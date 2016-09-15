@@ -1,0 +1,2657 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>陈亚伦博客</title>
+  <subtitle>写代码，亦是写情怀。</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-08-21T12:39:14.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>陈亚伦</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS学习笔记一：UIView与UIButton</title>
+    <link href="http://yoursite.com/2016/07/28/iOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AUIView%E4%B8%8EUIButton/"/>
+    <id>http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/</id>
+    <published>2016-07-27T21:00:38.000Z</published>
+    <updated>2016-08-21T12:39:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h2><p>UIView:<span class="s1">看到的控件</span></p>
+<p>UIViewController<span class="s1">：管理控制界面。</span></p>
+<p><span class="s1">一般情况下，每一个</span>“<span class="s1">满屏</span>”<span class="s1">的</span>UIView<span class="s1">都交给对应的</span>UIViewController<span class="s1">管理，</span>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理</span>UIView<span class="s1">对象。负责创建、销毁自己的</span>UIView<span class="s1">，显示隐藏</span>UIView<span class="s1">，处理</span>UIView<span class="s1">和用户之间的交互（事件处理）。</span>UIViewController<span class="s1">是</span>UIView<span class="s1">的大管家</span></p>
+<p><span class="s1">创建一个</span>UIViewController<span class="s1">，再由</span>UIViewController<span class="s1">创建自己的</span>UIview<span class="s1">，最后把</span>UIView<span class="s1">显示到用户眼前。并且由</span>UIViewcontroller<span class="s1">处理</span>UIView<span class="s1">的事件。</span></p>
+<p><span class="s1">使方法可被连接：</span>IBAction<span class="s1">相当于</span>void</p>
+<p>使属性可被连接：<span class="s2">IBOutlet</span>，能够使属性显示到<span class="s2">storyboard</span>的右击列表中</p>
+<p><span class="s3">//<span class="Apple-converted-space">  </span></span>声明两个属性保存文本框</p>
+<p>@property<span class="Apple-converted-space">  </span>(nonatomic,weak) IBOutlet UITextField *t1;</p>
+<p>注意命名</p>
+<pre class="lang:default decode:true ">-(IBAction)btnClick
+
+{
+
+    // 获取成员变量的两种方式
+
+    // 下划线方式  self方式
+
+   // _t1;
+
+   NSString *st1= self.t1.text;
+
+    NSString *st2=self.t2.text;
+
+    int n1=[st1 intValue];
+
+    int n2=[st2 intValue];
+
+    int  r=n1+n2;
+
+    self.l.text=[NSString stringWithFormat:@"%d",r];    
+
+}</pre>
+
+<p>连线的两种方式：</p>
+<p><span class="s5">1</span>，<span class="s5">.h</span>文件与<span class="s5">ib</span>控件连线</p>
+<p><span class="s5">2</span>，<span class="s5">il</span>中，<span class="s5">viewcontrol</span>与<span class="s5">ib</span>控件相连，将选择控件的事件，直接与<span class="s5">View<span class="Apple-converted-space">  </span>Controler</span>相连，便可以快速看到具备连接能力的属性或方法。<a id="more"></a> </p>
+<p><strong>程序启动过程：</strong></p>
+<p>1<span class="s6">，加载最主要的</span>storyboard<span class="s6">文件</span></p>
+<p><span class="s5">2</span>，创建白色箭头所指的控制器对象</p>
+<p><span class="s5">3</span>，创建控制器内部的<span class="s5">view</span>，显示到用户眼前</p>
+<p>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理的</span>UIView<span class="s1">对象：</span></p>
+<p>UIView *_view;</p>
+<p>@property (monatomic,retain)<span class="Apple-converted-space">  </span>UIView *view;</p>
+<h4 id="UIView的常见属性"><a href="#UIView的常见属性" class="headerlink" title="UIView的常见属性"></a><strong>UIView<span class="s7">的常见属性</span></strong></h4><pre class="lang:default decode:true">@property(nullable, nonatomic,readonly) UIView  *superview;获得自己的父控件对象
+
+@property(nonatomic,readonly,copy) NSArray&lt;__kindof UIView *&gt; *subviews;获得自己所有的子控件对象（新添加的子控件会在subviews数组的最后面）
+
+ NSLog(@"%ld个子控件",self.view.subviews.count);
+
+@property(nonatomic)  NSInteger tag;  控件的ID标识，父控件可以通过tag找到对应的子控件，默认为0，尽量保持唯一
+
+@property(nonatomic) CGRect  frame; 描述控件的位置和尺寸，以父控件左上角位置为原点（0，0）
+
+@property(nonatomic) CGRect  bounds; 
+与frame的不同是，以控件本身的左上角位置为原点（0，0），因此，默认point为（0，0），只有bounds是以自己左上角为原点，其他都是父控件左上角
+
+@property(nonatomic) CGPoint center; 表示控件中心点的坐标（以父控件左上角为（0，0））
+
+@property(nonatomic) CGAffineTransform transform; 控件的形变属性（可以设置旋转角度、比例缩放、平移等属性）
+
+struct CGAffineTransform {
+
+ CGFloat a, b, c, d;
+CGFloat tx, ty;
+
+};</pre>
+
+<p><strong>UIButton<span class="Apple-converted-space">  </span><span class="s4">状态</span></strong></p>
+<p>normal <span class="s4">普通（默认）</span></p>
+<p>highlight <span class="s4">高亮状态</span><span class="Apple-converted-space">  </span><span class="s4">按下去的时候</span></p>
+<p>常见错误：</p>
+<p>1<span class="s4">，</span><strong>setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key shuixng.’</strong></p>
+<p>删除了已经连接的属性，却没有取消控件中的属性连接线</p>
+<p>2<span class="s4">，</span><strong>unrecognized selector sent to instance 0x78633f00</strong></p>
+<p>未识别的方法：删除了已经连接的方法，但是没有取消控件中的方法连接线</p>
+<p><span class="s3">OC</span>语法中，不允许直接修改<strong><span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象</strong><span class="s3"><span class="Apple-converted-space"><strong> </strong>   </span></span>中结构体属性的成员</p>
+<p><span class="s4">报错：</span>Expression is not<span class="Apple-converted-space">  </span>assignable</p>
+<p>解决：</p>
+<p><span class="s3">OC</span>语法中，不允许直接<span class="Apple-converted-space">  </span>修改<span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象<span class="s3"><span class="Apple-converted-space">    </span></span>中结构体属性的成员。意味着可以直接赋值，可以直接修改成员变量的结构体属性成员</p>
+<pre class="lang:default decode:true">   // 取出按钮控件的属性
+
+    CGRect frame=_btn.frame;
+
+    //设置局部变量frame的值
+
+    frame.origin.x-=10;
+
+    // 重新赋值
+
+    _btn.frame=frame;
+
+</pre>
+<pre class="lang:default decode:true ">设置动画：
+
+- (IBAction)up:(id)sender {
+
+    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
+
+    [UIView beginAnimations:nil context:nil];
+
+    // 设置动画持续时间，默认0.2秒
+
+    [UIView setAnimationDuration:2.0];</pre>
+
+<p><span class="Apple-converted-space">    </span></p>
+<p><span class="Apple-converted-space"> </span>方法二：修改中点实现位置移动</p>
+<pre class="lang:default decode:true ">    CGPoint center=_btn.center;
+
+    switch ([sender tag]) {
+
+        case 1:center.y-=krun;break;
+
+        case 2:center.x+=krun;break;
+
+        case 3:center.y+=krun;break;
+
+        case 4:center.x-=krun;break;
+
+        default: break;
+
+    }
+
+    _btn.center=center;</pre>
+
+<p><span class="Apple-converted-space"> </span></p>
+<p><strong>代码重构：</strong></p>
+<pre class="lang:default decode:true">- (IBAction)run:(id)sender {
+
+    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
+
+    [UIView beginAnimations:nil context:nil];
+
+    // 设置动画持续时间，默认0.2秒
+
+    [UIView setAnimationDuration:1.0];
+
+    // OC语法中，不允许直接修改   某个对象    中结构体属性的成员
+
+    // 取出按钮控件的属性
+
+    CGRect frame=_btn.frame;
+
+    // id类型不允许点语法
+
+    switch ([sender tag]) {
+
+        case 1:frame.origin.y-=krun;break;
+
+        case 2:frame.origin.x+=krun;break;
+
+        case 3:frame.origin.y+=krun;break;
+
+        case 4:frame.origin.x-=krun;break;
+
+        default: break;
+
+    }
+
+    // 重新赋值
+
+    _btn.frame=frame;
+
+    // 动画结尾，提交动画
+
+    [UIView commitAnimations];
+
+}
+
+左旋转动画：
+
+#pragma mark 左旋转
+
+/*
+
+* -  逆时针方向  + 顺时针方向
+
+* 持续旋转方法CGAffineTransformRotate
+
+* 一次设值CGAffineTransformMakeRotation
+
+* M_PI_4是数学宏定义 45°，也即1/4PI弧度
+
+*/
+
+- (IBAction)leftRotate:(id)sender {
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0];
+
+    _btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);
+
+       [UIView commitAnimations];
+
+}
+
+放大动画：
+
+/*
+
+* 放大要求倍数大于1，缩小要求倍数小于1
+
+* 持续放大CGAffineTransformScale
+
+* 一次设值CGAffineTransformMakeScale
+
+*/
+
+- (IBAction)big:(id)sender {
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0];
+
+    _btn.transform=CGAffineTransformScale(_btn.transform, 1.5, 1.5);
+
+    [UIView commitAnimations];
+
+}
+
+代码重构：
+
+#pragma mark 左右旋转放大缩小
+
+- (IBAction)transfer:(id)sender {
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0];
+
+    switch ([sender tag])
+
+    {
+
+        case 1:_btn.transform= CGAffineTransformScale(_btn.transform, 1.5, 1.5);break;
+
+        case 2:_btn.transform= CGAffineTransformScale(_btn.transform, 0.5, 0.5);break;
+
+        case 3 :_btn.transform=CGAffineTransformRotate(_btn.transform, +M_PI_4);break;
+
+        case 4 :_btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);break;
+
+        default:  break;
+
+    }
+
+    [UIView commitAnimations];
+
+}
+
+transform重置
+
+#pragma mark 重置transform
+
+- (IBAction)reset:(id)sender {
+
+    // 将清空对其所作的变换，恢复原始形变属性，位置不能恢复
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0  ];
+
+    _btn.transform=CGAffineTransformIdentity;
+
+    [UIView commitAnimations];
+
+}</pre>
+
+<h3 id="使用Block重构代码"><a href="#使用Block重构代码" class="headerlink" title="使用Block重构代码"></a><strong>使用Block<span class="s4">重构代码</span></strong></h3><pre class="lang:default decode:true ">#pragma 代码重构用block调用
+
+-(void)btnClick:(id)sender andBlock: (void (^) ()  )blockArgument
+
+{
+
+    // 开始动画
+
+    [UIView beginAnimations:nil context:nil];
+
+    // 设置动画持续时间
+
+    [UIView setAnimationDuration:1.0];
+
+    blockArgument();
+
+    // 结束动画
+
+    [UIView commitAnimations];
+
+}
+
+#pragma 左右旋转功能的实现
+
+- (IBAction)leftOrRightRotate:(UIButton *)sender
+
+{
+
+    [self btnClick:sender andBlock:^
+
+    {
+
+        CGFloat r=sender.tag==6?M_PI_4:-M_PI_4;
+
+        _photo.transform=CGAffineTransformRotate(_photo.transform, r);
+
+    }
+
+     ] ;
+
+}</pre>
+
+<p><span class="s4">定义参数：要传入的</span>block<span class="s4">名称</span>block <span class="Apple-converted-space">  </span>(void)(^)()blockName</p>
+<p><span class="s3"><span class="Apple-converted-space">  </span></span>传入参数：直接封装好的代码块<span class="s3"> ^{}</span></p>
+<p><span class="s4">获取某方法的</span>sel<span class="s4">：</span>@selector(<span class="s4">方法名</span>)</p>
+<h3 id="通过代码设置控件"><a href="#通过代码设置控件" class="headerlink" title="通过代码设置控件"></a><strong>通过代码设置控件</strong></h3><p><span class="s4">在</span>viewDidLoad <span class="s4">方法中通过代码设置控件</span></p>
+<p>代码创建按钮：</p>
+<pre class="lang:default decode:true ">- (void)viewDidLoad {
+
+    [super viewDidLoad];
+
+    // Do any additional setup after loading the view, typically from a nib.
+
+    // 创建按钮
+
+    UIButton *btn=[[UIButton alloc]init ];
+
+    btn.frame=CGRectMake(20, 50, 100, 200);
+
+    // 普通状态下的按钮
+
+    [btn setBackgroundImage:[UIImage imageNamed:@"btn_01.png"] forState:UIControlStateNormal];
+
+    [btn setTitle:@"normal" forState:UIControlStateNormal];
+
+    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+
+    // 高亮状态下的按钮
+
+    [btn setBackgroundImage:[UIImage imageNamed:@"btn_02.png"] forState:UIControlStateHighlighted];
+
+    [btn setTitle:@"normal" forState:UIControlStateHighlighted];
+
+    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateHighlighted];
+
+    // 点击事件
+
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+
+    // 添加按钮控件到view中
+
+    [self.view addSubview:btn];
+
+}
+
+-(void)btnClick
+
+{
+
+    NSLog(@"按钮已被点击");
+
+}
+
+代码创建文本框：
+
+// 创建文本框并设置相关属性
+
+    UITextField *field=[[UITextField alloc]init];
+
+    CGFloat centerX=self.view.frame.size.width*0.5;
+
+    CGFloat centerY=self.view.frame.size.height*0.5;
+
+    field.frame=CGRectMake(centerX, centerY, 100, 50);
+
+    field.font=[UIFont systemFontOfSize:20];
+
+    field.backgroundColor=[UIColor purpleColor];
+
+    // 将文本框添加到view中
+
+    [self.view addSubview:field];</pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;UIView&quot;&gt;&lt;a href=&quot;#UIView&quot; class=&quot;headerlink&quot; title=&quot;UIView&quot;&gt;&lt;/a&gt;UIView&lt;/h2&gt;&lt;p&gt;UIView:&lt;span class=&quot;s1&quot;&gt;看到的控件&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;：管理控制界面。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;一般情况下，每一个&lt;/span&gt;“&lt;span class=&quot;s1&quot;&gt;满屏&lt;/span&gt;”&lt;span class=&quot;s1&quot;&gt;的&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;都交给对应的&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;管理，&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;内部有个&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;属性，就是它负责管理&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;对象。负责创建、销毁自己的&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;，显示隐藏&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;，处理&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;和用户之间的交互（事件处理）。&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;是&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;的大管家&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;创建一个&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;，再由&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;创建自己的&lt;/span&gt;UIview&lt;span class=&quot;s1&quot;&gt;，最后把&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;显示到用户眼前。并且由&lt;/span&gt;UIViewcontroller&lt;span class=&quot;s1&quot;&gt;处理&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;的事件。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;使方法可被连接：&lt;/span&gt;IBAction&lt;span class=&quot;s1&quot;&gt;相当于&lt;/span&gt;void&lt;/p&gt;
+&lt;p&gt;使属性可被连接：&lt;span class=&quot;s2&quot;&gt;IBOutlet&lt;/span&gt;，能够使属性显示到&lt;span class=&quot;s2&quot;&gt;storyboard&lt;/span&gt;的右击列表中&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s3&quot;&gt;//&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;/span&gt;声明两个属性保存文本框&lt;/p&gt;
+&lt;p&gt;@property&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(nonatomic,weak) IBOutlet UITextField *t1;&lt;/p&gt;
+&lt;p&gt;注意命名&lt;/p&gt;
+&lt;pre class=&quot;lang:default decode:true &quot;&gt;-(IBAction)btnClick
+
+{
+
+    // 获取成员变量的两种方式
+
+    // 下划线方式  self方式
+
+   // _t1;
+
+   NSString *st1= self.t1.text;
+
+    NSString *st2=self.t2.text;
+
+    int n1=[st1 intValue];
+
+    int n2=[st2 intValue];
+
+    int  r=n1+n2;
+
+    self.l.text=[NSString stringWithFormat:@&quot;%d&quot;,r];    
+
+}&lt;/pre&gt;
+
+&lt;p&gt;连线的两种方式：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s5&quot;&gt;1&lt;/span&gt;，&lt;span class=&quot;s5&quot;&gt;.h&lt;/span&gt;文件与&lt;span class=&quot;s5&quot;&gt;ib&lt;/span&gt;控件连线&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s5&quot;&gt;2&lt;/span&gt;，&lt;span class=&quot;s5&quot;&gt;il&lt;/span&gt;中，&lt;span class=&quot;s5&quot;&gt;viewcontrol&lt;/span&gt;与&lt;span class=&quot;s5&quot;&gt;ib&lt;/span&gt;控件相连，将选择控件的事件，直接与&lt;span class=&quot;s5&quot;&gt;View&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Controler&lt;/span&gt;相连，便可以快速看到具备连接能力的属性或方法。
+    
+    </summary>
+    
+      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="iOS开发" scheme="http://yoursite.com/tags/iOS%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Objective-C学习笔记三：点语法与自动属性</title>
+    <link href="http://yoursite.com/2016/05/18/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E7%82%B9%E8%AF%AD%E6%B3%95%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%B1%9E%E6%80%A7/"/>
+    <id>http://yoursite.com/2016/05/18/Objective-C学习笔记三：点语法与自动属性/</id>
+    <published>2016-05-17T21:00:07.000Z</published>
+    <updated>2016-08-21T12:41:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>2016.05.24更正@private相关错误</p>
+</blockquote>
+<p>### </p>
+<h3 id="点语法"><a href="#点语法" class="headerlink" title="点语法"></a>点语法</h3><p>本质是方法调用，不访问成员变量。前提是已经存在get和set方法(否则报错：Property ‘age’ not found on object of type ‘Person *’)。</p>
+<p><span class="s1">         [p </span><span class="s2">setAge</span><span class="s1">:</span><span class="s3">50</span><span class="s1">];</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s1"> result=[p </span><span class="s2">age</span><span class="s1">];</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s5">NSLog</span><span class="s1">(</span><span class="s6">@”result的结果是：%i”</span><span class="s1">,result);</span></p>
+<p>相当于：</p>
+<p><span class="s1">        p.</span><span class="s2">age</span><span class="s1">=</span><span class="s3">50</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s1"> result=p.</span><span class="s2">age</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s5">NSLog</span><span class="s1">(</span><span class="s6">@”result的结果是：%i”</span><span class="s1">,result);</span></p>
+<p>注意：此处的result未必等于50，因为在set方法中，age的值可能改变。</p>
+<h4 id="方法的展开原理："><a href="#方法的展开原理：" class="headerlink" title="方法的展开原理："></a>方法的展开原理：</h4><p><span class="s1"> [p        setAge   :      50];</span></p>
+<p>对应</p>
+<p><span class="s1">p     .     </span><span class="s2">age</span><span class="s1">=        </span><span class="s3">50</span><span class="s1">;</span></p>
+<p>而</p>
+<p><span class="s1">int result=[p       age];</span></p>
+<p>对应</p>
+<p><span class="s2">int</span><span class="s1"> result=p       .       </span><span class="s3">age</span><span class="s1">;</span></p>
+<h4 id="死循环"><a href="#死循环" class="headerlink" title="死循环"></a>死循环</h4><p>1，set方法中</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setAge:(</span><span class="s2">int</span><span class="s1">)a</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">self</span><span class="s1">.</span><span class="s3">age</span><span class="s1">=a;</span></p>
+<p><span class="s1">}</span></p>
+<p>实际上是在set方法中调用set方法。</p>
+<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)age</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s3">.</span><span class="s4">age</span><span class="s3">;</span></p>
+<p><span class="s1">}</span></p>
+<p>在get方法中调用get方法。</p>
+<p>以上编译链接均无警告、无错误，但是运行会报错。<a id="more"></a> </p>
+<h3 id="成员变量的作用域"><a href="#成员变量的作用域" class="headerlink" title="成员变量的作用域"></a>成员变量的作用域</h3><p>@private</p>
+<p>私有。只能在当前类的对象方法中直接访问（当前类的对象方法的@implementation中访问），子类虽然继承（内存中存在），但无权限访问（感觉貌似没有继承，一层网给过滤掉了，当然，除非再次在子类中声明一个同名的私有成员变量，这时情况就变了,编译器报错  Duplicute member ‘_age’，意味着重复声明）。因此，声明为@private的成员变量，只准当前类的对象方法访问。</p>
+<p>@protected</p>
+<p>保护（<strong>默认是保护，不是私有</strong>）。可以在当前类和子类的对象方法中直接访问（当前类和子类的@implementation中访问）。</p>
+<p>假设父类Person有保护的成员变量_number，子类继承，什么变量都不增加，那么子类对象方法中访问的是父类的_number。</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)show</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">self</span><span class="s1">-&gt;</span><span class="s3">_number</span><span class="s1">=</span><span class="s4">1000</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> result=</span><span class="s2">self</span><span class="s1">-&gt;</span><span class="s3">_number</span><span class="s1">;</span></p>
+<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">_number</span><span class="s5">=</span><span class="s4">5000</span><span class="s5">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> result2= </span><span class="s3">_number</span><span class="s1">;</span></p>
+<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">NSLog</span><span class="s5">(</span><span class="s1">@”self-&gt;_number的值是：%i”</span><span class="s5">,result);</span></p>
+<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">NSLog</span><span class="s5">(</span><span class="s1">@”_number的值是：%i”</span><span class="s5">,result2);</span></p>
+<p><span class="s1">}</span></p>
+<p>@public</p>
+<p>公开。任何地方都可以访问。一般用不到。</p>
+<p>@package</p>
+<p>同一个框架内可以访问，介于@public和@private之间。</p>
+<p>注意：类方法不可能访问成员变量。也可以在@implementation中声明成员变量。</p>
+<p>@implementation Student:NSObject</p>
+<p>{</p>
+<p>@public int age;</p>
+<p>@private int number;</p>
+<p>@protected int no;</p>
+<p>}</p>
+<p>@end</p>
+<p><span class="s1">.m</span>文件一般不会被包含，也即一般没有必要访问，故而一般不把成员变量放在实现文件中。</p>
+<h3 id="property和-synthesize属性合成"><a href="#property和-synthesize属性合成" class="headerlink" title="@property和@synthesize属性合成"></a>@property和@synthesize属性合成</h3><p>@property用在@interface中，代替get和set方法</p>
+<p>如：@property int age;</p>
+<p>等价于</p>
+<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)age;</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setAge:(</span><span class="s2">int</span><span class="s1">)age;</span></p>
+<p>即便是@property int _age;那也会生成-(int)_age;-(void)setAge:(int)_age;</p>
+<p>而@synthesize用在@implementation实现中：<strong>@synthesize<span class="Apple-converted-space">  </span>age=<span class="s1">成员变量名</span>; 不允许对成员变量进行条件过滤，如<span class="s1">@synthesize</span><span class="s2"> age=</span><span class="s3">_age+100</span><span class="s2">;</span></strong></p>
+<p><span class="s1">@synthesize</span><span class="s2"> age=</span><span class="s3">_age</span><span class="s2">;</span></p>
+<p>等价于</p>
+<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)age</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">return</span><span class="s1"> _age;</span></p>
+<p><span class="s1">}</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setAge:(</span><span class="s2">int</span><span class="s1">)age</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">_age</span><span class="s1">=age</span><span class="s1">;</span></p>
+<p><span class="s1">}</span></p>
+<p>注意：</p>
+<p>1，如果.h文件中没有这个_age成员变量。那么，利用@property可以自动生成私有@private的_age。而默认的_age却是@protected的。</p>
+<p>2，@synthesize age将会访问age这个成员变量而非_age。</p>
+<p>3，若手动实现getter方法，编译器只会自动生成setter方法；若手动实现setter方法，编译器只会自动生成getter方法。</p>
+<p>新特性：@property已经独揽@synthesize的实现了，也即</p>
+<p><span class="s1">@synthesize age=_age;可以省略。只用写@property int  age就好了。（当然，前提是不对参数进行过滤，直接传到成员变量中，如果要过滤，还是要自己生成相应的方法。）</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> _age;</span></p>
+<p><span class="s1">}</span></p>
+<p><span class="s1">@property</span> <span class="s1">int</span><span class="s3"> age;</span></p>
+<p>完美解决！</p>
+<p>另外，默认情况下，getter和setter方法中的实现会访问下划线开头的成员变量。</p>
+<h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>相当于NSObject  *  万能指针。</p>
+<p>id类型的定义：</p>
+<p>typedef struct objc_object {</p>
+<p>Class isa;</p>
+<p>}*id;</p>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>用来初始化对象的方法，完整地创建一个可用对象。</p>
+<p><span class="s1"><span class="Apple-converted-space">     </span></span><span class="s2">Person</span><span class="s1"> *p=[</span><span class="s2">Person</span> <span class="s3">alloc</span><span class="s1">];            +alloc方法分配存储空间，返回对象。</span></p>
+<p><span class="s1"><span class="Apple-converted-space">     </span>p=[p </span><span class="s3">init</span><span class="s1">];                    -init方法初始化</span></p>
+<h3 id="init方法的重写"><a href="#init方法的重写" class="headerlink" title="init方法的重写"></a>init方法的重写</h3><p>目的：在对象创建完毕之后，成员变量就有了一些默认的值。</p>
+<p>注意：先调用父类的构造方法，再进行子类内部成员变量的初始化</p>
+<p>在@implementation中进行重写：</p>
+<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)init</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">// 一定要先调用super的init方法，这是为了初始化父类的一些成员变量和其他属性</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">self</span><span class="s1">=[</span><span class="s2">super</span> <span class="s4">init</span><span class="s1">];</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">// 判断对象是否初始化成功，如果对象初始化成功，再进行接下来的自定义初始化</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s3">(</span><span class="s1">self</span><span class="s3">!=</span><span class="s1">nil</span><span class="s3">)</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">           </span></span><span class="s5">_age</span><span class="s1">=</span><span class="s6">10086</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">// 返回一个已经初始化完毕的对象</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s3">;</span></p>
+<p><span class="s1">}</span></p>
+<p>上面代码不够简化，一般用下面代码。</p>
+<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)init</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">   </span></span><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// 简化版</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">if</span><span class="s1">([</span><span class="s2">super</span> <span class="s5">init</span><span class="s1">])</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s6">_age</span><span class="s1">=</span><span class="s7">10086</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s4">;</span></p>
+<p><span class="s1">}</span></p>
+<h3 id="自定义构造方法"><a href="#自定义构造方法" class="headerlink" title="自定义构造方法"></a>自定义构造方法</h3><p>要求：是对象方法（对象的初始化），返回值是id类型，方法名以initWith开头。</p>
+<p>注意：-init方法重写不需要在@interface中声明，因为已经声明过了，而自定义的构造方法需要在@interface中显示声明。</p>
+<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)initWithAge:(</span><span class="s2">int</span><span class="s1">)age;</span></p>
+<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)initWithAge:(</span><span class="s2">int</span><span class="s1">)age</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">if</span><span class="s1">([</span><span class="s2">super</span> <span class="s3">init</span><span class="s1">])</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">_age</span><span class="s1">=age+</span><span class="s5">100</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p><span class="s6"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s6">;</span></p>
+<p><span class="s1">}</span></p>
+<p>调用如下：</p>
+<p><span class="s2">        Person</span><span class="s1"> *p=[</span><span class="s2">Person</span> <span class="s3">alloc</span><span class="s1">];</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span>p=[p </span><span class="s3">init</span><span class="s2">];</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s2"> r=p.</span><span class="s5">age</span><span class="s2">;</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s6">@”r的值是%i”</span><span class="s2">,r);</span></p>
+<p><span class="s2"><span class="Apple-converted-space">       </span>p= [p </span><span class="s5">initWithAge</span><span class="s2">:</span><span class="s7">110</span><span class="s2">];</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s2"> r2=p.</span><span class="s5">age</span><span class="s2">;</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s6">@”r2的值是%i”</span><span class="s2">,r2);</span></p>
+<p>说明，可以初始化多次。</p>
+<p>多个参数的构造方法也可以：</p>
+<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)initWithAge:(</span><span class="s2">int</span><span class="s1">)age andNumber:(</span><span class="s2">int</span><span class="s1">)number;</span></p>
+<h3 id="h和-m文件"><a href="#h和-m文件" class="headerlink" title=".h和.m文件"></a>.h和.m文件</h3><p>每个类分布在不同的文件中</p>
+<p>类的声明放在.h文件中，类的实现放在.m文件中</p>
+<p><strong>若想使用某个类，就包含某个类的.h文件即可。</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;2016.05.24更正@private相关错误&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;### &lt;/p&gt;
+&lt;h3 id=&quot;点语法&quot;&gt;&lt;a href=&quot;#点语法&quot; class=&quot;headerlink&quot; title=&quot;点语法&quot;&gt;&lt;/a&gt;点语法&lt;/h3&gt;&lt;p&gt;本质是方法调用，不访问成员变量。前提是已经存在get和set方法(否则报错：Property ‘age’ not found on object of type ‘Person *’)。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;         [p &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;setAge&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;];&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; result=[p &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;];&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s5&quot;&gt;NSLog&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s6&quot;&gt;@”result的结果是：%i”&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;,result);&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;相当于：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;        p.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; result=p.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s5&quot;&gt;NSLog&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s6&quot;&gt;@”result的结果是：%i”&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;,result);&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;注意：此处的result未必等于50，因为在set方法中，age的值可能改变。&lt;/p&gt;
+&lt;h4 id=&quot;方法的展开原理：&quot;&gt;&lt;a href=&quot;#方法的展开原理：&quot; class=&quot;headerlink&quot; title=&quot;方法的展开原理：&quot;&gt;&lt;/a&gt;方法的展开原理：&lt;/h4&gt;&lt;p&gt;&lt;span class=&quot;s1&quot;&gt; [p        setAge   :      50];&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;对应&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;p     .     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;=        &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;int result=[p       age];&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;对应&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; result=p       .       &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;h4 id=&quot;死循环&quot;&gt;&lt;a href=&quot;#死循环&quot; class=&quot;headerlink&quot; title=&quot;死循环&quot;&gt;&lt;/a&gt;死循环&lt;/h4&gt;&lt;p&gt;1，set方法中&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)setAge:(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)a&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;=a;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;实际上是在set方法中调用set方法。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)age&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;在get方法中调用get方法。&lt;/p&gt;
+&lt;p&gt;以上编译链接均无警告、无错误，但是运行会报错。
+    
+    </summary>
+    
+      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Objective-C学习笔记二：继承与属性</title>
+    <link href="http://yoursite.com/2016/05/16/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%B1%9E%E6%80%A7/"/>
+    <id>http://yoursite.com/2016/05/16/Objective-C学习笔记二：继承与属性/</id>
+    <published>2016-05-15T21:00:32.000Z</published>
+    <updated>2016-08-21T12:41:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。</p>
+<p>成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。</p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> _speed;</span></p>
+<p><span class="s1">}</span></p>
+<p><strong>set方法</strong>：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set方法中设置行为，监听属性的改变。</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s;</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">_speed</span><span class="s1">=</span><span class="s1">s+</span><span class="s2">20</span><span class="s1">;</span></p>
+<p><span class="s1">}</span></p>
+<p><strong>get方法</strong>：获取对象内部的成员变量，不接收参数，返回类型与成员变量类型相同，方法名称与成员变量名称相同（不含下划线）。不推荐以get开头。</p>
+<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed;</span></p>
+<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">return</span> <span class="s3">_speed</span><span class="s1">;</span></p>
+<p><span class="s1">}</span></p>
+<p>只读：只提供get方法。可读可写：提供get和set方法。</p>
+<h3 id="OC的弱语法"><a href="#OC的弱语法" class="headerlink" title="OC的弱语法"></a>OC的弱语法</h3><p>1，调用未声明、未实现的对象方法</p>
+<p>编译 报错 No visible @interface for ‘Dog’ declares the selector ‘ssss’，链接运行 报错。</p>
+<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1002014a0’</strong></span></p>
+<p>给Dog对象发送不能识别的消息。</p>
+<p>2，调用已声明、未实现的对象方法</p>
+<p>编译警告：Method definition for ‘ssss’ not found   未实现方法  链接正常，运行报错</p>
+<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1001002a0’</strong></span></p>
+<p>3,调用未声明、已实现的对象方法</p>
+<p>编译 链接运行  错误  No visible @interface for ‘Dog’ declares the selector ‘ssss’</p>
+<p>在Dog的@interface中，对于ssss的声明是不可见的。<a id="more"></a> </p>
+<h3 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h3><p>类本身在内存中占据存储空间，里面有类\对象方法列表。直接通过类名执行的方法。</p>
+<p>以+开头，只能由类名调用，类方法中不能访问成员变量（实例变量）。<strong>允许类方法与对象方法重名。</strong>(执行者不同，当然可以重名！)</p>
+<p>使用场合：当不需要访问成员变量的时候，尽量使用类方法，提升效率。</p>
+<p>输出类的名称：</p>
+<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showClassName;</span></p>
+<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showClassName</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">NSLog</span><span class="s3">(</span><span class="s4">@”类的名称是：%@”</span><span class="s3">,</span><span class="s1">NSStringFromClass</span><span class="s3">([</span><span class="s2">self</span> <span class="s1">class</span><span class="s3">]));</span></p>
+<p><span class="s1">}</span></p>
+<p>调用：<span class="s1">[</span><span class="s2">Dog</span> <span class="s2">showClassName</span><span class="s1">];</span></p>
+<h3 id="self关键字"><a href="#self关键字" class="headerlink" title="self关键字"></a>self关键字</h3><p>self是指针，指向当前对象或类的调用者。出现在对象方法中，代表当前对象，出现在类方法中，代表当前类。不能出现在函数中（会报错：Use of undeclared identifier ‘self’使用未声明的标识符）。</p>
+<p>用途：</p>
+<p>1， self-&gt;<span class="s1">成员变量名  在对象方法中访问当前方法调用的成员变量，也即当成员变量与局部变量同名时，用来区分同名的局部变量。</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject;</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s1">@”showSelfOfObject方法被调用”</span><span class="s2">);</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">int</span><span class="s1"> _speed;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">self</span><span class="s1">-&gt;</span><span class="s5">_speed</span><span class="s1">=</span><span class="s6">200</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span>_speed+=</span><span class="s6">1000</span><span class="s1">;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">int</span><span class="s1"><span class="Apple-converted-space">  </span>result= </span><span class="s4">self</span><span class="s1">-&gt;</span><span class="s5">_speed</span><span class="s1">+</span><span class="s6">10</span><span class="s1">;</span></p>
+<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s1">@”result的值是：%i”</span><span class="s2">,result);</span></p>
+<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s1">@”_speed的值是：%i”</span><span class="s2">,_speed);</span></p>
+<p><span class="s1">}</span></p>
+<p>当成员变量与局部变量同名时（编译警告Local declaration of ‘_speed’ hides the instance variable局部变量隐藏了成员变量），采用就近原则，访问局部变量。因此需要用self访问成员变量。</p>
+<p>2，方法的调用 :在对象方法中调用当前对象的对象方法以及在类方法中调用当前类的类方法</p>
+<p>在对象方法中调用当前对象的对象方法</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject;</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showTestObject;</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”showSelfOfObject方法被调用”</span><span class="s3">);</span></p>
+<p><span class="s1">}</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showTestObject</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s2">self</span> <span class="s1">showSelfOfObject</span><span class="s3">];</span></p>
+<p><span class="s1">}</span></p>
+<p>在类方法中调用当前类的类方法</p>
+<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showSelfOfClass;</span></p>
+<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showTestClass;</span></p>
+<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showSelfOfClass</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”showSelfOfClass方法被调用”</span><span class="s3">);</span></p>
+<p><span class="s1">}</span></p>
+<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showTestClass</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s2">self</span> <span class="s1">showSelfOfClass</span><span class="s3">];</span></p>
+<p><span class="s1">}</span></p>
+<p><strong>常见错误：</strong></p>
+<p>1，在对象方法中调用类方法（编译错误No visible @interface for ‘Dog’ declares the selector ‘<span class="s1">showSelfOfClass</span>‘）错误相当于未声明未定义却调用这个方法。</p>
+<p>2，在类方法中调用对象方法（编译错误No known class method for selector ‘<span class="s1">showSelfOfObject</span>‘）未知的类方法</p>
+<p>3，self的死循环:调用本身</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”showSelfOfObject方法被调用”</span><span class="s3">);</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s2">self</span> <span class="s1">showSelfOfObject</span><span class="s3">];</span></p>
+<p><span class="s1">}</span></p>
+<p>4，调用函数</p>
+<p>函数不依赖对象。void f();  [self f]<span class="Apple-converted-space">  </span><span class="s1">错误</span></p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>场景：当两个类拥有相同的属性和方法时，将相同的内容抽取到父类中。当A类完全拥有B类的部分属性或方法时，考虑A类作为父类。</p>
+<p>1，父类必须声明在子类前面。</p>
+<p>2，不允许子类和父类拥有相同的成员变量（如果子类有和父类相同的成员变量，意味着，同一成员变量声明定义两次，编译错误 Duplicute member <span class="s1">‘_age’  ，哪怕成员变量的访问属性不同，子类公开父类私有，或者父类公开子类私有，都不行！</span>）</p>
+<p>3，子类方法和属性的访问过程：如果子类没有，再访问父类。即由子类开始。</p>
+<p>4，Objective-C中只有单继承（与C＋＋不同）</p>
+<p><strong>方法的重写</strong>:父类和子类拥有相同签名的类方法或者对象方法（子类重新实现了父类中的方法），则优先调用子类的同名方法。</p>
+<p>父类Person：</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)show</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”调用了Person的show方法”</span><span class="s3">);</span></p>
+<p><span class="s1">}</span></p>
+<p>子类Student：</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)show</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1">     //[</span><span class="s2">super</span> <span class="s3">show</span><span class="s1">];</span></p>
+<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”调用了Student的show方法”</span><span class="s3">);</span></p>
+<p><span class="s1">}</span></p>
+<p>调用：</p>
+<p><span class="s1">Student</span><span class="s2"> *p=[[</span><span class="s1">Student</span> <span class="s3">alloc</span><span class="s2">] </span><span class="s3">init</span><span class="s2">];   </span><span class="s1">[p </span><span class="s4">show</span><span class="s1">];</span></p>
+<p>很明显，调用的是重写的子类Student的show方法。</p>
+<p>super</p>
+<p>场景：子类重写父类的方法时，想调用父类的方法（包括类方法和对象方法）。</p>
+<p>效果与self类似，super在对象方法中就调用父类的对象方法，在类方法中就调用父类的类方法。</p>
+<p>继承可以在不改变原来模型的基础上拓充方法，抽取公共代码，建立类与类之间的联系，减少代码的冗余性，但是，会增加耦合性。</p>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>某一种事物的多种形态。在实现继承的前提下，<strong>父类类型指针指向子类对象</strong>（右边是左边），指向子类对象的父类指针可以调用子类中重写父类的方法，但是指向子类对象的父类指针不能调用子类中拓展的方法（父类中没有的方法）。</p>
+<p><span class="s2">Person</span><span class="s1"> *p=[[</span><span class="s2">Student</span> <span class="s3">alloc</span><span class="s1">] </span><span class="s3">init</span><span class="s1">];</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span>[p </span><span class="s4">show</span><span class="s2">];</span></p>
+<p>Student是Person，show方法在子类和父类中都有，这里调用的是子类的show方法。</p>
+<p>当子类拓展了一个<span class="s1">showStudent对象方法，如果还想调用，则强制转换：将指向子类对象的父类指针强制转化为子类指针。</span></p>
+<p><span class="s1">Person</span><span class="s2"> *p=[[</span><span class="s1">Student</span> <span class="s3">alloc</span><span class="s2">] </span><span class="s3">init</span><span class="s2">];</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">Student</span><span class="s1"> <em> p2=(</em></span><span class="s4">Student</span><span class="s1"> )p;</span></p>
+<p><span class="s1"><span class="Apple-converted-space">        </span>[p2 </span><span class="s4">showStudent</span><span class="s1">];</span></p>
+<p>将父类指针p强制转换为子类指针，使它可以调用子类Student拓展的showStudent方法。</p>
+<p>如果不做强制转换，而直接调用子类拓展的方法</p>
+<p><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s2">Person</span><span class="s1"> *p=[[</span><span class="s2">Student</span> <span class="s3">alloc</span><span class="s1">] </span><span class="s3">init</span><span class="s1">];</span></p>
+<p><span class="s4"><span class="Apple-converted-space">     </span></span><span class="s1"><span class="Apple-converted-space">       </span>[p showStudent];</span></p>
+<p>编译报错： No visible @interface for ‘Person’ declares the selector ‘showStudent’</p>
+<p>转换语法： { 相应子类名 <em>   p=(父类名 </em>)指向子类对象的父类指针；}</p>
+<p>主要应用：[动态绑定]如果参数使用父类类型，可以传入父类、子类对象，调用相应的方法（如将子类对象传递给参数，调用子类的方法；将父类对象传递给参数，则调用父类的方法）</p>
+<p>例如，Person和Student中都有同名show对象方法，可以通过test函数传入的参数判断调用哪个方法。</p>
+<p><span class="s1">#import </span><span class="s2">&lt;Foundation/Foundation.h&gt;</span></p>
+<p><span class="s1">#import </span><span class="s2">“Person.h”</span></p>
+<p><span class="s1">#import </span><span class="s2">“Student.h”</span></p>
+<p><span class="s3">void</span><span class="s2"> test(</span><span class="s4">Person</span><span class="s2"> * p)</span></p>
+<p><span class="s2">{</span></p>
+<p><span class="s2"><span class="Apple-converted-space">    </span>[p </span><span class="s4">show</span><span class="s2">];</span></p>
+<p><span class="s2">}</span></p>
+<p><span class="s3">int</span><span class="s2"> main(</span><span class="s3">int</span><span class="s2"> argc, </span><span class="s3">const</span> <span class="s3">char</span><span class="s2"> * argv[]) {</span></p>
+<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s2">@autoreleasepool</span><span class="s5"> {</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">Person</span><span class="s2"> *p=[[</span><span class="s4">Person</span> <span class="s6">alloc</span><span class="s2">] </span><span class="s6">init</span><span class="s2">];</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">Student</span><span class="s2"> *s=[[</span><span class="s4">Student</span> <span class="s6">alloc</span><span class="s2">] </span><span class="s6">init</span><span class="s2">];</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">test</span><span class="s2">(p);</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">test</span><span class="s2">(s);</span></p>
+<p><span class="s2"><span class="Apple-converted-space">            </span>}</span></p>
+<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">return</span> <span class="s7">0</span><span class="s2">;</span></p>
+<p><span class="s2">}</span></p>
+<h3 id="NSString的使用"><a href="#NSString的使用" class="headerlink" title="NSString的使用"></a>NSString的使用</h3><h4 id="创建字符串与输出字符串"><a href="#创建字符串与输出字符串" class="headerlink" title="创建字符串与输出字符串"></a><strong>创建字符串与输出字符串</strong></h4><p><span class="s2">NSString</span><span class="s1"> *s=</span><span class="s3">@”Sometimes”</span><span class="s1">;</span></p>
+<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s2">NSLog</span><span class="s3">(</span><span class="s4">@”%@”</span><span class="s3">,s);</span></p>
+<h4 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a><strong>格式化字符串</strong></h4><p><span class="s1">int</span><span class="s2"> age=</span><span class="s3">85</span><span class="s2">;</span></p>
+<p><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s2">NSString</span><span class="s4"> *s=[</span><span class="s2">NSString</span> <span class="s2">stringWithFormat</span><span class="s4">:</span><span class="s5">@”传入的年龄参数是%d”</span><span class="s4">,age];</span></p>
+<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s6">NSLog</span><span class="s2">(</span><span class="s5">@”%@”</span><span class="s2">,s);</span></p>
+<p>调用<span class="s2">NSString类方法。</span></p>
+<h4 id="length返回字数（不是字符数）"><a href="#length返回字数（不是字符数）" class="headerlink" title="length返回字数（不是字符数）"></a><strong>length返回字数（不是字符数）</strong></h4><p><span class="s1">NSString</span><span class="s2"> *s=</span><span class="s3">@”123 456”</span><span class="s2">;</span></p>
+<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s1">NSLog</span><span class="s3">(</span><span class="s4">@”%@”</span><span class="s3">,s);</span></p>
+<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s1">NSUInteger</span><span class="s3"> size=[s </span><span class="s1">length</span><span class="s3">];</span></p>
+<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s1">NSLog</span><span class="s3">(</span><span class="s4">@”%lu”</span><span class="s3">,(</span><span class="s5">unsigned</span> <span class="s5">long</span><span class="s3">)size);</span></p>
+<p>返回的是7，包括空格。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;封装&quot;&gt;&lt;a href=&quot;#封装&quot; class=&quot;headerlink&quot; title=&quot;封装&quot;&gt;&lt;/a&gt;封装&lt;/h3&gt;&lt;p&gt;优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。&lt;/p&gt;
+&lt;p&gt;成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; _speed;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;set方法&lt;/strong&gt;：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set方法中设置行为，监听属性的改变。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)setSpeed:(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)s;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)setSpeed:(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)s&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;_speed&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;s+&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;get方法&lt;/strong&gt;：获取对象内部的成员变量，不接收参数，返回类型与成员变量类型相同，方法名称与成员变量名称相同（不含下划线）。不推荐以get开头。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)speed;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)speed&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s3&quot;&gt;_speed&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;只读：只提供get方法。可读可写：提供get和set方法。&lt;/p&gt;
+&lt;h3 id=&quot;OC的弱语法&quot;&gt;&lt;a href=&quot;#OC的弱语法&quot; class=&quot;headerlink&quot; title=&quot;OC的弱语法&quot;&gt;&lt;/a&gt;OC的弱语法&lt;/h3&gt;&lt;p&gt;1，调用未声明、未实现的对象方法&lt;/p&gt;
+&lt;p&gt;编译 报错 No visible @interface for ‘Dog’ declares the selector ‘ssss’，链接运行 报错。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;strong&gt;reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1002014a0’&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;给Dog对象发送不能识别的消息。&lt;/p&gt;
+&lt;p&gt;2，调用已声明、未实现的对象方法&lt;/p&gt;
+&lt;p&gt;编译警告：Method definition for ‘ssss’ not found   未实现方法  链接正常，运行报错&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;strong&gt;reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1001002a0’&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;3,调用未声明、已实现的对象方法&lt;/p&gt;
+&lt;p&gt;编译 链接运行  错误  No visible @interface for ‘Dog’ declares the selector ‘ssss’&lt;/p&gt;
+&lt;p&gt;在Dog的@interface中，对于ssss的声明是不可见的。
+    
+    </summary>
+    
+      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Objective-C学习笔记一：类</title>
+    <link href="http://yoursite.com/2016/05/12/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9A%E7%B1%BB/"/>
+    <id>http://yoursite.com/2016/05/12/Objective-C学习笔记一：类/</id>
+    <published>2016-05-11T21:00:49.000Z</published>
+    <updated>2016-08-21T12:42:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h3><p>三要素：事物名称（类名）；属性；行为（功能）</p>
+<p>具有相同（或者类似）属性和行为的对象可以抽象出一个类。</p>
+<h3 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h3><p>类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识</p>
+<p>行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上</p>
+<p><span class="s1">#import </span><span class="s2">&lt;Foundation/Foundation.h&gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多API。</span></p>
+<p><span class="s1">#import </span><span class="s2">用来拷贝某个文件的内容，与#include的区别：自动防止文件内容被拷贝多次</span></p>
+<p><span class="s1">@interface</span><span class="s2"> Person : </span><span class="s3">NSObject</span></p>
+<p><span class="s2">{</span></p>
+<p><span class="s2">@public</span></p>
+<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">int</span><span class="s2"> _age;</span></p>
+<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">bool</span><span class="s2"> _sex;</span></p>
+<p><span class="s2">}</span></p>
+<p><span class="s2">-(</span><span class="s1">void</span><span class="s2">)print;</span></p>
+<p><span class="s2">@end</span></p>
+<p>大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.</p>
+<p><span class="s1">: </span><span class="s2">NSObject（继承基类）使声明的类具有创建对象的能力。</span></p>
+<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><p><span class="s1">@implementation</span><span class="s2"> Person</span></p>
+<p><span class="s1">-(</span><span class="s3">void</span><span class="s1">)print</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s1">(</span><span class="s5">@”输出内容”</span><span class="s1">);</span></p>
+<p><span class="s1">}</span></p>
+<p><span class="s1">@end</span></p>
+<p>已经导入声明文件<span class="s1">#import </span><span class="s2">“Person.h” 类的实现即方法的实现。<a id="more"></a> </span></p>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p><span class="s2">Person</span><span class="s1"> *p=[[</span><span class="s2">Person</span> <span class="s3">alloc</span><span class="s1">] </span><span class="s3">init</span><span class="s1">];</span></p>
+<p><span class="s1">[p </span><span class="s2">print</span><span class="s1">];</span></p>
+<p>对象的本质是结构体，对象需要通过指针操纵。</p>
+<p>类在内存中也占据存储空间，在创建对象之前为类分配一份内存空间，将类加载进内存。而且只存储方法列表，其中由类产生的对象，都有一个isa指针指向类。</p>
+<p>方法调用：[行为执行者   行为名称];</p>
+<p>[Person new]执行Person这个类的new行为创建对象，返回对象地址。</p>
+<p>Person  <em>p=[Person new];定义一个Person </em>类型的指针变量p，指向Person类型的对象。指针的类型是Person *，指针指向的类型是Person。</p>
+<p><span class="s1">[p </span><span class="s2">print</span><span class="s1">]表示给p指向的对象发送一条print消息。</span></p>
+<p>Person  <em>p=[Person new];等价于 Person </em>p;p=[Person new];另外Person *p2=p;表示p2、p指向同一个内容。p=p2:将p2存储的指针交给p，使p存储的也是p2存储的内容。</p>
+<h3 id="方法与函数的区别以及注意"><a href="#方法与函数的区别以及注意" class="headerlink" title="方法与函数的区别以及注意"></a>方法与函数的区别以及注意</h3><ul>
+<li><span class="s2">OC方法只能声明在@interface和@end之间，只能实现在@implementation和@end之间。也就是说OC方法不能独立于类存在</span></li>
+<li><span class="s2">C函数不属于类，跟类没有联系，C函数只归定义函数的文件所有</span></li>
+<li><span class="s2">C函数不能访问OC对象的成员</span></li>
+<li><p>对象方法归类／对象所有，函数属于整个文件所有，任何地方都可以放置函数（如果放在<span class="s1">@interface</span>与<span class="s1">@end</span>之间，将会忽略掉函数，即未定义）</p>
+</li>
+<li><p><span class="s2">方法只有声明，没有实现（经典错误）</span></p>
+</li>
+<li><span class="s2">方法没有声明，只有实现（编译器警告，但是能调用，OC的弱语法）</span></li>
+<li><span class="s2">编译的时候：访问没有的成员变量直接报错，访问没有的方法，只是警告</span></li>
+<li><span class="s2">同一个类中不允许两个对象方法同名</span></li>
+</ul>
+<h3 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h3><ul>
+<li><p><span class="s2">属性访问  </span>[Car  new]-&gt;speed = 200;</p>
+</li>
+<li><p><span class="s2">方法调用    </span>[ [Car  new]  run];</p>
+</li>
+</ul>
+<h3 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h3><p>不带参数的对象方法：</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print;  方法名print</span></p>
+<p>带一个参数的对象方法：</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print:(</span><span class="s2">int</span><span class="s1">) a; 方法名print :</span></p>
+<p>带多个参数的对象方法：</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print:(</span><span class="s2">int</span><span class="s1">) a WithOther:(</span><span class="s2">int</span><span class="s1">) b; 方法名</span></p>
+<p><span class="s1">print</span><span class="s1"> : WithOther:</span></p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><p>typedef enum<span class="s1">｛</span></p>
+<p><span class="Apple-converted-space">          </span>SexMan,</p>
+<p><span class="Apple-converted-space">          </span>SexWoman</p>
+<p><span class="s1">｝</span>Sex;</p>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>typedef struct{</p>
+<p><span class="Apple-converted-space">   </span>int year;</p>
+<p><span class="Apple-converted-space">   </span>int month;</p>
+<p><span class="Apple-converted-space">   </span>int day;</p>
+<p>} Date;</p>
+<p>访问枚举：s-&gt;sex=SexMan;</p>
+<p>访问结构体：s-&gt;birthday.year=2016;</p>
+<p>定义结构体：</p>
+<p>Date d={2016,4,30};</p>
+<p>访问结构体：</p>
+<p>s-&gt;birthday.year=2016;</p>
+<p>s-&gt;birthday.month=4;</p>
+<p>s-&gt;birthday.day=16;</p>
+<p>等价于：</p>
+<p>Date d={2016,4,16};</p>
+<p>s-&gt;birthday=d;</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>打印函数中注意％与<span class="s1">%</span>的区别</li>
+<li>定义枚举、结构体等必需放在<span class="s1">@interface</span>的前面方可使用</li>
+<li><span class="s1">OC</span>方法中一个参数一个冒号</li>
+<li>对象中有对象</li>
+</ul>
+<p>@interface Student : NSObject</p>
+<p>{</p>
+<p><span class="Apple-converted-space">    </span>@public</p>
+<p><span class="Apple-converted-space">    </span>//<span class="s1">狗</span></p>
+<p><span class="Apple-converted-space">    </span>Dog *dog;</p>
+<p>}</p>
+<p>-(void)letDogRun</p>
+<p>{</p>
+<p><span class="Apple-converted-space">    </span>[dog run];</p>
+<p>}</p>
+<p>main.m</p>
+<p>Student *stu=[Student new];</p>
+<p><span class="Apple-converted-space">        </span>Dog *dog=[Dog new];</p>
+<p><span class="Apple-converted-space">            </span>stu-&gt;dog=dog;</p>
+<p><span class="Apple-converted-space">        </span>[stu letDogRun];</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;类的设计&quot;&gt;&lt;a href=&quot;#类的设计&quot; class=&quot;headerlink&quot; title=&quot;类的设计&quot;&gt;&lt;/a&gt;类的设计&lt;/h3&gt;&lt;p&gt;三要素：事物名称（类名）；属性；行为（功能）&lt;/p&gt;
+&lt;p&gt;具有相同（或者类似）属性和行为的对象可以抽象出一个类。&lt;/p&gt;
+&lt;h3 id=&quot;类的声明&quot;&gt;&lt;a href=&quot;#类的声明&quot; class=&quot;headerlink&quot; title=&quot;类的声明&quot;&gt;&lt;/a&gt;类的声明&lt;/h3&gt;&lt;p&gt;类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识&lt;/p&gt;
+&lt;p&gt;行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;#import &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;Foundation/Foundation.h&amp;gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多API。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;#import &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;用来拷贝某个文件的内容，与#include的区别：自动防止文件内容被拷贝多次&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;@interface&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Person : &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;NSObject&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;@public&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; _age;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; _sex;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;)print;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;@end&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;NSObject（继承基类）使声明的类具有创建对象的能力。&lt;/span&gt;&lt;/p&gt;
+&lt;h3 id=&quot;类的实现&quot;&gt;&lt;a href=&quot;#类的实现&quot; class=&quot;headerlink&quot; title=&quot;类的实现&quot;&gt;&lt;/a&gt;类的实现&lt;/h3&gt;&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;@implementation&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Person&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)print&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;NSLog&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s5&quot;&gt;@”输出内容”&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;);&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;@end&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;已经导入声明文件&lt;span class=&quot;s1&quot;&gt;#import &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;“Person.h” 类的实现即方法的实现。
+    
+    </summary>
+    
+      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈负债哲学</title>
+    <link href="http://yoursite.com/2016/05/06/%E6%B5%85%E8%B0%88%E8%B4%9F%E5%80%BA%E5%93%B2%E5%AD%A6/"/>
+    <id>http://yoursite.com/2016/05/06/浅谈负债哲学/</id>
+    <published>2016-05-05T21:00:45.000Z</published>
+    <updated>2016-08-21T12:43:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>原文刊自某信用卡论坛。某年某日拜读之后，收获巨大，特此转载。感谢作者。</p>
+</blockquote>
+<h1 id="一"><a href="#一" class="headerlink" title="一"></a>一</h1><p><span style="color: #000000;">首先抛出一个问题，银行放贷最关心的是什么？<br>并不是还贷的能力，而是抽贷的时机。</span></p>
+<p>即使资不抵债，银行照样敢放出贷款，如果您不能理解，那么请往下看：</p>
+<p>&nbsp;</p>
+<p><span style="color: #000000;">“信用卡体系的根基并非持卡人的信用，而是银行的不守信用”，这是我最初接触到信用卡时的第一想法。说来奇怪，当我第一次接触到信用卡的时候，并没有任何信用卡，甚至没有申请信用卡的想法；那年我大三，或者说大四，总之暑假还没有开学。</span></p>
+<p><span style="color: #000000;">本来，作为一名实习生只能担任一些非核心的岗位，但因为父亲的原因，免除了基础性的工作，直接进入了能够接触到信用逻辑的技术部门；那是我最初接触到银行的信贷逻辑，并使我后来决定远离银行体系的原因。银行只是一台冷血的机器，这里只有利益的竞逐和赤裸裸的博弈，银行与用户，银行与银行，而没有理解与帮助。<a id="more"></a> </span></p>
+<table class="t_table" cellspacing="0"><br><tbody><br><tr><br><td><br><br><span style="color: #000000;">银行客户分类服务标准：</span><br><br><span style="font-size: small; color: #000000;">贵宾客户：</span><br><br><span style="color: #000000;"><span style="font-size: xx-small;">提供周到满意的全方位服务</span></span><br><br><span style="font-size: small; color: #000000;">高值客户：</span><br><div align="right"><span style="color: #000000;"><span style="font-size: xx-small;">提供周到满意的品质服务</span></span></div><br><span style="font-size: small; color: #000000;">金卡客户：</span><br><br><span style="color: #000000;"><span style="font-size: xx-small;">提供客户满意的便捷服务</span></span><br><br><span style="color: #000000;"><span style="font-size: small;">基础客户</span><span style="font-size: xx-small;">：</span></span><br><br><span style="color: #000000;"><span style="font-size: xx-small;">提供便捷舒适的基础业务</span></span><br><br><span style="font-size: small; color: #000000;">政策客户：</span><br><br><span style="color: #000000;"><span style="font-size: xx-small;">提供政策要求的服务质量</span></span><br><br></td><br><td><br><br><span style="color: #000000;">银行关于不同类型投诉的处理方式：</span><br><br><span style="font-size: small; color: #000000;">重大过失投诉：</span><br><br><span style="font-size: xx-small; color: #000000;">指银监会可能亲审的投诉(比如身份冒用、账务冲正等)，由实权部门优先受理</span><br><br><span style="font-size: small; color: #000000;">终止合作投诉：</span><br><br><span style="font-size: xx-small; color: #000000;">指客户要求与银行互相拉黑，并按合同依法索赔的投诉，由实权部门直接受理</span><br><br><span style="color: #000000;"><span style="font-size: small;">贵宾客户</span><span style="font-size: small;">投诉：</span><span style="font-size: small;"><br></span></span><br><br><span style="font-size: xx-small; color: #000000;">指贵宾卡达标客户的各类(合理或无理的)投诉，由实权贵宾投诉部门特殊受理</span><br><br><span style="font-size: small; color: #000000;">一般类别投诉：</span><br><br><span style="color: #000000;"><span style="font-size: xx-small;">指普通投诉(</span><span style="font-size: xx-small;">包括</span><span style="font-size: xx-small;">客户执意要求管理层受理的投诉)，</span><span style="font-size: xx-small;">转回</span><span style="font-size: xx-small;">直接管理部门</span><span style="font-size: xx-small;">自行处理</span></span><br><br><span style="color: #000000;"><span style="font-size: small;">反复多次</span><span style="font-size: small;">投诉：</span><span style="font-size: small;"><br></span></span><br><br><span style="color: #000000;"><span style="font-size: xx-small;">指针对同一情节投诉3次及以上的客户，转由兼职大学生</span><span style="font-size: xx-small;">接听投</span><span style="font-size: xx-small;">诉(只许说套话)</span></span><br><br></td><br></tr><br><tr><br><td colspan="2"><br><div align="left"><span style="color: #000000;">垃圾客户：提供便捷的存取款业务<span style="font-size: xx-small;">(即:个人储蓄账户业务)</span>，并避免该客户影响其他储户的客户体验</span></div></td><br></tr><br></tbody><br></table><br><div align="left"><span style="color: #000000;"><span style="font-size: xx-small;">其中低保户、</span><span style="font-size: xx-small;">五保户</span><span style="font-size: xx-small;">等属于政策客户</span><span style="font-size: xx-small;">，</span>除政策客户外，行内资产在15K以下的属于垃圾客户，</span></div><br><span style="color: #000000;">除重大过错外，垃圾客户所有投诉均属于无效投诉，包括柜员态度和拒绝服务。简而言之，银行对这类客户的态度是<span style="font-family: 宋体;"><span style="font-size: xx-small;">：(</span></span><span style="font-size: xx-small;">淘汰低端客户是目的，不属于客户流失，特别是垃圾客户)</span></span><br><br><span style="color: #000000;"><span style="font-size: medium;">要么忍着，要么滚，爱存不存，这点存款的盈利还挣不回服务成本。</span>另一方面，</span><br><br><span style="color: #000000;"><span style="font-size: xx-small;">银监对于</span>非重大过失是转回银行<span style="font-size: xx-small;">(投诉转申诉)</span>自行处理的<span style="font-size: xx-small;">，</span><span style="font-size: xx-small;">银行并</span>不害怕<span style="font-size: xx-small;">垃圾</span><span style="font-size: xx-small;">客户</span>投诉到银监会</span><br><div id="code_dc1"><br><br>1.  <span style="color: #000000;">注：关于日均存款，银行一般有两种计算方式：账面日均(一般24:00结算)和公允日均(一般22:00结算)</span><br>2.  <span style="color: #000000;">账面日均：每日某时刻的行内资产/行内负债作为数据单位，计算平均数。</span><br>3.  <span style="color: #000000;">公允日均：每日某时刻及之前42小时内，行内资产最低值/行内负债最高值作为数据单位，计算平均数。</span><br>4.  <span style="color: #000000;">借记类业务一般采用前一种，贷记类业务一般采用后一种（但支行签字承担责任的业务可以采用前一种）</span><br></div><br><br># 二<br><br>银行的收益不是柜员的：即使大闹银行，那帮人也没什么损失，只要高柜玻璃不碎根本不算事故，撑死算个意外<br><br>无效投诉，一只三不：只道歉(不认错)，不处罚，不整改，不赔偿(所有不反馈处罚决定的投诉,都是无效投诉)<br><div align="right"><br><br>无法理解”一只三不”?体会一下这句话:”对不起,先生,我们已经打烊了.”道歉是因为造成了不便(包括自身没有任何过错)<br><br></div><br><br>一方面，引入更多债权方，可以稀释已发卡行的资金风险，而逾期记录会阻碍其他债权方的加入或追加额度；<br>另一方面，持卡人一而再的利用逾期宽容策略是银行更加不能容忍的，没有银行能容忍自己成为风险转嫁终端。<br><br>银行不会(因为不愿意)上报持卡人的短期逾期，除非持卡人预见到银行不会上报该笔逾期。<br><br>与逾期记录相对的另一个扣分项是信报查询记录：<br>其中比较常见的是信用卡审批、本人查询、贷款审批和贷后管理。<br>其中扣分最严重的依次是：<br><br><table class="t_table" cellspacing="0"><br><tbody><br><tr><br><td><span style="color: #000000;">1.不知名机构的贷款审批<span style="font-size: xx-small;">(尤其是没有贷款记录的)</span></span></td><br><td><span style="color: #000000;">3.未持卡机构的信用卡审批</span></td><br></tr><br><tr><br><td><span style="color: #000000;">2.非冷冻机构的贷后管理</span></td><br><td><span style="color: #000000;">4.个人明细版的本人查询</span></td><br></tr><br></tbody><br></table>
+
+<p>四大行或者其他著名银行的贷款审批是不会扣分的，而已持卡行的信用卡审批记录也是根本无所谓的。<br>特别需要注意的是：（贷后管理是不需要持卡人主动申请的，而银行方面为了防止贷后管理被投诉，）<br>银行卡部对贷后管理统一口径(不影响系统评分)，但实际执行中贷后管理比(已持卡行)信用卡审批扣分更多</p>
+<p><span style="color: #000000;">对于明知资不抵债的人，银行依旧敢于放款，并不是信任持卡人或者贷款人的还款能力，而是豪赌其他贷款方像自己一样认为持卡人还有榨取空间而不会抢先抽贷。银行对于自己的批卡或者放款有自信（或者说盲目自信的相信）自己不会成为击鼓传花的最后一棒；换言之，银行有自信在用户可用资金不足之前及时抽贷或者停卡，而把坏账留给其他债权人。越没有信用的银行越敢于放贷，同样也是这些银行更急于抽贷。</span></p>
+<p><span style="color: #000000;">说到抽贷，就不得不提到催收。</span><br><span style="color: #000000;">首先，催收的威逼利诱是不需要害怕的，没有打工者会为了那点提成冒着自己违法的风险。</span><br><span style="color: #000000;">但是同样的，催收也不害怕你的强硬威胁，同样因为大部分人不敢把狠话付诸行动。</span><br><span style="color: #000000;">记住关于催收的三个基本：</span><br><span style="color: #000000;">1.催收的利诱不能信，即使如约先还部分款，后续仍会一如既往的强硬。</span><br><span style="color: #000000;">2.催收总是试图诱导你对他动用武力，因为你的打手被认定共同受益，可以追究欠款的连带赔偿。</span><br><span style="color: #000000;">3.有资格做某事的人数超过总人口的8%，以这种行为做威胁必定没用；除非你有足够的专业背景。</span><br><span style="color: #000000;">简而言之：</span><br><span style="color: #000000;">催收不过是不敢付诸行动的苍蝇，不过你对他的强硬同样没用<span style="font-size: xx-small;">，除非你是土豪、律师或者暴力犯罪在逃犯</span></span><br><span style="color: #000000;"><span style="font-size: xx-small;">以上是常见的外包催收，还有一种连催收人员都鲜有耳闻的催收队伍：污点催收。<br>这类催收一般是对付那些想为家人保住财产的逾期者(或者说是想一人做事一人当的汉子)；<br>一言以蔽之：</span>直系亲属(及配偶)无钱可出则采用外包催收，而直系亲属不愿倾其所有的采用污点催收。</span><br><span style="color: #000000;">污点催收人是银行招安的一部分逾期特别巨大且确实走投无路的铤而走险者，一般具备以下协议：</span></p>
+<div class="blockcode" style="text-align: justify;"><br><div id="code_DYg"><br><br>1.  <span style="color: #000000;">协议禁止催收时使用违法手段，否则造成的一切后果及法律责任自负，与银行无关；</span><br>2.  <span style="color: #000000;">不能达到签约的催收指标则视为违约，银行将继续依法对信用卡诈骗报案追究刑事责任；</span><br>3.  <span style="color: #000000;">达到催收指标满XX年后，可以不再追究刑事及民事责任，并发放一定金额的奖励；</span><br>4.  <span style="color: #000000;">因催收冲突或暴力袭击原因导致死亡的，向其子女发放优厚的死亡赔偿金(不属于死者的遗产)</span><br></div><br></div>
+
+<p><span style="color: #000000;">但是，实际执行中：由于逾期者的亲属不存在法律上的连带责任，</span></p>
+<div style="text-align: justify;" align="right"><span style="color: #000000;">银行摊派给污点催收的一定是通过合法手段<span style="font-size: xx-small;">(含法律渠道)</span>不可能回收的债务。</span></div>
+
+<p><span style="color: #000000;">此种关系模式下：银行把自己最大的威胁<span style="font-size: xx-small;">(包括暴力压力和舆论压力)</span>变成了自己最锋利的刀，</span></p>
+<div style="text-align: justify;" align="right"><span style="color: #000000;">催收和被催收的关系是：除非被催收者的父母妻儿倾家荡产，否则污点催收人必定家破人亡。</span></div>
+
+<h1 id="三"><a href="#三" class="headerlink" title="三"></a>三</h1><p><span style="color: #000000;">进场自由，愿赌服输，<u>希望回本的赌徒永远都是loser</u>。</span></p>
+<p><span style="color: #000000;">  所谓进场自由，当被抢先抽贷或者资金断流，信用卡所谓催收不过是迫使持卡人把烂账转嫁到亲友或其他债权方，而非让你尽早赚回本金，不要说什么没有钱，银行之所以催收恰是因为你没有资金，银行试图引入更多的债权人使自己完成抽贷全身而退。</span></p>
+<p><span style="color: #000000;">  所谓愿赌服输，如果短期内无法全身而退，银行唯一要做的就是甩掉黑锅，把自己塑造成受害者，而隐藏面具下的魔鬼；作为赌局的输家，银行并不是妄图回本的loser，根本不在乎收回本金（沉没成本的收益期望小于风险成本+机会成本），让持卡人背负欺骗银行的黑锅，这才是信用卡刑事庭的本质。</span></p>
+<p><span style="color: #000000;">关于刑事，插入一句：</span><span style="color: #000000;">A.还款优先抵扣滞纳金，判定是否存在持续还款</span><span style="color: #000000;">B.还款优先抵扣本金后，判定刑事判决具体刑期</span><span style="color: #000000;"><span style="font-size: xx-small;">同一笔还款在AB两个阶段，优先偿还的优先级不同，A阶段在B阶段之前结算。</span></span></p>
+<div class="blockcode"><br><div id="code_K1F"><br><br>1.  <span style="color: #000000;">以5%滞纳金+利息为例，如果每月还款不超过本金的5%视为没有还款。</span><br>2.  <span style="color: #000000;">如果每月偿还5%，那么20个月后停止偿还，也仅仅是民事问题。</span><br>3.  <span style="color: #000000;">举例：欠款10万，</span><br>4.  <span style="color: #000000;">第2~5个月还款5000.01，第6~15个月偿还3K，则有且仅有第6~15个月视为没有还款。</span><br>5.  <span style="color: #000000;">量刑金额：49,999.96 (即100K-5000.01<em>4-3K</em>10)，利息及滞纳金部分不作为量刑标准。                                                    </span><br>6.  <span style="color: #000000;">数额较大：数额在5000元以上不满5万元的；</span><br>7.  <span style="color: #000000;">数额巨大：数额在5万元以上不满50万元的。</span><br></div><br></div>
+
+<p><span style="color: #000000;">上述数据可以看出逾期还款的基准点是：两年结清本金，利息、罚金不免。</span></p>
+<p>由此引出了逾期协商的本质：<strong>双方退而求其次</strong>。<br><span style="color: #000000;">所谓谈判的过错不过是时间（容忍期）与空间（资金关系）的利益交换。</span><br><span style="color: #000000;">银行拒绝与持卡人协商的原因仅仅是由于持卡人没有任何谈判的诚意。</span></p>
+<p><span style="color: #000000;">谈判（或者说协商）的本质无非是：时间换空间，或者空间换时间；</span><br><span style="color: #000000;">逾期者的协商如果基于时空双降，这注定是失败的，除非你爸是李刚。</span></p>
+<p><span style="color: #000000;">空间换时间（典型案例）：持卡人通过另有约定同意<span style="font-size: xx-small;">(刑期意义上)</span>还款优先冲抵滞纳金；</span><br><span style="color: #000000;">银行接受较长的约定还款期限并降低最低还款标准，但不降低滞纳金收取标准。</span><br><span style="color: #000000;">时间换空间（典型案例）：持卡人于15个工作日内从其他债权方<span style="font-size: xx-small;">(特别是直系亲属)</span>借到本金；</span><br><span style="color: #000000;">银行确认本金偿清后，免除全部利息与滞纳金，并永久拒绝持卡人的信贷业务。</span></p>
+<p><span style="color: #000000;">想要延长还款期，并减免利息的，洗洗睡吧：银行相对于默认规则没有降低任何风险。</span><br><span style="color: #000000;">至于自首，只要你的供述事实构不成犯罪，一定会被经侦赶出来，立不了案，哪来的自首？</span></p>
+<p><span style="color: #000000;">注意：判刑后银行仍有对债务的民事权力，可以申请法院强制执行，也就是说：坐牢也得还。</span><br>但是，在某些极端情况下，银行一定会免除债务的，比如因负债压力过大而自杀(不含劝离/解救成功，含抢救成功):<br>因自杀导致的病危通知书，仅一张，或因其他原因而起，因而银行不承担责任，所以没卵用。<br>两张因自杀导致的(三甲医院出具的)病危通知书，免利息、滞纳金。<br>三张以上因自杀导致的(三甲医院出具的)病危通知书，连本金都免。<br>无论最后是否抢救成功，但上述病危通知书必须是持卡人本人、直系亲属或配偶。<br><span style="color: #000000;">不想像上述那样极端？成为特殊人群也可以享受减免且免于刑事，比如<span style="font-size: xx-small;">(政府部门确认的)</span>地震受灾户。</span></p>
+<h1 id="四"><a href="#四" class="headerlink" title="四"></a>四</h1><p><span style="color: #000000;">没有一家银行能承受挤兑，同样没有任何股票能承受抛售，但仍有很多人安然的持有着存款或股票；从这个意义上来说，银行与这些投资者其实并没有本质区别，盲目的信任其他投资者会继续持有，而成功者总是踩着失败者的尸体在攀登；如同股票一样，庄家与散户不会同时获益，所谓双赢无非是找第三方作为失败者，金融的本质是<strong>零和博弈</strong>：你、中介与银行总有一方是失败者，而这三者中绝对强势的银行注定不败。</span></p>
+<p><span style="color: #000000;">说到第三方，普及一个反常识的常识：</span></p>
+<div style="text-align: justify;" align="right"><strong><span style="color: #000000;">除非你套的行为一定（must）会被银行发现，否则这个行为总是（always）会导致降额或封卡</span></strong></div>
+
+<p>之所以原谅你说谎，是因为自始就看透了你的谎言；<br>如果被你成功欺骗了，会害怕你欺骗的能力，所以不会原谅你。<br>局外人认为：只有银行发现不了的路子，才能活的长久；这样的路子不会被银行发现是在套。<br>事实的真相是：银行把所有经此消费均认定为套的路子，才能活的长久；因为他是永远的说谎者。<br>被记录在案的“永远说谎者”在某种意义上就是诚实者，当然银行不会承认有一份永久说谎者名单。<br>无论跳码还是套码，银行永远不是吃亏者，只有交足了保护费的说谎者（商户）才有开绿灯的资格。<br>这条食物链里银行拿的是大头，才能保持长期稳定的平衡，虽然银行装受害者，让第三方支付机构背黑锅。</p>
+<p>如果你套的行为成功骗过银行电脑系统，那么银行会害怕你的反监控能力，于是就不和你玩了。<br>换句话说，如果你骗过了银行电脑系统，那么一旦被发现，100%被降额封卡，零宽容，零容忍</p>
+<p>能长期稳定的路子没有能骗过银行电脑系统的评估和风控的，<br>或者说是已经和银行报备过自己被用来套的路子才能长期存活。<br>当然，丰富账单也是必要的，主要是给银监看的，只要别太过分，银监也装傻；不过，丰富账单对系统评分没卵用</p>
+<p>关于代还的认定，这里一般采用池缓冲的概念（最低标准一天两夜，即一晚上加一白天再加一晚上）：<br>任意一笔金额入账时刻止，之前的48/72小时内的总消费入账和总还款入账是银行判定代还的标准：<br>该笔入账及之前48小时内，总消费入账超过额度的70%且总还款入账超过额度的70%则视为代还；<br>该笔入账及之前72小时内，总消费入账超过额度的90%且总还款入账超过额度的90%则视为代还。<br>单笔消费金额/还款金额不作为代还判定要件，相邻两笔消费/还款间的时间间隔不作为代还认定标准</p>
+<h1 id="五"><a href="#五" class="headerlink" title="五"></a>五</h1><p><span style="color: #000000;">那年，又到了事业编制的招考，一心想要脱离银行业的我毅然决然的决定备考。幸运地，我考上了，虽然面临着30万的违约金与保密赔偿款<span style="font-size: xx-small;">(已挣回并偿清)</span>，前景也不如在银行那样明朗。但是人没有梦想和咸鱼有什么区别，帮助银行助纣为虐并不是我的理想，从那一刻起，我决定利用银行间的博弈均衡彻底玩弄银行的授信体系，这也许当年的年少轻狂，虽然现在也并不怎么成熟。</span></p>
+<p><span style="color: #000000;">不过，这并不是天朝国情决定的，而是资本的本质决定的。</span><br><span style="color: #000000;">即使是传说中刷卡能拒付的美国，拒付其实也没有那么容易成功。</span><br><span style="color: #000000;">在美国（以及大部分资本主义国家）</span><br><span style="color: #000000;">商户分为三类，可信商户、合作商户、普通商户。</span><br><span style="color: #000000;">用户分为三类，受邀用户、高值用户、普通用户。</span><br><span style="color: #000000;">当然，分类标准并不是商户的口碑，而仅仅是商户缴纳的年费，或者说保护费。</span></p>
+<p><span style="color: #000000;">当用户等级高于或等于商户等级时，拒付轻松加愉快。</span><br><span style="color: #000000;"> 当用户等级低于          商户等级时，拒付永远失败。</span><br><span style="color: #000000;"> 例如只有受邀用户可以拒付可信商户，受邀用户指银行主动邀请才能办理的高端卡用户，比如运通黑、花旗主席卡</span></p>
+<div align="center"><span style="color: #000000;">注意：美国拒付是商户承担资金损失（财货两空）；并不是银行负责赔付</span></div>
+
+<p><span style="color: #000000;">附花旗信用卡协议：</span><br><span style="color: #000000;"> 您不得以未凭密交易、单据上无签名或无交易单据等为由否认交易或拒绝还款。</span></p>
+<p><span style="color: #000000;">这里不能不说一下中国的盗刷立案制度，受害人报案制，也就是说：谁的过失谁负责，谁负责谁报案，</span></p>
+<div align="center"><span style="color: #000000;">如果是银行的错必须由银行负责报案，如果持卡人泄露的信息则是持卡人进行报案。</span></div>
+
+<p><span style="color: #000000;">如果被盗刷到派出所报案时，一口咬定不是亲友作案，自己也从没泄露过信息，那么肯定立不了案。</span><br><span style="color: #000000;"> 这并非派出所不作为，而是必须提供盗刷信息的泄露途径才能立案；否则，必须银行方面进行报案。</span><br><span style="color: #000000;"> 另一方面，</span><br><span style="color: #000000;"> 除非提供立案材料，否则银行要承担泄露支付信息的刑事风险，(相比于这个风险)钱根本不是问题。</span><br><span style="color: #000000;"> 所有表示银行承认存在可疑交易但拒绝赔付的所谓个人经历一定是软文，银行即使明知也根本不可能承认这一点：</span><br><span style="color: #000000;"> 负责受理盗刷投诉的客服人员只有耍官腔的权力，负责交流细节的只有法务部，律师知道有些真话不能说。</span><br><span style="color: #000000;"> 如果持卡人坚持自己没有泄露过支付信息，但无法提供银行泄露(故意或漏洞)持卡人支付信息的证据：</span><br><span style="color: #000000;"> 那么就会出现银行必须等待立案材料，而派出所表示必须银行方面报案的（伪）踢皮球，形成死锁。</span><br><span style="color: #000000;"> 国内银行赔付信用卡盗刷(名义上)是因为信用卡附赠的保险，但银行不会承认在盗刷事件中存在过错。</span></p>
+<h1 id="六"><a href="#六" class="headerlink" title="六"></a>六</h1><p><span style="color: #000000;">说来讽刺，我第一家申请的是单位的工资行——中国银行，然而时至今日仍然没有能够攻略中行白金卡的方法，即使依赖于存款也无济于事，甚至不知道问题出在哪里，或许距离才能产生美。</span></p>
+<p><span style="color: #000000;">我得到毕业证的两周后获得了人生中的第一张，不，准确地说是两张校友信用卡，15K的招行，以及半个月之后的建行，只有12K的金卡。</span></p>
+<p><span style="color: #000000;">这是一个很讽刺的开局，只有不到3万的额度，却想要玩弄银行的授信体系，这与儿童的妄语其实并没有什么不同。当时，我一度放弃了轻狂的想法；但是讽刺的，成也萧何败也萧何，花旗竟然批复了一张高于当前总额度两倍的卡，即由此，我开始了信用卡的提额之路。</span></p>
+<p><table class="t_table" cellspacing="0" bgcolor="#fcfcfc"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td><span style="color: #000000;">退款能否视为还款的通用规则：</span><br><span style="color: #000000;">   账单日之后的退款优先冲抵未出账单； </span><br><span style="color: #000000;">   冲抵未出后余款可用来冲抵已出账单。</span><br><span style="font-size: xx-small; color: #000000;"><br>余款（退款冲抵已出账单部分）：</span><br><span style="color: #000000;">   如果不小于上期账单，视为全额还款；<br>如果小于上期账单，不视为最低还款。</span><br><span style="font-size: xx-small; color: #000000;"><br>当余款小于上期账单时，以下二选一：</span><br><span style="color: #000000;">   ①另行存入达到最低还款额的现金金额</span><br><span style="color: #000000;">   ②补足余款和上期账单全额还款的差额</span></td></p>
+<p><td><span style="color: #000000;"><span style="font-size: large;">当天消费入账时刻分节点：</span><span style="font-size: medium;"><br>招商银行：00:00<br>工商银行：06:00【以步步为赢到账为准】<br>中国银行：08:00【中行未持卡，未验证】<br>建设银行：17:00【银联单币：19:00】<br>花旗银行：21:00（浦发银行）【纽约8:00】<br>农业银行：22:00<br>邮储银行：24:00（上海银行）</span></span></td><br><br><br><br>也许是上天眷顾，恰逢建行的清华提额活动，凭借一张清华龙卡和事业单位的工牌从12K直接保送到了100K。而在建行提额的不久，花旗也随之提升了额度，到达了119K，而招商作为我的第一张卡并没有任何变化，此时已经过了2015年的春节，看着手里这三家银行的卡，我决定在将国有银行攻略之前，不再申请其他商业银行的卡，当然交通银行作为股份制重组的银行，并没有在我的日程表之中，取而代之的是出身邮局系统的邮政储蓄银行。</p>
+<p>也许是首卡的情怀，或者是对额度的偏执，在申请中行期间，一直不忘关心招行的额度，在第8个多月的时候，招行终于分娩了，奇迹的从15K直接提到了43K，然而这依然是额度最低的一张卡。显然，如果一直保持着低位，必定拉低平均授信额度。最低单行额度反应了你对金融波动承受的幅度，越低的额度意味着你对越低的资金波动反应敏感，银行更关心你的最低单行(含正式销户不足一年)额度，其次才是最高单行(不含已销户)额度。说到信报，顺便提一句：个人明细版和银行打印版信报在信贷交易信息明细后紧接着是查询记录，但是：<br>银行数据版在这两个大类之间还有一个：信贷机构信息明细，这在个人版及银行打印版不体现。<br>包括进行过信用卡审批的所有银行/机构(包括未批卡机构)的列表以及相关数据，此大类下包含：<br>额度使用量峰值(概念类似单月股票最高点)和日均额度占用(概念类似借记卡日均存款)等按机构上报的数据；<br>以及未批卡机构的未批卡原因（一般是”其他原因”，但”进件不实”、”仿真流水”等会以代码形式高亮体现）；<br>以及已销户机构的销整户原因（一般是“个人原因”，但”信贷逾期”、”虚假交易”等会以代码形式高亮体现）。<br>显然，账单日前还款来降低负债(除了自我安慰之外)对银行并没有什么卵用。<br>不过，用来骗小贷公司还是绰绰有余的。</p>
+<p>需要特别说明的一点是：即使消掉的账户也不会消失(包括额度)，但是：<br>银行只关心法人机构数，你的信报有多少个账户根本无所谓。</p>
+<div class="blockcode"><br><div id="code_kJ4"><br><br>1.  比如建行北京分行发了一张双币卡，建行上海分行发了一张银联单币卡，招行发了一个双币卡。<br>2.  那么你的：<br>3.  账户数是5个。<br>4.  机构数是三个（建行北京分行、建行上海分行、招商银行）<br>5.  法人机构数是两个（建设银行、招商银行）<br></div><br></div>
+
+<p><span style="color: #000000;">接触客户的柜员/客服是看不见具体的拒绝理由的，客服告知的拒批原因都是一本正经的胡说八道。</span><br><span style="color: #000000;">即使你是因为进件身份无法核实真实性，你的理财经理也会在查询之后告诉你是总授信额度过高。</span></p>
+<p><span style="color: #000000;">明显的，招行拉低了最低单行的额度，这是有着明确目标的人所不能容忍的；即使现金分期毕业，仍然无法摆脱最低单行的命运；但作为第一张信用卡有一种情怀在里面，所以并没有销卡，而是决定直接申请白金卡；来到支行要了一张白金卡的申请表，也许长相过得去，前台客服并没有为难，轻松地填了银联白的申请表，甚至连信用卡都没有复印，说是查的到；过程很愉快，结局很扯淡，被拒绝了。</span></p>
+<p><span style="color: #000000;">这时我才意识到小昭成为了额度的短板，既然柜台不行，那就邮寄；个人邮寄肯定不如柜台，于是另辟蹊径，走了公对公的挂号信邮寄，速度很缓慢，结局很愉快。银联白成功下卡，而且不是起步的6万，直接给了7万。更诡调的是，之后的某一天这张7万的卡被意外的刷空了，竟然还有额度外的现金分期，而这次分期之后的某个周六，恰逢招行大赦天下，又出现了一次分期，此时小昭在一个月之内，额度成为了最高的155K。</span></p>
+<h1 id="七"><a href="#七" class="headerlink" title="七"></a>七</h1><p><span style="color: #000000;">关于羊毛或腿毛的性质，内在原理是发卡行对持卡人的定额补偿：</span><br><span style="font-size: medium; color: #000000;">薅羊毛的重点不在于撸没撸，而在于程度是否超过官方福利的阈值标准</span><br><span style="color: #000000;">以招商腿毛卡为例：</span><br>招商金卡正常封顶额度是5万，20元一积分。则50000/20=2500；<br>按每张腿毛卡5000取现计算，可得积分5000/20=250；<br>城市卡每张享有1.5倍积分，两张城市卡相对于3张腿毛卡；<br>因此相对于两张城市卡+7张卡，其中ATM最多取10K单笔，相对于两笔网络，即：<br>每月的标准操作是：两张城市卡+1次ATM取现+5次网络取现；<br><span style="color: #000000;">此时需要，2张城市卡+6张标准腿毛卡，恰为招行推荐的工作地+户籍地城市卡。</span><br><span style="color: #000000;">所以，不难看出：腿毛卡的每月定额补偿积分是以2500分为安全阈值的；</span><br><span style="color: #000000;">无论怎么撸，每月腿毛总收益不超过2500积分就是安全的官方福利；</span><br><span style="color: #000000;">而超过2500分/月就会带来各种各样的评分下降，月撸几十张城市卡的也就呵呵了。</span></p>
+<p><span style="color: #000000;">招行达到最高额度之后，我彷徨了；是去申请工商还是先搞定中行？犹豫中，老农来单位推自己的尊然白金卡，只要持卡行在2~5行，单行额度不低于10万的在职职工都能保送尊然白，而且返还首年年费，恰好低空飞过标准线，蒙蒙的填了表，但意外的批了卡，这时我才知道这张没听说过的精粹白是什么卡种。</span></p>
+<p><span style="color: #000000;">拿到精粹白的时候，信心嫉妒膨胀，传说中的邮储白成为了奋斗的目标，便无视了中行和工商。当时邮储还没有小白金，邮储白的逼格令我心驰神往，恰逢正式成为副主任科员，当然这在我们单位内算是比较常见的级别，也还属于小兵的范畴。</span></p>
+<p><span style="color: #000000;">但是，年轻嘛，不试试怎么行？于是壮着胆子就去了，由于招商成功的经验，我自认为毫无问题，然而连申请表都没有拿到，就被赶了出来。这能忍？当然不能，于是尝试了各种网点，得到的结果都是一样的：白金信用卡没有申请表。</span></p>
+<p><span style="color: #000000;">邮储碰壁后，就又开始了工商和中行的申请，恰逢大妈推广大来白金卡，于是工商的大来白成功填了表，当然只是试试看根本没报多大希望，毕竟工行连储蓄账户都没有，而中行那也屡战屡败。结果出乎意料，大来白金卡批了（初始额度不高，后来在和电话客服扯淡时，意外的发现能提额，这是后话）；而中国银行一如既往的坚定，申请失败。</span></p>
+<p><span style="color: #000000;">这里说明一下刷卡与费率的问题：</span><br><span style="color: #000000;"><span style="font-size: medium;">如果某档费率的月消费金额不超过月总消费金额的5%，则该费率不计评分</span>。</span><br><span style="color: #000000;">以某月刷卡消费66K<span style="font-size: xx-small;">（注意：不是账单金额）</span>为例：</span><br><span style="color: #000000;">某费率下的总消费金额低于3.3K，则这些消费不会增加评分，更不会减分。</span><br><span style="color: #000000;">对于月消费6万多的持卡人，总额两三千的几笔消费，1.25与刷封顶的效果是完全一样的。</span><br><span style="color: #000000;">所以，不必对偶尔遇到的小额套码耿耿于怀，因为根本无所谓（即使是三农或者封顶）。</span><br><span style="color: #000000;">同样，对于月消费数万元的账户，用小额多笔高费率来美化账单其实也并没有什么卵用。</span></p>
+<div class="blockcode"><br><div id="code_BAn"><br><br>1.  <span style="color: #000000;">注：66K和3.3K这两个数值很熟悉吧，提醒一下：</span><br>2.  <span style="color: #000000;">建行：45K<em>(1+50%)=67.5K（你懂得）</em></span><br>3.  <span style="color: #000000;">中行：50K(1+30%)=65K（搬砖办卡）</span><br>4.  <span style="color: #000000;">招行：60K+5K=65K（现金分期）</span><br>5.  <span style="color: #000000;">封顶：26/0.78%=3.333K</span><br></div><br></div><br><span style="color: #000000;">元旦左右，坐飞机回北京，想着15号线比机场线换乘走的路要少（13号线的步行距离你懂的），于是乘坐了空港3路，诡吊的是在天竺村附近车抛锚了，地图上看附近有家邮储支行就又去试了试，结果意外的凭工牌和精粹白填了一张表（虽然没要精粹白的复印件），更意外的是竟然批卡了，虽然是所有银行额度最低的一张卡，但总归里离集齐国有行更近了一步。</span><br><br><span style="color: #000000;">虽然，第一家申请的信用卡，到现在还没有攻略成功……</span><br><br># 八<br><br><span style="color: #000000;">最后，告诫诸位：</span><br><br><span style="color: #000000;">信用卡套出来锦上添花，会成为卡神；套出来用于苟延残喘，则更加卡奴。</span><br><br><span style="color: #000000;">当不用也过得去，就放心大胆的用，不用来生钱的钱不过是一堆废纸。</span><br><span style="color: #000000;">当不用就过不去，请千万别用，否则不过是饮鸩止渴。</span><br><br><span style="color: #000000;">卡神与卡奴的核心不在于奇技淫巧，而在于是否有额度外的存款使之活盘。</span><br><br><span style="color: #000000;">如果已经负资产，同样也有成为卡神的机会，但请确保手上的闲置存款不要低于总负债的20%。</span><br><span style="color: #000000;">看起来这样的闲置负债将加大利息成本，但请记住只有资金是活盘的总还有希望。</span><br><br><strong><span style="color: #000000;">当闲置存款低于负债的16.5%这条活盘警戒线超过7日，终会被债务拖垮，万劫不复。</span></strong><br><br><span style="color: #000000;">注：闲置存款不限于定活期：<br>余额宝、招行朝朝盈等能实时取现的都算闲置存款，但不包括各种封闭期禁止取款的理财产品。</span><br><br><span style="color: #000000;">建行看重代发收入<span style="font-size: xx-small;">(象征国家建设的贡献)           </span>中行看重行内存款<span style="font-size: xx-small;">(象征国库保障的需要)</span></span><br><br><span style="color: #000000;">工商看重理财贡献<span style="font-size: xx-small;">(象征以钱生钱的能力</span><span style="font-size: xx-small;">)           </span>农行看重单位性质<span style="font-size: xx-small;">(象征术业专攻的特性)</span></span><br><br><span style="font-size: large; color: #000000;">附录：销卡威胁处理流程</span><br><br><div class="blockcode"><br><br>1.  <span style="color: #000000;">销卡不销户？是，下一步；否，转第3步；</span><br>2.  <span style="color: #000000;">销卡成功，结束。</span><br>3.  <span style="color: #000000;">确认用户诉求并挽留？无需销户，下一步；销户，转第5步；</span><br>4.  <span style="color: #000000;">客户是否有其他诉求（如：提额、年费优惠）？是，下一步；否，转第2步；</span><br>5.  <span style="color: #000000;">不可逆确认？是，下一步；否，转第2步；</span><br>6.  <span style="color: #000000;">系统评测是否通过客户诉求？是，下一步；否，转第8步；</span><br>7.  <span style="color: #000000;">客户同意系统评测结果？是，调整后结束；否，下一步；</span><br>8.  <span style="color: #000000;">系统评测客户综合评分？高，下一步；一般或较低，转第10步；</span><br>9.  <span style="color: #000000;">客户是否反悔销户请求？是，结束；否，下一步；</span><br>10.  <span style="color: #000000;">销户成功，不可恢复，结束。</span><br></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;原文刊自某信用卡论坛。某年某日拜读之后，收获巨大，特此转载。感谢作者。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;一&quot;&gt;&lt;a href=&quot;#一&quot; class=&quot;headerlink&quot; title=&quot;一&quot;&gt;&lt;/a&gt;一&lt;/h1&gt;&lt;p&gt;&lt;span style=&quot;color: #000000;&quot;&gt;首先抛出一个问题，银行放贷最关心的是什么？&lt;br&gt;并不是还贷的能力，而是抽贷的时机。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;即使资不抵债，银行照样敢放出贷款，如果您不能理解，那么请往下看：&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;color: #000000;&quot;&gt;“信用卡体系的根基并非持卡人的信用，而是银行的不守信用”，这是我最初接触到信用卡时的第一想法。说来奇怪，当我第一次接触到信用卡的时候，并没有任何信用卡，甚至没有申请信用卡的想法；那年我大三，或者说大四，总之暑假还没有开学。&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style=&quot;color: #000000;&quot;&gt;本来，作为一名实习生只能担任一些非核心的岗位，但因为父亲的原因，免除了基础性的工作，直接进入了能够接触到信用逻辑的技术部门；那是我最初接触到银行的信贷逻辑，并使我后来决定远离银行体系的原因。银行只是一台冷血的机器，这里只有利益的竞逐和赤裸裸的博弈，银行与用户，银行与银行，而没有理解与帮助。
+    
+    </summary>
+    
+      <category term="金融理财" scheme="http://yoursite.com/categories/%E9%87%91%E8%9E%8D%E7%90%86%E8%B4%A2/"/>
+    
+    
+      <category term="金融" scheme="http://yoursite.com/tags/%E9%87%91%E8%9E%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记八：简单的RSS阅读器</title>
+    <link href="http://yoursite.com/2016/05/04/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AB%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84RSS%E9%98%85%E8%AF%BB%E5%99%A8/"/>
+    <id>http://yoursite.com/2016/05/04/UWP开发笔记八：简单的RSS阅读器/</id>
+    <published>2016-05-03T21:00:23.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。</p>
+<p>这次起，把所有功能代码放在类中，MainPage不能再那么随便了。</p>
+<p>新建RSSClass类：</p>
+<pre class="lang:default decode:true ">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+// ItemsControl
+using Windows.UI.Xaml.Controls;
+// KeyRoutedEventArgs 
+using Windows.UI.Xaml.Input;
+// SyndicationClient 
+using Windows.Web.Syndication;
+
+namespace RSS阅读器
+{
+  public   class RssClass
+    {
+        // 下载指定url的feed条目，逐一将其整合到集合控件ItemsControl中
+        private async void Load(ItemsControl list,Uri url)
+        {
+            // 从URL异步检索源
+            SyndicationClient client = new SyndicationClient();
+            // 开始一个异步操作以下载从给定的URI的聚合feed。
+            SyndicationFeed feed =await client.RetrieveFeedAsync(url);
+            // 遍历feed中的所有item，将其添加到list中
+            foreach (var item in feed.Items)
+            {
+                list.Items.Add(item);
+            }
+        }
+
+        // 
+        public void Start(ref ItemsControl list,string url,KeyRoutedEventArgs args)
+        {
+            // 当按下回车键时
+            if (args.Key== Windows.System.VirtualKey.Enter)
+            {
+                try
+                {
+                    Load(list, new Uri(url));
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                // 设置控件的焦点
+                list.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+            }
+        }
+    }
+}
+</pre>
+页面代码：
+<pre class="lang:default decode:true "> &lt;Grid.RowDefinitions&gt;
+            &lt;RowDefinition Height="Auto"/&gt;
+            &lt;RowDefinition Height="*"/&gt;
+        &lt;/Grid.RowDefinitions&gt;
+        &lt;TextBox Name="URLTextBox"
+                 Margin="10"
+                 KeyDown="URLTextBox_KeyDown"
+                 PlaceholderText="请输入RSS地址"/&gt;
+        &lt;ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto"
+                      Margin="20"
+                      Grid.Row="1"&gt;
+
+            &lt;ItemsControl Name="ListItemsControl"&gt;
+                    &lt;ItemsControl.ItemTemplate&gt;
+                        &lt;!--数据模板--&gt;
+                        &lt;DataTemplate&gt;
+                        &lt;StackPanel&gt;
+                            &lt;!--超链接--&gt;
+                            &lt;HyperlinkButton NavigateUri="{Binding Path=Links[0].Uri}"&gt;
+                                &lt;!--超链接标题--&gt;
+                                &lt;HyperlinkButton.Content&gt;
+                                    &lt;TextBlock Text="{Binding Path=Title.Text}"/&gt;
+                                &lt;/HyperlinkButton.Content&gt;
+                            &lt;/HyperlinkButton&gt;
+
+                            &lt;!--文章日期--&gt;
+                            &lt;TextBlock Text="{Binding Path=PublishedDate}"/&gt;
+                        &lt;/StackPanel&gt;
+                        &lt;/DataTemplate&gt;
+                    &lt;/ItemsControl.ItemTemplate&gt;
+                &lt;/ItemsControl&gt;
+
+        &lt;/ScrollViewer&gt;
+</pre>
+cs逻辑代码：
+<pre class="lang:default decode:true "> private RssClass rss = new RssClass();
+        private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            rss.Start(ref ListItemsControl, URLTextBox.Text, e);
+        }</pre>
+明显清晰许多。![](http://images.chenyalun.cn/2016/04/23/005.png)
+
+原谅我又无耻地用了自己网站的RSS源做示例。
+
+* * *
+
+* * *
+
+* * *
+
+## &gt;&gt;笔记
+
+*   #### ItemsControl的数据绑定：
+<pre class="lang:default decode:true">&lt;ItemsControl Name="ListItemsControl"&gt;
+            &lt;ItemsControl.ItemTemplate&gt;
+                             &lt;DataTemplate&gt;
+
+                              &lt;/DataTemplate&gt;
+             &lt;/ItemsControl.ItemTemplate&gt;
+&lt;/ItemsControl&gt;</pre>
+
+<ul>
+<li><h4 id="ScrollViewer的两个属性："><a href="#ScrollViewer的两个属性：" class="headerlink" title="ScrollViewer的两个属性："></a>ScrollViewer的两个属性：</h4><p>VerticalScrollBarVisibility=”Auto”<br>HorizontalScrollBarVisibility=”Auto”</p>
+</li>
+<li><h4 id="绑定RSS内容："><a href="#绑定RSS内容：" class="headerlink" title="绑定RSS内容："></a>绑定RSS内容：</h4><p>链接：<strong> </strong>&lt;HyperlinkButton NavigateUri=”{Binding Path=<strong>Links[0].Uri</strong>}”&gt;</p>
+</li>
+</ul>
+<p>链接标题：&lt;TextBlock Text=”{Binding Path=<strong>Title.Text</strong>}”/&gt;</p>
+<p>文章日期：&lt;TextBlock Text=”{Binding Path=<strong>PublishedDate</strong>}”/&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。&lt;/p&gt;
+&lt;p&gt;这次起，把所有功能代码放在类中，MainPage不能再那么随便了。&lt;/p&gt;
+&lt;p&gt;新建RSSClass类：&lt;/p&gt;
+&lt;pre class=&quot;lang:d
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记七：WebView与简单浏览器</title>
+    <link href="http://yoursite.com/2016/05/02/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%83%EF%BC%9AWebView%E4%B8%8E%E7%AE%80%E5%8D%95%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    <id>http://yoursite.com/2016/05/02/UWP开发笔记七：WebView与简单浏览器/</id>
+    <published>2016-05-01T21:00:18.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。</p>
+<p>命令栏代码：</p>
+<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar IsOpen=”True”&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”BackAppBarButton”<br>                              Click=”BackAppBarButton_Click”<br>                              Label=”返回”<br>                              Icon=”Back”/&gt;<br>                &lt;AppBarButton Name=”ForwardAppBarButton”<br>                              Label=”前进”<br>                              Icon=”Forward”<br>                              Click=”ForwardAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”RefreshAppBarButton”<br>                              Label=”刷新”<br>                              Icon=”Refresh”<br>                              Click=”RefreshAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”StopAppBarButton”<br>                              Click=”StopAppBarButton_Click”<br>                              Label=”停止”<br>                              Icon=”Stop”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面：</p>
+<p><pre class="lang:default decode:true ">&lt;Grid.RowDefinitions&gt;<br>            &lt;RowDefinition Height=”Auto”/&gt;<br>            &lt;RowDefinition Height=”*”/&gt;<br>        &lt;/Grid.RowDefinitions&gt;<br>        &lt;TextBox Name=”URLTextBox”<br>                 InputScope=”Url”<br>                 KeyDown=”URLTextBox_KeyDown”<br>                 Margin=”20”/&gt;<br>        &lt;WebView Name=”Web”<br>                 Grid.Row=”1”<br>                 NavigationCompleted=”Web_NavigationCompleted”/&gt;</pre></p>
+<pre><code>&amp;lt;/Grid&amp;gt;&lt;/pre&gt;
+</code></pre><p>后台逻辑：</p>
+<p><pre class="lang:default decode:true "> // 返回处理<br>        private void BackAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            if (Web.CanGoBack)<br>            {<br>                Web.GoBack();<br>            }<br>        }</pre></p>
+<pre><code>// 前进处理
+private void ForwardAppBarButton_Click(object sender, RoutedEventArgs e)
+{
+    if (Web.CanGoForward)
+    {
+        Web.GoForward();
+    }
+}
+
+// 刷新
+private void RefreshAppBarButton_Click(object sender, RoutedEventArgs e)
+{
+    Web.Refresh();
+}
+
+// 停止
+private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
+{
+    Web.Stop();
+}
+
+// 按（回车）键处理
+private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+{
+    // 如果按下的键是回车键
+    if (e.Key== Windows.System.VirtualKey.Enter)
+    {
+        // 导航到文本框中的地址
+        Web.Navigate(new Uri(URLTextBox.Text));
+    }
+
+    // 处理焦点
+    Web.Focus(FocusState.Keyboard);
+}
+
+// 导航完成事件处理
+private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+{
+    // 导航是否成功
+    if (args.IsSuccess)
+    {
+        // 参数传递到地址栏
+        URLTextBox.Text = args.Uri.ToString();
+    }
+
+}&lt;/pre&gt;
+</code></pre><p>可以看到效果(原谅我无耻地用了自己的博客）：</p>
+<p>初始页面：<img src="http://images.chenyalun.cn/2016/04/23/001.png" alt=""></p>
+<p>打开新链接：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/23/002.png" alt=""></p>
+<hr>
+<hr>
+<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>对键盘的按键（回车）键处理：<br>private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)<br>{<br>// 如果按下的键是回车键<br>if (e.Key== Windows.System.VirtualKey.Enter)<br>{<br>// 导航到文本框中的地址<br>Web.Navigate(new Uri(URLTextBox.Text));<br>}<br>}</p>
+<p>对焦点的处理：<br>Web.Focus(FocusState.Keyboard);</p>
+<p>还有就是，文本框（地址栏）输入的文本必须是URL，即 <a href="http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。" target="_blank" rel="external">http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。&lt;/p&gt;
+&lt;p&gt;命令栏代码：&lt;/p&gt;
+&lt;p&gt;&lt;
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记六：幸运彩色小球</title>
+    <link href="http://yoursite.com/2016/04/30/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AD%EF%BC%9A%E5%B9%B8%E8%BF%90%E5%BD%A9%E8%89%B2%E5%B0%8F%E7%90%83/"/>
+    <id>http://yoursite.com/2016/04/30/UWP开发笔记六：幸运彩色小球/</id>
+    <published>2016-04-29T21:00:46.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个和<a href="http://www.chenyalun.cn/uwp开发笔记四：随机数与筛子游戏.html" target="_blank" rel="external">UWP开发笔记四：随机数与筛子游戏</a>有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。</p>
+<p>命令栏：</p>
+<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Label=”新建”<br>                              Icon=”NewFolder”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
+<p><pre class="lang:default decode:true ">&lt;StackPanel HorizontalAlignment=”Center”<br>            VerticalAlignment=”Center”<br>            Name=”DisplayStackPanel”<br>                    Orientation=”Horizontal”/&gt;</pre><br>当然，为了方便起见，创建一个ShowBall类：需要引入的命名空间有：</p>
+<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
+<p>完整代码：</p>
+<p><pre class="lang:default decode:true ">using System;<br>using System.Collections.Generic;<br>using System.Linq;<br>using System.Text;<br>using System.Threading.Tasks;<br>//color<br>using Windows.UI;</pre></p>
+<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
+<p>namespace Lucky_Lotto<br>{<br>   public  class ShowBall<br>    {<br>        // 定义随机数(种子为日期和时间的计时周期）<br>        private Random random = new Random((int)DateTime.Now.Ticks);</p>
+<pre><code>    // 定义获取数字集合方法
+    private List&amp;lt;int&amp;gt; GetNumbers()
+    {
+        int Number;
+        // 定义Numbers集合
+        List&amp;lt;int&amp;gt; Numbers = new List&amp;lt;int&amp;gt;();
+        // 当Numbers集合中整数个数小于6时，自动增加
+        while (Numbers.Count &amp;lt; 6)
+        {
+            // 随机获取1到50之间的整数赋予Number（Number可以取1，不可取50）
+            Number = random.Next(1, 50);
+            // 将产生的随机数添加到集合之中
+            // 处理当集合中的整数与产生的随机数相同的情况
+            if (!Numbers.Contains(Number)||Number&amp;lt;1)
+            {
+                Numbers.Add(Number);
+            }
+            // 对集合中的数字进行有序整理（美观起见）
+            Numbers.Sort();
+        }
+
+        return Numbers;
+
+    }
+    // 对StackPanel进行处理：创建小球，增添颜色等
+    // 将每个小球分别放在Canva中s，6个Canvas放在一个StackPanel中
+    public void PlayBall(ref StackPanel stackpanel)
+    {
+        // 清空原先讯在的元素
+        stackpanel.Children.Clear();
+
+        // 对数字集合遍历
+        foreach(int number in GetNumbers())
+        {
+            // 定义Canvas
+            Canvas canvas = new Canvas();
+            canvas.Width = 48;
+            canvas.Height = 48;
+            canvas.Margin = new Thickness(2);
+
+            // 定义球
+            Ellipse ellipse = new Ellipse();
+            ellipse.Width = canvas.Width;
+            ellipse.Height = canvas.Height;
+            // 设置小球边框颜色是黑色
+            ellipse.Stroke = new SolidColorBrush(Colors.Black);
+
+            // 根据数字的大小设置小球的填充颜色
+            if (number &amp;gt;= 1 &amp;amp;&amp;amp; number &amp;lt;= 9)
+            {
+                ellipse.Fill = new SolidColorBrush(Colors.White);
+            }
+            else if (number &amp;gt; 9 &amp;amp;&amp;amp; number &amp;lt;= 19)
+            {
+                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 200, 236));
+            }
+            else if (number &amp;gt; 19 &amp;amp;&amp;amp; number &amp;lt;= 29)
+            {
+                ellipse.Fill = new SolidColorBrush(Colors.Magenta);
+            }
+            else if (number &amp;gt; 29 &amp;amp;&amp;amp; number &amp;lt;= 39)
+            {
+                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 255, 0));
+            }
+            else if (number &amp;gt; 39 &amp;amp;&amp;amp; number &amp;lt;= 49)
+            {
+                ellipse.Fill = new SolidColorBrush(Colors.Yellow);
+            }
+
+            // 定义球中的文本（数字）
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = number.ToString();
+            textBlock.FontSize = 16;
+            textBlock.Foreground = new SolidColorBrush(Colors.Black);
+            textBlock.Margin = new Thickness(16, 12, 16, 12);
+
+            // 将文本（数字）、小球添加到canvas中，将canvas添加到stackpanel中
+            // 一定先添加球，再添加文本，否则文本不会显示
+            canvas.Children.Add(ellipse);
+            canvas.Children.Add(textBlock);
+            stackpanel.Children.Add(canvas);
+        }
+    }
+}
+</code></pre><p>}<br><br>这样主页面的后台代码就可以轻松的调用了：</p>
+<p><pre class="lang:default decode:true "> // 新建类的实例<br>        public  ShowBall showball = new ShowBall();<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {</pre></p>
+<pre><code>  showball.PlayBall(ref DisplayStackPanel);
+}&lt;/pre&gt;
+</code></pre><p>演示：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/22/001.png" alt=""><img src="http://images.chenyalun.cn/2016/04/22/002.png" alt=""></p>
+<hr>
+<hr>
+<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>// 对数字集合遍历<br>foreach(int number in GetNumbers())  {}</p>
+<p>// 设置小球边框颜色是黑色<br>ellipse.Stroke = new SolidColorBrush(Colors.Black);</p>
+<p>//设置margin</p>
+<p>textBlock.Margin = new Thickness(16, 12, 16, 12);</p>
+<p>// 一定先添加球，再添加文本，否则文本不会显示<br>canvas.Children.Add(ellipse);<br>canvas.Children.Add(textBlock);<br>stackpanel.Children.Add(canvas);</p>
+<p>// 清空原先存在的元素<br>stackpanel.Children.Clear();</p>
+<p>// 对集合中的数字进行有序整理（美观起见）<br>Numbers.Sort();</p>
+<p>// 定义随机数(种子为日期和时间的计时周期）<br>private Random random = new Random((int)DateTime.Now.Ticks);</p>
+<p>// 定义Numbers集合<br>List&lt;int&gt; Numbers = new List&lt;int&gt;();</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个和&lt;a href=&quot;http://www.chenyalun.cn/uwp开发笔记四：随机数与筛子游戏.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;UWP开发笔记四：随机数与筛子游戏&lt;/a&gt;有异曲同工之妙，通过随机函数产生一定范围大小的数字
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记五：应用数据本地存储</title>
+    <link href="http://yoursite.com/2016/04/28/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%94%EF%BC%9A%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/"/>
+    <id>http://yoursite.com/2016/04/28/UWP开发笔记五：应用数据本地存储/</id>
+    <published>2016-04-27T21:00:59.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。</p>
+<p>命令栏代码：</p>
+<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Icon=”Page”<br>                              Label=”新建”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”LoadAppBarButton”<br>                              Icon=”Folder”<br>                              Label=”显示”<br>                              Click=”LoadAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”SaveAppBarButton”<br>                              Icon=”Save”<br>                              Label=”保存”<br>                              Click=”SaveAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
+<p><pre class="lang:default decode:true "> &lt;StackPanel&gt;<br>            &lt;TextBox Name=”Email”<br>                     PlaceholderText=”邮箱”<br>                     Margin=”20”<br>                     InputScope=”EmailSmtpAddress”/&gt;<br>            &lt;TextBox Name=”Web”<br>                     PlaceholderText=”网址”<br>                     Margin=”20”<br>                     InputScope=”Url”/&gt;<br>            &lt;TextBox Name=”Tel”<br>                     PlaceholderText=”手机号码”<br>                     Margin=”20”<br>                     InputScope=”TelephoneNumber”/&gt;<br>        &lt;/StackPanel&gt;</pre><br>后台逻辑：</p>
+<p><pre class="lang:default decode:true ">  //  新建存储<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            Email.Text = string.Empty;<br>            Web.Text = string.Empty;<br>            Tel.Text = string.Empty;<br>        }</pre></p>
+<pre><code>// 保存信息
+private void SaveAppBarButton_Click(object sender, RoutedEventArgs e)
+{
+    Save(&quot;Email&quot;, Email.Text);
+    Save(&quot;Web&quot;, Web.Text);
+    Save(&quot;Tel&quot;, Tel.Text);
+}
+
+// 加载存储信息
+private void LoadAppBarButton_Click(object sender, RoutedEventArgs e)
+{
+    Email.Text = Load(&quot;Email&quot;);
+    Web.Text = Load(&quot;Web&quot;);
+    Tel.Text = Load(&quot;Tel&quot;);
+}
+
+// 应用本地设置信息存储:保存 键 值
+public void Save(string key,string value)
+{
+    ApplicationData.Current.LocalSettings.Values[key] = value;
+}
+
+// 加载应用本地设置存储的信息
+public string Load(string key)
+{
+    if (ApplicationData.Current.LocalSettings.Values[key]!=null)
+    {
+        return ApplicationData.Current.LocalSettings.Values[key].ToString();
+    }
+
+    return string.Empty;
+}&lt;/pre&gt;
+</code></pre><p>输入信息并保存：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/005.png" alt=""></p>
+<p>点击新建清空数据，点击显示：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/006.png" alt=""></p>
+<hr>
+<hr>
+<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><ul>
+<li>空字符串：string.Empty</li>
+<li>保存的方式为键值对：key和value</li>
+<li>本地设置类： ApplicationData.Current.LocalSettings.Values[key] = value;其中key一般是字符串，value是保存的值</li>
+<li>需要引入命名空间：应用数据存储  using Windows.Storage;</li>
+<li>删除存储 ApplicationData.Current.LocalSettings.Values.Remove(“key”); 其中key是键<br>&nbsp;</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。&lt;/p&gt;
+&lt;p&gt;命令栏代码：&lt;/p&gt;
+&lt;p&gt;&lt;pre class=&quot;lang:default decode:true &quot;&gt;&amp;lt;Page.BottomA
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记四：随机数与筛子游戏</title>
+    <link href="http://yoursite.com/2016/04/26/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%8E%E7%AD%9B%E5%AD%90%E6%B8%B8%E6%88%8F/"/>
+    <id>http://yoursite.com/2016/04/26/UWP开发笔记四：随机数与筛子游戏/</id>
+    <published>2016-04-25T21:00:25.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>点击方块，方块随机出现类似筛子的点数，连续点击，连续出现随机的数。当然，是有两个方块的。点击底部命令栏的刷新按钮，两块“筛子”均恢复空白状态。</p>
+<p>命令栏：</p>
+<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                    &lt;AppBarButton Name=”NewAppBarButton”<br>                                  Icon=”Page”<br>                                  Click=”NewAppBarButton_Click”<br>                                  Label=”刷新”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
+<p><pre class="lang:default decode:true "> &lt;Grid.ColumnDefinitions&gt;<br>            &lt;ColumnDefinition Width=”<em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”</em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”*”/&gt;<br>        &lt;/Grid.ColumnDefinitions&gt;</pre></p>
+<pre><code>    &amp;lt;Grid Name=&quot;FirstGrid&quot;
+          Tapped=&quot;FirstGrid_Tapped&quot;
+          Width=&quot;100&quot;
+          Height=&quot;100&quot;
+          Background=&quot;HotPink&quot;
+          Grid.Column=&quot;1&quot;&amp;gt;
+        &amp;lt;Grid.RowDefinitions&amp;gt;
+            &amp;lt;RowDefinition /&amp;gt;
+            &amp;lt;RowDefinition /&amp;gt;
+            &amp;lt;RowDefinition /&amp;gt;
+        &amp;lt;/Grid.RowDefinitions&amp;gt;
+        &amp;lt;Grid.ColumnDefinitions&amp;gt;
+            &amp;lt;ColumnDefinition/&amp;gt;
+            &amp;lt;ColumnDefinition/&amp;gt;
+            &amp;lt;ColumnDefinition/&amp;gt;
+        &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+    &amp;lt;/Grid&amp;gt;
+
+&amp;lt;Grid Name=&quot;SecondGrid&quot;
+          Tapped=&quot;SecondGrid_Tapped&quot;
+          Width=&quot;100&quot;
+          Height=&quot;100&quot;
+          Background=&quot;HotPink&quot;
+          Grid.Column=&quot;3&quot;&amp;gt;
+    &amp;lt;Grid.RowDefinitions&amp;gt;
+        &amp;lt;RowDefinition /&amp;gt;
+        &amp;lt;RowDefinition /&amp;gt;
+        &amp;lt;RowDefinition /&amp;gt;
+    &amp;lt;/Grid.RowDefinitions&amp;gt;
+    &amp;lt;Grid.ColumnDefinitions&amp;gt;
+        &amp;lt;ColumnDefinition/&amp;gt;
+        &amp;lt;ColumnDefinition/&amp;gt;
+        &amp;lt;ColumnDefinition/&amp;gt;
+    &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+
+&amp;lt;/Grid&amp;gt;&lt;/pre&gt;
+</code></pre><p>后台代码MainPage.xaml.cs：</p>
+<p>引入命名空间：</p>
+<p><pre class="lang:default decode:true ">//颜色<br>using Windows.UI;<br>//图形<br>using Windows.UI.Xaml.Shapes;</pre><br>逻辑代码：</p>
+<p><pre class="lang:default decode:true"> private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            //刷新页面<br>            FirstGrid.Children.Clear();<br>            SecondGrid.Children.Clear();<br>        }</pre></p>
+<pre><code>    private void FirstGrid_Tapped(object sender, TappedRoutedEventArgs e)
+    {
+        // 移除面板上所有元素
+        FirstGrid.Children.Clear();
+        switch (Number())
+        {
+            case 0:
+            case 1:
+                Add(FirstGrid, 1, 1);
+                break;
+            case 2:
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 2, 0);
+                break;
+            case 3:
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 1, 1);
+                Add(FirstGrid, 2, 0);
+                break;
+            case 4:
+                Add(FirstGrid, 0, 0);
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 2, 0);
+                Add(FirstGrid, 2, 2);
+                break;
+            case 5:
+                Add(FirstGrid, 0, 0);
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 2, 2);
+                Add(FirstGrid, 1, 1);
+                Add(FirstGrid, 2, 0);
+                break;
+            case 6:
+                Add(FirstGrid, 0, 0);
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 1, 0);
+                Add(FirstGrid, 1, 2);
+                Add(FirstGrid, 2, 0);
+                Add(FirstGrid, 2, 2);
+                break;
+        }
+    }
+
+// 设置随机数
+    public int Number()
+    {
+        // 返回0到7之间的随机整数
+        return new Random().Next(0, 7);
+    }
+
+    // 设置添加圆点
+    public void Add(Grid grid, int row, int col)
+    {
+
+        Ellipse ell = new Ellipse();
+        // 设置填充颜色
+        ell.Fill = new SolidColorBrush(Colors.White);
+        // 设置宽高度
+        ell.Width = 20;
+        ell.Height = 20;
+        // 设置圆点的在表格上的位置
+        ell.SetValue(Grid.RowProperty, row);
+        ell.SetValue(Grid.ColumnProperty, col);
+        // 获取面板元素（把ell元素添加到面板中）
+        grid.Children.Add(ell);
+    }
+
+    private void SecondGrid_Tapped(object sender, TappedRoutedEventArgs e)
+    {
+        // 移除面板上所有元素
+        SecondGrid.Children.Clear();
+        switch (Number())
+        {
+            case 0:
+            case 1:
+                Add(SecondGrid, 1, 1);
+                break;
+            case 2:
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 2, 0);
+                break;
+            case 3:
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 1, 1);
+                Add(SecondGrid, 2, 0);
+                break;
+            case 4:
+                Add(SecondGrid, 0, 0);
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 2, 0);
+                Add(SecondGrid, 2, 2);
+                break;
+            case 5:
+                Add(SecondGrid, 0, 0);
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 2, 2);
+                Add(SecondGrid, 1, 1);
+                Add(SecondGrid, 2, 0);
+                break;
+            case 6:
+                Add(SecondGrid, 0, 0);
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 1, 0);
+                Add(SecondGrid, 1, 2);
+                Add(SecondGrid,2, 0);
+                Add(SecondGrid, 2, 2);
+                break;
+        }
+    }&lt;/pre&gt;
+</code></pre><p>点击出现筛子点数：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/001.png" alt=""></p>
+<p>点击刷新按钮，清空所有元素：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/002.png" alt=""></p>
+<hr>
+<hr>
+<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><ul>
+<li><h3 id="随机数："><a href="#随机数：" class="headerlink" title="随机数："></a>随机数：</h3></li>
+</ul>
+<p>Random()与时间相关的种子；</p>
+<p>Random(seed)指定种子；</p>
+<p>Random().NextDouble返回大于或等于0.0且小于1.0的随机浮点数；</p>
+<p>Random().Next()返回非负随机整数；</p>
+<p>Random().Next(下限，上限)返回指定范围非负随机整数（可取下限，不可取上限）；</p>
+<h3 id="设置图形依赖属性："><a href="#设置图形依赖属性：" class="headerlink" title="设置图形依赖属性："></a>设置图形依赖属性：</h3><p>Ellipse ell = new Ellipse();</p>
+<p>// 设置填充颜色<br>ell.Fill = new SolidColorBrush(Colors.White);</p>
+<p>// 设置圆点的在表格上的位置<br>ell.SetValue(Grid.RowProperty, row);<br>ell.SetValue(Grid.ColumnProperty, col);<br>// 获取面板元素（把ell元素添加到面板中）<br>grid.Children.Add(ell);</p>
+<p>// 移除面板上所有元素<br>SecondGrid.Children.Clear();</p>
+<p>总结：代码比较琐碎，而且不是很令人满意，xaml创建图形很方便，可是处理逻辑的时候没有思路，只好把图形创建的代码写在后台。本想写个方法同时处理两个方块，然而并没有成功〒_〒</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;点击方块，方块随机出现类似筛子的点数，连续点击，连续出现随机的数。当然，是有两个方块的。点击底部命令栏的刷新按钮，两块“筛子”均恢复空白状态。&lt;/p&gt;
+&lt;p&gt;命令栏：&lt;/p&gt;
+&lt;p&gt;&lt;pre class=&quot;lang:default decode:true &quot;&gt;&amp;lt;Pag
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记三：动画编程之图形的翻转</title>
+    <link href="http://yoursite.com/2016/04/24/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E5%8A%A8%E7%94%BB%E7%BC%96%E7%A8%8B%E4%B9%8B%E5%9B%BE%E5%BD%A2%E7%9A%84%E7%BF%BB%E8%BD%AC/"/>
+    <id>http://yoursite.com/2016/04/24/UWP开发笔记三：动画编程之图形的翻转/</id>
+    <published>2016-04-23T21:00:40.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>动画编程可以实现很酷的很炫的效果，能让开发出的App散发无穷无尽的魅力，在颜值至上的时代，好看是检验UI的唯一标准。图形的翻转主要有三种形式：RotationX，RotationY，RotationZ，就是获取或设置围绕旋转的 X 轴或Y轴或Z轴旋转对象的角度。</p>
+<p>计划在文本框中键入图片的地址源，按回车载入图片，点击命令栏中按钮，图片做出相应变换。</p>
+<p>XAML代码：</p>
+<pre class="lang:default decode:true ">&lt;!--命令栏--&gt;
+    &lt;Page.BottomAppBar&gt;
+        &lt;AppBar IsSticky="True"&gt;
+            &lt;StackPanel Orientation="Horizontal" HorizontalAlignment="Right"&gt;
+            &lt;AppBarButton Name="XRotateAppBarButton"
+                          Icon="RepeatAll"
+                          Label="Pitch"
+                          Click="XRotateAppBarButton_Click"/&gt;
+            &lt;AppBarButton Name="YRotateAppButton"
+                          Icon="Rotate"
+                          Label="Roll"
+                          Click="YRotateAppButton_Click"/&gt;
+            &lt;AppBarButton Name="ZRotateAppBarButton"
+                          Icon="Refresh"
+                          Label="Yaw"
+                          Click="ZRotateAppBarButton_Click"/&gt;
+            &lt;/StackPanel&gt;
+
+        &lt;/AppBar&gt;
+    &lt;/Page.BottomAppBar&gt;
+
+    &lt;!--动画--&gt;
+    &lt;Page.Resources&gt;
+        &lt;!--X方向翻转--&gt;
+        &lt;Storyboard x:Name="StoryBoardX"&gt;
+            &lt;DoubleAnimation Storyboard.TargetName="ResultImage"
+                             Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)"
+                             From="0.0"
+                             To="360.0"
+                             AutoReverse="True"
+                             RepeatBehavior="Forever"&gt;
+            &lt;/DoubleAnimation&gt;
+        &lt;/Storyboard&gt;
+
+        &lt;!--Y方向翻转--&gt;
+        &lt;Storyboard x:Name="StoryBoardY"&gt;
+            &lt;DoubleAnimation Storyboard.TargetName="ResultImage"
+                             Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)"
+                             From="0.0"
+                             To="360.0"
+                             AutoReverse="True"
+                             RepeatBehavior="Forever"&gt;
+            &lt;/DoubleAnimation&gt;
+        &lt;/Storyboard&gt;
+
+        &lt;!--Z方向翻转--&gt;
+        &lt;Storyboard x:Name="StoryBoardZ"&gt;
+            &lt;DoubleAnimation Storyboard.TargetName="ResultImage"
+                             Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationZ)"
+                             From="0.0"
+                             To="360.0"
+                             AutoReverse="True"
+                             RepeatBehavior="Forever"&gt;
+            &lt;/DoubleAnimation&gt;
+        &lt;/Storyboard&gt;
+    &lt;/Page.Resources&gt;
+
+    &lt;Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"&gt;
+        &lt;Grid.RowDefinitions&gt;
+            &lt;RowDefinition Height="Auto"/&gt;
+            &lt;RowDefinition Height="Auto"/&gt;
+            &lt;RowDefinition Height="*"/&gt;
+        &lt;/Grid.RowDefinitions&gt;
+        &lt;TextBlock Text="请输入图片的地址"
+                   HorizontalAlignment="Center"
+                   Height="30"/&gt;
+        &lt;TextBox  Grid.Row="1"
+                  Name="URLTextBox"
+                   FontSize="20"
+                   HorizontalAlignment="Stretch"
+                   Height="40"
+                   Margin="20"
+                   InputScope="Url"
+                   KeyDown="URLTextBox_KeyDown"/&gt;
+        &lt;Image Grid.Row="2"
+               Name="ResultImage"
+               Margin="60"
+               Stretch="Uniform"&gt;
+            &lt;!--注意一定要声明-Projection属性--&gt;
+            &lt;Image.Projection&gt;
+                &lt;PlaneProjection /&gt;
+            &lt;/Image.Projection&gt;
+        &lt;/Image&gt;
+    &lt;/Grid&gt;</pre>
+原图：
+
+![](http://images.chenyalun.cn/2016/04/20/101.png)
+
+X轴翻转:
+
+![](http://images.chenyalun.cn/2016/04/20/102.gif)
+
+&nbsp;
+
+Y轴翻转：![](http://images.chenyalun.cn/2016/04/20/103.gif)
+
+以及Z轴翻转：![](http://images.chenyalun.cn/2016/04/20/104.gif)
+
+CS 代码（主要是获取文本框中的URL，以及处理按钮事件）：
+<pre class="lang:default decode:true "> // TextBox输入完毕按下回车后，得到图片来源
+        private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            // 判断与事件关联的输入按钮是否为虚拟按键的Enter键
+            if (e.Key==Windows.System.VirtualKey.Enter)
+            {
+                ResultImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(URLTextBox.Text));
+            }
+        }
+
+        // 设置按下按钮后的翻转效果
+        private   void XRotateAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+             StoryBoardX.Begin();
+        }
+
+        private void YRotateAppButton_Click(object sender, RoutedEventArgs e)
+        {
+            StoryBoardY.Begin();
+        }
+
+        private void ZRotateAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            StoryBoardZ.Begin();
+        }</pre>
+
+<hr>
+<hr>
+<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><h3 id="1-处理文本框的回车事件中，"><a href="#1-处理文本框的回车事件中，" class="headerlink" title="1,处理文本框的回车事件中，"></a>1,处理文本框的回车事件中，</h3><p>文本框输入类型：InputScope=”Url”   键盘按键属性KeyDown=”URLTextBox_KeyDown”</p>
+<p>获取文本框内容并转换为URL：</p>
+<p>// 判断与事件关联的按键是否为虚拟按键的Enter键<br>if (e.Key==Windows.System.VirtualKey.Enter)<br>{<br>ResultImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(URLTextBox.Text));</p>
+<p>等同于：</p>
+<pre class="lang:default decode:true ">Uri url = new Uri(URLTextBox.Text);
+ResultImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(url);</pre>
+}
+
+当然，如果引入命名空间了，那就更好了  using Windows.UI.Xaml.Media.Imaging;
+<pre class="lang:default decode:true ">Uri url = new Uri(URLTextBox.Text);
+ResultImage.Source = new BitmapImage(url);</pre>
+
+<h3 id="2，关于动画"><a href="#2，关于动画" class="headerlink" title="2，关于动画"></a>2，关于动画</h3><p>首先目标图片要声明Projection属性，即添加：</p>
+<pre class="lang:default decode:true ">&lt;Image.Projection&gt;
+   &lt;PlaneProjection /&gt;
+&lt;/Image.Projection&gt;</pre>
+其次在 &lt;Page.Resources&gt;中添加故事板：
+<pre class="lang:default decode:true ">&lt;Storyboard x:Name="StoryBoardX"&gt;
+&lt;DoubleAnimation Storyboard.TargetName="ResultImage"
+Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)"
+From="0.0"
+To="360.0"
+AutoReverse="True"
+RepeatBehavior="Forever"&gt;
+&lt;/DoubleAnimation&gt;
+&lt;/Storyboard&gt;
+</pre>
+
+<ul>
+<li>命名：方便后台代码调用</li>
+<li>类：DoubleAnimation针对Double属性，还有ColorAnimation针对Color属性，以及PointAnimation针对Point，这里图形翻转目标属性是PlaneProjection   值是double类型</li>
+<li>Storyboard.TargetName：执行动画的对象名称</li>
+<li>Storyboard.TargetProperty：执行动画的对象属性，此处是PlaneProjection.RotationX，写成Storyboard.TargetProperty=”PlaneProjection.RotationX”也没有关系</li>
+<li>From：起始值</li>
+<li>To：终点值</li>
+<li>By：变化值</li>
+<li>AutoReverse：自动重置（返回原状）</li>
+<li>RepeatBehavior：播放次数</li>
+<li>Duration：持续时间（值的格式为时分秒，即0.0.3  3秒）<br>以上是通过XAML写出界面，当然，完全可以在后台代码中，完成StoryBoard的设置：<br><pre class="lang:default decode:true ">            DoubleAnimation animation = new DoubleAnimation();<pre><code>animation.From = 0.0;
+animation.To = 360.0;
+animation.BeginTime = TimeSpan.FromSeconds(1);
+animation.RepeatBehavior = RepeatBehavior.Forever;
+Storyboard.SetTarget(animation, target);
+Storyboard.SetTargetProperty(animation, &quot;(UIElement.Projection).(PlaneProjection.Rotation&quot; + axis + &quot;)&quot;);
+rotation.Children.Clear();
+rotation.Children.Add(animation);
+rotation.Begin();
+rotating = true;&lt;/pre&gt;
+</code></pre>不过看个人爱好了，我还是喜欢XAML。</pre></li>
+</ul>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;动画编程可以实现很酷的很炫的效果，能让开发出的App散发无穷无尽的魅力，在颜值至上的时代，好看是检验UI的唯一标准。图形的翻转主要有三种形式：RotationX，RotationY，RotationZ，就是获取或设置围绕旋转的 X 轴或Y轴或Z轴旋转对象的角度。&lt;/p&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记二：AppBar和CommandBar</title>
+    <link href="http://yoursite.com/2016/04/22/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9AAppBar%E5%92%8CCommandBar/"/>
+    <id>http://yoursite.com/2016/04/22/UWP开发笔记二：AppBar和CommandBar/</id>
+    <published>2016-04-21T21:00:36.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>AppBar和CommandBar也算是比较常用的控件了，不过个人不太喜欢这些，主要是觉得很非主流，我还是喜欢把功能都做到汉堡菜单里。</p>
+<p>1，CommandBar被包裹住了，一般放在页面顶部或底部。</p>
+<p><pre class="lang:default decode:true ">&lt;Page<br>    x:Class=”ApplicationBar.MainPage”<br>    xmlns=”<a href="http://schemas.microsoft.com/winfx/2006/xaml/presentation" target="_blank" rel="external">http://schemas.microsoft.com/winfx/2006/xaml/presentation</a>“<br>    xmlns:x=”<a href="http://schemas.microsoft.com/winfx/2006/xaml" target="_blank" rel="external">http://schemas.microsoft.com/winfx/2006/xaml</a>“<br>    xmlns:local=”using:ApplicationBar”<br>    xmlns:d=”<a href="http://schemas.microsoft.com/expression/blend/2008" target="_blank" rel="external">http://schemas.microsoft.com/expression/blend/2008</a>“<br>    xmlns:mc=”<a href="http://schemas.openxmlformats.org/markup-compatibility/2006" target="_blank" rel="external">http://schemas.openxmlformats.org/markup-compatibility/2006</a>“<br>    mc:Ignorable=”d”&gt;</pre></p>
+<p>  &lt;Page.BottomAppBar&gt;<br>        &lt;CommandBar&gt;</p>
+<pre><code>    &amp;lt;/CommandBar&amp;gt;
+&amp;lt;/Page.BottomAppBar&amp;gt;
+&amp;lt;Grid Background=&quot;{ThemeResource ApplicationPageBackgroundThemeBrush}&quot;&amp;gt;
+&amp;lt;/Grid&amp;gt;
+</code></pre><p>&lt;/Page&gt;<br>所以就是这种效果，在CommandBar中有两种菜单可选</p>
+<p>图标文字：添加AppBarButton即可</p>
+<p><img src="http://images.chenyalun.cn/2016/04/20/001.png" alt=""></p>
+<p><pre class="lang:default decode:true ">&lt;AppBarButton Name=”FirstAppBarButton”<br>    Icon=”Account”<br>     Label=”主页”<br>    Click=”FirstAppBarButton_Click”/&gt;</pre><br>文字列表：需要夹在&lt;CommandBar.SecondaryCommands&gt;&lt;/CommandBar.SecondaryCommands&gt;中间</p>
+<p><img src="http://images.chenyalun.cn/2016/04/20/002.png" alt=""></p>
+<p><pre class="lang:default decode:true ">&lt;CommandBar.SecondaryCommands&gt;<br>                &lt;AppBarButton Name=”TextAppBarButton1”<br>                              Label=”文字1”<br>                              Click=”TextAppBarButton1_Click”/&gt;<br>&lt;/CommandBar.SecondaryCommands&gt;</pre><br>2,AppBar 的话，可能更强大一点，它可以嵌套着命令栏CommandBar，不过也是需要放在页面顶部或者底部</p>
+<p><img src="http://images.chenyalun.cn/2016/04/20/005.png" alt=""></p>
+<p><pre class="lang:default decode:true">&lt;Page.TopAppBar&gt;<br>        &lt;AppBar  &gt;</pre></p>
+<pre><code>    &amp;lt;/AppBar&amp;gt;
+&amp;lt;/Page.TopAppBar&amp;gt;&lt;/pre&gt;
+</code></pre><p>对于每个命令栏按钮，依然可以添加Click事件进行处理。</p>
+<p><img src="http://images.chenyalun.cn/2016/04/20/003.png" alt=""></p>
+<p><img src="http://images.chenyalun.cn/2016/04/20/004.png" alt=""></p>
+<hr>
+<hr>
+<h3 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h3><p>1,</p>
+<p><pre class="lang:default decode:true ">&lt;Page.TopAppBar&gt;<br>        &lt;AppBar  IsSticky=”True” &gt;<br>            &lt;StackPanel Orientation=”Horizontal” &gt;<br>                &lt;CommandBar&gt;<br>                    &lt;!–第二命令栏–&gt;<br>                    &lt;CommandBar.SecondaryCommands&gt;<br>                        &lt;AppBarButton Name=”Hide” Icon=”Cancel” Label=”文本” Visibility=”Collapsed” Click=”Show_Click”/&gt;<br>                    &lt;/CommandBar.SecondaryCommands&gt;<br>                     &lt;!–设置命令栏内容–&gt;<br>                    &lt;CommandBar.Content&gt;<br>                        &lt;TextBlock Text=”Now playing…” Margin=”12,14”/&gt;<br>                    &lt;/CommandBar.Content&gt;<br>                &lt;/CommandBar&gt;<br>                     &lt;!–分割线–&gt;<br>                &lt;AppBarSeparator/&gt;<br>                &lt;AppBarButton Name=”Show”<br>                              Icon=”Accept”<br>                              Label=”Show Other”<br>                              Click=”Show_Click”<br>                              IsCompact=”True”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.TopAppBar&gt;</pre><br>如上所示，AppBar中包裹命令栏。若菜单栏中只包含AppBarButton（普通按钮）、AppBarToggleButton（切换按钮）、AppBarSeparator（分割线） 这几个控件，且没有特殊布局格式要求，CommandBar 控件可以解决大多数问题。</p>
+<p>第二命令栏需要使用：CommandBar.SecondaryCommands</p>
+<p>命令栏内容：CommandBar.Content</p>
+<p>命令按钮分割线： &lt;AppBarSeparator/&gt;</p>
+<p>标签：label</p>
+<p>图标: icon</p>
+<p>顶部命令栏：&lt;Page.TopAppBar&gt;&lt;/Page.TopAppBar&gt;</p>
+<p>底部命令栏： &lt;Page.BottomAppBar&gt; &lt;/Page.BottomAppBar&gt;</p>
+<p>单词：toggle 切换   Separator分隔符</p>
+<p>在AppBar属性中：IsSticky=”True”表示打开命令栏后，除非用户显式地点击鼠标右键或按Win+z, 或用手指从屏幕顶端或底端划过才会隐藏，否则AppBar会一直显示。一般不设置。</p>
+<p>IsOpen=”True” 一直完全显示图标+文字，一般不设置。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;AppBar和CommandBar也算是比较常用的控件了，不过个人不太喜欢这些，主要是觉得很非主流，我还是喜欢把功能都做到汉堡菜单里。&lt;/p&gt;
+&lt;p&gt;1，CommandBar被包裹住了，一般放在页面顶部或底部。&lt;/p&gt;
+&lt;p&gt;&lt;pre class=&quot;lang:default
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UWP开发笔记一：Hello UWP与对话框</title>
+    <link href="http://yoursite.com/2016/04/20/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AHello_UWP%E4%B8%8E%E5%AF%B9%E8%AF%9D%E6%A1%86/"/>
+    <id>http://yoursite.com/2016/04/20/UWP开发笔记一：Hello_UWP与对话框/</id>
+    <published>2016-04-19T21:00:51.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这段时间在悄悄地学习UWP开发，不过担心会忘记，所以感觉还是记下笔记比较好。一来自己没事可以翻着看看，可解闷了，二来欢迎志同道合的童鞋一起交流。</p>
+<p>1，假定PC装好VS2015，文件–新建–项目–windows通用应用</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/001.png" alt=""></p>
+<p>设置版本：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/002.png" alt=""></p>
+<p>2，右侧解决方案中，打开MainPage.xaml，写入xaml代码：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/003.png" alt=""></p>
+<p><pre class="lang:default decode:true ">  &lt;Button Name=”HelloUWPButton”<br>                Content=”显示”<br>                HorizontalAlignment=”Center”<br>                VerticalAlignment=”Center”<br>        Click=”HelloUWPButton_Click”/&gt;</pre><br>或者拖入Button控件，属性中设置Click事件：HelloUWPButton_Click，内容设置为：显示。</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/004.png" alt=""></p>
+<p>3，处理click事件：</p>
+<p><pre class="lang:default decode:true ">private async void HelloUWPButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            await new Windows.UI.Popups.MessageDialog(“Hello UWP”).ShowAsync();</pre></p>
+<pre><code>}&lt;/pre&gt;
+</code></pre><p>4，调试运行即可。</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/005.png" alt=""></p>
+<hr>
+<hr>
+<h3 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;<strong>笔记</strong></h3><p>1，其实点击事件的代码和下面两行等价：</p>
+<p><pre class="lang:default decode:true ">var message = new MessageDialog(“Hello UWP”);<br>await  message.ShowAsync();</pre><br>&nbsp;</p>
+<p>2，消息对话框引入的命名空间：<strong>using Windows.UI.Popups;</strong></p>
+<p>&nbsp;</p>
+<p>3，消息对话框的使用</p>
+<p>创建对话框并设置内容：</p>
+<p><pre class="lang:default decode:true ">var messageDialog = new MessageDialog(“消息对话框的内容”, “可省略的对话框标题”);</pre><br>设置对话框中的命令,最多有3个：</p>
+<p><pre class="lang:default decode:true ">UICommand cmd1 = new UICommand();<br>UICommand cmd2 = new UICommand();<br>UICommand cmd3 = new UICommand();</pre><br>设置命令的标签文本：</p>
+<p><pre class="lang:default decode:true ">cmd1.Label = “标签1”;<br>cmd2.Label = “标签2”;<br>cmd3.Label = “标签3”;</pre><br>设置命令的唯一标识符：</p>
+<p><pre class="lang:default decode:true ">cmd1.Id = 1;<br>cmd2.Id = 2;<br>cmd3.Id = 3;</pre><br>设置消息对话框命令的默认ID（直接按下回车键就可以执行的命令）<br>三个命令默认从左到右DefaultCommandIndex依次是0，1，2，大于2或者不设置则DefaultCommandIndex的值为0</p>
+<p><pre class="lang:default decode:true "> messageDialog.DefaultCommandIndex = 1;</pre><br>设置调用（点击）命令时引发的事件：OnCommend</p>
+<p><pre class="lang:default decode:true ">cmd1.Invoked = new UICommandInvokedHandler(OnCommend);<br>cmd2.Invoked = new UICommandInvokedHandler(OnCommend);<br>cmd3.Invoked = new UICommandInvokedHandler(OnCommend);</pre><br>将3个命令添加到对话框中</p>
+<p><pre class="lang:default decode:true ">messageDialog.Commands.Add(cmd1);<br>messageDialog.Commands.Add(cmd2);<br>messageDialog.Commands.Add(cmd3);</pre><br>显示消息对话框(异步)</p>
+<p><pre class="lang:default decode:true ">await messageDialog.ShowAsync();</pre><br>截至目前，上面的代码可以简化为：</p>
+<p><pre class="lang:default decode:true">var messageDialog = new MessageDialog(“消息对话框的内容”);<br>messageDialog.DefaultCommandIndex = 1;<br>messageDialog.Commands.Add(new UICommand(“标签1”, OnCommend, 1));<br>messageDialog.Commands.Add(new UICommand(“标签2”, OnCommend, 2));<br>messageDialog.Commands.Add(new UICommand(“标签3”, OnCommend, 3));<br>await messageDialog.ShowAsync();</pre><br>处理调用命令的事件：</p>
+<p>一般通过命令的ID进行不同的处理，将object类型的command.Id转化为int32类型</p>
+<p><pre class="lang:default decode:true "> private void OnCommend(IUICommand command)<br>        {<br>            var ID = Convert.ToInt32(command.Id);</pre></p>
+<pre><code>    // 处理不同的命令
+    if (ID == 1)
+    {
+        ResultTextBlock.Text = &quot;你点击了命令1：标签1&quot;;
+    }
+    else if (ID == 2)
+    {
+        ResultTextBlock.Text = &quot;你点击了命令2：标签2&quot;;
+    }
+    else
+    {
+        ResultTextBlock.Text = &quot;你点击了命令3：标签3&quot;;
+    }
+
+}&lt;/pre&gt;
+</code></pre><p><img src="http://images.chenyalun.cn/2016/04/19/006.png" alt=""></p>
+<p>4，单词积累：</p>
+<p>popups：弹出窗口；弹出式视窗</p>
+<p>invoked：恳求；实行；引起</p>
+<p>5,github: <a href="http://www.chenyalun.cn/go/?url=https://github.com/chenyalun/UWP-Notes.git" target="_blank" rel="external">https://github.com/chenyalun/UWP-Notes.git</a></p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这段时间在悄悄地学习UWP开发，不过担心会忘记，所以感觉还是记下笔记比较好。一来自己没事可以翻着看看，可解闷了，二来欢迎志同道合的童鞋一起交流。&lt;/p&gt;
+&lt;p&gt;1，假定PC装好VS2015，文件–新建–项目–windows通用应用&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http
+    
+    </summary>
+    
+      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Visual Studio 2015如何配置Github</title>
+    <link href="http://yoursite.com/2015/11/06/Visual_Studio_2015%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEGithub/"/>
+    <id>http://yoursite.com/2015/11/06/Visual_Studio_2015如何配置Github/</id>
+    <published>2015-11-05T21:00:13.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>身为一枚开发人员，使用Github是一项基本技能，Github的美妙之处在下就不细细道来了，其实，稍微入门的童鞋都会在Visual Studio 2015配置Github的，如此说来，我再分享这个教程纯属无聊了。</p>
+<h3 id="1，申请注册Github"><a href="#1，申请注册Github" class="headerlink" title="1，申请注册Github"></a>1，申请注册Github</h3><p><a href="http://www.chenyalun.cn/go/?url=https://github.com" target="_blank" rel="external">https://github.com</a>，这个就是人家的官网，注册成功，点击右上角的“+”，创建新的organization。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110501.jpg" alt=""></p>
+<p>注意你的organization name是全网唯一的，不允许重复。当然也可以选择用于付费的项目，视自己情况而定。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110602.jpg" alt=""></p>
+<p>很巧妙的我的RoseMyCode就这样创建成功啦。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110503.jpg" alt=""></p>
+<p>接着是创建自己的repository，当然这个是属于刚才的RoseMycode目录之下的。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110604.jpg" alt=""></p>
+<p>如此，一个简单的Github搞定啦。</p>
+<h3 id="2，配置VS2015"><a href="#2，配置VS2015" class="headerlink" title="2，配置VS2015"></a>2，配置VS2015</h3><p>依次点击视图-团队资源管理器，打开即可。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110605.jpg" alt=""></p>
+<p>在右侧的团队资源管理器中找到本地Git存储库，点击克隆。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110606.jpg" alt=""></p>
+<p>然后把我们刚才创建的repository链接地址粘贴即可，当然你要选定自己要克隆的代码的路径，是在默认的C盘，还是其他盘。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110607.jpg" alt=""><img src="http://source.chenyalun.cn/images/201511/5110608.jpg" alt=""></p>
+<p>看吧，着实很简单，我们就把VS配置好啦。当然值得一提的是Visual Studio Online，为 Visual Studio、Eclipse、Xcode 或任何其他 IDE 或代码编辑器提供版本控制、敏捷规划、持续交付和应用程序分析的基于云的协作服务。这个也是令人神往的。有兴趣的同学不妨看看。</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;身为一枚开发人员，使用Github是一项基本技能，Github的美妙之处在下就不细细道来了，其实，稍微入门的童鞋都会在Visual Studio 2015配置Github的，如此说来，我再分享这个教程纯属无聊了。&lt;/p&gt;
+&lt;h3 id=&quot;1，申请注册Github&quot;&gt;&lt;a h
+    
+    </summary>
+    
+      <category term="应用开发" scheme="http://yoursite.com/categories/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>泛谈单链表的插入与删除</title>
+    <link href="http://yoursite.com/2015/11/04/%E6%B3%9B%E8%B0%88%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
+    <id>http://yoursite.com/2015/11/04/泛谈单链表的插入与删除/</id>
+    <published>2015-11-03T21:00:32.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>谈过<a href="http://www.chenyalun.cn/泛谈顺序表的插入与删除.html" target="_blank" rel="external">顺序表的插入与删除</a>，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。</p>
+<p>先看定义：</p>
+<p><pre class="lang:default decode:true ">typedef struct LNode{<br>    int data;<br>    struct LNode <em>next;<br>}LNode;</em></pre><br>数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你咬我呀，哈哈。</p>
+<p>江湖传言LNode *p等价于LinkList p，不知道有木有人认同呢？闲话少说，看代码：</p>
+<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;</pre></p>
+<p>#include&lt;malloc.h&gt;<br>//定义并初始化单链表<br>typedef struct LNode{<br>    int data;<br>    struct LNode *next;<br>}LNode;</p>
+<p>//单链表的创建与初始化，设定共n个节点（不含头节点）<br>void CreateLinkList(LNode <em>a,int n) {<br>        LNode </em>p,<em>q;<br>        p=a;<br>    while(n–){<br>         q=(LNode </em>)malloc(sizeof(LNode *));<br>         scanf(“%d”,&amp;q-&gt;data);<br>           q-&gt;next=NULL;<br>        p-&gt;next=q;<br>        p=q;<br>    }<br>}</p>
+<p>//查找是否存在一个值为x的节点，若存在，删之，并返回OK，否则返回NOT FOUND<br>char <em>SearchAndDelete(LNode </em>c,int x){<br>    LNode <em>p,</em>q;<br>    p=c;<br>    //开始查找<br>    while(p-&gt;next!=NULL)<br>    {<br>        if(p-&gt;next-&gt;data==x)<br>        break;<br>        p=p-&gt;next;<br>    }<br>    //若找到则开始删除<br>    if(p-&gt;next==NULL)<br>    return “NOT FOUND”;<br>    else<br>    {<br>        q=p-&gt;next;<br>        p-&gt;next=p-&gt;next-&gt;next;<br>        free(q);<br>        return “OK”;<br>    }<br>}</p>
+<p>//在链表c中第n个节点位置插入元素e<br>void Insert(LNode <em>c,int n,int e){<br>    LNode </em>p=( LNode <em>)malloc(sizeof(LNode </em>)),<br>    <em>q=( LNode </em>)malloc(sizeof(LNode <em>));//插入的节点<br>    p=c;<br>    q-&gt;data=e;<br>    //找到要插入节点的位置<br>    for(int i=1;i&lt;n;i++){<br>        p=p-&gt;next;<br>    }<br>    //插入节点<br>    q-&gt;next=p-&gt;next;<br>    p-&gt;next=q;<br>}<br>//打印单链表<br>void Print(LNode </em>a){<br>    LNode <em>p=( LNode </em>)malloc(sizeof(LNode *));<br>    p=a-&gt;next;<br>    while(p!=NULL){<br>        printf(“%d\n”,p-&gt;data);<br>        p=p-&gt;next;<br>    }<br>}</p>
+<p>int main(){<br>   LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));<br>    CreateLinkList(a,5);<br>   Insert(a,3,10086);//假定在第3个位置插入数值为10086的节点<br> Print(a);<br>   printf(“—————-\n”);<br>SearchAndDelete(a,13);//查找并执行删除数值为13的节点<br>  Print(a);<br>return 0;<br>}<br><br>说明如下：</p>
+<p>1，假定输入的是11 12 13 14 15五个数值。在第三个位置（13的位置）插入一个数据域为10086的节点。此时原来的数值已经变成了11 12 10086 13 14 15</p>
+<p>2，完事后，我为了方便不再另写代码，在11 12 10086 13 14 15的基础上假定查找并删除数据域为13的节点。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110101.jpg" alt=""></p>
+<p>当然还有值得体会的是，我把节点的内存分配放在主函数里，不知道是不是有人想打我呢？</p>
+<p>像这样：</p>
+<p><pre class="nums:false lang:default decode:true ">LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>当然，清晰一点就是</p>
+<p>&nbsp;</p>
+<p><pre class="nums:false lang:default decode:true ">LNode <em>a;<br>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>两者效果一样。这不是重点。看下面的两段代码：</p>
+<p><pre class="lang:default decode:true ">void Print(LNode *a){</pre></p>
+<p>}<br>和</p>
+<p><pre class="lang:default decode:true">void Print(LNode <em>&amp;a){<br>    a=( LNode </em>)malloc(sizeof(LNode *));</pre></p>
+<p>}<br>这才是重点，和小伙伴研究一下，决定采取有违伦理惨无人道的第一种方式。最后在主函数中再调用malloc觉得还是蛮灵活轻便的。</p>
+<p>当然，上面的代码不是为了解题，只是提供一个思路，具体可视情况修改。</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;谈过&lt;a href=&quot;http://www.chenyalun.cn/泛谈顺序表的插入与删除.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;顺序表的插入与删除&lt;/a&gt;，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就
+    
+    </summary>
+    
+      <category term="编程技巧" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>泛谈顺序表的插入与删除</title>
+    <link href="http://yoursite.com/2015/11/02/%E6%B3%9B%E8%B0%88%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
+    <id>http://yoursite.com/2015/11/02/泛谈顺序表的插入与删除/</id>
+    <published>2015-11-01T21:00:11.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。</p>
+<p>所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。看到这时，确实很不high，还木有到链表呢，何必那么心急引入指针，而且我又不爱指针。</p>
+<p><pre class="lang:default decode:true ">typedef struct{<br>    Elemtype *elem;<br>    int length;<br>    int listsize;<br>}SqList;</pre><br>没有指责的意思，只是我辈太愚笨罢了。</p>
+<p>翻翻资料。发现还有一种更巧妙而且容易理解的方式：</p>
+<p><pre class="lang:default decode:true ">typedef struct{<br>    int data[Max];<br>    int length;<br>}SqList;</pre><br>这样一来，整个顺序表就与数组特别特别相似啦。</p>
+<p>那么，声明一个很长很长但是彼此知道的Max长度数组，作为默认“表长”（其实不是表长），再给它一个长度length，如此，顺序表横空出世了。</p>
+<p>既然如此，那关于什么插入、删除操作就不在话下了。</p>
+<h3 id="1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m"><a href="#1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m" class="headerlink" title="1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m"></a>1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m</h3><p>题目很清楚，插入元素m后，后面的元素自然往后移动啦。先看代码。</p>
+<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;<br>//#include&lt;malloc.h&gt;<br>//#include&lt;stdlib.h&gt;   //一般这两个是需要的</pre></p>
+<p>#define Max 200<br>//定义并初始化顺序表<br>typedef struct{<br>    int data[Max];<br>    int length=10;<br>}SqList;<br>//顺序表l中查找元素e的位置<br>int LocatElem(SqList l,int e){<br>    int i=0;<br>    for(;i&lt;l.length;++i)<br>      if(l.data[i]==e)<br>      return i+1;<br>}</p>
+<p>//在元素e的位置插入元素m<br>void Insert(SqList &amp;l,int e,int m) {<br>    int i=l.length,p=LocatElem(l,e);<br>    for(;i&gt;=p;–i){<br>        l.data[i]=l.data[i-1];<br>    }<br>    l.data[i]=m;<br>    l.length++;<br>}</p>
+<p>int main(){<br>    int i=0,e=18,m=200;<br>    SqList a;<br>    for(;i&lt;a.length;++i)<br>         scanf(“%d”,&amp;a.data[i]);<br>    Insert(a,e,m);<br>    for(int i=0;i&lt;a.length;++i)<br>         printf(“%d\n”,a.data[i]);<br>    return 0;<br>}<br>这里假设我们输入从11，12一直到20的整数值，首先查找元素e=18的值的位置，插入m的值200。</p>
+<p>原来：11 12 13 14 15 16 17 18 19 20</p>
+<p>run后：11 12 13 14 15 16 17 200 18 19 20</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5103102.jpg" alt=""></p>
+<h3 id="2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素"><a href="#2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素" class="headerlink" title="2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素"></a>2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素</h3><p><pre class="lang:default decode:true">#include&lt;stdio.h&gt;<br>//#include&lt;malloc.h&gt;<br>//#include&lt;stdlib.h&gt;</pre></p>
+<p>#define Max 200<br>//定义并初始化顺序表<br>typedef struct{<br>    int data[Max];<br>    int length=10;<br>}SqList;<br>//顺序表l中查找元素e的位置<br>int LocatElem(SqList l,int e){<br>    int i=0;<br>    for(;i&lt;l.length;++i)<br>      if(l.data[i]==e)<br>      return i+1;<br>}</p>
+<p>//删除顺序表中值为e的元素<br>void Delete(SqList &amp;l,int e){<br>    int i=LocatElem(l,e);<br>    for(;i&lt;=l.length;++i)<br>       l.data[i-1]=l.data[i];<br>       l.length–;<br>}<br>int main(){<br>    int i=0, e=15;//e的值自己说了算<br>    SqList a;<br>     for(;i&lt;a.length;++i)<br>          scanf(“%d”,&amp;a.data[i]);<br>     Delete(a,e);<br>    for(int i=0;i&lt;a.length;++i)<br>          printf(“%d\n”,a.data[i]);<br>     return 0;<br>}<br>改动不大，添加个函数而已。这里删除的是15，具体题目具体分析。</p>
+<p>原来：11 12 13 14 15 16 17 18 19 20</p>
+<p>run后：11 12 13 14  16 17  18 19 20</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5103101.jpg" alt=""></p>
+<p>说这么多，无非是想分享一个模板，插入、删除搞定了，其他也很容易拿下了。当然变的是题目，不变的是方法论。</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。&lt;/p&gt;
+&lt;p&gt;所谓的顺序表，在严版的书中，定义的异常专业巧妙。
+    
+    </summary>
+    
+      <category term="编程技巧" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>题目：1011二进制整数的转换</title>
+    <link href="http://yoursite.com/2015/10/30/%E9%A2%98%E7%9B%AE%EF%BC%9A1011%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B4%E6%95%B0%E7%9A%84%E8%BD%AC%E6%8D%A2/"/>
+    <id>http://yoursite.com/2015/10/30/题目：1011二进制整数的转换/</id>
+    <published>2015-10-29T21:00:42.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目概述：给定一个正整数，写出它的2进制表示</p>
+<p>输入：多组输入，输入的第一行为一个正整数n，表示接下来有n组数据，每一行为1个正整数a(0&lt;a&lt;=10000)</p>
+<p>输出：对于每一组数据，求出a的2进制表示法</p>
+<p>样例输入：</p>
+<p>2<br>5<br>10</p>
+<p>样例输出：</p>
+<p>101<br>1010</p>
+<p>关于进制的转换，其实是有章可循的。而对于十进制整数到二进制整数的转换中，用给定的数反复除以2，除第一次外，每次除以2均取前一次商的整数部分作被除数并依次记下每次的余数。另外，所得到的商的最后一位余数是所求二进制数的最高位。如此，便可轻而易举得到我们需要的二进制整数。</p>
+<p><table class="table-view log-set-param"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">被除数</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">计算过程</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">商</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">余数</div><br></p>
+<p><tr></tr></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">6</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">6/2</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">3</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">0</div><br></p>
+<p><tr></tr></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">3</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">3/2</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">1</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">1</div><br></p>
+<p><tr></tr></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">1</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">1/2</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">0</div></p>
+<p><td align="center" valign="center"></td></p>
+<p><div class="para">1</div><br><br><br><br>&nbsp;</p>
+<p>像上面的这个，二进制整数便是110。思路明了，那代码自然“油然而生”。</p>
+<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;
+void binary(int n){
+    int a[200],i=0;
+    do{
+        a[i]=n%2;
+        n=n/2;    
+        i++;        
+    }while(n!=0);
+
+while(i&gt;0)
+printf("%d",a[--i]);
+
+printf("\n");
+}
+int main(){
+    int n,a[200],i=0;
+    scanf("%d",&amp;n);
+    for(;i&lt;n;i++)
+        scanf("%d",&amp;a[i]);
+    for(i=0;i&lt;n;i++)
+        binary(a[i]);
+    return 0;
+}</pre>
+
+<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true ">#include&lt;iostream&gt;
+using namespace std;
+void binary(int n){
+    int a[200],i=0;
+    do{
+        a[i]=n%2;
+        n=n/2;    
+        i++;        
+    }while(n!=0);
+
+while(i&gt;0)
+cout&lt;&lt;a[--i];
+cout&lt;&lt;endl;
+}
+int main(){
+    int n,a[200],i=0;
+    cin&gt;&gt;n;
+    for(;i&lt;n;i++)
+        cin&gt;&gt;a[i];
+    for(i=0;i&lt;n;i++)
+        binary(a[i]);
+    return 0;
+}
+</pre>
+
+<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true ">import java.util.Scanner;</pre></p>
+<p>public class Main {</p>
+<pre><code>static void binary(int n){
+    int a[]=new int [200],i=0;
+    do{
+        a[i]=n%2;
+        n=n/2;
+        i++;
+    }while(n!=0);
+
+while(i&amp;gt;0)
+    System.out.print(a[--i]);
+System.out.println();
+}
+
+public static void main(String[] args) {
+    int a[]=new int [200],n,i=0;
+    Scanner s=new Scanner (System.in);
+    n=s.nextInt();
+    for(;i&amp;lt;n;i++)
+    a[i]=s.nextInt();
+    for(i=0;i&amp;lt;n;i++)
+    binary(a[i]);
+}
+</code></pre><p>}<br><br>其实最根本的莫过于进制转换这个函数：用一个整形数组存储每次得到的余数a[i]=n%2（当然，打印的时候，顺序要倒过来），接着要做的便是n=n/2；整除2即可。核心函数搞定了，那与之相关的题目便可顺手解决了。像题目1012【给定一个正整数，写出它的2进制表示中有多少个1】很容易搞定。</p>
+<h3 id="4，二进制数中1的个数"><a href="#4，二进制数中1的个数" class="headerlink" title="4，二进制数中1的个数"></a>4，二进制数中1的个数</h3><p><pre class="lang:default decode:true ">#include&lt;iostream&gt;<br>using namespace std;<br>int binary_number1(int n){<br>    int a[200],i=0,k=0;<br>    do{<br>        a[i]=n%2;<br>        n=n/2;<br>        i++;<br>    }while(n!=0);</pre></p>
+<p>while(i&gt;0)<br>{<br>    if(a[–i]==1)<br>    k++;<br>}<br>return k;<br>}<br>int main(){<br>    int n,a[200],i=0;<br>    cin&gt;&gt;n;<br>    for(;i&lt;n;i++)<br>        cin&gt;&gt;a[i];<br>    for(i=0;i&lt;n;i++)<br>        cout&lt;&lt;binary_number1(a[i])&lt;&lt;endl;<br>    return 0;<br>}<br><br>&nbsp;</p>
+<p>下面是JAVA代码：</p>
+<p><pre class="lang:default decode:true ">import java.util.Scanner;</pre></p>
+<p>public class Main {</p>
+<pre><code> static int binary_number1(int n){
+    int a[]=new int [200],i=0,k=0;
+    do{
+        a[i]=n%2;
+        n=n/2;
+        i++;
+    }while(n!=0);
+
+while(i&amp;gt;0){
+    if(a[--i]==1)
+    k++;
+}
+return k;
+</code></pre><p>}<br>    public static void main(String[] args) {<br>        int a[]=new int [200],n,i=0;<br>        Scanner s=new Scanner (System.in);<br>        n=s.nextInt();<br>        for(;i&lt;n;i++)<br>        a[i]=s.nextInt();<br>        for(i=0;i&lt;n;i++)<br>        System.out.println(binary_number1(a[i]));<br>    }<br>}<br><br>&nbsp;</p>
+<p>万变不离其宗，无非是增加个计数工具而已。</p>
+<p>总之，十进制整数转换到二进制整数确实不算难解，稍微理解一下便可轻松解决，当然，有整数必然有小数，二进制如此其他进制也类似，具体看咱下回分解。</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目概述：给定一个正整数，写出它的2进制表示&lt;/p&gt;
+&lt;p&gt;输入：多组输入，输入的第一行为一个正整数n，表示接下来有n组数据，每一行为1个正整数a(0&amp;lt;a&amp;lt;=10000)&lt;/p&gt;
+&lt;p&gt;输出：对于每一组数据，求出a的2进制表示法&lt;/p&gt;
+&lt;p&gt;样例输入：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="程序试题" scheme="http://yoursite.com/categories/%E7%A8%8B%E5%BA%8F%E8%AF%95%E9%A2%98/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>题目1009：求出小于n的所有质数的和</title>
+    <link href="http://yoursite.com/2015/10/28/%E9%A2%98%E7%9B%AE1009%EF%BC%9A%E6%B1%82%E5%87%BA%E5%B0%8F%E4%BA%8En%E7%9A%84%E6%89%80%E6%9C%89%E8%B4%A8%E6%95%B0%E7%9A%84%E5%92%8C/"/>
+    <id>http://yoursite.com/2015/10/28/题目1009：求出小于n的所有质数的和/</id>
+    <published>2015-10-27T21:00:11.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>概述：给定一个质数n(5&lt;n&lt;1000)，求出小于n的所有质数的和</p>
+<p>输入：多组输入，每行一个n(5&lt;n&lt;1000),</p>
+<p>输出：对于每组数据，输出为一行，值为小于n的所有质数的和</p>
+<p>样例输入：6 7</p>
+<p>样例输出：10  10</p>
+<p>看到这个题目我心中一乐，确实就是质数函数的改编版，难度不大，不过咱是为了锻炼写代码，所以还是要认真做的。直接看函数啦。</p>
+<p>不过值得注意的是：</p>
+<p>1，数字1不是质数，当然，也不是合数。回顾上次的题目1008，虽然输进去1打印的是Yes，但是题目要求是输入一个大于2的数，所以上次的代码不能算错。</p>
+<p>2，函数sqrt的参数是double型，即使不在程序中特意说明，也不会产生影响，但还是值得注意的，因为这个关系到编译器，如果想保持代码的准确完美，int n=(int) sqrt((double)m);具体是(double)m还是double (m)，在c和c++中是不一样的，如果用错，可能编译会报错。</p>
+<p>3，判断是否为质数的prime函数中，用于计数的自然数i要从2开始，关系到<span class="crayon-v">m</span><span class="crayon-o">%</span><span class="crayon-v">i</span><span class="crayon-o">==</span><span class="crayon-cn">0这个表达式，</span>如果从0开始，嘿嘿，你试试。</p>
+<p>想到上次的代码，这次无非是多了一个求和函数，当然判断是否为质数的函数还可以再做些优化。</p>
+<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true">#include&lt;stdio.h&gt;
+#include&lt;math.h&gt;
+
+int prime(int m){ 
+int n=(int) sqrt((double)m),i;
+    for(i=2;i&lt;=n;i++){
+       if(m%i==0)
+        break;
+    }
+  if(i&gt;n)
+     return 1;
+  else
+     return 0;
+}
+
+int sum(int n){
+     int s=0; 
+     int i;
+      for( i=2;i&lt;n;i++){
+      if(prime(i)==1)    
+      s+=i;
+  }
+      return s;
+}
+
+int main(){
+     int n;
+     while(scanf("%d",&amp;n)!= EOF) 
+     printf("%d\n",sum(n));
+    return 0;
+   }
+</pre>
+
+<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true">//c++代码沿用上次的函数
+#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cmath&gt;
+using namespace std;
+
+string prime(int m){
+    int n=(int) sqrt( double(m)),i=2;//一定要注意i=2
+    for(;i&lt;=n;i++){
+       if(m%i==0)
+        break;
+     }
+  if(i&gt;n)
+     return "Yes";
+  else
+     return "No";
+}
+
+int sum(int n){
+     int s=0; 
+      for(int i=2;i&lt;n;i++){
+      if(prime(i)=="Yes")
+      s+=i;
+  }
+      return s;
+}
+
+ int main(){
+      int n;
+     while(cin&gt;&gt;n){
+         cout&lt;&lt;sum(n)&lt;&lt;endl;
+    }
+       return 0;
+}
+</pre>
+
+<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true">import java.util.*;</pre></p>
+<p>public class Main {</p>
+<pre><code>static int prime(int m){ 
+int n=(int) Math.sqrt((double)m),i=2;
+        for(;i&amp;lt;=n;i++){
+           if(m%i==0)
+            break;
+        }
+      if(i&amp;gt;n)
+         return 1;
+      else
+         return 0;
+    }
+
+    static int sum(int n){
+         int s=0; 
+         int i;
+          for( i=2;i&amp;lt;n;i++){
+          if(prime(i)==1)    
+          s+=i;
+      }
+          return s;
+    }
+
+public static void main(String[] args) {
+    int n;
+     while(1==1) {
+         Scanner s=new Scanner(System.in);
+         n=s.nextInt();
+     System.out.println(sum(n));}
+}
+</code></pre><p>}<br><br>本身这道题目很简单，但确实花了我不少时间，嗯，还是不熟啊。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;概述：给定一个质数n(5&amp;lt;n&amp;lt;1000)，求出小于n的所有质数的和&lt;/p&gt;
+&lt;p&gt;输入：多组输入，每行一个n(5&amp;lt;n&amp;lt;1000),&lt;/p&gt;
+&lt;p&gt;输出：对于每组数据，输出为一行，值为小于n的所有质数的和&lt;/p&gt;
+&lt;p&gt;样例输入：6 7&lt;/p&gt;
+&lt;p&gt;
+    
+    </summary>
+    
+      <category term="程序试题" scheme="http://yoursite.com/categories/%E7%A8%8B%E5%BA%8F%E8%AF%95%E9%A2%98/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>在Windows Azure中创建并连接mysql</title>
+    <link href="http://yoursite.com/2015/10/27/%E5%9C%A8Windows_Azure%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%9E%E6%8E%A5mysql/"/>
+    <id>http://yoursite.com/2015/10/27/在Windows_Azure中创建并连接mysql/</id>
+    <published>2015-10-27T11:04:25.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>微软云中的数据库令人神往，尤其是云数据库中的MySql让无数仁人志士更为之向往。今天，咱们就一起尝试在微软云中创建一个MySql应用，并且将云服务器中的本地数据库迁移到云上。不过要着重提醒大家的是，云数据库的容量是有限的，陈亚伦在这里用的是20M的数据库，(T_T)，当然，因为是免费的。你玩的要是app，大型网站之类，建议选择微软云的高级订阅。因为我这里连接的是个人gallery，所以不介意数据库的大小。</p>
+<h3 id="1，创建数据库订阅"><a href="#1，创建数据库订阅" class="headerlink" title="1，创建数据库订阅"></a>1，创建数据库订阅</h3><p>首先打开仪表板：<a href="http://www.chenyalun.cn/go/?url=https://portal.azure.com/" target="_blank" rel="external">https://portal.azure.com/</a>，最左侧选择“新建”—“数据 + 存储器”—“MySQL 数据库”。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102601.jpg" alt=""></p>
+<p>接着便是进行一系列的设置，location一般选择东亚，定价层根据自己情况而定，水星是免费的，还有Titan、金星、土星、木星，价格不同，大小也不同。最后别忘了法律条款的授权。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102602.jpg" alt=""></p>
+<p>创建成功后便可以看到如图所示的界面。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102603.jpg" alt=""></p>
+<p>打开“所有设置”，选择属性，可以清晰地看到状态、数据库名、主机名、用户名、密码、订阅类型等等。</p>
+<p>那么，我们需要的便是主机名（主机地址）、用户名、密码，方便本地与云端的连接。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102604.jpg" alt=""></p>
+<p>猛戳仪表板上的管理数据库，便可跳转到cleardb整体预览，那么，亲想要在本地连接并管理吗？</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102605.jpg" alt=""></p>
+<h3 id="2，迁移数据库"><a href="#2，迁移数据库" class="headerlink" title="2，迁移数据库"></a>2，迁移数据库</h3><p>就是它：<a href="http://www.chenyalun.cn/go/?url=http://www.mysql.com/products/workbench/" target="_blank" rel="external">http://www.mysql.com/products/workbench/</a></p>
+<p>下载你需要的管理工具即可。</p>
+<p>安装成功后，填写刚刚在“属性”中的相关信息，譬如主机名、用户名、密码什么的，点击OK，便可轻松连接。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102606.jpg" alt=""></p>
+<p>若是要连接云端的数据库，首先我们要做的肯定是把原来的数据库迁移过来。当然，这里你肯定要有已经导出的数据库，直接导入即可。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102607.jpg" alt=""></p>
+<p><img src="http://source.chenyalun.cn/images/201510/5102608.jpg" alt=""></p>
+<p>如此我们便把数据库巧妙地迁移到云端了，不对，你还要在你的网站或者软件的配置信息中稍做修改，这样才完美实现迁移。</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;微软云中的数据库令人神往，尤其是云数据库中的MySql让无数仁人志士更为之向往。今天，咱们就一起尝试在微软云中创建一个MySql应用，并且将云服务器中的本地数据库迁移到云上。不过要着重提醒大家的是，云数据库的容量是有限的，陈亚伦在这里用的是20M的数据库，(T_T)，当然，
+    
+    </summary>
+    
+      <category term="应用开发" scheme="http://yoursite.com/categories/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>题目1008：质数还是合数</title>
+    <link href="http://yoursite.com/2015/10/26/%E9%A2%98%E7%9B%AE1008%EF%BC%9A%E8%B4%A8%E6%95%B0%E8%BF%98%E6%98%AF%E5%90%88%E6%95%B0/"/>
+    <id>http://yoursite.com/2015/10/26/题目1008：质数还是合数/</id>
+    <published>2015-10-25T21:00:09.000Z</published>
+    <updated>2016-08-21T12:15:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>质数</strong>（prime number）又称素数，有无限个。一个大于1的自然数，除了1和它本身外，不能被其他自然数整除，换句话说就是该数除了1和它本身以外不再有其他的因数；否则称为<strong>合数</strong>。</p>
+<p>题目描述：给定一个正整数n(2&lt;n&lt;10000)，判断是否为质数</p>
+<p>输入：多组输入，每行一个n(2&lt;n&lt;=10000),</p>
+<p>输出：对于每一组数，如果是质数则输出Yes，否则输出No</p>
+<p>样例：</p>
+<p>2<br>3<br>4</p>
+<p>Yes<br>Yes<br>No</p>
+<p>看完题目，思路马上就有了。无非是先判断是不是为质数，进而输出Yes和No。怎么判断是不是为质数呢？</p>
+<p>在一般领域，对正整数n，如果用2到n之间的所有整数去除，均无法整除，则n为质数。无非做个循环嘛，可是专家说了，不用到n，到根号2就可以了。因为将n分解为两个因数，必然一个大于根号2，一个小于根号2，比如18，分解成1和18、2和9、3和6，而18开根号约为4.2，看看，很符合吧。所以，循环到根号2就可以，不用浪费时间、消耗代码。</p>
+<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true">#include&lt;stdio.h&gt;
+#include&lt;math.h&gt;
+char *prime(int a){
+    char m[]="Yes";
+    char n[]="No";
+    int i=2,b=(int)sqrt(double (a));;
+    for(;i&lt;=b;i++){
+        if(a%i==0)
+        break;
+    }
+    if(i&gt;b)
+    return "Yes";
+    else
+    return "No";  
+}
+
+int main(){
+    int n,i=0,a[100];
+    scanf("%d",&amp;n);
+    for(;i&lt;n;i++)
+        scanf("%d",&amp;a[i]);
+    for(i=0;i&lt;n;i++)    
+        printf("%s\n",prime(a[i]));    
+    return 0;
+}
+</pre>
+
+<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true ">#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+using namespace std;
+string prime(int a){
+    int i=2,b;
+    b=(int)sqrt(double (a));//sqrt()的参数为 double 类型
+    for(;i&lt;=b;i++){
+        if(a%i==0)
+        break;
+    }
+    if(i&gt;b)
+    return "Yes";
+    else
+    return "No";
+}
+int main(){
+    int n,i=0,a[100];
+    cin&gt;&gt;n;
+    for(;i&lt;n;i++)
+    cin&gt;&gt;a[i];
+    for(i=0;i&lt;n;i++)
+    cout&lt;&lt;prime(a[i])&lt;&lt;endl;
+    return 0;
+}
+</pre>
+
+<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true ">import java.util.*;</pre></p>
+<p>public class Main {<br>    static String prime(int a){<br>        int i=2,b;<br>        b=(int)Math.sqrt(a);//sqrt()的参数为 double 类型<br>        for(;i&lt;=b;i++){<br>            if(a%i==0)<br>            break;<br>        }<br>        if(i&gt;b)<br>        return “Yes”;<br>        else<br>        return “No”;<br>    }</p>
+<pre><code>public static void main(String[] args) {
+    int n,i=0;
+    int a[]=new int [100];
+    Scanner s=new Scanner(System.in);
+    n=s.nextInt();
+    for(;i&amp;lt;n;i++)
+    a[i]=s.nextInt();;
+    for(i=0;i&amp;lt;n;i++)
+    System.out.println(prime(a[i]));
+}
+</code></pre><p>}<br><br>依然看不出差别有多大，但是值得一提的是，在C中，函数的返回值没有string，很不方便，返回”Yes“和”No”让我想了半天。当然，小伙伴劝我，不用那么强迫症非要在函数里返回，主函数写个”Yes“和”No”效果一样的。但是，纠结着最终还是实现了。</p>
+<p>string prime(int a){}这样的函数在C中会报错，所以char <em>prime(int a){}是很巧妙的。</em>prime指向字符串”Yes“和”No”的首地址，打印%s，就可以借助强大的printf函数，把整个字符串（字符数组也可以）打印出来，着实强大！当然啦，%c，打印首个字符（Y或者N）。</p>
+<p>&nbsp;</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;质数&lt;/strong&gt;（prime number）又称素数，有无限个。一个大于1的自然数，除了1和它本身外，不能被其他自然数整除，换句话说就是该数除了1和它本身以外不再有其他的因数；否则称为&lt;strong&gt;合数&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;题目描述：给
+    
+    </summary>
+    
+      <category term="程序试题" scheme="http://yoursite.com/categories/%E7%A8%8B%E5%BA%8F%E8%AF%95%E9%A2%98/"/>
+    
+    
+  </entry>
+  
+</feed>

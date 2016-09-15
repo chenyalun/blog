@@ -1,0 +1,1214 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS开发," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="陈亚伦博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="UIViewUIView:看到的控件
+UIViewController：管理控制界面。
+一般情况下，每一个“满屏”的UIView都交给对应的UIViewController管理，UIViewController内部有个UIView属性，就是它负责管理UIView对象。负责创建、销毁自己的UIView，显示隐藏UIView，处理UIView和用户之间的交互（事件处理）。UIViewControlle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS学习笔记一：UIView与UIButton">
+<meta property="og:url" content="http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/index.html">
+<meta property="og:site_name" content="陈亚伦博客">
+<meta property="og:description" content="UIViewUIView:看到的控件
+UIViewController：管理控制界面。
+一般情况下，每一个“满屏”的UIView都交给对应的UIViewController管理，UIViewController内部有个UIView属性，就是它负责管理UIView对象。负责创建、销毁自己的UIView，显示隐藏UIView，处理UIView和用户之间的交互（事件处理）。UIViewControlle">
+<meta property="og:updated_time" content="2016-08-21T12:39:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS学习笔记一：UIView与UIButton">
+<meta name="twitter:description" content="UIViewUIView:看到的控件
+UIViewController：管理控制界面。
+一般情况下，每一个“满屏”的UIView都交给对应的UIViewController管理，UIViewController内部有个UIView属性，就是它负责管理UIView对象。负责创建、销毁自己的UIView，显示隐藏UIView，处理UIView和用户之间的交互（事件处理）。UIViewControlle">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 11510108,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/"/>
+
+  <title> iOS学习笔记一：UIView与UIButton | 陈亚伦博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-82867422-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">陈亚伦博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">写代码，亦是写情怀。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS学习笔记一：UIView与UIButton
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-28T05:00:38+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios开发/" itemprop="url" rel="index">
+                    <span itemprop="name">ios开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/28/iOS学习笔记一：UIView与UIButton/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/iOS学习笔记一：UIView与UIButton/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h2><p>UIView:<span class="s1">看到的控件</span></p>
+<p>UIViewController<span class="s1">：管理控制界面。</span></p>
+<p><span class="s1">一般情况下，每一个</span>“<span class="s1">满屏</span>”<span class="s1">的</span>UIView<span class="s1">都交给对应的</span>UIViewController<span class="s1">管理，</span>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理</span>UIView<span class="s1">对象。负责创建、销毁自己的</span>UIView<span class="s1">，显示隐藏</span>UIView<span class="s1">，处理</span>UIView<span class="s1">和用户之间的交互（事件处理）。</span>UIViewController<span class="s1">是</span>UIView<span class="s1">的大管家</span></p>
+<p><span class="s1">创建一个</span>UIViewController<span class="s1">，再由</span>UIViewController<span class="s1">创建自己的</span>UIview<span class="s1">，最后把</span>UIView<span class="s1">显示到用户眼前。并且由</span>UIViewcontroller<span class="s1">处理</span>UIView<span class="s1">的事件。</span></p>
+<p><span class="s1">使方法可被连接：</span>IBAction<span class="s1">相当于</span>void</p>
+<p>使属性可被连接：<span class="s2">IBOutlet</span>，能够使属性显示到<span class="s2">storyboard</span>的右击列表中</p>
+<p><span class="s3">//<span class="Apple-converted-space">  </span></span>声明两个属性保存文本框</p>
+<p>@property<span class="Apple-converted-space">  </span>(nonatomic,weak) IBOutlet UITextField *t1;</p>
+<p>注意命名</p>
+<pre class="lang:default decode:true ">-(IBAction)btnClick
+
+{
+
+    // 获取成员变量的两种方式
+
+    // 下划线方式  self方式
+
+   // _t1;
+
+   NSString *st1= self.t1.text;
+
+    NSString *st2=self.t2.text;
+
+    int n1=[st1 intValue];
+
+    int n2=[st2 intValue];
+
+    int  r=n1+n2;
+
+    self.l.text=[NSString stringWithFormat:@"%d",r];    
+
+}</pre>
+
+<p>连线的两种方式：</p>
+<p><span class="s5">1</span>，<span class="s5">.h</span>文件与<span class="s5">ib</span>控件连线</p>
+<p><span class="s5">2</span>，<span class="s5">il</span>中，<span class="s5">viewcontrol</span>与<span class="s5">ib</span>控件相连，将选择控件的事件，直接与<span class="s5">View<span class="Apple-converted-space">  </span>Controler</span>相连，便可以快速看到具备连接能力的属性或方法。<a id="more"></a> </p>
+<p><strong>程序启动过程：</strong></p>
+<p>1<span class="s6">，加载最主要的</span>storyboard<span class="s6">文件</span></p>
+<p><span class="s5">2</span>，创建白色箭头所指的控制器对象</p>
+<p><span class="s5">3</span>，创建控制器内部的<span class="s5">view</span>，显示到用户眼前</p>
+<p>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理的</span>UIView<span class="s1">对象：</span></p>
+<p>UIView *_view;</p>
+<p>@property (monatomic,retain)<span class="Apple-converted-space">  </span>UIView *view;</p>
+<h4 id="UIView的常见属性"><a href="#UIView的常见属性" class="headerlink" title="UIView的常见属性"></a><strong>UIView<span class="s7">的常见属性</span></strong></h4><pre class="lang:default decode:true">@property(nullable, nonatomic,readonly) UIView  *superview;获得自己的父控件对象
+
+@property(nonatomic,readonly,copy) NSArray&lt;__kindof UIView *&gt; *subviews;获得自己所有的子控件对象（新添加的子控件会在subviews数组的最后面）
+
+ NSLog(@"%ld个子控件",self.view.subviews.count);
+
+@property(nonatomic)  NSInteger tag;  控件的ID标识，父控件可以通过tag找到对应的子控件，默认为0，尽量保持唯一
+
+@property(nonatomic) CGRect  frame; 描述控件的位置和尺寸，以父控件左上角位置为原点（0，0）
+
+@property(nonatomic) CGRect  bounds; 
+与frame的不同是，以控件本身的左上角位置为原点（0，0），因此，默认point为（0，0），只有bounds是以自己左上角为原点，其他都是父控件左上角
+
+@property(nonatomic) CGPoint center; 表示控件中心点的坐标（以父控件左上角为（0，0））
+
+@property(nonatomic) CGAffineTransform transform; 控件的形变属性（可以设置旋转角度、比例缩放、平移等属性）
+
+struct CGAffineTransform {
+
+ CGFloat a, b, c, d;
+CGFloat tx, ty;
+
+};</pre>
+
+<p><strong>UIButton<span class="Apple-converted-space">  </span><span class="s4">状态</span></strong></p>
+<p>normal <span class="s4">普通（默认）</span></p>
+<p>highlight <span class="s4">高亮状态</span><span class="Apple-converted-space">  </span><span class="s4">按下去的时候</span></p>
+<p>常见错误：</p>
+<p>1<span class="s4">，</span><strong>setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key shuixng.’</strong></p>
+<p>删除了已经连接的属性，却没有取消控件中的属性连接线</p>
+<p>2<span class="s4">，</span><strong>unrecognized selector sent to instance 0x78633f00</strong></p>
+<p>未识别的方法：删除了已经连接的方法，但是没有取消控件中的方法连接线</p>
+<p><span class="s3">OC</span>语法中，不允许直接修改<strong><span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象</strong><span class="s3"><span class="Apple-converted-space"><strong> </strong>   </span></span>中结构体属性的成员</p>
+<p><span class="s4">报错：</span>Expression is not<span class="Apple-converted-space">  </span>assignable</p>
+<p>解决：</p>
+<p><span class="s3">OC</span>语法中，不允许直接<span class="Apple-converted-space">  </span>修改<span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象<span class="s3"><span class="Apple-converted-space">    </span></span>中结构体属性的成员。意味着可以直接赋值，可以直接修改成员变量的结构体属性成员</p>
+<pre class="lang:default decode:true">   // 取出按钮控件的属性
+
+    CGRect frame=_btn.frame;
+
+    //设置局部变量frame的值
+
+    frame.origin.x-=10;
+
+    // 重新赋值
+
+    _btn.frame=frame;
+
+</pre>
+<pre class="lang:default decode:true ">设置动画：
+
+- (IBAction)up:(id)sender {
+
+    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
+
+    [UIView beginAnimations:nil context:nil];
+
+    // 设置动画持续时间，默认0.2秒
+
+    [UIView setAnimationDuration:2.0];</pre>
+
+<p><span class="Apple-converted-space">    </span></p>
+<p><span class="Apple-converted-space"> </span>方法二：修改中点实现位置移动</p>
+<pre class="lang:default decode:true ">    CGPoint center=_btn.center;
+
+    switch ([sender tag]) {
+
+        case 1:center.y-=krun;break;
+
+        case 2:center.x+=krun;break;
+
+        case 3:center.y+=krun;break;
+
+        case 4:center.x-=krun;break;
+
+        default: break;
+
+    }
+
+    _btn.center=center;</pre>
+
+<p><span class="Apple-converted-space"> </span></p>
+<p><strong>代码重构：</strong></p>
+<pre class="lang:default decode:true">- (IBAction)run:(id)sender {
+
+    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
+
+    [UIView beginAnimations:nil context:nil];
+
+    // 设置动画持续时间，默认0.2秒
+
+    [UIView setAnimationDuration:1.0];
+
+    // OC语法中，不允许直接修改   某个对象    中结构体属性的成员
+
+    // 取出按钮控件的属性
+
+    CGRect frame=_btn.frame;
+
+    // id类型不允许点语法
+
+    switch ([sender tag]) {
+
+        case 1:frame.origin.y-=krun;break;
+
+        case 2:frame.origin.x+=krun;break;
+
+        case 3:frame.origin.y+=krun;break;
+
+        case 4:frame.origin.x-=krun;break;
+
+        default: break;
+
+    }
+
+    // 重新赋值
+
+    _btn.frame=frame;
+
+    // 动画结尾，提交动画
+
+    [UIView commitAnimations];
+
+}
+
+左旋转动画：
+
+#pragma mark 左旋转
+
+/*
+
+* -  逆时针方向  + 顺时针方向
+
+* 持续旋转方法CGAffineTransformRotate
+
+* 一次设值CGAffineTransformMakeRotation
+
+* M_PI_4是数学宏定义 45°，也即1/4PI弧度
+
+*/
+
+- (IBAction)leftRotate:(id)sender {
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0];
+
+    _btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);
+
+       [UIView commitAnimations];
+
+}
+
+放大动画：
+
+/*
+
+* 放大要求倍数大于1，缩小要求倍数小于1
+
+* 持续放大CGAffineTransformScale
+
+* 一次设值CGAffineTransformMakeScale
+
+*/
+
+- (IBAction)big:(id)sender {
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0];
+
+    _btn.transform=CGAffineTransformScale(_btn.transform, 1.5, 1.5);
+
+    [UIView commitAnimations];
+
+}
+
+代码重构：
+
+#pragma mark 左右旋转放大缩小
+
+- (IBAction)transfer:(id)sender {
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0];
+
+    switch ([sender tag])
+
+    {
+
+        case 1:_btn.transform= CGAffineTransformScale(_btn.transform, 1.5, 1.5);break;
+
+        case 2:_btn.transform= CGAffineTransformScale(_btn.transform, 0.5, 0.5);break;
+
+        case 3 :_btn.transform=CGAffineTransformRotate(_btn.transform, +M_PI_4);break;
+
+        case 4 :_btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);break;
+
+        default:  break;
+
+    }
+
+    [UIView commitAnimations];
+
+}
+
+transform重置
+
+#pragma mark 重置transform
+
+- (IBAction)reset:(id)sender {
+
+    // 将清空对其所作的变换，恢复原始形变属性，位置不能恢复
+
+    [UIView beginAnimations:nil context:nil];
+
+    [UIView setAnimationDuration:1.0  ];
+
+    _btn.transform=CGAffineTransformIdentity;
+
+    [UIView commitAnimations];
+
+}</pre>
+
+<h3 id="使用Block重构代码"><a href="#使用Block重构代码" class="headerlink" title="使用Block重构代码"></a><strong>使用Block<span class="s4">重构代码</span></strong></h3><pre class="lang:default decode:true ">#pragma 代码重构用block调用
+
+-(void)btnClick:(id)sender andBlock: (void (^) ()  )blockArgument
+
+{
+
+    // 开始动画
+
+    [UIView beginAnimations:nil context:nil];
+
+    // 设置动画持续时间
+
+    [UIView setAnimationDuration:1.0];
+
+    blockArgument();
+
+    // 结束动画
+
+    [UIView commitAnimations];
+
+}
+
+#pragma 左右旋转功能的实现
+
+- (IBAction)leftOrRightRotate:(UIButton *)sender
+
+{
+
+    [self btnClick:sender andBlock:^
+
+    {
+
+        CGFloat r=sender.tag==6?M_PI_4:-M_PI_4;
+
+        _photo.transform=CGAffineTransformRotate(_photo.transform, r);
+
+    }
+
+     ] ;
+
+}</pre>
+
+<p><span class="s4">定义参数：要传入的</span>block<span class="s4">名称</span>block <span class="Apple-converted-space">  </span>(void)(^)()blockName</p>
+<p><span class="s3"><span class="Apple-converted-space">  </span></span>传入参数：直接封装好的代码块<span class="s3"> ^{}</span></p>
+<p><span class="s4">获取某方法的</span>sel<span class="s4">：</span>@selector(<span class="s4">方法名</span>)</p>
+<h3 id="通过代码设置控件"><a href="#通过代码设置控件" class="headerlink" title="通过代码设置控件"></a><strong>通过代码设置控件</strong></h3><p><span class="s4">在</span>viewDidLoad <span class="s4">方法中通过代码设置控件</span></p>
+<p>代码创建按钮：</p>
+<pre class="lang:default decode:true ">- (void)viewDidLoad {
+
+    [super viewDidLoad];
+
+    // Do any additional setup after loading the view, typically from a nib.
+
+    // 创建按钮
+
+    UIButton *btn=[[UIButton alloc]init ];
+
+    btn.frame=CGRectMake(20, 50, 100, 200);
+
+    // 普通状态下的按钮
+
+    [btn setBackgroundImage:[UIImage imageNamed:@"btn_01.png"] forState:UIControlStateNormal];
+
+    [btn setTitle:@"normal" forState:UIControlStateNormal];
+
+    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+
+    // 高亮状态下的按钮
+
+    [btn setBackgroundImage:[UIImage imageNamed:@"btn_02.png"] forState:UIControlStateHighlighted];
+
+    [btn setTitle:@"normal" forState:UIControlStateHighlighted];
+
+    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateHighlighted];
+
+    // 点击事件
+
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+
+    // 添加按钮控件到view中
+
+    [self.view addSubview:btn];
+
+}
+
+-(void)btnClick
+
+{
+
+    NSLog(@"按钮已被点击");
+
+}
+
+代码创建文本框：
+
+// 创建文本框并设置相关属性
+
+    UITextField *field=[[UITextField alloc]init];
+
+    CGFloat centerX=self.view.frame.size.width*0.5;
+
+    CGFloat centerY=self.view.frame.size.height*0.5;
+
+    field.frame=CGRectMake(centerX, centerY, 100, 50);
+
+    field.font=[UIFont systemFontOfSize:20];
+
+    field.backgroundColor=[UIColor purpleColor];
+
+    // 将文本框添加到view中
+
+    [self.view addSubview:field];</pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS开发/" rel="tag">#iOS开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/18/Objective-C学习笔记三：点语法与自动属性/" rel="next" title="Objective-C学习笔记三：点语法与自动属性">
+                <i class="fa fa-chevron-left"></i> Objective-C学习笔记三：点语法与自动属性
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/28/iOS学习笔记一：UIView与UIButton/"
+           data-title="iOS学习笔记一：UIView与UIButton" data-url="http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://chenyaluncos-10005661.cos.myqcloud.com/touxiang.jpg"
+               alt="陈亚伦" />
+          <p class="site-author-name" itemprop="name">陈亚伦</p>
+          <p class="site-description motion-element" itemprop="description">爱生活 做自己</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/icqk" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chenyalun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.instagram.com/ichenyalun" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.pinterest.com/iChenYalun" target="_blank" title="Pinterest">
+                  
+                    <i class="fa fa-fw fa-pinterest"></i>
+                  
+                  Pinterest
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView"><span class="nav-number">1.</span> <span class="nav-text">UIView</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UIView的常见属性"><span class="nav-number">1.0.1.</span> <span class="nav-text">UIView的常见属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Block重构代码"><span class="nav-number">1.1.</span> <span class="nav-text">使用Block重构代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过代码设置控件"><span class="nav-number">1.2.</span> <span class="nav-text">通过代码设置控件</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈亚伦</span>
+</div>
+
+<div class="powered-by">
+  Powered by Hexo 
+</div>
+
+<div class="theme-info">
+  心有猛虎，细嗅蔷薇。 
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenyalun"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
