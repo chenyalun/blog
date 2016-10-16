@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS开发," />
+  <meta name="keywords" content="Objective-C," />
 
 
 
@@ -90,22 +90,34 @@
 
 
 
-<meta name="description" content="UIViewUIView:看到的控件
-UIViewController：管理控制界面。
-一般情况下，每一个“满屏”的UIView都交给对应的UIViewController管理，UIViewController内部有个UIView属性，就是它负责管理UIView对象。负责创建、销毁自己的UIView，显示隐藏UIView，处理UIView和用户之间的交互（事件处理）。UIViewControlle">
+<meta name="description" content="2016.10.16更正部分错别字
+
+分类场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。声明文件的命名方式 【类+分类.h】
+@interface 类名 (分类名)
+@end
+实现文件的命名方式 【类+分类.m】
+@implementation">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS学习笔记一：UIView与UIButton">
-<meta property="og:url" content="http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/index.html">
+<meta property="og:title" content="Objective-C学习笔记四：分类与代理">
+<meta property="og:url" content="http://yoursite.com/2016/08/16/Objective-C学习笔记四：分类/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="UIViewUIView:看到的控件
-UIViewController：管理控制界面。
-一般情况下，每一个“满屏”的UIView都交给对应的UIViewController管理，UIViewController内部有个UIView属性，就是它负责管理UIView对象。负责创建、销毁自己的UIView，显示隐藏UIView，处理UIView和用户之间的交互（事件处理）。UIViewControlle">
-<meta property="og:updated_time" content="2016-08-21T12:39:14.000Z">
+<meta property="og:description" content="2016.10.16更正部分错别字
+
+分类场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。声明文件的命名方式 【类+分类.h】
+@interface 类名 (分类名)
+@end
+实现文件的命名方式 【类+分类.m】
+@implementation">
+<meta property="og:updated_time" content="2016-10-16T10:38:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS学习笔记一：UIView与UIButton">
-<meta name="twitter:description" content="UIViewUIView:看到的控件
-UIViewController：管理控制界面。
-一般情况下，每一个“满屏”的UIView都交给对应的UIViewController管理，UIViewController内部有个UIView属性，就是它负责管理UIView对象。负责创建、销毁自己的UIView，显示隐藏UIView，处理UIView和用户之间的交互（事件处理）。UIViewControlle">
+<meta name="twitter:title" content="Objective-C学习笔记四：分类与代理">
+<meta name="twitter:description" content="2016.10.16更正部分错别字
+
+分类场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。声明文件的命名方式 【类+分类.h】
+@interface 类名 (分类名)
+@end
+实现文件的命名方式 【类+分类.m】
+@implementation">
 
 
 
@@ -126,9 +138,9 @@ UIViewController：管理控制界面。
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/16/Objective-C学习笔记四：分类/"/>
 
-  <title> iOS学习笔记一：UIView与UIButton | 陈亚伦博客 </title>
+  <title> Objective-C学习笔记四：分类与代理 | 陈亚伦博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -280,7 +292,7 @@ UIViewController：管理控制界面。
             
             
               
-                iOS学习笔记一：UIView与UIButton
+                Objective-C学习笔记四：分类与代理
               
             
           </h1>
@@ -292,8 +304,8 @@ UIViewController：管理控制界面。
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T05:00:38+08:00" content="2016-07-28">
-              2016-07-28
+            <time itemprop="dateCreated" datetime="2016-08-16T17:50:17+08:00" content="2016-08-16">
+              2016-08-16
             </time>
           </span>
 
@@ -322,8 +334,8 @@ UIViewController：管理控制界面。
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/07/28/iOS学习笔记一：UIView与UIButton/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/iOS学习笔记一：UIView与UIButton/" itemprop="commentsCount"></span>
+                <a href="/2016/08/16/Objective-C学习笔记四：分类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/16/Objective-C学习笔记四：分类/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,386 +358,211 @@ UIViewController：管理控制界面。
       
 
       
-        <h2 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h2><p>UIView:<span class="s1">看到的控件</span></p>
-<p>UIViewController<span class="s1">：管理控制界面。</span></p>
-<p><span class="s1">一般情况下，每一个</span>“<span class="s1">满屏</span>”<span class="s1">的</span>UIView<span class="s1">都交给对应的</span>UIViewController<span class="s1">管理，</span>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理</span>UIView<span class="s1">对象。负责创建、销毁自己的</span>UIView<span class="s1">，显示隐藏</span>UIView<span class="s1">，处理</span>UIView<span class="s1">和用户之间的交互（事件处理）。</span>UIViewController<span class="s1">是</span>UIView<span class="s1">的大管家</span></p>
-<p><span class="s1">创建一个</span>UIViewController<span class="s1">，再由</span>UIViewController<span class="s1">创建自己的</span>UIview<span class="s1">，最后把</span>UIView<span class="s1">显示到用户眼前。并且由</span>UIViewcontroller<span class="s1">处理</span>UIView<span class="s1">的事件。</span></p>
-<p><span class="s1">使方法可被连接：</span>IBAction<span class="s1">相当于</span>void</p>
-<p>使属性可被连接：<span class="s2">IBOutlet</span>，能够使属性显示到<span class="s2">storyboard</span>的右击列表中</p>
-<p><span class="s3">//<span class="Apple-converted-space">  </span></span>声明两个属性保存文本框</p>
-<p>@property<span class="Apple-converted-space">  </span>(nonatomic,weak) IBOutlet UITextField *t1;</p>
-<p>注意命名</p>
-<pre class="lang:default decode:true ">-(IBAction)btnClick
-
+        <blockquote>
+<p>2016.10.16更正部分错别字</p>
+</blockquote>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）<br>当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。<br>声明文件的命名方式 【类+分类.h】</p>
+<pre><code>@interface 类名 (分类名)
+@end
+</code></pre><p>实现文件的命名方式 【类+分类.m】</p>
+<pre><code>@implementation 类名 (分类名)
+@end
+</code></pre><p>特征：用括号括住添加的分类<br>好处：一个庞大的类可以分模块开发、由多个人编写，有利于团队合作。</p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1，分类可以访问原来类中的成员变量，但不能增加成员变量。（若要增加成员变量，可以使用继承）</p>
+<p>2，分类的优先级最高，当调用类中的一个方法时，优先去分类中查找，再去原类中查找，最后去父类中查找。也即，倘若在分类中重写了原类中的方法，会覆盖掉原来的方法，导致原来的方法无法使用。（不建议重写原来类中的方法）<br>重写会出现警告：Category is implementing a method which will also be implemented by its primary class.</p>
+<p>3，如果多个分类中有相同（方法签名相同，但不一样）的方法，则调用的是最后编译的方法。</p>
+<a id="more"></a> 
+<h2 id="类的私有方法"><a href="#类的私有方法" class="headerlink" title="类的私有方法"></a>类的私有方法</h2><ul>
+<li>方式1，直接在.m文件中写方法实现，不要在.h文件中进行方法声明</li>
+<li>方式2，在.m文件中定义一个category，然后在category中声明一些方法，最后在@implementation和@end之间作方法实现。</li>
+</ul>
+<h1 id="类的本质"><a href="#类的本质" class="headerlink" title="类的本质"></a>类的本质</h1><p>类也是一个对象，是Class类型的对象，简称类对象，类对象就是类。<br>class类型的定义:<code>typedef struct objc_class *Class;</code><br>类名代表着类对象，每个类只有一个类对象。</p>
+<h2 id="load"><a href="#load" class="headerlink" title="+load"></a>+load</h2><p>在程序启动的时候，就会加载所有的类和分类，并调用一次所有类和分类的+load方法；</p>
+<ul>
+<li>先加载父类，再加载子类，也即先调用父类的+load方法，再调用子类的+load方法;</li>
+<li>先加载原始类，再加载分类（顺序也即父类——父类的分类——子类）。</li>
+<li>不管程序运行过程中有没有用到这个类，都会调用+load加载。</li>
+</ul>
+<h2 id="initialize"><a href="#initialize" class="headerlink" title="+initialize"></a>+initialize</h2><p>在第一次使用某个类时（比如创建对象），就会调用一次+initialize方法<br>一个类只会调用一次+initialize方法，先调用父类的，再调用子类的<br>获取类对象的两种方式</p>
+<pre><code>Class c = [Person class];//类方法
+</code></pre><p>或者</p>
+<pre><code>Person *p = [Person new];
+Class c = [p class];//对象方法
+</code></pre><p>很明显，[p class]和[Person class]方法返回的都是是class类型<br>类对象调用类方法：</p>
+<pre><code>Class c=[Person class];
+  Person *p2=[c new];
+</code></pre><h2 id="description方法"><a href="#description方法" class="headerlink" title="description方法"></a>description方法</h2><p>类似其他语言的ToString方法，NSObject自带的方法。返回值类型是<code>NSString ＊</code><br>默认情况下，使用NSLog和%@打印一个对象，输出的是&lt;类名:内存地址&gt;<br>如：<code>&lt;Person: 0x1002070a0&gt;</code><br>而NSLog(@”%@”,p)会调用-description方法</p>
+<h3 id="description方法-1"><a href="#description方法-1" class="headerlink" title="-description方法"></a>-description方法</h3><p>使用NSLog和%@输出某个对象时，会调用对象的-description方法</p>
+<h3 id="description方法-2"><a href="#description方法-2" class="headerlink" title="+description方法"></a>+description方法</h3><p>使用NSLog和%@输出某个类对象时，会调用类对象的+description方法</p>
+<p>可以重写+description和-description方法修改NSLog的默认输出<br>注意：如果在-description方法中使用NSLog打印self，会造成死循环。</p>
+<pre><code>// 重写-description方法
+-(NSString *)description
 {
-
-    // 获取成员变量的两种方式
-
-    // 下划线方式  self方式
-
-   // _t1;
-
-   NSString *st1= self.t1.text;
-
-    NSString *st2=self.t2.text;
-
-    int n1=[st1 intValue];
-
-    int n2=[st2 intValue];
-
-    int  r=n1+n2;
-
-    self.l.text=[NSString stringWithFormat:@"%d",r];    
-
-}</pre>
-
-<p>连线的两种方式：</p>
-<p><span class="s5">1</span>，<span class="s5">.h</span>文件与<span class="s5">ib</span>控件连线</p>
-<p><span class="s5">2</span>，<span class="s5">il</span>中，<span class="s5">viewcontrol</span>与<span class="s5">ib</span>控件相连，将选择控件的事件，直接与<span class="s5">View<span class="Apple-converted-space">  </span>Controler</span>相连，便可以快速看到具备连接能力的属性或方法。<a id="more"></a> </p>
-<p><strong>程序启动过程：</strong></p>
-<p>1<span class="s6">，加载最主要的</span>storyboard<span class="s6">文件</span></p>
-<p><span class="s5">2</span>，创建白色箭头所指的控制器对象</p>
-<p><span class="s5">3</span>，创建控制器内部的<span class="s5">view</span>，显示到用户眼前</p>
-<p>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理的</span>UIView<span class="s1">对象：</span></p>
-<p>UIView *_view;</p>
-<p>@property (monatomic,retain)<span class="Apple-converted-space">  </span>UIView *view;</p>
-<h4 id="UIView的常见属性"><a href="#UIView的常见属性" class="headerlink" title="UIView的常见属性"></a><strong>UIView<span class="s7">的常见属性</span></strong></h4><pre class="lang:default decode:true">@property(nullable, nonatomic,readonly) UIView  *superview;获得自己的父控件对象
-
-@property(nonatomic,readonly,copy) NSArray&lt;__kindof UIView *&gt; *subviews;获得自己所有的子控件对象（新添加的子控件会在subviews数组的最后面）
-
- NSLog(@"%ld个子控件",self.view.subviews.count);
-
-@property(nonatomic)  NSInteger tag;  控件的ID标识，父控件可以通过tag找到对应的子控件，默认为0，尽量保持唯一
-
-@property(nonatomic) CGRect  frame; 描述控件的位置和尺寸，以父控件左上角位置为原点（0，0）
-
-@property(nonatomic) CGRect  bounds; 
-与frame的不同是，以控件本身的左上角位置为原点（0，0），因此，默认point为（0，0），只有bounds是以自己左上角为原点，其他都是父控件左上角
-
-@property(nonatomic) CGPoint center; 表示控件中心点的坐标（以父控件左上角为（0，0））
-
-@property(nonatomic) CGAffineTransform transform; 控件的形变属性（可以设置旋转角度、比例缩放、平移等属性）
-
-struct CGAffineTransform {
-
- CGFloat a, b, c, d;
-CGFloat tx, ty;
-
-};</pre>
-
-<p><strong>UIButton<span class="Apple-converted-space">  </span><span class="s4">状态</span></strong></p>
-<p>normal <span class="s4">普通（默认）</span></p>
-<p>highlight <span class="s4">高亮状态</span><span class="Apple-converted-space">  </span><span class="s4">按下去的时候</span></p>
-<p>常见错误：</p>
-<p>1<span class="s4">，</span><strong>setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key shuixng.’</strong></p>
-<p>删除了已经连接的属性，却没有取消控件中的属性连接线</p>
-<p>2<span class="s4">，</span><strong>unrecognized selector sent to instance 0x78633f00</strong></p>
-<p>未识别的方法：删除了已经连接的方法，但是没有取消控件中的方法连接线</p>
-<p><span class="s3">OC</span>语法中，不允许直接修改<strong><span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象</strong><span class="s3"><span class="Apple-converted-space"><strong> </strong>   </span></span>中结构体属性的成员</p>
-<p><span class="s4">报错：</span>Expression is not<span class="Apple-converted-space">  </span>assignable</p>
-<p>解决：</p>
-<p><span class="s3">OC</span>语法中，不允许直接<span class="Apple-converted-space">  </span>修改<span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象<span class="s3"><span class="Apple-converted-space">    </span></span>中结构体属性的成员。意味着可以直接赋值，可以直接修改成员变量的结构体属性成员</p>
-<pre class="lang:default decode:true">   // 取出按钮控件的属性
-
-    CGRect frame=_btn.frame;
-
-    //设置局部变量frame的值
-
-    frame.origin.x-=10;
-
-    // 重新赋值
-
-    _btn.frame=frame;
-
-</pre>
-<pre class="lang:default decode:true ">设置动画：
-
-- (IBAction)up:(id)sender {
-
-    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
-
-    [UIView beginAnimations:nil context:nil];
-
-    // 设置动画持续时间，默认0.2秒
-
-    [UIView setAnimationDuration:2.0];</pre>
-
-<p><span class="Apple-converted-space">    </span></p>
-<p><span class="Apple-converted-space"> </span>方法二：修改中点实现位置移动</p>
-<pre class="lang:default decode:true ">    CGPoint center=_btn.center;
-
-    switch ([sender tag]) {
-
-        case 1:center.y-=krun;break;
-
-        case 2:center.x+=krun;break;
-
-        case 3:center.y+=krun;break;
-
-        case 4:center.x-=krun;break;
-
-        default: break;
-
-    }
-
-    _btn.center=center;</pre>
-
-<p><span class="Apple-converted-space"> </span></p>
-<p><strong>代码重构：</strong></p>
-<pre class="lang:default decode:true">- (IBAction)run:(id)sender {
-
-    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
-
-    [UIView beginAnimations:nil context:nil];
-
-    // 设置动画持续时间，默认0.2秒
-
-    [UIView setAnimationDuration:1.0];
-
-    // OC语法中，不允许直接修改   某个对象    中结构体属性的成员
-
-    // 取出按钮控件的属性
-
-    CGRect frame=_btn.frame;
-
-    // id类型不允许点语法
-
-    switch ([sender tag]) {
-
-        case 1:frame.origin.y-=krun;break;
-
-        case 2:frame.origin.x+=krun;break;
-
-        case 3:frame.origin.y+=krun;break;
-
-        case 4:frame.origin.x-=krun;break;
-
-        default: break;
-
-    }
-
-    // 重新赋值
-
-    _btn.frame=frame;
-
-    // 动画结尾，提交动画
-
-    [UIView commitAnimations];
-
+  return [NSString stringWithFormat:@”%@”, self];    
 }
-
-左旋转动画：
-
-#pragma mark 左旋转
-
-/*
-
-* -  逆时针方向  + 顺时针方向
-
-* 持续旋转方法CGAffineTransformRotate
-
-* 一次设值CGAffineTransformMakeRotation
-
-* M_PI_4是数学宏定义 45°，也即1/4PI弧度
-
-*/
-
-- (IBAction)leftRotate:(id)sender {
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0];
-
-    _btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);
-
-       [UIView commitAnimations];
-
-}
-
-放大动画：
-
-/*
-
-* 放大要求倍数大于1，缩小要求倍数小于1
-
-* 持续放大CGAffineTransformScale
-
-* 一次设值CGAffineTransformMakeScale
-
-*/
-
-- (IBAction)big:(id)sender {
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0];
-
-    _btn.transform=CGAffineTransformScale(_btn.transform, 1.5, 1.5);
-
-    [UIView commitAnimations];
-
-}
-
-代码重构：
-
-#pragma mark 左右旋转放大缩小
-
-- (IBAction)transfer:(id)sender {
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0];
-
-    switch ([sender tag])
-
-    {
-
-        case 1:_btn.transform= CGAffineTransformScale(_btn.transform, 1.5, 1.5);break;
-
-        case 2:_btn.transform= CGAffineTransformScale(_btn.transform, 0.5, 0.5);break;
-
-        case 3 :_btn.transform=CGAffineTransformRotate(_btn.transform, +M_PI_4);break;
-
-        case 4 :_btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);break;
-
-        default:  break;
-
-    }
-
-    [UIView commitAnimations];
-
-}
-
-transform重置
-
-#pragma mark 重置transform
-
-- (IBAction)reset:(id)sender {
-
-    // 将清空对其所作的变换，恢复原始形变属性，位置不能恢复
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0  ];
-
-    _btn.transform=CGAffineTransformIdentity;
-
-    [UIView commitAnimations];
-
-}</pre>
-
-<h3 id="使用Block重构代码"><a href="#使用Block重构代码" class="headerlink" title="使用Block重构代码"></a><strong>使用Block<span class="s4">重构代码</span></strong></h3><pre class="lang:default decode:true ">#pragma 代码重构用block调用
-
--(void)btnClick:(id)sender andBlock: (void (^) ()  )blockArgument
-
+</code></pre><p>编译无警告，无报错，运行出错。<br>真正重写：<br>假设属性为</p>
+<pre><code>// 重写-description方法
+-(NSString *)description
 {
-
-    // 开始动画
-
-    [UIView beginAnimations:nil context:nil];
-
-    // 设置动画持续时间
-
-    [UIView setAnimationDuration:1.0];
-
-    blockArgument();
-
-    // 结束动画
-
-    [UIView commitAnimations];
-
+  return [NSString stringWithFormat:@”姓名：%@ 年龄：%d”, _name,_age];
 }
+</code></pre><h1 id="SEL"><a href="#SEL" class="headerlink" title="SEL"></a>SEL</h1><p>每个类的方法列表都存储在类对象中,每个方法都有一个与之对应的SEL类型的对象<br>根据一个SEL对象就可以找到方法的地址，进而调用方法<br>SEL类型定义</p>
+<pre><code>typedef struct objc_selector *SEL;
+</code></pre><p>SEL对象的创建：</p>
+<pre><code>SEL s=@selector(test);
+SEL s2=NSSelectorFromString(@”test”);
+</code></pre><p>将SEL对象转换为NSString对象</p>
+<pre><code>NSString *s3=NSStringFromSelector(s);
+</code></pre><p>调用对象p的show方法：</p>
+<pre><code>// 创建p对象
+Person *p=[[Person alloc] init];
+// 将show方法封装为SEL类型数据的s
+SEL s=@selector(show);
+// 调用s间接调用show方法
+  [p performSelector:s];
+</code></pre><h2 id="p-test-原理解释"><a href="#p-test-原理解释" class="headerlink" title="[p test]原理解释"></a>[p test]原理解释</h2><ol>
+<li>把test包装成SEL类型的数据</li>
+<li>根据SEL数据找到对应的方法地址</li>
+<li>根据方法地址调用相应的方法<br>消息就是SEL。</li>
+</ol>
+<h1 id="NSLog方法总结"><a href="#NSLog方法总结" class="headerlink" title="NSLog方法总结"></a>NSLog方法总结</h1><ol>
+<li><p>打印对象的内存地址</p>
+<pre><code>NSLog(@”%p”,p);
+</code></pre></li>
+<li><p>打印指针的内存地址（&amp;p取出地址）</p>
+<pre><code>NSLog(@”%p”,&amp;p);
+</code></pre></li>
+<li><p>打印某一对象（默认返回类名+内存地址，可以通过重写-description方法改变输出内容）</p>
+<pre><code>NSLog(@”%@”,p);
+</code></pre></li>
+<li><p>打印代码行号</p>
+<pre><code>NSLog(@”%d”,__LINE__);
+</code></pre></li>
+<li><p>打印文件路径</p>
+<pre><code>NSLog(@”%d”,__FILE__);
+</code></pre><p>注意：如果文件路径中存在中文，则无法输出<br>这时可以使用：</p>
+<pre><code>printf(“%s\n”__FILE__);输出包含中文字符的路径（\n只是为了观看清晰）
+</code></pre></li>
+<li><p>打印当前函数名称</p>
+<pre><code>NSLog(@”%s”,__func__);
+</code></pre><h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1></li>
+</ol>
+<p>一系列方法的列表（不能增加成员变量）。其中声明的方法可以被任何类实现，这种模式一般称作代理（delegation）。<br>如果一些类之间没有继承的关系，但是有某些相同的行为，这时要考虑使用代理。<br>代理的定义：<br>当一代理只针对某个类中，代理最好放在一个类的.h文件中，使用时引入即可。（假定在Person.h文件中）</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+@interface Person : NSObject
+@end
 
-#pragma 左右旋转功能的实现
+// 要在@interface之外设置代理
+@protocol MyProtocol &lt;NSObject&gt;
+// 必须实现的方法
+@required
+-(void)show;
+-(void)myShow;
+// 可选实现的方法
+@optional
++(void)herShow;
+@end
+</code></pre><p>在Dog.h文件中遵守协议：</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+// 声明协议@protocol  MyProtocol;
+@protocol  MyProtocol;
 
-- (IBAction)leftOrRightRotate:(UIButton *)sender
-
+@interface Dog : NSObject&lt;MyProtocol&gt;
+// 遵守某个协议
+// 注意导入协议文件#import &quot;Person.h&quot;或者声明协议@protocol  MyProtocol;
+-(void)show;
+-(void)myShow;
+@end
+</code></pre><p>当某一代理用在多个类中，协议需要放在单独创建的.h文件中<br>此时创建的只有一个名为BigProtocol的.h文件。</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt; 
+@protocol BigProtocol &lt;NSObject&gt;
+@required
+-(void)bigShow;
+@optional
+-(void)bigShow2;
+@end
+</code></pre><p>在Cat.h文件中遵守协议</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+//@protocol BigProtocol;
+#import &quot;BigProtocol.h&quot;
+ @interface Cat : NSObject&lt;BigProtocol&gt;
+-(void)bigShow;
+@end
+</code></pre><p>在Dog.h文件中遵守协议</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+//@protocol BigProtocol;
+#import &quot;BigProtocol.h&quot;
+@interface _Dog : NSObject&lt;BigProtocol&gt;
+-(void)bigShow;
+-(void)bigShow2;
+@end
+</code></pre><h2 id="注意点-1"><a href="#注意点-1" class="headerlink" title="注意点"></a>注意点</h2><ol>
+<li><p>在遵守协议时，如果使用@protocol BigProtocol;编译器会警告：无法找到协议的定义<br>而使用<code>#import “BigProtocol.h“</code>，则完全没有问题。</p>
+</li>
+<li><p>如果某个类遵守多个协议，协议之间用逗号分隔：</p>
+<pre><code>@interface Cat : NSObject&lt;BigProtocol,MyProtocol&gt;
+</code></pre></li>
+<li><p>一个协议本身可以遵守其他协议，如遵守名字叫NSObject的协议（默认是这种情况，基协议NSObject）<br>如果A协议遵守B协议，这时A协议就能拥有B协议的所有方法声明。</p>
+<pre><code>@protocol BigProtocol &lt;NSObject&gt;
+@end
+</code></pre></li>
+</ol>
+<p>BigProtocol拥有NSObject协议的所有方法声明。</p>
+<ol>
+<li><p>约定框架中后缀为Delegate的都是协议。（协议类似其他语言的接口，就像C#中默认以I开头的都是接口 ）</p>
+</li>
+<li><p>要求某个对象必须遵守某个协议（如要求obj保存的对象遵守协议MyProtocol，并且继承Person）</p>
+<pre><code>Person&lt;MyProtocol&gt; *obj=[[Person alloc] init];
+</code></pre></li>
+<li><p>利用conformsToProtocol:判断某个类是否实现了某个协议</p>
+<pre><code>Cat *c=[[Cat alloc] init ];
+bool result=  [c conformsToProtocol:@protocol(BigProtocol)];
+NSLog(@&quot;%@&quot;,result?@&quot;YES&quot;:@&quot;NO&quot;);
+[c conformsToProtocol:@protocol(BigProtocol)];返回的是bool类型。
+</code></pre></li>
+</ol>
+<h1 id="block"><a href="#block" class="headerlink" title="block"></a>block</h1><p>块。<br>有返回值（void也可以）、有形参。block封装了一段代码，可以在任何时候执行。block可以作为函数参数或者函数返回值，而其本身又可以带输入参数和返回值。<br>在多线程，异步任务，集合遍历，集合排序，动画专场使用较多。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><pre><code>返回值类型  (^+block名称)(参数类型列表)=^(参数列表){   代码内容  };
+</code></pre><ol>
+<li><p>注意大括号后面有分号</p>
+</li>
+<li><p>对比函数</p>
+<pre><code>int (^MySum)(int ,int )=^(int a,int b){ return a+b;};
+int     MySum (int a,int b){return a+b;}
+</code></pre></li>
+<li><p>block可以访问局部变量，但不能更改局部变量。<br>如果更改则报错：Variable is not assignable (missing__block type specifier)，如：</p>
+<pre><code>int c=10;
+// Block的定义
+int (^MySum)(int ,int )=^(int a,int b)
 {
+  c=21;
+  return a+b+c;
+};
+NSLog(@&quot;%i&quot;,MySum(10,20));
+</code></pre></li>
+</ol>
+<p>如果硬是要修改：在局部变量前面加上<code>__block</code> ，如   <code>__block int c=21;</code>这时，便可以在block中修改局部变量了。</p>
+<pre><code>__block  int c=10;
+        // Block的定义
+        int (^MySum)(int ,int )=^(int a,int b)
+        {
+             c=21;
+            return a+b+c;
+        };
+        NSLog(@&quot;%i&quot;,MySum(10,20));
+</code></pre><p>4 . block的调用，和函数一样，使用名称即可：<code>MySum(_形参列表);</code></p>
+<p>5 . 如果block没有形参，则可以省略等号后面的()<br>如：  </p>
+<pre><code>int (^SomeSum)()=^{return 25;};
+</code></pre><p>但是等号前面的两对括号不可省略。</p>
+<p>6 . 利用typedef声明类型</p>
+<pre><code>格式：typedef  返回值类型 (^block块名称)(参数_类型列表)
+例如：typedef int (^MyBlock)(int,int);
 
-    [self btnClick:sender andBlock:^
-
-    {
-
-        CGFloat r=sender.tag==6?M_PI_4:-M_PI_4;
-
-        _photo.transform=CGAffineTransformRotate(_photo.transform, r);
-
-    }
-
-     ] ;
-
-}</pre>
-
-<p><span class="s4">定义参数：要传入的</span>block<span class="s4">名称</span>block <span class="Apple-converted-space">  </span>(void)(^)()blockName</p>
-<p><span class="s3"><span class="Apple-converted-space">  </span></span>传入参数：直接封装好的代码块<span class="s3"> ^{}</span></p>
-<p><span class="s4">获取某方法的</span>sel<span class="s4">：</span>@selector(<span class="s4">方法名</span>)</p>
-<h3 id="通过代码设置控件"><a href="#通过代码设置控件" class="headerlink" title="通过代码设置控件"></a><strong>通过代码设置控件</strong></h3><p><span class="s4">在</span>viewDidLoad <span class="s4">方法中通过代码设置控件</span></p>
-<p>代码创建按钮：</p>
-<pre class="lang:default decode:true ">- (void)viewDidLoad {
-
-    [super viewDidLoad];
-
-    // Do any additional setup after loading the view, typically from a nib.
-
-    // 创建按钮
-
-    UIButton *btn=[[UIButton alloc]init ];
-
-    btn.frame=CGRectMake(20, 50, 100, 200);
-
-    // 普通状态下的按钮
-
-    [btn setBackgroundImage:[UIImage imageNamed:@"btn_01.png"] forState:UIControlStateNormal];
-
-    [btn setTitle:@"normal" forState:UIControlStateNormal];
-
-    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-
-    // 高亮状态下的按钮
-
-    [btn setBackgroundImage:[UIImage imageNamed:@"btn_02.png"] forState:UIControlStateHighlighted];
-
-    [btn setTitle:@"normal" forState:UIControlStateHighlighted];
-
-    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateHighlighted];
-
-    // 点击事件
-
-    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-
-    // 添加按钮控件到view中
-
-    [self.view addSubview:btn];
-
-}
-
--(void)btnClick
-
-{
-
-    NSLog(@"按钮已被点击");
-
-}
-
-代码创建文本框：
-
-// 创建文本框并设置相关属性
-
-    UITextField *field=[[UITextField alloc]init];
-
-    CGFloat centerX=self.view.frame.size.width*0.5;
-
-    CGFloat centerY=self.view.frame.size.height*0.5;
-
-    field.frame=CGRectMake(centerX, centerY, 100, 50);
-
-    field.font=[UIFont systemFontOfSize:20];
-
-    field.backgroundColor=[UIColor purpleColor];
-
-    // 将文本框添加到view中
-
-    [self.view addSubview:field];</pre>
+以后就可以用MyBlock这种类型定义Block变量
+  MyBlock m=^(int a,int b){return a+b;};
+        int c=m(15,25);
+        NSLog(@”%i”,c);
+</code></pre>
       
     </div>
 
@@ -747,7 +584,7 @@ transform重置
       
         <div class="post-tags">
           
-            <a href="/tags/iOS开发/" rel="tag">#iOS开发</a>
+            <a href="/tags/Objective-C/" rel="tag">#Objective-C</a>
           
         </div>
       
@@ -788,8 +625,8 @@ transform重置
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/07/28/iOS学习笔记一：UIView与UIButton/"
-           data-title="iOS学习笔记一：UIView与UIButton" data-url="http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/">
+      <div class="ds-thread" data-thread-key="2016/08/16/Objective-C学习笔记四：分类/"
+           data-title="Objective-C学习笔记四：分类与代理" data-url="http://yoursite.com/2016/08/16/Objective-C学习笔记四：分类/">
       </div>
     
   </div>
@@ -851,7 +688,7 @@ transform重置
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -925,7 +762,7 @@ transform重置
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView"><span class="nav-number">1.</span> <span class="nav-text">UIView</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UIView的常见属性"><span class="nav-number">1.0.1.</span> <span class="nav-text">UIView的常见属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Block重构代码"><span class="nav-number">1.1.</span> <span class="nav-text">使用Block重构代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过代码设置控件"><span class="nav-number">1.2.</span> <span class="nav-text">通过代码设置控件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分类"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意点"><span class="nav-number">1.1.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的私有方法"><span class="nav-number">1.2.</span> <span class="nav-text">类的私有方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的本质"><span class="nav-number">2.</span> <span class="nav-text">类的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#load"><span class="nav-number">2.1.</span> <span class="nav-text">+load</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#initialize"><span class="nav-number">2.2.</span> <span class="nav-text">+initialize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#description方法"><span class="nav-number">2.3.</span> <span class="nav-text">description方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#description方法-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">-description方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#description方法-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">+description方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SEL"><span class="nav-number">3.</span> <span class="nav-text">SEL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#p-test-原理解释"><span class="nav-number">3.1.</span> <span class="nav-text">[p test]原理解释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSLog方法总结"><span class="nav-number">4.</span> <span class="nav-text">NSLog方法总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代理"><span class="nav-number">5.</span> <span class="nav-text">代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意点-1"><span class="nav-number">5.1.</span> <span class="nav-text">注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#block"><span class="nav-number">6.</span> <span class="nav-text">block</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">6.1.</span> <span class="nav-text">定义</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-21T12:39:14.000Z</updated>
+  <updated>2016-10-16T10:38:46.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,438 +16,240 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>iOS学习笔记一：UIView与UIButton</title>
-    <link href="http://yoursite.com/2016/07/28/iOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AUIView%E4%B8%8EUIButton/"/>
-    <id>http://yoursite.com/2016/07/28/iOS学习笔记一：UIView与UIButton/</id>
-    <published>2016-07-27T21:00:38.000Z</published>
-    <updated>2016-08-21T12:39:14.000Z</updated>
+    <title>Objective-C学习笔记四：分类与代理</title>
+    <link href="http://yoursite.com/2016/08/16/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E5%88%86%E7%B1%BB/"/>
+    <id>http://yoursite.com/2016/08/16/Objective-C学习笔记四：分类/</id>
+    <published>2016-08-16T09:50:17.000Z</published>
+    <updated>2016-10-16T10:38:46.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="UIView"><a href="#UIView" class="headerlink" title="UIView"></a>UIView</h2><p>UIView:<span class="s1">看到的控件</span></p>
-<p>UIViewController<span class="s1">：管理控制界面。</span></p>
-<p><span class="s1">一般情况下，每一个</span>“<span class="s1">满屏</span>”<span class="s1">的</span>UIView<span class="s1">都交给对应的</span>UIViewController<span class="s1">管理，</span>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理</span>UIView<span class="s1">对象。负责创建、销毁自己的</span>UIView<span class="s1">，显示隐藏</span>UIView<span class="s1">，处理</span>UIView<span class="s1">和用户之间的交互（事件处理）。</span>UIViewController<span class="s1">是</span>UIView<span class="s1">的大管家</span></p>
-<p><span class="s1">创建一个</span>UIViewController<span class="s1">，再由</span>UIViewController<span class="s1">创建自己的</span>UIview<span class="s1">，最后把</span>UIView<span class="s1">显示到用户眼前。并且由</span>UIViewcontroller<span class="s1">处理</span>UIView<span class="s1">的事件。</span></p>
-<p><span class="s1">使方法可被连接：</span>IBAction<span class="s1">相当于</span>void</p>
-<p>使属性可被连接：<span class="s2">IBOutlet</span>，能够使属性显示到<span class="s2">storyboard</span>的右击列表中</p>
-<p><span class="s3">//<span class="Apple-converted-space">  </span></span>声明两个属性保存文本框</p>
-<p>@property<span class="Apple-converted-space">  </span>(nonatomic,weak) IBOutlet UITextField *t1;</p>
-<p>注意命名</p>
-<pre class="lang:default decode:true ">-(IBAction)btnClick
-
+    <content type="html"><![CDATA[<blockquote>
+<p>2016.10.16更正部分错别字</p>
+</blockquote>
+<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）<br>当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。<br>声明文件的命名方式 【类+分类.h】</p>
+<pre><code>@interface 类名 (分类名)
+@end
+</code></pre><p>实现文件的命名方式 【类+分类.m】</p>
+<pre><code>@implementation 类名 (分类名)
+@end
+</code></pre><p>特征：用括号括住添加的分类<br>好处：一个庞大的类可以分模块开发、由多个人编写，有利于团队合作。</p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1，分类可以访问原来类中的成员变量，但不能增加成员变量。（若要增加成员变量，可以使用继承）</p>
+<p>2，分类的优先级最高，当调用类中的一个方法时，优先去分类中查找，再去原类中查找，最后去父类中查找。也即，倘若在分类中重写了原类中的方法，会覆盖掉原来的方法，导致原来的方法无法使用。（不建议重写原来类中的方法）<br>重写会出现警告：Category is implementing a method which will also be implemented by its primary class.</p>
+<p>3，如果多个分类中有相同（方法签名相同，但不一样）的方法，则调用的是最后编译的方法。</p>
+<a id="more"></a> 
+<h2 id="类的私有方法"><a href="#类的私有方法" class="headerlink" title="类的私有方法"></a>类的私有方法</h2><ul>
+<li>方式1，直接在.m文件中写方法实现，不要在.h文件中进行方法声明</li>
+<li>方式2，在.m文件中定义一个category，然后在category中声明一些方法，最后在@implementation和@end之间作方法实现。</li>
+</ul>
+<h1 id="类的本质"><a href="#类的本质" class="headerlink" title="类的本质"></a>类的本质</h1><p>类也是一个对象，是Class类型的对象，简称类对象，类对象就是类。<br>class类型的定义:<code>typedef struct objc_class *Class;</code><br>类名代表着类对象，每个类只有一个类对象。</p>
+<h2 id="load"><a href="#load" class="headerlink" title="+load"></a>+load</h2><p>在程序启动的时候，就会加载所有的类和分类，并调用一次所有类和分类的+load方法；</p>
+<ul>
+<li>先加载父类，再加载子类，也即先调用父类的+load方法，再调用子类的+load方法;</li>
+<li>先加载原始类，再加载分类（顺序也即父类——父类的分类——子类）。</li>
+<li>不管程序运行过程中有没有用到这个类，都会调用+load加载。</li>
+</ul>
+<h2 id="initialize"><a href="#initialize" class="headerlink" title="+initialize"></a>+initialize</h2><p>在第一次使用某个类时（比如创建对象），就会调用一次+initialize方法<br>一个类只会调用一次+initialize方法，先调用父类的，再调用子类的<br>获取类对象的两种方式</p>
+<pre><code>Class c = [Person class];//类方法
+</code></pre><p>或者</p>
+<pre><code>Person *p = [Person new];
+Class c = [p class];//对象方法
+</code></pre><p>很明显，[p class]和[Person class]方法返回的都是是class类型<br>类对象调用类方法：</p>
+<pre><code>Class c=[Person class];
+  Person *p2=[c new];
+</code></pre><h2 id="description方法"><a href="#description方法" class="headerlink" title="description方法"></a>description方法</h2><p>类似其他语言的ToString方法，NSObject自带的方法。返回值类型是<code>NSString ＊</code><br>默认情况下，使用NSLog和%@打印一个对象，输出的是&lt;类名:内存地址&gt;<br>如：<code>&lt;Person: 0x1002070a0&gt;</code><br>而NSLog(@”%@”,p)会调用-description方法</p>
+<h3 id="description方法-1"><a href="#description方法-1" class="headerlink" title="-description方法"></a>-description方法</h3><p>使用NSLog和%@输出某个对象时，会调用对象的-description方法</p>
+<h3 id="description方法-2"><a href="#description方法-2" class="headerlink" title="+description方法"></a>+description方法</h3><p>使用NSLog和%@输出某个类对象时，会调用类对象的+description方法</p>
+<p>可以重写+description和-description方法修改NSLog的默认输出<br>注意：如果在-description方法中使用NSLog打印self，会造成死循环。</p>
+<pre><code>// 重写-description方法
+-(NSString *)description
 {
-
-    // 获取成员变量的两种方式
-
-    // 下划线方式  self方式
-
-   // _t1;
-
-   NSString *st1= self.t1.text;
-
-    NSString *st2=self.t2.text;
-
-    int n1=[st1 intValue];
-
-    int n2=[st2 intValue];
-
-    int  r=n1+n2;
-
-    self.l.text=[NSString stringWithFormat:@"%d",r];    
-
-}</pre>
-
-<p>连线的两种方式：</p>
-<p><span class="s5">1</span>，<span class="s5">.h</span>文件与<span class="s5">ib</span>控件连线</p>
-<p><span class="s5">2</span>，<span class="s5">il</span>中，<span class="s5">viewcontrol</span>与<span class="s5">ib</span>控件相连，将选择控件的事件，直接与<span class="s5">View<span class="Apple-converted-space">  </span>Controler</span>相连，便可以快速看到具备连接能力的属性或方法。<a id="more"></a> </p>
-<p><strong>程序启动过程：</strong></p>
-<p>1<span class="s6">，加载最主要的</span>storyboard<span class="s6">文件</span></p>
-<p><span class="s5">2</span>，创建白色箭头所指的控制器对象</p>
-<p><span class="s5">3</span>，创建控制器内部的<span class="s5">view</span>，显示到用户眼前</p>
-<p>UIViewController<span class="s1">内部有个</span>UIView<span class="s1">属性，就是它负责管理的</span>UIView<span class="s1">对象：</span></p>
-<p>UIView *_view;</p>
-<p>@property (monatomic,retain)<span class="Apple-converted-space">  </span>UIView *view;</p>
-<h4 id="UIView的常见属性"><a href="#UIView的常见属性" class="headerlink" title="UIView的常见属性"></a><strong>UIView<span class="s7">的常见属性</span></strong></h4><pre class="lang:default decode:true">@property(nullable, nonatomic,readonly) UIView  *superview;获得自己的父控件对象
-
-@property(nonatomic,readonly,copy) NSArray&lt;__kindof UIView *&gt; *subviews;获得自己所有的子控件对象（新添加的子控件会在subviews数组的最后面）
-
- NSLog(@"%ld个子控件",self.view.subviews.count);
-
-@property(nonatomic)  NSInteger tag;  控件的ID标识，父控件可以通过tag找到对应的子控件，默认为0，尽量保持唯一
-
-@property(nonatomic) CGRect  frame; 描述控件的位置和尺寸，以父控件左上角位置为原点（0，0）
-
-@property(nonatomic) CGRect  bounds; 
-与frame的不同是，以控件本身的左上角位置为原点（0，0），因此，默认point为（0，0），只有bounds是以自己左上角为原点，其他都是父控件左上角
-
-@property(nonatomic) CGPoint center; 表示控件中心点的坐标（以父控件左上角为（0，0））
-
-@property(nonatomic) CGAffineTransform transform; 控件的形变属性（可以设置旋转角度、比例缩放、平移等属性）
-
-struct CGAffineTransform {
-
- CGFloat a, b, c, d;
-CGFloat tx, ty;
-
-};</pre>
-
-<p><strong>UIButton<span class="Apple-converted-space">  </span><span class="s4">状态</span></strong></p>
-<p>normal <span class="s4">普通（默认）</span></p>
-<p>highlight <span class="s4">高亮状态</span><span class="Apple-converted-space">  </span><span class="s4">按下去的时候</span></p>
-<p>常见错误：</p>
-<p>1<span class="s4">，</span><strong>setValue:forUndefinedKey:]: this class is not key value coding-compliant for the key shuixng.’</strong></p>
-<p>删除了已经连接的属性，却没有取消控件中的属性连接线</p>
-<p>2<span class="s4">，</span><strong>unrecognized selector sent to instance 0x78633f00</strong></p>
-<p>未识别的方法：删除了已经连接的方法，但是没有取消控件中的方法连接线</p>
-<p><span class="s3">OC</span>语法中，不允许直接修改<strong><span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象</strong><span class="s3"><span class="Apple-converted-space"><strong> </strong>   </span></span>中结构体属性的成员</p>
-<p><span class="s4">报错：</span>Expression is not<span class="Apple-converted-space">  </span>assignable</p>
-<p>解决：</p>
-<p><span class="s3">OC</span>语法中，不允许直接<span class="Apple-converted-space">  </span>修改<span class="s3"> <span class="Apple-converted-space">  </span></span>某个对象<span class="s3"><span class="Apple-converted-space">    </span></span>中结构体属性的成员。意味着可以直接赋值，可以直接修改成员变量的结构体属性成员</p>
-<pre class="lang:default decode:true">   // 取出按钮控件的属性
-
-    CGRect frame=_btn.frame;
-
-    //设置局部变量frame的值
-
-    frame.origin.x-=10;
-
-    // 重新赋值
-
-    _btn.frame=frame;
-
-</pre>
-<pre class="lang:default decode:true ">设置动画：
-
-- (IBAction)up:(id)sender {
-
-    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
-
-    [UIView beginAnimations:nil context:nil];
-
-    // 设置动画持续时间，默认0.2秒
-
-    [UIView setAnimationDuration:2.0];</pre>
-
-<p><span class="Apple-converted-space">    </span></p>
-<p><span class="Apple-converted-space"> </span>方法二：修改中点实现位置移动</p>
-<pre class="lang:default decode:true ">    CGPoint center=_btn.center;
-
-    switch ([sender tag]) {
-
-        case 1:center.y-=krun;break;
-
-        case 2:center.x+=krun;break;
-
-        case 3:center.y+=krun;break;
-
-        case 4:center.x-=krun;break;
-
-        default: break;
-
-    }
-
-    _btn.center=center;</pre>
-
-<p><span class="Apple-converted-space"> </span></p>
-<p><strong>代码重构：</strong></p>
-<pre class="lang:default decode:true">- (IBAction)run:(id)sender {
-
-    // 设置动画：动画开头，参数一般为空。把需要的内容放在开头结尾中间
-
-    [UIView beginAnimations:nil context:nil];
-
-    // 设置动画持续时间，默认0.2秒
-
-    [UIView setAnimationDuration:1.0];
-
-    // OC语法中，不允许直接修改   某个对象    中结构体属性的成员
-
-    // 取出按钮控件的属性
-
-    CGRect frame=_btn.frame;
-
-    // id类型不允许点语法
-
-    switch ([sender tag]) {
-
-        case 1:frame.origin.y-=krun;break;
-
-        case 2:frame.origin.x+=krun;break;
-
-        case 3:frame.origin.y+=krun;break;
-
-        case 4:frame.origin.x-=krun;break;
-
-        default: break;
-
-    }
-
-    // 重新赋值
-
-    _btn.frame=frame;
-
-    // 动画结尾，提交动画
-
-    [UIView commitAnimations];
-
+  return [NSString stringWithFormat:@”%@”, self];    
 }
-
-左旋转动画：
-
-#pragma mark 左旋转
-
-/*
-
-* -  逆时针方向  + 顺时针方向
-
-* 持续旋转方法CGAffineTransformRotate
-
-* 一次设值CGAffineTransformMakeRotation
-
-* M_PI_4是数学宏定义 45°，也即1/4PI弧度
-
-*/
-
-- (IBAction)leftRotate:(id)sender {
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0];
-
-    _btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);
-
-       [UIView commitAnimations];
-
-}
-
-放大动画：
-
-/*
-
-* 放大要求倍数大于1，缩小要求倍数小于1
-
-* 持续放大CGAffineTransformScale
-
-* 一次设值CGAffineTransformMakeScale
-
-*/
-
-- (IBAction)big:(id)sender {
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0];
-
-    _btn.transform=CGAffineTransformScale(_btn.transform, 1.5, 1.5);
-
-    [UIView commitAnimations];
-
-}
-
-代码重构：
-
-#pragma mark 左右旋转放大缩小
-
-- (IBAction)transfer:(id)sender {
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0];
-
-    switch ([sender tag])
-
-    {
-
-        case 1:_btn.transform= CGAffineTransformScale(_btn.transform, 1.5, 1.5);break;
-
-        case 2:_btn.transform= CGAffineTransformScale(_btn.transform, 0.5, 0.5);break;
-
-        case 3 :_btn.transform=CGAffineTransformRotate(_btn.transform, +M_PI_4);break;
-
-        case 4 :_btn.transform=CGAffineTransformRotate(_btn.transform, -M_PI_4);break;
-
-        default:  break;
-
-    }
-
-    [UIView commitAnimations];
-
-}
-
-transform重置
-
-#pragma mark 重置transform
-
-- (IBAction)reset:(id)sender {
-
-    // 将清空对其所作的变换，恢复原始形变属性，位置不能恢复
-
-    [UIView beginAnimations:nil context:nil];
-
-    [UIView setAnimationDuration:1.0  ];
-
-    _btn.transform=CGAffineTransformIdentity;
-
-    [UIView commitAnimations];
-
-}</pre>
-
-<h3 id="使用Block重构代码"><a href="#使用Block重构代码" class="headerlink" title="使用Block重构代码"></a><strong>使用Block<span class="s4">重构代码</span></strong></h3><pre class="lang:default decode:true ">#pragma 代码重构用block调用
-
--(void)btnClick:(id)sender andBlock: (void (^) ()  )blockArgument
-
+</code></pre><p>编译无警告，无报错，运行出错。<br>真正重写：<br>假设属性为</p>
+<pre><code>// 重写-description方法
+-(NSString *)description
 {
-
-    // 开始动画
-
-    [UIView beginAnimations:nil context:nil];
-
-    // 设置动画持续时间
-
-    [UIView setAnimationDuration:1.0];
-
-    blockArgument();
-
-    // 结束动画
-
-    [UIView commitAnimations];
-
+  return [NSString stringWithFormat:@”姓名：%@ 年龄：%d”, _name,_age];
 }
+</code></pre><h1 id="SEL"><a href="#SEL" class="headerlink" title="SEL"></a>SEL</h1><p>每个类的方法列表都存储在类对象中,每个方法都有一个与之对应的SEL类型的对象<br>根据一个SEL对象就可以找到方法的地址，进而调用方法<br>SEL类型定义</p>
+<pre><code>typedef struct objc_selector *SEL;
+</code></pre><p>SEL对象的创建：</p>
+<pre><code>SEL s=@selector(test);
+SEL s2=NSSelectorFromString(@”test”);
+</code></pre><p>将SEL对象转换为NSString对象</p>
+<pre><code>NSString *s3=NSStringFromSelector(s);
+</code></pre><p>调用对象p的show方法：</p>
+<pre><code>// 创建p对象
+Person *p=[[Person alloc] init];
+// 将show方法封装为SEL类型数据的s
+SEL s=@selector(show);
+// 调用s间接调用show方法
+  [p performSelector:s];
+</code></pre><h2 id="p-test-原理解释"><a href="#p-test-原理解释" class="headerlink" title="[p test]原理解释"></a>[p test]原理解释</h2><ol>
+<li>把test包装成SEL类型的数据</li>
+<li>根据SEL数据找到对应的方法地址</li>
+<li>根据方法地址调用相应的方法<br>消息就是SEL。</li>
+</ol>
+<h1 id="NSLog方法总结"><a href="#NSLog方法总结" class="headerlink" title="NSLog方法总结"></a>NSLog方法总结</h1><ol>
+<li><p>打印对象的内存地址</p>
+<pre><code>NSLog(@”%p”,p);
+</code></pre></li>
+<li><p>打印指针的内存地址（&amp;p取出地址）</p>
+<pre><code>NSLog(@”%p”,&amp;p);
+</code></pre></li>
+<li><p>打印某一对象（默认返回类名+内存地址，可以通过重写-description方法改变输出内容）</p>
+<pre><code>NSLog(@”%@”,p);
+</code></pre></li>
+<li><p>打印代码行号</p>
+<pre><code>NSLog(@”%d”,__LINE__);
+</code></pre></li>
+<li><p>打印文件路径</p>
+<pre><code>NSLog(@”%d”,__FILE__);
+</code></pre><p>注意：如果文件路径中存在中文，则无法输出<br>这时可以使用：</p>
+<pre><code>printf(“%s\n”__FILE__);输出包含中文字符的路径（\n只是为了观看清晰）
+</code></pre></li>
+<li><p>打印当前函数名称</p>
+<pre><code>NSLog(@”%s”,__func__);
+</code></pre><h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1></li>
+</ol>
+<p>一系列方法的列表（不能增加成员变量）。其中声明的方法可以被任何类实现，这种模式一般称作代理（delegation）。<br>如果一些类之间没有继承的关系，但是有某些相同的行为，这时要考虑使用代理。<br>代理的定义：<br>当一代理只针对某个类中，代理最好放在一个类的.h文件中，使用时引入即可。（假定在Person.h文件中）</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+@interface Person : NSObject
+@end
 
-#pragma 左右旋转功能的实现
+// 要在@interface之外设置代理
+@protocol MyProtocol &lt;NSObject&gt;
+// 必须实现的方法
+@required
+-(void)show;
+-(void)myShow;
+// 可选实现的方法
+@optional
++(void)herShow;
+@end
+</code></pre><p>在Dog.h文件中遵守协议：</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+// 声明协议@protocol  MyProtocol;
+@protocol  MyProtocol;
 
-- (IBAction)leftOrRightRotate:(UIButton *)sender
-
+@interface Dog : NSObject&lt;MyProtocol&gt;
+// 遵守某个协议
+// 注意导入协议文件#import &quot;Person.h&quot;或者声明协议@protocol  MyProtocol;
+-(void)show;
+-(void)myShow;
+@end
+</code></pre><p>当某一代理用在多个类中，协议需要放在单独创建的.h文件中<br>此时创建的只有一个名为BigProtocol的.h文件。</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt; 
+@protocol BigProtocol &lt;NSObject&gt;
+@required
+-(void)bigShow;
+@optional
+-(void)bigShow2;
+@end
+</code></pre><p>在Cat.h文件中遵守协议</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+//@protocol BigProtocol;
+#import &quot;BigProtocol.h&quot;
+ @interface Cat : NSObject&lt;BigProtocol&gt;
+-(void)bigShow;
+@end
+</code></pre><p>在Dog.h文件中遵守协议</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+//@protocol BigProtocol;
+#import &quot;BigProtocol.h&quot;
+@interface _Dog : NSObject&lt;BigProtocol&gt;
+-(void)bigShow;
+-(void)bigShow2;
+@end
+</code></pre><h2 id="注意点-1"><a href="#注意点-1" class="headerlink" title="注意点"></a>注意点</h2><ol>
+<li><p>在遵守协议时，如果使用@protocol BigProtocol;编译器会警告：无法找到协议的定义<br>而使用<code>#import “BigProtocol.h“</code>，则完全没有问题。</p>
+</li>
+<li><p>如果某个类遵守多个协议，协议之间用逗号分隔：</p>
+<pre><code>@interface Cat : NSObject&lt;BigProtocol,MyProtocol&gt;
+</code></pre></li>
+<li><p>一个协议本身可以遵守其他协议，如遵守名字叫NSObject的协议（默认是这种情况，基协议NSObject）<br>如果A协议遵守B协议，这时A协议就能拥有B协议的所有方法声明。</p>
+<pre><code>@protocol BigProtocol &lt;NSObject&gt;
+@end
+</code></pre></li>
+</ol>
+<p>BigProtocol拥有NSObject协议的所有方法声明。</p>
+<ol>
+<li><p>约定框架中后缀为Delegate的都是协议。（协议类似其他语言的接口，就像C#中默认以I开头的都是接口 ）</p>
+</li>
+<li><p>要求某个对象必须遵守某个协议（如要求obj保存的对象遵守协议MyProtocol，并且继承Person）</p>
+<pre><code>Person&lt;MyProtocol&gt; *obj=[[Person alloc] init];
+</code></pre></li>
+<li><p>利用conformsToProtocol:判断某个类是否实现了某个协议</p>
+<pre><code>Cat *c=[[Cat alloc] init ];
+bool result=  [c conformsToProtocol:@protocol(BigProtocol)];
+NSLog(@&quot;%@&quot;,result?@&quot;YES&quot;:@&quot;NO&quot;);
+[c conformsToProtocol:@protocol(BigProtocol)];返回的是bool类型。
+</code></pre></li>
+</ol>
+<h1 id="block"><a href="#block" class="headerlink" title="block"></a>block</h1><p>块。<br>有返回值（void也可以）、有形参。block封装了一段代码，可以在任何时候执行。block可以作为函数参数或者函数返回值，而其本身又可以带输入参数和返回值。<br>在多线程，异步任务，集合遍历，集合排序，动画专场使用较多。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><pre><code>返回值类型  (^+block名称)(参数类型列表)=^(参数列表){   代码内容  };
+</code></pre><ol>
+<li><p>注意大括号后面有分号</p>
+</li>
+<li><p>对比函数</p>
+<pre><code>int (^MySum)(int ,int )=^(int a,int b){ return a+b;};
+int     MySum (int a,int b){return a+b;}
+</code></pre></li>
+<li><p>block可以访问局部变量，但不能更改局部变量。<br>如果更改则报错：Variable is not assignable (missing__block type specifier)，如：</p>
+<pre><code>int c=10;
+// Block的定义
+int (^MySum)(int ,int )=^(int a,int b)
 {
+  c=21;
+  return a+b+c;
+};
+NSLog(@&quot;%i&quot;,MySum(10,20));
+</code></pre></li>
+</ol>
+<p>如果硬是要修改：在局部变量前面加上<code>__block</code> ，如   <code>__block int c=21;</code>这时，便可以在block中修改局部变量了。</p>
+<pre><code>__block  int c=10;
+        // Block的定义
+        int (^MySum)(int ,int )=^(int a,int b)
+        {
+             c=21;
+            return a+b+c;
+        };
+        NSLog(@&quot;%i&quot;,MySum(10,20));
+</code></pre><p>4 . block的调用，和函数一样，使用名称即可：<code>MySum(_形参列表);</code></p>
+<p>5 . 如果block没有形参，则可以省略等号后面的()<br>如：  </p>
+<pre><code>int (^SomeSum)()=^{return 25;};
+</code></pre><p>但是等号前面的两对括号不可省略。</p>
+<p>6 . 利用typedef声明类型</p>
+<pre><code>格式：typedef  返回值类型 (^block块名称)(参数_类型列表)
+例如：typedef int (^MyBlock)(int,int);
 
-    [self btnClick:sender andBlock:^
-
-    {
-
-        CGFloat r=sender.tag==6?M_PI_4:-M_PI_4;
-
-        _photo.transform=CGAffineTransformRotate(_photo.transform, r);
-
-    }
-
-     ] ;
-
-}</pre>
-
-<p><span class="s4">定义参数：要传入的</span>block<span class="s4">名称</span>block <span class="Apple-converted-space">  </span>(void)(^)()blockName</p>
-<p><span class="s3"><span class="Apple-converted-space">  </span></span>传入参数：直接封装好的代码块<span class="s3"> ^{}</span></p>
-<p><span class="s4">获取某方法的</span>sel<span class="s4">：</span>@selector(<span class="s4">方法名</span>)</p>
-<h3 id="通过代码设置控件"><a href="#通过代码设置控件" class="headerlink" title="通过代码设置控件"></a><strong>通过代码设置控件</strong></h3><p><span class="s4">在</span>viewDidLoad <span class="s4">方法中通过代码设置控件</span></p>
-<p>代码创建按钮：</p>
-<pre class="lang:default decode:true ">- (void)viewDidLoad {
-
-    [super viewDidLoad];
-
-    // Do any additional setup after loading the view, typically from a nib.
-
-    // 创建按钮
-
-    UIButton *btn=[[UIButton alloc]init ];
-
-    btn.frame=CGRectMake(20, 50, 100, 200);
-
-    // 普通状态下的按钮
-
-    [btn setBackgroundImage:[UIImage imageNamed:@"btn_01.png"] forState:UIControlStateNormal];
-
-    [btn setTitle:@"normal" forState:UIControlStateNormal];
-
-    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-
-    // 高亮状态下的按钮
-
-    [btn setBackgroundImage:[UIImage imageNamed:@"btn_02.png"] forState:UIControlStateHighlighted];
-
-    [btn setTitle:@"normal" forState:UIControlStateHighlighted];
-
-    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateHighlighted];
-
-    // 点击事件
-
-    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-
-    // 添加按钮控件到view中
-
-    [self.view addSubview:btn];
-
-}
-
--(void)btnClick
-
-{
-
-    NSLog(@"按钮已被点击");
-
-}
-
-代码创建文本框：
-
-// 创建文本框并设置相关属性
-
-    UITextField *field=[[UITextField alloc]init];
-
-    CGFloat centerX=self.view.frame.size.width*0.5;
-
-    CGFloat centerY=self.view.frame.size.height*0.5;
-
-    field.frame=CGRectMake(centerX, centerY, 100, 50);
-
-    field.font=[UIFont systemFontOfSize:20];
-
-    field.backgroundColor=[UIColor purpleColor];
-
-    // 将文本框添加到view中
-
-    [self.view addSubview:field];</pre>]]></content>
+以后就可以用MyBlock这种类型定义Block变量
+  MyBlock m=^(int a,int b){return a+b;};
+        int c=m(15,25);
+        NSLog(@”%i”,c);
+</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;UIView&quot;&gt;&lt;a href=&quot;#UIView&quot; class=&quot;headerlink&quot; title=&quot;UIView&quot;&gt;&lt;/a&gt;UIView&lt;/h2&gt;&lt;p&gt;UIView:&lt;span class=&quot;s1&quot;&gt;看到的控件&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;：管理控制界面。&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;一般情况下，每一个&lt;/span&gt;“&lt;span class=&quot;s1&quot;&gt;满屏&lt;/span&gt;”&lt;span class=&quot;s1&quot;&gt;的&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;都交给对应的&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;管理，&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;内部有个&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;属性，就是它负责管理&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;对象。负责创建、销毁自己的&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;，显示隐藏&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;，处理&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;和用户之间的交互（事件处理）。&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;是&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;的大管家&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;创建一个&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;，再由&lt;/span&gt;UIViewController&lt;span class=&quot;s1&quot;&gt;创建自己的&lt;/span&gt;UIview&lt;span class=&quot;s1&quot;&gt;，最后把&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;显示到用户眼前。并且由&lt;/span&gt;UIViewcontroller&lt;span class=&quot;s1&quot;&gt;处理&lt;/span&gt;UIView&lt;span class=&quot;s1&quot;&gt;的事件。&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;使方法可被连接：&lt;/span&gt;IBAction&lt;span class=&quot;s1&quot;&gt;相当于&lt;/span&gt;void&lt;/p&gt;
-&lt;p&gt;使属性可被连接：&lt;span class=&quot;s2&quot;&gt;IBOutlet&lt;/span&gt;，能够使属性显示到&lt;span class=&quot;s2&quot;&gt;storyboard&lt;/span&gt;的右击列表中&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s3&quot;&gt;//&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;&lt;/span&gt;声明两个属性保存文本框&lt;/p&gt;
-&lt;p&gt;@property&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;(nonatomic,weak) IBOutlet UITextField *t1;&lt;/p&gt;
-&lt;p&gt;注意命名&lt;/p&gt;
-&lt;pre class=&quot;lang:default decode:true &quot;&gt;-(IBAction)btnClick
-
-{
-
-    // 获取成员变量的两种方式
-
-    // 下划线方式  self方式
-
-   // _t1;
-
-   NSString *st1= self.t1.text;
-
-    NSString *st2=self.t2.text;
-
-    int n1=[st1 intValue];
-
-    int n2=[st2 intValue];
-
-    int  r=n1+n2;
-
-    self.l.text=[NSString stringWithFormat:@&quot;%d&quot;,r];    
-
-}&lt;/pre&gt;
-
-&lt;p&gt;连线的两种方式：&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s5&quot;&gt;1&lt;/span&gt;，&lt;span class=&quot;s5&quot;&gt;.h&lt;/span&gt;文件与&lt;span class=&quot;s5&quot;&gt;ib&lt;/span&gt;控件连线&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s5&quot;&gt;2&lt;/span&gt;，&lt;span class=&quot;s5&quot;&gt;il&lt;/span&gt;中，&lt;span class=&quot;s5&quot;&gt;viewcontrol&lt;/span&gt;与&lt;span class=&quot;s5&quot;&gt;ib&lt;/span&gt;控件相连，将选择控件的事件，直接与&lt;span class=&quot;s5&quot;&gt;View&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Controler&lt;/span&gt;相连，便可以快速看到具备连接能力的属性或方法。
+      &lt;blockquote&gt;
+&lt;p&gt;2016.10.16更正部分错别字&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;分类&quot;&gt;&lt;a href=&quot;#分类&quot; class=&quot;headerlink&quot; title=&quot;分类&quot;&gt;&lt;/a&gt;分类&lt;/h1&gt;&lt;p&gt;场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）&lt;br&gt;当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。&lt;br&gt;声明文件的命名方式 【类+分类.h】&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@interface 类名 (分类名)
+@end
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实现文件的命名方式 【类+分类.m】&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@implementation 类名 (分类名)
+@end
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;特征：用括号括住添加的分类&lt;br&gt;好处：一个庞大的类可以分模块开发、由多个人编写，有利于团队合作。&lt;/p&gt;
+&lt;h2 id=&quot;注意点&quot;&gt;&lt;a href=&quot;#注意点&quot; class=&quot;headerlink&quot; title=&quot;注意点&quot;&gt;&lt;/a&gt;注意点&lt;/h2&gt;&lt;p&gt;1，分类可以访问原来类中的成员变量，但不能增加成员变量。（若要增加成员变量，可以使用继承）&lt;/p&gt;
+&lt;p&gt;2，分类的优先级最高，当调用类中的一个方法时，优先去分类中查找，再去原类中查找，最后去父类中查找。也即，倘若在分类中重写了原类中的方法，会覆盖掉原来的方法，导致原来的方法无法使用。（不建议重写原来类中的方法）&lt;br&gt;重写会出现警告：Category is implementing a method which will also be implemented by its primary class.&lt;/p&gt;
+&lt;p&gt;3，如果多个分类中有相同（方法签名相同，但不一样）的方法，则调用的是最后编译的方法。&lt;/p&gt;
     
     </summary>
     
       <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="iOS开发" scheme="http://yoursite.com/tags/iOS%E5%BC%80%E5%8F%91/"/>
+      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
     
   </entry>
   
@@ -456,190 +258,170 @@ transform重置
     <link href="http://yoursite.com/2016/05/18/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E7%82%B9%E8%AF%AD%E6%B3%95%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%B1%9E%E6%80%A7/"/>
     <id>http://yoursite.com/2016/05/18/Objective-C学习笔记三：点语法与自动属性/</id>
     <published>2016-05-17T21:00:07.000Z</published>
-    <updated>2016-08-21T12:41:02.000Z</updated>
+    <updated>2016-10-16T09:42:02.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>2016.05.24更正@private相关错误</p>
+<p>2016.10.16更正部分错别字<br>2016.05.24更正@private相关错误</p>
 </blockquote>
-<p>### </p>
 <h3 id="点语法"><a href="#点语法" class="headerlink" title="点语法"></a>点语法</h3><p>本质是方法调用，不访问成员变量。前提是已经存在get和set方法(否则报错：Property ‘age’ not found on object of type ‘Person *’)。</p>
-<p><span class="s1">         [p </span><span class="s2">setAge</span><span class="s1">:</span><span class="s3">50</span><span class="s1">];</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s1"> result=[p </span><span class="s2">age</span><span class="s1">];</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s5">NSLog</span><span class="s1">(</span><span class="s6">@”result的结果是：%i”</span><span class="s1">,result);</span></p>
-<p>相当于：</p>
-<p><span class="s1">        p.</span><span class="s2">age</span><span class="s1">=</span><span class="s3">50</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s1"> result=p.</span><span class="s2">age</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s5">NSLog</span><span class="s1">(</span><span class="s6">@”result的结果是：%i”</span><span class="s1">,result);</span></p>
-<p>注意：此处的result未必等于50，因为在set方法中，age的值可能改变。</p>
-<h4 id="方法的展开原理："><a href="#方法的展开原理：" class="headerlink" title="方法的展开原理："></a>方法的展开原理：</h4><p><span class="s1"> [p        setAge   :      50];</span></p>
+<pre><code>[p setAge:50];
+int result=[p age];
+NSLog(@”result的结果是：%i”,result);
+</code></pre><p>相当于：</p>
+<pre><code>p.age=50;
+int result=p.age;
+NSLog(@”result的结果是：%i”,result);
+</code></pre><p>注意：此处的result未必等于50，因为在set方法中，age的值可能改变。</p>
+<h4 id="方法的展开原理："><a href="#方法的展开原理：" class="headerlink" title="方法的展开原理："></a>方法的展开原理：</h4><p>[p        setAge   :      50];</p>
 <p>对应</p>
-<p><span class="s1">p     .     </span><span class="s2">age</span><span class="s1">=        </span><span class="s3">50</span><span class="s1">;</span></p>
-<p>而</p>
-<p><span class="s1">int result=[p       age];</span></p>
-<p>对应</p>
-<p><span class="s2">int</span><span class="s1"> result=p       .       </span><span class="s3">age</span><span class="s1">;</span></p>
+<p>p     .     age=        50;</p>
+<p>而<br>int result=[p       age];</p>
+<p>对应<br>int result=p       .       age;</p>
 <h4 id="死循环"><a href="#死循环" class="headerlink" title="死循环"></a>死循环</h4><p>1，set方法中</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setAge:(</span><span class="s2">int</span><span class="s1">)a</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">self</span><span class="s1">.</span><span class="s3">age</span><span class="s1">=a;</span></p>
-<p><span class="s1">}</span></p>
-<p>实际上是在set方法中调用set方法。</p>
-<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)age</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s3">.</span><span class="s4">age</span><span class="s3">;</span></p>
-<p><span class="s1">}</span></p>
-<p>在get方法中调用get方法。</p>
-<p>以上编译链接均无警告、无错误，但是运行会报错。<a id="more"></a> </p>
-<h3 id="成员变量的作用域"><a href="#成员变量的作用域" class="headerlink" title="成员变量的作用域"></a>成员变量的作用域</h3><p>@private</p>
-<p>私有。只能在当前类的对象方法中直接访问（当前类的对象方法的@implementation中访问），子类虽然继承（内存中存在），但无权限访问（感觉貌似没有继承，一层网给过滤掉了，当然，除非再次在子类中声明一个同名的私有成员变量，这时情况就变了,编译器报错  Duplicute member ‘_age’，意味着重复声明）。因此，声明为@private的成员变量，只准当前类的对象方法访问。</p>
-<p>@protected</p>
-<p>保护（<strong>默认是保护，不是私有</strong>）。可以在当前类和子类的对象方法中直接访问（当前类和子类的@implementation中访问）。</p>
-<p>假设父类Person有保护的成员变量_number，子类继承，什么变量都不增加，那么子类对象方法中访问的是父类的_number。</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)show</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">self</span><span class="s1">-&gt;</span><span class="s3">_number</span><span class="s1">=</span><span class="s4">1000</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> result=</span><span class="s2">self</span><span class="s1">-&gt;</span><span class="s3">_number</span><span class="s1">;</span></p>
-<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s1">_number</span><span class="s5">=</span><span class="s4">5000</span><span class="s5">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> result2= </span><span class="s3">_number</span><span class="s1">;</span></p>
-<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">NSLog</span><span class="s5">(</span><span class="s1">@”self-&gt;_number的值是：%i”</span><span class="s5">,result);</span></p>
-<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s6">NSLog</span><span class="s5">(</span><span class="s1">@”_number的值是：%i”</span><span class="s5">,result2);</span></p>
-<p><span class="s1">}</span></p>
-<p>@public</p>
-<p>公开。任何地方都可以访问。一般用不到。</p>
-<p>@package</p>
-<p>同一个框架内可以访问，介于@public和@private之间。</p>
-<p>注意：类方法不可能访问成员变量。也可以在@implementation中声明成员变量。</p>
-<p>@implementation Student:NSObject</p>
-<p>{</p>
-<p>@public int age;</p>
-<p>@private int number;</p>
-<p>@protected int no;</p>
-<p>}</p>
-<p>@end</p>
-<p><span class="s1">.m</span>文件一般不会被包含，也即一般没有必要访问，故而一般不把成员变量放在实现文件中。</p>
-<h3 id="property和-synthesize属性合成"><a href="#property和-synthesize属性合成" class="headerlink" title="@property和@synthesize属性合成"></a>@property和@synthesize属性合成</h3><p>@property用在@interface中，代替get和set方法</p>
-<p>如：@property int age;</p>
+<pre><code>-(void)setAge:(int)a
+{
+    self.age=a;
+}
+</code></pre><p>实际上是在set方法中调用set方法。</p>
+<pre><code>-(int)age
+{
+    return self.age;
+}
+</code></pre><p>在get方法中调用get方法。<br>以上编译链接均无警告、无错误，但是运行会报错。</p>
+<a id="more"></a> 
+<h3 id="成员变量的作用域"><a href="#成员变量的作用域" class="headerlink" title="成员变量的作用域"></a>成员变量的作用域</h3><h4 id="private"><a href="#private" class="headerlink" title="@private"></a>@private</h4><p>私有。<br>只能在当前类的对象方法中直接访问（当前类的对象方法的@implementation中访问），子类虽然继承（内存中存在），但无权限访问（感觉貌似没有继承，一层网给过滤掉。</p>
+<h4 id="protected"><a href="#protected" class="headerlink" title="@protected"></a>@protected</h4><p>保护（默认是保护，不是私有）。<br>可以在当前类和子类的对象方法中直接访问（当前类和子类的@implementation中访问）。<br>假设父类Person有保护的成员变量_number，子类继承，什么变量都不增加，那么子类对象方法中访问的是父类的_number。</p>
+<pre><code>-(void)show
+{
+    self-&gt;_number=1000;
+    int result=self-&gt;_number;
+    _number=5000;
+    int result2= _number;
+    NSLog(@”self-&gt;_number的值是：%i”,result);
+    NSLog(@”_number的值是：%i”,result2);
+}
+</code></pre><h4 id="public"><a href="#public" class="headerlink" title="@public"></a>@public</h4><p>公开。任何地方都可以访问。一般用不到。</p>
+<h4 id="package"><a href="#package" class="headerlink" title="@package"></a>@package</h4><p>同一个框架内可以访问，介于@public和@private之间。</p>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>1,在类方法中不可能访问成员变量。<br>2,也可以在@implementation中声明成员变量。</p>
+<pre><code>@implementation Student:NSObject
+{
+    @public int age;
+    @private int number;
+    @protected int no;
+}
+@end
+</code></pre><p>然而.m文件一般不会被包含，也即一般没有必要访问，故而一般不把成员变量放在实现文件中。</p>
+<h4 id="property和-synthesize属性合成"><a href="#property和-synthesize属性合成" class="headerlink" title="@property和@synthesize属性合成"></a>@property和@synthesize属性合成</h4><p>@property用在@interface中，代替get和set方法<br>如：<code>@property int age;</code><br>等价于</p>
+<pre><code>-(int)age;
+-(void)setAge:(int)age;
+</code></pre><p>即便是<code>@property int _age;</code>那也会生成</p>
+<pre><code>-(int)_age;
+-(void)setAge:(int)_age;
+</code></pre><p>而@synthesize用在@implementation实现中：@synthesize  age=成员变量名; 不允许对成员变量进行条件过滤，如@synthesize age=_age+100;</p>
+<p><code>@synthesize age=_age;</code></p>
 <p>等价于</p>
-<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)age;</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setAge:(</span><span class="s2">int</span><span class="s1">)age;</span></p>
-<p>即便是@property int _age;那也会生成-(int)_age;-(void)setAge:(int)_age;</p>
-<p>而@synthesize用在@implementation实现中：<strong>@synthesize<span class="Apple-converted-space">  </span>age=<span class="s1">成员变量名</span>; 不允许对成员变量进行条件过滤，如<span class="s1">@synthesize</span><span class="s2"> age=</span><span class="s3">_age+100</span><span class="s2">;</span></strong></p>
-<p><span class="s1">@synthesize</span><span class="s2"> age=</span><span class="s3">_age</span><span class="s2">;</span></p>
-<p>等价于</p>
-<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)age</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">return</span><span class="s1"> _age;</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setAge:(</span><span class="s2">int</span><span class="s1">)age</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">_age</span><span class="s1">=age</span><span class="s1">;</span></p>
-<p><span class="s1">}</span></p>
-<p>注意：</p>
-<p>1，如果.h文件中没有这个_age成员变量。那么，利用@property可以自动生成私有@private的_age。而默认的_age却是@protected的。</p>
-<p>2，@synthesize age将会访问age这个成员变量而非_age。</p>
-<p>3，若手动实现getter方法，编译器只会自动生成setter方法；若手动实现setter方法，编译器只会自动生成getter方法。</p>
-<p>新特性：@property已经独揽@synthesize的实现了，也即</p>
-<p><span class="s1">@synthesize age=_age;可以省略。只用写@property int  age就好了。（当然，前提是不对参数进行过滤，直接传到成员变量中，如果要过滤，还是要自己生成相应的方法。）</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> _age;</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">@property</span> <span class="s1">int</span><span class="s3"> age;</span></p>
-<p>完美解决！</p>
-<p>另外，默认情况下，getter和setter方法中的实现会访问下划线开头的成员变量。</p>
-<h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>相当于NSObject  *  万能指针。</p>
-<p>id类型的定义：</p>
-<p>typedef struct objc_object {</p>
-<p>Class isa;</p>
-<p>}*id;</p>
-<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>用来初始化对象的方法，完整地创建一个可用对象。</p>
-<p><span class="s1"><span class="Apple-converted-space">     </span></span><span class="s2">Person</span><span class="s1"> *p=[</span><span class="s2">Person</span> <span class="s3">alloc</span><span class="s1">];            +alloc方法分配存储空间，返回对象。</span></p>
-<p><span class="s1"><span class="Apple-converted-space">     </span>p=[p </span><span class="s3">init</span><span class="s1">];                    -init方法初始化</span></p>
-<h3 id="init方法的重写"><a href="#init方法的重写" class="headerlink" title="init方法的重写"></a>init方法的重写</h3><p>目的：在对象创建完毕之后，成员变量就有了一些默认的值。</p>
-<p>注意：先调用父类的构造方法，再进行子类内部成员变量的初始化</p>
-<p>在@implementation中进行重写：</p>
-<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)init</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">// 一定要先调用super的init方法，这是为了初始化父类的一些成员变量和其他属性</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">self</span><span class="s1">=[</span><span class="s2">super</span> <span class="s4">init</span><span class="s1">];</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">// 判断对象是否初始化成功，如果对象初始化成功，再进行接下来的自定义初始化</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">if</span><span class="s3">(</span><span class="s1">self</span><span class="s3">!=</span><span class="s1">nil</span><span class="s3">)</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">           </span></span><span class="s5">_age</span><span class="s1">=</span><span class="s6">10086</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">// 返回一个已经初始化完毕的对象</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s3">;</span></p>
-<p><span class="s1">}</span></p>
-<p>上面代码不够简化，一般用下面代码。</p>
-<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)init</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">   </span></span><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">// 简化版</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">if</span><span class="s1">([</span><span class="s2">super</span> <span class="s5">init</span><span class="s1">])</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s6">_age</span><span class="s1">=</span><span class="s7">10086</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p><span class="s4"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s4">;</span></p>
-<p><span class="s1">}</span></p>
-<h3 id="自定义构造方法"><a href="#自定义构造方法" class="headerlink" title="自定义构造方法"></a>自定义构造方法</h3><p>要求：是对象方法（对象的初始化），返回值是id类型，方法名以initWith开头。</p>
-<p>注意：-init方法重写不需要在@interface中声明，因为已经声明过了，而自定义的构造方法需要在@interface中显示声明。</p>
-<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)initWithAge:(</span><span class="s2">int</span><span class="s1">)age;</span></p>
-<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)initWithAge:(</span><span class="s2">int</span><span class="s1">)age</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">if</span><span class="s1">([</span><span class="s2">super</span> <span class="s3">init</span><span class="s1">])</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span>{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">_age</span><span class="s1">=age+</span><span class="s5">100</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p><span class="s6"><span class="Apple-converted-space">    </span></span><span class="s1">return</span> <span class="s1">self</span><span class="s6">;</span></p>
-<p><span class="s1">}</span></p>
-<p>调用如下：</p>
-<p><span class="s2">        Person</span><span class="s1"> *p=[</span><span class="s2">Person</span> <span class="s3">alloc</span><span class="s1">];</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span>p=[p </span><span class="s3">init</span><span class="s2">];</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s2"> r=p.</span><span class="s5">age</span><span class="s2">;</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s6">@”r的值是%i”</span><span class="s2">,r);</span></p>
-<p><span class="s2"><span class="Apple-converted-space">       </span>p= [p </span><span class="s5">initWithAge</span><span class="s2">:</span><span class="s7">110</span><span class="s2">];</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">int</span><span class="s2"> r2=p.</span><span class="s5">age</span><span class="s2">;</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s6">@”r2的值是%i”</span><span class="s2">,r2);</span></p>
-<p>说明，可以初始化多次。</p>
-<p>多个参数的构造方法也可以：</p>
-<p><span class="s1">-(</span><span class="s2">id</span><span class="s1">)initWithAge:(</span><span class="s2">int</span><span class="s1">)age andNumber:(</span><span class="s2">int</span><span class="s1">)number;</span></p>
-<h3 id="h和-m文件"><a href="#h和-m文件" class="headerlink" title=".h和.m文件"></a>.h和.m文件</h3><p>每个类分布在不同的文件中</p>
-<p>类的声明放在.h文件中，类的实现放在.m文件中</p>
-<p><strong>若想使用某个类，就包含某个类的.h文件即可。</strong></p>
+<pre><code>-(int)age
+{
+    return _age;
+}
+-(void)setAge:(int)age
+{
+    _age=age;
+}
+</code></pre><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p> 1，如果.h文件中没有这个_age成员变量。那么，利用@property可以自动生成私有@private的_age。而默认的_age却是@protected的。<br> 2，@synthesize age将会访问age这个成员变量而非_age。<br> 3，若手动实现getter方法，编译器只会自动生成setter方法；若手动实现setter方法，编译器只会自动生成getter方法。</p>
+<h5 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h5><p>@property已经独揽@synthesize的实现了，也即</p>
+<p><code>@synthesize age=_age;</code>可以省略。只用写<code>@property int  age</code>就好了。（当然，前提是不对参数进行过滤，直接传到成员变量中，如果要过滤，还是要自己生成相应的方法。）</p>
+<p> 4，默认情况下，getter和setter方法中的实现会访问下划线开头的成员变量。</p>
+<h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>相当于<code>NSObject  *</code>  ，是万能指针。</p>
+<h4 id="id类型的定义"><a href="#id类型的定义" class="headerlink" title="id类型的定义"></a>id类型的定义</h4><pre><code>typedef struct objc_object {
+Class isa;
+}*id;
+</code></pre><h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>用来初始化对象的方法，完整地创建一个可用对象。</p>
+<p><code>Person *p=[Person alloc];</code><br>+alloc方法分配存储空间，返回对象。</p>
+<p><code>p=[p init];</code><br>-init方法初始化</p>
+<h4 id="init方法的重写"><a href="#init方法的重写" class="headerlink" title="init方法的重写"></a>init方法的重写</h4><p>目的：在对象创建完毕之后，使成员变量就有了一些默认的值。<br>注意：一定要先调用父类的构造方法，再进行子类内部成员变量的初始化<br>在@implementation中进行重写：</p>
+<pre><code>-(id)init
+{
+    // 一定要先调用super的init方法，这是为了初始化父类的一些成员变量和其他属性
+    self=[super init];
+    // 判断对象是否初始化成功，如果对象初始化成功，再进行接下来的自定义初始化
+    if(self!=nil)
+    {
+           _age=10086;
+    }
+    // 返回一个已经初始化完毕的对象
+    return self;
+}
+</code></pre><p>上面代码不够简化，一般用下面代码。</p>
+<pre><code>-(id)init
+{
+       // 简化版
+    if([super init])
+    {
+        _age=10086;
+    }
+    return self;
+}
+</code></pre><h4 id="自定义构造方法"><a href="#自定义构造方法" class="headerlink" title="自定义构造方法"></a>自定义构造方法</h4><p>要求：是对象方法（对象的初始化），返回值是id类型，方法名以initWith开头。<br>注意：-init方法重写不需要在@interface中声明，因为已经声明过了，而自定义的构造方法需要在@interface中显式声明。</p>
+<pre><code>// 声明
+-(id)initWithAge:(int)age;
+
+
+
+
+// 实现
+-(id)initWithAge:(int)age
+{
+    if([super init])
+    {
+        _age=age+100;
+    }
+    return self;
+}
+</code></pre><p>调用示例：</p>
+<pre><code>Person *p=[Person alloc];
+p=[p init];
+int r=p.age;
+NSLog(@”r的值是%i”,r);
+
+p= [p initWithAge:110];
+int r2=p.age;
+NSLog(@”r2的值是%i”,r2);
+</code></pre><p>显而易见一个对象可以初始化多次。</p>
+<p>含有多个参数的构造方法：<br><code>-(id)initWithAge:(int)age andNumber:(int)number;</code></p>
+<h3 id="h文件和-m文件"><a href="#h文件和-m文件" class="headerlink" title=".h文件和.m文件"></a>.h文件和.m文件</h3><p>每个类分布在不同的文件中<br>类的声明放在.h文件中，类的实现放在.m文件中<br>若想使用某个类，就包含某个类的.h文件即可。</p>
 ]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;2016.05.24更正@private相关错误&lt;/p&gt;
+&lt;p&gt;2016.10.16更正部分错别字&lt;br&gt;2016.05.24更正@private相关错误&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;### &lt;/p&gt;
 &lt;h3 id=&quot;点语法&quot;&gt;&lt;a href=&quot;#点语法&quot; class=&quot;headerlink&quot; title=&quot;点语法&quot;&gt;&lt;/a&gt;点语法&lt;/h3&gt;&lt;p&gt;本质是方法调用，不访问成员变量。前提是已经存在get和set方法(否则报错：Property ‘age’ not found on object of type ‘Person *’)。&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;         [p &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;setAge&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;];&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; result=[p &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;];&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s5&quot;&gt;NSLog&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s6&quot;&gt;@”result的结果是：%i”&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;,result);&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;相当于：&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;        p.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; result=p.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;        &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s5&quot;&gt;NSLog&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s6&quot;&gt;@”result的结果是：%i”&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;,result);&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;注意：此处的result未必等于50，因为在set方法中，age的值可能改变。&lt;/p&gt;
-&lt;h4 id=&quot;方法的展开原理：&quot;&gt;&lt;a href=&quot;#方法的展开原理：&quot; class=&quot;headerlink&quot; title=&quot;方法的展开原理：&quot;&gt;&lt;/a&gt;方法的展开原理：&lt;/h4&gt;&lt;p&gt;&lt;span class=&quot;s1&quot;&gt; [p        setAge   :      50];&lt;/span&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[p setAge:50];
+int result=[p age];
+NSLog(@”result的结果是：%i”,result);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;相当于：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;p.age=50;
+int result=p.age;
+NSLog(@”result的结果是：%i”,result);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;注意：此处的result未必等于50，因为在set方法中，age的值可能改变。&lt;/p&gt;
+&lt;h4 id=&quot;方法的展开原理：&quot;&gt;&lt;a href=&quot;#方法的展开原理：&quot; class=&quot;headerlink&quot; title=&quot;方法的展开原理：&quot;&gt;&lt;/a&gt;方法的展开原理：&lt;/h4&gt;&lt;p&gt;[p        setAge   :      50];&lt;/p&gt;
 &lt;p&gt;对应&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;p     .     &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;=        &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;而&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;int result=[p       age];&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;对应&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; result=p       .       &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;p     .     age=        50;&lt;/p&gt;
+&lt;p&gt;而&lt;br&gt;int result=[p       age];&lt;/p&gt;
+&lt;p&gt;对应&lt;br&gt;int result=p       .       age;&lt;/p&gt;
 &lt;h4 id=&quot;死循环&quot;&gt;&lt;a href=&quot;#死循环&quot; class=&quot;headerlink&quot; title=&quot;死循环&quot;&gt;&lt;/a&gt;死循环&lt;/h4&gt;&lt;p&gt;1，set方法中&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)setAge:(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)a&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;=a;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;实际上是在set方法中调用set方法。&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)age&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;在get方法中调用get方法。&lt;/p&gt;
-&lt;p&gt;以上编译链接均无警告、无错误，但是运行会报错。
+&lt;pre&gt;&lt;code&gt;-(void)setAge:(int)a
+{
+    self.age=a;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;实际上是在set方法中调用set方法。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-(int)age
+{
+    return self.age;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;在get方法中调用get方法。&lt;br&gt;以上编译链接均无警告、无错误，但是运行会报错。&lt;/p&gt;
     
     </summary>
     
