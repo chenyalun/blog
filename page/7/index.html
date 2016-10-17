@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,170 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/06/获得Access_Token的三种方法总结/" itemprop="url">
+                  获得Access_Token的三种方法总结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-06T05:00:01+08:00" content="2015-10-06">
+              2015-10-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
+                    <span itemprop="name">公众号开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/06/获得Access_Token的三种方法总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/06/获得Access_Token的三种方法总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在自定义菜单和其他高级接口中均需要用到AppID和AppSecret，这两个参数也是非常显眼的放在开发页面，同时，我们也需要这两个参数生成Access_Token。Access_Token是什么东东？简单的说就是调用各个接口的钥匙，所以当我们获得Access_Token后注意妥善保存，当然，有效期是两个小时，需要定时刷新。现在，我就将获取Access_Token的三种方法分享一下。</p>
+<h3 id="1，官网调试工具生成Access-Token"><a href="#1，官网调试工具生成Access-Token" class="headerlink" title="1，官网调试工具生成Access_Token"></a>1，官网调试工具生成Access_Token</h3><p>打开网址：<a href="http://www.chenyalun.cn/go/?url=https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&amp;type=%E5%9F%BA%E7%A1%80%E6%94%AF%E6%8C%81&amp;form=%E8%8E%B7%E5%8F%96access_token%E6%8E%A5%E5%8F%A3%20/token" target="_blank" rel="external">点击这里</a></p>
+<p><img src="http://source.chenyalun.cn/images/201510/5100501.jpg" alt=""></p>
+<p>直接输入你的AppID和AppSecret，点击检查问题，就可以看到传说中的Access_Token啦，就是图中红黄色的一串字符。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5100502.jpg" alt=""></p>
+<p>&nbsp;</p>
+<h3 id="2-编写代码获取生成Access-Token"><a href="#2-编写代码获取生成Access-Token" class="headerlink" title="2,编写代码获取生成Access_Token"></a>2,编写代码获取生成Access_Token</h3><h4 id="第一种代码如下："><a href="#第一种代码如下：" class="headerlink" title="第一种代码如下："></a>第一种代码如下：</h4><p><pre class="lang:default decode:true">&lt;?php<br>define(“APPID”, “替换成你的APPID”);<br>define(“APPSECRET”, “替换成你的APPSECRET”);<br>$token_access_url = “<a href="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=" target="_blank" rel="external">https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=</a>“ . APPID . “&amp;secret=” . APPSECRET;<br>$res = file_get_contents($token_access_url);<br>$result = json_decode($res, true);<br>$access_token = $result[‘access_token’];<br>echo $access_token;<br>?&gt;</pre><br>&nbsp;</p>
+<p><strong>参数说明</strong></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>grant_type</td></p>
+<p><td>是</td></p>
+<p><td>获取access_token填写client_credential</td><br></p>
+<p><tr></tr></p>
+<p><td>appid</td></p>
+<p><td>是</td></p>
+<p><td>第三方用户唯一凭证</td><br></p>
+<p><tr></tr></p>
+<p><td>secret</td></p>
+<p><td>是</td></p>
+<p><td>第三方用户唯一凭证密钥，即appsecret</td><br><br><br><br><strong>返回说明</strong></p>
+<p>正常情况下，微信会返回下述JSON数据包给公众号：</p>
+<p><pre>{“access_token”:”ACCESS_TOKEN”,”expires_in”:7200}<br></pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>access_token</td></p>
+<p><td>获取到的凭证</td><br></p>
+<p><tr></tr></p>
+<p><td>expires_in</td></p>
+<p><td>凭证有效时间，单位：秒</td><br><br><br><br>错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:</p>
+<p><pre class="">{“errcode”:40013,”errmsg”:”invalid appid”}</pre><br>&nbsp;</p>
+<p>将以上代码复制粘贴到文本文档中，保存为php格式，别忘了修改你的AppID和appsecret。然后直接在网页上运行就可以看到神奇的Access_Token啦。（本地环境，云服务器或者sae都是可以滴,我的是云服务器，如下图所示）</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/images/201510/5100503.jpg" alt=""></h3><h3 id="3-编写代码获取生成Access-Token"><a href="#3-编写代码获取生成Access-Token" class="headerlink" title="3,编写代码获取生成Access_Token"></a>3,编写代码获取生成Access_Token</h3><h4 id="第二种代码如下："><a href="#第二种代码如下：" class="headerlink" title="第二种代码如下："></a>第二种代码如下：</h4><p><pre class="lang:default decode:true ">&lt;?php<br>$appid = “替换成你的appid”;<br>$appsecret = “替换成你的appsecret”;<br>$url = “<a href="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=$appid&amp;secret=$appsecret" target="_blank" rel="external">https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=$appid&amp;secret=$appsecret</a>“;<br>GetToken($url);<br>function GetToken($url){<br>$ch = curl_init();<br>curl_setopt($ch, CURLOPT_URL, $url);<br>curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);<br>curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);<br>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);<br>$res=curl_exec($ch);<br>   $access_token=json_decode($res,true);<br>   echo $access_token[‘access_token’];<br>}<br>?&gt;<br></pre><br>&nbsp;</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5100504.jpg" alt=""></p>
+<p>【方法二和方法三本质上就是代码不同而已，原谅我，o(^▽^)o】</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1174,142 +1338,6 @@ return $userinfo_array;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/25/字符串与定义字符数组的简单区分/" itemprop="url">
-                  字符串与定义字符数组的简单区分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-25T23:05:46+08:00" content="2015-09-25">
-              2015-09-25
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">编程技巧</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/25/字符串与定义字符数组的简单区分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/25/字符串与定义字符数组的简单区分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>字符串定义与字符数组定义是编程语言的基础，是最起码的知识，而知识就像内裤，平时看不见，却非常有用。先回顾一下最简单的字符数组的定义，一共有三种典型方法。</p>
-<h3 id="1，定义字符数组"><a href="#1，定义字符数组" class="headerlink" title="1，定义字符数组"></a>1，定义字符数组</h3><p><pre class="lang:default decode:true">char a[3]={‘1’,’2’,’3’};<br></pre></p>
-<p><pre class="lang:default decode:true">char a[3]=”12”;其实是char a[3]={‘1’,’2’,’\0’}</pre></p>
-<p><pre class="lang:default decode:true">char a[3]={“12”};其实是char a[3]={‘1’,’2’,’\0’}</pre><br>需要注意的是：</p>
-<p>第一： 字符串其实就是以\0结尾的字符串。<br>第二：定义 字符数组时要考虑    \0 ，平时笔试题每次都出，但是一到实际编程中，就巧妙地遗忘了。</p>
-<p>还有一种方式：</p>
-<p><pre class="lang:default decode:true ">char a[3]={3,2,3};</pre><br>这个根本不是定义字符数组。因为少了单引号，当年出现这种情况，处于好奇，利用c++直接输出a[0],然后就是个表情。从a[0]开始，一直到a[47]，都是不正常的字符，到a[48]时才出现数字0。请看下面代码：</p>
-<p><pre class="lang:default decode:true ">#include&lt;iostream&gt;<br>using namespace std;<br>int main(){<br>    char a[3]={3,2,1};<br>    cout&lt;&lt;a[0];<br>}</pre><br>不信可以自己测试一下。</p>
-<h3 id="2，字符数组深入探讨"><a href="#2，字符数组深入探讨" class="headerlink" title="2，字符数组深入探讨"></a>2，字符数组深入探讨</h3><p><pre class="lang:default decode:true">#include&lt;stdio.h&gt;</pre></p>
-<p>#include&lt;string.h&gt;<br>int main(){<br>    char a[3]={3,2,1},b[6]={5,6,7,8,9};<br>    int m;<br>    m=a[0]+b[4];<br>    printf(“%d”,m);<br>    return 0;<br>}<br>结果竟然是12，不可思议，明明我的字符数组定义是错误的，为什么还出现正确的结果？</p>
-<p>和同学探讨一下，原因在于</p>
-<p><pre class="lang:default decode:true">printf(“%d”,m);</pre><br>没错，就是这一行中的%d,   C语言中的输出强制类型转换将本是字符相加活生生变成数字相加。</p>
-<p>当把这行代码改成</p>
-<p><pre class="lang:default decode:true ">printf(“%c”,m);</pre><br>结果再一次变成表情，嗯，准确的说是个男性符号。</p>
-<p>再次折腾一下，整个代码改成下面的这样：</p>
-<p><pre class="lang:default decode:true ">#include&lt;iostream&gt;<br>using namespace std;<br>int main(){<br>    char a[3]={‘3’,’2’,’1’},b[6]={‘5’,’6’,’7’,’8’,’9’};<br>          cout&lt;&lt;a[0]+b[4]-‘0’-‘0’;<br>    return 0;<br>}</pre><br>为了避免C语言输出的类型转换，我用C++输出，可见，因为两个’0’的缘故，字符结果已经转换为数字了。</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1355,7 +1383,7 @@ return $userinfo_array;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1372,7 +1400,7 @@ return $userinfo_array;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

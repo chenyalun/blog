@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,149 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/04/泛谈单链表的插入与删除/" itemprop="url">
+                  泛谈单链表的插入与删除
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-04T05:00:32+08:00" content="2015-11-04">
+              2015-11-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">编程技巧</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/04/泛谈单链表的插入与删除/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/04/泛谈单链表的插入与删除/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>谈过<a href="http://www.chenyalun.cn/泛谈顺序表的插入与删除.html" target="_blank" rel="external">顺序表的插入与删除</a>，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。</p>
+<p>先看定义：</p>
+<p><pre class="lang:default decode:true ">typedef struct LNode{<br>    int data;<br>    struct LNode <em>next;<br>}LNode;</em></pre><br>数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你咬我呀，哈哈。</p>
+<p>江湖传言LNode *p等价于LinkList p，不知道有木有人认同呢？闲话少说，看代码：</p>
+<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;</pre></p>
+<p>#include&lt;malloc.h&gt;<br>//定义并初始化单链表<br>typedef struct LNode{<br>    int data;<br>    struct LNode *next;<br>}LNode;</p>
+<p>//单链表的创建与初始化，设定共n个节点（不含头节点）<br>void CreateLinkList(LNode <em>a,int n) {<br>        LNode </em>p,<em>q;<br>        p=a;<br>    while(n–){<br>         q=(LNode </em>)malloc(sizeof(LNode *));<br>         scanf(“%d”,&amp;q-&gt;data);<br>           q-&gt;next=NULL;<br>        p-&gt;next=q;<br>        p=q;<br>    }<br>}</p>
+<p>//查找是否存在一个值为x的节点，若存在，删之，并返回OK，否则返回NOT FOUND<br>char <em>SearchAndDelete(LNode </em>c,int x){<br>    LNode <em>p,</em>q;<br>    p=c;<br>    //开始查找<br>    while(p-&gt;next!=NULL)<br>    {<br>        if(p-&gt;next-&gt;data==x)<br>        break;<br>        p=p-&gt;next;<br>    }<br>    //若找到则开始删除<br>    if(p-&gt;next==NULL)<br>    return “NOT FOUND”;<br>    else<br>    {<br>        q=p-&gt;next;<br>        p-&gt;next=p-&gt;next-&gt;next;<br>        free(q);<br>        return “OK”;<br>    }<br>}</p>
+<p>//在链表c中第n个节点位置插入元素e<br>void Insert(LNode <em>c,int n,int e){<br>    LNode </em>p=( LNode <em>)malloc(sizeof(LNode </em>)),<br>    <em>q=( LNode </em>)malloc(sizeof(LNode <em>));//插入的节点<br>    p=c;<br>    q-&gt;data=e;<br>    //找到要插入节点的位置<br>    for(int i=1;i&lt;n;i++){<br>        p=p-&gt;next;<br>    }<br>    //插入节点<br>    q-&gt;next=p-&gt;next;<br>    p-&gt;next=q;<br>}<br>//打印单链表<br>void Print(LNode </em>a){<br>    LNode <em>p=( LNode </em>)malloc(sizeof(LNode *));<br>    p=a-&gt;next;<br>    while(p!=NULL){<br>        printf(“%d\n”,p-&gt;data);<br>        p=p-&gt;next;<br>    }<br>}</p>
+<p>int main(){<br>   LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));<br>    CreateLinkList(a,5);<br>   Insert(a,3,10086);//假定在第3个位置插入数值为10086的节点<br> Print(a);<br>   printf(“—————-\n”);<br>SearchAndDelete(a,13);//查找并执行删除数值为13的节点<br>  Print(a);<br>return 0;<br>}<br><br>说明如下：</p>
+<p>1，假定输入的是11 12 13 14 15五个数值。在第三个位置（13的位置）插入一个数据域为10086的节点。此时原来的数值已经变成了11 12 10086 13 14 15</p>
+<p>2，完事后，我为了方便不再另写代码，在11 12 10086 13 14 15的基础上假定查找并删除数据域为13的节点。</p>
+<p><img src="http://source.chenyalun.cn/images/201511/5110101.jpg" alt=""></p>
+<p>当然还有值得体会的是，我把节点的内存分配放在主函数里，不知道是不是有人想打我呢？</p>
+<p>像这样：</p>
+<p><pre class="nums:false lang:default decode:true ">LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>当然，清晰一点就是</p>
+<p>&nbsp;</p>
+<p><pre class="nums:false lang:default decode:true ">LNode <em>a;<br>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>两者效果一样。这不是重点。看下面的两段代码：</p>
+<p><pre class="lang:default decode:true ">void Print(LNode *a){</pre></p>
+<p>}<br>和</p>
+<p><pre class="lang:default decode:true">void Print(LNode <em>&amp;a){<br>    a=( LNode </em>)malloc(sizeof(LNode *));</pre></p>
+<p>}<br>这才是重点，和小伙伴研究一下，决定采取有违伦理惨无人道的第一种方式。最后在主函数中再调用malloc觉得还是蛮灵活轻便的。</p>
+<p>当然，上面的代码不是为了解题，只是提供一个思路，具体可视情况修改。</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1032,202 +1175,6 @@ public static void main(String[] args) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/26/题目1008：质数还是合数/" itemprop="url">
-                  题目1008：质数还是合数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-26T05:00:09+08:00" content="2015-10-26">
-              2015-10-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/程序试题/" itemprop="url" rel="index">
-                    <span itemprop="name">程序试题</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/26/题目1008：质数还是合数/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/26/题目1008：质数还是合数/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>质数</strong>（prime number）又称素数，有无限个。一个大于1的自然数，除了1和它本身外，不能被其他自然数整除，换句话说就是该数除了1和它本身以外不再有其他的因数；否则称为<strong>合数</strong>。</p>
-<p>题目描述：给定一个正整数n(2&lt;n&lt;10000)，判断是否为质数</p>
-<p>输入：多组输入，每行一个n(2&lt;n&lt;=10000),</p>
-<p>输出：对于每一组数，如果是质数则输出Yes，否则输出No</p>
-<p>样例：</p>
-<p>2<br>3<br>4</p>
-<p>Yes<br>Yes<br>No</p>
-<p>看完题目，思路马上就有了。无非是先判断是不是为质数，进而输出Yes和No。怎么判断是不是为质数呢？</p>
-<p>在一般领域，对正整数n，如果用2到n之间的所有整数去除，均无法整除，则n为质数。无非做个循环嘛，可是专家说了，不用到n，到根号2就可以了。因为将n分解为两个因数，必然一个大于根号2，一个小于根号2，比如18，分解成1和18、2和9、3和6，而18开根号约为4.2，看看，很符合吧。所以，循环到根号2就可以，不用浪费时间、消耗代码。</p>
-<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true">#include&lt;stdio.h&gt;
-#include&lt;math.h&gt;
-char *prime(int a){
-    char m[]="Yes";
-    char n[]="No";
-    int i=2,b=(int)sqrt(double (a));;
-    for(;i&lt;=b;i++){
-        if(a%i==0)
-        break;
-    }
-    if(i&gt;b)
-    return "Yes";
-    else
-    return "No";  
-}
-
-int main(){
-    int n,i=0,a[100];
-    scanf("%d",&amp;n);
-    for(;i&lt;n;i++)
-        scanf("%d",&amp;a[i]);
-    for(i=0;i&lt;n;i++)    
-        printf("%s\n",prime(a[i]));    
-    return 0;
-}
-</pre>
-
-<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true ">#include&lt;iostream&gt;
-#include&lt;cmath&gt;
-using namespace std;
-string prime(int a){
-    int i=2,b;
-    b=(int)sqrt(double (a));//sqrt()的参数为 double 类型
-    for(;i&lt;=b;i++){
-        if(a%i==0)
-        break;
-    }
-    if(i&gt;b)
-    return "Yes";
-    else
-    return "No";
-}
-int main(){
-    int n,i=0,a[100];
-    cin&gt;&gt;n;
-    for(;i&lt;n;i++)
-    cin&gt;&gt;a[i];
-    for(i=0;i&lt;n;i++)
-    cout&lt;&lt;prime(a[i])&lt;&lt;endl;
-    return 0;
-}
-</pre>
-
-<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true ">import java.util.*;</pre></p>
-<p>public class Main {<br>    static String prime(int a){<br>        int i=2,b;<br>        b=(int)Math.sqrt(a);//sqrt()的参数为 double 类型<br>        for(;i&lt;=b;i++){<br>            if(a%i==0)<br>            break;<br>        }<br>        if(i&gt;b)<br>        return “Yes”;<br>        else<br>        return “No”;<br>    }</p>
-<pre><code>public static void main(String[] args) {
-    int n,i=0;
-    int a[]=new int [100];
-    Scanner s=new Scanner(System.in);
-    n=s.nextInt();
-    for(;i&amp;lt;n;i++)
-    a[i]=s.nextInt();;
-    for(i=0;i&amp;lt;n;i++)
-    System.out.println(prime(a[i]));
-}
-</code></pre><p>}<br><br>依然看不出差别有多大，但是值得一提的是，在C中，函数的返回值没有string，很不方便，返回”Yes“和”No”让我想了半天。当然，小伙伴劝我，不用那么强迫症非要在函数里返回，主函数写个”Yes“和”No”效果一样的。但是，纠结着最终还是实现了。</p>
-<p>string prime(int a){}这样的函数在C中会报错，所以char <em>prime(int a){}是很巧妙的。</em>prime指向字符串”Yes“和”No”的首地址，打印%s，就可以借助强大的printf函数，把整个字符串（字符数组也可以）打印出来，着实强大！当然啦，%c，打印首个字符（Y或者N）。</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1273,7 +1220,7 @@ int main(){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1290,7 +1237,7 @@ int main(){
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

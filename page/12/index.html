@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,162 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/12/利用SAE搭建公众号开发环境/" itemprop="url">
+                  利用SAE搭建公众号开发环境
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-12T19:54:53+08:00" content="2015-09-12">
+              2015-09-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
+                    <span itemprop="name">公众号开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/12/利用SAE搭建公众号开发环境/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/12/利用SAE搭建公众号开发环境/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>微信开发的实质就是利用我们自己创造的服务器与微信服务器进行数据交换，而微信服务器需要先对消息进行预处理，区分消息类型，封装成xml数据后，以post的形式交给开发者，然后开发者就可以为所欲为的根据它的数据返回相应的内容了。成为开发者后，就可以获取公众平台的接口权限，当然不同类型的公众号权限是不同滴。具体接口状态可以查看公众号的开发者中心。</p>
+<p>总而言之，想要成为开发者，最好有PHP语言程序、MySQL数据库、计算机网络通讯、及HTTP/XML/CSS/JS等基础。当然，小白也是可以的，只不过需要非同寻常的努力。</p>
+<p>首先我们要做的当然是搭建一个服务器了，本文介绍sae环境搭建。</p>
+<h3 id="1，注册账号"><a href="#1，注册账号" class="headerlink" title="1，注册账号"></a>1，注册账号</h3><p>进入sae官网<a href="http://sae.sina.com.cn/，直接用你的微博账号登录即可，纳尼，你还没有微博？！" target="_blank" rel="external">http://sae.sina.com.cn/，直接用你的微博账号登录即可，纳尼，你还没有微博？！</a></p>
+<p><img src="http://source.chenyalun.cn/50913001.jpg" alt=""></p>
+<p>&nbsp;</p>
+<p>授权完成后，填写相关信息就完成了sae的注册，sae的账号就是你的微博账号。要记住你填写的安全邮箱和密码，后面会用到的。接着点击实名认证，不要嫌麻烦，不实名认证的话，后果很严重，后果很严重，后果很严重。</p>
+<h3 id="2-实名认证"><a href="#2-实名认证" class="headerlink" title="2,实名认证"></a>2,实名认证</h3><p><img src="http://source.chenyalun.cn/50913002.jpg" alt=""></p>
+<p>&nbsp;</p>
+<h3 id="3-SVN部署"><a href="#3-SVN部署" class="headerlink" title="3, SVN部署"></a>3, SVN部署</h3><p>实名认证会有3天时间，资料正确的话很容易就通过了。话说sae有四种代码管理方式：在线安装应用，在线编辑，本地开发环境上传，还有就是SVN部署。我们这里采用SVN部署，因为它和阿里云服务器一样，可以随时回退到任意历史版本，简直炸天了o(^▽^)o</p>
+<p>&nbsp;</p>
+<p>不出意外的话你用的是windows操作系统，不要问我为什么知道，这就好办了，推荐使用Tortoise SVN客户端，下载地址: <a href="http://www.chenyalun.cn/go/?url=http://tortoisesvn.net/downloads.html" target="_blank" rel="external">http://tortoisesvn.net/downloads.html</a>，，注意选择是64位还是32位的哦，，安装完成后就不用管它了。</p>
+<p><img src="http://source.chenyalun.cn/50913003.jpg" alt=""></p>
+<h3 id="4，创建应用"><a href="#4，创建应用" class="headerlink" title="4，创建应用"></a>4，创建应用</h3><p>点击控制台，云应用sae，再点击创建新应用，下面以创建域名为“chenyalun”，名称为“微信”为例，语言选择php5.3，这个名称也是要记住的。</p>
+<p><img src="http://source.chenyalun.cn/50913004.jpg" alt=""><img src="http://source.chenyalun.cn/50913005.jpg" alt=""></p>
+<p>创建成功后出现图示下列界面：</p>
+<p><img src="http://source.chenyalun.cn/50913007.jpg" alt=""></p>
+<p>&nbsp;</p>
+<p>接着点击微信二字，我们进入应用管理界面，然后选择代码管理，选择SVN工具。</p>
+<p><img src="http://source.chenyalun.cn/50913006.jpg" alt=""><img src="http://source.chenyalun.cn/50913008.jpg" alt=""></p>
+<p>然后点击创建版本，默认版本是“1”</p>
+<p><img src="http://source.chenyalun.cn/50913009.jpg" alt=""></p>
+<p>&nbsp;</p>
+<p>下面所示就是创建好的代码版本，注意该图中有提示SVN仓库地址。我们要记下来，用心记住。</p>
+<p><img src="http://source.chenyalun.cn/50913010.jpg" alt=""></p>
+<p>&nbsp;</p>
+<h3 id="5，本地SVN连接"><a href="#5，本地SVN连接" class="headerlink" title="5，本地SVN连接"></a>5，本地SVN连接</h3><p>打开计算机，选择一个本地工作目录，我以F盘为例，进入F盘根目录，在空白区域右击，弹出的菜单中明显多出两个东东，就是SVN checkout和TortoiseSVN，如果没有，说明你并没有安装好Tortoise SVN客户端，然后点击SVN checkout，出现这个画面：</p>
+<p><img src="http://source.chenyalun.cn/50913011.jpg" alt=""></p>
+<p>SVN仓库地址     <a href="https://svn.sinaapp.com/你的应用名称（我的是chenyalun）" target="_blank" rel="external">https://svn.sinaapp.com/你的应用名称（我的是chenyalun）</a></p>
+<p>用户名  是SAE安全邮箱</p>
+<p>密码      是SAE安全密码</p>
+<p>这些在最开始注册时需要记下来的。</p>
+<p><img src="http://source.chenyalun.cn/50913012.jpg" alt=""></p>
+<p>然后点击ok即可，完成之后，明显在F盘多出了一个名为chenyalun的文件夹</p>
+<p><img src="http://source.chenyalun.cn/50913013.jpg" alt=""></p>
+<p>没错，在chenyalun文件夹中有个名称为“1”的文件夹，就是我们刚刚创建的版本号，打开之后看到index.php文件，再次点击<a href="http://1.chenyalun.sinaapp.com/，就可以访问了，当然内容是index.php文件中的代码。" target="_blank" rel="external">http://1.chenyalun.sinaapp.com/，就可以访问了，当然内容是index.php文件中的代码。</a></p>
+<p>就这样，sae开发环境已经搭建好了。如果我们需要修改代码，直接在index.php中修改即可，完成后，右击选择SVN Commit ，在弹出的对话框中点击OK，这样就上传到云端了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -443,7 +599,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -460,7 +616,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

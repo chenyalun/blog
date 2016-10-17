@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,298 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/26/UWP开发笔记四：随机数与筛子游戏/" itemprop="url">
+                  UWP开发笔记四：随机数与筛子游戏
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-26T05:00:25+08:00" content="2016-04-26">
+              2016-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/UWP开发笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">UWP开发笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/26/UWP开发笔记四：随机数与筛子游戏/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/26/UWP开发笔记四：随机数与筛子游戏/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>点击方块，方块随机出现类似筛子的点数，连续点击，连续出现随机的数。当然，是有两个方块的。点击底部命令栏的刷新按钮，两块“筛子”均恢复空白状态。</p>
+<p>命令栏：</p>
+<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                    &lt;AppBarButton Name=”NewAppBarButton”<br>                                  Icon=”Page”<br>                                  Click=”NewAppBarButton_Click”<br>                                  Label=”刷新”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
+<p><pre class="lang:default decode:true "> &lt;Grid.ColumnDefinitions&gt;<br>            &lt;ColumnDefinition Width=”<em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”</em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”*”/&gt;<br>        &lt;/Grid.ColumnDefinitions&gt;</pre></p>
+<pre><code>    &amp;lt;Grid Name=&quot;FirstGrid&quot;
+          Tapped=&quot;FirstGrid_Tapped&quot;
+          Width=&quot;100&quot;
+          Height=&quot;100&quot;
+          Background=&quot;HotPink&quot;
+          Grid.Column=&quot;1&quot;&amp;gt;
+        &amp;lt;Grid.RowDefinitions&amp;gt;
+            &amp;lt;RowDefinition /&amp;gt;
+            &amp;lt;RowDefinition /&amp;gt;
+            &amp;lt;RowDefinition /&amp;gt;
+        &amp;lt;/Grid.RowDefinitions&amp;gt;
+        &amp;lt;Grid.ColumnDefinitions&amp;gt;
+            &amp;lt;ColumnDefinition/&amp;gt;
+            &amp;lt;ColumnDefinition/&amp;gt;
+            &amp;lt;ColumnDefinition/&amp;gt;
+        &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+    &amp;lt;/Grid&amp;gt;
+
+&amp;lt;Grid Name=&quot;SecondGrid&quot;
+          Tapped=&quot;SecondGrid_Tapped&quot;
+          Width=&quot;100&quot;
+          Height=&quot;100&quot;
+          Background=&quot;HotPink&quot;
+          Grid.Column=&quot;3&quot;&amp;gt;
+    &amp;lt;Grid.RowDefinitions&amp;gt;
+        &amp;lt;RowDefinition /&amp;gt;
+        &amp;lt;RowDefinition /&amp;gt;
+        &amp;lt;RowDefinition /&amp;gt;
+    &amp;lt;/Grid.RowDefinitions&amp;gt;
+    &amp;lt;Grid.ColumnDefinitions&amp;gt;
+        &amp;lt;ColumnDefinition/&amp;gt;
+        &amp;lt;ColumnDefinition/&amp;gt;
+        &amp;lt;ColumnDefinition/&amp;gt;
+    &amp;lt;/Grid.ColumnDefinitions&amp;gt;
+
+&amp;lt;/Grid&amp;gt;&lt;/pre&gt;
+</code></pre><p>后台代码MainPage.xaml.cs：</p>
+<p>引入命名空间：</p>
+<p><pre class="lang:default decode:true ">//颜色<br>using Windows.UI;<br>//图形<br>using Windows.UI.Xaml.Shapes;</pre><br>逻辑代码：</p>
+<p><pre class="lang:default decode:true"> private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            //刷新页面<br>            FirstGrid.Children.Clear();<br>            SecondGrid.Children.Clear();<br>        }</pre></p>
+<pre><code>    private void FirstGrid_Tapped(object sender, TappedRoutedEventArgs e)
+    {
+        // 移除面板上所有元素
+        FirstGrid.Children.Clear();
+        switch (Number())
+        {
+            case 0:
+            case 1:
+                Add(FirstGrid, 1, 1);
+                break;
+            case 2:
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 2, 0);
+                break;
+            case 3:
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 1, 1);
+                Add(FirstGrid, 2, 0);
+                break;
+            case 4:
+                Add(FirstGrid, 0, 0);
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 2, 0);
+                Add(FirstGrid, 2, 2);
+                break;
+            case 5:
+                Add(FirstGrid, 0, 0);
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 2, 2);
+                Add(FirstGrid, 1, 1);
+                Add(FirstGrid, 2, 0);
+                break;
+            case 6:
+                Add(FirstGrid, 0, 0);
+                Add(FirstGrid, 0, 2);
+                Add(FirstGrid, 1, 0);
+                Add(FirstGrid, 1, 2);
+                Add(FirstGrid, 2, 0);
+                Add(FirstGrid, 2, 2);
+                break;
+        }
+    }
+
+// 设置随机数
+    public int Number()
+    {
+        // 返回0到7之间的随机整数
+        return new Random().Next(0, 7);
+    }
+
+    // 设置添加圆点
+    public void Add(Grid grid, int row, int col)
+    {
+
+        Ellipse ell = new Ellipse();
+        // 设置填充颜色
+        ell.Fill = new SolidColorBrush(Colors.White);
+        // 设置宽高度
+        ell.Width = 20;
+        ell.Height = 20;
+        // 设置圆点的在表格上的位置
+        ell.SetValue(Grid.RowProperty, row);
+        ell.SetValue(Grid.ColumnProperty, col);
+        // 获取面板元素（把ell元素添加到面板中）
+        grid.Children.Add(ell);
+    }
+
+    private void SecondGrid_Tapped(object sender, TappedRoutedEventArgs e)
+    {
+        // 移除面板上所有元素
+        SecondGrid.Children.Clear();
+        switch (Number())
+        {
+            case 0:
+            case 1:
+                Add(SecondGrid, 1, 1);
+                break;
+            case 2:
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 2, 0);
+                break;
+            case 3:
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 1, 1);
+                Add(SecondGrid, 2, 0);
+                break;
+            case 4:
+                Add(SecondGrid, 0, 0);
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 2, 0);
+                Add(SecondGrid, 2, 2);
+                break;
+            case 5:
+                Add(SecondGrid, 0, 0);
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 2, 2);
+                Add(SecondGrid, 1, 1);
+                Add(SecondGrid, 2, 0);
+                break;
+            case 6:
+                Add(SecondGrid, 0, 0);
+                Add(SecondGrid, 0, 2);
+                Add(SecondGrid, 1, 0);
+                Add(SecondGrid, 1, 2);
+                Add(SecondGrid,2, 0);
+                Add(SecondGrid, 2, 2);
+                break;
+        }
+    }&lt;/pre&gt;
+</code></pre><p>点击出现筛子点数：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/001.png" alt=""></p>
+<p>点击刷新按钮，清空所有元素：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/002.png" alt=""></p>
+<hr>
+<hr>
+<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><ul>
+<li><h3 id="随机数："><a href="#随机数：" class="headerlink" title="随机数："></a>随机数：</h3></li>
+</ul>
+<p>Random()与时间相关的种子；</p>
+<p>Random(seed)指定种子；</p>
+<p>Random().NextDouble返回大于或等于0.0且小于1.0的随机浮点数；</p>
+<p>Random().Next()返回非负随机整数；</p>
+<p>Random().Next(下限，上限)返回指定范围非负随机整数（可取下限，不可取上限）；</p>
+<h3 id="设置图形依赖属性："><a href="#设置图形依赖属性：" class="headerlink" title="设置图形依赖属性："></a>设置图形依赖属性：</h3><p>Ellipse ell = new Ellipse();</p>
+<p>// 设置填充颜色<br>ell.Fill = new SolidColorBrush(Colors.White);</p>
+<p>// 设置圆点的在表格上的位置<br>ell.SetValue(Grid.RowProperty, row);<br>ell.SetValue(Grid.ColumnProperty, col);<br>// 获取面板元素（把ell元素添加到面板中）<br>grid.Children.Add(ell);</p>
+<p>// 移除面板上所有元素<br>SecondGrid.Children.Clear();</p>
+<p>总结：代码比较琐碎，而且不是很令人满意，xaml创建图形很方便，可是处理逻辑的时候没有思路，只好把图形创建的代码写在后台。本想写个方法同时处理两个方块，然而并没有成功〒_〒</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1021,149 +1313,6 @@ rotating = true;&lt;/pre&gt;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/04/泛谈单链表的插入与删除/" itemprop="url">
-                  泛谈单链表的插入与删除
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T05:00:32+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/编程技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">编程技巧</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/04/泛谈单链表的插入与删除/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/04/泛谈单链表的插入与删除/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>谈过<a href="http://www.chenyalun.cn/泛谈顺序表的插入与删除.html" target="_blank" rel="external">顺序表的插入与删除</a>，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。</p>
-<p>先看定义：</p>
-<p><pre class="lang:default decode:true ">typedef struct LNode{<br>    int data;<br>    struct LNode <em>next;<br>}LNode;</em></pre><br>数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你咬我呀，哈哈。</p>
-<p>江湖传言LNode *p等价于LinkList p，不知道有木有人认同呢？闲话少说，看代码：</p>
-<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;</pre></p>
-<p>#include&lt;malloc.h&gt;<br>//定义并初始化单链表<br>typedef struct LNode{<br>    int data;<br>    struct LNode *next;<br>}LNode;</p>
-<p>//单链表的创建与初始化，设定共n个节点（不含头节点）<br>void CreateLinkList(LNode <em>a,int n) {<br>        LNode </em>p,<em>q;<br>        p=a;<br>    while(n–){<br>         q=(LNode </em>)malloc(sizeof(LNode *));<br>         scanf(“%d”,&amp;q-&gt;data);<br>           q-&gt;next=NULL;<br>        p-&gt;next=q;<br>        p=q;<br>    }<br>}</p>
-<p>//查找是否存在一个值为x的节点，若存在，删之，并返回OK，否则返回NOT FOUND<br>char <em>SearchAndDelete(LNode </em>c,int x){<br>    LNode <em>p,</em>q;<br>    p=c;<br>    //开始查找<br>    while(p-&gt;next!=NULL)<br>    {<br>        if(p-&gt;next-&gt;data==x)<br>        break;<br>        p=p-&gt;next;<br>    }<br>    //若找到则开始删除<br>    if(p-&gt;next==NULL)<br>    return “NOT FOUND”;<br>    else<br>    {<br>        q=p-&gt;next;<br>        p-&gt;next=p-&gt;next-&gt;next;<br>        free(q);<br>        return “OK”;<br>    }<br>}</p>
-<p>//在链表c中第n个节点位置插入元素e<br>void Insert(LNode <em>c,int n,int e){<br>    LNode </em>p=( LNode <em>)malloc(sizeof(LNode </em>)),<br>    <em>q=( LNode </em>)malloc(sizeof(LNode <em>));//插入的节点<br>    p=c;<br>    q-&gt;data=e;<br>    //找到要插入节点的位置<br>    for(int i=1;i&lt;n;i++){<br>        p=p-&gt;next;<br>    }<br>    //插入节点<br>    q-&gt;next=p-&gt;next;<br>    p-&gt;next=q;<br>}<br>//打印单链表<br>void Print(LNode </em>a){<br>    LNode <em>p=( LNode </em>)malloc(sizeof(LNode *));<br>    p=a-&gt;next;<br>    while(p!=NULL){<br>        printf(“%d\n”,p-&gt;data);<br>        p=p-&gt;next;<br>    }<br>}</p>
-<p>int main(){<br>   LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));<br>    CreateLinkList(a,5);<br>   Insert(a,3,10086);//假定在第3个位置插入数值为10086的节点<br> Print(a);<br>   printf(“—————-\n”);<br>SearchAndDelete(a,13);//查找并执行删除数值为13的节点<br>  Print(a);<br>return 0;<br>}<br><br>说明如下：</p>
-<p>1，假定输入的是11 12 13 14 15五个数值。在第三个位置（13的位置）插入一个数据域为10086的节点。此时原来的数值已经变成了11 12 10086 13 14 15</p>
-<p>2，完事后，我为了方便不再另写代码，在11 12 10086 13 14 15的基础上假定查找并删除数据域为13的节点。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110101.jpg" alt=""></p>
-<p>当然还有值得体会的是，我把节点的内存分配放在主函数里，不知道是不是有人想打我呢？</p>
-<p>像这样：</p>
-<p><pre class="nums:false lang:default decode:true ">LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>当然，清晰一点就是</p>
-<p>&nbsp;</p>
-<p><pre class="nums:false lang:default decode:true ">LNode <em>a;<br>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>两者效果一样。这不是重点。看下面的两段代码：</p>
-<p><pre class="lang:default decode:true ">void Print(LNode *a){</pre></p>
-<p>}<br>和</p>
-<p><pre class="lang:default decode:true">void Print(LNode <em>&amp;a){<br>    a=( LNode </em>)malloc(sizeof(LNode *));</pre></p>
-<p>}<br>这才是重点，和小伙伴研究一下，决定采取有违伦理惨无人道的第一种方式。最后在主函数中再调用malloc觉得还是蛮灵活轻便的。</p>
-<p>当然，上面的代码不是为了解题，只是提供一个思路，具体可视情况修改。</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1209,7 +1358,7 @@ rotating = true;&lt;/pre&gt;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1226,7 +1375,7 @@ rotating = true;&lt;/pre&gt;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

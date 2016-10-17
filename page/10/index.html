@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,507 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/18/回复用户消息/" itemprop="url">
+                  回复用户消息
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-18T21:52:39+08:00" content="2015-09-18">
+              2015-09-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
+                    <span itemprop="name">公众号开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/18/回复用户消息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/18/回复用户消息/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>当用户发送消息给公众号时，会产生一个POST请求，开发者可以在响应包（Get）中返回特定XML结构，来对该消息进行响应（现支持回复文本、图片、图文、语音、视频、音乐）。严格来说，发送被动响应消息其实并不是一种接口，而是对微信服务器发过来消息的一次回复。那么现在我们就来分析下回复给用户的六种消息类型。依然按照原先接受普通消息的格式，分析其xml，进行相关参数解释，以及给出实例代码。</p>
+<h3 id="1，文本消息"><a href="#1，文本消息" class="headerlink" title="1，文本消息"></a>1，文本消息</h3><p>依然是xml格式：</p>
+<pre class="lang:default decode:true ">&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;
+&lt;Content&gt;&lt;![CDATA[你好]]&gt;&lt;/Content&gt;
+&lt;/xml&gt;</pre>
+<table border="1" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>ToUserName</td>
+<td>是</td>
+<td>接收方帐号（收到的OpenID）</td>
+</tr>
+<tr>
+<td>FromUserName</td>
+<td>是</td>
+<td>**开发者**微信号</td>
+</tr>
+<tr>
+<td>CreateTime</td>
+<td>是</td>
+<td>消息创建时间 （整型）</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>是</td>
+<td>text</td>
+</tr>
+<tr>
+<td>Content</td>
+<td>是</td>
+<td>回复的消息内容（换行：在content中能够换行，微信客户端就支持换行显示）</td>
+</tr>
+</tbody>
+</table>
+<pre class="lang:default decode:true"> const REPLY_TYPE_TEXT = 'text';
+
+/**
+ * 生成向用户发送的文字信息
+ * @param string $content
+ * @return string xml字符串
+ */
+ public function outputText($content)
+ {
+ $textTpl = '&lt;xml&gt;
+ &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
+ &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
+ &lt;CreateTime&gt;%s&lt;/CreateTime&gt;
+ &lt;MsgType&gt;&lt;![CDATA[%s]]&gt;&lt;/MsgType&gt;
+ &lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt; 
+ &lt;/xml&gt;';
+
+ $text = sprintf($textTpl, $this-&gt;_postData-&gt;FromUserName, $this-&gt;_postData-&gt;ToUserName, time(), self::REPLY_TYPE_TEXT, $content);
+ return $text;
+ }
+
+</pre>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/5091809180002.png" alt=""></h3><h3 id="2，图片消息"><a href="#2，图片消息" class="headerlink" title="2，图片消息"></a>2，图片消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[image]]&gt;&lt;/MsgType&gt;<br>&lt;Image&gt;<br>&lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br>&lt;/Image&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>image</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>是</td></p>
+<p><td>通过素材管理接口上传多媒体文件，得到的id。</td><br><br><br></p>
+<p><pre class="lang:default decode:true">const REPLY_TYPE_IMAGE=’image’;<br>/**</pre></p>
+<pre><code> * 生成向用户发送的图片信息
+ * @param string $media_id
+ * @return string xml字符串
+ */
+public function outputImage($media_id)
+{
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+            &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+            &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+            &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+            &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+            &amp;lt;Image&amp;gt;
+                &amp;lt;MediaId&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MediaId&amp;gt;
+            &amp;lt;/Image&amp;gt;
+        &amp;lt;/xml&amp;gt;&apos;;
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_VOICE, $media_id);
+    return $text;
+}
+</code></pre><p><br>注意：图片，语音，视频以及音乐缩略图的媒体ID（MediaID）是自己上传之后获取的，微信服务器只保存3天，所以你在测试时请自行上传。上传方法：把图片直接发送到测试微信公众号就可以得到媒体ID了，像视频，语音之类以此类推，想要查看媒体ID，可以直接把【<a href="http://www.chenyalun.cn/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD%E4%BB%A3%E7%A0%81.html" target="_blank" rel="external">微信公众账号接收消息类型判断代码</a>】这篇文章中的代码文件配置成微信接口即可。</p>
+<h3 id="3，语音消息"><a href="#3，语音消息" class="headerlink" title="3，语音消息"></a>3，语音消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[voice]]&gt;&lt;/MsgType&gt;<br>&lt;Voice&gt;<br>&lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br>&lt;/Voice&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间戳 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>语音，voice</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>是</td></p>
+<p><td>通过素材管理接口上传多媒体文件，得到的id</td><br><br><br></p>
+<p><pre class="lang:default decode:true"> const REPLY_TYPE_VOICE = ‘voice’;</pre></p>
+<p>/**</p>
+<pre><code> * 生成向用户发送的语音信息
+ * @param string $content
+ * @return string xml字符串
+ */
+public function outputVoice($media_id)
+{
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+            &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+            &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+            &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+            &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+            &amp;lt;Voice&amp;gt;
+                &amp;lt;MediaId&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MediaId&amp;gt;
+            &amp;lt;/Voice&amp;gt;
+        &amp;lt;/xml&amp;gt;&apos;;
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_VOICE, $media_id);
+    return $text;
+}
+</code></pre><p><br>4，视频消息</p>
+<p><pre class="lang:default decode:true">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;!<br>[CDATA]&gt;<br>&lt;/MsgType&gt;<br>&lt;Video&gt;<br> &lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br>&lt;Title&gt;&lt;![CDATA[title]]&gt;&lt;/Title&gt;<br> &lt;Description&gt;&lt;![CDATA[description]]&gt;&lt;/Description&gt; &lt;/Video&gt; &lt;/xml&gt;</pre><br>&nbsp;</p>
+<p>&nbsp;</p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>video</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>是</td></p>
+<p><td>通过素材管理接口上传多媒体文件，得到的id</td><br></p>
+<p><tr></tr></p>
+<p><td>Title</td></p>
+<p><td>否</td></p>
+<p><td>视频消息的标题</td><br></p>
+<p><tr></tr></p>
+<p><td>Description</td></p>
+<p><td>否</td></p>
+<p><td>视频消息的描述</td><br><br><br></p>
+<p><pre class="lang:default decode:true"> const REPLY_TYPE_VIDEO = ‘video’;</pre></p>
+<p>/**</p>
+<pre><code> * 生成向用户发送的视频信息
+ * @param string $content
+ * @return string xml字符串
+ */
+public function outputVideo($videopost)
+{
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+            &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+            &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+            &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+            &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+            &amp;lt;Video&amp;gt;
+                &amp;lt;MediaId&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MediaId&amp;gt;
+                &amp;lt;Title&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Title&amp;gt;
+                &amp;lt;Description&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Description&amp;gt;
+            &amp;lt;/Video&amp;gt; 
+        &amp;lt;/xml&amp;gt;&apos;;
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_VIDEO, $videopost[&apos;media_id&apos;], $videopost[&apos;title&apos;], $videopost[&apos;description&apos;]);
+    return $text;
+}
+</code></pre><p><br>&nbsp;</p>
+<h3 id="5，音乐消息"><a href="#5，音乐消息" class="headerlink" title="5，音乐消息"></a>5，音乐消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;<br>&lt;![CDATA[music]]&gt;&lt;/MsgType&gt;<br>&lt;Music&gt;<br>&lt;Title&gt;&lt;![CDATA[TITLE]]&gt;&lt;/Title&gt;<br>&lt;Description&gt;&lt;![CDATA[DESCRIPTION]]&gt;&lt;/Description&gt;<br>&lt;MusicUrl&gt;&lt;![CDATA[MUSIC_Url]]&gt;&lt;/MusicUrl&gt;<br>&lt;HQMusicUrl&gt;&lt;![CDATA[HQ_MUSIC_Url]]&gt;&lt;/HQMusicUrl&gt;<br>&lt;ThumbMediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/ThumbMediaId&gt;<br>&lt;/Music&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>music</td><br></p>
+<p><tr></tr></p>
+<p><td>Title</td></p>
+<p><td>否</td></p>
+<p><td>音乐标题</td><br></p>
+<p><tr></tr></p>
+<p><td>Description</td></p>
+<p><td>否</td></p>
+<p><td>音乐描述</td><br></p>
+<p><tr></tr></p>
+<p><td>MusicURL</td></p>
+<p><td>否</td></p>
+<p><td>音乐链接</td><br></p>
+<p><tr></tr></p>
+<p><td>HQMusicUrl</td></p>
+<p><td>否</td></p>
+<p><td>高质量音乐链接，WIFI环境优先使用该链接播放音乐</td><br></p>
+<p><tr></tr></p>
+<p><td>ThumbMediaId</td></p>
+<p><td>否</td></p>
+<p><td>缩略图的媒体id，通过素材管理接口上传多媒体文件，得到的id</td><br><br><br></p>
+<p><pre class="lang:default decode:true ">const REPLY_TYPE_MUSIC=’music’;<br> /**</pre></p>
+<pre><code> * 生成向用户发送的音乐信息
+ * @param type $musicpost
+ * @return type
+ * @throws Exception
+ */
+public function outputMusic($musicpost){
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+        &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+        &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+        &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+        &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt; 
+        &amp;lt;Music&amp;gt;%s&amp;lt;/Music&amp;gt;
+    &amp;lt;/xml&amp;gt;&apos;;
+
+    $musicTpl = &apos;
+        &amp;lt;Title&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Title&amp;gt;
+        &amp;lt;Description&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Description&amp;gt;
+        &amp;lt;MusicUrl&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MusicUrl&amp;gt;
+        &amp;lt;HQMusicUrl&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/HQMusicUrl&amp;gt;
+        &apos;;
+    $music = &apos;&apos;;        
+    if (is_array($musicpost)){
+        $music .= sprintf($musicTpl, $musicpost[&apos;title&apos;], $musicpost[&apos;description&apos;], $musicpost[&apos;musicurl&apos;], $musicpost[&apos;hdmusicurl&apos;]);
+    }else{
+        throw new Exception(&apos;$posts 数据结构错误&apos;);
+    }
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_MUSIC, $music);
+    return $text;
+
+}
+</code></pre><p><br><img src="http://source.chenyalun.cn/5091809180010.png" alt=""></p>
+<h3 id="6，图文消息"><a href="#6，图文消息" class="headerlink" title="6，图文消息"></a>6，图文消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[news]]&gt;&lt;/MsgType&gt;<br>&lt;ArticleCount&gt;2&lt;/ArticleCount&gt;<br>&lt;Articles&gt;<br>&lt;item&gt;<br>&lt;Title&gt;&lt;![CDATA[title1]]&gt;&lt;/Title&gt;<br>&lt;Description&gt;&lt;![CDATA[description1]]&gt;&lt;/Description&gt;<br>&lt;PicUrl&gt;&lt;![CDATA[picurl]]&gt;&lt;/PicUrl&gt;<br>&lt;Url&gt;&lt;![CDATA[url]]&gt;&lt;/Url&gt;<br>&lt;/item&gt;<br>&lt;item&gt;<br>&lt;Title&gt;&lt;![CDATA[title]]&gt;&lt;/Title&gt;<br>&lt;Description&gt;&lt;![CDATA[description]]&gt;&lt;/Description&gt;<br>&lt;PicUrl&gt;&lt;![CDATA[picurl]]&gt;&lt;/PicUrl&gt;<br>&lt;Url&gt;&lt;![CDATA[url]]&gt;&lt;/Url&gt;<br>&lt;/item&gt;<br>&lt;/Articles&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>news</td><br></p>
+<p><tr></tr></p>
+<p><td>ArticleCount</td></p>
+<p><td>是</td></p>
+<p><td>图文消息个数，限制为10条以内</td><br></p>
+<p><tr></tr></p>
+<p><td>Articles</td></p>
+<p><td>是</td></p>
+<p><td>多条图文消息信息，默认第一个item为大图,注意，如果图文数超过10，则将会无响应</td><br></p>
+<p><tr></tr></p>
+<p><td>Title</td></p>
+<p><td>否</td></p>
+<p><td>图文消息标题</td><br></p>
+<p><tr></tr></p>
+<p><td>Description</td></p>
+<p><td>否</td></p>
+<p><td>图文消息描述</td><br></p>
+<p><tr></tr></p>
+<p><td>PicUrl</td></p>
+<p><td>否</td></p>
+<p><td>图片链接，支持JPG、PNG格式，较好的效果为大图360<em>200，小图200</em>200</td><br></p>
+<p><tr></tr></p>
+<p><td>Url</td></p>
+<p><td>否</td></p>
+<p><td>点击图文消息跳转链接</td><br><br><br></p>
+<p><pre class="lang:default decode:true ">const REPLY_TYPE_NEWS = ‘news’;<br>   /**</pre></p>
+<pre><code> * 生成向用户发送的图文信息
+ * @param arrry $posts 文章数组，每一个元素是一个文章数组，索引跟微信官方接口说明一致
+ * @return string xml字符串
+ */
+public function outputNews($posts = array())
+{
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+         &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+         &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+         &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+         &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+         &amp;lt;ArticleCount&amp;gt;%d&amp;lt;/ArticleCount&amp;gt;
+         &amp;lt;Articles&amp;gt;%s&amp;lt;/Articles&amp;gt;
+     &amp;lt;/xml&amp;gt;&apos;;
+
+    $itemTpl = &apos;&amp;lt;item&amp;gt;
+         &amp;lt;Title&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Title&amp;gt;
+         &amp;lt;Discription&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Discription&amp;gt;
+         &amp;lt;PicUrl&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/PicUrl&amp;gt;
+         &amp;lt;Url&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Url&amp;gt;
+     &amp;lt;/item&amp;gt;&apos;;
+
+    $items = &apos;&apos;;
+    foreach ((array)$posts as $p) {
+        if (is_array($p))
+            $items .= sprintf($itemTpl, $p[&apos;title&apos;], $p[&apos;discription&apos;], $p[&apos;picurl&apos;], $p[&apos;url&apos;]);
+        else
+            throw new Exception(&apos;$posts 数据结构错误&apos;);
+    }
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_NEWS,  count($posts), $items);
+    return $text;
+}
+</code></pre><p><br><img src="http://source.chenyalun.cn/5091809180007.png" alt="">         <img src="http://source.chenyalun.cn/5091809180008.png" alt=""></p>
+<p>以上就把回复用户消息类型介绍完了，文中的代码和实际中的有所差距，本着知识共享的原则，现在将实际的代码分享出来，可以查看文章：【<a href="http://www.chenyalun.cn/%e5%9b%9e%e5%a4%8d%e5%90%84%e7%a7%8d%e6%b6%88%e6%81%af%e7%b1%bb%e5%9e%8b%e4%bb%a3%e7%a0%81.html" target="_blank" rel="external">回复各种消息类型代码</a>】</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1484,308 +1985,6 @@ private function transmitText($object, $content)
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/15/收发消息的XML数据包分析（下）/" itemprop="url">
-                  收发消息的XML数据包分析（下）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-15T22:20:24+08:00" content="2015-09-15">
-              2015-09-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
-                    <span itemprop="name">公众号开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/15/收发消息的XML数据包分析（下）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/15/收发消息的XML数据包分析（下）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在前文的<a href="http://www.chenyalun.cn/%E6%94%B6%E5%8F%91%E6%B6%88%E6%81%AF%E7%9A%84xml%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.html" target="_blank" rel="external">收发消息的XML数据包分析（上）</a>中我们介绍了文本，图片以及语音三种消息类型，并给出了相关的代码，今天，我们就接着介绍地理位置，链接，视频消息类型，并分析它们的消息结构。</p>
-<h3 id="一，地理位置"><a href="#一，地理位置" class="headerlink" title="一，地理位置"></a>一，地理位置</h3><p>消息结构如下：</p>
-<pre class="lang:default decode:true ">&lt;xml&gt;
-&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
-&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;
-&lt;CreateTime&gt;1351776360&lt;/CreateTime&gt;
-&lt;MsgType&gt;&lt;![CDATA[location]]&gt;&lt;/MsgType&gt;
-&lt;Location_X&gt;23.134521&lt;/Location_X&gt;
-&lt;Location_Y&gt;113.358803&lt;/Location_Y&gt;
-&lt;Scale&gt;20&lt;/Scale&gt;
-&lt;Label&gt;&lt;![CDATA[位置信息]]&gt;&lt;/Label&gt;
-&lt;MsgId&gt;1234567890123456&lt;/MsgId&gt;
-&lt;/xml&gt;</pre>
-&nbsp;
-<table border="1" cellspacing="0" cellpadding="4" align="center">
-<tbody>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-<tr>
-<td>ToUserName</td>
-<td>**开发者**微信号</td>
-</tr>
-<tr>
-<td>FromUserName</td>
-<td>发送方帐号（一个OpenID）</td>
-</tr>
-<tr>
-<td>CreateTime</td>
-<td>消息创建时间 （整型）</td>
-</tr>
-<tr>
-<td>MsgType</td>
-<td>location</td>
-</tr>
-<tr>
-<td>Location_X</td>
-<td>地理位置维度</td>
-</tr>
-<tr>
-<td>Location_Y</td>
-<td>地理位置经度</td>
-</tr>
-<tr>
-<td>Scale</td>
-<td>地图缩放大小</td>
-</tr>
-<tr>
-<td>Label</td>
-<td>地理位置信息</td>
-</tr>
-<tr>
-<td>MsgId</td>
-<td>消息id，64位整型</td>
-</tr>
-</tbody>
-</table>
-isLocationMsg用于判断消息的类型是否为位置消息：
-<pre class="lang:default decode:true "> const MSG_TYPE_LOCATION = 'location';
-
-/**
-     * 判断是否是位置信息
-     * @return boolean
-     */
-    public function isLocationMsg()
-    {
-        return $this-&gt;_postData-&gt;MsgType == self::MSG_TYPE_LOCATION;
-    }
-//发送消息
- $this-&gt;outputText("您发送的是位置消息,维度为: ".$data-&gt;Location_X."\n经度为: ".$data-&gt;Location_Y."\n缩放级别为: ".$data-&gt;Scale."\n位置为: ".$data-&gt;Label);
-
-</pre>
-
-<h3 id=""><a href="#" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/5091809180004.png" alt=""></h3><h3 id="二，链接消息"><a href="#二，链接消息" class="headerlink" title="二，链接消息"></a>二，链接消息</h3><p>此处的链接消息与URL有所不同，因为用户直接发送的URL仍是被视作文本消息，而链接消息是指用户点击右上角的“发送给好友”“分享到朋友圈”，此处的链接才是真正的链接，我们可以通过“收藏”功能，把它保存下来，再发送到公众号。</p>
-<p>链接消息的数据结构如下</p>
-<pre class="lang:default decode:true ">&lt;xml&gt;
-&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
-&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;
-&lt;CreateTime&gt;1351776360&lt;/CreateTime&gt;
-&lt;MsgType&gt;&lt;![CDATA[link]]&gt;&lt;/MsgType&gt;
-&lt;Title&gt;&lt;![CDATA[公众平台官网链接]]&gt;&lt;/Title&gt;
-&lt;Description&gt;&lt;![CDATA[公众平台官网链接]]&gt;&lt;/Description&gt;
-&lt;Url&gt;&lt;![CDATA[url]]&gt;&lt;/Url&gt;
-&lt;MsgId&gt;1234567890123456&lt;/MsgId&gt;
-&lt;/xml&gt;</pre>
-&nbsp;
-<table border="1" cellspacing="0" cellpadding="4" align="center">
-<tbody>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-<tr>
-<td>ToUserName</td>
-<td>接收方微信号</td>
-</tr>
-<tr>
-<td>FromUserName</td>
-<td>发送方微信号，若为普通用户，则是一个OpenID</td>
-</tr>
-<tr>
-<td>CreateTime</td>
-<td>消息创建时间</td>
-</tr>
-<tr>
-<td>MsgType</td>
-<td>消息类型，link</td>
-</tr>
-<tr>
-<td>Title</td>
-<td>消息标题</td>
-</tr>
-<tr>
-<td>Description</td>
-<td>消息描述</td>
-</tr>
-<tr>
-<td>Url</td>
-<td>消息链接</td>
-</tr>
-<tr>
-<td>MsgId</td>
-<td>消息id，64位整型</td>
-</tr>
-</tbody>
-</table>
-&nbsp;
-
-isLinkMsg用于判断消息的类型是否为链接类型
-<pre class="lang:default decode:true">   const MSG_TYPE_LINK='link';
-
-/**
-     * 判断是否是链接
-     * @return boolean
-     */
-    public function isLinkMsg(){
-        return $this-&gt;_postData-&gt;MsgType == self::MSG_TYPE_LINK;
-    }
-
-//发送消息
-      $this-&gt;outputText("您发送的是链接消息,标题是: ".$data-&gt;Title."\n摘要是: ".$data-&gt;Description."\n链接是: ".$data-&gt;Url);
-</pre>
-
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/5091809180003.png" alt=""></h3><h3 id="三，视频消息"><a href="#三，视频消息" class="headerlink" title="三，视频消息"></a>三，视频消息</h3><p>目前分为视频消息和短视频消息，二者仅有丝毫的不同，数据结构如下：</p>
-<p>&nbsp;</p>
-<p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;1357290913&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA]&gt;<br>&lt;/MsgType&gt; &lt;MediaId&gt;<br>&lt;![CDATA[media_id]]&gt;<br>&lt;/MediaId&gt;<br> &lt;ThumbMediaId&gt;<br>&lt;![CDATA[thumb_media_id]]&gt;<br> &lt;/ThumbMediaId&gt;<br>&lt;MsgId&gt;1234567890123456&lt;/MsgId&gt; &lt;/xml&gt;</pre><br>&nbsp;</p>
-<p><table border="1" cellspacing="0" cellpadding="4" align="center"></table></p>
-<p><tbody></tbody></p>
-<p><tr></tr></p>
-<p><th>参数</th></p>
-<p><th>描述</th><br></p>
-<p><tr></tr></p>
-<p><td>ToUserName</td></p>
-<p><td><strong>开发者</strong>微信号</td><br></p>
-<p><tr></tr></p>
-<p><td>FromUserName</td></p>
-<p><td>发送方帐号（一个OpenID）</td><br></p>
-<p><tr></tr></p>
-<p><td>CreateTime</td></p>
-<p><td>消息创建时间 （整型）</td><br></p>
-<p><tr></tr></p>
-<p><td>MsgType</td></p>
-<p><td><strong>视频为video，小视频为shortvideo</strong></td><br></p>
-<p><tr></tr></p>
-<p><td>MediaId</td></p>
-<p><td>视频消息媒体id，可以调用多媒体文件下载接口拉取数据。</td><br></p>
-<p><tr></tr></p>
-<p><td>ThumbMediaId</td></p>
-<p><td>视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。</td><br></p>
-<p><tr></tr></p>
-<p><td>MsgId</td></p>
-<p><td>消息id，64位整型</td><br><br><br><br>isVideoMsg用于判断消息类型是否为视频消息</p>
-<p><pre class="lang:default decode:true">  const MSG_TYPE_VIDEO=’video’;</pre></p>
-<p>/**</p>
-<pre><code> * 判断是否是视频消息
- * @return boolean
- */
-public function isVideoMsg(){
-    return $this-&amp;gt;_postData-&amp;gt;MsgType == self::MSG_TYPE_VIDEO;
-}
-</code></pre><p>//发送消息<br>$this-&gt;outputText(“您发送的是视频消息,媒体ID是: “.$data-&gt;MediaId.”\n缩略图ID是: “.$data-&gt;ThumbMediaId);<br><br>于是所有的普通消息类型我们都分析完了，<span class="toctext">文本消息，</span><span class="toctext">图片消息，</span><span class="toctext">语音消息，</span> <span class="toctext">视频消息，</span><span class="toctext">小视频消息，</span><span class="toctext">地理位置消息，</span><span class="toctext">链接消息都是普通的消息类型，也是最常用的消息类型，所以需要认真研习掌握，当然文中的全部代码会给出供下载，可自行配置测试。</span></p>
-<p>具体代码可点击文章查看： <a href="http://www.chenyalun.cn/%e5%be%ae%e4%bf%a1%e5%85%ac%e4%bc%97%e8%b4%a6%e5%8f%b7%e6%8e%a5%e6%94%b6%e6%b6%88%e6%81%af%e7%b1%bb%e5%9e%8b%e5%88%a4%e6%96%ad%e4%bb%a3%e7%a0%81.html" target="_blank" rel="external">微信公众账号接收消息类型判断代码</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1831,7 +2030,7 @@ public function isVideoMsg(){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1848,7 +2047,7 @@ public function isVideoMsg(){
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

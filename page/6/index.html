@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,460 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/11/题目1001：整数a+b的程序实现（下）/" itemprop="url">
+                  题目1001：整数a+b的程序实现（下）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-11T05:00:06+08:00" content="2015-10-11">
+              2015-10-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/程序试题/" itemprop="url" rel="index">
+                    <span itemprop="name">程序试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/11/题目1001：整数a+b的程序实现（下）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/11/题目1001：整数a+b的程序实现（下）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在【<a href="http://www.chenyalun.cn/%e9%a2%98%e7%9b%ae1001%ef%bc%9a%e6%95%b4%e6%95%b0ab%e7%9a%84%e7%a8%8b%e5%ba%8f%e5%ae%9e%e7%8e%b0%ef%bc%88%e4%b8%8a%ef%bc%89.html" target="_blank" rel="external">题目1001：整数a+b的程序实现（上）</a>】中我们简要讨论了正整数相加，当然，整数的大小在计算机心理承受范围之内，时隔好几天，继续探讨，这里就说下，大整数的加法。</p>
+<p>关于高精度正整数加法，我首先想到的是利用数组存储那些可爱的数字们，但是又考虑到字符串同样可以存储200位的数字，然后就有下面3种解决方案。<br>1，只用数组<br>2，只用字符串<br>3，数组和字符串双管齐下<br>方案1：每个数组元素存储1位，需要多少位数字就开辟多少个数组元素<br>优点：数组中的每一位都是实实在在的数字，可以直接加减，运算时极为方便；<br>缺点：从键盘输入的时候很不爽，输入时每两位数之间必须有分隔符，才能保证一位数组元素存储一个数字，不符合正常人的输入习惯；</p>
+<p>方案2：其实字符串的最大长度是255，可以表示255位，那么200位当然不在话下<br>优点：可以直接输入输出，输入时，每两位数之间不必分隔符，符合地球人的输入习惯；<br>缺点：字符串中的每一位是一个字符，而字符是不能直接进行运算的，我们必须先将它转化为数值再进行运算，在转化的时候要考虑很多东西；</p>
+<p>方案3：输入的时候用字符串，计算的时候用数组。<br>优点：充分利用字符串和数组的优点，趋利避害，计算简便，容易理解，这个在臣妾看来，是极好的呀；<br>缺点：我们需要开辟数组存储空间，开辟字符串存储空间，些许占内存；<br>但是综合以上几点，显然，方案3是最巧妙的，既然如此，那代码怎么写呢？</p>
+<p>考虑大整数相加有两种情况（美观起见我用三位数代替200位数的情况，效果其实一样：</p>
+<p>a[3] 099<br>b[3] 009<br>c[3] 108</p>
+<p>和<br>a[3] 091<br>b[3] 002<br>c[3] 093<br>显而易见，我们需要将两个字符串中长度最大的值作为所得结果数组c的长度，这时还要考虑数组c的首位元素是否为0，因为不可能输出093这样的数，必须把0去掉。</p>
+<p>思路：<br>1，开辟两个字符串用于存储键入的两串数字<br>2，求取两个字符串中的最大长度<br>3，将字符串转化为数组（从末尾开始依次存取）<br>4，数组中每位元素相加，并考虑进位，得出的结果存储在c[3]中<br>5，判断相加的结果c[3]数组首位c[0]是否为0，若为0，从c[1]开始打印，若不为0，从c[0]开始打印。<br>6，喝杯茶开始敲代码</p>
+<p>为节约内存，我把两个数组相加的结果依然存储在数组a中，就不再开辟多余的数组啦。代码如下：</p>
+<h3 id="1，C语言版"><a href="#1，C语言版" class="headerlink" title="1，C语言版"></a>1，C语言版</h3><pre class="lang:default decode:true">//高精度正整数相加-C语言
+//@陈亚伦博客 
+
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+    void Add(char s1[200],char s2[200]){    
+    int a[200]={0},b[200]={0},l1,l2,m,n,i;
+    l1=strlen(s1);
+    l2=strlen(s2);               //分别取出s1、s2的长度 赋给l1,l2 
+    if(l1&lt;l2)
+       m=l2;
+    else
+       m=l1;
+    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
+    for( i=0;i&lt;l1;m--,i++) 
+        a[m]=s1[l1-1-i]-'0';
+    for(m=n,i=0;i&lt;l2;m--,i++)
+         b[m]=s2[l2-1-i]-'0';    //将字符串s1，s2分别转化为数组a，b     
+    for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
+    {    
+       a[i]+=b[i];              //把两个数的结果给a[i] 
+         if(a[i]&gt;=10)            //对是否进位进行判断
+        {    
+        a[i]-=10;
+        a[i-1]+=1;              //a[i-1]++;
+         }
+    }
+    if(a[0]!=0)                 //判断数组ａ的首位是否为０
+    {
+     for(i=0;i&lt;=n;i++)
+       printf("%d",a[i]);
+    }
+    else 
+    {
+     for(i=1;i&lt;=n;i++)         //舍去a[0] 
+       printf("%d",a[i]);
+    }
+
+}
+int main(){ 
+    char s1[200],s2[200];
+    gets(s1);
+    gets(s2);   
+    Add(s1,s2);                //读取输入的两个字符串s1，s2
+    printf("\n");           
+    return 0;
+}</pre>
+
+<h3 id="2，C-版"><a href="#2，C-版" class="headerlink" title="2，C++版"></a>2，C++版</h3><pre class="lang:default decode:true">//高精度加法-C++版
+//@陈亚伦博客 
+#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+
+void Add(string s1,string s2){
+    int a[200]={0},b[200]={0},l1,l2,m,n,i;
+
+    //分别取出s1、s2的长度 赋给l1,l2               
+    l1=s1.length();  
+    l2=s2.length();      
+    if(l1&lt;l2)
+       m=l2;
+    else
+       m=l1;
+    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
+
+    //将字符串s1，s2分别转化为数组a，b 
+    for( i=0;i&lt;l1;m--,i++) 
+        a[m]=s1[l1-1-i]-'0';
+    for(m=n,i=0;i&lt;l2;m--,i++)
+         b[m]=s2[l2-1-i]-'0';
+
+    //for循环开始实现两个数组相加     
+    for(i=n;i&gt;=0;i--)          
+    {    
+       a[i]+=b[i];              //把两个数的结果给a[i] 
+         if(a[i]&gt;=10)            //对是否进位进行判断
+        {    
+        a[i]-=10;
+        a[i-1]+=1;              //即 a[i-1]++;
+         }
+    }
+
+    //从首位开始打印得出的结果 
+    if(a[0]!=0)                 //判断数组ａ的首位是否为０
+    {
+     for(i=0;i&lt;=n;i++)
+      cout&lt;&lt;a[i];
+    }
+    else                        //舍去a[0] 
+    {
+     for(i=1;i&lt;=n;i++)         
+        cout&lt;&lt;a[i];
+    }
+}
+
+int main(){    
+    char s1[200],s2[200];
+
+    //读取输入的两个字符串s1，s2
+    cin.getline(s1, 200);
+    cin.getline(s2, 200);
+    Add(s1,s2);
+
+    //美观起见打印个换行 
+    cout&lt;&lt;endl;         
+    return 0;
+
+}</pre>
+
+<h3 id="3，JAVA版"><a href="#3，JAVA版" class="headerlink" title="3，JAVA版"></a>3，JAVA版</h3><pre class="lang:default decode:true">//高精度加法-JAVA版
+//@陈亚伦博客 
+import java.util.*;
+
+public class Add {
+    static void Add(String s1,String s2){
+        //字符串转化为数组
+        int a[]=new int [200];
+        int b[]=new int [200];       
+        int l1,l2,i,m,n;
+        //取出字符串s1,s2两者的最大长度，赋予m,n,并保证k是两者最大者
+        l1= s1.length();
+        l2= s2.length();
+        if(l1&lt;=l2)
+            m=l2;
+        else
+            m=l1; 
+            n=m;
+
+        //将字符串s1转化为数组
+        for(i=0;i&lt;l1;m--,i++) 
+        a[m]=s1.charAt(l1-1-i)-'0';
+
+        //将字符串s2转化为数组
+        for(m=n,i=0;i&lt;l2;m--,i++)
+        b[m]=s2.charAt(l2-1-i)-'0';
+
+        //实现数组a，b从末位元素开始相加
+            for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
+                {    
+                   a[i]+=b[i];              //把两个数的结果给a[i] 
+                     if(a[i]&gt;=10)            //对是否进位进行判断
+                    {    
+                    a[i]-=10;
+                    a[i-1]+=1;       
+                     }
+                }        
+         //判断a[0]是否为0
+          if(a[0]==0)
+              for(i=1;i&lt;=n;i++)
+                 System.out.print(a[i]);
+          else
+              for(i=0;i&lt;=n;i++)
+                 System.out.print(a[i]);        
+    } 
+    public static void main(String[] args) {
+                Scanner s=new Scanner(System.in);
+                String s1=new String ();
+                String s2=new String ();
+                s1=s.nextLine();
+                s2=s.nextLine();      
+                Add(s1,s2);
+                //换行美化
+                System.out.println();
+}
+}</pre>
+以上代码敲完，然后觉得不过瘾，是不是可以多组输入呢？
+
+这个应该是比较简单的，不多说，直接上代码。
+
+* * *
+
+&nbsp;
+
+### 4，C语言版多组输入
+
+<pre class="lang:default decode:true">//高精度加法-C语言
+//@陈亚伦博客 
+#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+
+    void Add(char s1[200],char s2[200]){    
+    int a[200]={0},b[200]={0},l1,l2,m,n,i;
+    l1=strlen(s1);
+    l2=strlen(s2);               //分别取出s1、s2的长度 赋给l1,l2 
+    if(l1&lt;l2)
+       m=l2;
+    else
+       m=l1;
+    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
+    for( i=0;i&lt;l1;m--,i++) 
+        a[m]=s1[l1-1-i]-'0';
+    for(m=n,i=0;i&lt;l2;m--,i++)
+         b[m]=s2[l2-1-i]-'0';    //将字符串s1，s2分别转化为数组a，b     
+    for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
+    {    
+       a[i]+=b[i];              //把两个数的结果给a[i] 
+         if(a[i]&gt;=10)            //对是否进位进行判断
+        {    
+        a[i]-=10;
+        a[i-1]+=1;              //a[i-1]++;
+         }
+    }
+    if(a[0]!=0)                 //判断数组ａ的首位是否为０
+    {
+     for(i=0;i&lt;=n;i++)
+       printf("%d",a[i]);
+    }
+    else 
+    {
+     for(i=1;i&lt;=n;i++)         //舍去a[0] 
+       printf("%d",a[i]);
+    }
+
+}
+int main(){ while(1){
+    char s1[200],s2[200];
+    gets(s1);
+    gets(s2);   
+    Add(s1,s2);                //读取输入的两个字符串s1，s2
+    printf("\n");           
+}
+    return 0;
+}</pre>
+
+<h3 id="5，C-多组输入"><a href="#5，C-多组输入" class="headerlink" title="5，C++多组输入"></a>5，C++多组输入</h3><pre class="lang:default decode:true">//高精度加法C++版
+//@陈亚伦博客 
+#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+using namespace std;
+void Add(string s1,string s2){        
+    int a[200]={0},b[200]={0},l1,l2,m,n,i;
+
+    //分别取出s1、s2的长度 赋给l1,l2               
+    l1=s1.length();  
+    l2=s2.length();      
+    if(l1&lt;l2)
+       m=l2;
+    else
+       m=l1;
+    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
+
+    //将字符串s1，s2分别转化为数组a，b 
+    for( i=0;i&lt;l1;m--,i++) 
+        a[m]=s1[l1-1-i]-'0';
+    for(m=n,i=0;i&lt;l2;m--,i++)
+         b[m]=s2[l2-1-i]-'0';
+
+    //for循环开始实现两个数组相加     
+    for(i=n;i&gt;=0;i--)          
+    {    
+       a[i]+=b[i];              //把两个数的结果给a[i] 
+         if(a[i]&gt;=10)            //对是否进位进行判断
+        {    
+        a[i]-=10;
+        a[i-1]+=1;              //即 a[i-1]++;
+         }
+    }
+
+    //从首位开始打印得出的结果 
+    if(a[0]!=0)                 //判断数组ａ的首位是否为０
+    {
+     for(i=0;i&lt;=n;i++)
+      cout&lt;&lt;a[i];
+    }
+    else                        //舍去a[0] 
+    {
+     for(i=1;i&lt;=n;i++)         
+        cout&lt;&lt;a[i];
+    }
+}
+int main(){    
+while(cin){
+    char s1[200],s2[200];
+    cin.getline(s1, 200);
+    cin.getline(s2, 200);
+    Add(s1,s2);
+    cout&lt;&lt;endl;             
+}
+    return 0;
+}
+</pre>
+
+<h3 id="6，JAVA多组输入"><a href="#6，JAVA多组输入" class="headerlink" title="6，JAVA多组输入"></a>6，JAVA多组输入</h3><p><pre class="lang:default decode:true">//高精度加法java版<br>//@陈亚伦博客<br>import java.util.*;</pre></p>
+<p>public class Add {<br>    static void Add(String s1,String s2){<br>        //字符串转化为数组<br>        int a[]=new int [200];<br>        int b[]=new int [200];<br>        int l1,l2,i,m,n;<br>        //取出字符串s1,s2两者的最大长度，赋予m,n,并保证k是两者最大者<br>        l1= s1.length();<br>        l2= s2.length();<br>        if(l1&lt;=l2)<br>            m=l2;<br>        else<br>            m=l1;<br>            n=m;</p>
+<pre><code>    //将字符串s1转化为数组
+    for(i=0;i&amp;lt;l1;m--,i++) 
+    a[m]=s1.charAt(l1-1-i)-&apos;0&apos;;
+
+    //将字符串s2转化为数组
+    for(m=n,i=0;i&amp;lt;l2;m--,i++)
+    b[m]=s2.charAt(l2-1-i)-&apos;0&apos;;
+
+    //实现数组a，b从末位元素开始相加
+        for(i=n;i&amp;gt;=0;i--)           //for循环开始实现两个数组相加 
+            {    
+               a[i]+=b[i];              //把两个数的结果给a[i] 
+                 if(a[i]&amp;gt;=10)            //对是否进位进行判断
+                {    
+                a[i]-=10;
+                a[i-1]+=1;       
+                 }
+            }        
+     //判断a[0]是否为0
+      if(a[0]==0)
+          for(i=1;i&amp;lt;=n;i++)
+             System.out.print(a[i]);
+      else
+          for(i=0;i&amp;lt;=n;i++)
+             System.out.print(a[i]);        
+} 
+public static void main(String[] args) {
+    while(1==1){
+            Scanner s=new Scanner(System.in);
+            String s1=new String ();
+            String s2=new String ();
+            s1=s.nextLine();
+            s2=s.nextLine();      
+            Add(s1,s2);
+            //换行美化
+            System.out.println();
+    }
+</code></pre><p>}//main<br>}//class<br>&nbsp;</p>
+<p>总的来说，代码基本上满足要求，可能在大神眼里根本不值得一提，但毕竟我刚开始接触JAVA，姑且当作学习及复习之用吧，所以不周到或者不合适的地方请多担待，也欢迎发送电子邮件或者在微博上艾特我，咱们一起交流，共同进步。</p>
+<p>懒得复制的同学，请移步云盘下载：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1sjuvAl3" target="_blank" rel="external">http://pan.baidu.com/s/1sjuvAl3</a></p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1146,170 +1600,6 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/06/获得Access_Token的三种方法总结/" itemprop="url">
-                  获得Access_Token的三种方法总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-06T05:00:01+08:00" content="2015-10-06">
-              2015-10-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
-                    <span itemprop="name">公众号开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/06/获得Access_Token的三种方法总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/06/获得Access_Token的三种方法总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在自定义菜单和其他高级接口中均需要用到AppID和AppSecret，这两个参数也是非常显眼的放在开发页面，同时，我们也需要这两个参数生成Access_Token。Access_Token是什么东东？简单的说就是调用各个接口的钥匙，所以当我们获得Access_Token后注意妥善保存，当然，有效期是两个小时，需要定时刷新。现在，我就将获取Access_Token的三种方法分享一下。</p>
-<h3 id="1，官网调试工具生成Access-Token"><a href="#1，官网调试工具生成Access-Token" class="headerlink" title="1，官网调试工具生成Access_Token"></a>1，官网调试工具生成Access_Token</h3><p>打开网址：<a href="http://www.chenyalun.cn/go/?url=https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&amp;type=%E5%9F%BA%E7%A1%80%E6%94%AF%E6%8C%81&amp;form=%E8%8E%B7%E5%8F%96access_token%E6%8E%A5%E5%8F%A3%20/token" target="_blank" rel="external">点击这里</a></p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100501.jpg" alt=""></p>
-<p>直接输入你的AppID和AppSecret，点击检查问题，就可以看到传说中的Access_Token啦，就是图中红黄色的一串字符。</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100502.jpg" alt=""></p>
-<p>&nbsp;</p>
-<h3 id="2-编写代码获取生成Access-Token"><a href="#2-编写代码获取生成Access-Token" class="headerlink" title="2,编写代码获取生成Access_Token"></a>2,编写代码获取生成Access_Token</h3><h4 id="第一种代码如下："><a href="#第一种代码如下：" class="headerlink" title="第一种代码如下："></a>第一种代码如下：</h4><p><pre class="lang:default decode:true">&lt;?php<br>define(“APPID”, “替换成你的APPID”);<br>define(“APPSECRET”, “替换成你的APPSECRET”);<br>$token_access_url = “<a href="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=" target="_blank" rel="external">https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=</a>“ . APPID . “&amp;secret=” . APPSECRET;<br>$res = file_get_contents($token_access_url);<br>$result = json_decode($res, true);<br>$access_token = $result[‘access_token’];<br>echo $access_token;<br>?&gt;</pre><br>&nbsp;</p>
-<p><strong>参数说明</strong></p>
-<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
-<p><tbody></tbody></p>
-<p><tr></tr></p>
-<p><th>参数</th></p>
-<p><th>是否必须</th></p>
-<p><th>说明</th><br></p>
-<p><tr></tr></p>
-<p><td>grant_type</td></p>
-<p><td>是</td></p>
-<p><td>获取access_token填写client_credential</td><br></p>
-<p><tr></tr></p>
-<p><td>appid</td></p>
-<p><td>是</td></p>
-<p><td>第三方用户唯一凭证</td><br></p>
-<p><tr></tr></p>
-<p><td>secret</td></p>
-<p><td>是</td></p>
-<p><td>第三方用户唯一凭证密钥，即appsecret</td><br><br><br><br><strong>返回说明</strong></p>
-<p>正常情况下，微信会返回下述JSON数据包给公众号：</p>
-<p><pre>{“access_token”:”ACCESS_TOKEN”,”expires_in”:7200}<br></pre></p>
-<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
-<p><tbody></tbody></p>
-<p><tr></tr></p>
-<p><th>参数</th></p>
-<p><th>说明</th><br></p>
-<p><tr></tr></p>
-<p><td>access_token</td></p>
-<p><td>获取到的凭证</td><br></p>
-<p><tr></tr></p>
-<p><td>expires_in</td></p>
-<p><td>凭证有效时间，单位：秒</td><br><br><br><br>错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:</p>
-<p><pre class="">{“errcode”:40013,”errmsg”:”invalid appid”}</pre><br>&nbsp;</p>
-<p>将以上代码复制粘贴到文本文档中，保存为php格式，别忘了修改你的AppID和appsecret。然后直接在网页上运行就可以看到神奇的Access_Token啦。（本地环境，云服务器或者sae都是可以滴,我的是云服务器，如下图所示）</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/images/201510/5100503.jpg" alt=""></h3><h3 id="3-编写代码获取生成Access-Token"><a href="#3-编写代码获取生成Access-Token" class="headerlink" title="3,编写代码获取生成Access_Token"></a>3,编写代码获取生成Access_Token</h3><h4 id="第二种代码如下："><a href="#第二种代码如下：" class="headerlink" title="第二种代码如下："></a>第二种代码如下：</h4><p><pre class="lang:default decode:true ">&lt;?php<br>$appid = “替换成你的appid”;<br>$appsecret = “替换成你的appsecret”;<br>$url = “<a href="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=$appid&amp;secret=$appsecret" target="_blank" rel="external">https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid=$appid&amp;secret=$appsecret</a>“;<br>GetToken($url);<br>function GetToken($url){<br>$ch = curl_init();<br>curl_setopt($ch, CURLOPT_URL, $url);<br>curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);<br>curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);<br>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);<br>$res=curl_exec($ch);<br>   $access_token=json_decode($res,true);<br>   echo $access_token[‘access_token’];<br>}<br>?&gt;<br></pre><br>&nbsp;</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100504.jpg" alt=""></p>
-<p>【方法二和方法三本质上就是代码不同而已，原谅我，o(^▽^)o】</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1355,7 +1645,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1372,7 +1662,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

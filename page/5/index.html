@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,202 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/26/题目1008：质数还是合数/" itemprop="url">
+                  题目1008：质数还是合数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-26T05:00:09+08:00" content="2015-10-26">
+              2015-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/程序试题/" itemprop="url" rel="index">
+                    <span itemprop="name">程序试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/26/题目1008：质数还是合数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/26/题目1008：质数还是合数/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>质数</strong>（prime number）又称素数，有无限个。一个大于1的自然数，除了1和它本身外，不能被其他自然数整除，换句话说就是该数除了1和它本身以外不再有其他的因数；否则称为<strong>合数</strong>。</p>
+<p>题目描述：给定一个正整数n(2&lt;n&lt;10000)，判断是否为质数</p>
+<p>输入：多组输入，每行一个n(2&lt;n&lt;=10000),</p>
+<p>输出：对于每一组数，如果是质数则输出Yes，否则输出No</p>
+<p>样例：</p>
+<p>2<br>3<br>4</p>
+<p>Yes<br>Yes<br>No</p>
+<p>看完题目，思路马上就有了。无非是先判断是不是为质数，进而输出Yes和No。怎么判断是不是为质数呢？</p>
+<p>在一般领域，对正整数n，如果用2到n之间的所有整数去除，均无法整除，则n为质数。无非做个循环嘛，可是专家说了，不用到n，到根号2就可以了。因为将n分解为两个因数，必然一个大于根号2，一个小于根号2，比如18，分解成1和18、2和9、3和6，而18开根号约为4.2，看看，很符合吧。所以，循环到根号2就可以，不用浪费时间、消耗代码。</p>
+<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true">#include&lt;stdio.h&gt;
+#include&lt;math.h&gt;
+char *prime(int a){
+    char m[]="Yes";
+    char n[]="No";
+    int i=2,b=(int)sqrt(double (a));;
+    for(;i&lt;=b;i++){
+        if(a%i==0)
+        break;
+    }
+    if(i&gt;b)
+    return "Yes";
+    else
+    return "No";  
+}
+
+int main(){
+    int n,i=0,a[100];
+    scanf("%d",&amp;n);
+    for(;i&lt;n;i++)
+        scanf("%d",&amp;a[i]);
+    for(i=0;i&lt;n;i++)    
+        printf("%s\n",prime(a[i]));    
+    return 0;
+}
+</pre>
+
+<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true ">#include&lt;iostream&gt;
+#include&lt;cmath&gt;
+using namespace std;
+string prime(int a){
+    int i=2,b;
+    b=(int)sqrt(double (a));//sqrt()的参数为 double 类型
+    for(;i&lt;=b;i++){
+        if(a%i==0)
+        break;
+    }
+    if(i&gt;b)
+    return "Yes";
+    else
+    return "No";
+}
+int main(){
+    int n,i=0,a[100];
+    cin&gt;&gt;n;
+    for(;i&lt;n;i++)
+    cin&gt;&gt;a[i];
+    for(i=0;i&lt;n;i++)
+    cout&lt;&lt;prime(a[i])&lt;&lt;endl;
+    return 0;
+}
+</pre>
+
+<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true ">import java.util.*;</pre></p>
+<p>public class Main {<br>    static String prime(int a){<br>        int i=2,b;<br>        b=(int)Math.sqrt(a);//sqrt()的参数为 double 类型<br>        for(;i&lt;=b;i++){<br>            if(a%i==0)<br>            break;<br>        }<br>        if(i&gt;b)<br>        return “Yes”;<br>        else<br>        return “No”;<br>    }</p>
+<pre><code>public static void main(String[] args) {
+    int n,i=0;
+    int a[]=new int [100];
+    Scanner s=new Scanner(System.in);
+    n=s.nextInt();
+    for(;i&amp;lt;n;i++)
+    a[i]=s.nextInt();;
+    for(i=0;i&amp;lt;n;i++)
+    System.out.println(prime(a[i]));
+}
+</code></pre><p>}<br><br>依然看不出差别有多大，但是值得一提的是，在C中，函数的返回值没有string，很不方便，返回”Yes“和”No”让我想了半天。当然，小伙伴劝我，不用那么强迫症非要在函数里返回，主函数写个”Yes“和”No”效果一样的。但是，纠结着最终还是实现了。</p>
+<p>string prime(int a){}这样的函数在C中会报错，所以char <em>prime(int a){}是很巧妙的。</em>prime指向字符串”Yes“和”No”的首地址，打印%s，就可以借助强大的printf函数，把整个字符串（字符数组也可以）打印出来，着实强大！当然啦，%c，打印首个字符（Y或者N）。</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1160,460 +1356,6 @@ $item_str&lt;/Articles&gt;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/11/题目1001：整数a+b的程序实现（下）/" itemprop="url">
-                  题目1001：整数a+b的程序实现（下）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-11T05:00:06+08:00" content="2015-10-11">
-              2015-10-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/程序试题/" itemprop="url" rel="index">
-                    <span itemprop="name">程序试题</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/11/题目1001：整数a+b的程序实现（下）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/11/题目1001：整数a+b的程序实现（下）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在【<a href="http://www.chenyalun.cn/%e9%a2%98%e7%9b%ae1001%ef%bc%9a%e6%95%b4%e6%95%b0ab%e7%9a%84%e7%a8%8b%e5%ba%8f%e5%ae%9e%e7%8e%b0%ef%bc%88%e4%b8%8a%ef%bc%89.html" target="_blank" rel="external">题目1001：整数a+b的程序实现（上）</a>】中我们简要讨论了正整数相加，当然，整数的大小在计算机心理承受范围之内，时隔好几天，继续探讨，这里就说下，大整数的加法。</p>
-<p>关于高精度正整数加法，我首先想到的是利用数组存储那些可爱的数字们，但是又考虑到字符串同样可以存储200位的数字，然后就有下面3种解决方案。<br>1，只用数组<br>2，只用字符串<br>3，数组和字符串双管齐下<br>方案1：每个数组元素存储1位，需要多少位数字就开辟多少个数组元素<br>优点：数组中的每一位都是实实在在的数字，可以直接加减，运算时极为方便；<br>缺点：从键盘输入的时候很不爽，输入时每两位数之间必须有分隔符，才能保证一位数组元素存储一个数字，不符合正常人的输入习惯；</p>
-<p>方案2：其实字符串的最大长度是255，可以表示255位，那么200位当然不在话下<br>优点：可以直接输入输出，输入时，每两位数之间不必分隔符，符合地球人的输入习惯；<br>缺点：字符串中的每一位是一个字符，而字符是不能直接进行运算的，我们必须先将它转化为数值再进行运算，在转化的时候要考虑很多东西；</p>
-<p>方案3：输入的时候用字符串，计算的时候用数组。<br>优点：充分利用字符串和数组的优点，趋利避害，计算简便，容易理解，这个在臣妾看来，是极好的呀；<br>缺点：我们需要开辟数组存储空间，开辟字符串存储空间，些许占内存；<br>但是综合以上几点，显然，方案3是最巧妙的，既然如此，那代码怎么写呢？</p>
-<p>考虑大整数相加有两种情况（美观起见我用三位数代替200位数的情况，效果其实一样：</p>
-<p>a[3] 099<br>b[3] 009<br>c[3] 108</p>
-<p>和<br>a[3] 091<br>b[3] 002<br>c[3] 093<br>显而易见，我们需要将两个字符串中长度最大的值作为所得结果数组c的长度，这时还要考虑数组c的首位元素是否为0，因为不可能输出093这样的数，必须把0去掉。</p>
-<p>思路：<br>1，开辟两个字符串用于存储键入的两串数字<br>2，求取两个字符串中的最大长度<br>3，将字符串转化为数组（从末尾开始依次存取）<br>4，数组中每位元素相加，并考虑进位，得出的结果存储在c[3]中<br>5，判断相加的结果c[3]数组首位c[0]是否为0，若为0，从c[1]开始打印，若不为0，从c[0]开始打印。<br>6，喝杯茶开始敲代码</p>
-<p>为节约内存，我把两个数组相加的结果依然存储在数组a中，就不再开辟多余的数组啦。代码如下：</p>
-<h3 id="1，C语言版"><a href="#1，C语言版" class="headerlink" title="1，C语言版"></a>1，C语言版</h3><pre class="lang:default decode:true">//高精度正整数相加-C语言
-//@陈亚伦博客 
-
-#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-    void Add(char s1[200],char s2[200]){    
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-    l1=strlen(s1);
-    l2=strlen(s2);               //分别取出s1、s2的长度 赋给l1,l2 
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';    //将字符串s1，s2分别转化为数组a，b     
-    for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //a[i-1]++;
-         }
-    }
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-       printf("%d",a[i]);
-    }
-    else 
-    {
-     for(i=1;i&lt;=n;i++)         //舍去a[0] 
-       printf("%d",a[i]);
-    }
-
-}
-int main(){ 
-    char s1[200],s2[200];
-    gets(s1);
-    gets(s2);   
-    Add(s1,s2);                //读取输入的两个字符串s1，s2
-    printf("\n");           
-    return 0;
-}</pre>
-
-<h3 id="2，C-版"><a href="#2，C-版" class="headerlink" title="2，C++版"></a>2，C++版</h3><pre class="lang:default decode:true">//高精度加法-C++版
-//@陈亚伦博客 
-#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-using namespace std;
-
-void Add(string s1,string s2){
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-
-    //分别取出s1、s2的长度 赋给l1,l2               
-    l1=s1.length();  
-    l2=s2.length();      
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-
-    //将字符串s1，s2分别转化为数组a，b 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';
-
-    //for循环开始实现两个数组相加     
-    for(i=n;i&gt;=0;i--)          
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //即 a[i-1]++;
-         }
-    }
-
-    //从首位开始打印得出的结果 
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-      cout&lt;&lt;a[i];
-    }
-    else                        //舍去a[0] 
-    {
-     for(i=1;i&lt;=n;i++)         
-        cout&lt;&lt;a[i];
-    }
-}
-
-int main(){    
-    char s1[200],s2[200];
-
-    //读取输入的两个字符串s1，s2
-    cin.getline(s1, 200);
-    cin.getline(s2, 200);
-    Add(s1,s2);
-
-    //美观起见打印个换行 
-    cout&lt;&lt;endl;         
-    return 0;
-
-}</pre>
-
-<h3 id="3，JAVA版"><a href="#3，JAVA版" class="headerlink" title="3，JAVA版"></a>3，JAVA版</h3><pre class="lang:default decode:true">//高精度加法-JAVA版
-//@陈亚伦博客 
-import java.util.*;
-
-public class Add {
-    static void Add(String s1,String s2){
-        //字符串转化为数组
-        int a[]=new int [200];
-        int b[]=new int [200];       
-        int l1,l2,i,m,n;
-        //取出字符串s1,s2两者的最大长度，赋予m,n,并保证k是两者最大者
-        l1= s1.length();
-        l2= s2.length();
-        if(l1&lt;=l2)
-            m=l2;
-        else
-            m=l1; 
-            n=m;
-
-        //将字符串s1转化为数组
-        for(i=0;i&lt;l1;m--,i++) 
-        a[m]=s1.charAt(l1-1-i)-'0';
-
-        //将字符串s2转化为数组
-        for(m=n,i=0;i&lt;l2;m--,i++)
-        b[m]=s2.charAt(l2-1-i)-'0';
-
-        //实现数组a，b从末位元素开始相加
-            for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
-                {    
-                   a[i]+=b[i];              //把两个数的结果给a[i] 
-                     if(a[i]&gt;=10)            //对是否进位进行判断
-                    {    
-                    a[i]-=10;
-                    a[i-1]+=1;       
-                     }
-                }        
-         //判断a[0]是否为0
-          if(a[0]==0)
-              for(i=1;i&lt;=n;i++)
-                 System.out.print(a[i]);
-          else
-              for(i=0;i&lt;=n;i++)
-                 System.out.print(a[i]);        
-    } 
-    public static void main(String[] args) {
-                Scanner s=new Scanner(System.in);
-                String s1=new String ();
-                String s2=new String ();
-                s1=s.nextLine();
-                s2=s.nextLine();      
-                Add(s1,s2);
-                //换行美化
-                System.out.println();
-}
-}</pre>
-以上代码敲完，然后觉得不过瘾，是不是可以多组输入呢？
-
-这个应该是比较简单的，不多说，直接上代码。
-
-* * *
-
-&nbsp;
-
-### 4，C语言版多组输入
-
-<pre class="lang:default decode:true">//高精度加法-C语言
-//@陈亚伦博客 
-#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-
-    void Add(char s1[200],char s2[200]){    
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-    l1=strlen(s1);
-    l2=strlen(s2);               //分别取出s1、s2的长度 赋给l1,l2 
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';    //将字符串s1，s2分别转化为数组a，b     
-    for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //a[i-1]++;
-         }
-    }
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-       printf("%d",a[i]);
-    }
-    else 
-    {
-     for(i=1;i&lt;=n;i++)         //舍去a[0] 
-       printf("%d",a[i]);
-    }
-
-}
-int main(){ while(1){
-    char s1[200],s2[200];
-    gets(s1);
-    gets(s2);   
-    Add(s1,s2);                //读取输入的两个字符串s1，s2
-    printf("\n");           
-}
-    return 0;
-}</pre>
-
-<h3 id="5，C-多组输入"><a href="#5，C-多组输入" class="headerlink" title="5，C++多组输入"></a>5，C++多组输入</h3><pre class="lang:default decode:true">//高精度加法C++版
-//@陈亚伦博客 
-#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-using namespace std;
-void Add(string s1,string s2){        
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-
-    //分别取出s1、s2的长度 赋给l1,l2               
-    l1=s1.length();  
-    l2=s2.length();      
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-
-    //将字符串s1，s2分别转化为数组a，b 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';
-
-    //for循环开始实现两个数组相加     
-    for(i=n;i&gt;=0;i--)          
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //即 a[i-1]++;
-         }
-    }
-
-    //从首位开始打印得出的结果 
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-      cout&lt;&lt;a[i];
-    }
-    else                        //舍去a[0] 
-    {
-     for(i=1;i&lt;=n;i++)         
-        cout&lt;&lt;a[i];
-    }
-}
-int main(){    
-while(cin){
-    char s1[200],s2[200];
-    cin.getline(s1, 200);
-    cin.getline(s2, 200);
-    Add(s1,s2);
-    cout&lt;&lt;endl;             
-}
-    return 0;
-}
-</pre>
-
-<h3 id="6，JAVA多组输入"><a href="#6，JAVA多组输入" class="headerlink" title="6，JAVA多组输入"></a>6，JAVA多组输入</h3><p><pre class="lang:default decode:true">//高精度加法java版<br>//@陈亚伦博客<br>import java.util.*;</pre></p>
-<p>public class Add {<br>    static void Add(String s1,String s2){<br>        //字符串转化为数组<br>        int a[]=new int [200];<br>        int b[]=new int [200];<br>        int l1,l2,i,m,n;<br>        //取出字符串s1,s2两者的最大长度，赋予m,n,并保证k是两者最大者<br>        l1= s1.length();<br>        l2= s2.length();<br>        if(l1&lt;=l2)<br>            m=l2;<br>        else<br>            m=l1;<br>            n=m;</p>
-<pre><code>    //将字符串s1转化为数组
-    for(i=0;i&amp;lt;l1;m--,i++) 
-    a[m]=s1.charAt(l1-1-i)-&apos;0&apos;;
-
-    //将字符串s2转化为数组
-    for(m=n,i=0;i&amp;lt;l2;m--,i++)
-    b[m]=s2.charAt(l2-1-i)-&apos;0&apos;;
-
-    //实现数组a，b从末位元素开始相加
-        for(i=n;i&amp;gt;=0;i--)           //for循环开始实现两个数组相加 
-            {    
-               a[i]+=b[i];              //把两个数的结果给a[i] 
-                 if(a[i]&amp;gt;=10)            //对是否进位进行判断
-                {    
-                a[i]-=10;
-                a[i-1]+=1;       
-                 }
-            }        
-     //判断a[0]是否为0
-      if(a[0]==0)
-          for(i=1;i&amp;lt;=n;i++)
-             System.out.print(a[i]);
-      else
-          for(i=0;i&amp;lt;=n;i++)
-             System.out.print(a[i]);        
-} 
-public static void main(String[] args) {
-    while(1==1){
-            Scanner s=new Scanner(System.in);
-            String s1=new String ();
-            String s2=new String ();
-            s1=s.nextLine();
-            s2=s.nextLine();      
-            Add(s1,s2);
-            //换行美化
-            System.out.println();
-    }
-</code></pre><p>}//main<br>}//class<br>&nbsp;</p>
-<p>总的来说，代码基本上满足要求，可能在大神眼里根本不值得一提，但毕竟我刚开始接触JAVA，姑且当作学习及复习之用吧，所以不周到或者不合适的地方请多担待，也欢迎发送电子邮件或者在微博上艾特我，咱们一起交流，共同进步。</p>
-<p>懒得复制的同学，请移步云盘下载：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1sjuvAl3" target="_blank" rel="external">http://pan.baidu.com/s/1sjuvAl3</a></p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1659,7 +1401,7 @@ public static void main(String[] args) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1676,7 +1418,7 @@ public static void main(String[] args) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

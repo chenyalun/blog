@@ -167,7 +167,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">写代码，亦是写情怀。</p>
+  <p class="site-subtitle">Write Less, Do More.</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -254,6 +254,142 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/25/字符串与定义字符数组的简单区分/" itemprop="url">
+                  字符串与定义字符数组的简单区分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-25T23:05:46+08:00" content="2015-09-25">
+              2015-09-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编程技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">编程技巧</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/25/字符串与定义字符数组的简单区分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/25/字符串与定义字符数组的简单区分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>字符串定义与字符数组定义是编程语言的基础，是最起码的知识，而知识就像内裤，平时看不见，却非常有用。先回顾一下最简单的字符数组的定义，一共有三种典型方法。</p>
+<h3 id="1，定义字符数组"><a href="#1，定义字符数组" class="headerlink" title="1，定义字符数组"></a>1，定义字符数组</h3><p><pre class="lang:default decode:true">char a[3]={‘1’,’2’,’3’};<br></pre></p>
+<p><pre class="lang:default decode:true">char a[3]=”12”;其实是char a[3]={‘1’,’2’,’\0’}</pre></p>
+<p><pre class="lang:default decode:true">char a[3]={“12”};其实是char a[3]={‘1’,’2’,’\0’}</pre><br>需要注意的是：</p>
+<p>第一： 字符串其实就是以\0结尾的字符串。<br>第二：定义 字符数组时要考虑    \0 ，平时笔试题每次都出，但是一到实际编程中，就巧妙地遗忘了。</p>
+<p>还有一种方式：</p>
+<p><pre class="lang:default decode:true ">char a[3]={3,2,3};</pre><br>这个根本不是定义字符数组。因为少了单引号，当年出现这种情况，处于好奇，利用c++直接输出a[0],然后就是个表情。从a[0]开始，一直到a[47]，都是不正常的字符，到a[48]时才出现数字0。请看下面代码：</p>
+<p><pre class="lang:default decode:true ">#include&lt;iostream&gt;<br>using namespace std;<br>int main(){<br>    char a[3]={3,2,1};<br>    cout&lt;&lt;a[0];<br>}</pre><br>不信可以自己测试一下。</p>
+<h3 id="2，字符数组深入探讨"><a href="#2，字符数组深入探讨" class="headerlink" title="2，字符数组深入探讨"></a>2，字符数组深入探讨</h3><p><pre class="lang:default decode:true">#include&lt;stdio.h&gt;</pre></p>
+<p>#include&lt;string.h&gt;<br>int main(){<br>    char a[3]={3,2,1},b[6]={5,6,7,8,9};<br>    int m;<br>    m=a[0]+b[4];<br>    printf(“%d”,m);<br>    return 0;<br>}<br>结果竟然是12，不可思议，明明我的字符数组定义是错误的，为什么还出现正确的结果？</p>
+<p>和同学探讨一下，原因在于</p>
+<p><pre class="lang:default decode:true">printf(“%d”,m);</pre><br>没错，就是这一行中的%d,   C语言中的输出强制类型转换将本是字符相加活生生变成数字相加。</p>
+<p>当把这行代码改成</p>
+<p><pre class="lang:default decode:true ">printf(“%c”,m);</pre><br>结果再一次变成表情，嗯，准确的说是个男性符号。</p>
+<p>再次折腾一下，整个代码改成下面的这样：</p>
+<p><pre class="lang:default decode:true ">#include&lt;iostream&gt;<br>using namespace std;<br>int main(){<br>    char a[3]={‘3’,’2’,’1’},b[6]={‘5’,’6’,’7’,’8’,’9’};<br>          cout&lt;&lt;a[0]+b[4]-‘0’-‘0’;<br>    return 0;<br>}</pre><br>为了避免C语言输出的类型转换，我用C++输出，可见，因为两个’0’的缘故，字符结果已经转换为数字了。</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -922,132 +1058,6 @@ public class Main
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/21/潘金莲：用手段证明自己存在的女强人（下）/" itemprop="url">
-                  潘金莲：用手段证明自己存在的女强人（下）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-21T21:29:25+08:00" content="2015-09-21">
-              2015-09-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文热评/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文热评</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/21/潘金莲：用手段证明自己存在的女强人（下）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/21/潘金莲：用手段证明自己存在的女强人（下）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>接着上回，<a href="http://www.chenyalun.cn/%e6%bd%98%e9%87%91%e8%8e%b2%ef%bc%9a%e7%94%a8%e6%89%8b%e6%ae%b5%e8%af%81%e6%98%8e%e8%87%aa%e5%b7%b1%e5%ad%98%e5%9c%a8%e7%9a%84%e5%a5%b3%e5%bc%ba%e4%ba%ba%ef%bc%88%e4%b8%8a%ef%bc%89.html" target="_blank" rel="external">潘金莲：用手段证明自己存在的女强人（上）</a>中咱们说到潘金莲心高气傲的性格，当她嫁到西门庆家中，首先她既是主人又是奴隶，西门庆不顺心随时可以对她踢两脚，她和正妻吴月娘发生口角，西门庆也不会给她留情面，而她对这种既贵又贱的身份地位不仅可以理解还安之若素，但是，有一点，西门庆不仅妻妾成群还是个花心大萝卜，在妻妾争宠中，潘金莲的聪明才智在这里发挥的淋漓尽致。那有看官就问了，潘金莲不会阻止西门庆再找情人吗？呵呵，她根本不可能阻挡西门庆对女人的占有欲，她能做的便是在西门庆找到新欢之后顺水推舟，提供场地，出谋划策。</p>
-<p>潘金莲软硬兼施，在正妻吴月娘面前低声下气，百般奉承掌握其心理特点后挑拨她与西门庆的关系。在争宠中，能分清敌友，对孟玉楼采取拉的策略，对孙雪娥则采取打的策略。之后又把李瓶儿和宋惠莲作为对手，置强敌于死地，中间过程大家可以想象，就跟后宫效果差不多。所以，潘金莲的手段可以从中窥见一二。</p>
-<p>首先是宋惠莲，她和西门庆偷情也就罢了，还说潘金莲的坏话，这不是找事吗，潘金莲用两面派的做法先稳住敌手，再借西门庆之手灭了宋惠莲的丈夫，结果宋惠莲夫妇“男的入官，女的上吊”。接着是李瓶儿，李瓶儿的有钱、貌美成了潘金莲的嫉妒对象，再加上又先给西门庆生个儿子，关键西门庆对李瓶儿还特别喜爱，每晚到她房里，潘金莲心想，这哪成啊，以后我就等于不存在了嘛。于是，潘金莲就对孩子下手了，先是在娃娃满月的时候故意摆弄，让他患上寒潮热，接着精心喂养一只猫，训练有素，平日里用红布裹着肉喂它，而孩子呢，穿的也是红缎衫，你看，潘金莲聪明吧。结果可想而知，某个下午，训练有素的猫扑向孩子，疯狂撕扯，不久这孩子一命呜呼了。孩子死掉了，潘金莲接着对李瓶儿进行疯狂打击，无事生非和她斗气，本来李瓶儿没了孩子情绪就不好，再加上潘金莲这天天给气受，不久也去世了。</p>
-<p>潘金莲似乎胜利了，在“后宫”胜利了。她确实是个女强人，聪明伶俐，但是首先她与西门庆没有感情。西门庆只是她的一个梯子，到西门庆府中后，他性欲旺盛，但又无法独自拥有一个男人，后又与西门庆的女婿陈经济发生关系，到最后，为了满足自己的性欲，在西门庆生病、极度虚弱的情况下仍让他吃春药，结果西门庆一命呜呼，所以可以看到她对西门庆从没有过真感情。再说她自己，不惜一切手段包括罪恶证明自己的存在，武大郎也好，宋惠莲、李瓶儿也罢，谁挡了她的路，谁就要付出惨痛的代价，她是个有足够勇气满足自己情欲的人，用杀死一个又一个不喜欢的人证明自己是可爱的。可结果呢？最后一刀被武松解决掉。</p>
-<p>潘金莲因为耐不住寂寞，或者说不甘心不满足而出轨，单纯说她不守妇道过于片面，人追求幸福本没有错，既然婚姻不合适就离婚嘛，直接向武大郎说，依大郎的实在憨厚应该会成全她的，但她没有，他选择用杀死武大郎的方式结束自己的婚姻，同时为自己的死埋下伏笔。再说她嫁到西门家族中，处处小心设防，时时争宠寻欢，已由单纯的少女成为一个蛇蝎心肠的少妇，与女婿陈经济偷情，杀死竞争对手，用过度的饥渴毁掉西门庆，不得不说她已满手罪恶。</p>
-<p>人人都想活得光鲜亮丽，谁都不想平庸的过这一生，证明自己存在并没有错，但是要讲究方式方法。我们能做的是用自己辛勤的双手，智慧的大脑去创造自己殷切期盼的幸福生活，用不懈的奋斗去书写自己的无悔青春。用不屈不挠的意志去实现自己的小小梦想。而企图通过不劳而获、出卖自己肉体与灵魂去拥有财富、名望、地位，那么这种人终究被人所不齿，所拥有的一切最终会如过眼云烟渐渐远去，被时间的铁蹄疯狂践踏后，留下的恐怕只有破裂肮脏的躯壳和茶余饭后的笑谈。</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1093,7 +1103,7 @@ public class Main
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">56</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1110,7 +1120,7 @@ public class Main
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
