@@ -276,6 +276,233 @@
             
               
                 
+                <a class="post-title-link" href="/2015/09/22/题目1001：整数a+b的程序实现（上）/" itemprop="url">
+                  题目1001：整数a+b的程序实现（上）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-22T21:05:43+08:00" content="2015-09-22">
+              2015-09-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/程序试题/" itemprop="url" rel="index">
+                    <span itemprop="name">程序试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/22/题目1001：整数a+b的程序实现（上）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/22/题目1001：整数a+b的程序实现（上）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>从这篇文章起，咱们就一起探讨下程序设计题，一方面练练技术，另一方面也好和大家一起提高，所以如果你遇到不解或者有什么建议请及时联系我，咱们一起探讨，毕竟三人行，必有我师嘛。</p>
+<p>今天，咱们就探讨下a+b的问题，别看这个问题很easy，但是确实值得思考。题目如下：</p>
+<p>输入：a  b</p>
+<p>输出：a+b的结果</p>
+<p>例如：</p>
+<pre class="lang:default decode:true ">输入：
+3  7
+输出：
+10</pre>
+看到这个题目是不是很无语呀，哈哈，这个题目是我自己编的，好吧，进入正题，我们要考虑的情况有：
+
+1，普通整数加法运行一次；
+
+2，普通整数加法多次输入（运行一次程序不退出）；
+
+3，长整数加法（比如15位的数相加）运行一次；
+
+4，长整数加法（比如15位的数相加）多次输入；
+
+因为我们是对问题进行分析，所以程序的实现笔者就用三种代码（c，c++，java）供大家参考。
+
+### 1，普通整数加法运行一次
+
+这个问题过于简单，不做多说。上代码：
+
+c语言版
+<pre class="lang:default decode:true">//普通整数a与b相加代码的实现--c语言
+#include &lt;stdio.h&gt;
+int main()
+{
+ int a,b;
+ scanf("%d %d",&amp;a,&amp;b);
+ printf("%d\n",a+b);
+ return 0;
+}</pre>
+此时输完a后，输入回车或空格，再输入b即可；如果想要输完a后，输入逗号，再输入b，代码第6行改为：
+<pre class="lang:default decode:true "> scanf("%d,%d",&amp;a,&amp;b);</pre>
+值得注意的是，一定要分清“，”与“,”的区别，错一点都不行。c语言是这样，c++，java请自行分析。
+
+本博客采用国际上流行的标准。输入a后，按回车键作为分隔，再输入b，以后代码默认如此，不再赘述。
+
+c++版
+<pre class="lang:default decode:true">//普通整数a与b相加代码的实现--c++
+#include&lt;iostream&gt;
+using namespace std;
+  int main(){
+  int a,b;
+  cin&gt;&gt;a&gt;&gt;b;
+  cout&lt;&lt;a+b&lt;&lt;endl;
+}</pre>
+java版
+<pre class="lang:default decode:true">//普通整数a与b相加代码的实现--java
+import java.io.*;
+import java.util.*;
+public class Main
+{
+            public static void main(String args[]) throws Exception
+            {
+                int a,b;
+        Scanner s=new Scanner(System.in);
+        a=s.nextInt();
+        b=s.nextInt();
+        System.out.println(a+b);
+            }
+}</pre>
+
+<h3 id="2，普通整数加法多次输入"><a href="#2，普通整数加法多次输入" class="headerlink" title="2，普通整数加法多次输入"></a>2，普通整数加法多次输入</h3><p>添加个while循环即可完美解决。</p>
+<p>C语言版</p>
+<pre class="lang:default decode:true ">//普通整数a与b相加代码的实现--c语言
+#include &lt;stdio.h&gt;
+int main()
+{
+ int a,b;
+ while(scanf("%d %d",&amp;a,&amp;b))
+ printf("%d\n",a+b);
+ return 0;
+}
+</pre>
+c++版
+<pre class="lang:default decode:true ">//普通整数a与b相加代码的实现--c++
+#include&lt;iostream&gt;
+using namespace std;
+  int main(){
+  int a,b;
+  while(cin&gt;&gt;a&gt;&gt;b)
+  cout&lt;&lt;a+b&lt;&lt;endl;
+}</pre>
+java版
+<pre class="lang:default decode:true">//普通整数a与b相加代码的实现--java
+import java.io.*;
+import java.util.*;
+public class Main
+{
+            public static void main(String args[]) throws Exception
+    {
+        int a,b;
+        Scanner s=new Scanner(System.in);
+        while(s.hasNext())
+        {
+        a=s.nextInt();
+        b=s.nextInt();
+        System.out.println(a+b);
+        }
+    }
+}</pre>
+
+<p>### </p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/21/潘金莲：用手段证明自己存在的女强人（下）/" itemprop="url">
                   潘金莲：用手段证明自己存在的女强人（下）
                 </a>
@@ -797,134 +1024,6 @@ ticket:不多说，就是凭借这个换二维码的；expire_seconds：二维�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/19/赵光义：惶恐猥琐中折射屌丝心态/" itemprop="url">
-                  赵光义：惶恐猥琐中折射屌丝心态
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-19T16:22:28+08:00" content="2015-09-19">
-              2015-09-19
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文热评/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文热评</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/19/赵光义：惶恐猥琐中折射屌丝心态/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/19/赵光义：惶恐猥琐中折射屌丝心态/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>看到这个标题，相信不少同学已经开始骂我了，人家赵光义虽然不是自小皇子出身，但起码人家当上皇帝了呀，完成祖国统一大业，基本上把大宋朝治理的还不错，怎么好说人家猥琐还屌丝呢？</p>
-<p>说到这，不得不提下赵光义著名的箭伤，在战场上中箭之后，留下病根了，到最后这病根还是要了他的命。关键是在中箭之后，他的心理发生了巨大的变化。最早的时候，他老哥赵匡胤没当上皇帝时，可以说光义对哥哥忠心耿耿，两人感情也是极好的，赵匡胤能打下江山绝对有赵光义的功劳。但是，按理说，皇帝死了应该传位给儿子，可赵匡胤却“传位”给弟弟，不要不信，就是这么神奇。这肯定让人浮想联翩了，就留下历史谜团“烛光斧影”。</p>
-<p>在皇室家族中，不可否认，很多人是想当皇帝的。那赵光义是不是权欲熏心，杀了哥哥坐上皇位呢，可能性很大。但是还有一点，赵光义心理有问题了，这可能比权欲更能驱使他做出伤天害理的事。你想啊，每天忍受箭伤顽疾的折磨（御医们大都是吃干饭的，所以不要寄希望于他们），看不到阳光，享受不了健康的幸福，心理负担越发严重，整天想着灰暗的事，想着说不定哪天就一命呜呼了，怎么办，越想越焦急，越着急就自私自利，可不就做出很多猥琐的事。把哥哥搞定之后，自己堂而皇之的继承了皇位，对哥哥家孩子的所作所为，更体现他的猥琐阴险。</p>
-<p>赵匡胤有四个儿子，依次是赵德秀，赵德昭，赵德林，赵德芳。德秀，德林幼年夭亡。先说德昭，因为将士们论功行赏的事，德昭向皇帝觐见，皇帝觉得战败了，很不爽，就不想封赏什么的，而文武大臣包括德昭想按法律来，应该论功行赏，然后皇上很不开心，来一句“现在还轮不到你丫做主，等你自己当上皇帝再赏也不晚”。然后德昭没想到自己成了抢夺皇位的嫌疑人，越想越害怕，想着与其日后扣上谋反的罪名，不如现在KO自己，最后拿一把水果刀把自己解决了。</p>
-<p>话说，赵光义当初是按着他老娘的旨意（这是他自己说的，谁知道他老娘有没有这个旨意呢），因为哥哥的孩子还小，自己先当上皇帝，巩固朝廷统治，日后还传位给德昭，德芳的。可是现在，明显是反悔了，一步一步铲除异己，想传位给自家孩子。再说德芳，死法更神奇，被一场天衣无缝的阴谋秒掉的，虽说是喝毒酒身亡，可当时，包括皇帝赵光义，光义他孩子们，光义他嫂子（赵匡胤媳妇）们，诸位大臣在场，明明德芳喝毒酒身亡，却说成酒中木有毒，乐极生悲，笑死的（毒酒喝下去，产生狂笑的症状，最后挂掉）。</p>
-<p>看看，硬是把哥哥家的孩子一个一个给铲除掉。</p>
-<p>赵光义怕死，因为整天被箭伤折磨，心理愈发压抑，也就愈发变态猥琐了。李煜，没有错，就是写“恰似一江春水向东流”的李煜被光义赐毒酒灭掉的，这不是关键。关键是，李煜的媳妇，容貌美丽、神彩端静小周后，很漂亮滴，你懂的。赵光义硬是“强幸”了人家，场面“蔚为大观”。人在做，天在看，画工们把这现场给画下来了，高清无码的<a href="http://www.chenyalun.cn/go/?url=http://baike.baidu.com/view/1278848.htm" target="_blank" rel="external">熙陵幸小周后图</a>从此流芳百世。可见，赵光义也是个好色之徒。</p>
-<p>赵光义远远没有他哥赵匡胤值得人尊敬，玩手腕，弄权术，这点他是最擅长的，我觉得他有一个不可忽视的优点就是他爱读书，每天都读，成年累月的读，玩着命的读书，“开卷有益”的典故就出自他，最后把一千多种古籍看完之后，起个名，就什么《太平御览》，名扬天下。每天不论政事多忙，都要抽空读书，这点值得人学习，值得人敬佩。</p>
-<p>出身皇族，本就有许多迫不得已，而赵光义，在哥哥当上皇帝后因为种种原因就开始沦为屌丝，很穷，尤其在亲情方面，但是，他不是个昏君，因为他读很多书，会音乐，会下棋，会书法等等。无论是觊觎皇权，还是心理问题，他终究做了不少卑鄙的事，虽说他就很多成就，但就品德方面，他是个好色之徒，他弑兄篡位，他还铲除自己亲哥哥的孩子，就这点，我看不起他。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -970,7 +1069,7 @@ ticket:不多说，就是凭借这个换二维码的；expire_seconds：二维�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -987,7 +1086,7 @@ ticket:不多说，就是凭借这个换二维码的；expire_seconds：二维�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

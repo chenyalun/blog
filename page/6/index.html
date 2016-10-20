@@ -276,6 +276,157 @@
             
               
                 
+                <a class="post-title-link" href="/2015/10/18/利用Windows_Azure部署一个WordPress网站/" itemprop="url">
+                  利用Windows Azure部署一个WordPress网站
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-18T05:00:51+08:00" content="2015-10-18">
+              2015-10-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/应用开发/" itemprop="url" rel="index">
+                    <span itemprop="name">应用开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/18/利用Windows_Azure部署一个WordPress网站/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/18/利用Windows_Azure部署一个WordPress网站/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近倒是对云计算很感兴趣，比较著名的应该就是微软云，亚马逊云，谷歌云了。今天就分享一下怎么在Windows Azure上部署一个基于wordpress的站点。过程比较简单，希望能给新手们一些帮助。</p>
+<h3 id="1，登录Windows-Azure主页"><a href="#1，登录Windows-Azure主页" class="headerlink" title="1，登录Windows Azure主页"></a>1，登录Windows Azure主页</h3><p>点击：<a href="http://www.chenyalun.cn/go/?url=https://portal.azure.com/" target="_blank" rel="external"> https://portal.azure.com/</a></p>
+<p>前提是你有Windows Live ID（现在很流行的是outlook邮箱），没有注册的注册一个即可。注册成功便可以登录你的微软账号啦，接着便是注册微软云（Windows Azure），可能需要提供信用卡号和（非中国大陆的）手机号。当然，因为众所周知的原因微软云并不直接在中国大陆推行，你也可以使用在中国的代理商世纪华联，其实效果是一样的，不过我还是想用原汁原味的微软云，所以这里以全球统一的微软云官网为例，就不分享在中国代理世纪华联怎么部署了。</p>
+<h3 id="2，创建Web-应用"><a href="#2，创建Web-应用" class="headerlink" title="2，创建Web 应用"></a>2，创建Web 应用</h3><p>在微软云主页，请依次点击 新建&gt;&gt;Web+移动&gt;&gt;应用商店，效果如下图所示。<img src="http://source.chenyalun.cn/images/201510/5101601.jpg" alt=""></p>
+<p>在搜索框中输入 wordpress,选择第一个。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101602.jpg" alt=""></p>
+<h3 id="3，填写相关信息"><a href="#3，填写相关信息" class="headerlink" title="3，填写相关信息"></a>3，填写相关信息</h3><p>1，域名：类似 <a href="http://XXXX.azurewebsites.net，XXXX可以设置成自己喜欢的字符，比如我的是http://chenyalun.azurewebsites.net，当然，这个是默认域名，你可以自定义绑定一级、二级域名，前提仍然是你的订阅是可以付费的。" target="_blank" rel="external">http://XXXX.azurewebsites.net，XXXX可以设置成自己喜欢的字符，比如我的是http://chenyalun.azurewebsites.net，当然，这个是默认域名，你可以自定义绑定一级、二级域名，前提仍然是你的订阅是可以付费的。</a></p>
+<p>2，数据库：数据库名称可以自定义，比较好的一点就是，你不用再另外记忆数据库的名称和密码，完成之后站点直接就和数据库相连接啦。</p>
+<p>3，地域：这个不多说，看你网站的受众主要在哪个地方了，若是中国，那选择East Asia就可以啦，好像这个设置不可以更改，所以请慎重。（这个只是机房的位置，并不是说，除了这个位置的人之外，其他地方的人不能访问你的站点，唯一的影响就是，其他地方访问时速度可能相对比较慢）</p>
+<p>4，定价层：选择你的数据库的套餐（容量，连接总数等，一个数据库可以让多个站点同时使用的），免费套餐是“水星”，容量是0.02G.连接总数是4个。下图中的套餐“Titan”连接总数为10个，大小为0.24G，当然每个月3.5美金。一共有5个套餐可以选择。</p>
+<p>当然还有法律条款，这都是需要同意的。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101603.jpg" alt=""></p>
+<p>填写完毕之后，点击创建即可。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101604.jpg" alt=""></p>
+<h3 id="4，安装wordpress"><a href="#4，安装wordpress" class="headerlink" title="4，安装wordpress"></a>4，安装wordpress</h3><p>至此，一个Web 应用已经创建好了，下面开始安装wordpress。打开你的应用主页，就是你最初设置的域名，直接跳转到安装界面，如图，选择你想要的语言，这里以英语为例（如果你是面向中国的网站，选择简体中文就可以啦）</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101605.jpg" alt=""></p>
+<p>点击“继续”按钮，填写网站的相应信息。</p>
+<p>1，站点名称（Site-Title）：你自己想</p>
+<p>2，用户名Username）：你以后登录网站后台的用户名</p>
+<p>3，密码（Password）：不多说</p>
+<p>4，邮箱（Your-Email）：填写常用邮箱即可</p>
+<p>5，privacy：是否允许搜索引擎（百度、谷歌等）抓取你的网站，一般默认是同意的，除非你的网站只是想自己看。</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101606.jpg" alt=""></p>
+<p>填写好之后点击安装即可。秒秒钟，wordpress安装成功。接下来便是登录你的站点了。输入你刚才的用户名，密码（不要告诉我你已经忘啦，否则很麻烦，很麻烦，很麻烦）</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101007.jpg" alt=""></p>
+<p>登录成功后，你的后台界面：</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101608.jpg" alt=""></p>
+<p>网站前台界面：</p>
+<p><img src="http://source.chenyalun.cn/images/201510/5101609.jpg" alt=""></p>
+<p>于是，一个基于wordpress的站点就这么诞生啦。是不是很简单呢。</p>
+<p>在Windows Azure上部署Web应用其实就是这么容易，这就是云的强大。</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/10/11/题目1001：整数a+b的程序实现（下）/" itemprop="url">
                   题目1001：整数a+b的程序实现（下）
                 </a>
@@ -1440,166 +1591,6 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/07/如何改变图片的亮度与清晰度/" itemprop="url">
-                  如何改变图片的亮度与清晰度
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-07T05:00:22+08:00" content="2015-10-07">
-              2015-10-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂文热评/" itemprop="url" rel="index">
-                    <span itemprop="name">杂文热评</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/07/如何改变图片的亮度与清晰度/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/07/如何改变图片的亮度与清晰度/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>那么从今天起我们就来探讨有关photoshop的知识，或者说是应用方面的技巧，其实ps是非常有用的，尽管我们已经拥有了美图，把照片修的漂漂些不成问题，但是ps仍是专业的工具，学习平面设计必须掌握的。那你要是说，我不学平面设计，那了解这个干什么呀。答：兴趣使然。</p>
-<p>闲话少说，进入今天正题，我们今天探讨的是如果改变图片的亮度与清晰度。</p>
-<h3 id="1，改变图片的亮度"><a href="#1，改变图片的亮度" class="headerlink" title="1，改变图片的亮度"></a>1，改变图片的亮度</h3><p><img src="http://source.chenyalun.cn/images/201510/5100641.jpg" alt=""></p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100641f.png" alt=""></p>
-<p><strong> <span style="color: green;">实现方法：</span></strong></p>
-<p>进入ps主页面，按住Ctrl+M调出曲线对话框，拨动线条调节图片的亮度；或者依次点击【图像】-【调整】-【曲线】也可以调出对话框。曲线逼近左上方图片高亮，逼近右下方图片灰暗。</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100643.jpg" alt=""></p>
-<h3 id="2，改变图片的清晰度"><a href="#2，改变图片的清晰度" class="headerlink" title="2，改变图片的清晰度"></a>2，改变图片的清晰度</h3><p><img src="http://source.chenyalun.cn/images/201510/5100642.jpg" alt=""></p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100642f.jpg" alt=""></p>
-<p><strong> <span style="color: green;">实现方法：</span></strong></p>
-<p>进入ps主页面，依次点击【滤镜】-【模糊】-【高斯模糊】，改变半径的数值即可调节模糊度。</p>
-<p>然而当打开【模糊】的时候，竟然有这么多种类的模糊，不就是调个清晰度嘛，干嘛这么麻烦？其实对专业人士来说，这全都非常有用的，下面简单介绍一下。</p>
-<p><strong>场景模糊</strong></p>
-<p>这是CS6中的新功能，顾名思义，就是让背景模糊，主体清晰可见，用以突出主体的效果。非常高科技的模糊处理方法o(^▽^)o，以往的话还要借助蒙版、通道什么的，现在很智能啦。</p>
-<p><strong>光圈模糊</strong></p>
-<p>出来一个圆圈，圆圈外面模糊，里面清晰可见。当然，可以调节圆圈的形状。</p>
-<p><strong>倾斜模糊</strong></p>
-<p>出现两条直线，两条虚线，随意摆动，调节不同层次不同位置的模糊程度。</p>
-<p><strong>表面模糊</strong></p>
-<p>在保留边缘的同时模糊图像，好像给图片蒙一层雾，仅仅是表层的模糊。半径是指模糊像素的半径大小，阈值就是清晰程度啦。</p>
-<p><strong>动感模糊</strong></p>
-<p>貌似图片是因为晃动才模糊的，给人的感觉也很独特。角度：用于调节方向，距离：用于调节“晃动”的半径。</p>
-<p><strong>高斯模糊</strong></p>
-<p>专业解释：“高斯”是指当 Adobe Photoshop CS2 将加权平均应用于像素时生成的钟形曲线。“高斯模糊”滤镜添加低频细节，并产生一种朦胧效果。在进行字体的特殊效果制作时，在通道内经常应用此滤镜的效果。我们常用的一种。</p>
-<p><strong>进一步模糊</strong></p>
-<p>“进一步模糊”滤镜生成的效果比“模糊”滤镜强三到四倍。</p>
-<p><strong>径向模糊</strong></p>
-<p>就是模拟前后移动相机或旋转相机所产生的模糊效果。</p>
-<p><strong>镜头模糊</strong></p>
-<p>图像中的一些对象在焦点内，而使另一些区域变模糊。貌似拼谁的手机像素高一样。</p>
-<p><strong>模糊</strong></p>
-<p>产生轻微的模糊效果。</p>
-<p><strong>平均</strong></p>
-<p>根据整张图片像素的平均值，简单粗暴对图片进行模糊处理。然后我们什么也不用操作了。好像用处不大。</p>
-<p><strong>特殊模糊</strong></p>
-<p>很特殊，我觉得画画的时候能用到，哈哈。</p>
-<p><strong>形状模糊</strong></p>
-<p>根据那些奇怪的箭头，表情等形状，给图片来一个等内核的模糊处理。</p>
-<p>以上介绍顺序为Ps CS6的菜单顺序，我们常用的应该是高斯模糊和动感模糊。高斯模糊柔和地处理静态图片，动感模糊处理有动感的图片（比如奔跑的一瞬间拍下的照片，不是GIF动图哈）</p>
-<p>还有就是按住Ctrl+Alt+Z可以撤销操作，很有用的。</p>
-<p>### </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1645,7 +1636,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1662,7 +1653,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

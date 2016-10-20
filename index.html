@@ -276,6 +276,137 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/23/C语言交换两个数值的八种方法/" itemprop="url">
+                  C语言交换两个数值的八种方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-23T10:20:17+08:00" content="2016-10-23">
+              2016-10-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios开发/" itemprop="url" rel="index">
+                    <span itemprop="name">ios开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/23/C语言交换两个数值的八种方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/23/C语言交换两个数值的八种方法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.</p>
+<p>编译器:XCode8.0</p>
+</blockquote>
+<h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">   int m = 5, n = 3;</div><div class="line">   m = m ^ n;</div><div class="line">   n = m ^ n;</div><div class="line">   m = m ^ n;</div><div class="line">   </div><div class="line">   printf(&quot;m:%d---n:%d&quot;,m,n);</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>异或一般是针对二进制数.</p>
+<ol>
+<li>两数异或,相同则得0,不同则得1</li>
+<li>x ^ x = 0,x ^ 0 = x<br>第二行:  m:0101 n:0011<br>第三行:  m:0110 n:0011<br>第四行:  n:0101 m:0110<br>第五行:  m:0011 n:0101<br>此时,已完成交换.</li>
+</ol>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/23/C语言交换两个数值的八种方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/18/iOS学习笔记一：Cocoapods的安装与使用/" itemprop="url">
                   iOS学习笔记一：Cocoapods的安装与使用
                 </a>
@@ -345,10 +476,7 @@
 
       
         
-          <blockquote>
-<p>参考文章:<br><a href="http://blog.csdn.net/lissdy/article/details/9191351">http://blog.csdn.net/lissdy/article/details/9191351</a><br><a href="http://www.cnblogs.com/yan520/p/5583362.html">http://www.cnblogs.com/yan520/p/5583362.html</a><br><a href="http://www.jianshu.com/p/32d9cfb91471">http://www.jianshu.com/p/32d9cfb91471</a><br>向作者致谢!</p>
-</blockquote>
-<h1 id="升级Gem"><a href="#升级Gem" class="headerlink" title="升级Gem"></a>升级Gem</h1><pre><code>sudo gem update --system
+          <h1 id="升级Gem"><a href="#升级Gem" class="headerlink" title="升级Gem"></a>升级Gem</h1><pre><code>sudo gem update --system
 </code></pre><h1 id="切换Cocoapods的数据源"><a href="#切换Cocoapods的数据源" class="headerlink" title="切换Cocoapods的数据源"></a>切换Cocoapods的数据源</h1><pre><code># 1.删除
 gem sources --remove https://rubygems.org/
 
@@ -824,150 +952,6 @@ NSLog(@”result的结果是：%i”,result);
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/12/Objective-C学习笔记一：类/" itemprop="url">
-                  Objective-C学习笔记一：类
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-12T05:00:49+08:00" content="2016-05-12">
-              2016-05-12
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ios开发/" itemprop="url" rel="index">
-                    <span itemprop="name">ios开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/12/Objective-C学习笔记一：类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/12/Objective-C学习笔记一：类/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h3><p>三要素：事物名称（类名）；属性；行为（功能）</p>
-<p>具有相同（或者类似）属性和行为的对象可以抽象出一个类。</p>
-<h3 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h3><p>类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识</p>
-<p>行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上</p>
-<p><span class="s1">#import </span><span class="s2">&lt;Foundation/Foundation.h&gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多API。</span></p>
-<p><span class="s1">#import </span><span class="s2">用来拷贝某个文件的内容，与#include的区别：自动防止文件内容被拷贝多次</span></p>
-<p><span class="s1">@interface</span><span class="s2"> Person : </span><span class="s3">NSObject</span></p>
-<p><span class="s2">{</span></p>
-<p><span class="s2">@public</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">int</span><span class="s2"> _age;</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">bool</span><span class="s2"> _sex;</span></p>
-<p><span class="s2">}</span></p>
-<p><span class="s2">-(</span><span class="s1">void</span><span class="s2">)print;</span></p>
-<p><span class="s2">@end</span></p>
-<p>大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.</p>
-<p><span class="s1">: </span><span class="s2">NSObject（继承基类）使声明的类具有创建对象的能力。</span></p>
-<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><p><span class="s1">@implementation</span><span class="s2"> Person</span></p>
-<p><span class="s1">-(</span><span class="s3">void</span><span class="s1">)print</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s1">(</span><span class="s5">@”输出内容”</span><span class="s1">);</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">@end</span></p>
-<p>已经导入声明文件<span class="s1">#import </span><span class="s2">“Person.h” 类的实现即方法的实现。
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/12/Objective-C学习笔记一：类/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1013,7 +997,7 @@ NSLog(@”result的结果是：%i”,result);
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1030,7 +1014,7 @@ NSLog(@”result的结果是：%i”,result);
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

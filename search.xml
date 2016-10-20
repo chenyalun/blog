@@ -4,12 +4,105 @@
   
     
     <entry>
+      <title><![CDATA[C语言交换两个数值的八种方法]]></title>
+      <url>http://yoursite.com/2016/10/23/C%E8%AF%AD%E8%A8%80%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%80%BC%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.</p>
+<p>编译器:XCode8.0</p>
+</blockquote>
+<h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">   int m = 5, n = 3;</div><div class="line">   m = m ^ n;</div><div class="line">   n = m ^ n;</div><div class="line">   m = m ^ n;</div><div class="line">   </div><div class="line">   printf(&quot;m:%d---n:%d&quot;,m,n);</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>异或一般是针对二进制数.</p>
+<ol>
+<li>两数异或,相同则得0,不同则得1</li>
+<li>x ^ x = 0,x ^ 0 = x<br>第二行:  m:0101 n:0011<br>第三行:  m:0110 n:0011<br>第四行:  n:0101 m:0110<br>第五行:  m:0011 n:0101<br>此时,已完成交换.</li>
+</ol>
+<a id="more"></a>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><pre><code>int main(int argc, const char * argv[]) {
+    int m = 2147483648, n = 2147483647;
+    m = m + n - (n = m);
+    printf(&quot;m:%d---n:%d&quot;,m,n);
+    return 0;
+}
+</code></pre><ol>
+<li>从左向右依次进行,首先获取m与n的和,接着利用()运算符直接将m的值赋予n,此时n完成交换</li>
+<li>同时()内的值是m的值,两数之和减去m值便是n的值,再将n的值赋予m,到这里m完成交换</li>
+</ol>
+<h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><pre><code>int main(int argc, const char * argv[]) {
+int m = 5, n = 3;
+n = (long)((long)m &lt;&lt; 32 | (m = n)) &gt;&gt; 32;
+printf(&quot;m:%d---n:%d&quot;,m,n);
+return 0;
+}
+</code></pre><p>注:<code>__int64表示64位整型变量,Xcode中用long代替,VC6.0可直接使用__int64,即: b = (__int64)((__int64)a &lt;&lt; 32 | (a = b)) &gt;&gt; 32；</code></p>
+<ol>
+<li>(m = n):完成m的交换,()的值是n</li>
+<li>(long)((long)m &lt;&lt; 32 | n):得到的结果是 <code>00...0  0101   00...0  11</code>第一部分28个0,第三部分30个0 </li>
+<li>((long)((long)m &lt;&lt; 32 ) &gt;&gt; 32:得到的结果:把第三第四部分去掉,即<code>00...0  0101</code> 正好32位,且此值为m的值,再将其赋予n,完成n的交换.</li>
+</ol>
+<h1 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h1><pre><code>#define swap(x, y, z) ((z) = (x), (x) = (y), (y) = (z))
+
+int main(int argc, const char * argv[]) {
+    int m = 5, n = 3,t = 0;
+    swap(m, n, t);
+    printf(&quot;m:%d---n:%d&quot;,m,n);
+    return 0;
+}
+</code></pre><p>比较巧妙,把中间变量放在宏中.</p>
+<h1 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h1><pre><code>int main(int argc, char *argv[]) {
+int m = 5, n = 3;
+m = m + n;
+n = m - n;
+m = m - n;
+
+printf(&quot;m:%d---n:%d&quot;,m,n);
+return 0;
+}
+</code></pre><p>算是一种数学方法吧,但可能溢出.</p>
+<h1 id="两数之积"><a href="#两数之积" class="headerlink" title="两数之积"></a>两数之积</h1><pre><code>int main(int argc, const char * argv[]) {
+    int m = 5, n = 3;
+    m = m * n;
+    n = m / n;
+    m = m / n;
+
+    printf(&quot;m:%d---n:%d&quot;,m,n);
+    return 0;
+}
+</code></pre><p>两数之和方法的变形,n不能为0,m更可能溢出.</p>
+<h1 id="经典的交换函数"><a href="#经典的交换函数" class="headerlink" title="经典的交换函数"></a>经典的交换函数</h1><pre><code>void swap(int *a, int *b) {
+    int temp = 0;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main(int argc, const char * argv[]) {
+    int m = 2147483648, n = 2147483647;
+    swap(&amp;m,&amp;n);
+    printf(&quot;m:%d---n:%d&quot;,m,n);
+    return 0;
+}
+</code></pre><h1 id="直接添加变量"><a href="#直接添加变量" class="headerlink" title="直接添加变量"></a>直接添加变量</h1><pre><code>int main(int argc, const char * argv[]) {
+    int m = 2147483648, n = 2147483647,temp = 0;
+    temp = m;
+    m = n;
+    n = temp;
+    printf(&quot;m:%d---n:%d&quot;,m,n);
+    return 0;
+}
+</code></pre><h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><p>int最大值，根据编译器类型不同而变化。<br>1 对于16位编译器，int占16位(2字节)。<br>int的最大值为32767.<br>2 对于32位和64位编译器，int占32位(4字节)。<br>int的最大值为2147483647</p>
+<p>3 可以通过打印sizeof(int)查看平台对应的int占用字节数。乘8后即为位数。<br>最高位为符号位，如位数为n，则最大值为<br>2^(n-1)<br>即2的n-1次幂。</p>
+<pre><code>printf(&quot;%lu&quot;,sizeof(int));
+int a = 2147483648;
+</code></pre><blockquote>
+<p>参考并致谢:<br><a href="http://blog.csdn.net/ljx_5489464/article/details/50042571" target="_blank" rel="external">http://blog.csdn.net/ljx_5489464/article/details/50042571</a><br><a href="http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/" target="_blank" rel="external">http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/</a><br><a href="http://www.itdadao.com/articles/c15a428576p0.html" target="_blank" rel="external">http://www.itdadao.com/articles/c15a428576p0.html</a><br><a href="http://www.cnblogs.com/kubixuesheng/p/4104800.html" target="_blank" rel="external">http://www.cnblogs.com/kubixuesheng/p/4104800.html</a><br><a href="https://www.byvoid.com/blog/c-int64" target="_blank" rel="external">https://www.byvoid.com/blog/c-int64</a></p>
+</blockquote>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS学习笔记一：Cocoapods的安装与使用]]></title>
       <url>http://yoursite.com/2016/10/18/iOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9ACocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>参考文章:<br><a href="http://blog.csdn.net/lissdy/article/details/9191351" target="_blank" rel="external">http://blog.csdn.net/lissdy/article/details/9191351</a><br><a href="http://www.cnblogs.com/yan520/p/5583362.html" target="_blank" rel="external">http://www.cnblogs.com/yan520/p/5583362.html</a><br><a href="http://www.jianshu.com/p/32d9cfb91471" target="_blank" rel="external">http://www.jianshu.com/p/32d9cfb91471</a><br>向作者致谢!</p>
-</blockquote>
-<h1 id="升级Gem"><a href="#升级Gem" class="headerlink" title="升级Gem"></a>升级Gem</h1><pre><code>sudo gem update --system
+      <content type="html"><![CDATA[<h1 id="升级Gem"><a href="#升级Gem" class="headerlink" title="升级Gem"></a>升级Gem</h1><pre><code>sudo gem update --system
 </code></pre><h1 id="切换Cocoapods的数据源"><a href="#切换Cocoapods的数据源" class="headerlink" title="切换Cocoapods的数据源"></a>切换Cocoapods的数据源</h1><pre><code># 1.删除
 gem sources --remove https://rubygems.org/
 
@@ -122,7 +215,10 @@ killall Finder
 </code></pre><p>Mac取消显示隐藏文件</p>
 <pre><code>defaults write com.apple.finder AppleShowAllFiles -boolean false ; 
 killall Finder
-</code></pre>]]></content>
+</code></pre><blockquote>
+<p>参考并致谢:<br><a href="http://blog.csdn.net/lissdy/article/details/9191351" target="_blank" rel="external">http://blog.csdn.net/lissdy/article/details/9191351</a><br><a href="http://www.cnblogs.com/yan520/p/5583362.html" target="_blank" rel="external">http://www.cnblogs.com/yan520/p/5583362.html</a><br><a href="http://www.jianshu.com/p/32d9cfb91471" target="_blank" rel="external">http://www.jianshu.com/p/32d9cfb91471</a></p>
+</blockquote>
+]]></content>
     </entry>
     
     <entry>

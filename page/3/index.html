@@ -276,6 +276,175 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/28/UWP开发笔记五：应用数据本地存储/" itemprop="url">
+                  UWP开发笔记五：应用数据本地存储
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T05:00:59+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/UWP开发笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">UWP开发笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/28/UWP开发笔记五：应用数据本地存储/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/28/UWP开发笔记五：应用数据本地存储/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。</p>
+<p>命令栏代码：</p>
+<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Icon=”Page”<br>                              Label=”新建”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”LoadAppBarButton”<br>                              Icon=”Folder”<br>                              Label=”显示”<br>                              Click=”LoadAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”SaveAppBarButton”<br>                              Icon=”Save”<br>                              Label=”保存”<br>                              Click=”SaveAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
+<p><pre class="lang:default decode:true "> &lt;StackPanel&gt;<br>            &lt;TextBox Name=”Email”<br>                     PlaceholderText=”邮箱”<br>                     Margin=”20”<br>                     InputScope=”EmailSmtpAddress”/&gt;<br>            &lt;TextBox Name=”Web”<br>                     PlaceholderText=”网址”<br>                     Margin=”20”<br>                     InputScope=”Url”/&gt;<br>            &lt;TextBox Name=”Tel”<br>                     PlaceholderText=”手机号码”<br>                     Margin=”20”<br>                     InputScope=”TelephoneNumber”/&gt;<br>        &lt;/StackPanel&gt;</pre><br>后台逻辑：</p>
+<p><pre class="lang:default decode:true ">  //  新建存储<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            Email.Text = string.Empty;<br>            Web.Text = string.Empty;<br>            Tel.Text = string.Empty;<br>        }</pre></p>
+<pre><code>// 保存信息
+private void SaveAppBarButton_Click(object sender, RoutedEventArgs e)
+{
+    Save(&quot;Email&quot;, Email.Text);
+    Save(&quot;Web&quot;, Web.Text);
+    Save(&quot;Tel&quot;, Tel.Text);
+}
+
+// 加载存储信息
+private void LoadAppBarButton_Click(object sender, RoutedEventArgs e)
+{
+    Email.Text = Load(&quot;Email&quot;);
+    Web.Text = Load(&quot;Web&quot;);
+    Tel.Text = Load(&quot;Tel&quot;);
+}
+
+// 应用本地设置信息存储:保存 键 值
+public void Save(string key,string value)
+{
+    ApplicationData.Current.LocalSettings.Values[key] = value;
+}
+
+// 加载应用本地设置存储的信息
+public string Load(string key)
+{
+    if (ApplicationData.Current.LocalSettings.Values[key]!=null)
+    {
+        return ApplicationData.Current.LocalSettings.Values[key].ToString();
+    }
+
+    return string.Empty;
+}&lt;/pre&gt;
+</code></pre><p>输入信息并保存：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/005.png" alt=""></p>
+<p>点击新建清空数据，点击显示：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/21/006.png" alt=""></p>
+<hr>
+<hr>
+<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><ul>
+<li>空字符串：string.Empty</li>
+<li>保存的方式为键值对：key和value</li>
+<li>本地设置类： ApplicationData.Current.LocalSettings.Values[key] = value;其中key一般是字符串，value是保存的值</li>
+<li>需要引入命名空间：应用数据存储  using Windows.Storage;</li>
+<li>删除存储 ApplicationData.Current.LocalSettings.Values.Remove(“key”); 其中key是键<br>&nbsp;</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/26/UWP开发笔记四：随机数与筛子游戏/" itemprop="url">
                   UWP开发笔记四：随机数与筛子游戏
                 </a>
@@ -1176,143 +1345,6 @@ rotating = true;&lt;/pre&gt;
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/06/Visual_Studio_2015如何配置Github/" itemprop="url">
-                  Visual Studio 2015如何配置Github
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-06T05:00:13+08:00" content="2015-11-06">
-              2015-11-06
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/应用开发/" itemprop="url" rel="index">
-                    <span itemprop="name">应用开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/06/Visual_Studio_2015如何配置Github/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/06/Visual_Studio_2015如何配置Github/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>身为一枚开发人员，使用Github是一项基本技能，Github的美妙之处在下就不细细道来了，其实，稍微入门的童鞋都会在Visual Studio 2015配置Github的，如此说来，我再分享这个教程纯属无聊了。</p>
-<h3 id="1，申请注册Github"><a href="#1，申请注册Github" class="headerlink" title="1，申请注册Github"></a>1，申请注册Github</h3><p><a href="http://www.chenyalun.cn/go/?url=https://github.com" target="_blank" rel="external">https://github.com</a>，这个就是人家的官网，注册成功，点击右上角的“+”，创建新的organization。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110501.jpg" alt=""></p>
-<p>注意你的organization name是全网唯一的，不允许重复。当然也可以选择用于付费的项目，视自己情况而定。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110602.jpg" alt=""></p>
-<p>很巧妙的我的RoseMyCode就这样创建成功啦。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110503.jpg" alt=""></p>
-<p>接着是创建自己的repository，当然这个是属于刚才的RoseMycode目录之下的。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110604.jpg" alt=""></p>
-<p>如此，一个简单的Github搞定啦。</p>
-<h3 id="2，配置VS2015"><a href="#2，配置VS2015" class="headerlink" title="2，配置VS2015"></a>2，配置VS2015</h3><p>依次点击视图-团队资源管理器，打开即可。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110605.jpg" alt=""></p>
-<p>在右侧的团队资源管理器中找到本地Git存储库，点击克隆。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110606.jpg" alt=""></p>
-<p>然后把我们刚才创建的repository链接地址粘贴即可，当然你要选定自己要克隆的代码的路径，是在默认的C盘，还是其他盘。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110607.jpg" alt=""><img src="http://source.chenyalun.cn/images/201511/5110608.jpg" alt=""></p>
-<p>看吧，着实很简单，我们就把VS配置好啦。当然值得一提的是Visual Studio Online，为 Visual Studio、Eclipse、Xcode 或任何其他 IDE 或代码编辑器提供版本控制、敏捷规划、持续交付和应用程序分析的基于云的协作服务。这个也是令人神往的。有兴趣的同学不妨看看。</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1358,7 +1390,7 @@ rotating = true;&lt;/pre&gt;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1375,7 +1407,7 @@ rotating = true;&lt;/pre&gt;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
