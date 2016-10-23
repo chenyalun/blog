@@ -121,7 +121,7 @@
 
   <link rel="canonical" href="http://yoursite.com/page/4/"/>
 
-  <title> 陈亚伦博客 </title>
+  <title> 陈亚伦博客 - 爱生活 做自己 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,34 +214,21 @@
           </a>
         </li>
       
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            搜索
+            关于
           </a>
         </li>
+      
+
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
   
 </nav>
 
@@ -276,8 +263,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/06/Visual_Studio_2015如何配置Github/" itemprop="url">
-                  Visual Studio 2015如何配置Github
+                <a class="post-title-link" href="/2016/04/20/UWP开发笔记一：Hello_UWP与对话框/" itemprop="url">
+                  UWP开发笔记一：Hello UWP与对话框
                 </a>
               
             
@@ -290,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-06T05:00:13+08:00" content="2015-11-06">
-              2015-11-06
+            <time itemprop="dateCreated" datetime="2016-04-20T05:00:51+08:00" content="2016-04-20">
+              2016-04-20
             </time>
           </span>
 
@@ -304,8 +291,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/应用开发/" itemprop="url" rel="index">
-                    <span itemprop="name">应用开发</span>
+                  <a href="/categories/UWP开发笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">UWP开发笔记</span>
                   </a>
                 </span>
 
@@ -320,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/06/Visual_Studio_2015如何配置Github/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/06/Visual_Studio_2015如何配置Github/" itemprop="commentsCount"></span>
+                <a href="/2016/04/20/UWP开发笔记一：Hello_UWP与对话框/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/UWP开发笔记一：Hello_UWP与对话框/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -346,23 +333,59 @@
       
         
           
-            <p>身为一枚开发人员，使用Github是一项基本技能，Github的美妙之处在下就不细细道来了，其实，稍微入门的童鞋都会在Visual Studio 2015配置Github的，如此说来，我再分享这个教程纯属无聊了。</p>
-<h3 id="1，申请注册Github"><a href="#1，申请注册Github" class="headerlink" title="1，申请注册Github"></a>1，申请注册Github</h3><p><a href="http://www.chenyalun.cn/go/?url=https://github.com" target="_blank" rel="external">https://github.com</a>，这个就是人家的官网，注册成功，点击右上角的“+”，创建新的organization。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110501.jpg" alt=""></p>
-<p>注意你的organization name是全网唯一的，不允许重复。当然也可以选择用于付费的项目，视自己情况而定。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110602.jpg" alt=""></p>
-<p>很巧妙的我的RoseMyCode就这样创建成功啦。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110503.jpg" alt=""></p>
-<p>接着是创建自己的repository，当然这个是属于刚才的RoseMycode目录之下的。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110604.jpg" alt=""></p>
-<p>如此，一个简单的Github搞定啦。</p>
-<h3 id="2，配置VS2015"><a href="#2，配置VS2015" class="headerlink" title="2，配置VS2015"></a>2，配置VS2015</h3><p>依次点击视图-团队资源管理器，打开即可。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110605.jpg" alt=""></p>
-<p>在右侧的团队资源管理器中找到本地Git存储库，点击克隆。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110606.jpg" alt=""></p>
-<p>然后把我们刚才创建的repository链接地址粘贴即可，当然你要选定自己要克隆的代码的路径，是在默认的C盘，还是其他盘。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110607.jpg" alt=""><img src="http://source.chenyalun.cn/images/201511/5110608.jpg" alt=""></p>
-<p>看吧，着实很简单，我们就把VS配置好啦。当然值得一提的是Visual Studio Online，为 Visual Studio、Eclipse、Xcode 或任何其他 IDE 或代码编辑器提供版本控制、敏捷规划、持续交付和应用程序分析的基于云的协作服务。这个也是令人神往的。有兴趣的同学不妨看看。</p>
+            <p>这段时间在悄悄地学习UWP开发，不过担心会忘记，所以感觉还是记下笔记比较好。一来自己没事可以翻着看看，可解闷了，二来欢迎志同道合的童鞋一起交流。</p>
+<p>1，假定PC装好VS2015，文件–新建–项目–windows通用应用</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/001.png" alt=""></p>
+<p>设置版本：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/002.png" alt=""></p>
+<p>2，右侧解决方案中，打开MainPage.xaml，写入xaml代码：</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/003.png" alt=""></p>
+<p><pre class="lang:default decode:true ">  &lt;Button Name=”HelloUWPButton”<br>                Content=”显示”<br>                HorizontalAlignment=”Center”<br>                VerticalAlignment=”Center”<br>        Click=”HelloUWPButton_Click”/&gt;</pre><br>或者拖入Button控件，属性中设置Click事件：HelloUWPButton_Click，内容设置为：显示。</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/004.png" alt=""></p>
+<p>3，处理click事件：</p>
+<p><pre class="lang:default decode:true ">private async void HelloUWPButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            await new Windows.UI.Popups.MessageDialog(“Hello UWP”).ShowAsync();</pre></p>
+<pre><code>}&lt;/pre&gt;
+</code></pre><p>4，调试运行即可。</p>
+<p><img src="http://images.chenyalun.cn/2016/04/19/005.png" alt=""></p>
+<hr>
+<hr>
+<h3 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;<strong>笔记</strong></h3><p>1，其实点击事件的代码和下面两行等价：</p>
+<p><pre class="lang:default decode:true ">var message = new MessageDialog(“Hello UWP”);<br>await  message.ShowAsync();</pre><br>&nbsp;</p>
+<p>2，消息对话框引入的命名空间：<strong>using Windows.UI.Popups;</strong></p>
+<p>&nbsp;</p>
+<p>3，消息对话框的使用</p>
+<p>创建对话框并设置内容：</p>
+<p><pre class="lang:default decode:true ">var messageDialog = new MessageDialog(“消息对话框的内容”, “可省略的对话框标题”);</pre><br>设置对话框中的命令,最多有3个：</p>
+<p><pre class="lang:default decode:true ">UICommand cmd1 = new UICommand();<br>UICommand cmd2 = new UICommand();<br>UICommand cmd3 = new UICommand();</pre><br>设置命令的标签文本：</p>
+<p><pre class="lang:default decode:true ">cmd1.Label = “标签1”;<br>cmd2.Label = “标签2”;<br>cmd3.Label = “标签3”;</pre><br>设置命令的唯一标识符：</p>
+<p><pre class="lang:default decode:true ">cmd1.Id = 1;<br>cmd2.Id = 2;<br>cmd3.Id = 3;</pre><br>设置消息对话框命令的默认ID（直接按下回车键就可以执行的命令）<br>三个命令默认从左到右DefaultCommandIndex依次是0，1，2，大于2或者不设置则DefaultCommandIndex的值为0</p>
+<p><pre class="lang:default decode:true "> messageDialog.DefaultCommandIndex = 1;</pre><br>设置调用（点击）命令时引发的事件：OnCommend</p>
+<p><pre class="lang:default decode:true ">cmd1.Invoked = new UICommandInvokedHandler(OnCommend);<br>cmd2.Invoked = new UICommandInvokedHandler(OnCommend);<br>cmd3.Invoked = new UICommandInvokedHandler(OnCommend);</pre><br>将3个命令添加到对话框中</p>
+<p><pre class="lang:default decode:true ">messageDialog.Commands.Add(cmd1);<br>messageDialog.Commands.Add(cmd2);<br>messageDialog.Commands.Add(cmd3);</pre><br>显示消息对话框(异步)</p>
+<p><pre class="lang:default decode:true ">await messageDialog.ShowAsync();</pre><br>截至目前，上面的代码可以简化为：</p>
+<p><pre class="lang:default decode:true">var messageDialog = new MessageDialog(“消息对话框的内容”);<br>messageDialog.DefaultCommandIndex = 1;<br>messageDialog.Commands.Add(new UICommand(“标签1”, OnCommend, 1));<br>messageDialog.Commands.Add(new UICommand(“标签2”, OnCommend, 2));<br>messageDialog.Commands.Add(new UICommand(“标签3”, OnCommend, 3));<br>await messageDialog.ShowAsync();</pre><br>处理调用命令的事件：</p>
+<p>一般通过命令的ID进行不同的处理，将object类型的command.Id转化为int32类型</p>
+<p><pre class="lang:default decode:true "> private void OnCommend(IUICommand command)<br>        {<br>            var ID = Convert.ToInt32(command.Id);</pre></p>
+<pre><code>    // 处理不同的命令
+    if (ID == 1)
+    {
+        ResultTextBlock.Text = &quot;你点击了命令1：标签1&quot;;
+    }
+    else if (ID == 2)
+    {
+        ResultTextBlock.Text = &quot;你点击了命令2：标签2&quot;;
+    }
+    else
+    {
+        ResultTextBlock.Text = &quot;你点击了命令3：标签3&quot;;
+    }
+
+}&lt;/pre&gt;
+</code></pre><p><img src="http://images.chenyalun.cn/2016/04/19/006.png" alt=""></p>
+<p>4，单词积累：</p>
+<p>popups：弹出窗口；弹出式视窗</p>
+<p>invoked：恳求；实行；引起</p>
+<p>5,github: <a href="http://www.chenyalun.cn/go/?url=https://github.com/chenyalun/UWP-Notes.git" target="_blank" rel="external">https://github.com/chenyalun/UWP-Notes.git</a></p>
 <p>&nbsp;</p>
 
           
@@ -698,8 +721,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/30/题目：1011二进制整数的转换/" itemprop="url">
-                  题目：1011二进制整数的转换
+                <a class="post-title-link" href="/2015/10/22/微信应用之交通信息查询/" itemprop="url">
+                  微信应用之交通信息查询
                 </a>
               
             
@@ -712,8 +735,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-30T05:00:42+08:00" content="2015-10-30">
-              2015-10-30
+            <time itemprop="dateCreated" datetime="2015-10-22T05:00:53+08:00" content="2015-10-22">
+              2015-10-22
             </time>
           </span>
 
@@ -726,8 +749,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/程序试题/" itemprop="url" rel="index">
-                    <span itemprop="name">程序试题</span>
+                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
+                    <span itemprop="name">公众号开发</span>
                   </a>
                 </span>
 
@@ -742,8 +765,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/30/题目：1011二进制整数的转换/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/30/题目：1011二进制整数的转换/" itemprop="commentsCount"></span>
+                <a href="/2015/10/22/微信应用之交通信息查询/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/22/微信应用之交通信息查询/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -768,148 +791,180 @@
       
         
           
-            <p>题目概述：给定一个正整数，写出它的2进制表示</p>
-<p>输入：多组输入，输入的第一行为一个正整数n，表示接下来有n组数据，每一行为1个正整数a(0&lt;a&lt;=10000)</p>
-<p>输出：对于每一组数据，求出a的2进制表示法</p>
-<p>样例输入：</p>
-<p>2<br>5<br>10</p>
-<p>样例输出：</p>
-<p>101<br>1010</p>
-<p>关于进制的转换，其实是有章可循的。而对于十进制整数到二进制整数的转换中，用给定的数反复除以2，除第一次外，每次除以2均取前一次商的整数部分作被除数并依次记下每次的余数。另外，所得到的商的最后一位余数是所求二进制数的最高位。如此，便可轻而易举得到我们需要的二进制整数。</p>
-<p><table class="table-view log-set-param"></table></p>
-<p><tbody></tbody></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">被除数</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">计算过程</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">商</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">余数</div><br></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">6</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">6/2</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">3</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">0</div><br></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">3</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">3/2</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div><br></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1/2</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">0</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div><br><br><br><br>&nbsp;</p>
-<p>像上面的这个，二进制整数便是110。思路明了，那代码自然“油然而生”。</p>
-<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;
-void binary(int n){
-    int a[200],i=0;
-    do{
-        a[i]=n%2;
-        n=n/2;    
-        i++;        
-    }while(n!=0);
+            <p>基本上如果不是每天都宅在家里，公交车，实时路况，航班，火车等这些交通信息我们是肯定要用到的。其实这些信息也是比较好查询的，百度一下，全都有了。不过在微信上，把这些功能集于一体也是很有意思的。</p>
+<h3 id="1，查询网站"><a href="#1，查询网站" class="headerlink" title="1，查询网站"></a>1，查询网站</h3><p>公交：<a href="http://m.8684.cn/bus" target="_blank" rel="external">http://m.8684.cn/bus</a>                                           <a href="http://m.gongjiao.com/" target="_blank" rel="external">http://m.gongjiao.com/</a></p>
+<p>汽车：<a href="http://touch.trip8080.com/" target="_blank" rel="external">http://touch.trip8080.com/</a>                                 <a href="http://m.checi.org/" target="_blank" rel="external">http://m.checi.org/</a></p>
+<p>火车：<a href="http://m.ctrip.com/html5/Trains/" target="_blank" rel="external">http://m.ctrip.com/html5/Trains/</a>                     <a href="http://m.huoche.com.cn/" target="_blank" rel="external">http://m.huoche.com.cn/</a></p>
+<p>飞机：<a href="http://touch.qunar.com/h5/flight/" target="_blank" rel="external">http://touch.qunar.com/h5/flight/</a></p>
+<p>路况：<a href="http://dp.sina.cn/dpool/tools/citytraffic/city.php" target="_blank" rel="external">http://dp.sina.cn/dpool/tools/citytraffic/city.php</a></p>
+<p>违章：<a href="http://app.eclicks.cn/violation2/webapp/index?appid=10" target="_blank" rel="external">http://app.eclicks.cn/violation2/webapp/index?appid=10</a></p>
+<p>这些查询网站非常多，当然广告也是非常多，比较恶心，如果你找到自己心仪的网站，替换即可。</p>
+<h3 id="2，代码实现"><a href="#2，代码实现" class="headerlink" title="2，代码实现"></a>2，代码实现</h3><p>其实这些都不是接口，只是当用户输入“交通”的时候，微信公众号返回给用户一条图文而已，而图文则指向了相应的网址。那么举一反三，除了交通之外，任何我们想指向的网址都是可以的，所以技术含量并不高。</p>
+<pre class="lang:default decode:true ">&lt;?php
+define("TOKEN", "chenyalun");
 
-while(i&gt;0)
-printf("%d",a[--i]);
-
-printf("\n");
-}
-int main(){
-    int n,a[200],i=0;
-    scanf("%d",&amp;n);
-    for(;i&lt;n;i++)
-        scanf("%d",&amp;a[i]);
-    for(i=0;i&lt;n;i++)
-        binary(a[i]);
-    return 0;
-}</pre>
-
-<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true ">#include&lt;iostream&gt;
-using namespace std;
-void binary(int n){
-    int a[200],i=0;
-    do{
-        a[i]=n%2;
-        n=n/2;    
-        i++;        
-    }while(n!=0);
-
-while(i&gt;0)
-cout&lt;&lt;a[--i];
-cout&lt;&lt;endl;
-}
-int main(){
-    int n,a[200],i=0;
-    cin&gt;&gt;n;
-    for(;i&lt;n;i++)
-        cin&gt;&gt;a[i];
-    for(i=0;i&lt;n;i++)
-        binary(a[i]);
-    return 0;
-}
-</pre>
-
-<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true ">import java.util.Scanner;</pre></p>
-<p>public class Main {</p>
-<pre><code>static void binary(int n){
-    int a[]=new int [200],i=0;
-    do{
-        a[i]=n%2;
-        n=n/2;
-        i++;
-    }while(n!=0);
-
-while(i&amp;gt;0)
-    System.out.print(a[--i]);
-System.out.println();
+$wechatObj = new wechatCallbackapiTest();
+if (!isset($_GET['echostr'])) {
+    $wechatObj-&gt;responseMsg();
+}else{
+    $wechatObj-&gt;valid();
 }
 
-public static void main(String[] args) {
-    int a[]=new int [200],n,i=0;
-    Scanner s=new Scanner (System.in);
-    n=s.nextInt();
-    for(;i&amp;lt;n;i++)
-    a[i]=s.nextInt();
-    for(i=0;i&amp;lt;n;i++)
-    binary(a[i]);
-}
-</code></pre><p>}<br><br>其实最根本的莫过于进制转换这个函数：用一个整形数组存储每次得到的余数a[i]=n%2（当然，打印的时候，顺序要倒过来），接着要做的便是n=n/2；整除2即可。核心函数搞定了，那与之相关的题目便可顺手解决了。像题目1012【给定一个正整数，写出它的2进制表示中有多少个1】很容易搞定。</p>
-<h3 id="4，二进制数中1的个数"><a href="#4，二进制数中1的个数" class="headerlink" title="4，二进制数中1的个数"></a>4，二进制数中1的个数</h3><p><pre class="lang:default decode:true ">#include&lt;iostream&gt;<br>using namespace std;<br>int binary_number1(int n){<br>    int a[200],i=0,k=0;<br>    do{<br>        a[i]=n%2;<br>        n=n/2;<br>        i++;<br>    }while(n!=0);</pre></p>
-<p>while(i&gt;0)<br>{<br>    if(a[–i]==1)<br>    k++;<br>}<br>return k;<br>}<br>int main(){<br>    int n,a[200],i=0;<br>    cin&gt;&gt;n;<br>    for(;i&lt;n;i++)<br>        cin&gt;&gt;a[i];<br>    for(i=0;i&lt;n;i++)<br>        cout&lt;&lt;binary_number1(a[i])&lt;&lt;endl;<br>    return 0;<br>}<br><br>&nbsp;</p>
-<p>下面是JAVA代码：</p>
-<p><pre class="lang:default decode:true ">import java.util.Scanner;</pre></p>
-<p>public class Main {</p>
-<pre><code> static int binary_number1(int n){
-    int a[]=new int [200],i=0,k=0;
-    do{
-        a[i]=n%2;
-        n=n/2;
-        i++;
-    }while(n!=0);
+class wechatCallbackapiTest
+{
+    public function valid()
+    {
+        $echoStr = $_GET["echostr"];
+        if($this-&gt;checkSignature()){
+            echo $echoStr;
+            exit;
+        }
+    }
 
-while(i&amp;gt;0){
-    if(a[--i]==1)
-    k++;
+    private function checkSignature()
+    {
+        $signature = $_GET["signature"];
+        $timestamp = $_GET["timestamp"];
+        $nonce = $_GET["nonce"];
+        $token = TOKEN;
+        $tmpArr = array($token, $timestamp, $nonce);
+        sort($tmpArr);
+        $tmpStr = implode($tmpArr);
+        $tmpStr = sha1($tmpStr);
+
+        if($tmpStr == $signature){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function responseMsg()
+    {
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        if (!empty($postStr)){
+            $this-&gt;logger("R ".$postStr);
+            $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $RX_TYPE = trim($postObj-&gt;MsgType);
+
+            switch ($RX_TYPE)
+            {
+                case "event":
+                    $result = $this-&gt;receiveEvent($postObj);
+                    break;
+                case "text":
+                    $result = $this-&gt;receiveText($postObj);
+                    break;
+
+            }
+            $this-&gt;logger("T ".$result);
+            echo $result;
+        }else {
+            echo "";
+            exit;
+        }
+    }
+
+    private function receiveEvent($object)
+    {
+        $content = "";
+        switch ($object-&gt;Event)
+        {
+            case "subscribe":
+                $content = "欢迎关注陈亚伦博客 ";
+                break;
+            case "unsubscribe":
+                $content = "取消关注";
+                break;
+        }
+        $result = $this-&gt;transmitText($object, $content);
+        return $result;
+    }
+
+    private function receiveText($object)
+    {
+        $keyword = trim($object-&gt;Content);
+        $content[] = array("Title" =&gt;"交通信息","Description" =&gt;"", "PicUrl" =&gt;"", "Url" =&gt;"http://m.8684.cn/bus");
+        $content[] = array("Title" =&gt;"【公交线路】\n全车公交查询", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/ai/114/09caed4a27c56000bb870c68ab028850", "Url" =&gt;"http://m.8684.cn/shenzhen_bus");
+        $content[] = array("Title" =&gt;"【汽车班次】\n长途汽车班车", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/i/175/4951bd2a2f368cafc5ad09ff95ce591d", "Url" =&gt;"http://touch.trip8080.com/");
+        $content[] = array("Title" =&gt;"【火车时刻】\n火车时刻查询", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/ai/114/26a9407dcedda5f4a30b195f78ec3680", "Url" =&gt;"http://m.ctrip.com/html5/Trains/");
+        $content[] = array("Title" =&gt;"【飞 机 票】\n机票查询", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/i/175/a1bd6303a8bde7da50166aa8dafb7568", "Url" =&gt;"http://touch.qunar.com/h5/flight/");
+        $content[] = array("Title" =&gt;"【城市路况】\n重点城市实时路况", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/i/175/0d8488edf94574651d048025596a6190", "Url" =&gt;"http://dp.sina.cn/dpool/tools/citytraffic/city.php");
+        $content[] = array("Title" =&gt;"【违章查询】\n全国违章查询", "Description" =&gt;"", "PicUrl" =&gt;"http://g.hiphotos.bdimg.com/wisegame/pic/item/9e1f4134970a304eab30503cd0c8a786c8175ce2.jpg", "Url" =&gt;"http://app.eclicks.cn/violation2/webapp/index?appid=10");
+
+        $result = $this-&gt;transmitNews($object, $content);
+        return $result;
+    }
+
+    private function transmitText($object, $content)
+    {
+        $textTpl = "&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;%s&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;
+&lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt;
+&lt;/xml&gt;";
+        $result = sprintf($textTpl, $object-&gt;FromUserName, $object-&gt;ToUserName, time(), $content);
+        return $result;
+    }
+
+    private function transmitNews($object, $arr_item)
+    {
+        if(!is_array($arr_item))
+            return;
+
+        $itemTpl = "    &lt;item&gt;
+        &lt;Title&gt;&lt;![CDATA[%s]]&gt;&lt;/Title&gt;
+        &lt;Description&gt;&lt;![CDATA[%s]]&gt;&lt;/Description&gt;
+        &lt;PicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;/PicUrl&gt;
+        &lt;Url&gt;&lt;![CDATA[%s]]&gt;&lt;/Url&gt;
+    &lt;/item&gt;
+";
+        $item_str = "";
+        foreach ($arr_item as $item)
+            $item_str .= sprintf($itemTpl, $item['Title'], $item['Description'], $item['PicUrl'], $item['Url']);
+
+        $newsTpl = "&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;%s&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[news]]&gt;&lt;/MsgType&gt;
+&lt;Content&gt;&lt;![CDATA[]]&gt;&lt;/Content&gt;
+&lt;ArticleCount&gt;%s&lt;/ArticleCount&gt;
+&lt;Articles&gt;
+$item_str&lt;/Articles&gt;
+&lt;/xml&gt;";
+
+        $result = sprintf($newsTpl, $object-&gt;FromUserName, $object-&gt;ToUserName, time(), count($arr_item));
+        return $result;
+    }
+
+    private function logger($log_content)
+    {
+        if(isset($_SERVER['HTTP_BAE_ENV_APPID'])){   //BAE
+            require_once "BaeLog.class.php";
+            $logger = BaeLog::getInstance();
+            $logger -&gt;logDebug($log_content);
+        }else if(isset($_SERVER['HTTP_APPNAME'])){   //SAE
+            sae_set_display_errors(false);
+            sae_debug($log_content);
+            sae_set_display_errors(true);
+        }else if($_SERVER['REMOTE_ADDR'] != "127.0.0.1"){ //LOCAL
+            $max_size = 10000;
+            $log_filename = "log.xml";
+            if(file_exists($log_filename) and (abs(filesize($log_filename)) &gt; $max_size)){unlink($log_filename);}
+            file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
+        }
+    }
 }
-return k;
-</code></pre><p>}<br>    public static void main(String[] args) {<br>        int a[]=new int [200],n,i=0;<br>        Scanner s=new Scanner (System.in);<br>        n=s.nextInt();<br>        for(;i&lt;n;i++)<br>        a[i]=s.nextInt();<br>        for(i=0;i&lt;n;i++)<br>        System.out.println(binary_number1(a[i]));<br>    }<br>}<br><br>&nbsp;</p>
-<p>万变不离其宗，无非是增加个计数工具而已。</p>
-<p>总之，十进制整数转换到二进制整数确实不算难解，稍微理解一下便可轻松解决，当然，有整数必然有小数，二进制如此其他进制也类似，具体看咱下回分解。</p>
+?&gt;</pre>
+
+<h3 id="3，图片示例"><a href="#3，图片示例" class="headerlink" title="3，图片示例"></a>3，图片示例</h3><p><img src="http://source.chenyalun.cn/images/201510/5101701.png" alt=""><img src="http://source.chenyalun.cn/images/201510/5101702.png" alt=""><img src="http://source.chenyalun.cn/images/201510/5101703.png" alt=""></p>
+<p>&nbsp;</p>
+<p>不想直接复制代码的同学请直接下载完整代码</p>
+<p>下载地址:<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1FP3oq" target="_blank" rel="external">http://pan.baidu.com/s/1FP3oq</a></p>
+<p>&nbsp;</p>
 <p>&nbsp;</p>
 
           
@@ -960,8 +1015,8 @@ return k;
             
               
                 
-                <a class="post-title-link" href="/2015/10/28/题目1009：求出小于n的所有质数的和/" itemprop="url">
-                  题目1009：求出小于n的所有质数的和
+                <a class="post-title-link" href="/2015/10/09/微信开发之上传多媒体文件/" itemprop="url">
+                  微信开发之上传多媒体文件
                 </a>
               
             
@@ -974,8 +1029,8 @@ return k;
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-28T05:00:11+08:00" content="2015-10-28">
-              2015-10-28
+            <time itemprop="dateCreated" datetime="2015-10-09T05:00:19+08:00" content="2015-10-09">
+              2015-10-09
             </time>
           </span>
 
@@ -988,8 +1043,8 @@ return k;
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/程序试题/" itemprop="url" rel="index">
-                    <span itemprop="name">程序试题</span>
+                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
+                    <span itemprop="name">公众号开发</span>
                   </a>
                 </span>
 
@@ -1004,8 +1059,8 @@ return k;
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/28/题目1009：求出小于n的所有质数的和/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/28/题目1009：求出小于n的所有质数的和/" itemprop="commentsCount"></span>
+                <a href="/2015/10/09/微信开发之上传多媒体文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/09/微信开发之上传多媒体文件/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1030,119 +1085,208 @@ return k;
       
         
           
-            <p>概述：给定一个质数n(5&lt;n&lt;1000)，求出小于n的所有质数的和</p>
-<p>输入：多组输入，每行一个n(5&lt;n&lt;1000),</p>
-<p>输出：对于每组数据，输出为一行，值为小于n的所有质数的和</p>
-<p>样例输入：6 7</p>
-<p>样例输出：10  10</p>
-<p>看到这个题目我心中一乐，确实就是质数函数的改编版，难度不大，不过咱是为了锻炼写代码，所以还是要认真做的。直接看函数啦。</p>
-<p>不过值得注意的是：</p>
-<p>1，数字1不是质数，当然，也不是合数。回顾上次的题目1008，虽然输进去1打印的是Yes，但是题目要求是输入一个大于2的数，所以上次的代码不能算错。</p>
-<p>2，函数sqrt的参数是double型，即使不在程序中特意说明，也不会产生影响，但还是值得注意的，因为这个关系到编译器，如果想保持代码的准确完美，int n=(int) sqrt((double)m);具体是(double)m还是double (m)，在c和c++中是不一样的，如果用错，可能编译会报错。</p>
-<p>3，判断是否为质数的prime函数中，用于计数的自然数i要从2开始，关系到<span class="crayon-v">m</span><span class="crayon-o">%</span><span class="crayon-v">i</span><span class="crayon-o">==</span><span class="crayon-cn">0这个表达式，</span>如果从0开始，嘿嘿，你试试。</p>
-<p>想到上次的代码，这次无非是多了一个求和函数，当然判断是否为质数的函数还可以再做些优化。</p>
-<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true">#include&lt;stdio.h&gt;
-#include&lt;math.h&gt;
+            <p>在前面的文章中我们已经提到过发送给用户多媒体消息，比如图片（含缩略图），视频，语音等等，而且我们还说了，本着节约光荣、浪费可耻的原则，腾讯微信服务器只把这些文件保留3天，过期删除。今天我们就详细探讨一下上传多媒体文件到微信服务器的方法。</p>
+<p>当我们把这些多媒体文件上传到服务器后，每个文件会得到一个相应的媒体ID（media_ID)，以后就根据这个调用这些文件。一般来说上传文件都是通过提交html表单完成的，但是也可以通过CURL直接向服务器进行提交。接口地址：</p>
+<pre class="nums:false lang:default decode:true ">http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&amp;type=TYPE</pre>
+**参数说明**
+<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+<tr>
+<td>access_token</td>
+<td>是</td>
+<td>调用接口凭证</td>
+</tr>
+<tr>
+<td>type</td>
+<td>是</td>
+<td>媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）</td>
+</tr>
+<tr>
+<td>media</td>
+<td>是</td>
+<td>form-data中媒体文件标识，有filename、filelength、content-type等信息</td>
+</tr>
+</tbody>
+</table>
+值得注意的有：
 
-int prime(int m){ 
-int n=(int) sqrt((double)m),i;
-    for(i=2;i&lt;=n;i++){
-       if(m%i==0)
-        break;
+1，若你的服务器是windows，上传的文件格式为：@C:\Users\Allen\chenyalun.jpg，但如果是在Linux服务器上那文件格式就为：@home/Users/Allen/chenyalun.jpg，相信大多数同学（包括我）用的都是Linux服务器，那下面的示例就以这个为标准啦。
+
+2，文件名必须是完整绝对路径，而且需要在路径前加上@以示区分。
+
+3，上传的文件中，图片最大1M，只能是JPG格式；语音不超过2M，播放长度不超过60秒，支持AMR,MP3,SPEEX等格式；视频不超过10M，支持MP4格式，缩略图不超过64KB，支持JPG格式。
+
+### 1，上传图片
+
+代码如下
+<pre class="wrap:true lang:default decode:true ">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "image";
+$filepath = dirname(__FILE__)."/chenyalun.jpg";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     }
-  if(i&gt;n)
-     return 1;
-  else
-     return 0;
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
 }
+?&gt;</pre>
+保存为image.php(新建文本文档，选择另存为，注意编码格式为UTF-8，下面的代码编码格式都是这样的）
 
-int sum(int n){
-     int s=0; 
-     int i;
-      for( i=2;i&lt;n;i++){
-      if(prime(i)==1)    
-      s+=i;
-  }
-      return s;
-}
+在浏览器打开就可以啦，比如我的是http://wechat.chenyalun.cn/image.php，打开之后返回结果如下：
 
-int main(){
-     int n;
-     while(scanf("%d",&amp;n)!= EOF) 
-     printf("%d\n",sum(n));
-    return 0;
-   }
+![](http://source.chenyalun.cn/images/201510/5100671.jpg)
+<pre class="nums:false wrap:true lang:default decode:true">string(118) "{"type":"image","media_id":"27E2jndYZ_yNOEKMld7rP3aLEQY_h0EZyr0sBh0707urqUD9BuWtHxzm4mvHXHVy","created_at":1444219660}"</pre>
+**返回说明**
+
+正确情况下的返回JSON数据包结果如下：
+<pre class="nums:false lang:default decode:true">{"type":"TYPE","media_id":"MEDIA_ID","created_at":123456789}
 </pre>
+<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>type</td>
+<td>媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb，主要用于视频与音乐格式的缩略图）</td>
+</tr>
+<tr>
+<td>media_id</td>
+<td>媒体文件上传后，获取时的唯一标识</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>媒体文件上传时间戳</td>
+</tr>
+</tbody>
+</table>
+错误情况下的返回JSON数据包示例如下（示例为无效媒体类型错误）：
+<pre class="nums:false lang:default decode:true">{"errcode":40004,"errmsg":"invalid media type"}</pre>
+非常显然，媒体ID我们已经拿到手啦。就是下面这一串东东：
 
-<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true">//c++代码沿用上次的函数
-#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cmath&gt;
-using namespace std;
+27E2jndYZ_yNOEKMld7rP3aLEQY_h0EZyr0sBh0707urqUD9BuWtHxzm4mvHXHVy
 
-string prime(int m){
-    int n=(int) sqrt( double(m)),i=2;//一定要注意i=2
-    for(;i&lt;=n;i++){
-       if(m%i==0)
-        break;
-     }
-  if(i&gt;n)
-     return "Yes";
-  else
-     return "No";
-}
+那么当我们再调用这个图片的时候，媒体ID就派上用场啦，一定要记得，图片只能在服务器保留3天，图片只能在服务器保留3天，图片只能在服务器保留3天。
 
-int sum(int n){
-     int s=0; 
-      for(int i=2;i&lt;n;i++){
-      if(prime(i)=="Yes")
-      s+=i;
-  }
-      return s;
-}
+敬请注意以下几点：
 
- int main(){
-      int n;
-     while(cin&gt;&gt;n){
-         cout&lt;&lt;sum(n)&lt;&lt;endl;
+1，将第3行的access_token替换成你自己的（关于获取access_token，请查阅【[获得Access_Token的三种方法总结](http://www.chenyalun.cn/%e8%8e%b7%e5%be%97access_token%e7%9a%84%e4%b8%89%e7%a7%8d%e6%96%b9%e6%b3%95%e6%80%bb%e7%bb%93.html)】。
+
+2，将第6行中的文件名称改成你自己的，注意不要搞错啦。
+
+说到这里那么上传语音（以MP3文件为例)，视频（以MP4文件为例），缩略图（还是以JPG格式为例）都是轻而易举的了。嗯，不多说啦，上代码。
+
+### 2，上传语音
+
+<pre class="wrap:true lang:default decode:true">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "voice";
+$filepath = dirname(__FILE__)."/chenyalun.mp3";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     }
-       return 0;
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
 }
-</pre>
+?&gt;</pre>
 
-<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true">import java.util.*;</pre></p>
-<p>public class Main {</p>
-<pre><code>static int prime(int m){ 
-int n=(int) Math.sqrt((double)m),i=2;
-        for(;i&amp;lt;=n;i++){
-           if(m%i==0)
-            break;
-        }
-      if(i&amp;gt;n)
-         return 1;
-      else
-         return 0;
+<h3 id="3，上传视频"><a href="#3，上传视频" class="headerlink" title="3，上传视频"></a>3，上传视频</h3><pre class="wrap:true lang:default decode:true">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "video";
+$filepath = dirname(__FILE__)."/chenyalun.mp4";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata);
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     }
-
-    static int sum(int n){
-         int s=0; 
-         int i;
-          for( i=2;i&amp;lt;n;i++){
-          if(prime(i)==1)    
-          s+=i;
-      }
-          return s;
-    }
-
-public static void main(String[] args) {
-    int n;
-     while(1==1) {
-         Scanner s=new Scanner(System.in);
-         n=s.nextInt();
-     System.out.println(sum(n));}
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
 }
-</code></pre><p>}<br><br>本身这道题目很简单，但确实花了我不少时间，嗯，还是不熟啊。</p>
-<p>&nbsp;</p>
+?&gt;</pre>
+&nbsp;
+
+### 4，上传缩略图
+
+<pre class="wrap:true lang:default decode:true">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "thumb";
+$filepath = dirname(__FILE__)."/chenyalun.jpg";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata);
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+?&lt;br&gt;</pre>
+
+<h3 id="5，利用官方工具进行调试"><a href="#5，利用官方工具进行调试" class="headerlink" title="5，利用官方工具进行调试"></a>5，利用官方工具进行调试</h3><p>点击这里打开上传接口调试工具，<a href="http://www.chenyalun.cn/go/?url=https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&amp;type=%E5%9F%BA%E7%A1%80%E6%94%AF%E6%8C%81&amp;form=%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8E%A5%E5%8F%A3%20/media/upload" target="_blank" rel="external">这里这里</a>，接口列表选择【多媒体文件上传接口】，我们也可以在这里上传文件，不过，这个工具主要是检查问题进行调试，如果想偷个懒，也可以直接从这里上传。</p>
+<p>还有就是有时候微信服务器也不是很给力，【System busy】偶尔会出现的，如果是这样，建议大家稍等片刻再来尝试。</p>
+<p>本着知识分享、共同进步的原则，我把所有的代码都放在云端了，需要的同学可以免费下载。</p>
+<p>下载地址：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1jG8MM94" target="_blank" rel="external">http://pan.baidu.com/s/1jG8MM94</a></p>
 <p>&nbsp;</p>
 
           
@@ -1176,7 +1320,7 @@ public static void main(String[] args) {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1217,7 +1361,7 @@ public static void main(String[] args) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1225,7 +1369,7 @@ public static void main(String[] args) {
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1234,7 +1378,7 @@ public static void main(String[] args) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1275,18 +1419,18 @@ public static void main(String[] args) {
               <span class="links-of-author-item">
                 <a href="https://www.instagram.com/ichenyalun" target="_blank" title="Instagram">
                   
-                    <i class="fa fa-fw fa-instagram"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   Instagram
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.pinterest.com/iChenYalun" target="_blank" title="Pinterest">
+                <a href="http://stackoverflow.com/users/7026915/allen" target="_blank" title="SOF">
                   
-                    <i class="fa fa-fw fa-pinterest"></i>
+                    <i class="fa fa-fw fa-stack-overflow"></i>
                   
-                  Pinterest
+                  SOF
                 </a>
               </span>
             
@@ -1442,141 +1586,13 @@ public static void main(String[] args) {
 
   
   
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
-
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            }
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
-
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
-
 
   
 
   
 
   
-
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+<script type="text/javascript" src="/js/src/love.js"></script>
 </body>
 </html>

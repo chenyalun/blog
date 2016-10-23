@@ -1549,7 +1549,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #01ffff;
+  background: #57dffc;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2067,13 +2067,6 @@ a.search-result {
 .page-pv .busuanzi-value {
   margin: 0 5px;
 }
-.site-uv {
-  margin-right: 10px;
-}
-.site-uv::after {
-  content: "|";
-  padding-left: 10px;
-}
 .use-motion .post {
   opacity: 0;
 }
@@ -2134,7 +2127,7 @@ a.search-result {
   overflow: hidden;
 }
 body {
-  background: #f5f7f9;
+  background: url("/images/bg.png");
 }
 @media (min-width: 992px) {
   .full-image.full-image.full-image {

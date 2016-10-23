@@ -121,7 +121,7 @@
 
   <link rel="canonical" href="http://yoursite.com/page/2/"/>
 
-  <title> 陈亚伦博客 </title>
+  <title> 陈亚伦博客 - 爱生活 做自己 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,34 +214,21 @@
           </a>
         </li>
       
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            搜索
+            关于
           </a>
         </li>
+      
+
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
   
 </nav>
 
@@ -254,6 +241,155 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/16/Objective-C学习笔记二：继承与属性/" itemprop="url">
+                  Objective-C学习笔记二：继承与属性
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-16T05:00:32+08:00" content="2016-05-16">
+              2016-05-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ios开发/" itemprop="url" rel="index">
+                    <span itemprop="name">ios开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/16/Objective-C学习笔记二：继承与属性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/16/Objective-C学习笔记二：继承与属性/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。</p>
+<p>成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。</p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> _speed;</span></p>
+<p><span class="s1">}</span></p>
+<p><strong>set方法</strong>：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set方法中设置行为，监听属性的改变。</p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s;</span></p>
+<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">_speed</span><span class="s1">=</span><span class="s1">s+</span><span class="s2">20</span><span class="s1">;</span></p>
+<p><span class="s1">}</span></p>
+<p><strong>get方法</strong>：获取对象内部的成员变量，不接收参数，返回类型与成员变量类型相同，方法名称与成员变量名称相同（不含下划线）。不推荐以get开头。</p>
+<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed;</span></p>
+<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed</span></p>
+<p><span class="s1">{</span></p>
+<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">return</span> <span class="s3">_speed</span><span class="s1">;</span></p>
+<p><span class="s1">}</span></p>
+<p>只读：只提供get方法。可读可写：提供get和set方法。</p>
+<h3 id="OC的弱语法"><a href="#OC的弱语法" class="headerlink" title="OC的弱语法"></a>OC的弱语法</h3><p>1，调用未声明、未实现的对象方法</p>
+<p>编译 报错 No visible @interface for ‘Dog’ declares the selector ‘ssss’，链接运行 报错。</p>
+<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1002014a0’</strong></span></p>
+<p>给Dog对象发送不能识别的消息。</p>
+<p>2，调用已声明、未实现的对象方法</p>
+<p>编译警告：Method definition for ‘ssss’ not found   未实现方法  链接正常，运行报错</p>
+<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1001002a0’</strong></span></p>
+<p>3,调用未声明、已实现的对象方法</p>
+<p>编译 链接运行  错误  No visible @interface for ‘Dog’ declares the selector ‘ssss’</p>
+<p>在Dog的@interface中，对于ssss的声明是不可见的。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/16/Objective-C学习笔记二：继承与属性/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -957,242 +1093,11 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/30/UWP开发笔记六：幸运彩色小球/" itemprop="url">
-                  UWP开发笔记六：幸运彩色小球
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-30T05:00:46+08:00" content="2016-04-30">
-              2016-04-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/UWP开发笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">UWP开发笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/30/UWP开发笔记六：幸运彩色小球/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/30/UWP开发笔记六：幸运彩色小球/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这个和<a href="http://www.chenyalun.cn/uwp开发笔记四：随机数与筛子游戏.html" target="_blank" rel="external">UWP开发笔记四：随机数与筛子游戏</a>有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。</p>
-<p>命令栏：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Label=”新建”<br>                              Icon=”NewFolder”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
-<p><pre class="lang:default decode:true ">&lt;StackPanel HorizontalAlignment=”Center”<br>            VerticalAlignment=”Center”<br>            Name=”DisplayStackPanel”<br>                    Orientation=”Horizontal”/&gt;</pre><br>当然，为了方便起见，创建一个ShowBall类：需要引入的命名空间有：</p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>完整代码：</p>
-<p><pre class="lang:default decode:true ">using System;<br>using System.Collections.Generic;<br>using System.Linq;<br>using System.Text;<br>using System.Threading.Tasks;<br>//color<br>using Windows.UI;</pre></p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>namespace Lucky_Lotto<br>{<br>   public  class ShowBall<br>    {<br>        // 定义随机数(种子为日期和时间的计时周期）<br>        private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<pre><code>    // 定义获取数字集合方法
-    private List&amp;lt;int&amp;gt; GetNumbers()
-    {
-        int Number;
-        // 定义Numbers集合
-        List&amp;lt;int&amp;gt; Numbers = new List&amp;lt;int&amp;gt;();
-        // 当Numbers集合中整数个数小于6时，自动增加
-        while (Numbers.Count &amp;lt; 6)
-        {
-            // 随机获取1到50之间的整数赋予Number（Number可以取1，不可取50）
-            Number = random.Next(1, 50);
-            // 将产生的随机数添加到集合之中
-            // 处理当集合中的整数与产生的随机数相同的情况
-            if (!Numbers.Contains(Number)||Number&amp;lt;1)
-            {
-                Numbers.Add(Number);
-            }
-            // 对集合中的数字进行有序整理（美观起见）
-            Numbers.Sort();
-        }
-
-        return Numbers;
-
-    }
-    // 对StackPanel进行处理：创建小球，增添颜色等
-    // 将每个小球分别放在Canva中s，6个Canvas放在一个StackPanel中
-    public void PlayBall(ref StackPanel stackpanel)
-    {
-        // 清空原先讯在的元素
-        stackpanel.Children.Clear();
-
-        // 对数字集合遍历
-        foreach(int number in GetNumbers())
-        {
-            // 定义Canvas
-            Canvas canvas = new Canvas();
-            canvas.Width = 48;
-            canvas.Height = 48;
-            canvas.Margin = new Thickness(2);
-
-            // 定义球
-            Ellipse ellipse = new Ellipse();
-            ellipse.Width = canvas.Width;
-            ellipse.Height = canvas.Height;
-            // 设置小球边框颜色是黑色
-            ellipse.Stroke = new SolidColorBrush(Colors.Black);
-
-            // 根据数字的大小设置小球的填充颜色
-            if (number &amp;gt;= 1 &amp;amp;&amp;amp; number &amp;lt;= 9)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.White);
-            }
-            else if (number &amp;gt; 9 &amp;amp;&amp;amp; number &amp;lt;= 19)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 200, 236));
-            }
-            else if (number &amp;gt; 19 &amp;amp;&amp;amp; number &amp;lt;= 29)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Magenta);
-            }
-            else if (number &amp;gt; 29 &amp;amp;&amp;amp; number &amp;lt;= 39)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 255, 0));
-            }
-            else if (number &amp;gt; 39 &amp;amp;&amp;amp; number &amp;lt;= 49)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Yellow);
-            }
-
-            // 定义球中的文本（数字）
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = number.ToString();
-            textBlock.FontSize = 16;
-            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-            textBlock.Margin = new Thickness(16, 12, 16, 12);
-
-            // 将文本（数字）、小球添加到canvas中，将canvas添加到stackpanel中
-            // 一定先添加球，再添加文本，否则文本不会显示
-            canvas.Children.Add(ellipse);
-            canvas.Children.Add(textBlock);
-            stackpanel.Children.Add(canvas);
-        }
-    }
-}
-</code></pre><p>}<br><br>这样主页面的后台代码就可以轻松的调用了：</p>
-<p><pre class="lang:default decode:true "> // 新建类的实例<br>        public  ShowBall showball = new ShowBall();<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {</pre></p>
-<pre><code>  showball.PlayBall(ref DisplayStackPanel);
-}&lt;/pre&gt;
-</code></pre><p>演示：</p>
-<p><img src="http://images.chenyalun.cn/2016/04/22/001.png" alt=""><img src="http://images.chenyalun.cn/2016/04/22/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>// 对数字集合遍历<br>foreach(int number in GetNumbers())  {}</p>
-<p>// 设置小球边框颜色是黑色<br>ellipse.Stroke = new SolidColorBrush(Colors.Black);</p>
-<p>//设置margin</p>
-<p>textBlock.Margin = new Thickness(16, 12, 16, 12);</p>
-<p>// 一定先添加球，再添加文本，否则文本不会显示<br>canvas.Children.Add(ellipse);<br>canvas.Children.Add(textBlock);<br>stackpanel.Children.Add(canvas);</p>
-<p>// 清空原先存在的元素<br>stackpanel.Children.Clear();</p>
-<p>// 对集合中的数字进行有序整理（美观起见）<br>Numbers.Sort();</p>
-<p>// 定义随机数(种子为日期和时间的计时周期）<br>private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<p>// 定义Numbers集合<br>List&lt;int&gt; Numbers = new List&lt;int&gt;();</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1233,7 +1138,7 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1241,7 +1146,7 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1250,7 +1155,7 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1291,18 +1196,18 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
               <span class="links-of-author-item">
                 <a href="https://www.instagram.com/ichenyalun" target="_blank" title="Instagram">
                   
-                    <i class="fa fa-fw fa-instagram"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   Instagram
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.pinterest.com/iChenYalun" target="_blank" title="Pinterest">
+                <a href="http://stackoverflow.com/users/7026915/allen" target="_blank" title="SOF">
                   
-                    <i class="fa fa-fw fa-pinterest"></i>
+                    <i class="fa fa-fw fa-stack-overflow"></i>
                   
-                  Pinterest
+                  SOF
                 </a>
               </span>
             
@@ -1458,141 +1363,13 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
 
   
   
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
-
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            }
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
-
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
-
 
   
 
   
 
   
-
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+<script type="text/javascript" src="/js/src/love.js"></script>
 </body>
 </html>

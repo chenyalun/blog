@@ -121,7 +121,7 @@
 
   <link rel="canonical" href="http://yoursite.com/page/6/"/>
 
-  <title> 陈亚伦博客 </title>
+  <title> 陈亚伦博客 - 爱生活 做自己 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,34 +214,21 @@
           </a>
         </li>
       
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            搜索
+            关于
           </a>
         </li>
+      
+
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup">
- <span class="search-icon fa fa-search"></span>
- <input type="text" id="local-search-input">
- <div id="local-search-result"></div>
- <span class="popup-btn-close">close</span>
-</div>
-
-
-    </div>
   
 </nav>
 
@@ -276,8 +263,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/10/18/利用Windows_Azure部署一个WordPress网站/" itemprop="url">
-                  利用Windows Azure部署一个WordPress网站
+                <a class="post-title-link" href="/2015/09/18/回复用户消息/" itemprop="url">
+                  回复用户消息
                 </a>
               
             
@@ -290,613 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-18T05:00:51+08:00" content="2015-10-18">
-              2015-10-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/应用开发/" itemprop="url" rel="index">
-                    <span itemprop="name">应用开发</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/18/利用Windows_Azure部署一个WordPress网站/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/18/利用Windows_Azure部署一个WordPress网站/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近倒是对云计算很感兴趣，比较著名的应该就是微软云，亚马逊云，谷歌云了。今天就分享一下怎么在Windows Azure上部署一个基于wordpress的站点。过程比较简单，希望能给新手们一些帮助。</p>
-<h3 id="1，登录Windows-Azure主页"><a href="#1，登录Windows-Azure主页" class="headerlink" title="1，登录Windows Azure主页"></a>1，登录Windows Azure主页</h3><p>点击：<a href="http://www.chenyalun.cn/go/?url=https://portal.azure.com/" target="_blank" rel="external"> https://portal.azure.com/</a></p>
-<p>前提是你有Windows Live ID（现在很流行的是outlook邮箱），没有注册的注册一个即可。注册成功便可以登录你的微软账号啦，接着便是注册微软云（Windows Azure），可能需要提供信用卡号和（非中国大陆的）手机号。当然，因为众所周知的原因微软云并不直接在中国大陆推行，你也可以使用在中国的代理商世纪华联，其实效果是一样的，不过我还是想用原汁原味的微软云，所以这里以全球统一的微软云官网为例，就不分享在中国代理世纪华联怎么部署了。</p>
-<h3 id="2，创建Web-应用"><a href="#2，创建Web-应用" class="headerlink" title="2，创建Web 应用"></a>2，创建Web 应用</h3><p>在微软云主页，请依次点击 新建&gt;&gt;Web+移动&gt;&gt;应用商店，效果如下图所示。<img src="http://source.chenyalun.cn/images/201510/5101601.jpg" alt=""></p>
-<p>在搜索框中输入 wordpress,选择第一个。</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101602.jpg" alt=""></p>
-<h3 id="3，填写相关信息"><a href="#3，填写相关信息" class="headerlink" title="3，填写相关信息"></a>3，填写相关信息</h3><p>1，域名：类似 <a href="http://XXXX.azurewebsites.net，XXXX可以设置成自己喜欢的字符，比如我的是http://chenyalun.azurewebsites.net，当然，这个是默认域名，你可以自定义绑定一级、二级域名，前提仍然是你的订阅是可以付费的。" target="_blank" rel="external">http://XXXX.azurewebsites.net，XXXX可以设置成自己喜欢的字符，比如我的是http://chenyalun.azurewebsites.net，当然，这个是默认域名，你可以自定义绑定一级、二级域名，前提仍然是你的订阅是可以付费的。</a></p>
-<p>2，数据库：数据库名称可以自定义，比较好的一点就是，你不用再另外记忆数据库的名称和密码，完成之后站点直接就和数据库相连接啦。</p>
-<p>3，地域：这个不多说，看你网站的受众主要在哪个地方了，若是中国，那选择East Asia就可以啦，好像这个设置不可以更改，所以请慎重。（这个只是机房的位置，并不是说，除了这个位置的人之外，其他地方的人不能访问你的站点，唯一的影响就是，其他地方访问时速度可能相对比较慢）</p>
-<p>4，定价层：选择你的数据库的套餐（容量，连接总数等，一个数据库可以让多个站点同时使用的），免费套餐是“水星”，容量是0.02G.连接总数是4个。下图中的套餐“Titan”连接总数为10个，大小为0.24G，当然每个月3.5美金。一共有5个套餐可以选择。</p>
-<p>当然还有法律条款，这都是需要同意的。</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101603.jpg" alt=""></p>
-<p>填写完毕之后，点击创建即可。</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101604.jpg" alt=""></p>
-<h3 id="4，安装wordpress"><a href="#4，安装wordpress" class="headerlink" title="4，安装wordpress"></a>4，安装wordpress</h3><p>至此，一个Web 应用已经创建好了，下面开始安装wordpress。打开你的应用主页，就是你最初设置的域名，直接跳转到安装界面，如图，选择你想要的语言，这里以英语为例（如果你是面向中国的网站，选择简体中文就可以啦）</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101605.jpg" alt=""></p>
-<p>点击“继续”按钮，填写网站的相应信息。</p>
-<p>1，站点名称（Site-Title）：你自己想</p>
-<p>2，用户名Username）：你以后登录网站后台的用户名</p>
-<p>3，密码（Password）：不多说</p>
-<p>4，邮箱（Your-Email）：填写常用邮箱即可</p>
-<p>5，privacy：是否允许搜索引擎（百度、谷歌等）抓取你的网站，一般默认是同意的，除非你的网站只是想自己看。</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101606.jpg" alt=""></p>
-<p>填写好之后点击安装即可。秒秒钟，wordpress安装成功。接下来便是登录你的站点了。输入你刚才的用户名，密码（不要告诉我你已经忘啦，否则很麻烦，很麻烦，很麻烦）</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101007.jpg" alt=""></p>
-<p>登录成功后，你的后台界面：</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101608.jpg" alt=""></p>
-<p>网站前台界面：</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5101609.jpg" alt=""></p>
-<p>于是，一个基于wordpress的站点就这么诞生啦。是不是很简单呢。</p>
-<p>在Windows Azure上部署Web应用其实就是这么容易，这就是云的强大。</p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/11/题目1001：整数a+b的程序实现（下）/" itemprop="url">
-                  题目1001：整数a+b的程序实现（下）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-11T05:00:06+08:00" content="2015-10-11">
-              2015-10-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/程序试题/" itemprop="url" rel="index">
-                    <span itemprop="name">程序试题</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/11/题目1001：整数a+b的程序实现（下）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/11/题目1001：整数a+b的程序实现（下）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在【<a href="http://www.chenyalun.cn/%e9%a2%98%e7%9b%ae1001%ef%bc%9a%e6%95%b4%e6%95%b0ab%e7%9a%84%e7%a8%8b%e5%ba%8f%e5%ae%9e%e7%8e%b0%ef%bc%88%e4%b8%8a%ef%bc%89.html" target="_blank" rel="external">题目1001：整数a+b的程序实现（上）</a>】中我们简要讨论了正整数相加，当然，整数的大小在计算机心理承受范围之内，时隔好几天，继续探讨，这里就说下，大整数的加法。</p>
-<p>关于高精度正整数加法，我首先想到的是利用数组存储那些可爱的数字们，但是又考虑到字符串同样可以存储200位的数字，然后就有下面3种解决方案。<br>1，只用数组<br>2，只用字符串<br>3，数组和字符串双管齐下<br>方案1：每个数组元素存储1位，需要多少位数字就开辟多少个数组元素<br>优点：数组中的每一位都是实实在在的数字，可以直接加减，运算时极为方便；<br>缺点：从键盘输入的时候很不爽，输入时每两位数之间必须有分隔符，才能保证一位数组元素存储一个数字，不符合正常人的输入习惯；</p>
-<p>方案2：其实字符串的最大长度是255，可以表示255位，那么200位当然不在话下<br>优点：可以直接输入输出，输入时，每两位数之间不必分隔符，符合地球人的输入习惯；<br>缺点：字符串中的每一位是一个字符，而字符是不能直接进行运算的，我们必须先将它转化为数值再进行运算，在转化的时候要考虑很多东西；</p>
-<p>方案3：输入的时候用字符串，计算的时候用数组。<br>优点：充分利用字符串和数组的优点，趋利避害，计算简便，容易理解，这个在臣妾看来，是极好的呀；<br>缺点：我们需要开辟数组存储空间，开辟字符串存储空间，些许占内存；<br>但是综合以上几点，显然，方案3是最巧妙的，既然如此，那代码怎么写呢？</p>
-<p>考虑大整数相加有两种情况（美观起见我用三位数代替200位数的情况，效果其实一样：</p>
-<p>a[3] 099<br>b[3] 009<br>c[3] 108</p>
-<p>和<br>a[3] 091<br>b[3] 002<br>c[3] 093<br>显而易见，我们需要将两个字符串中长度最大的值作为所得结果数组c的长度，这时还要考虑数组c的首位元素是否为0，因为不可能输出093这样的数，必须把0去掉。</p>
-<p>思路：<br>1，开辟两个字符串用于存储键入的两串数字<br>2，求取两个字符串中的最大长度<br>3，将字符串转化为数组（从末尾开始依次存取）<br>4，数组中每位元素相加，并考虑进位，得出的结果存储在c[3]中<br>5，判断相加的结果c[3]数组首位c[0]是否为0，若为0，从c[1]开始打印，若不为0，从c[0]开始打印。<br>6，喝杯茶开始敲代码</p>
-<p>为节约内存，我把两个数组相加的结果依然存储在数组a中，就不再开辟多余的数组啦。代码如下：</p>
-<h3 id="1，C语言版"><a href="#1，C语言版" class="headerlink" title="1，C语言版"></a>1，C语言版</h3><pre class="lang:default decode:true">//高精度正整数相加-C语言
-//@陈亚伦博客 
-
-#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-    void Add(char s1[200],char s2[200]){    
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-    l1=strlen(s1);
-    l2=strlen(s2);               //分别取出s1、s2的长度 赋给l1,l2 
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';    //将字符串s1，s2分别转化为数组a，b     
-    for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //a[i-1]++;
-         }
-    }
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-       printf("%d",a[i]);
-    }
-    else 
-    {
-     for(i=1;i&lt;=n;i++)         //舍去a[0] 
-       printf("%d",a[i]);
-    }
-
-}
-int main(){ 
-    char s1[200],s2[200];
-    gets(s1);
-    gets(s2);   
-    Add(s1,s2);                //读取输入的两个字符串s1，s2
-    printf("\n");           
-    return 0;
-}</pre>
-
-<h3 id="2，C-版"><a href="#2，C-版" class="headerlink" title="2，C++版"></a>2，C++版</h3><pre class="lang:default decode:true">//高精度加法-C++版
-//@陈亚伦博客 
-#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-using namespace std;
-
-void Add(string s1,string s2){
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-
-    //分别取出s1、s2的长度 赋给l1,l2               
-    l1=s1.length();  
-    l2=s2.length();      
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-
-    //将字符串s1，s2分别转化为数组a，b 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';
-
-    //for循环开始实现两个数组相加     
-    for(i=n;i&gt;=0;i--)          
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //即 a[i-1]++;
-         }
-    }
-
-    //从首位开始打印得出的结果 
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-      cout&lt;&lt;a[i];
-    }
-    else                        //舍去a[0] 
-    {
-     for(i=1;i&lt;=n;i++)         
-        cout&lt;&lt;a[i];
-    }
-}
-
-int main(){    
-    char s1[200],s2[200];
-
-    //读取输入的两个字符串s1，s2
-    cin.getline(s1, 200);
-    cin.getline(s2, 200);
-    Add(s1,s2);
-
-    //美观起见打印个换行 
-    cout&lt;&lt;endl;         
-    return 0;
-
-}</pre>
-
-<h3 id="3，JAVA版"><a href="#3，JAVA版" class="headerlink" title="3，JAVA版"></a>3，JAVA版</h3><pre class="lang:default decode:true">//高精度加法-JAVA版
-//@陈亚伦博客 
-import java.util.*;
-
-public class Add {
-    static void Add(String s1,String s2){
-        //字符串转化为数组
-        int a[]=new int [200];
-        int b[]=new int [200];       
-        int l1,l2,i,m,n;
-        //取出字符串s1,s2两者的最大长度，赋予m,n,并保证k是两者最大者
-        l1= s1.length();
-        l2= s2.length();
-        if(l1&lt;=l2)
-            m=l2;
-        else
-            m=l1; 
-            n=m;
-
-        //将字符串s1转化为数组
-        for(i=0;i&lt;l1;m--,i++) 
-        a[m]=s1.charAt(l1-1-i)-'0';
-
-        //将字符串s2转化为数组
-        for(m=n,i=0;i&lt;l2;m--,i++)
-        b[m]=s2.charAt(l2-1-i)-'0';
-
-        //实现数组a，b从末位元素开始相加
-            for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
-                {    
-                   a[i]+=b[i];              //把两个数的结果给a[i] 
-                     if(a[i]&gt;=10)            //对是否进位进行判断
-                    {    
-                    a[i]-=10;
-                    a[i-1]+=1;       
-                     }
-                }        
-         //判断a[0]是否为0
-          if(a[0]==0)
-              for(i=1;i&lt;=n;i++)
-                 System.out.print(a[i]);
-          else
-              for(i=0;i&lt;=n;i++)
-                 System.out.print(a[i]);        
-    } 
-    public static void main(String[] args) {
-                Scanner s=new Scanner(System.in);
-                String s1=new String ();
-                String s2=new String ();
-                s1=s.nextLine();
-                s2=s.nextLine();      
-                Add(s1,s2);
-                //换行美化
-                System.out.println();
-}
-}</pre>
-以上代码敲完，然后觉得不过瘾，是不是可以多组输入呢？
-
-这个应该是比较简单的，不多说，直接上代码。
-
-* * *
-
-&nbsp;
-
-### 4，C语言版多组输入
-
-<pre class="lang:default decode:true">//高精度加法-C语言
-//@陈亚伦博客 
-#include&lt;stdio.h&gt;
-#include&lt;string.h&gt;
-
-    void Add(char s1[200],char s2[200]){    
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-    l1=strlen(s1);
-    l2=strlen(s2);               //分别取出s1、s2的长度 赋给l1,l2 
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';    //将字符串s1，s2分别转化为数组a，b     
-    for(i=n;i&gt;=0;i--)           //for循环开始实现两个数组相加 
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //a[i-1]++;
-         }
-    }
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-       printf("%d",a[i]);
-    }
-    else 
-    {
-     for(i=1;i&lt;=n;i++)         //舍去a[0] 
-       printf("%d",a[i]);
-    }
-
-}
-int main(){ while(1){
-    char s1[200],s2[200];
-    gets(s1);
-    gets(s2);   
-    Add(s1,s2);                //读取输入的两个字符串s1，s2
-    printf("\n");           
-}
-    return 0;
-}</pre>
-
-<h3 id="5，C-多组输入"><a href="#5，C-多组输入" class="headerlink" title="5，C++多组输入"></a>5，C++多组输入</h3><pre class="lang:default decode:true">//高精度加法C++版
-//@陈亚伦博客 
-#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-using namespace std;
-void Add(string s1,string s2){        
-    int a[200]={0},b[200]={0},l1,l2,m,n,i;
-
-    //分别取出s1、s2的长度 赋给l1,l2               
-    l1=s1.length();  
-    l2=s2.length();      
-    if(l1&lt;l2)
-       m=l2;
-    else
-       m=l1;
-    n=m;                         //取出l1与l2两者的最大值，赋予m和n 
-
-    //将字符串s1，s2分别转化为数组a，b 
-    for( i=0;i&lt;l1;m--,i++) 
-        a[m]=s1[l1-1-i]-'0';
-    for(m=n,i=0;i&lt;l2;m--,i++)
-         b[m]=s2[l2-1-i]-'0';
-
-    //for循环开始实现两个数组相加     
-    for(i=n;i&gt;=0;i--)          
-    {    
-       a[i]+=b[i];              //把两个数的结果给a[i] 
-         if(a[i]&gt;=10)            //对是否进位进行判断
-        {    
-        a[i]-=10;
-        a[i-1]+=1;              //即 a[i-1]++;
-         }
-    }
-
-    //从首位开始打印得出的结果 
-    if(a[0]!=0)                 //判断数组ａ的首位是否为０
-    {
-     for(i=0;i&lt;=n;i++)
-      cout&lt;&lt;a[i];
-    }
-    else                        //舍去a[0] 
-    {
-     for(i=1;i&lt;=n;i++)         
-        cout&lt;&lt;a[i];
-    }
-}
-int main(){    
-while(cin){
-    char s1[200],s2[200];
-    cin.getline(s1, 200);
-    cin.getline(s2, 200);
-    Add(s1,s2);
-    cout&lt;&lt;endl;             
-}
-    return 0;
-}
-</pre>
-
-<h3 id="6，JAVA多组输入"><a href="#6，JAVA多组输入" class="headerlink" title="6，JAVA多组输入"></a>6，JAVA多组输入</h3><p><pre class="lang:default decode:true">//高精度加法java版<br>//@陈亚伦博客<br>import java.util.*;</pre></p>
-<p>public class Add {<br>    static void Add(String s1,String s2){<br>        //字符串转化为数组<br>        int a[]=new int [200];<br>        int b[]=new int [200];<br>        int l1,l2,i,m,n;<br>        //取出字符串s1,s2两者的最大长度，赋予m,n,并保证k是两者最大者<br>        l1= s1.length();<br>        l2= s2.length();<br>        if(l1&lt;=l2)<br>            m=l2;<br>        else<br>            m=l1;<br>            n=m;</p>
-<pre><code>    //将字符串s1转化为数组
-    for(i=0;i&amp;lt;l1;m--,i++) 
-    a[m]=s1.charAt(l1-1-i)-&apos;0&apos;;
-
-    //将字符串s2转化为数组
-    for(m=n,i=0;i&amp;lt;l2;m--,i++)
-    b[m]=s2.charAt(l2-1-i)-&apos;0&apos;;
-
-    //实现数组a，b从末位元素开始相加
-        for(i=n;i&amp;gt;=0;i--)           //for循环开始实现两个数组相加 
-            {    
-               a[i]+=b[i];              //把两个数的结果给a[i] 
-                 if(a[i]&amp;gt;=10)            //对是否进位进行判断
-                {    
-                a[i]-=10;
-                a[i-1]+=1;       
-                 }
-            }        
-     //判断a[0]是否为0
-      if(a[0]==0)
-          for(i=1;i&amp;lt;=n;i++)
-             System.out.print(a[i]);
-      else
-          for(i=0;i&amp;lt;=n;i++)
-             System.out.print(a[i]);        
-} 
-public static void main(String[] args) {
-    while(1==1){
-            Scanner s=new Scanner(System.in);
-            String s1=new String ();
-            String s2=new String ();
-            s1=s.nextLine();
-            s2=s.nextLine();      
-            Add(s1,s2);
-            //换行美化
-            System.out.println();
-    }
-</code></pre><p>}//main<br>}//class<br>&nbsp;</p>
-<p>总的来说，代码基本上满足要求，可能在大神眼里根本不值得一提，但毕竟我刚开始接触JAVA，姑且当作学习及复习之用吧，所以不周到或者不合适的地方请多担待，也欢迎发送电子邮件或者在微博上艾特我，咱们一起交流，共同进步。</p>
-<p>懒得复制的同学，请移步云盘下载：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1sjuvAl3" target="_blank" rel="external">http://pan.baidu.com/s/1sjuvAl3</a></p>
-<p>&nbsp;</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/10/微信开发之下载多媒体文件/" itemprop="url">
-                  微信开发之下载多媒体文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-10T05:00:17+08:00" content="2015-10-10">
-              2015-10-10
+            <time itemprop="dateCreated" datetime="2015-09-18T21:52:39+08:00" content="2015-09-18">
+              2015-09-18
             </time>
           </span>
 
@@ -925,8 +307,8 @@ public static void main(String[] args) {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/10/微信开发之下载多媒体文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/10/微信开发之下载多媒体文件/" itemprop="commentsCount"></span>
+                <a href="/2015/09/18/回复用户消息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/18/回复用户消息/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -951,10 +333,73 @@ public static void main(String[] args) {
       
         
           
-            <p>在【<a href="http://www.chenyalun.cn/微信开发之上传多媒体文件.html" target="_blank" rel="external">微信开发之上传多媒体文件</a>】中我们简要探讨了如何上传多媒体文件到服务器，有上传肯定就有下载了，那么今天我们再来分析一下从微信服务器下载文件（前提是我们已经上传）如何实现。不过需要提醒大家，视频已经不支持下载了。</p>
-<p>接口地址：</p>
-<p><a href="http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&amp;media_id=MEDIA_ID" target="_blank" rel="external">http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&amp;media_id=MEDIA_ID</a></p>
-<p><strong>参数说明</strong></p>
+            <p>当用户发送消息给公众号时，会产生一个POST请求，开发者可以在响应包（Get）中返回特定XML结构，来对该消息进行响应（现支持回复文本、图片、图文、语音、视频、音乐）。严格来说，发送被动响应消息其实并不是一种接口，而是对微信服务器发过来消息的一次回复。那么现在我们就来分析下回复给用户的六种消息类型。依然按照原先接受普通消息的格式，分析其xml，进行相关参数解释，以及给出实例代码。</p>
+<h3 id="1，文本消息"><a href="#1，文本消息" class="headerlink" title="1，文本消息"></a>1，文本消息</h3><p>依然是xml格式：</p>
+<pre class="lang:default decode:true ">&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;
+&lt;Content&gt;&lt;![CDATA[你好]]&gt;&lt;/Content&gt;
+&lt;/xml&gt;</pre>
+<table border="1" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>ToUserName</td>
+<td>是</td>
+<td>接收方帐号（收到的OpenID）</td>
+</tr>
+<tr>
+<td>FromUserName</td>
+<td>是</td>
+<td>**开发者**微信号</td>
+</tr>
+<tr>
+<td>CreateTime</td>
+<td>是</td>
+<td>消息创建时间 （整型）</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>是</td>
+<td>text</td>
+</tr>
+<tr>
+<td>Content</td>
+<td>是</td>
+<td>回复的消息内容（换行：在content中能够换行，微信客户端就支持换行显示）</td>
+</tr>
+</tbody>
+</table>
+<pre class="lang:default decode:true"> const REPLY_TYPE_TEXT = 'text';
+
+/**
+ * 生成向用户发送的文字信息
+ * @param string $content
+ * @return string xml字符串
+ */
+ public function outputText($content)
+ {
+ $textTpl = '&lt;xml&gt;
+ &lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
+ &lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
+ &lt;CreateTime&gt;%s&lt;/CreateTime&gt;
+ &lt;MsgType&gt;&lt;![CDATA[%s]]&gt;&lt;/MsgType&gt;
+ &lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt; 
+ &lt;/xml&gt;';
+
+ $text = sprintf($textTpl, $this-&gt;_postData-&gt;FromUserName, $this-&gt;_postData-&gt;ToUserName, time(), self::REPLY_TYPE_TEXT, $content);
+ return $text;
+ }
+
+</pre>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/5091809180002.png" alt=""></h3><h3 id="2，图片消息"><a href="#2，图片消息" class="headerlink" title="2，图片消息"></a>2，图片消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[image]]&gt;&lt;/MsgType&gt;<br>&lt;Image&gt;<br>&lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br>&lt;/Image&gt;<br>&lt;/xml&gt;</pre></p>
 <p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
 <p><tbody></tbody></p>
 <p><tr></tr></p>
@@ -962,81 +407,314 @@ public static void main(String[] args) {
 <p><th>是否必须</th></p>
 <p><th>说明</th><br></p>
 <p><tr></tr></p>
-<p><td>access_token</td></p>
+<p><td>ToUserName</td></p>
 <p><td>是</td></p>
-<p><td>调用接口凭证</td><br></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
 <p><tr></tr></p>
-<p><td>media_id</td></p>
+<p><td>FromUserName</td></p>
 <p><td>是</td></p>
-<p><td>媒体文件ID</td><br><br><br><br><strong>返回说明</strong></p>
-<p>正确情况下的返回HTTP头如下：</p>
-<pre class="">HTTP/1.1 200 OK
-Connection: close
-Content-Type: image/jpeg 
-Content-disposition: attachment; filename="MEDIA_ID.jpg"
-Date: Sun, 06 Jan 2013 10:20:18 GMT
-Cache-Control: no-cache, must-revalidate
-Content-Length: 339721
-curl -G "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&amp;media_id=MEDIA_ID"
-</pre>
-错误情况下的返回JSON数据包示例如下（示例为无效媒体ID错误）：:
-<pre class="">{"errcode":40007,"errmsg":"invalid media_id"}</pre>
-看到这里想必大家十分清楚啦，最关键的还是媒体ID和access_token。那么access_token的获取方法请查看【[获得Access_Token的三种方法总结](http://www.chenyalun.cn/%e8%8e%b7%e5%be%97access_token%e7%9a%84%e4%b8%89%e7%a7%8d%e6%96%b9%e6%b3%95%e6%80%bb%e7%bb%93.html)】，媒体ID的获取方法请查阅【[微信开发之上传多媒体文件](http://www.chenyalun.cn/微信开发之上传多媒体文件.html)】
-
-### 1，下载图片
-
-代码如下：
-<pre class="lang:default decode:true ">&lt;?php
-header("Content-Type:image/jpeg");
-$access_token="ndX2jBjagfJBuhAi1S9UTtI4ZZD94CSuvRfsn3Fa2PYfTaFRrt_GvVgLE3e81p_mkYFP9OdYvjhvEY7Si2lUJSWQkNvtC0QycI2Q1-45vMw";
-$mediaid = "7TzEATgNA3DMhhQK8jN0tVCdCl3mrvAdkkmd_Hy0s_mlX_3ysh2WaSUfde8vRc3d";
-$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$access_token&amp;media_id=$mediaid";
-$pic=file_get_contents($url);
-echo $pic;
-?&gt;
-</pre>
-很显然，在浏览器上出现我们梦寐以求的图片。右键，另存为即可。
-
-![](http://source.chenyalun.cn/images/201510/5100711.jpg)
-
-### 2，下载语音
-
-代码如下：
-<pre class="lang:default decode:true">&lt;?php
-$access_token="ndX2jBjagfJBuhAi1S9UTtI4ZZD94CSuvRfsn3Fa2PYfTaFRrt_GvVgLE3e81p_mkYFP9OdYvjhvEY7Si2lUJSWQkNvtC0QycI2Q1-45vMw";
-$mediaid = "5Idx79V9E3XfBCz_A50gr1a1_klgPpJnb_eq73yz0bn-prhIsNlwI3n6jQgshmWk";
-$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$access_token&amp;media_id=$mediaid";
-$yuyin = file_get_contents($url);
-$yName= "chenyalun.amr";
-if(file_put_contents($yName,$yuyin)){
-echo"陈亚伦博客提醒你文件下载成功";
-}else{
-echo"陈亚伦博客提醒你文件下载失败";
-}
-?&gt;</pre>
-
-<h3 id="3，下载缩略图"><a href="#3，下载缩略图" class="headerlink" title="3，下载缩略图"></a>3，下载缩略图</h3><p>代码如下：</p>
-<pre class="lang:default decode:true ">&lt;?php
-$access_token="ndX2jBjagfJBuhAi1S9UTtI4ZZD94CSuvRfsn3Fa2PYfTaFRrt_GvVgLE3e81p_mkYFP9OdYvjhvEY7Si2lUJSWQkNvtC0QycI2Q1-45vMw";
-$mediaid = "wQu5FdN_W1rnsikE9tMfRGiy1XafRDYxsviiTS9TxW0q-cl19LYz7xere0ok8RQ5";
-$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$access_token&amp;media_id=$mediaid";
-$pic=file_get_contents($url);
-$picName="chenyalun1.jpg";
-if(file_get_contents($picName,$pic)){
-echo"陈亚伦博客提醒你缩略图下载成功";
-}
-else
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>image</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>是</td></p>
+<p><td>通过素材管理接口上传多媒体文件，得到的id。</td><br><br><br></p>
+<p><pre class="lang:default decode:true">const REPLY_TYPE_IMAGE=’image’;<br>/**</pre></p>
+<pre><code> * 生成向用户发送的图片信息
+ * @param string $media_id
+ * @return string xml字符串
+ */
+public function outputImage($media_id)
 {
-echo"陈亚伦博客提醒你缩略图下载失败";
-}
-?&gt;</pre>
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+            &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+            &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+            &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+            &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+            &amp;lt;Image&amp;gt;
+                &amp;lt;MediaId&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MediaId&amp;gt;
+            &amp;lt;/Image&amp;gt;
+        &amp;lt;/xml&amp;gt;&apos;;
 
-<h3 id=""><a href="#" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/images/201510/5100712.jpg" alt=""></h3><h3 id="4，总结"><a href="#4，总结" class="headerlink" title="4，总结"></a>4，总结</h3><p>1，以上代码请另存为php文件，编码格式选择ANSI，如果你执意选择UTF-8，可能会乱码。</p>
-<p>2，语音以及缩略图文件不会直接显示在浏览器中，下载成功后，它将保存在你的代码文件的存放目录中。</p>
-<p>3，请替换以上代码中的文件名、媒体ID以及access_token（这个貌似我不用提醒(●ˇ∀ˇ●)）</p>
-<p>4，本着知识分享，共同进步的原则，我也将所有代码放在云端，需要的同学请下载。</p>
-<p>下载链接：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1ntEMtEL" target="_blank" rel="external">http://pan.baidu.com/s/1ntEMtEL</a></p>
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_VOICE, $media_id);
+    return $text;
+}
+</code></pre><p><br>注意：图片，语音，视频以及音乐缩略图的媒体ID（MediaID）是自己上传之后获取的，微信服务器只保存3天，所以你在测试时请自行上传。上传方法：把图片直接发送到测试微信公众号就可以得到媒体ID了，像视频，语音之类以此类推，想要查看媒体ID，可以直接把【<a href="http://www.chenyalun.cn/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E8%B4%A6%E5%8F%B7%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD%E4%BB%A3%E7%A0%81.html" target="_blank" rel="external">微信公众账号接收消息类型判断代码</a>】这篇文章中的代码文件配置成微信接口即可。</p>
+<h3 id="3，语音消息"><a href="#3，语音消息" class="headerlink" title="3，语音消息"></a>3，语音消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[voice]]&gt;&lt;/MsgType&gt;<br>&lt;Voice&gt;<br>&lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br>&lt;/Voice&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间戳 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>语音，voice</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>是</td></p>
+<p><td>通过素材管理接口上传多媒体文件，得到的id</td><br><br><br></p>
+<p><pre class="lang:default decode:true"> const REPLY_TYPE_VOICE = ‘voice’;</pre></p>
+<p>/**</p>
+<pre><code> * 生成向用户发送的语音信息
+ * @param string $content
+ * @return string xml字符串
+ */
+public function outputVoice($media_id)
+{
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+            &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+            &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+            &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+            &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+            &amp;lt;Voice&amp;gt;
+                &amp;lt;MediaId&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MediaId&amp;gt;
+            &amp;lt;/Voice&amp;gt;
+        &amp;lt;/xml&amp;gt;&apos;;
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_VOICE, $media_id);
+    return $text;
+}
+</code></pre><p><br>4，视频消息</p>
+<p><pre class="lang:default decode:true">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;!<br>[CDATA]&gt;<br>&lt;/MsgType&gt;<br>&lt;Video&gt;<br> &lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br>&lt;Title&gt;&lt;![CDATA[title]]&gt;&lt;/Title&gt;<br> &lt;Description&gt;&lt;![CDATA[description]]&gt;&lt;/Description&gt; &lt;/Video&gt; &lt;/xml&gt;</pre><br>&nbsp;</p>
 <p>&nbsp;</p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>video</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>是</td></p>
+<p><td>通过素材管理接口上传多媒体文件，得到的id</td><br></p>
+<p><tr></tr></p>
+<p><td>Title</td></p>
+<p><td>否</td></p>
+<p><td>视频消息的标题</td><br></p>
+<p><tr></tr></p>
+<p><td>Description</td></p>
+<p><td>否</td></p>
+<p><td>视频消息的描述</td><br><br><br></p>
+<p><pre class="lang:default decode:true"> const REPLY_TYPE_VIDEO = ‘video’;</pre></p>
+<p>/**</p>
+<pre><code> * 生成向用户发送的视频信息
+ * @param string $content
+ * @return string xml字符串
+ */
+public function outputVideo($videopost)
+{
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+            &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+            &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+            &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+            &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+            &amp;lt;Video&amp;gt;
+                &amp;lt;MediaId&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MediaId&amp;gt;
+                &amp;lt;Title&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Title&amp;gt;
+                &amp;lt;Description&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Description&amp;gt;
+            &amp;lt;/Video&amp;gt; 
+        &amp;lt;/xml&amp;gt;&apos;;
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_VIDEO, $videopost[&apos;media_id&apos;], $videopost[&apos;title&apos;], $videopost[&apos;description&apos;]);
+    return $text;
+}
+</code></pre><p><br>&nbsp;</p>
+<h3 id="5，音乐消息"><a href="#5，音乐消息" class="headerlink" title="5，音乐消息"></a>5，音乐消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;<br>&lt;![CDATA[music]]&gt;&lt;/MsgType&gt;<br>&lt;Music&gt;<br>&lt;Title&gt;&lt;![CDATA[TITLE]]&gt;&lt;/Title&gt;<br>&lt;Description&gt;&lt;![CDATA[DESCRIPTION]]&gt;&lt;/Description&gt;<br>&lt;MusicUrl&gt;&lt;![CDATA[MUSIC_Url]]&gt;&lt;/MusicUrl&gt;<br>&lt;HQMusicUrl&gt;&lt;![CDATA[HQ_MUSIC_Url]]&gt;&lt;/HQMusicUrl&gt;<br>&lt;ThumbMediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/ThumbMediaId&gt;<br>&lt;/Music&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>music</td><br></p>
+<p><tr></tr></p>
+<p><td>Title</td></p>
+<p><td>否</td></p>
+<p><td>音乐标题</td><br></p>
+<p><tr></tr></p>
+<p><td>Description</td></p>
+<p><td>否</td></p>
+<p><td>音乐描述</td><br></p>
+<p><tr></tr></p>
+<p><td>MusicURL</td></p>
+<p><td>否</td></p>
+<p><td>音乐链接</td><br></p>
+<p><tr></tr></p>
+<p><td>HQMusicUrl</td></p>
+<p><td>否</td></p>
+<p><td>高质量音乐链接，WIFI环境优先使用该链接播放音乐</td><br></p>
+<p><tr></tr></p>
+<p><td>ThumbMediaId</td></p>
+<p><td>否</td></p>
+<p><td>缩略图的媒体id，通过素材管理接口上传多媒体文件，得到的id</td><br><br><br></p>
+<p><pre class="lang:default decode:true ">const REPLY_TYPE_MUSIC=’music’;<br> /**</pre></p>
+<pre><code> * 生成向用户发送的音乐信息
+ * @param type $musicpost
+ * @return type
+ * @throws Exception
+ */
+public function outputMusic($musicpost){
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+        &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+        &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+        &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+        &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt; 
+        &amp;lt;Music&amp;gt;%s&amp;lt;/Music&amp;gt;
+    &amp;lt;/xml&amp;gt;&apos;;
+
+    $musicTpl = &apos;
+        &amp;lt;Title&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Title&amp;gt;
+        &amp;lt;Description&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Description&amp;gt;
+        &amp;lt;MusicUrl&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MusicUrl&amp;gt;
+        &amp;lt;HQMusicUrl&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/HQMusicUrl&amp;gt;
+        &apos;;
+    $music = &apos;&apos;;        
+    if (is_array($musicpost)){
+        $music .= sprintf($musicTpl, $musicpost[&apos;title&apos;], $musicpost[&apos;description&apos;], $musicpost[&apos;musicurl&apos;], $musicpost[&apos;hdmusicurl&apos;]);
+    }else{
+        throw new Exception(&apos;$posts 数据结构错误&apos;);
+    }
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_MUSIC, $music);
+    return $text;
+
+}
+</code></pre><p><br><img src="http://source.chenyalun.cn/5091809180010.png" alt=""></p>
+<h3 id="6，图文消息"><a href="#6，图文消息" class="headerlink" title="6，图文消息"></a>6，图文消息</h3><p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;12345678&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[news]]&gt;&lt;/MsgType&gt;<br>&lt;ArticleCount&gt;2&lt;/ArticleCount&gt;<br>&lt;Articles&gt;<br>&lt;item&gt;<br>&lt;Title&gt;&lt;![CDATA[title1]]&gt;&lt;/Title&gt;<br>&lt;Description&gt;&lt;![CDATA[description1]]&gt;&lt;/Description&gt;<br>&lt;PicUrl&gt;&lt;![CDATA[picurl]]&gt;&lt;/PicUrl&gt;<br>&lt;Url&gt;&lt;![CDATA[url]]&gt;&lt;/Url&gt;<br>&lt;/item&gt;<br>&lt;item&gt;<br>&lt;Title&gt;&lt;![CDATA[title]]&gt;&lt;/Title&gt;<br>&lt;Description&gt;&lt;![CDATA[description]]&gt;&lt;/Description&gt;<br>&lt;PicUrl&gt;&lt;![CDATA[picurl]]&gt;&lt;/PicUrl&gt;<br>&lt;Url&gt;&lt;![CDATA[url]]&gt;&lt;/Url&gt;<br>&lt;/item&gt;<br>&lt;/Articles&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" width="640px" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>是否必须</th></p>
+<p><th>说明</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td>是</td></p>
+<p><td>接收方帐号（收到的OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>是</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>是</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>是</td></p>
+<p><td>news</td><br></p>
+<p><tr></tr></p>
+<p><td>ArticleCount</td></p>
+<p><td>是</td></p>
+<p><td>图文消息个数，限制为10条以内</td><br></p>
+<p><tr></tr></p>
+<p><td>Articles</td></p>
+<p><td>是</td></p>
+<p><td>多条图文消息信息，默认第一个item为大图,注意，如果图文数超过10，则将会无响应</td><br></p>
+<p><tr></tr></p>
+<p><td>Title</td></p>
+<p><td>否</td></p>
+<p><td>图文消息标题</td><br></p>
+<p><tr></tr></p>
+<p><td>Description</td></p>
+<p><td>否</td></p>
+<p><td>图文消息描述</td><br></p>
+<p><tr></tr></p>
+<p><td>PicUrl</td></p>
+<p><td>否</td></p>
+<p><td>图片链接，支持JPG、PNG格式，较好的效果为大图360<em>200，小图200</em>200</td><br></p>
+<p><tr></tr></p>
+<p><td>Url</td></p>
+<p><td>否</td></p>
+<p><td>点击图文消息跳转链接</td><br><br><br></p>
+<p><pre class="lang:default decode:true ">const REPLY_TYPE_NEWS = ‘news’;<br>   /**</pre></p>
+<pre><code> * 生成向用户发送的图文信息
+ * @param arrry $posts 文章数组，每一个元素是一个文章数组，索引跟微信官方接口说明一致
+ * @return string xml字符串
+ */
+public function outputNews($posts = array())
+{
+    $textTpl = &apos;&amp;lt;xml&amp;gt;
+         &amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/ToUserName&amp;gt;
+         &amp;lt;FromUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/FromUserName&amp;gt;
+         &amp;lt;CreateTime&amp;gt;%s&amp;lt;/CreateTime&amp;gt;
+         &amp;lt;MsgType&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/MsgType&amp;gt;
+         &amp;lt;ArticleCount&amp;gt;%d&amp;lt;/ArticleCount&amp;gt;
+         &amp;lt;Articles&amp;gt;%s&amp;lt;/Articles&amp;gt;
+     &amp;lt;/xml&amp;gt;&apos;;
+
+    $itemTpl = &apos;&amp;lt;item&amp;gt;
+         &amp;lt;Title&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Title&amp;gt;
+         &amp;lt;Discription&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Discription&amp;gt;
+         &amp;lt;PicUrl&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/PicUrl&amp;gt;
+         &amp;lt;Url&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt;/Url&amp;gt;
+     &amp;lt;/item&amp;gt;&apos;;
+
+    $items = &apos;&apos;;
+    foreach ((array)$posts as $p) {
+        if (is_array($p))
+            $items .= sprintf($itemTpl, $p[&apos;title&apos;], $p[&apos;discription&apos;], $p[&apos;picurl&apos;], $p[&apos;url&apos;]);
+        else
+            throw new Exception(&apos;$posts 数据结构错误&apos;);
+    }
+
+    $text = sprintf($textTpl, $this-&amp;gt;_postData-&amp;gt;FromUserName, $this-&amp;gt;_postData-&amp;gt;ToUserName, time(), self::REPLY_TYPE_NEWS,  count($posts), $items);
+    return $text;
+}
+</code></pre><p><br><img src="http://source.chenyalun.cn/5091809180007.png" alt="">         <img src="http://source.chenyalun.cn/5091809180008.png" alt=""></p>
+<p>以上就把回复用户消息类型介绍完了，文中的代码和实际中的有所差距，本着知识共享的原则，现在将实际的代码分享出来，可以查看文章：【<a href="http://www.chenyalun.cn/%e5%9b%9e%e5%a4%8d%e5%90%84%e7%a7%8d%e6%b6%88%e6%81%af%e7%b1%bb%e5%9e%8b%e4%bb%a3%e7%a0%81.html" target="_blank" rel="external">回复各种消息类型代码</a>】</p>
 
           
         
@@ -1086,8 +764,8 @@ echo"陈亚伦博客提醒你缩略图下载失败";
             
               
                 
-                <a class="post-title-link" href="/2015/10/09/微信开发之上传多媒体文件/" itemprop="url">
-                  微信开发之上传多媒体文件
+                <a class="post-title-link" href="/2015/09/17/接收事件消息/" itemprop="url">
+                  接收事件消息
                 </a>
               
             
@@ -1100,8 +778,8 @@ echo"陈亚伦博客提醒你缩略图下载失败";
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-09T05:00:19+08:00" content="2015-10-09">
-              2015-10-09
+            <time itemprop="dateCreated" datetime="2015-09-17T22:56:25+08:00" content="2015-09-17">
+              2015-09-17
             </time>
           </span>
 
@@ -1130,8 +808,8 @@ echo"陈亚伦博客提醒你缩略图下载失败";
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/09/微信开发之上传多媒体文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/09/微信开发之上传多媒体文件/" itemprop="commentsCount"></span>
+                <a href="/2015/09/17/接收事件消息/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/17/接收事件消息/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1156,208 +834,872 @@ echo"陈亚伦博客提醒你缩略图下载失败";
       
         
           
-            <p>在前面的文章中我们已经提到过发送给用户多媒体消息，比如图片（含缩略图），视频，语音等等，而且我们还说了，本着节约光荣、浪费可耻的原则，腾讯微信服务器只把这些文件保留3天，过期删除。今天我们就详细探讨一下上传多媒体文件到微信服务器的方法。</p>
-<p>当我们把这些多媒体文件上传到服务器后，每个文件会得到一个相应的媒体ID（media_ID)，以后就根据这个调用这些文件。一般来说上传文件都是通过提交html表单完成的，但是也可以通过CURL直接向服务器进行提交。接口地址：</p>
-<pre class="nums:false lang:default decode:true ">http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&amp;type=TYPE</pre>
-**参数说明**
-<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
-<tbody>
-<tr>
-<th>参数</th>
-<th>是否必须</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>access_token</td>
-<td>是</td>
-<td>调用接口凭证</td>
-</tr>
-<tr>
-<td>type</td>
-<td>是</td>
-<td>媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）</td>
-</tr>
-<tr>
-<td>media</td>
-<td>是</td>
-<td>form-data中媒体文件标识，有filename、filelength、content-type等信息</td>
-</tr>
-</tbody>
-</table>
-值得注意的有：
-
-1，若你的服务器是windows，上传的文件格式为：@C:\Users\Allen\chenyalun.jpg，但如果是在Linux服务器上那文件格式就为：@home/Users/Allen/chenyalun.jpg，相信大多数同学（包括我）用的都是Linux服务器，那下面的示例就以这个为标准啦。
-
-2，文件名必须是完整绝对路径，而且需要在路径前加上@以示区分。
-
-3，上传的文件中，图片最大1M，只能是JPG格式；语音不超过2M，播放长度不超过60秒，支持AMR,MP3,SPEEX等格式；视频不超过10M，支持MP4格式，缩略图不超过64KB，支持JPG格式。
-
-### 1，上传图片
-
-代码如下
-<pre class="wrap:true lang:default decode:true ">&lt;?php
-
-$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
-
-$type = "image";
-$filepath = dirname(__FILE__)."/chenyalun.jpg";
-$filedata = array("media"  =&gt; "@".$filepath);
-$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
-$result = https_request($url, $filedata); 
-var_dump($result); 
-function https_request($url, $data = null)
-{
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-    if (!empty($data)){
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    }
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($curl);
-    curl_close($curl);
-    return $output;
-}
-?&gt;</pre>
-保存为image.php(新建文本文档，选择另存为，注意编码格式为UTF-8，下面的代码编码格式都是这样的）
-
-在浏览器打开就可以啦，比如我的是http://wechat.chenyalun.cn/image.php，打开之后返回结果如下：
-
-![](http://source.chenyalun.cn/images/201510/5100671.jpg)
-<pre class="nums:false wrap:true lang:default decode:true">string(118) "{"type":"image","media_id":"27E2jndYZ_yNOEKMld7rP3aLEQY_h0EZyr0sBh0707urqUD9BuWtHxzm4mvHXHVy","created_at":1444219660}"</pre>
-**返回说明**
-
-正确情况下的返回JSON数据包结果如下：
-<pre class="nums:false lang:default decode:true">{"type":"TYPE","media_id":"MEDIA_ID","created_at":123456789}
-</pre>
-<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
+            <p>在前面的文章中，具体的链接、图片、文本等消息类型已经进行过分析，接下来分析下关注、取消关注，扫描二维码，上传地理位置以及点击菜单等事件消息类型。</p>
+<h3 id="1，关注与取消"><a href="#1，关注与取消" class="headerlink" title="1，关注与取消"></a>1，关注与取消</h3><p>用户在关注与取消关注公众号时，微信会把这个事件推送到开发者填写的URL。方便开发者给用户下发欢迎消息或者做帐号的解绑。微信服务器在五秒内收不到响应会断掉连接，并且重新发起请求，总共重试三次。</p>
+<p>&nbsp;</p>
+<p>关注事件的xml文件分析</p>
+<pre class="lang:default decode:true">&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[FromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;123456789&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;
+&lt;Event&gt;&lt;![CDATA[subscribe]]&gt;&lt;/Event&gt;
+&lt;/xml&gt;</pre>
+参数说明：
+<table border="1" cellspacing="0" cellpadding="4" align="center">
 <tbody>
 <tr>
 <th>参数</th>
 <th>描述</th>
 </tr>
 <tr>
-<td>type</td>
-<td>媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb，主要用于视频与音乐格式的缩略图）</td>
+<td>ToUserName</td>
+<td>**开发者**微信号</td>
 </tr>
 <tr>
-<td>media_id</td>
-<td>媒体文件上传后，获取时的唯一标识</td>
+<td>FromUserName</td>
+<td>发送方帐号（一个OpenID）</td>
 </tr>
 <tr>
-<td>created_at</td>
-<td>媒体文件上传时间戳</td>
+<td>CreateTime</td>
+<td>消息创建时间 （整型）</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>消息类型，event</td>
+</tr>
+<tr>
+<td>Event</td>
+<td>事件类型，subscribe(订阅)、unsubscribe(取消订阅)</td>
 </tr>
 </tbody>
 </table>
-错误情况下的返回JSON数据包示例如下（示例为无效媒体类型错误）：
-<pre class="nums:false lang:default decode:true">{"errcode":40004,"errmsg":"invalid media type"}</pre>
-非常显然，媒体ID我们已经拿到手啦。就是下面这一串东东：
-
-27E2jndYZ_yNOEKMld7rP3aLEQY_h0EZyr0sBh0707urqUD9BuWtHxzm4mvHXHVy
-
-那么当我们再调用这个图片的时候，媒体ID就派上用场啦，一定要记得，图片只能在服务器保留3天，图片只能在服务器保留3天，图片只能在服务器保留3天。
-
-敬请注意以下几点：
-
-1，将第3行的access_token替换成你自己的（关于获取access_token，请查阅【[获得Access_Token的三种方法总结](http://www.chenyalun.cn/%e8%8e%b7%e5%be%97access_token%e7%9a%84%e4%b8%89%e7%a7%8d%e6%96%b9%e6%b3%95%e6%80%bb%e7%bb%93.html)】。
-
-2，将第6行中的文件名称改成你自己的，注意不要搞错啦。
-
-说到这里那么上传语音（以MP3文件为例)，视频（以MP4文件为例），缩略图（还是以JPG格式为例）都是轻而易举的了。嗯，不多说啦，上代码。
-
-### 2，上传语音
-
-<pre class="wrap:true lang:default decode:true">&lt;?php
-
-$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
-
-$type = "voice";
-$filepath = dirname(__FILE__)."/chenyalun.mp3";
-$filedata = array("media"  =&gt; "@".$filepath);
-$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
-$result = https_request($url, $filedata); 
-var_dump($result); 
-function https_request($url, $data = null)
-{
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-    if (!empty($data)){
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    }
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($curl);
-    curl_close($curl);
-    return $output;
-}
-?&gt;</pre>
-
-<h3 id="3，上传视频"><a href="#3，上传视频" class="headerlink" title="3，上传视频"></a>3，上传视频</h3><pre class="wrap:true lang:default decode:true">&lt;?php
-
-$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
-
-$type = "video";
-$filepath = dirname(__FILE__)."/chenyalun.mp4";
-$filedata = array("media"  =&gt; "@".$filepath);
-$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
-$result = https_request($url, $filedata);
-var_dump($result); 
-function https_request($url, $data = null)
-{
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-    if (!empty($data)){
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    }
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($curl);
-    curl_close($curl);
-    return $output;
-}
-?&gt;</pre>
 &nbsp;
 
-### 4，上传缩略图
+isSubscribeEvent用于判断消息类型是否为订阅事件，具体代码如下：
 
-<pre class="wrap:true lang:default decode:true">&lt;?php
+&nbsp;
+<pre class="lang:default decode:true">/**
+     * 判断是否是订阅事件
+     * @return boolean
+     */
+    public function isSubscribeEvent()
+    {
+       return $this-&gt;_postData-&gt;Event == self::EVENT_TYPE_SUBSCRIBE &amp;&amp;
+           $this-&gt;_postData-&gt;EventKey == "";
 
-$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+    }</pre>
+&nbsp;
+<pre class="lang:default decode:true">/**   
+   * 判断是否是退订事件   
+   * @return boolean    
+  */   
+  public function isUnsubscribeEvent()  
+   {      
+   return $this-&gt;_postData-&gt;Event == self::EVENT_TYPE_UNSUBSCRIBE;  
+   }</pre>
 
-$type = "thumb";
-$filepath = dirname(__FILE__)."/chenyalun.jpg";
-$filedata = array("media"  =&gt; "@".$filepath);
-$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
-$result = https_request($url, $filedata);
-var_dump($result); 
-function https_request($url, $data = null)
-{
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-    if (!empty($data)){
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+<h3 id="2，扫描二维码"><a href="#2，扫描二维码" class="headerlink" title="2，扫描二维码"></a>2，扫描二维码</h3><p>扫描二维码的类型分为已关注用户扫描和未关注用户扫描，二者略有不同，如果未关注公众号，则可以先关注公众号，关注后微信将带关注场景值（扫二维码关注、搜索微信号关注、搜索昵称关注等等）的事件推送给开发者用户硬是不关注的话，就不推送了，如果已经关注，那更好办。</p>
+<p>isSubscribeScanEvent用于判断消息类型是否为未关注用户扫描二维码事件，它们的xml文件分析如下：</p>
+<p>用户未关注时，进行关注后的事件推送，推送XML数据包示例：</p>
+<pre class="lang:default decode:true">&lt;xml&gt;&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[FromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;123456789&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;
+&lt;Event&gt;&lt;![CDATA[subscribe]]&gt;&lt;/Event&gt;
+&lt;EventKey&gt;&lt;![CDATA[qrscene_123123]]&gt;&lt;/EventKey&gt;
+&lt;Ticket&gt;&lt;![CDATA[TICKET]]&gt;&lt;/Ticket&gt;
+&lt;/xml&gt;</pre>
+参数说明：
+<table border="1" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>ToUserName</td>
+<td>**开发者**微信号</td>
+</tr>
+<tr>
+<td>FromUserName</td>
+<td>发送方帐号（一个OpenID）</td>
+</tr>
+<tr>
+<td>CreateTime</td>
+<td>消息创建时间 （整型）</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>消息类型，event</td>
+</tr>
+<tr>
+<td>Event</td>
+<td>事件类型，subscribe</td>
+</tr>
+<tr>
+<td>EventKey</td>
+<td>事件KEY值，qrscene_为前缀，后面为二维码的参数值</td>
+</tr>
+<tr>
+<td>Ticket</td>
+<td>二维码的ticket，可用来换取二维码图片</td>
+</tr>
+</tbody>
+</table>
+用户已关注时的事件推送，推送XML数据包示例：
+<pre class="lang:default decode:true ">&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[FromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;123456789&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;
+&lt;Event&gt;&lt;![CDATA[SCAN]]&gt;&lt;/Event&gt;
+&lt;EventKey&gt;&lt;![CDATA[SCENE_VALUE]]&gt;&lt;/EventKey&gt;
+&lt;Ticket&gt;&lt;![CDATA[TICKET]]&gt;&lt;/Ticket&gt;
+&lt;/xml&gt;</pre>
+参数说明：
+<table border="1" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>ToUserName</td>
+<td>**开发者**微信号</td>
+</tr>
+<tr>
+<td>FromUserName</td>
+<td>发送方帐号（一个OpenID）</td>
+</tr>
+<tr>
+<td>CreateTime</td>
+<td>消息创建时间 （整型）</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>消息类型，event</td>
+</tr>
+<tr>
+<td>Event</td>
+<td>事件类型，SCAN</td>
+</tr>
+<tr>
+<td>EventKey</td>
+<td>事件KEY值，是一个32位无符号整数，即创建二维码时的二维码scene_id</td>
+</tr>
+<tr>
+<td>Ticket</td>
+<td>二维码的ticket，可用来换取二维码图片</td>
+</tr>
+</tbody>
+</table>
+
+*   <pre class="lang:default decode:true">/**
+     * 判断是否是未关注用户扫描二维码事件
+     * @return boolean
+     */
+    public function isSubscribeScanEvent()
+    {
+         return $this-&gt;_postData-&gt;Event == self::EVENT_TYPE_SUBSCRIBE &amp;&amp;
+               $this-&gt;_postData-&gt;EventKey != "";
+    }</pre>
+<pre class="lang:default decode:true">/**    
+  * 判断是否是扫描二维码事件     
+      * @return boolean    
+  */   
+  public function isScanEvent()  
+   {        
+ return $this-&gt;_postData-&gt;Event == self::EVENT_TYPE_SCAN;  
+   }</pre>
+
+<h3 id="3，上传地理位置事件"><a href="#3，上传地理位置事件" class="headerlink" title="3，上传地理位置事件"></a>3，上传地理位置事件</h3><p>用户同意上报地理位置后，每次进入公众号会话时，都会在进入时上报地理位置，或在进入会话后每5秒上报一次地理位置，公众号可以在公众平台网站中修改以上设置。上报地理位置时，微信会将上报地理位置事件推送到开发者填写的URL。</p>
+<p>isLocaitonEvent用于判断消息类型是否是地理位置事件，具体xml数据包如下</p>
+<pre class="lang:default decode:true ">&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;123456789&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;
+&lt;Event&gt;&lt;![CDATA[LOCATION]]&gt;&lt;/Event&gt;
+&lt;Latitude&gt;23.137466&lt;/Latitude&gt;
+&lt;Longitude&gt;113.352425&lt;/Longitude&gt;
+&lt;Precision&gt;119.385040&lt;/Precision&gt;
+&lt;/xml&gt;</pre>
+参数说明：
+<table border="1" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>ToUserName</td>
+<td>**开发者**微信号</td>
+</tr>
+<tr>
+<td>FromUserName</td>
+<td>发送方帐号（一个OpenID）</td>
+</tr>
+<tr>
+<td>CreateTime</td>
+<td>消息创建时间 （整型）</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>消息类型，event</td>
+</tr>
+<tr>
+<td>Event</td>
+<td>事件类型，LOCATION</td>
+</tr>
+<tr>
+<td>Latitude</td>
+<td>地理位置纬度</td>
+</tr>
+<tr>
+<td>Longitude</td>
+<td>地理位置经度</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>地理位置精度</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+
+&nbsp;
+<pre class="lang:default decode:true">/**
+     * 判断是否是上传地理位置事件
+     * @return boolean
+     */
+    public function isLocaitonEvent()
+    {
+        return $this-&gt;_postData-&gt;Event == self::EVENT_TYPE_LOCATION;
     }
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($curl);
-    curl_close($curl);
-    return $output;
-}
-?&lt;br&gt;</pre>
 
-<h3 id="5，利用官方工具进行调试"><a href="#5，利用官方工具进行调试" class="headerlink" title="5，利用官方工具进行调试"></a>5，利用官方工具进行调试</h3><p>点击这里打开上传接口调试工具，<a href="http://www.chenyalun.cn/go/?url=https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&amp;type=%E5%9F%BA%E7%A1%80%E6%94%AF%E6%8C%81&amp;form=%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8E%A5%E5%8F%A3%20/media/upload" target="_blank" rel="external">这里这里</a>，接口列表选择【多媒体文件上传接口】，我们也可以在这里上传文件，不过，这个工具主要是检查问题进行调试，如果想偷个懒，也可以直接从这里上传。</p>
-<p>还有就是有时候微信服务器也不是很给力，【System busy】偶尔会出现的，如果是这样，建议大家稍等片刻再来尝试。</p>
-<p>本着知识分享、共同进步的原则，我把所有的代码都放在云端了，需要的同学可以免费下载。</p>
-<p>下载地址：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1jG8MM94" target="_blank" rel="external">http://pan.baidu.com/s/1jG8MM94</a></p>
+</pre>
+
+<h3 id="4，自定义菜单事件"><a href="#4，自定义菜单事件" class="headerlink" title="4，自定义菜单事件"></a>4，自定义菜单事件</h3><p>用户点击自定义菜单后，如果是Click类型，微信会把点击事件推送给开发者，如果是View型，或者点击菜单弹出子菜单，则不会上报。所以具体分为以下两种。</p>
+<p><span id=".E7.82.B9.E5.87.BB.E8.8F.9C.E5.8D.95.E6.8B.89.E5.8F.96.E6.B6.88.E6.81.AF.E6.97.B6.E7.9A.84.E4.BA.8B.E4.BB.B6.E6.8E.A8.E9.80.81" class="mw-headline">点击菜单拉取消息时的事件推送</span></p>
+<p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[FromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;123456789&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;<br>&lt;Event&gt;&lt;![CDATA[CLICK]]&gt;&lt;/Event&gt;<br>&lt;EventKey&gt;&lt;![CDATA[EVENTKEY]]&gt;&lt;/EventKey&gt;<br>&lt;/xml&gt;</pre><br>参数说明：</p>
+<p><table border="1" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>描述</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>发送方帐号（一个OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>消息类型，event</td><br></p>
+<p><tr></tr></p>
+<p><td>Event</td></p>
+<p><td>事件类型，CLICK</td><br></p>
+<p><tr></tr></p>
+<p><td>EventKey</td></p>
+<p><td>事件KEY值，与自定义菜单接口中KEY值对应</td><br><br><br><br><span id=".E7.82.B9.E5.87.BB.E8.8F.9C.E5.8D.95.E8.B7.B3.E8.BD.AC.E9.93.BE.E6.8E.A5.E6.97.B6.E7.9A.84.E4.BA.8B.E4.BB.B6.E6.8E.A8.E9.80.81" class="mw-headline">点击菜单跳转链接时的事件推送</span></p>
+<p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[FromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;123456789&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[event]]&gt;&lt;/MsgType&gt;<br>&lt;Event&gt;&lt;![CDATA[VIEW]]&gt;&lt;/Event&gt;<br>&lt;EventKey&gt;&lt;![CDATA[www.qq.com]]&gt;&lt;/EventKey&gt;<br>&lt;/xml&gt;</pre><br>参数说明：</p>
+<p><table border="1" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>描述</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>发送方帐号（一个OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>消息类型，event</td><br></p>
+<p><tr></tr></p>
+<p><td>Event</td></p>
+<p><td>事件类型，VIEW</td><br></p>
+<p><tr></tr></p>
+<p><td>EventKey</td></p>
+<p><td>事件KEY值，设置的跳转URL</td><br><br><br><br>isClickEvent用于判断消息类型具体指哪一种。</p>
+<p><pre class="lang:default decode:true"> /**</pre></p>
+<pre><code> * 判断是否是点击菜单拉取消息事件
+ * @return boolean
+ */
+public function isClickEvent()
+{
+    return $this-&amp;gt;_postData-&amp;gt;Event == self::EVENT_TYPE_CLICK;
+}
+
+/**
+ * 判断是否是点击菜单跳转事件
+ * @return boolean
+ */
+public function isViewEvent()
+{
+    return $this-&amp;gt;_postData-&amp;gt;Event == self::EVENT_TYPE_VIEW;
+}
+</code></pre><p><br>&nbsp;</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/15/收发消息的XML数据包分析（下）/" itemprop="url">
+                  收发消息的XML数据包分析（下）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-15T22:20:24+08:00" content="2015-09-15">
+              2015-09-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
+                    <span itemprop="name">公众号开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/15/收发消息的XML数据包分析（下）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/15/收发消息的XML数据包分析（下）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在前文的<a href="http://www.chenyalun.cn/%E6%94%B6%E5%8F%91%E6%B6%88%E6%81%AF%E7%9A%84xml%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%8A%EF%BC%89.html" target="_blank" rel="external">收发消息的XML数据包分析（上）</a>中我们介绍了文本，图片以及语音三种消息类型，并给出了相关的代码，今天，我们就接着介绍地理位置，链接，视频消息类型，并分析它们的消息结构。</p>
+<h3 id="一，地理位置"><a href="#一，地理位置" class="headerlink" title="一，地理位置"></a>一，地理位置</h3><p>消息结构如下：</p>
+<pre class="lang:default decode:true ">&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;1351776360&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[location]]&gt;&lt;/MsgType&gt;
+&lt;Location_X&gt;23.134521&lt;/Location_X&gt;
+&lt;Location_Y&gt;113.358803&lt;/Location_Y&gt;
+&lt;Scale&gt;20&lt;/Scale&gt;
+&lt;Label&gt;&lt;![CDATA[位置信息]]&gt;&lt;/Label&gt;
+&lt;MsgId&gt;1234567890123456&lt;/MsgId&gt;
+&lt;/xml&gt;</pre>
+&nbsp;
+<table border="1" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>ToUserName</td>
+<td>**开发者**微信号</td>
+</tr>
+<tr>
+<td>FromUserName</td>
+<td>发送方帐号（一个OpenID）</td>
+</tr>
+<tr>
+<td>CreateTime</td>
+<td>消息创建时间 （整型）</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>location</td>
+</tr>
+<tr>
+<td>Location_X</td>
+<td>地理位置维度</td>
+</tr>
+<tr>
+<td>Location_Y</td>
+<td>地理位置经度</td>
+</tr>
+<tr>
+<td>Scale</td>
+<td>地图缩放大小</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>地理位置信息</td>
+</tr>
+<tr>
+<td>MsgId</td>
+<td>消息id，64位整型</td>
+</tr>
+</tbody>
+</table>
+isLocationMsg用于判断消息的类型是否为位置消息：
+<pre class="lang:default decode:true "> const MSG_TYPE_LOCATION = 'location';
+
+/**
+     * 判断是否是位置信息
+     * @return boolean
+     */
+    public function isLocationMsg()
+    {
+        return $this-&gt;_postData-&gt;MsgType == self::MSG_TYPE_LOCATION;
+    }
+//发送消息
+ $this-&gt;outputText("您发送的是位置消息,维度为: ".$data-&gt;Location_X."\n经度为: ".$data-&gt;Location_Y."\n缩放级别为: ".$data-&gt;Scale."\n位置为: ".$data-&gt;Label);
+
+</pre>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/5091809180004.png" alt=""></h3><h3 id="二，链接消息"><a href="#二，链接消息" class="headerlink" title="二，链接消息"></a>二，链接消息</h3><p>此处的链接消息与URL有所不同，因为用户直接发送的URL仍是被视作文本消息，而链接消息是指用户点击右上角的“发送给好友”“分享到朋友圈”，此处的链接才是真正的链接，我们可以通过“收藏”功能，把它保存下来，再发送到公众号。</p>
+<p>链接消息的数据结构如下</p>
+<pre class="lang:default decode:true ">&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;1351776360&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[link]]&gt;&lt;/MsgType&gt;
+&lt;Title&gt;&lt;![CDATA[公众平台官网链接]]&gt;&lt;/Title&gt;
+&lt;Description&gt;&lt;![CDATA[公众平台官网链接]]&gt;&lt;/Description&gt;
+&lt;Url&gt;&lt;![CDATA[url]]&gt;&lt;/Url&gt;
+&lt;MsgId&gt;1234567890123456&lt;/MsgId&gt;
+&lt;/xml&gt;</pre>
+&nbsp;
+<table border="1" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>ToUserName</td>
+<td>接收方微信号</td>
+</tr>
+<tr>
+<td>FromUserName</td>
+<td>发送方微信号，若为普通用户，则是一个OpenID</td>
+</tr>
+<tr>
+<td>CreateTime</td>
+<td>消息创建时间</td>
+</tr>
+<tr>
+<td>MsgType</td>
+<td>消息类型，link</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>消息标题</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>消息描述</td>
+</tr>
+<tr>
+<td>Url</td>
+<td>消息链接</td>
+</tr>
+<tr>
+<td>MsgId</td>
+<td>消息id，64位整型</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+
+isLinkMsg用于判断消息的类型是否为链接类型
+<pre class="lang:default decode:true">   const MSG_TYPE_LINK='link';
+
+/**
+     * 判断是否是链接
+     * @return boolean
+     */
+    public function isLinkMsg(){
+        return $this-&gt;_postData-&gt;MsgType == self::MSG_TYPE_LINK;
+    }
+
+//发送消息
+      $this-&gt;outputText("您发送的是链接消息,标题是: ".$data-&gt;Title."\n摘要是: ".$data-&gt;Description."\n链接是: ".$data-&gt;Url);
+</pre>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="http://source.chenyalun.cn/5091809180003.png" alt=""></h3><h3 id="三，视频消息"><a href="#三，视频消息" class="headerlink" title="三，视频消息"></a>三，视频消息</h3><p>目前分为视频消息和短视频消息，二者仅有丝毫的不同，数据结构如下：</p>
+<p>&nbsp;</p>
+<p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;1357290913&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA]&gt;<br>&lt;/MsgType&gt; &lt;MediaId&gt;<br>&lt;![CDATA[media_id]]&gt;<br>&lt;/MediaId&gt;<br> &lt;ThumbMediaId&gt;<br>&lt;![CDATA[thumb_media_id]]&gt;<br> &lt;/ThumbMediaId&gt;<br>&lt;MsgId&gt;1234567890123456&lt;/MsgId&gt; &lt;/xml&gt;</pre><br>&nbsp;</p>
+<p><table border="1" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>描述</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>发送方帐号（一个OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td><strong>视频为video，小视频为shortvideo</strong></td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>视频消息媒体id，可以调用多媒体文件下载接口拉取数据。</td><br></p>
+<p><tr></tr></p>
+<p><td>ThumbMediaId</td></p>
+<p><td>视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgId</td></p>
+<p><td>消息id，64位整型</td><br><br><br><br>isVideoMsg用于判断消息类型是否为视频消息</p>
+<p><pre class="lang:default decode:true">  const MSG_TYPE_VIDEO=’video’;</pre></p>
+<p>/**</p>
+<pre><code> * 判断是否是视频消息
+ * @return boolean
+ */
+public function isVideoMsg(){
+    return $this-&amp;gt;_postData-&amp;gt;MsgType == self::MSG_TYPE_VIDEO;
+}
+</code></pre><p>//发送消息<br>$this-&gt;outputText(“您发送的是视频消息,媒体ID是: “.$data-&gt;MediaId.”\n缩略图ID是: “.$data-&gt;ThumbMediaId);<br><br>于是所有的普通消息类型我们都分析完了，<span class="toctext">文本消息，</span><span class="toctext">图片消息，</span><span class="toctext">语音消息，</span> <span class="toctext">视频消息，</span><span class="toctext">小视频消息，</span><span class="toctext">地理位置消息，</span><span class="toctext">链接消息都是普通的消息类型，也是最常用的消息类型，所以需要认真研习掌握，当然文中的全部代码会给出供下载，可自行配置测试。</span></p>
+<p>具体代码可点击文章查看： <a href="http://www.chenyalun.cn/%e5%be%ae%e4%bf%a1%e5%85%ac%e4%bc%97%e8%b4%a6%e5%8f%b7%e6%8e%a5%e6%94%b6%e6%b6%88%e6%81%af%e7%b1%bb%e5%9e%8b%e5%88%a4%e6%96%ad%e4%bb%a3%e7%a0%81.html" target="_blank" rel="external">微信公众账号接收消息类型判断代码</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/14/收发消息的XML数据包分析（上）/" itemprop="url">
+                  收发消息的XML数据包分析（上）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-14T22:35:02+08:00" content="2015-09-14">
+              2015-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/公众号开发/" itemprop="url" rel="index">
+                    <span itemprop="name">公众号开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/14/收发消息的XML数据包分析（上）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/14/收发消息的XML数据包分析（上）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>微信服务器的数据交换方式就是把消息封装成xml数据以POST的形式发到我们配置的url上，根据消息类型的不同，xml数据格式也有所不同，而前面我们已经强调过，熟练掌握各种消息类型的收发是微信公众平台开发基础，那么我们今天就首先认识下3种常见的消息类型，它们是：文本，图片和语音。当然还有地理位置，链接，视频，图文，我们稍后提及。</p>
+<h3 id="一，文本消息"><a href="#一，文本消息" class="headerlink" title="一，文本消息"></a>一，文本消息</h3><p><pre class="lang:default decode:true">/**</pre></p>
+<pre><code> * 解析接收到的post数据
+ * @return SimpleXMLElement
+ */
+public function parsePostRequestData()
+{
+    $rawData = $GLOBALS[&apos;HTTP_RAW_POST_DATA&apos;];
+    $data = simplexml_load_string($rawData, &apos;SimpleXMLElement&apos;, LIBXML_NOCDATA);
+    if ($data !== false)
+        $this-&amp;gt;_postData = $data;
+
+    return $data;
+}
+</code></pre><p><br>从$GLOBALS[‘HTTP_RAW_POST_DATA’]中获取POST数据，不过此时的数据是无类型的，通过simplexml_load_string将它解析成xml对象，就能后续使用了。</p>
+<p>任何文字消息都是文本消息，包括url，这和我们将要说的“链接”类型有所不同。</p>
+<p>文本消息结构如下：</p>
+<p><pre class="lang:default decode:true">&lt;xml&gt;<br> &lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br> &lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br> &lt;CreateTime&gt;1348831860&lt;/CreateTime&gt;<br> &lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;<br> &lt;Content&gt;&lt;![CDATA[this is a test]]&gt;&lt;/Content&gt;<br> &lt;MsgId&gt;1234567890123456&lt;/MsgId&gt;<br> &lt;/xml&gt;</pre></p>
+<p><table border="1" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>描述</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>发送方帐号（一个OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>text</td><br></p>
+<p><tr></tr></p>
+<p><td>Content</td></p>
+<p><td>文本消息内容</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgId</td></p>
+<p><td>消息id，64位整型</td><br><br><br><br>ToUserName：微信公众账号，在账号信息中可以看到的。</p>
+<p>FromUserName：消息发送者的OpenID，对于同一个公众号，订阅者的OpenID固定不变，对于不同的公众号，用户的OpenID是不同的。</p>
+<p>CreateTime：消息创造的时间，是整形数字，表示从1970年1月1日0时0分0秒到现在经过的秒数。</p>
+<p>MsgType：消息类型，就是我们所说的文本，语音，视频等类型。</p>
+<p>Content：消息内容。</p>
+<p>MsgId：消息id编号，是64位整形数据。</p>
+<p><pre class="lang:default decode:true">//定义test<br>const MSG_TYPE_TEXT = ‘text’;<br>  /**</pre></p>
+<pre><code> * 判断是否是文字信息
+ * @return boolean
+ */
+public function isTextMsg()
+{
+    return $this-&amp;gt;_postData-&amp;gt;MsgType == self::MSG_TYPE_TEXT;
+}
+</code></pre><p>//发送消息<br>$this-&gt;text(“您发送的是文本消息，消息内容是：”.$data-&gt;Content);</p>
+<p><br>text函数用来发送消息，后面更加详细介绍。</p>
+<p><img src="http://source.chenyalun.cn/5091809180001.png" alt=""></p>
+<h3 id="二，图片消息"><a href="#二，图片消息" class="headerlink" title="二，图片消息"></a>二，图片消息</h3><p>图片消息就是媒体消息，微信在收到时，就存在云端生成图片的url和媒体ID，图片的URL可以公共访问，比如百度logo的url：<a href="https://www.baidu.com/img/bd_logo1.png,我们点击就可以访问了，而公众号则可以通过媒体ID获取图片文件，更加方便，图片的结构如下；" target="_blank" rel="external">https://www.baidu.com/img/bd_logo1.png,我们点击就可以访问了，而公众号则可以通过媒体ID获取图片文件，更加方便，图片的结构如下；</a></p>
+<p><pre class="lang:default decode:true ">&lt;xml&gt;<br> &lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br> &lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br> &lt;CreateTime&gt;1348831860&lt;/CreateTime&gt;<br> &lt;MsgType&gt;&lt;![CDATA[image]]&gt;&lt;/MsgType&gt;<br> &lt;PicUrl&gt;&lt;![CDATA[this is a url]]&gt;&lt;/PicUrl&gt;<br> &lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br> &lt;MsgId&gt;1234567890123456&lt;/MsgId&gt;<br> &lt;/xml&gt;</pre></p>
+<p><table border="1" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>描述</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>发送方帐号（一个OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>image</td><br></p>
+<p><tr></tr></p>
+<p><td>PicUrl</td></p>
+<p><td>图片链接</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>图片消息媒体id，可以调用多媒体文件下载接口拉取数据。</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgId</td></p>
+<p><td>消息id，64位整型</td><br><br><br></p>
+<p><pre class="lang:default decode:true">const REPLY_TYPE_IMAGE=’image’;<br>;/**</pre></p>
+<pre><code> * 判断是否是图片
+ * @return boolean
+ */
+public function isImageMsg(){
+    return $this-&amp;gt;_postData-&amp;gt;MsgType == self::MSG_TYPE_IMAGE;
+}
+</code></pre><p>//发送消息<br>$this-&gt;text(“您发送的是图片消息，图片链接是：”.$data-&gt;PicUrl.”\n媒体ID是：”.$data-&gt;MediaID);<br><img src="http://source.chenyalun.cn/5091809180005.png" alt=""></p>
+<h3 id="三，语音消息"><a href="#三，语音消息" class="headerlink" title="三，语音消息"></a>三，语音消息</h3><p>语音消息也是只发送媒体ID，结构如下：</p>
+<p><pre class="lang:default decode:true ">&lt;xml&gt;<br>&lt;ToUserName&gt;&lt;![CDATA[toUser]]&gt;&lt;/ToUserName&gt;<br>&lt;FromUserName&gt;&lt;![CDATA[fromUser]]&gt;&lt;/FromUserName&gt;<br>&lt;CreateTime&gt;1357290913&lt;/CreateTime&gt;<br>&lt;MsgType&gt;&lt;![CDATA[voice]]&gt;&lt;/MsgType&gt;<br>&lt;MediaId&gt;&lt;![CDATA[media_id]]&gt;&lt;/MediaId&gt;<br>&lt;Format&gt;&lt;![CDATA[Format]]&gt;&lt;/Format&gt;<br>&lt;MsgId&gt;1234567890123456&lt;/MsgId&gt;<br>&lt;/xml&gt;</pre></p>
+<p><table border="1" cellspacing="0" cellpadding="4" align="center"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><th>参数</th></p>
+<p><th>描述</th><br></p>
+<p><tr></tr></p>
+<p><td>ToUserName</td></p>
+<p><td><strong>开发者</strong>微信号</td><br></p>
+<p><tr></tr></p>
+<p><td>FromUserName</td></p>
+<p><td>发送方帐号（一个OpenID）</td><br></p>
+<p><tr></tr></p>
+<p><td>CreateTime</td></p>
+<p><td>消息创建时间 （整型）</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgType</td></p>
+<p><td>语音为voice</td><br></p>
+<p><tr></tr></p>
+<p><td>MediaId</td></p>
+<p><td>语音消息媒体id，可以调用多媒体文件下载接口拉取数据。</td><br></p>
+<p><tr></tr></p>
+<p><td>Format</td></p>
+<p><td>语音格式，如amr，speex等</td><br></p>
+<p><tr></tr></p>
+<p><td>MsgID</td></p>
+<p><td>消息id，64位整型</td><br><br><br><br>&nbsp;</p>
+<p><pre class="lang:default decode:true"> const MSG_TYPE_VOICE = ‘voice’;</pre></p>
+<p>  /**</p>
+<pre><code> * 判断是否是语音消息
+ * @return boolean
+ */
+public function isVoiceMsg(){
+    return $this-&amp;gt;_postData-&amp;gt;MsgType == self::MSG_TYPE_VOICE;
+}
+</code></pre><p>  //发送消息<br>$this-&gt;text(“您发送的是语音消息，媒体ID是：”.$data-&gt;MediaID.”\n语音格式是：”.$data-&gt;Format);<br><br><img src="http://source.chenyalun.cn/5091809180006.png" alt=""></p>
+<p>好，今天就先介绍这三个，重要的是对消息类型的理解，勤加思考方会融会贯通。</p>
 <p>&nbsp;</p>
 
           
@@ -1408,8 +1750,8 @@ function https_request($url, $data = null)
             
               
                 
-                <a class="post-title-link" href="/2015/10/08/微信开发之长链接转成短链接/" itemprop="url">
-                  微信开发之长链接转成短链接
+                <a class="post-title-link" href="/2015/09/14/开发第一个应用/" itemprop="url">
+                  开发第一个应用
                 </a>
               
             
@@ -1422,8 +1764,8 @@ function https_request($url, $data = null)
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-08T05:00:57+08:00" content="2015-10-08">
-              2015-10-08
+            <time itemprop="dateCreated" datetime="2015-09-14T19:33:31+08:00" content="2015-09-14">
+              2015-09-14
             </time>
           </span>
 
@@ -1452,8 +1794,8 @@ function https_request($url, $data = null)
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/10/08/微信开发之长链接转成短链接/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/08/微信开发之长链接转成短链接/" itemprop="commentsCount"></span>
+                <a href="/2015/09/14/开发第一个应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/14/开发第一个应用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1478,91 +1820,37 @@ function https_request($url, $data = null)
       
         
           
-            <p>众所周知，链接就是一个网页的姓名，直接通过一个链接访问一个网页到现在仍然是主流。但是，链接的本质是字符串，我们需要一个一个的把它敲到地址栏里，比如说想访问陈亚伦博客，肯定输入www.chenyalun.cn（当然你要是省事输入chenyalun.cn照样可以访问，这个问题我们稍后再讨论），更可恶的是，陈亚伦博客文章的链接是中文名，些许麻烦啦。</p>
-<p>二维码比较方便了，马化腾说”二维码是线上线下的一个关键入口”，由此可见，当我们掏出手机，扫下二维码就能付款，就能打开网页，在臣妾看来，这是极好的呀。不过，二维码扫描大多数还是跳转到一个网页，比如我们常见的“分享到微信朋友圈”，点开之后，就是这个网页的二维码。没错，陈亚伦博客每篇文章底部都有“分享到空间、微信、新浪微博”，大家可以尝试下哈。</p>
-<p>那么问题来了，生成二维码的原链接太长就会导致扫码速度和成功率下降，这可怎么办呢？很简单，将很长很长的长链接转成短链接再生成二维码不就完美解决这个问题了。于是进入今天的主题：微信开发之长链接转成短链接。</p>
-<h3 id="1，接口调用说明"><a href="#1，接口调用说明" class="headerlink" title="1，接口调用说明"></a>1，接口调用说明</h3><p>伟大的开发者们可以通过OpenID来获取用户的基本信息。</p>
-<pre class="nums:false lang:default decode:true">http请求方式: POST
-https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
-</pre>
-**<span style="color: green;">参数说明</span>**
-<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
-<tbody>
-<tr>
-<th>参数</th>
-<th>是否必须</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>access_token</td>
-<td>是</td>
-<td>调用接口凭证</td>
-</tr>
-<tr>
-<td>action</td>
-<td>是</td>
-<td>此处填long2short，代表长链接转短链接</td>
-</tr>
-<tr>
-<td>long_url</td>
-<td>是</td>
-<td>需要转换的长链接，支持http://、https://、weixin://wxpay 格式的url</td>
-</tr>
-</tbody>
-</table>
-****<span style="color: green;">调用举例</span>****
-<pre class="nums:false wrap:true lang:default decode:true">curl -d "{\"action\":\"long2short\",\"long_url\":\"http://wap.koudaitong.com/v2/showcase/goods?alias=128wi9shh&amp;spm=h56083&amp;redirect_count=1\"}" "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN"
-</pre>
-****<span style="color: green;">返回说明</span>****
+            <p>当决定进入微信公众平台开发时，有一件重要的事情摆在你面前：申请公众账号和相关接口，然而并不是每个人类都能够拥有这些接口，因为很多巧妙的接口只开放给认证的童鞋，不过我们完全可以通过申请官方的测试账号进行开发。于是奇妙的微信开发就这么开始了，想想都激动o(^▽^)o</p>
+<p>1，下载PHP SDK</p>
+<p>微信公众平台提供许多接口，网上也有很多开源公众平台PHP SDK，作为一名闷骚的开发者，重复造轮子实在不是明智之举，那么我们可以根据自身的用途，来选择一个巧妙的开源软件，我在此向大家推荐几个：</p>
+<p><a href="https://github.com/spetacular/weixin" target="_blank" rel="external">https://github.com/spetacular/weixin</a>  采用MIT License</p>
+<p><a href="https://github.com/zemzheng/wechatphp-sdk" target="_blank" rel="external">https://github.com/zemzheng/wechatphp-sdk</a>   采用MIT License</p>
+<p><a href="https://github.com/dodgepudding/wechat-php-sdk" target="_blank" rel="external">https://github.com/dodgepudding/wechat-php-sdk</a>  采用GUN LGPL version 2.1 License</p>
+<p>我们就以第一个SDK为例。大家进入页面点击项目主页右下角的“Download Zip”直接下载，或者直接点击下载地址：<a href="https://github.com/spetacular/weixin/archive/master.zip" target="_blank" rel="external">https://github.com/spetacular/weixin/archive/master.zip</a></p>
+<p><img src="http://source.chenyalun.cn/50914001.jpg" alt="">解压后得到文件目录：</p>
+<p>api.php为自定义回复接口</p>
+<p>menu.php为菜单操作</p>
+<p>defaultweixin.php拓展逻辑实现</p>
+<p>weixin.class.php微信接口实现类</p>
+<p>weixin.config.php微信配置文件</p>
+<p>还有个README.MD就是使用说明了，然并L。。</p>
+<p>2，接口测试账号申请</p>
+<p>在公众号木有审核通过或者根本无法认证时，我们可以申请这个进行开发，申请地址：<a href="http://www.chenyalun.cn/go/?url=http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login" target="_blank" rel="external">http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login</a></p>
+<p><img src="http://source.chenyalun.cn/50914003.jpg" alt=""></p>
+<p>类似电脑版微信的登录模式，扫一扫即可，接着出现了神奇的管理界面，最重要的就是</p>
+<div class="frm_control_group show_value info_item">
 
-正常情况下，微信会返回下述JSON数据包给公众号：
-<pre class="nums:false lang:default decode:true">{"errcode":0,"errmsg":"ok","short_url":"http:\/\/w.url.cn\/s\/AvCo6Ih"}
-</pre>
-****<span style="color: green;">参数说明</span>****
-<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
-<tbody>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-<tr>
-<td>errcode</td>
-<td>错误码。</td>
-</tr>
-<tr>
-<td>errmsg</td>
-<td>错误信息。</td>
-</tr>
-<tr>
-<td>short_url</td>
-<td>短链接。</td>
-</tr>
-</tbody>
-</table>
-当然，如果你没有成功，微信会返回错误码信息，JSON数据包示例如下（该示例为AppID无效错误）:
-<pre class="nums:false lang:default decode:true ">{"errcode":40013,"errmsg":"invalid appid"}</pre>
-
-<h3 id="2，代码实现"><a href="#2，代码实现" class="headerlink" title="2，代码实现"></a>2，代码实现</h3><p>如何实现代码呢，其实很简单，只要获得一个access_token就可以啦。代码如下：</p>
-<p><pre class="wrap:true lang:default decode:true">&lt;?php<br>$access_token=”iuOGWooBMoVGYvqiTv5-mbfWdC6iwgV-j9YSIaoAkIYhSE1YqZ9iBjeP19OPwQObWC84286kd7H50wjkz9oOG-a7R9XwDcZq-tkJvI-DFUA”;<br>$url=”<a href="https://api.weixin.qq.com/cgi-bin/shorturl?access_token=&quot;.$access_token" target="_blank" rel="external">https://api.weixin.qq.com/cgi-bin/shorturl?access_token=&quot;.$access_token</a>;<br>$data=”{\”action\”:\”long2short\”,\”long_url\”:\”<a href="http://www.chenyalun.cn/%E8%BD%AF%E4%BB%B6%EF%BC%9Aoffice2016%E4%B8%93%E4%B8%9A%E5%A2%9E%E5%BC%BA%E6%AD%A3%E5%BC%8F%E7%89%88.html\&quot;}" target="_blank" rel="external">http://www.chenyalun.cn/%E8%BD%AF%E4%BB%B6%EF%BC%9Aoffice2016%E4%B8%93%E4%B8%9A%E5%A2%9E%E5%BC%BA%E6%AD%A3%E5%BC%8F%E7%89%88.html\&quot;}</a>“;<br>$res=url($url,$data);<br>var_dump($res);<br>function url($url,$data=null){<br>     $curl = curl_init();<br>     curl_setopt($curl, CURLOPT_URL, $url);<br>     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);<br>     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);<br>     curl_setopt($curl, CURLOPT_POST, 1);<br>curl_setopt($curl, CURLOPT_POSTFIELDS, $data);<br>curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);<br>$out=curl_exec($curl);<br>curl_close($curl);<br>return $out;<br>}<br>?&gt;<br></pre><br>敬请注意：1，第4行中的</p>
-<p><pre class="nums:false wrap:true lang:default decode:true "><a href="http://www.chenyalun.cn/%E8%BD%AF%E4%BB%B6%EF%BC%9Aoffice2016%E4%B8%93%E4%B8%9A%E5%A2%9E%E5%BC%BA%E6%AD%A3%E5%BC%8F%E7%89%88.html" target="_blank" rel="external">http://www.chenyalun.cn/%E8%BD%AF%E4%BB%B6%EF%BC%9Aoffice2016%E4%B8%93%E4%B8%9A%E5%A2%9E%E5%BC%BA%E6%AD%A3%E5%BC%8F%E7%89%88.html</a></pre><br>就是我们要转化的长链接，一定要看清楚到哪里结束哈。2，第2行中的access_token就是很经典的我们重复很多次的access_token，如果还不清楚，请查阅【<a href="http://www.chenyalun.cn/%e8%8e%b7%e5%be%97access_token%e7%9a%84%e4%b8%89%e7%a7%8d%e6%96%b9%e6%b3%95%e6%80%bb%e7%bb%93.html" target="_blank" rel="external">获得ACCESS_TOKEN的三种方法总结</a>】。</p>
-<p>嗯，就是这样，把上面的代码保存为url.php，直接在浏览器中打开就可以看到这个东东。</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100701.jpg" alt=""></p>
-<p>具体代码如下：</p>
-<p><pre class="nums:false lang:default decode:true ">string(71) “{“errcode”:0,”errmsg”:”ok”,”short_url”:”http:\/\/w.url.cn\/s\/A0qi0K3”}”</pre><br>那么生成的短链接就是：<a href="http://www.chenyalun.cn/go/?url=http://w.url.cn/s/A0qi0K3" target="_blank" rel="external">http://w.url.cn/s/A0qi0K3</a> ，至此已经大功告成啦。</p>
-<p>为了照顾懒得复制代码的同学，我把完整的url.php文件放在云端，供大家下载，</p>
-<p>下载地址：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1dD15tmT" target="_blank" rel="external">http://pan.baidu.com/s/1dD15tmT</a></p>
-<h3 id="3，其他方法"><a href="#3，其他方法" class="headerlink" title="3，其他方法"></a>3，其他方法</h3><p>生成短链接的域名是url.cn，想到这里，在联想到微博的短链接转换功能，我果断点开url.cn这个网址，果然跳转到腾讯微博，而w.url.cn竟然指向了微信主页。至此豁然开朗，所谓的长链接转短链接接口无非就是利用腾讯微博的短链接转换而已。</p>
-<p>1，利用腾讯微博转换</p>
-<p>直接在腾讯微博界面发一个长链接的微博，短链接巧妙生成。详见下图：</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100702.jpg" alt=""></p>
-<p><img src="http://source.chenyalun.cn/images/201510/5100703.jpg" alt=""></p>
-<p>生成的短链接：<a href="http://www.chenyalun.cn/go/?url=http://url.cn/drDeH5" target="_blank" rel="external">http://url.cn/drDeH5</a>，</p>
-<p>2，新浪微博亦然</p>
-<p>3，百度短网址</p>
-<p>打开<a href="http://www.chenyalun.cn/go/?url=http://dwz.cn/" target="_blank" rel="external">http://dwz.cn/</a>，直接输入你的长网址即可。</p>
-<p>4，新浪短网址</p>
-<p>打开网址<a href="http://www.chenyalun.cn/go/?url=http://sina.lt/" target="_blank" rel="external">http://sina.lt/</a>，选择自己喜欢的后缀。</p>
-<p>以上方法对做营销的同学来说并不陌生，不喜勿喷，当然还有其他长链接转换为短链接的网站，甚至有批量转化链接的网站，大家可以自行搜索。</p>
+<p><label class="frm_label" for="">appID和</label><label class="frm_label" for="">appsecret了，访问接口必然要用的。还有就是“请填写接口配置信息，此信息需要你有自己的服务器资源，填写的URL需要正确响应微信发送的Token验证”这里的url就是服务器地址，Token是我们与微信服务器约定的密码。</label></p>
+<p><div class="frm_controls"></div><br></p></div><p></p>
+<p><div class="frm_control_group show_value info_item">3，上传至服务器</div></p>
+<p><div class="frm_control_group show_value info_item">在上传至服务器之前我们要修改weixin.config.php中的配置项，包括<label class="frm_label" for="">appID，</label><label class="frm_label" for="">appsecret和Token，打开weixin.config.php可以看到</label></div></p>
+<p><div class="frm_control_group show_value info_item"></div></p>
+<p><pre class="lang:default decode:true">&lt;?php<br>define(‘APPID’,’APPID’);<br>define(‘APPSECRET’,’APPSECRET’);<br>define(‘TOKEN’,’Token’);<br>?&gt;<br></pre><br>直接将APPID,APPSECRET,还有自己设置的TOKEN依次替换即可。注意，是替换第二个，不要全部替换，否则配置会出错的。例如：</p>
+<p><pre class="lang:default decode:true">&lt;?php<br>define(‘APPID’,wxxxxxxxxxsx’);<br>define(‘APPSECRET’,’87b4d3xxxxxxxxxx99’);<br>define(‘TOKEN’,’iloveyou’);//此处是自己设置的密钥，比如我的iloveyou，设置成什么，自己开心就好，哈哈<br>?&gt;</pre><br>将代码上传至服务器，如果按照前文所说采用SAE的话，那只需在把所示的六个文件修改后复制到版本号为“1”的文件夹内，右击打开菜单点击SVN Commit即可上传至服务器。如果你仔细看过<a href="http://www.chenyalun.cn/%E5%88%A9%E7%94%A8sae%E6%90%AD%E5%BB%BA%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83.html" target="_blank" rel="external">SAE环境的搭建</a>，这些都不是问题，当然如果实在不理解，那就在回到SAE，点击代码管理，上传代码包，效果一样。</p>
+<p>如果api.php的网址是“<a href="http://www.chenyalun.cn/api.php”，那么测试管理员的url就填成“http://www.chenyalun.cn/api.php”。因为我们是采用的SAE，所以api.php的网址是http://1.chenyalun1.sinaapp.com/api.php，此处的&quot;1&quot;表示版本号，无伤大雅。点击提交，微信服务器会自动验证接口和签名是否正确，正确的话，恭喜，成功进入开发者模式了。" target="_blank" rel="external">http://www.chenyalun.cn/api.php”，那么测试管理员的url就填成“http://www.chenyalun.cn/api.php”。因为我们是采用的SAE，所以api.php的网址是http://1.chenyalun1.sinaapp.com/api.php，此处的&quot;1&quot;表示版本号，无伤大雅。点击提交，微信服务器会自动验证接口和签名是否正确，正确的话，恭喜，成功进入开发者模式了。</a></p>
+<p>4，扫描二维码</p>
+<p>扫描测试号的二维码，并关注，就可以看到管理测试页的用户列表了，php sdk默认的消息处理方式是返回用户发送的消息，效果如图：，就这样，一个简单的应用就这么巧妙地完成了。</p>
+<p><br><img src="http://source.chenyalun.cn/0915q1.jpg" alt=""></p>
 
           
         
@@ -1595,7 +1883,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
   </nav>
 
 
@@ -1636,7 +1924,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1644,7 +1932,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1653,7 +1941,7 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1694,18 +1982,18 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
               <span class="links-of-author-item">
                 <a href="https://www.instagram.com/ichenyalun" target="_blank" title="Instagram">
                   
-                    <i class="fa fa-fw fa-instagram"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   Instagram
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://www.pinterest.com/iChenYalun" target="_blank" title="Pinterest">
+                <a href="http://stackoverflow.com/users/7026915/allen" target="_blank" title="SOF">
                   
-                    <i class="fa fa-fw fa-pinterest"></i>
+                    <i class="fa fa-fw fa-stack-overflow"></i>
                   
-                  Pinterest
+                  SOF
                 </a>
               </span>
             
@@ -1861,141 +2149,13 @@ https://api.weixin.qq.com/cgi-bin/shorturl?access_token=ACCESS_TOKEN
 
   
   
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length == 0) {
-       search_path = "search.xml";
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    function proceedsearch() {
-      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
-      $('.popup').toggle();
-
-    }
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-    'use strict';
-    $.ajax({
-        url: path,
-        dataType: "xml",
-        async: true,
-        success: function( xmlResponse ) {
-            // get the contents from search data
-            isfetched = true;
-            $('.popup').detach().appendTo('.header-inner');
-            var datas = $( "entry", xmlResponse ).map(function() {
-                return {
-                    title: $( "title", this ).text(),
-                    content: $("content",this).text(),
-                    url: $( "url" , this).text()
-                };
-            }).get();
-            var $input = document.getElementById(search_id);
-            var $resultContent = document.getElementById(content_id);
-            $input.addEventListener('input', function(){
-                var matchcounts = 0;
-                var str='<ul class=\"search-result-list\">';
-                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                $resultContent.innerHTML = "";
-                if (this.value.trim().length > 1) {
-                // perform local searching
-                datas.forEach(function(data) {
-                    var isMatch = true;
-                    var content_index = [];
-                    var data_title = data.title.trim().toLowerCase();
-                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
-                    var data_url = data.url;
-                    var index_title = -1;
-                    var index_content = -1;
-                    var first_occur = -1;
-                    // only match artiles with not empty titles and contents
-                    if(data_title != '' && data_content != '') {
-                        keywords.forEach(function(keyword, i) {
-                            index_title = data_title.indexOf(keyword);
-                            index_content = data_content.indexOf(keyword);
-                            if( index_title < 0 && index_content < 0 ){
-                                isMatch = false;
-                            } else {
-                                if (index_content < 0) {
-                                    index_content = 0;
-                                }
-                                if (i == 0) {
-                                    first_occur = index_content;
-                                }
-                            }
-                        });
-                    }
-                    // show search results
-                    if (isMatch) {
-                        matchcounts += 1;
-                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
-                        var content = data.content.trim().replace(/<[^>]+>/g,"");
-                        if (first_occur >= 0) {
-                            // cut out 100 characters
-                            var start = first_occur - 20;
-                            var end = first_occur + 80;
-                            if(start < 0){
-                                start = 0;
-                            }
-                            if(start == 0){
-                                end = 50;
-                            }
-                            if(end > content.length){
-                                end = content.length;
-                            }
-                            var match_content = content.substring(start, end);
-                            // highlight all keywords
-                            keywords.forEach(function(keyword){
-                                var regS = new RegExp(keyword, "gi");
-                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
-                            });
-
-                            str += "<p class=\"search-result\">" + match_content +"...</p>"
-                        }
-                        str += "</li>";
-                    }
-                })};
-                str += "</ul>";
-                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
-                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
-                $resultContent.innerHTML = str;
-            });
-            proceedsearch();
-        }
-    });}
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched == false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-
-    });
-
-    $('.popup-btn-close').click(function(e){
-      $('.popup').hide();
-      $(".popoverlay").remove();
-      $('body').css('overflow', '');
-    });
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-  </script>
-
 
   
 
   
 
   
-
+  <script type="text/javascript" src="/js/src/particle.js"></script>
+<script type="text/javascript" src="/js/src/love.js"></script>
 </body>
 </html>

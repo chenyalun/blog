@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-20T01:20:24.000Z</updated>
+  <updated>2016-10-23T02:59:22.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,439 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>读「李明杰博客」</title>
+    <link href="http://yoursite.com/2016/10/28/%E8%AF%BB%E6%9D%8E%E6%98%8E%E6%9D%B0%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2016/10/28/读李明杰博客/</id>
+    <published>2016-10-28T11:22:17.000Z</published>
+    <updated>2016-10-23T02:59:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="读感"><a href="#读感" class="headerlink" title="读感"></a>读感</h1><p>李明杰老师是我很尊敬的iOS启蒙老师,这次零零碎碎花了一周时间拜读他的博客,很多知识点理解的更透彻了.不太熟悉或将近遗忘的知识点记录下来,做复习巩固之用.</p>
+<h1 id="钩玄"><a href="#钩玄" class="headerlink" title="钩玄"></a>钩玄</h1><ol>
+<li><p>loadView、viewDidLoad及viewDidUnload的关系是怎样的?</p>
+</li>
+<li><p>为什么默认情况下UIImageView内的按钮无法点击?忽略视图的四种方法?</p>
+</li>
+<li><p>只声明一个局部int类型变量与只声明一个全局的int类型变量,却不初始化,其值是?</p>
+</li>
+<li><p>使用char存储大写字母A有哪两种赋值方式?</p>
+</li>
+<li><p>逗号表达式的运算过程<code>c = (++a, a *= 2, b = a * 5);</code>是怎样的?</p>
+</li>
+<li>枚举与结构体定义的三种方式?</li>
+<li>为何不要在description方法中同时使用%@和self?</li>
+</ol>
+<a id="more"></a>
+<h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><ol>
+<li><p>不要在UIViewController的loadView方法中改变状态栏的可视性,会导致重复调用2次loadView和viewDidLoad方法.</p>
+</li>
+<li><p>控制打印格式</p>
+<p> printf(“My height is %8.1f”, 179.95f);</p>
+<p> scanf(“%d-%d-%d”, &amp;a, &amp;b, &amp;c);<br> scanf(“%d %d %d”, &amp;a, &amp;b, &amp;c);</p>
+</li>
+</ol>
+<ol>
+<li><p>计算机中的内存是以字节为单位的存储空间.<br>内存的每一个字节都有一个唯一的编号，这个编号就称为地址.<br>凡存放在内存中的程序和数据都有一个地址，也就是说，一个函数也有自己的内存地址。变量存储单元的第一个字节的地址就是该变量的地址.</p>
+</li>
+<li><p>二维数组的&amp;a[i] == (a+i)</p>
+</li>
+<li><p>gets可以读入包含空格、tab的字符串，直到遇到回车为止；<br>getchar函数可以读入空格、TAB，直到遇到回车为止。scanf则不能读入空格和TAB。scanf不能用来读取空格、tab.</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    char a[10];
+    char b[10];
+    gets(a);
+    puts(a);
+
+    scanf(&quot;%s&quot;,b);
+    puts(b);
+    return 0;
+}
+</code></pre></li>
+</ol>
+<pre><code>putchar(65); // A
+
+putchar(&apos;A&apos;); // A
+
+int a = 65;
+putchar(a); // A
+
+char c;
+c = getchar();
+</code></pre><ol>
+<li><p>包含string.h头文件后,strlen\strcpy\strcat\strcmp函数的用法</p>
+<pre><code>// 长度为2,遇空字符\0断!
+int size = strlen(&quot;mj&quot;);
+
+// 遇空字符\0断!
+char s[10];
+strcpy(s, &quot;lmj&quot;);
+
+// 遇空字符\0断!
+char s1[30] = &quot;LOVE&quot;;
+strcat(s1, &quot;OC&quot;);
+
+// 左减右,比字符ASCII码差值
+strcmp(s1, s2);
+</code></pre></li>
+<li><p>通过变量名引用变量，由系统自动完成变量名和其存储地址之间的转换，称为变量的”直接引用”方式.<br>首先将变量a的地址存放在另一个变量中，比如存放在变量b中，然后通过变量b来间接引用变量a，间接读写变量a的值。这就是”间接引用”.</p>
+</li>
+<li><p>在指针变量没有指向确定地址之前，不要对它所指的内容赋值。<code>int *p; *p = 10; //这是错误的</code>.</p>
+</li>
+<li>基本数据类型作为函数实参时，只是纯粹地将值传递给形参，形参的改变并不影响实参。</li>
+<li><p>如何使一个函数有多个返回值.</p>
+<pre><code>int test(int a, int b,int *c) {
+    // 赋值给指针指向的变量
+    *c = a + b;
+    return a * b;
+}
+
+int main(int argc, const char * argv[]) {
+    int m = 2,n = 4,s1,s2;
+    s1 =  test(m, n, &amp;s2);
+
+    printf(&quot;%d---%d&quot;,s1,s2);
+    return 0;
+}
+</code></pre></li>
+<li>二维数组中,可以根据a[0]的地址获取其他元素的地址，使p=&amp;a[0],p+1就是a[1]的地址。这里的p+1不一定代表p的值加1，也可能是加2、加4或者加8。究竟加多少，这跟指针的类型有关.</li>
+<li>指针操作中,数组名a是个常量,不能进行赋值运算！<code>*(p+i)和*(a+i)都表示数组元素a[i]</code><pre><code>char s[10];
+s = &quot;mj&quot;;// 错误! s是常量
+</code></pre></li>
+<li>用数组名作为函数实参时，是把实参数组的首地址传递给形参数组，两个数组共同占用同一段内存空间，这样形参数组中的元素值发生变化就会使实参数组的元素值也同时变化.</li>
+<li><code>char *s = &quot;mj&quot;;3 *s = &quot;like&quot;;</code>的两个错误:1,s指向的是”mj”的首字符’m’,只有一个字节,要”like”存进1个字节的空间内，肯定内存溢出.2,s指向的是字符串常量”mj”,不能再通过指针来修改字符串内容(字符数组可以修改).</li>
+<li><p>分辨:</p>
+<pre><code>char a[] = &quot;lmj&quot;;定义的是一个字符串变量
+char *p2 = &quot;lmj&quot;;定义的是一个字符串常量
+</code></pre></li>
+<li><p>返回指针的函数</p>
+<pre><code>   // 将字符串str中的小写字母变成大写字母，并返回改变后的字符串
+   // 注意的是：这里的参数要传字符串变量，不能传字符串常量
+   char * upper(char *str) {
+       // 先保留最初的地址。因为等会str指向的位置会变来变去的。
+       char *dest = str;
+
+   // 如果还不是空字符
+   while (*str != &apos;\0&apos;) {
+       // 如果是小写字母
+       if (*str &gt;= &apos;a&apos; &amp;&amp; *str &lt;= &apos;z&apos;) {
+           // 变为大写字母。小写和大写字母的ASCII值有个固定的差值
+           *str -= &apos;a&apos; - &apos;A&apos;;
+       }
+
+       // 遍历下一个字符
+       str++;
+   }
+
+   // 返回字符串
+   return dest;
+}
+// 调用:
+   int main()
+   {
+       // 定义一个字符串变量
+       char str[] = &quot;lmj&quot;;
+
+       // 调用函数
+       char *dest = upper(str);
+
+       printf(&quot;%s&quot;, dest);
+       return 0;
+   }
+</code></pre></li>
+<li><p>指向函数的指针</p>
+<pre><code>int sum(int a, int b) {
+    return a + b;
+}
+
+int main()
+{
+    // 定义一个指针变量p，指向sum函数
+    int (*p)(int a, int b) = sum;
+    // 或者 int (*p)(int, int) = sum;
+    // 或者 int (*p)() = sum;
+
+    // 利用指针变量p调用函数
+    int result = (*p)(1, 3);
+    // 或者 int result = p(1, 3);
+
+    printf(&quot;%d&quot;, result);
+    return 0;
+}
+</code></pre></li>
+</ol>
+<ol>
+<li><p>将函数作为参数在函数间传递</p>
+<pre><code> // 减法运算
+ int minus(int a, int b) {
+    return a - b;
+ }
+
+// 加法运算
+int sum(int a, int b) {
+    return a + b;
+}
+
+// 这个counting函数是用来做a和b之间的计算，至于做加法还是减法运算，由函数的第1个参数决定
+void counting( int (*p)(int, int) , int a, int b) {
+    int result = p(a, b);
+    printf(&quot;计算结果为：%d\n&quot;, result);
+}
+
+int main()
+{
+    // 进行加法运算
+    counting(sum, 6, 4);
+
+    // 进行减法运算
+    counting(minus, 6, 4);
+
+    return 0;
+ }
+</code></pre></li>
+<li><p>所有预处理指令都以符号”#”开头，并且结尾不用分号,作用范围是从它出现的位置到文件尾,主要有：宏定义、文件包含、条件编译.</p>
+</li>
+<li>使用带参数的宏定义,最好将参数和结果都用括号括起来.</li>
+<li>宏定义不涉及存储空间的分配、参数类型匹配、参数传递、返回值问题,宏替换只在编译预处理阶段进行,带参数的宏比函数具有更高的执行效率.</li>
+<li><p>条件编译</p>
+<pre><code>#if 条件1
+ ...code1...
+#elif 条件2
+ ...code2...
+#else
+ ...code3...
+#endif
+
+#if defined(MAX)
+     ...code...
+#endif
+
+#if !defined(MAX)
+     ...code...
+#endif
+</code></pre></li>
+<li><p><code>#include　&lt;文件名&gt;</code>到C语言库函数头文件所在的目录中寻找文件,<code>#include　&quot;文件名&quot;</code>系统会先在源程序当前目录下寻找，若找不到，再到操作系统的path路径中查找，最后才到C语言库函数头文件所在目录中查找.</p>
+</li>
+<li><p>避免#include重复包含同一个头文件:使用条件编译</p>
+<pre><code>#ifndef _ONE_H_
+#define _ONE_H_
+
+void one();
+
+#endif
+</code></pre></li>
+<li>在函数内部定义的变量，称为局部变量。形式参数也属于局部变量,在所有函数外部定义的变量，称为全局变量.</li>
+<li>所有的局部变量在默认情况下都是自动变量,是存储在堆栈中的.所有的全局变量和被关键字static修饰的局部变量都是静态变量,是存储在静态内存中的，也就是不属于堆栈.</li>
+<li>静态变量在程序运行之前创建，在程序的整个运行期间始终存在，直到程序结束。在程序执行到声明自动变量的代码块(函数)时，自动变量才被创建；当自动变量所在的代码块(函数)执行完毕后，这些自动变量就会自行销毁.</li>
+<li><p>被关键字register修饰的自动变量都是寄存器变量,是存储在硬件寄存器中的,其生命周期即是自动变量的生命周期.寄存器变量只限于int、char和指针类型变量使用,将一些频繁使用的自动变量定义为寄存器变量，这样程序尽可能地为它分配寄存器存放，而不用内存.</p>
+<pre><code>register int a;
+register char b;
+register int *c;
+</code></pre></li>
+<li>如果一个程序中有多个源文件(.c)，编译成功会生成对应的多个目标文件(.obj)，这些目标文件不能单独运行，因为这些目标文件之间可能会有关联。将这些相关联的目标文件链接在一起后才能生成可执行文件。</li>
+<li>所谓编译，就是单独检查每个源文件的语法是否合理，并不会检查每个源文件之间的关联关系，一个源文件编译成功就生成一个目标文件。所谓链接，就是检查目标文件的关联关系，将相关联的目标文件组合在一起，生成可执行文件。</li>
+<li>根据在当前文件中定义的函数是否允许其他文件访问,可将函数分为内部函数和外部函数.默认情况下，所有的函数都是外部函数,不允许重复定义同一个外部函数.</li>
+<li><p>使用extern关键字，表示引用其他文件的”外部函数”: <code>extern void test();</code>,然而extern可以省略,故直接声明即可.正规的项目里面，把”外部函数”的声明另写到一个头文件中,使用时直接包含头文件即可.</p>
+<pre><code>#ifndef one_h
+#define one_h
+
+#include &lt;stdio.h&gt;
+void test();
+#endif /* one_h */
+</code></pre></li>
+<li><p>在定义函数时，在函数的最左边加上static可以把该函数声明为内部函数(又叫静态函数),不允许其他文件访问.不同的文件中有同名的内部函数，则互不干扰。</p>
+</li>
+<li><p>默认情况下，一个函数不可以访问在它后面定义的全局变量.不同源文件中的同名全局变量代表着同一个变量</p>
+<pre><code>// a文件
+int ss =10;
+
+// b文件
+extern int  ss ;
+printf(&quot;%d&quot;, ss);// 是10
+</code></pre></li>
+<li>在定义全局变量的时候加上static关键字，此时static的作用在于限制该全局变量的作用域，只能在定义该全局变量的文件中才能使用，跟其他源文件中的同名变量互不干扰</li>
+<li><p>定义结构体的三种形式(枚举变量的定义与之类似)</p>
+<pre><code>struct Student {
+    char *name;
+    int age;
+};
+struct Student stu;
+</code></pre></li>
+</ol>
+<pre><code>struct Student {
+    char *name;
+    int age;
+} stu;
+
+
+
+struct {
+    char *name;
+    int age;
+} stu;
+</code></pre><ol>
+<li>定义结构体类型，只是说明了该类型的组成情况，并没有给它分配存储空间，就像系统不为int类型本身分配空间一样。只有当定义属于结构体类型的变量时，系统才会分配存储空间给该变量.结构体变量占用的内存空间是其成员所占内存之和，而且各成员在内存中按定义的顺序依次排列.</li>
+<li>将结构体变量作为函数参数进行传递时，其实传递的是全部成员的值，也就是将实参中成员的值一一赋值给对应的形参成员。因此，形参的改变不会影响到实参.</li>
+<li>结构体指针变量的定义形式：<code>struct 结构体名称 *指针变量名</code>,三种访问方式:<ul>
+<li>结构体变量名.成员名</li>
+<li>(*指针变量名).成员名</li>
+<li>指针变量名-&gt;成员名</li>
+</ul>
+</li>
+<li><p>typedef也可以给指针起别名:<code>typedef char *String;</code></p>
+<pre><code>// 相当于char *str = &quot;This is a string!&quot;;
+String str = &quot;This is a string!&quot;;
+</code></pre></li>
+<li><p>typedef给结构体起别名</p>
+</li>
+</ol>
+<pre><code>    struct CGRect {
+    CGPoint origin;
+    CGSize size;
+};
+typedef struct CGRect CGRect;
+</code></pre><ol>
+<li><p>typedef给指向结构体的指针起别名</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+// 定义一个结构体并起别名
+typedef struct {
+    float x;
+    float y;
+} Point;
+
+// 起别名
+typedef Point *PP;
+
+int main(int argc, const char * argv[]) {
+    // 定义结构体变量
+    Point point = {10, 20};
+
+    // 定义指针变量Point *p = &amp;point;
+    PP p = &amp;point;
+
+    // 利用指针变量访问结构体成员
+    printf(&quot;x=%f，y=%f&quot;, p-&gt;x, p-&gt;y);
+    return 0;
+ }
+</code></pre></li>
+<li><p>typedef与枚举类型</p>
+<pre><code>// 定义枚举类型
+ enum Season {spring, summer, autumn, winter};
+ // 给枚举类型起别名
+ typedef enum Season Season;
+
+ int main(int argc, const char * argv[]) {
+     // 定义枚举变量
+     Season s = spring;
+
+     return 0;
+ }
+</code></pre><p>43.typedef给指向函数的指针类型起别名</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+// 定义一个sum函数，计算a跟b的和
+int sum(int a, int b) {
+    int c = a + b;
+    printf(&quot;%d + %d = %d&quot;, a, b, c);
+    return c;
+}
+
+typedef int (*MySum)(int, int);
+
+int main(int argc, const char * argv[]) {
+    // 定义一个指向sum函数的指针变量p
+    MySum p = sum;
+
+    // 利用指针变量p调用sum函数
+    (*p)(4, 5);
+
+    return 0;
+ }
+</code></pre></li>
+</ol>
+<ol>
+<li><p>typedef与#define,给类型起别名，最好使用typedef，而不是使用#define.</p>
+<pre><code>typedef char *String1;
+#define String2 char *
+
+// 相当于char *str1;char *str2;
+String1 str1, str2;
+// 相当于char *str3;char  str4;产生误会
+String2 str3, str4;
+</code></pre></li>
+<li><p>C语言的源文件拓展名为”.c”，OC的源文件拓展名为”.m”,编译器会将.m文件编译为.o目标文件.编译器只会编译.m文件，并不会编译.h文件.</p>
+</li>
+<li><code>#import</code>是一个预处理指令，作用跟C语言的<code>#include</code>类似，都是 包含(拷贝)某个文件的内容 到 预处理指令所在的位置。在OC中，使用#import来包含头文件，可以自动防止同一个头文件被包含多次。<code>#import &lt;...&gt;</code>表示包含系统自带的文件，<code>#import &quot;...&quot;</code>表示包含开发人员自己创建的文件.</li>
+<li><code>+</code>表示静态方法,<code>-</code>表示动态方法,在.h中声明的所有方法作用域都是public类型，不能更改.成员变量默认作用域是@protected,成员变量必须写在大括号{ }里面.</li>
+<li>OC建议get方法的名字跟成员变量保持一致</li>
+<li>静态方法alloc分配存储空间,返回分配好内存的对象;对象的构造方法init进行初始化.</li>
+<li>访问公共变量age:对象-&gt;成员变量,<code>stu-&gt;_age = 10; int a = stu-&gt;_age;</code></li>
+<li>OC点语法的本质是方法调用，不是直接访问成员变量.</li>
+<li>UIView之所以能显示在屏幕上，完全是因为它内部的一个层(CALayer对象)。当UIView需要显示到屏幕上时，会调用drawRect:方法进行绘图，并且会将所有内容绘制在自己的层上，绘图完毕后，系统会将层拷贝到屏幕上，于是就完成了UIView的显示。</li>
+<li>通过layer属性可以设置shadowColor\shadowOffset\shadowOpacity\cornerRadius\borderWidth\borderColor等;maskToBounds=YES：是强制内部的所有子层支持圆角效果，少了这个设置，是不会有圆角效果的,如果设置了maskToBounds=YES，那将不会有阴影效果.</li>
+<li>CALayer是定义在QuartzCore框架中的；CGImageRef、CGColorRef两种数据类型是定义在CoreGraphics框架中的；UIColor、UIImage是定义在UIKit框架中的.</li>
+<li>每一个UIView内部都默认关联着一个CALayer，这个Layer为Root Layer（根层）;所有的非Root Layer，也就是手动创建的CALayer对象，都存在着隐式动画。当对非Root Layer的部分属性进行相应的修改时，默认会自动产生一些动画效果，这些属性称为Animatable Properties(可动画属性)。<ul>
+<li>bounds：用于设置CALayer的宽度和高度。修改这个属性会产生缩放动画</li>
+<li>backgroundColor：用于设置CALayer的背景色。修改这个属性会产生背景色的渐变动画</li>
+<li>position：用于设置CALayer的位置。修改这个属性会产生平移动画</li>
+</ul>
+</li>
+<li>position可以用来设置CALayer在父层中的位置，它是以父层的左上角为坐标原点(0, 0);anchorPoint称为”定位点”，它决定着CALayer身上的哪个点会在position属性所指的位置。它的x、y取值范围都是0~1，默认值为(0.5, 0.5).</li>
+<li>不能再将某个UIView设置为CALayer的delegate，因为UIView对象已经是它内部根层的delegate.</li>
+<li>当UIView需要显示时，它内部的层会准备好一个CGContextRef(图形上下文)，然后调用delegate(这里就是UIView)的drawLayer:inContext:方法，并且传入已经准备好的CGContextRef对象。而UIView在drawLayer:inContext:方法中又会调用自己的drawRect:方法.</li>
+<li>平时在drawRect:中通过UIGraphicsGetCurrentContext()获取的就是由层传入的CGContextRef对象，在drawRect:中完成的所有绘图都会填入层的CGContextRef中，然后被拷贝至屏幕.</li>
+<li>Core Animation的动画执行过程都是在后台操作的，不会阻塞主线程,而且是直接作用在CALayer上的，并非UIView.</li>
+<li>没有存储任何内存地址的指针就称为空指针(NULL指针,指向nil),空指针就是被赋值为0的指针，在没有被具体初始化之前，其值为0。可以给空指针发送消息,但消息发送不出去.”野指针”不是NULL指针，是指向”垃圾”内存（不可用内存）的指针.</li>
+<li>源文件编译成功后，会生成一个.o目标文件，这就是一个二进制文件.</li>
+<li><p>clang指令汇总</p>
+<pre><code>编译单个c源文件，并产生一个目标文件  cc -c one.c
+编译多个c源文件，并为每个文件产生一个目标文件  cc -c one.c two.c three.c
+链接单个目标文件产生一个名为a.out的可执行文件  cc one.o
+链接多个目标文件  cc one.o two.o three.o
+编译并链接一个c源文件  cc one.c
+编译并链接多个c源文件  cc one.c two.c three.c
+编译一个c源文件，并把它和现存的目标文件链接在一起  cc one.o two.o three.c
+可执行文件重命名加上“-o name”这个选项  cc -o abc one.c
+执行可执行文件  ./a.out
+</code></pre></li>
+<li>当使用基本数据类型（char、int、float等）作为实参时，实参和形参之间只是值传递，修改形参的值并不影响到实参</li>
+</ol>
+<blockquote>
+<p>向作者致谢!<br>M了个J:<a href="http://www.cnblogs.com/mjios/" target="_blank" rel="external">http://www.cnblogs.com/mjios/</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;读感&quot;&gt;&lt;a href=&quot;#读感&quot; class=&quot;headerlink&quot; title=&quot;读感&quot;&gt;&lt;/a&gt;读感&lt;/h1&gt;&lt;p&gt;李明杰老师是我很尊敬的iOS启蒙老师,这次零零碎碎花了一周时间拜读他的博客,很多知识点理解的更透彻了.不太熟悉或将近遗忘的知识点记录下来,做复习巩固之用.&lt;/p&gt;
+&lt;h1 id=&quot;钩玄&quot;&gt;&lt;a href=&quot;#钩玄&quot; class=&quot;headerlink&quot; title=&quot;钩玄&quot;&gt;&lt;/a&gt;钩玄&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;loadView、viewDidLoad及viewDidUnload的关系是怎样的?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;为什么默认情况下UIImageView内的按钮无法点击?忽略视图的四种方法?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;只声明一个局部int类型变量与只声明一个全局的int类型变量,却不初始化,其值是?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用char存储大写字母A有哪两种赋值方式?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;逗号表达式的运算过程&lt;code&gt;c = (++a, a *= 2, b = a * 5);&lt;/code&gt;是怎样的?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;枚举与结构体定义的三种方式?&lt;/li&gt;
+&lt;li&gt;为何不要在description方法中同时使用%@和self?&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="博记" scheme="http://yoursite.com/categories/%E5%8D%9A%E8%AE%B0/"/>
+    
+    
+      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="ios开发" scheme="http://yoursite.com/tags/ios%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>C语言交换两个数值的八种方法</title>
@@ -2138,45 +2571,6 @@ rotating = true;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>Visual Studio 2015如何配置Github</title>
-    <link href="http://yoursite.com/2015/11/06/Visual_Studio_2015%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AEGithub/"/>
-    <id>http://yoursite.com/2015/11/06/Visual_Studio_2015如何配置Github/</id>
-    <published>2015-11-05T21:00:13.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>身为一枚开发人员，使用Github是一项基本技能，Github的美妙之处在下就不细细道来了，其实，稍微入门的童鞋都会在Visual Studio 2015配置Github的，如此说来，我再分享这个教程纯属无聊了。</p>
-<h3 id="1，申请注册Github"><a href="#1，申请注册Github" class="headerlink" title="1，申请注册Github"></a>1，申请注册Github</h3><p><a href="http://www.chenyalun.cn/go/?url=https://github.com" target="_blank" rel="external">https://github.com</a>，这个就是人家的官网，注册成功，点击右上角的“+”，创建新的organization。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110501.jpg" alt=""></p>
-<p>注意你的organization name是全网唯一的，不允许重复。当然也可以选择用于付费的项目，视自己情况而定。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110602.jpg" alt=""></p>
-<p>很巧妙的我的RoseMyCode就这样创建成功啦。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110503.jpg" alt=""></p>
-<p>接着是创建自己的repository，当然这个是属于刚才的RoseMycode目录之下的。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110604.jpg" alt=""></p>
-<p>如此，一个简单的Github搞定啦。</p>
-<h3 id="2，配置VS2015"><a href="#2，配置VS2015" class="headerlink" title="2，配置VS2015"></a>2，配置VS2015</h3><p>依次点击视图-团队资源管理器，打开即可。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110605.jpg" alt=""></p>
-<p>在右侧的团队资源管理器中找到本地Git存储库，点击克隆。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110606.jpg" alt=""></p>
-<p>然后把我们刚才创建的repository链接地址粘贴即可，当然你要选定自己要克隆的代码的路径，是在默认的C盘，还是其他盘。</p>
-<p><img src="http://source.chenyalun.cn/images/201511/5110607.jpg" alt=""><img src="http://source.chenyalun.cn/images/201511/5110608.jpg" alt=""></p>
-<p>看吧，着实很简单，我们就把VS配置好啦。当然值得一提的是Visual Studio Online，为 Visual Studio、Eclipse、Xcode 或任何其他 IDE 或代码编辑器提供版本控制、敏捷规划、持续交付和应用程序分析的基于云的协作服务。这个也是令人神往的。有兴趣的同学不妨看看。</p>
-<p>&nbsp;</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;身为一枚开发人员，使用Github是一项基本技能，Github的美妙之处在下就不细细道来了，其实，稍微入门的童鞋都会在Visual Studio 2015配置Github的，如此说来，我再分享这个教程纯属无聊了。&lt;/p&gt;
-&lt;h3 id=&quot;1，申请注册Github&quot;&gt;&lt;a h
-    
-    </summary>
-    
-      <category term="应用开发" scheme="http://yoursite.com/categories/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>泛谈单链表的插入与删除</title>
     <link href="http://yoursite.com/2015/11/04/%E6%B3%9B%E8%B0%88%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
     <id>http://yoursite.com/2015/11/04/泛谈单链表的插入与删除/</id>
@@ -2265,305 +2659,421 @@ rotating = true;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>题目：1011二进制整数的转换</title>
-    <link href="http://yoursite.com/2015/10/30/%E9%A2%98%E7%9B%AE%EF%BC%9A1011%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B4%E6%95%B0%E7%9A%84%E8%BD%AC%E6%8D%A2/"/>
-    <id>http://yoursite.com/2015/10/30/题目：1011二进制整数的转换/</id>
-    <published>2015-10-29T21:00:42.000Z</published>
+    <title>微信应用之交通信息查询</title>
+    <link href="http://yoursite.com/2015/10/22/%E5%BE%AE%E4%BF%A1%E5%BA%94%E7%94%A8%E4%B9%8B%E4%BA%A4%E9%80%9A%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2/"/>
+    <id>http://yoursite.com/2015/10/22/微信应用之交通信息查询/</id>
+    <published>2015-10-21T21:00:53.000Z</published>
     <updated>2016-08-21T12:15:24.000Z</updated>
     
-    <content type="html"><![CDATA[<p>题目概述：给定一个正整数，写出它的2进制表示</p>
-<p>输入：多组输入，输入的第一行为一个正整数n，表示接下来有n组数据，每一行为1个正整数a(0&lt;a&lt;=10000)</p>
-<p>输出：对于每一组数据，求出a的2进制表示法</p>
-<p>样例输入：</p>
-<p>2<br>5<br>10</p>
-<p>样例输出：</p>
-<p>101<br>1010</p>
-<p>关于进制的转换，其实是有章可循的。而对于十进制整数到二进制整数的转换中，用给定的数反复除以2，除第一次外，每次除以2均取前一次商的整数部分作被除数并依次记下每次的余数。另外，所得到的商的最后一位余数是所求二进制数的最高位。如此，便可轻而易举得到我们需要的二进制整数。</p>
-<p><table class="table-view log-set-param"></table></p>
-<p><tbody></tbody></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">被除数</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">计算过程</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">商</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">余数</div><br></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">6</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">6/2</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">3</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">0</div><br></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">3</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">3/2</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div><br></p>
-<p><tr></tr></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1/2</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">0</div></p>
-<p><td align="center" valign="center"></td></p>
-<p><div class="para">1</div><br><br><br><br>&nbsp;</p>
-<p>像上面的这个，二进制整数便是110。思路明了，那代码自然“油然而生”。</p>
-<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;
-void binary(int n){
-    int a[200],i=0;
-    do{
-        a[i]=n%2;
-        n=n/2;    
-        i++;        
-    }while(n!=0);
+    <content type="html"><![CDATA[<p>基本上如果不是每天都宅在家里，公交车，实时路况，航班，火车等这些交通信息我们是肯定要用到的。其实这些信息也是比较好查询的，百度一下，全都有了。不过在微信上，把这些功能集于一体也是很有意思的。</p>
+<h3 id="1，查询网站"><a href="#1，查询网站" class="headerlink" title="1，查询网站"></a>1，查询网站</h3><p>公交：<a href="http://m.8684.cn/bus" target="_blank" rel="external">http://m.8684.cn/bus</a>                                           <a href="http://m.gongjiao.com/" target="_blank" rel="external">http://m.gongjiao.com/</a></p>
+<p>汽车：<a href="http://touch.trip8080.com/" target="_blank" rel="external">http://touch.trip8080.com/</a>                                 <a href="http://m.checi.org/" target="_blank" rel="external">http://m.checi.org/</a></p>
+<p>火车：<a href="http://m.ctrip.com/html5/Trains/" target="_blank" rel="external">http://m.ctrip.com/html5/Trains/</a>                     <a href="http://m.huoche.com.cn/" target="_blank" rel="external">http://m.huoche.com.cn/</a></p>
+<p>飞机：<a href="http://touch.qunar.com/h5/flight/" target="_blank" rel="external">http://touch.qunar.com/h5/flight/</a></p>
+<p>路况：<a href="http://dp.sina.cn/dpool/tools/citytraffic/city.php" target="_blank" rel="external">http://dp.sina.cn/dpool/tools/citytraffic/city.php</a></p>
+<p>违章：<a href="http://app.eclicks.cn/violation2/webapp/index?appid=10" target="_blank" rel="external">http://app.eclicks.cn/violation2/webapp/index?appid=10</a></p>
+<p>这些查询网站非常多，当然广告也是非常多，比较恶心，如果你找到自己心仪的网站，替换即可。</p>
+<h3 id="2，代码实现"><a href="#2，代码实现" class="headerlink" title="2，代码实现"></a>2，代码实现</h3><p>其实这些都不是接口，只是当用户输入“交通”的时候，微信公众号返回给用户一条图文而已，而图文则指向了相应的网址。那么举一反三，除了交通之外，任何我们想指向的网址都是可以的，所以技术含量并不高。</p>
+<pre class="lang:default decode:true ">&lt;?php
+define("TOKEN", "chenyalun");
 
-while(i&gt;0)
-printf("%d",a[--i]);
-
-printf("\n");
-}
-int main(){
-    int n,a[200],i=0;
-    scanf("%d",&amp;n);
-    for(;i&lt;n;i++)
-        scanf("%d",&amp;a[i]);
-    for(i=0;i&lt;n;i++)
-        binary(a[i]);
-    return 0;
-}</pre>
-
-<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true ">#include&lt;iostream&gt;
-using namespace std;
-void binary(int n){
-    int a[200],i=0;
-    do{
-        a[i]=n%2;
-        n=n/2;    
-        i++;        
-    }while(n!=0);
-
-while(i&gt;0)
-cout&lt;&lt;a[--i];
-cout&lt;&lt;endl;
-}
-int main(){
-    int n,a[200],i=0;
-    cin&gt;&gt;n;
-    for(;i&lt;n;i++)
-        cin&gt;&gt;a[i];
-    for(i=0;i&lt;n;i++)
-        binary(a[i]);
-    return 0;
-}
-</pre>
-
-<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true ">import java.util.Scanner;</pre></p>
-<p>public class Main {</p>
-<pre><code>static void binary(int n){
-    int a[]=new int [200],i=0;
-    do{
-        a[i]=n%2;
-        n=n/2;
-        i++;
-    }while(n!=0);
-
-while(i&amp;gt;0)
-    System.out.print(a[--i]);
-System.out.println();
+$wechatObj = new wechatCallbackapiTest();
+if (!isset($_GET['echostr'])) {
+    $wechatObj-&gt;responseMsg();
+}else{
+    $wechatObj-&gt;valid();
 }
 
-public static void main(String[] args) {
-    int a[]=new int [200],n,i=0;
-    Scanner s=new Scanner (System.in);
-    n=s.nextInt();
-    for(;i&amp;lt;n;i++)
-    a[i]=s.nextInt();
-    for(i=0;i&amp;lt;n;i++)
-    binary(a[i]);
-}
-</code></pre><p>}<br><br>其实最根本的莫过于进制转换这个函数：用一个整形数组存储每次得到的余数a[i]=n%2（当然，打印的时候，顺序要倒过来），接着要做的便是n=n/2；整除2即可。核心函数搞定了，那与之相关的题目便可顺手解决了。像题目1012【给定一个正整数，写出它的2进制表示中有多少个1】很容易搞定。</p>
-<h3 id="4，二进制数中1的个数"><a href="#4，二进制数中1的个数" class="headerlink" title="4，二进制数中1的个数"></a>4，二进制数中1的个数</h3><p><pre class="lang:default decode:true ">#include&lt;iostream&gt;<br>using namespace std;<br>int binary_number1(int n){<br>    int a[200],i=0,k=0;<br>    do{<br>        a[i]=n%2;<br>        n=n/2;<br>        i++;<br>    }while(n!=0);</pre></p>
-<p>while(i&gt;0)<br>{<br>    if(a[–i]==1)<br>    k++;<br>}<br>return k;<br>}<br>int main(){<br>    int n,a[200],i=0;<br>    cin&gt;&gt;n;<br>    for(;i&lt;n;i++)<br>        cin&gt;&gt;a[i];<br>    for(i=0;i&lt;n;i++)<br>        cout&lt;&lt;binary_number1(a[i])&lt;&lt;endl;<br>    return 0;<br>}<br><br>&nbsp;</p>
-<p>下面是JAVA代码：</p>
-<p><pre class="lang:default decode:true ">import java.util.Scanner;</pre></p>
-<p>public class Main {</p>
-<pre><code> static int binary_number1(int n){
-    int a[]=new int [200],i=0,k=0;
-    do{
-        a[i]=n%2;
-        n=n/2;
-        i++;
-    }while(n!=0);
+class wechatCallbackapiTest
+{
+    public function valid()
+    {
+        $echoStr = $_GET["echostr"];
+        if($this-&gt;checkSignature()){
+            echo $echoStr;
+            exit;
+        }
+    }
 
-while(i&amp;gt;0){
-    if(a[--i]==1)
-    k++;
+    private function checkSignature()
+    {
+        $signature = $_GET["signature"];
+        $timestamp = $_GET["timestamp"];
+        $nonce = $_GET["nonce"];
+        $token = TOKEN;
+        $tmpArr = array($token, $timestamp, $nonce);
+        sort($tmpArr);
+        $tmpStr = implode($tmpArr);
+        $tmpStr = sha1($tmpStr);
+
+        if($tmpStr == $signature){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function responseMsg()
+    {
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        if (!empty($postStr)){
+            $this-&gt;logger("R ".$postStr);
+            $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $RX_TYPE = trim($postObj-&gt;MsgType);
+
+            switch ($RX_TYPE)
+            {
+                case "event":
+                    $result = $this-&gt;receiveEvent($postObj);
+                    break;
+                case "text":
+                    $result = $this-&gt;receiveText($postObj);
+                    break;
+
+            }
+            $this-&gt;logger("T ".$result);
+            echo $result;
+        }else {
+            echo "";
+            exit;
+        }
+    }
+
+    private function receiveEvent($object)
+    {
+        $content = "";
+        switch ($object-&gt;Event)
+        {
+            case "subscribe":
+                $content = "欢迎关注陈亚伦博客 ";
+                break;
+            case "unsubscribe":
+                $content = "取消关注";
+                break;
+        }
+        $result = $this-&gt;transmitText($object, $content);
+        return $result;
+    }
+
+    private function receiveText($object)
+    {
+        $keyword = trim($object-&gt;Content);
+        $content[] = array("Title" =&gt;"交通信息","Description" =&gt;"", "PicUrl" =&gt;"", "Url" =&gt;"http://m.8684.cn/bus");
+        $content[] = array("Title" =&gt;"【公交线路】\n全车公交查询", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/ai/114/09caed4a27c56000bb870c68ab028850", "Url" =&gt;"http://m.8684.cn/shenzhen_bus");
+        $content[] = array("Title" =&gt;"【汽车班次】\n长途汽车班车", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/i/175/4951bd2a2f368cafc5ad09ff95ce591d", "Url" =&gt;"http://touch.trip8080.com/");
+        $content[] = array("Title" =&gt;"【火车时刻】\n火车时刻查询", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/ai/114/26a9407dcedda5f4a30b195f78ec3680", "Url" =&gt;"http://m.ctrip.com/html5/Trains/");
+        $content[] = array("Title" =&gt;"【飞 机 票】\n机票查询", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/i/175/a1bd6303a8bde7da50166aa8dafb7568", "Url" =&gt;"http://touch.qunar.com/h5/flight/");
+        $content[] = array("Title" =&gt;"【城市路况】\n重点城市实时路况", "Description" =&gt;"", "PicUrl" =&gt;"http://photo.candou.com/i/175/0d8488edf94574651d048025596a6190", "Url" =&gt;"http://dp.sina.cn/dpool/tools/citytraffic/city.php");
+        $content[] = array("Title" =&gt;"【违章查询】\n全国违章查询", "Description" =&gt;"", "PicUrl" =&gt;"http://g.hiphotos.bdimg.com/wisegame/pic/item/9e1f4134970a304eab30503cd0c8a786c8175ce2.jpg", "Url" =&gt;"http://app.eclicks.cn/violation2/webapp/index?appid=10");
+
+        $result = $this-&gt;transmitNews($object, $content);
+        return $result;
+    }
+
+    private function transmitText($object, $content)
+    {
+        $textTpl = "&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;%s&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;
+&lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt;
+&lt;/xml&gt;";
+        $result = sprintf($textTpl, $object-&gt;FromUserName, $object-&gt;ToUserName, time(), $content);
+        return $result;
+    }
+
+    private function transmitNews($object, $arr_item)
+    {
+        if(!is_array($arr_item))
+            return;
+
+        $itemTpl = "    &lt;item&gt;
+        &lt;Title&gt;&lt;![CDATA[%s]]&gt;&lt;/Title&gt;
+        &lt;Description&gt;&lt;![CDATA[%s]]&gt;&lt;/Description&gt;
+        &lt;PicUrl&gt;&lt;![CDATA[%s]]&gt;&lt;/PicUrl&gt;
+        &lt;Url&gt;&lt;![CDATA[%s]]&gt;&lt;/Url&gt;
+    &lt;/item&gt;
+";
+        $item_str = "";
+        foreach ($arr_item as $item)
+            $item_str .= sprintf($itemTpl, $item['Title'], $item['Description'], $item['PicUrl'], $item['Url']);
+
+        $newsTpl = "&lt;xml&gt;
+&lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;
+&lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;
+&lt;CreateTime&gt;%s&lt;/CreateTime&gt;
+&lt;MsgType&gt;&lt;![CDATA[news]]&gt;&lt;/MsgType&gt;
+&lt;Content&gt;&lt;![CDATA[]]&gt;&lt;/Content&gt;
+&lt;ArticleCount&gt;%s&lt;/ArticleCount&gt;
+&lt;Articles&gt;
+$item_str&lt;/Articles&gt;
+&lt;/xml&gt;";
+
+        $result = sprintf($newsTpl, $object-&gt;FromUserName, $object-&gt;ToUserName, time(), count($arr_item));
+        return $result;
+    }
+
+    private function logger($log_content)
+    {
+        if(isset($_SERVER['HTTP_BAE_ENV_APPID'])){   //BAE
+            require_once "BaeLog.class.php";
+            $logger = BaeLog::getInstance();
+            $logger -&gt;logDebug($log_content);
+        }else if(isset($_SERVER['HTTP_APPNAME'])){   //SAE
+            sae_set_display_errors(false);
+            sae_debug($log_content);
+            sae_set_display_errors(true);
+        }else if($_SERVER['REMOTE_ADDR'] != "127.0.0.1"){ //LOCAL
+            $max_size = 10000;
+            $log_filename = "log.xml";
+            if(file_exists($log_filename) and (abs(filesize($log_filename)) &gt; $max_size)){unlink($log_filename);}
+            file_put_contents($log_filename, date('H:i:s')." ".$log_content."\r\n", FILE_APPEND);
+        }
+    }
 }
-return k;
-</code></pre><p>}<br>    public static void main(String[] args) {<br>        int a[]=new int [200],n,i=0;<br>        Scanner s=new Scanner (System.in);<br>        n=s.nextInt();<br>        for(;i&lt;n;i++)<br>        a[i]=s.nextInt();<br>        for(i=0;i&lt;n;i++)<br>        System.out.println(binary_number1(a[i]));<br>    }<br>}<br><br>&nbsp;</p>
-<p>万变不离其宗，无非是增加个计数工具而已。</p>
-<p>总之，十进制整数转换到二进制整数确实不算难解，稍微理解一下便可轻松解决，当然，有整数必然有小数，二进制如此其他进制也类似，具体看咱下回分解。</p>
+?&gt;</pre>
+
+<h3 id="3，图片示例"><a href="#3，图片示例" class="headerlink" title="3，图片示例"></a>3，图片示例</h3><p><img src="http://source.chenyalun.cn/images/201510/5101701.png" alt=""><img src="http://source.chenyalun.cn/images/201510/5101702.png" alt=""><img src="http://source.chenyalun.cn/images/201510/5101703.png" alt=""></p>
+<p>&nbsp;</p>
+<p>不想直接复制代码的同学请直接下载完整代码</p>
+<p>下载地址:<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1FP3oq" target="_blank" rel="external">http://pan.baidu.com/s/1FP3oq</a></p>
+<p>&nbsp;</p>
 <p>&nbsp;</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;题目概述：给定一个正整数，写出它的2进制表示&lt;/p&gt;
-&lt;p&gt;输入：多组输入，输入的第一行为一个正整数n，表示接下来有n组数据，每一行为1个正整数a(0&amp;lt;a&amp;lt;=10000)&lt;/p&gt;
-&lt;p&gt;输出：对于每一组数据，求出a的2进制表示法&lt;/p&gt;
-&lt;p&gt;样例输入：&lt;/p&gt;
+      &lt;p&gt;基本上如果不是每天都宅在家里，公交车，实时路况，航班，火车等这些交通信息我们是肯定要用到的。其实这些信息也是比较好查询的，百度一下，全都有了。不过在微信上，把这些功能集于一体也是很有意思的。&lt;/p&gt;
+&lt;h3 id=&quot;1，查询网站&quot;&gt;&lt;a href=&quot;#1，查询网站&quot; cla
     
     </summary>
     
-      <category term="程序试题" scheme="http://yoursite.com/categories/%E7%A8%8B%E5%BA%8F%E8%AF%95%E9%A2%98/"/>
+      <category term="公众号开发" scheme="http://yoursite.com/categories/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/"/>
     
     
   </entry>
   
   <entry>
-    <title>题目1009：求出小于n的所有质数的和</title>
-    <link href="http://yoursite.com/2015/10/28/%E9%A2%98%E7%9B%AE1009%EF%BC%9A%E6%B1%82%E5%87%BA%E5%B0%8F%E4%BA%8En%E7%9A%84%E6%89%80%E6%9C%89%E8%B4%A8%E6%95%B0%E7%9A%84%E5%92%8C/"/>
-    <id>http://yoursite.com/2015/10/28/题目1009：求出小于n的所有质数的和/</id>
-    <published>2015-10-27T21:00:11.000Z</published>
+    <title>微信开发之上传多媒体文件</title>
+    <link href="http://yoursite.com/2015/10/09/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91%E4%B9%8B%E4%B8%8A%E4%BC%A0%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6/"/>
+    <id>http://yoursite.com/2015/10/09/微信开发之上传多媒体文件/</id>
+    <published>2015-10-08T21:00:19.000Z</published>
     <updated>2016-08-21T12:15:24.000Z</updated>
     
-    <content type="html"><![CDATA[<p>概述：给定一个质数n(5&lt;n&lt;1000)，求出小于n的所有质数的和</p>
-<p>输入：多组输入，每行一个n(5&lt;n&lt;1000),</p>
-<p>输出：对于每组数据，输出为一行，值为小于n的所有质数的和</p>
-<p>样例输入：6 7</p>
-<p>样例输出：10  10</p>
-<p>看到这个题目我心中一乐，确实就是质数函数的改编版，难度不大，不过咱是为了锻炼写代码，所以还是要认真做的。直接看函数啦。</p>
-<p>不过值得注意的是：</p>
-<p>1，数字1不是质数，当然，也不是合数。回顾上次的题目1008，虽然输进去1打印的是Yes，但是题目要求是输入一个大于2的数，所以上次的代码不能算错。</p>
-<p>2，函数sqrt的参数是double型，即使不在程序中特意说明，也不会产生影响，但还是值得注意的，因为这个关系到编译器，如果想保持代码的准确完美，int n=(int) sqrt((double)m);具体是(double)m还是double (m)，在c和c++中是不一样的，如果用错，可能编译会报错。</p>
-<p>3，判断是否为质数的prime函数中，用于计数的自然数i要从2开始，关系到<span class="crayon-v">m</span><span class="crayon-o">%</span><span class="crayon-v">i</span><span class="crayon-o">==</span><span class="crayon-cn">0这个表达式，</span>如果从0开始，嘿嘿，你试试。</p>
-<p>想到上次的代码，这次无非是多了一个求和函数，当然判断是否为质数的函数还可以再做些优化。</p>
-<h3 id="1，C代码"><a href="#1，C代码" class="headerlink" title="1，C代码"></a>1，C代码</h3><pre class="lang:default decode:true">#include&lt;stdio.h&gt;
-#include&lt;math.h&gt;
+    <content type="html"><![CDATA[<p>在前面的文章中我们已经提到过发送给用户多媒体消息，比如图片（含缩略图），视频，语音等等，而且我们还说了，本着节约光荣、浪费可耻的原则，腾讯微信服务器只把这些文件保留3天，过期删除。今天我们就详细探讨一下上传多媒体文件到微信服务器的方法。</p>
+<p>当我们把这些多媒体文件上传到服务器后，每个文件会得到一个相应的媒体ID（media_ID)，以后就根据这个调用这些文件。一般来说上传文件都是通过提交html表单完成的，但是也可以通过CURL直接向服务器进行提交。接口地址：</p>
+<pre class="nums:false lang:default decode:true ">http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=ACCESS_TOKEN&amp;type=TYPE</pre>
+**参数说明**
+<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+<tr>
+<td>access_token</td>
+<td>是</td>
+<td>调用接口凭证</td>
+</tr>
+<tr>
+<td>type</td>
+<td>是</td>
+<td>媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）</td>
+</tr>
+<tr>
+<td>media</td>
+<td>是</td>
+<td>form-data中媒体文件标识，有filename、filelength、content-type等信息</td>
+</tr>
+</tbody>
+</table>
+值得注意的有：
 
-int prime(int m){ 
-int n=(int) sqrt((double)m),i;
-    for(i=2;i&lt;=n;i++){
-       if(m%i==0)
-        break;
+1，若你的服务器是windows，上传的文件格式为：@C:\Users\Allen\chenyalun.jpg，但如果是在Linux服务器上那文件格式就为：@home/Users/Allen/chenyalun.jpg，相信大多数同学（包括我）用的都是Linux服务器，那下面的示例就以这个为标准啦。
+
+2，文件名必须是完整绝对路径，而且需要在路径前加上@以示区分。
+
+3，上传的文件中，图片最大1M，只能是JPG格式；语音不超过2M，播放长度不超过60秒，支持AMR,MP3,SPEEX等格式；视频不超过10M，支持MP4格式，缩略图不超过64KB，支持JPG格式。
+
+### 1，上传图片
+
+代码如下
+<pre class="wrap:true lang:default decode:true ">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "image";
+$filepath = dirname(__FILE__)."/chenyalun.jpg";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     }
-  if(i&gt;n)
-     return 1;
-  else
-     return 0;
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
 }
+?&gt;</pre>
+保存为image.php(新建文本文档，选择另存为，注意编码格式为UTF-8，下面的代码编码格式都是这样的）
 
-int sum(int n){
-     int s=0; 
-     int i;
-      for( i=2;i&lt;n;i++){
-      if(prime(i)==1)    
-      s+=i;
-  }
-      return s;
-}
+在浏览器打开就可以啦，比如我的是http://wechat.chenyalun.cn/image.php，打开之后返回结果如下：
 
-int main(){
-     int n;
-     while(scanf("%d",&amp;n)!= EOF) 
-     printf("%d\n",sum(n));
-    return 0;
-   }
+![](http://source.chenyalun.cn/images/201510/5100671.jpg)
+<pre class="nums:false wrap:true lang:default decode:true">string(118) "{"type":"image","media_id":"27E2jndYZ_yNOEKMld7rP3aLEQY_h0EZyr0sBh0707urqUD9BuWtHxzm4mvHXHVy","created_at":1444219660}"</pre>
+**返回说明**
+
+正确情况下的返回JSON数据包结果如下：
+<pre class="nums:false lang:default decode:true">{"type":"TYPE","media_id":"MEDIA_ID","created_at":123456789}
 </pre>
+<table border="1" width="640px" cellspacing="0" cellpadding="4" align="center">
+<tbody>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>type</td>
+<td>媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb，主要用于视频与音乐格式的缩略图）</td>
+</tr>
+<tr>
+<td>media_id</td>
+<td>媒体文件上传后，获取时的唯一标识</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>媒体文件上传时间戳</td>
+</tr>
+</tbody>
+</table>
+错误情况下的返回JSON数据包示例如下（示例为无效媒体类型错误）：
+<pre class="nums:false lang:default decode:true">{"errcode":40004,"errmsg":"invalid media type"}</pre>
+非常显然，媒体ID我们已经拿到手啦。就是下面这一串东东：
 
-<h3 id="2，C-代码"><a href="#2，C-代码" class="headerlink" title="2，C++代码"></a>2，C++代码</h3><pre class="lang:default decode:true">//c++代码沿用上次的函数
-#include&lt;iostream&gt;
-#include&lt;cstring&gt;
-#include&lt;cmath&gt;
-using namespace std;
+27E2jndYZ_yNOEKMld7rP3aLEQY_h0EZyr0sBh0707urqUD9BuWtHxzm4mvHXHVy
 
-string prime(int m){
-    int n=(int) sqrt( double(m)),i=2;//一定要注意i=2
-    for(;i&lt;=n;i++){
-       if(m%i==0)
-        break;
-     }
-  if(i&gt;n)
-     return "Yes";
-  else
-     return "No";
-}
+那么当我们再调用这个图片的时候，媒体ID就派上用场啦，一定要记得，图片只能在服务器保留3天，图片只能在服务器保留3天，图片只能在服务器保留3天。
 
-int sum(int n){
-     int s=0; 
-      for(int i=2;i&lt;n;i++){
-      if(prime(i)=="Yes")
-      s+=i;
-  }
-      return s;
-}
+敬请注意以下几点：
 
- int main(){
-      int n;
-     while(cin&gt;&gt;n){
-         cout&lt;&lt;sum(n)&lt;&lt;endl;
+1，将第3行的access_token替换成你自己的（关于获取access_token，请查阅【[获得Access_Token的三种方法总结](http://www.chenyalun.cn/%e8%8e%b7%e5%be%97access_token%e7%9a%84%e4%b8%89%e7%a7%8d%e6%96%b9%e6%b3%95%e6%80%bb%e7%bb%93.html)】。
+
+2，将第6行中的文件名称改成你自己的，注意不要搞错啦。
+
+说到这里那么上传语音（以MP3文件为例)，视频（以MP4文件为例），缩略图（还是以JPG格式为例）都是轻而易举的了。嗯，不多说啦，上代码。
+
+### 2，上传语音
+
+<pre class="wrap:true lang:default decode:true">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "voice";
+$filepath = dirname(__FILE__)."/chenyalun.mp3";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata); 
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     }
-       return 0;
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
 }
-</pre>
+?&gt;</pre>
 
-<h3 id="3，JAVA代码"><a href="#3，JAVA代码" class="headerlink" title="3，JAVA代码"></a>3，JAVA代码</h3><p><pre class="lang:default decode:true">import java.util.*;</pre></p>
-<p>public class Main {</p>
-<pre><code>static int prime(int m){ 
-int n=(int) Math.sqrt((double)m),i=2;
-        for(;i&amp;lt;=n;i++){
-           if(m%i==0)
-            break;
-        }
-      if(i&amp;gt;n)
-         return 1;
-      else
-         return 0;
+<h3 id="3，上传视频"><a href="#3，上传视频" class="headerlink" title="3，上传视频"></a>3，上传视频</h3><pre class="wrap:true lang:default decode:true">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "video";
+$filepath = dirname(__FILE__)."/chenyalun.mp4";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata);
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     }
-
-    static int sum(int n){
-         int s=0; 
-         int i;
-          for( i=2;i&amp;lt;n;i++){
-          if(prime(i)==1)    
-          s+=i;
-      }
-          return s;
-    }
-
-public static void main(String[] args) {
-    int n;
-     while(1==1) {
-         Scanner s=new Scanner(System.in);
-         n=s.nextInt();
-     System.out.println(sum(n));}
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
 }
-</code></pre><p>}<br><br>本身这道题目很简单，但确实花了我不少时间，嗯，还是不熟啊。</p>
-<p>&nbsp;</p>
+?&gt;</pre>
+&nbsp;
+
+### 4，上传缩略图
+
+<pre class="wrap:true lang:default decode:true">&lt;?php
+
+$access_token = "qOdqEnpIXNDOqhmLjOLR4VqRmVKZ-eKDA_8lpd8gFIA6Ltn6zZv9U7NU5Wz5Jfgod1ah75n8X_haNnIHDwexRYADd9OuSkgMmKw_ckKx3P4";
+
+$type = "thumb";
+$filepath = dirname(__FILE__)."/chenyalun.jpg";
+$filedata = array("media"  =&gt; "@".$filepath);
+$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$access_token&amp;type=$type";
+$result = https_request($url, $filedata);
+var_dump($result); 
+function https_request($url, $data = null)
+{
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+    if (!empty($data)){
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    }
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $output = curl_exec($curl);
+    curl_close($curl);
+    return $output;
+}
+?&lt;br&gt;</pre>
+
+<h3 id="5，利用官方工具进行调试"><a href="#5，利用官方工具进行调试" class="headerlink" title="5，利用官方工具进行调试"></a>5，利用官方工具进行调试</h3><p>点击这里打开上传接口调试工具，<a href="http://www.chenyalun.cn/go/?url=https://mp.weixin.qq.com/debug/cgi-bin/apiinfo?t=index&amp;type=%E5%9F%BA%E7%A1%80%E6%94%AF%E6%8C%81&amp;form=%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8E%A5%E5%8F%A3%20/media/upload" target="_blank" rel="external">这里这里</a>，接口列表选择【多媒体文件上传接口】，我们也可以在这里上传文件，不过，这个工具主要是检查问题进行调试，如果想偷个懒，也可以直接从这里上传。</p>
+<p>还有就是有时候微信服务器也不是很给力，【System busy】偶尔会出现的，如果是这样，建议大家稍等片刻再来尝试。</p>
+<p>本着知识分享、共同进步的原则，我把所有的代码都放在云端了，需要的同学可以免费下载。</p>
+<p>下载地址：<a href="http://www.chenyalun.cn/go/?url=http://pan.baidu.com/s/1jG8MM94" target="_blank" rel="external">http://pan.baidu.com/s/1jG8MM94</a></p>
 <p>&nbsp;</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;概述：给定一个质数n(5&amp;lt;n&amp;lt;1000)，求出小于n的所有质数的和&lt;/p&gt;
-&lt;p&gt;输入：多组输入，每行一个n(5&amp;lt;n&amp;lt;1000),&lt;/p&gt;
-&lt;p&gt;输出：对于每组数据，输出为一行，值为小于n的所有质数的和&lt;/p&gt;
-&lt;p&gt;样例输入：6 7&lt;/p&gt;
-&lt;p&gt;
+      &lt;p&gt;在前面的文章中我们已经提到过发送给用户多媒体消息，比如图片（含缩略图），视频，语音等等，而且我们还说了，本着节约光荣、浪费可耻的原则，腾讯微信服务器只把这些文件保留3天，过期删除。今天我们就详细探讨一下上传多媒体文件到微信服务器的方法。&lt;/p&gt;
+&lt;p&gt;当我们把这些多媒体文件
     
     </summary>
     
-      <category term="程序试题" scheme="http://yoursite.com/categories/%E7%A8%8B%E5%BA%8F%E8%AF%95%E9%A2%98/"/>
+      <category term="公众号开发" scheme="http://yoursite.com/categories/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91/"/>
     
     
   </entry>
