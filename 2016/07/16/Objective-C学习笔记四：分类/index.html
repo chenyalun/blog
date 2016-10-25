@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -92,39 +92,27 @@
 
 <meta name="description" content="2016.10.16更正部分错别字
 
-分类场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。声明文件的命名方式 【类+分类.h】
-@interface 类名 (分类名)
-@end
-实现文件的命名方式 【类+分类.m】
-@implementation">
+ 一些琐碎的笔记,关于分类、代理和block.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objective-C学习笔记四：分类与代理">
-<meta property="og:url" content="http://yoursite.com/2016/08/16/Objective-C学习笔记四：分类/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/07/16/Objective-C学习笔记四：分类/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
 <meta property="og:description" content="2016.10.16更正部分错别字
 
-分类场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。声明文件的命名方式 【类+分类.h】
-@interface 类名 (分类名)
-@end
-实现文件的命名方式 【类+分类.m】
-@implementation">
-<meta property="og:updated_time" content="2016-10-16T10:38:46.000Z">
+ 一些琐碎的笔记,关于分类、代理和block.">
+<meta property="og:updated_time" content="2016-10-25T14:37:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C学习笔记四：分类与代理">
 <meta name="twitter:description" content="2016.10.16更正部分错别字
 
-分类场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。声明文件的命名方式 【类+分类.h】
-@interface 类名 (分类名)
-@end
-实现文件的命名方式 【类+分类.m】
-@implementation">
+ 一些琐碎的笔记,关于分类、代理和block.">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -138,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/16/Objective-C学习笔记四：分类/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/16/Objective-C学习笔记四：分类/"/>
 
   <title> Objective-C学习笔记四：分类与代理 | 陈亚伦博客 </title>
 </head>
@@ -291,8 +279,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-16T17:50:17+08:00" content="2016-08-16">
-              2016-08-16
+            <time itemprop="dateCreated" datetime="2016-07-16T17:50:17+08:00" content="2016-07-16">
+              2016-07-16
             </time>
           </span>
 
@@ -321,8 +309,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/16/Objective-C学习笔记四：分类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/16/Objective-C学习笔记四：分类/" itemprop="commentsCount"></span>
+                <a href="/2016/07/16/Objective-C学习笔记四：分类/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/16/Objective-C学习笔记四：分类/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -348,6 +336,7 @@
         <blockquote>
 <p>2016.10.16更正部分错别字</p>
 </blockquote>
+<p></p><p align="center"> 一些琐碎的笔记,关于分类、代理和block. </p><br><a id="more"></a> <p></p>
 <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>场合：在不修改原来类模型的情况下，给类扩充一些方法，且仅是方法，不扩充成员变量。可以给系统自带的类添加分类，扩充方法。（注意引入分类文件）<br>当添加分类的方法是重写原来类中的方法时,不需要引入分类文件。<br>声明文件的命名方式 【类+分类.h】</p>
 <pre><code>@interface 类名 (分类名)
 @end
@@ -358,7 +347,6 @@
 <h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1，分类可以访问原来类中的成员变量，但不能增加成员变量。（若要增加成员变量，可以使用继承）</p>
 <p>2，分类的优先级最高，当调用类中的一个方法时，优先去分类中查找，再去原类中查找，最后去父类中查找。也即，倘若在分类中重写了原类中的方法，会覆盖掉原来的方法，导致原来的方法无法使用。（不建议重写原来类中的方法）<br>重写会出现警告：Category is implementing a method which will also be implemented by its primary class.</p>
 <p>3，如果多个分类中有相同（方法签名相同，但不一样）的方法，则调用的是最后编译的方法。</p>
-<a id="more"></a> 
 <h2 id="类的私有方法"><a href="#类的私有方法" class="headerlink" title="类的私有方法"></a>类的私有方法</h2><ul>
 <li>方式1，直接在.m文件中写方法实现，不要在.h文件中进行方法声明</li>
 <li>方式2，在.m文件中定义一个category，然后在category中声明一些方法，最后在@implementation和@end之间作方法实现。</li>
@@ -588,7 +576,7 @@ NSLog(@&quot;%i&quot;,MySum(10,20));
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/18/iOS学习笔记一：Cocoapods的安装与使用/" rel="prev" title="iOS学习笔记一：Cocoapods的安装与使用">
+              <a href="/2016/10/10/iOS学习笔记一：Cocoapods的安装与使用/" rel="prev" title="iOS学习笔记一：Cocoapods的安装与使用">
                 iOS学习笔记一：Cocoapods的安装与使用 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -616,8 +604,8 @@ NSLog(@&quot;%i&quot;,MySum(10,20));
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/16/Objective-C学习笔记四：分类/"
-           data-title="Objective-C学习笔记四：分类与代理" data-url="http://yoursite.com/2016/08/16/Objective-C学习笔记四：分类/">
+      <div class="ds-thread" data-thread-key="2016/07/16/Objective-C学习笔记四：分类/"
+           data-title="Objective-C学习笔记四：分类与代理" data-url="http://yoursite.com/2016/07/16/Objective-C学习笔记四：分类/">
       </div>
     
   </div>
@@ -662,7 +650,7 @@ NSLog(@&quot;%i&quot;,MySum(10,20));
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -670,7 +658,7 @@ NSLog(@&quot;%i&quot;,MySum(10,20));
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -849,13 +837,6 @@ NSLog(@&quot;%i&quot;,MySum(10,20));
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>

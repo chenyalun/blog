@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Objective-C," />
+  <meta name="keywords" content="Objective-C,ios开发," />
 
 
 
@@ -90,38 +90,29 @@
 
 
 
-<meta name="description" content="封装优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。
-成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。
-{
-    int _speed;
-}
-set方法：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set">
+<meta name="description" content="2016.10.25 温习
+
+ 关于继承与属性的笔记.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objective-C学习笔记二：继承与属性">
 <meta property="og:url" content="http://yoursite.com/2016/05/16/Objective-C学习笔记二：继承与属性/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="封装优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。
-成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。
-{
-    int _speed;
-}
-set方法：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set">
-<meta property="og:updated_time" content="2016-08-21T12:41:44.000Z">
+<meta property="og:description" content="2016.10.25 温习
+
+ 关于继承与属性的笔记.">
+<meta property="og:updated_time" content="2016-10-25T14:35:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C学习笔记二：继承与属性">
-<meta name="twitter:description" content="封装优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。
-成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。
-{
-    int _speed;
-}
-set方法：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set">
+<meta name="twitter:description" content="2016.10.25 温习
+
+ 关于继承与属性的笔记.">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -288,7 +279,7 @@ set方法：设置成员变量，过滤一些不符合要求的值。以set开�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-16T05:00:32+08:00" content="2016-05-16">
+            <time itemprop="dateCreated" datetime="2016-05-16T19:22:17+08:00" content="2016-05-16">
               2016-05-16
             </time>
           </span>
@@ -342,159 +333,264 @@ set方法：设置成员变量，过滤一些不符合要求的值。以set开�
       
 
       
-        <h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。</p>
-<p>成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。</p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> _speed;</span></p>
-<p><span class="s1">}</span></p>
-<p><strong>set方法</strong>：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set方法中设置行为，监听属性的改变。</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s;</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">_speed</span><span class="s1">=</span><span class="s1">s+</span><span class="s2">20</span><span class="s1">;</span></p>
-<p><span class="s1">}</span></p>
-<p><strong>get方法</strong>：获取对象内部的成员变量，不接收参数，返回类型与成员变量类型相同，方法名称与成员变量名称相同（不含下划线）。不推荐以get开头。</p>
-<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed;</span></p>
-<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">return</span> <span class="s3">_speed</span><span class="s1">;</span></p>
-<p><span class="s1">}</span></p>
-<p>只读：只提供get方法。可读可写：提供get和set方法。</p>
-<h3 id="OC的弱语法"><a href="#OC的弱语法" class="headerlink" title="OC的弱语法"></a>OC的弱语法</h3><p>1，调用未声明、未实现的对象方法</p>
-<p>编译 报错 No visible @interface for ‘Dog’ declares the selector ‘ssss’，链接运行 报错。</p>
-<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1002014a0’</strong></span></p>
+        <blockquote>
+<p>2016.10.25 温习</p>
+</blockquote>
+<p align="center"> 关于继承与属性的笔记. </p>
+
+<a id="more"></a>
+<h1 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h1><p>优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。</p>
+<p>成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性</p>
+<pre><code>{
+  int _speed;
+}
+</code></pre><p>set方法：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set方法中设置行为，监听属性的改变。</p>
+<pre><code>-(void)setSpeed:(int)s;
+
+-(void)setSpeed:(int)s
+
+{
+
+_speed=s+20;
+
+}
+</code></pre><p> get方法：获取对象内部的成员变量，不接收参数，返回类型与成员变量类型相同，方法名称与成员变量名称相同（不含下划线）。不推荐以get开头。</p>
+<pre><code>-(int)speed;
+
+-(int)speed
+
+{
+
+return _speed;
+
+}
+</code></pre><p>只读：只提供get方法。可读可写：提供get和set方法。</p>
+<h1 id="OC的弱语法"><a href="#OC的弱语法" class="headerlink" title="OC的弱语法"></a>OC的弱语法</h1><h2 id="调用未声明、未实现的对象方法"><a href="#调用未声明、未实现的对象方法" class="headerlink" title="调用未声明、未实现的对象方法"></a>调用未声明、未实现的对象方法</h2><p>编译 报错 <code>No visible @interface for ‘Dog’ declares the selector ‘ssss’</code>，链接运行 报错。</p>
+<p><code>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1002014a0’</code></p>
 <p>给Dog对象发送不能识别的消息。</p>
-<p>2，调用已声明、未实现的对象方法</p>
-<p>编译警告：Method definition for ‘ssss’ not found   未实现方法  链接正常，运行报错</p>
-<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1001002a0’</strong></span></p>
-<p>3,调用未声明、已实现的对象方法</p>
-<p>编译 链接运行  错误  No visible @interface for ‘Dog’ declares the selector ‘ssss’</p>
-<p>在Dog的@interface中，对于ssss的声明是不可见的。<a id="more"></a> </p>
-<h3 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h3><p>类本身在内存中占据存储空间，里面有类\对象方法列表。直接通过类名执行的方法。</p>
-<p>以+开头，只能由类名调用，类方法中不能访问成员变量（实例变量）。<strong>允许类方法与对象方法重名。</strong>(执行者不同，当然可以重名！)</p>
+<h2 id="调用已声明、未实现的对象方法"><a href="#调用已声明、未实现的对象方法" class="headerlink" title="调用已声明、未实现的对象方法"></a>调用已声明、未实现的对象方法</h2><p>编译警告：<code>Method definition for ‘ssss’ not found</code> 未实现方法 链接正常，运行报错</p>
+<p><code>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1001002a0’</code></p>
+<h2 id="调用未声明、已实现的对象方法"><a href="#调用未声明、已实现的对象方法" class="headerlink" title="调用未声明、已实现的对象方法"></a>调用未声明、已实现的对象方法</h2><p>编译 链接运行 错误 <code>No visible @interface for ‘Dog’ declares the selector ‘ssss’</code></p>
+<p>在Dog的@interface中，对于ssss的声明是不可见的。</p>
+<h1 id="类方法"><a href="#类方法" class="headerlink" title="类方法"></a>类方法</h1><p>类本身在内存中占据存储空间，里面有类\对象方法列表。直接通过类名执行的方法。</p>
+<p>以+开头，只能由类名调用，类方法中不能访问成员变量（实例变量）。允许类方法与对象方法重名。(执行者不同，当然可以重名！)</p>
 <p>使用场合：当不需要访问成员变量的时候，尽量使用类方法，提升效率。</p>
 <p>输出类的名称：</p>
-<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showClassName;</span></p>
-<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showClassName</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s1">NSLog</span><span class="s3">(</span><span class="s4">@”类的名称是：%@”</span><span class="s3">,</span><span class="s1">NSStringFromClass</span><span class="s3">([</span><span class="s2">self</span> <span class="s1">class</span><span class="s3">]));</span></p>
-<p><span class="s1">}</span></p>
-<p>调用：<span class="s1">[</span><span class="s2">Dog</span> <span class="s2">showClassName</span><span class="s1">];</span></p>
-<h3 id="self关键字"><a href="#self关键字" class="headerlink" title="self关键字"></a>self关键字</h3><p>self是指针，指向当前对象或类的调用者。出现在对象方法中，代表当前对象，出现在类方法中，代表当前类。不能出现在函数中（会报错：Use of undeclared identifier ‘self’使用未声明的标识符）。</p>
+<pre><code>+(void)showClassName;
+
++(void)showClassName
+
+{
+
+NSLog(@”类的名称是：%@”,NSStringFromClass([self class]));
+
+}
+</code></pre><p>调用：<code>[Dog showClassName];</code></p>
+<h1 id="self关键字"><a href="#self关键字" class="headerlink" title="self关键字"></a>self关键字</h1><p>self是指针，指向当前对象或类的调用者。出现在对象方法中，代表当前对象，出现在类方法中，代表当前类。不能出现在函数中（会报错：<code>Use of undeclared identifier ‘self’</code>使用未声明的标识符）。</p>
 <p>用途：</p>
-<p>1， self-&gt;<span class="s1">成员变量名  在对象方法中访问当前方法调用的成员变量，也即当成员变量与局部变量同名时，用来区分同名的局部变量。</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject;</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s1">@”showSelfOfObject方法被调用”</span><span class="s2">);</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">int</span><span class="s1"> _speed;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">self</span><span class="s1">-&gt;</span><span class="s5">_speed</span><span class="s1">=</span><span class="s6">200</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span>_speed+=</span><span class="s6">1000</span><span class="s1">;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">int</span><span class="s1"><span class="Apple-converted-space">  </span>result= </span><span class="s4">self</span><span class="s1">-&gt;</span><span class="s5">_speed</span><span class="s1">+</span><span class="s6">10</span><span class="s1">;</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s1">@”result的值是：%i”</span><span class="s2">,result);</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">NSLog</span><span class="s2">(</span><span class="s1">@”_speed的值是：%i”</span><span class="s2">,_speed);</span></p>
-<p><span class="s1">}</span></p>
-<p>当成员变量与局部变量同名时（编译警告Local declaration of ‘_speed’ hides the instance variable局部变量隐藏了成员变量），采用就近原则，访问局部变量。因此需要用self访问成员变量。</p>
-<p>2，方法的调用 :在对象方法中调用当前对象的对象方法以及在类方法中调用当前类的类方法</p>
+<ol>
+<li><p>self-&gt;成员变量名 在对象方法中访问当前方法调用的成员变量，也即当成员变量与局部变量同名时，用来区分同名的局部变量。</p>
+<pre><code>-(void)showSelfOfObject;
+
+-(void)showSelfOfObject
+
+{
+
+NSLog(@”showSelfOfObject方法被调用”);
+
+int _speed;
+
+self-&gt;_speed=200;
+
+_speed+=1000;
+
+int result= self-&gt;_speed+10;
+
+NSLog(@”result的值是：%i”,result);
+
+NSLog(@”_speed的值是：%i”,_speed);
+
+}
+</code></pre></li>
+</ol>
+<p>当成员变量与局部变量同名时（编译警告<code>Local declaration of ‘_speed’ hides the instance variable</code>局部变量隐藏了成员变量），采用就近原则，访问局部变量。因此需要用self访问成员变量。</p>
+<ol>
+<li>方法的调用:在对象方法中调用当前对象的对象方法以及在类方法中调用当前类的类方法</li>
+</ol>
 <p>在对象方法中调用当前对象的对象方法</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject;</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showTestObject;</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”showSelfOfObject方法被调用”</span><span class="s3">);</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showTestObject</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s2">self</span> <span class="s1">showSelfOfObject</span><span class="s3">];</span></p>
-<p><span class="s1">}</span></p>
-<p>在类方法中调用当前类的类方法</p>
-<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showSelfOfClass;</span></p>
-<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showTestClass;</span></p>
-<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showSelfOfClass</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”showSelfOfClass方法被调用”</span><span class="s3">);</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">+(</span><span class="s2">void</span><span class="s1">)showTestClass</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s2">self</span> <span class="s1">showSelfOfClass</span><span class="s3">];</span></p>
-<p><span class="s1">}</span></p>
-<p><strong>常见错误：</strong></p>
-<p>1，在对象方法中调用类方法（编译错误No visible @interface for ‘Dog’ declares the selector ‘<span class="s1">showSelfOfClass</span>‘）错误相当于未声明未定义却调用这个方法。</p>
-<p>2，在类方法中调用对象方法（编译错误No known class method for selector ‘<span class="s1">showSelfOfObject</span>‘）未知的类方法</p>
+<pre><code>-(void)showSelfOfObject;
+
+-(void)showTestObject;
+
+-(void)showSelfOfObject
+
+{
+
+NSLog(@”showSelfOfObject方法被调用”);
+
+}
+
+-(void)showTestObject
+
+{
+
+[self showSelfOfObject];
+
+}
+</code></pre><p>在类方法中调用当前类的类方法</p>
+<pre><code>+(void)showSelfOfClass;
+
++(void)showTestClass;
+
++(void)showSelfOfClass
+
+{
+
+NSLog(@”showSelfOfClass方法被调用”);
+
+}
+
++(void)showTestClass
+
+{
+
+[self showSelfOfClass];
+
+}
+</code></pre><p>常见错误：</p>
+<ol>
+<li><p>在对象方法中调用类方法（编译错误<code>No visible @interface for ‘Dog’ declares the selector ‘showSelfOfClass‘</code>）错误相当于未声明未定义却调用这个方法。</p>
+</li>
+<li><p>在类方法中调用对象方法（编译错误<code>No known class method for selector ‘showSelfOfObject‘</code>）未知的类方法</p>
+</li>
+</ol>
 <p>3，self的死循环:调用本身</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)showSelfOfObject</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”showSelfOfObject方法被调用”</span><span class="s3">);</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span>[</span><span class="s2">self</span> <span class="s1">showSelfOfObject</span><span class="s3">];</span></p>
-<p><span class="s1">}</span></p>
-<p>4，调用函数</p>
-<p>函数不依赖对象。void f();  [self f]<span class="Apple-converted-space">  </span><span class="s1">错误</span></p>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>场景：当两个类拥有相同的属性和方法时，将相同的内容抽取到父类中。当A类完全拥有B类的部分属性或方法时，考虑A类作为父类。</p>
-<p>1，父类必须声明在子类前面。</p>
-<p>2，不允许子类和父类拥有相同的成员变量（如果子类有和父类相同的成员变量，意味着，同一成员变量声明定义两次，编译错误 Duplicute member <span class="s1">‘_age’  ，哪怕成员变量的访问属性不同，子类公开父类私有，或者父类公开子类私有，都不行！</span>）</p>
-<p>3，子类方法和属性的访问过程：如果子类没有，再访问父类。即由子类开始。</p>
-<p>4，Objective-C中只有单继承（与C＋＋不同）</p>
-<p><strong>方法的重写</strong>:父类和子类拥有相同签名的类方法或者对象方法（子类重新实现了父类中的方法），则优先调用子类的同名方法。</p>
-<p>父类Person：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)show</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”调用了Person的show方法”</span><span class="s3">);</span></p>
-<p><span class="s1">}</span></p>
-<p>子类Student：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)show</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1">     //[</span><span class="s2">super</span> <span class="s3">show</span><span class="s1">];</span></p>
-<p><span class="s3"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s3">(</span><span class="s1">@”调用了Student的show方法”</span><span class="s3">);</span></p>
-<p><span class="s1">}</span></p>
-<p>调用：</p>
-<p><span class="s1">Student</span><span class="s2"> *p=[[</span><span class="s1">Student</span> <span class="s3">alloc</span><span class="s2">] </span><span class="s3">init</span><span class="s2">];   </span><span class="s1">[p </span><span class="s4">show</span><span class="s1">];</span></p>
-<p>很明显，调用的是重写的子类Student的show方法。</p>
-<p>super</p>
-<p>场景：子类重写父类的方法时，想调用父类的方法（包括类方法和对象方法）。</p>
+<pre><code>-(void)showSelfOfObject
+
+{
+
+NSLog(@”showSelfOfObject方法被调用”);
+
+[self showSelfOfObject];
+
+}
+</code></pre><p>4，调用函数</p>
+<p>函数不依赖对象。<code>void f(); [self f]</code> 错误</p>
+<h1 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h1><p>场景：当两个类拥有相同的属性和方法时，将相同的内容抽取到父类中。当A类完全拥有B类的部分属性或方法时，考虑A类作为父类。</p>
+<ol>
+<li><p>父类必须声明在子类前面。</p>
+</li>
+<li><p>不允许子类和父类拥有相同的成员变量（如果子类有和父类拥有相同的成员变量，意味着，同一成员变量声明定义两次，编译错误 <code>Duplicute member ‘_age’</code>，哪怕成员变量的访问属性不同，子类公开父类私有，或者父类公开子类私有，都不行！）</p>
+</li>
+<li><p>子类方法和属性的访问过程：如果子类没有，再访问父类。即由子类开始。</p>
+</li>
+<li><p>Objective-C中只有单继承（与C＋＋不同）</p>
+</li>
+</ol>
+<p>方法的重写:父类和子类拥有相同签名的类方法或者对象方法（子类重新实现了父类中的方法），则优先调用子类的同名方法。</p>
+<pre><code>父类Person：
+
+-(void)show
+
+{
+
+NSLog(@”调用了Person的show方法”);
+
+}
+
+子类Student：
+
+-(void)show
+
+{
+
+//[super show];
+
+NSLog(@”调用了Student的show方法”);
+
+}
+
+调用：
+
+Student *p=[[Student alloc] init]; [p show];
+</code></pre><p>很明显，调用的是重写的子类Student的show方法。</p>
+<h1 id="super"><a href="#super" class="headerlink" title="super"></a>super</h1><p>场景：子类重写父类的方法时，想调用父类的方法（包括类方法和对象方法）。</p>
 <p>效果与self类似，super在对象方法中就调用父类的对象方法，在类方法中就调用父类的类方法。</p>
 <p>继承可以在不改变原来模型的基础上拓充方法，抽取公共代码，建立类与类之间的联系，减少代码的冗余性，但是，会增加耦合性。</p>
-<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>某一种事物的多种形态。在实现继承的前提下，<strong>父类类型指针指向子类对象</strong>（右边是左边），指向子类对象的父类指针可以调用子类中重写父类的方法，但是指向子类对象的父类指针不能调用子类中拓展的方法（父类中没有的方法）。</p>
-<p><span class="s2">Person</span><span class="s1"> *p=[[</span><span class="s2">Student</span> <span class="s3">alloc</span><span class="s1">] </span><span class="s3">init</span><span class="s1">];</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span>[p </span><span class="s4">show</span><span class="s2">];</span></p>
-<p>Student是Person，show方法在子类和父类中都有，这里调用的是子类的show方法。</p>
-<p>当子类拓展了一个<span class="s1">showStudent对象方法，如果还想调用，则强制转换：将指向子类对象的父类指针强制转化为子类指针。</span></p>
-<p><span class="s1">Person</span><span class="s2"> *p=[[</span><span class="s1">Student</span> <span class="s3">alloc</span><span class="s2">] </span><span class="s3">init</span><span class="s2">];</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span></span><span class="s4">Student</span><span class="s1"> <em> p2=(</em></span><span class="s4">Student</span><span class="s1"> )p;</span></p>
-<p><span class="s1"><span class="Apple-converted-space">        </span>[p2 </span><span class="s4">showStudent</span><span class="s1">];</span></p>
-<p>将父类指针p强制转换为子类指针，使它可以调用子类Student拓展的showStudent方法。</p>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>某一种事物的多种形态。<br>在实现继承的前提下，父类类型指针指向子类对象（右边是左边），指向子类对象的父类指针可以调用子类中重写父类的方法，但是指向子类对象的父类指针不能调用子类中拓展的方法（父类中没有的方法）。</p>
+<pre><code>Person *p=[[Student alloc] init];
+
+[p show];
+</code></pre><p>Student是Person，show方法在子类和父类中都有，这里调用的是子类的show方法。</p>
+<p>当子类拓展了一个showStudent对象方法，如果还想调用，则强制转换：将指向子类对象的父类指针强制转化为子类指针。</p>
+<pre><code>Person *p=[[Student alloc] init];
+
+Student p2=(Student )p;
+
+[p2 showStudent];
+</code></pre><p>将父类指针p强制转换为子类指针，使它可以调用子类Student拓展的showStudent方法。</p>
 <p>如果不做强制转换，而直接调用子类拓展的方法</p>
-<p><span class="s1"><span class="Apple-converted-space">  </span></span><span class="s2">Person</span><span class="s1"> *p=[[</span><span class="s2">Student</span> <span class="s3">alloc</span><span class="s1">] </span><span class="s3">init</span><span class="s1">];</span></p>
-<p><span class="s4"><span class="Apple-converted-space">     </span></span><span class="s1"><span class="Apple-converted-space">       </span>[p showStudent];</span></p>
-<p>编译报错： No visible @interface for ‘Person’ declares the selector ‘showStudent’</p>
-<p>转换语法： { 相应子类名 <em>   p=(父类名 </em>)指向子类对象的父类指针；}</p>
-<p>主要应用：[动态绑定]如果参数使用父类类型，可以传入父类、子类对象，调用相应的方法（如将子类对象传递给参数，调用子类的方法；将父类对象传递给参数，则调用父类的方法）</p>
+<pre><code>Person *p=[[Student alloc] init];
+
+[p showStudent];
+</code></pre><p>编译报错： <code>No visible @interface for ‘Person’ declares the selector ‘showStudent’</code></p>
+<p>转换语法： { 相应子类名 p=(父类名 )指向子类对象的父类指针；}</p>
+<p>主要应用：<strong>动态绑定</strong><br>如果参数使用父类类型，可以传入父类、子类对象，调用相应的方法（如将子类对象传递给参数，调用子类的方法；将父类对象传递给参数，则调用父类的方法）</p>
 <p>例如，Person和Student中都有同名show对象方法，可以通过test函数传入的参数判断调用哪个方法。</p>
-<p><span class="s1">#import </span><span class="s2">&lt;Foundation/Foundation.h&gt;</span></p>
-<p><span class="s1">#import </span><span class="s2">“Person.h”</span></p>
-<p><span class="s1">#import </span><span class="s2">“Student.h”</span></p>
-<p><span class="s3">void</span><span class="s2"> test(</span><span class="s4">Person</span><span class="s2"> * p)</span></p>
-<p><span class="s2">{</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span>[p </span><span class="s4">show</span><span class="s2">];</span></p>
-<p><span class="s2">}</span></p>
-<p><span class="s3">int</span><span class="s2"> main(</span><span class="s3">int</span><span class="s2"> argc, </span><span class="s3">const</span> <span class="s3">char</span><span class="s2"> * argv[]) {</span></p>
-<p><span class="s5"><span class="Apple-converted-space">    </span></span><span class="s2">@autoreleasepool</span><span class="s5"> {</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">Person</span><span class="s2"> *p=[[</span><span class="s4">Person</span> <span class="s6">alloc</span><span class="s2">] </span><span class="s6">init</span><span class="s2">];</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">Student</span><span class="s2"> *s=[[</span><span class="s4">Student</span> <span class="s6">alloc</span><span class="s2">] </span><span class="s6">init</span><span class="s2">];</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">test</span><span class="s2">(p);</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s4">test</span><span class="s2">(s);</span></p>
-<p><span class="s2"><span class="Apple-converted-space">            </span>}</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s3">return</span> <span class="s7">0</span><span class="s2">;</span></p>
-<p><span class="s2">}</span></p>
-<h3 id="NSString的使用"><a href="#NSString的使用" class="headerlink" title="NSString的使用"></a>NSString的使用</h3><h4 id="创建字符串与输出字符串"><a href="#创建字符串与输出字符串" class="headerlink" title="创建字符串与输出字符串"></a><strong>创建字符串与输出字符串</strong></h4><p><span class="s2">NSString</span><span class="s1"> *s=</span><span class="s3">@”Sometimes”</span><span class="s1">;</span></p>
-<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s2">NSLog</span><span class="s3">(</span><span class="s4">@”%@”</span><span class="s3">,s);</span></p>
-<h4 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a><strong>格式化字符串</strong></h4><p><span class="s1">int</span><span class="s2"> age=</span><span class="s3">85</span><span class="s2">;</span></p>
-<p><span class="s4"><span class="Apple-converted-space">        </span></span><span class="s2">NSString</span><span class="s4"> *s=[</span><span class="s2">NSString</span> <span class="s2">stringWithFormat</span><span class="s4">:</span><span class="s5">@”传入的年龄参数是%d”</span><span class="s4">,age];</span></p>
-<p><span class="s2"><span class="Apple-converted-space">        </span></span><span class="s6">NSLog</span><span class="s2">(</span><span class="s5">@”%@”</span><span class="s2">,s);</span></p>
-<p>调用<span class="s2">NSString类方法。</span></p>
-<h4 id="length返回字数（不是字符数）"><a href="#length返回字数（不是字符数）" class="headerlink" title="length返回字数（不是字符数）"></a><strong>length返回字数（不是字符数）</strong></h4><p><span class="s1">NSString</span><span class="s2"> *s=</span><span class="s3">@”123 456”</span><span class="s2">;</span></p>
-<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s1">NSLog</span><span class="s3">(</span><span class="s4">@”%@”</span><span class="s3">,s);</span></p>
-<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s1">NSUInteger</span><span class="s3"> size=[s </span><span class="s1">length</span><span class="s3">];</span></p>
-<p><span class="s3"><span class="Apple-converted-space">        </span></span><span class="s1">NSLog</span><span class="s3">(</span><span class="s4">@”%lu”</span><span class="s3">,(</span><span class="s5">unsigned</span> <span class="s5">long</span><span class="s3">)size);</span></p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+
+#import “Person.h”
+
+#import “Student.h”
+
+void test(Person * p)
+
+{
+
+[p show];
+
+}
+
+int main(int argc, const char * argv[]) {
+
+@autoreleasepool {
+
+Person *p=[[Person alloc] init];
+
+Student *s=[[Student alloc] init];
+
+test(p);
+
+test(s);
+
+}
+
+return 0;
+
+}
+</code></pre><h1 id="NSString的使用"><a href="#NSString的使用" class="headerlink" title="NSString的使用"></a>NSString的使用</h1><ol>
+<li><p>创建字符串与输出字符串</p>
+<pre><code>NSString *s=@”Sometimes”;
+
+NSLog(@”%@”,s);
+</code></pre></li>
+<li><p>格式化字符串</p>
+<pre><code>int age=85;
+
+NSString *s=[NSString stringWithFormat:@”传入的年龄参数是%d”,age];
+
+NSLog(@”%@”,s);
+</code></pre></li>
+<li><p>调用NSString类方法。<br>length返回字数（不是字符数）</p>
+<pre><code>NSString *s=@”123 456”;
+
+NSLog(@”%@”,s);
+
+NSUInteger size=[s length];
+
+NSLog(@”%lu”,(unsigned long)size);
+</code></pre></li>
+</ol>
 <p>返回的是7，包括空格。</p>
 
       
@@ -519,6 +615,8 @@ set方法：设置成员变量，过滤一些不符合要求的值。以set开�
         <div class="post-tags">
           
             <a href="/tags/Objective-C/" rel="tag">#Objective-C</a>
+          
+            <a href="/tags/ios开发/" rel="tag">#ios开发</a>
           
         </div>
       
@@ -609,7 +707,7 @@ set方法：设置成员变量，过滤一些不符合要求的值。以set开�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -617,7 +715,7 @@ set方法：设置成员变量，过滤一些不符合要求的值。以set开�
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -700,7 +798,7 @@ set方法：设置成员变量，过滤一些不符合要求的值。以set开�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装"><span class="nav-number">1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OC的弱语法"><span class="nav-number">2.</span> <span class="nav-text">OC的弱语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类方法"><span class="nav-number">3.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self关键字"><span class="nav-number">4.</span> <span class="nav-text">self关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">5.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-number">6.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSString的使用"><span class="nav-number">7.</span> <span class="nav-text">NSString的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建字符串与输出字符串"><span class="nav-number">7.1.</span> <span class="nav-text">创建字符串与输出字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#格式化字符串"><span class="nav-number">7.2.</span> <span class="nav-text">格式化字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#length返回字数（不是字符数）"><span class="nav-number">7.3.</span> <span class="nav-text">length返回字数（不是字符数）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#封装"><span class="nav-number">1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OC的弱语法"><span class="nav-number">2.</span> <span class="nav-text">OC的弱语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#调用未声明、未实现的对象方法"><span class="nav-number">2.1.</span> <span class="nav-text">调用未声明、未实现的对象方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用已声明、未实现的对象方法"><span class="nav-number">2.2.</span> <span class="nav-text">调用已声明、未实现的对象方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用未声明、已实现的对象方法"><span class="nav-number">2.3.</span> <span class="nav-text">调用未声明、已实现的对象方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类方法"><span class="nav-number">3.</span> <span class="nav-text">类方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#self关键字"><span class="nav-number">4.</span> <span class="nav-text">self关键字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#继承"><span class="nav-number">5.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#super"><span class="nav-number">6.</span> <span class="nav-text">super</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多态"><span class="nav-number">7.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSString的使用"><span class="nav-number">8.</span> <span class="nav-text">NSString的使用</span></a></li></ol></div>
             
           </div>
         </section>
@@ -796,13 +894,6 @@ set方法：设置成员变量，过滤一些不符合要求的值。以set开�
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>

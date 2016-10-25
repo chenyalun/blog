@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -105,7 +105,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -277,7 +277,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-16T05:00:32+08:00" content="2016-05-16">
+            <time itemprop="dateCreated" datetime="2016-05-16T19:22:17+08:00" content="2016-05-16">
               2016-05-16
             </time>
           </span>
@@ -332,34 +332,10 @@
 
       
         
-          <h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>优点：过滤不合理的值，屏蔽内部的赋值过程，让外界不必关注内部的细节。</p>
-<p>成员变量的命名：以下划线开头。用于区分get方法名称和局部变量名称。尽量不设置为@public公有属性。</p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">int</span><span class="s1"> _speed;</span></p>
-<p><span class="s1">}</span></p>
-<p><strong>set方法</strong>：设置成员变量，过滤一些不符合要求的值。以set开头，返回类型为void，后面跟上成员变量名，形参不与成员变量重名，形参类型与成员变量相同，成员变量的首字母大写。在set方法中设置行为，监听属性的改变。</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s;</span></p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)setSpeed:(</span><span class="s2">int</span><span class="s1">)s</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s3">_speed</span><span class="s1">=</span><span class="s1">s+</span><span class="s2">20</span><span class="s1">;</span></p>
-<p><span class="s1">}</span></p>
-<p><strong>get方法</strong>：获取对象内部的成员变量，不接收参数，返回类型与成员变量类型相同，方法名称与成员变量名称相同（不含下划线）。不推荐以get开头。</p>
-<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed;</span></p>
-<p><span class="s1">-(</span><span class="s2">int</span><span class="s1">)speed</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s2">return</span> <span class="s3">_speed</span><span class="s1">;</span></p>
-<p><span class="s1">}</span></p>
-<p>只读：只提供get方法。可读可写：提供get和set方法。</p>
-<h3 id="OC的弱语法"><a href="#OC的弱语法" class="headerlink" title="OC的弱语法"></a>OC的弱语法</h3><p>1，调用未声明、未实现的对象方法</p>
-<p>编译 报错 No visible @interface for ‘Dog’ declares the selector ‘ssss’，链接运行 报错。</p>
-<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1002014a0’</strong></span></p>
-<p>给Dog对象发送不能识别的消息。</p>
-<p>2，调用已声明、未实现的对象方法</p>
-<p>编译警告：Method definition for ‘ssss’ not found   未实现方法  链接正常，运行报错</p>
-<p><span class="s1"><strong>reason: ‘-[Dog ssss]: unrecognized selector sent to instance 0x1001002a0’</strong></span></p>
-<p>3,调用未声明、已实现的对象方法</p>
-<p>编译 链接运行  错误  No visible @interface for ‘Dog’ declares the selector ‘ssss’</p>
-<p>在Dog的@interface中，对于ssss的声明是不可见的。
+          <blockquote>
+<p>2016.10.25 温习</p>
+</blockquote>
+<p align = "center"> 关于继承与属性的笔记. </p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/16/Objective-C学习笔记二：继承与属性/#more" rel="contents">
               阅读全文 &raquo;
@@ -625,14 +601,7 @@
 
       
         
-          <blockquote>
-<p>原文刊自某信用卡论坛。某年某日拜读之后，收获巨大，特此转载。感谢作者。</p>
-</blockquote>
-<h1 id="一"><a href="#一" class="headerlink" title="一"></a>一</h1><p><span style="color: #000000;">首先抛出一个问题，银行放贷最关心的是什么？<br>并不是还贷的能力，而是抽贷的时机。</span></p>
-<p>即使资不抵债，银行照样敢放出贷款，如果您不能理解，那么请往下看：</p>
-<p>&nbsp;</p>
-<p><span style="color: #000000;">“信用卡体系的根基并非持卡人的信用，而是银行的不守信用”，这是我最初接触到信用卡时的第一想法。说来奇怪，当我第一次接触到信用卡的时候，并没有任何信用卡，甚至没有申请信用卡的想法；那年我大三，或者说大四，总之暑假还没有开学。</span></p>
-<p><span style="color: #000000;">本来，作为一名实习生只能担任一些非核心的岗位，但因为父亲的原因，免除了基础性的工作，直接进入了能够接触到信用逻辑的技术部门；那是我最初接触到银行的信贷逻辑，并使我后来决定远离银行体系的原因。银行只是一台冷血的机器，这里只有利益的竞逐和赤裸裸的博弈，银行与用户，银行与银行，而没有理解与帮助。
+          <p align = "center"> 哲学上的负债,关于人性. </p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/06/浅谈负债哲学/#more" rel="contents">
               阅读全文 &raquo;
@@ -1097,7 +1066,7 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1138,7 +1107,7 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -1146,7 +1115,7 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -1314,13 +1283,6 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
 
   
 

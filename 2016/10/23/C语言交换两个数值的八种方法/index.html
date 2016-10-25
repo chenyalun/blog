@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -90,32 +90,23 @@
 
 
 
-<meta name="description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.
-编译器:XCode8.0
-
-异或123456789int main(int argc, const char * argv[]) &amp;#123;   int m = 5, n = 3;   m = m ^ n;   n = m ^ n;   m = m ^ n;      printf(&amp;quot;m:%d---n:%">
+<meta name="description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言交换两个数值的八种方法">
 <meta property="og:url" content="http://yoursite.com/2016/10/23/C语言交换两个数值的八种方法/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.
-编译器:XCode8.0
-
-异或123456789int main(int argc, const char * argv[]) &amp;#123;   int m = 5, n = 3;   m = m ^ n;   n = m ^ n;   m = m ^ n;      printf(&amp;quot;m:%d---n:%">
-<meta property="og:updated_time" content="2016-10-20T01:20:24.000Z">
+<meta property="og:description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.">
+<meta property="og:updated_time" content="2016-10-25T14:07:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言交换两个数值的八种方法">
-<meta name="twitter:description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.
-编译器:XCode8.0
-
-异或123456789int main(int argc, const char * argv[]) &amp;#123;   int m = 5, n = 3;   m = m ^ n;   n = m ^ n;   m = m ^ n;      printf(&amp;quot;m:%d---n:%">
+<meta name="twitter:description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -336,8 +327,8 @@
       
 
       
-        <blockquote>
-<p>在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月.</p>
+        <p></p><p align="center"> 在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月. </p><br><a id="more"></a><p></p>
+<blockquote>
 <p>编译器:XCode8.0</p>
 </blockquote>
 <h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int main(int argc, const char * argv[]) &#123;</div><div class="line">   int m = 5, n = 3;</div><div class="line">   m = m ^ n;</div><div class="line">   n = m ^ n;</div><div class="line">   m = m ^ n;</div><div class="line">   </div><div class="line">   printf(&quot;m:%d---n:%d&quot;,m,n);</div><div class="line">   return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -346,7 +337,6 @@
 <li>两数异或,相同则得0,不同则得1</li>
 <li>x ^ x = 0,x ^ 0 = x<br>第二行:  m:0101 n:0011<br>第三行:  m:0110 n:0011<br>第四行:  n:0101 m:0110<br>第五行:  m:0011 n:0101<br>此时,已完成交换.</li>
 </ol>
-<a id="more"></a>
 <h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><pre><code>int main(int argc, const char * argv[]) {
     int m = 2147483648, n = 2147483647;
     m = m + n - (n = m);
@@ -457,7 +447,7 @@ int a = 2147483648;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/18/iOS学习笔记一：Cocoapods的安装与使用/" rel="next" title="iOS学习笔记一：Cocoapods的安装与使用">
+              <a href="/2016/10/10/iOS学习笔记一：Cocoapods的安装与使用/" rel="next" title="iOS学习笔记一：Cocoapods的安装与使用">
                 <i class="fa fa-chevron-left"></i> iOS学习笔记一：Cocoapods的安装与使用
               </a>
             
@@ -539,7 +529,7 @@ int a = 2147483648;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -547,7 +537,7 @@ int a = 2147483648;
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -726,13 +716,6 @@ int a = 2147483648;
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
