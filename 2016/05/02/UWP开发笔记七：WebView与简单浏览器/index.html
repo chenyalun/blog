@@ -90,24 +90,18 @@
 
 
 
-<meta name="description" content="利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。
-命令栏代码：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar IsOpen=”True”&amp;gt;            &amp;lt;S">
+<meta name="description" content="利用webview控件可以简单制作一个浏览器.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UWP开发笔记七：WebView与简单浏览器">
 <meta property="og:url" content="http://yoursite.com/2016/05/02/UWP开发笔记七：WebView与简单浏览器/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。
-命令栏代码：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar IsOpen=”True”&amp;gt;            &amp;lt;S">
+<meta property="og:description" content="利用webview控件可以简单制作一个浏览器.">
 <meta property="og:image" content="http://images.chenyalun.cn/2016/04/23/001.png">
 <meta property="og:image" content="http://images.chenyalun.cn/2016/04/23/002.png">
-<meta property="og:updated_time" content="2016-08-21T12:15:24.000Z">
+<meta property="og:updated_time" content="2016-10-28T13:33:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UWP开发笔记七：WebView与简单浏览器">
-<meta name="twitter:description" content="利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。
-命令栏代码：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar IsOpen=”True”&amp;gt;            &amp;lt;S">
+<meta name="twitter:description" content="利用webview控件可以简单制作一个浏览器.">
 <meta name="twitter:image" content="http://images.chenyalun.cn/2016/04/23/001.png">
 
 
@@ -336,56 +330,100 @@
       
 
       
-        <p>利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。</p>
+        <p align="center"><br>利用webview控件可以简单制作一个浏览器. </p>
+
+<a id="more"></a>
+<p>利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。</p>
 <p>命令栏代码：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar IsOpen=”True”&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”BackAppBarButton”<br>                              Click=”BackAppBarButton_Click”<br>                              Label=”返回”<br>                              Icon=”Back”/&gt;<br>                &lt;AppBarButton Name=”ForwardAppBarButton”<br>                              Label=”前进”<br>                              Icon=”Forward”<br>                              Click=”ForwardAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”RefreshAppBarButton”<br>                              Label=”刷新”<br>                              Icon=”Refresh”<br>                              Click=”RefreshAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”StopAppBarButton”<br>                              Click=”StopAppBarButton_Click”<br>                              Label=”停止”<br>                              Icon=”Stop”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面：</p>
-<p><pre class="lang:default decode:true ">&lt;Grid.RowDefinitions&gt;<br>            &lt;RowDefinition Height=”Auto”/&gt;<br>            &lt;RowDefinition Height=”*”/&gt;<br>        &lt;/Grid.RowDefinitions&gt;<br>        &lt;TextBox Name=”URLTextBox”<br>                 InputScope=”Url”<br>                 KeyDown=”URLTextBox_KeyDown”<br>                 Margin=”20”/&gt;<br>        &lt;WebView Name=”Web”<br>                 Grid.Row=”1”<br>                 NavigationCompleted=”Web_NavigationCompleted”/&gt;</pre></p>
-<pre><code>&amp;lt;/Grid&amp;gt;&lt;/pre&gt;
+<pre><code>&lt;Page.BottomAppBar&gt;
+        &lt;AppBar IsOpen=”True”&gt;
+            &lt;StackPanel Orientation=”Horizontal”&gt;
+                &lt;AppBarButton Name=”BackAppBarButton”
+                              Click=”BackAppBarButton_Click”
+                              Label=”返回”
+                              Icon=”Back”/&gt;
+                &lt;AppBarButton Name=”ForwardAppBarButton”
+                              Label=”前进”
+                              Icon=”Forward”
+                              Click=”ForwardAppBarButton_Click”/&gt;
+                &lt;AppBarButton Name=”RefreshAppBarButton”
+                              Label=”刷新”
+                              Icon=”Refresh”
+                              Click=”RefreshAppBarButton_Click”/&gt;
+                &lt;AppBarButton Name=”StopAppBarButton”
+                              Click=”StopAppBarButton_Click”
+                              Label=”停止”
+                              Icon=”Stop”/&gt;
+            &lt;/StackPanel&gt;
+        &lt;/AppBar&gt;
+    &lt;/Page.BottomAppBar&gt;
+</code></pre><p>页面：</p>
+<pre><code>&lt;Grid.RowDefinitions&gt;
+            &lt;RowDefinition Height=”Auto”/&gt;
+            &lt;RowDefinition Height=”*”/&gt;
+        &lt;/Grid.RowDefinitions&gt;
+        &lt;TextBox Name=”URLTextBox”
+                 InputScope=”Url”
+                 KeyDown=”URLTextBox_KeyDown”
+                 Margin=”20”/&gt;
+        &lt;WebView Name=”Web”
+                 Grid.Row=”1”
+                 NavigationCompleted=”Web_NavigationCompleted”/&gt;
+
+&lt;/Grid&gt;
 </code></pre><p>后台逻辑：</p>
-<p><pre class="lang:default decode:true "> // 返回处理<br>        private void BackAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            if (Web.CanGoBack)<br>            {<br>                Web.GoBack();<br>            }<br>        }</pre></p>
-<pre><code>// 前进处理
-private void ForwardAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    if (Web.CanGoForward)
+<pre><code>     // 返回处理
+            private void BackAppBarButton_Click(object sender, RoutedEventArgs e)
+            {
+                if (Web.CanGoBack)
+                {
+                    Web.GoBack();
+                }
+            }
+
+    // 前进处理
+    private void ForwardAppBarButton_Click(object sender, RoutedEventArgs e)
     {
-        Web.GoForward();
-    }
-}
-
-// 刷新
-private void RefreshAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Web.Refresh();
-}
-
-// 停止
-private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Web.Stop();
-}
-
-// 按（回车）键处理
-private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-{
-    // 如果按下的键是回车键
-    if (e.Key== Windows.System.VirtualKey.Enter)
-    {
-        // 导航到文本框中的地址
-        Web.Navigate(new Uri(URLTextBox.Text));
+        if (Web.CanGoForward)
+        {
+            Web.GoForward();
+        }
     }
 
-    // 处理焦点
-    Web.Focus(FocusState.Keyboard);
-}
-
-// 导航完成事件处理
-private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-{
-    // 导航是否成功
-    if (args.IsSuccess)
+    // 刷新
+    private void RefreshAppBarButton_Click(object sender, RoutedEventArgs e)
     {
-        // 参数传递到地址栏
-        URLTextBox.Text = args.Uri.ToString();
+        Web.Refresh();
+    }
+
+    // 停止
+    private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        Web.Stop();
+    }
+
+    // 按（回车）键处理
+    private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        // 如果按下的键是回车键
+        if (e.Key== Windows.System.VirtualKey.Enter)
+        {
+            // 导航到文本框中的地址
+            Web.Navigate(new Uri(URLTextBox.Text));
+        }
+
+        // 处理焦点
+        Web.Focus(FocusState.Keyboard);
+    }
+
+    // 导航完成事件处理
+    private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+    {
+        // 导航是否成功
+        if (args.IsSuccess)
+        {
+            // 参数传递到地址栏
+            URLTextBox.Text = args.Uri.ToString();
     }
 
 }&lt;/pre&gt;
@@ -393,11 +431,18 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
 <p>初始页面：<img src="http://images.chenyalun.cn/2016/04/23/001.png" alt=""></p>
 <p>打开新链接：</p>
 <p><img src="http://images.chenyalun.cn/2016/04/23/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>对键盘的按键（回车）键处理：<br>private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)<br>{<br>// 如果按下的键是回车键<br>if (e.Key== Windows.System.VirtualKey.Enter)<br>{<br>// 导航到文本框中的地址<br>Web.Navigate(new Uri(URLTextBox.Text));<br>}<br>}</p>
-<p>对焦点的处理：<br>Web.Focus(FocusState.Keyboard);</p>
-<p>还有就是，文本框（地址栏）输入的文本必须是URL，即 <a href="http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。" target="_blank" rel="external">http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。</a></p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>对键盘的按键（回车）键处理：</p>
+<pre><code>private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+{
+// 如果按下的键是回车键
+if (e.Key== Windows.System.VirtualKey.Enter)
+{
+// 导航到文本框中的地址
+Web.Navigate(new Uri(URLTextBox.Text));
+}
+}
+</code></pre><p>对焦点的处理：<br><code>Web.Focus(FocusState.Keyboard);</code></p>
+<p>还有就是，文本框（地址栏）输入的文本必须是URL，即 <a href="http://chenyalun.com/" target="_blank" rel="external">http://chenyalun.com/</a> 如果是chenyalun.com那就会报错了。</p>
 
       
     </div>
@@ -602,7 +647,7 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-gt-笔记"><span class="nav-number">1.</span> <span class="nav-text">>>笔记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#笔记"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a></li></ol></div>
             
           </div>
         </section>

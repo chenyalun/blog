@@ -332,121 +332,12 @@
 
       
         
-          
-            <p>这个和<a href="http://www.chenyalun.cn/uwp开发笔记四：随机数与筛子游戏.html" target="_blank" rel="external">UWP开发笔记四：随机数与筛子游戏</a>有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。</p>
-<p>命令栏：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Label=”新建”<br>                              Icon=”NewFolder”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
-<p><pre class="lang:default decode:true ">&lt;StackPanel HorizontalAlignment=”Center”<br>            VerticalAlignment=”Center”<br>            Name=”DisplayStackPanel”<br>                    Orientation=”Horizontal”/&gt;</pre><br>当然，为了方便起见，创建一个ShowBall类：需要引入的命名空间有：</p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>完整代码：</p>
-<p><pre class="lang:default decode:true ">using System;<br>using System.Collections.Generic;<br>using System.Linq;<br>using System.Text;<br>using System.Threading.Tasks;<br>//color<br>using Windows.UI;</pre></p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>namespace Lucky_Lotto<br>{<br>   public  class ShowBall<br>    {<br>        // 定义随机数(种子为日期和时间的计时周期）<br>        private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<pre><code>    // 定义获取数字集合方法
-    private List&amp;lt;int&amp;gt; GetNumbers()
-    {
-        int Number;
-        // 定义Numbers集合
-        List&amp;lt;int&amp;gt; Numbers = new List&amp;lt;int&amp;gt;();
-        // 当Numbers集合中整数个数小于6时，自动增加
-        while (Numbers.Count &amp;lt; 6)
-        {
-            // 随机获取1到50之间的整数赋予Number（Number可以取1，不可取50）
-            Number = random.Next(1, 50);
-            // 将产生的随机数添加到集合之中
-            // 处理当集合中的整数与产生的随机数相同的情况
-            if (!Numbers.Contains(Number)||Number&amp;lt;1)
-            {
-                Numbers.Add(Number);
-            }
-            // 对集合中的数字进行有序整理（美观起见）
-            Numbers.Sort();
-        }
-
-        return Numbers;
-
-    }
-    // 对StackPanel进行处理：创建小球，增添颜色等
-    // 将每个小球分别放在Canva中s，6个Canvas放在一个StackPanel中
-    public void PlayBall(ref StackPanel stackpanel)
-    {
-        // 清空原先讯在的元素
-        stackpanel.Children.Clear();
-
-        // 对数字集合遍历
-        foreach(int number in GetNumbers())
-        {
-            // 定义Canvas
-            Canvas canvas = new Canvas();
-            canvas.Width = 48;
-            canvas.Height = 48;
-            canvas.Margin = new Thickness(2);
-
-            // 定义球
-            Ellipse ellipse = new Ellipse();
-            ellipse.Width = canvas.Width;
-            ellipse.Height = canvas.Height;
-            // 设置小球边框颜色是黑色
-            ellipse.Stroke = new SolidColorBrush(Colors.Black);
-
-            // 根据数字的大小设置小球的填充颜色
-            if (number &amp;gt;= 1 &amp;amp;&amp;amp; number &amp;lt;= 9)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.White);
-            }
-            else if (number &amp;gt; 9 &amp;amp;&amp;amp; number &amp;lt;= 19)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 200, 236));
-            }
-            else if (number &amp;gt; 19 &amp;amp;&amp;amp; number &amp;lt;= 29)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Magenta);
-            }
-            else if (number &amp;gt; 29 &amp;amp;&amp;amp; number &amp;lt;= 39)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 255, 0));
-            }
-            else if (number &amp;gt; 39 &amp;amp;&amp;amp; number &amp;lt;= 49)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Yellow);
-            }
-
-            // 定义球中的文本（数字）
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = number.ToString();
-            textBlock.FontSize = 16;
-            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-            textBlock.Margin = new Thickness(16, 12, 16, 12);
-
-            // 将文本（数字）、小球添加到canvas中，将canvas添加到stackpanel中
-            // 一定先添加球，再添加文本，否则文本不会显示
-            canvas.Children.Add(ellipse);
-            canvas.Children.Add(textBlock);
-            stackpanel.Children.Add(canvas);
-        }
-    }
-}
-</code></pre><p>}<br><br>这样主页面的后台代码就可以轻松的调用了：</p>
-<p><pre class="lang:default decode:true "> // 新建类的实例<br>        public  ShowBall showball = new ShowBall();<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {</pre></p>
-<pre><code>  showball.PlayBall(ref DisplayStackPanel);
-}&lt;/pre&gt;
-</code></pre><p>演示：</p>
-<p><img src="http://images.chenyalun.cn/2016/04/22/001.png" alt=""><img src="http://images.chenyalun.cn/2016/04/22/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>// 对数字集合遍历<br>foreach(int number in GetNumbers())  {}</p>
-<p>// 设置小球边框颜色是黑色<br>ellipse.Stroke = new SolidColorBrush(Colors.Black);</p>
-<p>//设置margin</p>
-<p>textBlock.Margin = new Thickness(16, 12, 16, 12);</p>
-<p>// 一定先添加球，再添加文本，否则文本不会显示<br>canvas.Children.Add(ellipse);<br>canvas.Children.Add(textBlock);<br>stackpanel.Children.Add(canvas);</p>
-<p>// 清空原先存在的元素<br>stackpanel.Children.Clear();</p>
-<p>// 对集合中的数字进行有序整理（美观起见）<br>Numbers.Sort();</p>
-<p>// 定义随机数(种子为日期和时间的计时周期）<br>private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<p>// 定义Numbers集合<br>List&lt;int&gt; Numbers = new List&lt;int&gt;();</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-          
+          <p align = "center"><br>幸运彩色小球游戏. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/30/UWP开发笔记六：幸运彩色小球/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -563,59 +454,12 @@
 
       
         
-          
-            <p>应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。</p>
-<p>命令栏代码：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Icon=”Page”<br>                              Label=”新建”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”LoadAppBarButton”<br>                              Icon=”Folder”<br>                              Label=”显示”<br>                              Click=”LoadAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”SaveAppBarButton”<br>                              Icon=”Save”<br>                              Label=”保存”<br>                              Click=”SaveAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
-<p><pre class="lang:default decode:true "> &lt;StackPanel&gt;<br>            &lt;TextBox Name=”Email”<br>                     PlaceholderText=”邮箱”<br>                     Margin=”20”<br>                     InputScope=”EmailSmtpAddress”/&gt;<br>            &lt;TextBox Name=”Web”<br>                     PlaceholderText=”网址”<br>                     Margin=”20”<br>                     InputScope=”Url”/&gt;<br>            &lt;TextBox Name=”Tel”<br>                     PlaceholderText=”手机号码”<br>                     Margin=”20”<br>                     InputScope=”TelephoneNumber”/&gt;<br>        &lt;/StackPanel&gt;</pre><br>后台逻辑：</p>
-<p><pre class="lang:default decode:true ">  //  新建存储<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            Email.Text = string.Empty;<br>            Web.Text = string.Empty;<br>            Tel.Text = string.Empty;<br>        }</pre></p>
-<pre><code>// 保存信息
-private void SaveAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Save(&quot;Email&quot;, Email.Text);
-    Save(&quot;Web&quot;, Web.Text);
-    Save(&quot;Tel&quot;, Tel.Text);
-}
-
-// 加载存储信息
-private void LoadAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Email.Text = Load(&quot;Email&quot;);
-    Web.Text = Load(&quot;Web&quot;);
-    Tel.Text = Load(&quot;Tel&quot;);
-}
-
-// 应用本地设置信息存储:保存 键 值
-public void Save(string key,string value)
-{
-    ApplicationData.Current.LocalSettings.Values[key] = value;
-}
-
-// 加载应用本地设置存储的信息
-public string Load(string key)
-{
-    if (ApplicationData.Current.LocalSettings.Values[key]!=null)
-    {
-        return ApplicationData.Current.LocalSettings.Values[key].ToString();
-    }
-
-    return string.Empty;
-}&lt;/pre&gt;
-</code></pre><p>输入信息并保存：</p>
-<p><img src="http://images.chenyalun.cn/2016/04/21/005.png" alt=""></p>
-<p>点击新建清空数据，点击显示：</p>
-<p><img src="http://images.chenyalun.cn/2016/04/21/006.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><ul>
-<li>空字符串：string.Empty</li>
-<li>保存的方式为键值对：key和value</li>
-<li>本地设置类： ApplicationData.Current.LocalSettings.Values[key] = value;其中key一般是字符串，value是保存的值</li>
-<li>需要引入命名空间：应用数据存储  using Windows.Storage;</li>
-<li>删除存储 ApplicationData.Current.LocalSettings.Values.Remove(“key”); 其中key是键<br>&nbsp;</li>
-</ul>
-
-          
+          <p align = "center"><br>应用数据存储. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/28/UWP开发笔记五：应用数据本地存储/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -732,182 +576,12 @@ public string Load(string key)
 
       
         
-          
-            <p>点击方块，方块随机出现类似筛子的点数，连续点击，连续出现随机的数。当然，是有两个方块的。点击底部命令栏的刷新按钮，两块“筛子”均恢复空白状态。</p>
-<p>命令栏：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                    &lt;AppBarButton Name=”NewAppBarButton”<br>                                  Icon=”Page”<br>                                  Click=”NewAppBarButton_Click”<br>                                  Label=”刷新”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
-<p><pre class="lang:default decode:true "> &lt;Grid.ColumnDefinitions&gt;<br>            &lt;ColumnDefinition Width=”<em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”</em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”*”/&gt;<br>        &lt;/Grid.ColumnDefinitions&gt;</pre></p>
-<pre><code>    &amp;lt;Grid Name=&quot;FirstGrid&quot;
-          Tapped=&quot;FirstGrid_Tapped&quot;
-          Width=&quot;100&quot;
-          Height=&quot;100&quot;
-          Background=&quot;HotPink&quot;
-          Grid.Column=&quot;1&quot;&amp;gt;
-        &amp;lt;Grid.RowDefinitions&amp;gt;
-            &amp;lt;RowDefinition /&amp;gt;
-            &amp;lt;RowDefinition /&amp;gt;
-            &amp;lt;RowDefinition /&amp;gt;
-        &amp;lt;/Grid.RowDefinitions&amp;gt;
-        &amp;lt;Grid.ColumnDefinitions&amp;gt;
-            &amp;lt;ColumnDefinition/&amp;gt;
-            &amp;lt;ColumnDefinition/&amp;gt;
-            &amp;lt;ColumnDefinition/&amp;gt;
-        &amp;lt;/Grid.ColumnDefinitions&amp;gt;
-    &amp;lt;/Grid&amp;gt;
-
-&amp;lt;Grid Name=&quot;SecondGrid&quot;
-          Tapped=&quot;SecondGrid_Tapped&quot;
-          Width=&quot;100&quot;
-          Height=&quot;100&quot;
-          Background=&quot;HotPink&quot;
-          Grid.Column=&quot;3&quot;&amp;gt;
-    &amp;lt;Grid.RowDefinitions&amp;gt;
-        &amp;lt;RowDefinition /&amp;gt;
-        &amp;lt;RowDefinition /&amp;gt;
-        &amp;lt;RowDefinition /&amp;gt;
-    &amp;lt;/Grid.RowDefinitions&amp;gt;
-    &amp;lt;Grid.ColumnDefinitions&amp;gt;
-        &amp;lt;ColumnDefinition/&amp;gt;
-        &amp;lt;ColumnDefinition/&amp;gt;
-        &amp;lt;ColumnDefinition/&amp;gt;
-    &amp;lt;/Grid.ColumnDefinitions&amp;gt;
-
-&amp;lt;/Grid&amp;gt;&lt;/pre&gt;
-</code></pre><p>后台代码MainPage.xaml.cs：</p>
-<p>引入命名空间：</p>
-<p><pre class="lang:default decode:true ">//颜色<br>using Windows.UI;<br>//图形<br>using Windows.UI.Xaml.Shapes;</pre><br>逻辑代码：</p>
-<p><pre class="lang:default decode:true"> private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            //刷新页面<br>            FirstGrid.Children.Clear();<br>            SecondGrid.Children.Clear();<br>        }</pre></p>
-<pre><code>    private void FirstGrid_Tapped(object sender, TappedRoutedEventArgs e)
-    {
-        // 移除面板上所有元素
-        FirstGrid.Children.Clear();
-        switch (Number())
-        {
-            case 0:
-            case 1:
-                Add(FirstGrid, 1, 1);
-                break;
-            case 2:
-                Add(FirstGrid, 0, 2);
-                Add(FirstGrid, 2, 0);
-                break;
-            case 3:
-                Add(FirstGrid, 0, 2);
-                Add(FirstGrid, 1, 1);
-                Add(FirstGrid, 2, 0);
-                break;
-            case 4:
-                Add(FirstGrid, 0, 0);
-                Add(FirstGrid, 0, 2);
-                Add(FirstGrid, 2, 0);
-                Add(FirstGrid, 2, 2);
-                break;
-            case 5:
-                Add(FirstGrid, 0, 0);
-                Add(FirstGrid, 0, 2);
-                Add(FirstGrid, 2, 2);
-                Add(FirstGrid, 1, 1);
-                Add(FirstGrid, 2, 0);
-                break;
-            case 6:
-                Add(FirstGrid, 0, 0);
-                Add(FirstGrid, 0, 2);
-                Add(FirstGrid, 1, 0);
-                Add(FirstGrid, 1, 2);
-                Add(FirstGrid, 2, 0);
-                Add(FirstGrid, 2, 2);
-                break;
-        }
-    }
-
-// 设置随机数
-    public int Number()
-    {
-        // 返回0到7之间的随机整数
-        return new Random().Next(0, 7);
-    }
-
-    // 设置添加圆点
-    public void Add(Grid grid, int row, int col)
-    {
-
-        Ellipse ell = new Ellipse();
-        // 设置填充颜色
-        ell.Fill = new SolidColorBrush(Colors.White);
-        // 设置宽高度
-        ell.Width = 20;
-        ell.Height = 20;
-        // 设置圆点的在表格上的位置
-        ell.SetValue(Grid.RowProperty, row);
-        ell.SetValue(Grid.ColumnProperty, col);
-        // 获取面板元素（把ell元素添加到面板中）
-        grid.Children.Add(ell);
-    }
-
-    private void SecondGrid_Tapped(object sender, TappedRoutedEventArgs e)
-    {
-        // 移除面板上所有元素
-        SecondGrid.Children.Clear();
-        switch (Number())
-        {
-            case 0:
-            case 1:
-                Add(SecondGrid, 1, 1);
-                break;
-            case 2:
-                Add(SecondGrid, 0, 2);
-                Add(SecondGrid, 2, 0);
-                break;
-            case 3:
-                Add(SecondGrid, 0, 2);
-                Add(SecondGrid, 1, 1);
-                Add(SecondGrid, 2, 0);
-                break;
-            case 4:
-                Add(SecondGrid, 0, 0);
-                Add(SecondGrid, 0, 2);
-                Add(SecondGrid, 2, 0);
-                Add(SecondGrid, 2, 2);
-                break;
-            case 5:
-                Add(SecondGrid, 0, 0);
-                Add(SecondGrid, 0, 2);
-                Add(SecondGrid, 2, 2);
-                Add(SecondGrid, 1, 1);
-                Add(SecondGrid, 2, 0);
-                break;
-            case 6:
-                Add(SecondGrid, 0, 0);
-                Add(SecondGrid, 0, 2);
-                Add(SecondGrid, 1, 0);
-                Add(SecondGrid, 1, 2);
-                Add(SecondGrid,2, 0);
-                Add(SecondGrid, 2, 2);
-                break;
-        }
-    }&lt;/pre&gt;
-</code></pre><p>点击出现筛子点数：</p>
-<p><img src="http://images.chenyalun.cn/2016/04/21/001.png" alt=""></p>
-<p>点击刷新按钮，清空所有元素：</p>
-<p><img src="http://images.chenyalun.cn/2016/04/21/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><ul>
-<li><h3 id="随机数："><a href="#随机数：" class="headerlink" title="随机数："></a>随机数：</h3></li>
-</ul>
-<p>Random()与时间相关的种子；</p>
-<p>Random(seed)指定种子；</p>
-<p>Random().NextDouble返回大于或等于0.0且小于1.0的随机浮点数；</p>
-<p>Random().Next()返回非负随机整数；</p>
-<p>Random().Next(下限，上限)返回指定范围非负随机整数（可取下限，不可取上限）；</p>
-<h3 id="设置图形依赖属性："><a href="#设置图形依赖属性：" class="headerlink" title="设置图形依赖属性："></a>设置图形依赖属性：</h3><p>Ellipse ell = new Ellipse();</p>
-<p>// 设置填充颜色<br>ell.Fill = new SolidColorBrush(Colors.White);</p>
-<p>// 设置圆点的在表格上的位置<br>ell.SetValue(Grid.RowProperty, row);<br>ell.SetValue(Grid.ColumnProperty, col);<br>// 获取面板元素（把ell元素添加到面板中）<br>grid.Children.Add(ell);</p>
-<p>// 移除面板上所有元素<br>SecondGrid.Children.Clear();</p>
-<p>总结：代码比较琐碎，而且不是很令人满意，xaml创建图形很方便，可是处理逻辑的时候没有思路，只好把图形创建的代码写在后台。本想写个方法同时处理两个方块，然而并没有成功〒_〒</p>
-<p>&nbsp;</p>
-
-          
+          <p align = "center"><br>随机数与筛子游戏<br>. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/26/UWP开发笔记四：随机数与筛子游戏/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1024,190 +698,12 @@ public string Load(string key)
 
       
         
-          
-            <p>动画编程可以实现很酷的很炫的效果，能让开发出的App散发无穷无尽的魅力，在颜值至上的时代，好看是检验UI的唯一标准。图形的翻转主要有三种形式：RotationX，RotationY，RotationZ，就是获取或设置围绕旋转的 X 轴或Y轴或Z轴旋转对象的角度。</p>
-<p>计划在文本框中键入图片的地址源，按回车载入图片，点击命令栏中按钮，图片做出相应变换。</p>
-<p>XAML代码：</p>
-<pre class="lang:default decode:true ">&lt;!--命令栏--&gt;
-    &lt;Page.BottomAppBar&gt;
-        &lt;AppBar IsSticky="True"&gt;
-            &lt;StackPanel Orientation="Horizontal" HorizontalAlignment="Right"&gt;
-            &lt;AppBarButton Name="XRotateAppBarButton"
-                          Icon="RepeatAll"
-                          Label="Pitch"
-                          Click="XRotateAppBarButton_Click"/&gt;
-            &lt;AppBarButton Name="YRotateAppButton"
-                          Icon="Rotate"
-                          Label="Roll"
-                          Click="YRotateAppButton_Click"/&gt;
-            &lt;AppBarButton Name="ZRotateAppBarButton"
-                          Icon="Refresh"
-                          Label="Yaw"
-                          Click="ZRotateAppBarButton_Click"/&gt;
-            &lt;/StackPanel&gt;
-
-        &lt;/AppBar&gt;
-    &lt;/Page.BottomAppBar&gt;
-
-    &lt;!--动画--&gt;
-    &lt;Page.Resources&gt;
-        &lt;!--X方向翻转--&gt;
-        &lt;Storyboard x:Name="StoryBoardX"&gt;
-            &lt;DoubleAnimation Storyboard.TargetName="ResultImage"
-                             Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)"
-                             From="0.0"
-                             To="360.0"
-                             AutoReverse="True"
-                             RepeatBehavior="Forever"&gt;
-            &lt;/DoubleAnimation&gt;
-        &lt;/Storyboard&gt;
-
-        &lt;!--Y方向翻转--&gt;
-        &lt;Storyboard x:Name="StoryBoardY"&gt;
-            &lt;DoubleAnimation Storyboard.TargetName="ResultImage"
-                             Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)"
-                             From="0.0"
-                             To="360.0"
-                             AutoReverse="True"
-                             RepeatBehavior="Forever"&gt;
-            &lt;/DoubleAnimation&gt;
-        &lt;/Storyboard&gt;
-
-        &lt;!--Z方向翻转--&gt;
-        &lt;Storyboard x:Name="StoryBoardZ"&gt;
-            &lt;DoubleAnimation Storyboard.TargetName="ResultImage"
-                             Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationZ)"
-                             From="0.0"
-                             To="360.0"
-                             AutoReverse="True"
-                             RepeatBehavior="Forever"&gt;
-            &lt;/DoubleAnimation&gt;
-        &lt;/Storyboard&gt;
-    &lt;/Page.Resources&gt;
-
-    &lt;Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"&gt;
-        &lt;Grid.RowDefinitions&gt;
-            &lt;RowDefinition Height="Auto"/&gt;
-            &lt;RowDefinition Height="Auto"/&gt;
-            &lt;RowDefinition Height="*"/&gt;
-        &lt;/Grid.RowDefinitions&gt;
-        &lt;TextBlock Text="请输入图片的地址"
-                   HorizontalAlignment="Center"
-                   Height="30"/&gt;
-        &lt;TextBox  Grid.Row="1"
-                  Name="URLTextBox"
-                   FontSize="20"
-                   HorizontalAlignment="Stretch"
-                   Height="40"
-                   Margin="20"
-                   InputScope="Url"
-                   KeyDown="URLTextBox_KeyDown"/&gt;
-        &lt;Image Grid.Row="2"
-               Name="ResultImage"
-               Margin="60"
-               Stretch="Uniform"&gt;
-            &lt;!--注意一定要声明-Projection属性--&gt;
-            &lt;Image.Projection&gt;
-                &lt;PlaneProjection /&gt;
-            &lt;/Image.Projection&gt;
-        &lt;/Image&gt;
-    &lt;/Grid&gt;</pre>
-原图：
-
-![](http://images.chenyalun.cn/2016/04/20/101.png)
-
-X轴翻转:
-
-![](http://images.chenyalun.cn/2016/04/20/102.gif)
-
-&nbsp;
-
-Y轴翻转：![](http://images.chenyalun.cn/2016/04/20/103.gif)
-
-以及Z轴翻转：![](http://images.chenyalun.cn/2016/04/20/104.gif)
-
-CS 代码（主要是获取文本框中的URL，以及处理按钮事件）：
-<pre class="lang:default decode:true "> // TextBox输入完毕按下回车后，得到图片来源
-        private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            // 判断与事件关联的输入按钮是否为虚拟按键的Enter键
-            if (e.Key==Windows.System.VirtualKey.Enter)
-            {
-                ResultImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(URLTextBox.Text));
-            }
-        }
-
-        // 设置按下按钮后的翻转效果
-        private   void XRotateAppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-             StoryBoardX.Begin();
-        }
-
-        private void YRotateAppButton_Click(object sender, RoutedEventArgs e)
-        {
-            StoryBoardY.Begin();
-        }
-
-        private void ZRotateAppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            StoryBoardZ.Begin();
-        }</pre>
-
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><h3 id="1-处理文本框的回车事件中，"><a href="#1-处理文本框的回车事件中，" class="headerlink" title="1,处理文本框的回车事件中，"></a>1,处理文本框的回车事件中，</h3><p>文本框输入类型：InputScope=”Url”   键盘按键属性KeyDown=”URLTextBox_KeyDown”</p>
-<p>获取文本框内容并转换为URL：</p>
-<p>// 判断与事件关联的按键是否为虚拟按键的Enter键<br>if (e.Key==Windows.System.VirtualKey.Enter)<br>{<br>ResultImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(URLTextBox.Text));</p>
-<p>等同于：</p>
-<pre class="lang:default decode:true ">Uri url = new Uri(URLTextBox.Text);
-ResultImage.Source = new Windows.UI.Xaml.Media.Imaging.BitmapImage(url);</pre>
-}
-
-当然，如果引入命名空间了，那就更好了  using Windows.UI.Xaml.Media.Imaging;
-<pre class="lang:default decode:true ">Uri url = new Uri(URLTextBox.Text);
-ResultImage.Source = new BitmapImage(url);</pre>
-
-<h3 id="2，关于动画"><a href="#2，关于动画" class="headerlink" title="2，关于动画"></a>2，关于动画</h3><p>首先目标图片要声明Projection属性，即添加：</p>
-<pre class="lang:default decode:true ">&lt;Image.Projection&gt;
-   &lt;PlaneProjection /&gt;
-&lt;/Image.Projection&gt;</pre>
-其次在 &lt;Page.Resources&gt;中添加故事板：
-<pre class="lang:default decode:true ">&lt;Storyboard x:Name="StoryBoardX"&gt;
-&lt;DoubleAnimation Storyboard.TargetName="ResultImage"
-Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)"
-From="0.0"
-To="360.0"
-AutoReverse="True"
-RepeatBehavior="Forever"&gt;
-&lt;/DoubleAnimation&gt;
-&lt;/Storyboard&gt;
-</pre>
-
-<ul>
-<li>命名：方便后台代码调用</li>
-<li>类：DoubleAnimation针对Double属性，还有ColorAnimation针对Color属性，以及PointAnimation针对Point，这里图形翻转目标属性是PlaneProjection   值是double类型</li>
-<li>Storyboard.TargetName：执行动画的对象名称</li>
-<li>Storyboard.TargetProperty：执行动画的对象属性，此处是PlaneProjection.RotationX，写成Storyboard.TargetProperty=”PlaneProjection.RotationX”也没有关系</li>
-<li>From：起始值</li>
-<li>To：终点值</li>
-<li>By：变化值</li>
-<li>AutoReverse：自动重置（返回原状）</li>
-<li>RepeatBehavior：播放次数</li>
-<li>Duration：持续时间（值的格式为时分秒，即0.0.3  3秒）<br>以上是通过XAML写出界面，当然，完全可以在后台代码中，完成StoryBoard的设置：<br><pre class="lang:default decode:true ">            DoubleAnimation animation = new DoubleAnimation();<pre><code>animation.From = 0.0;
-animation.To = 360.0;
-animation.BeginTime = TimeSpan.FromSeconds(1);
-animation.RepeatBehavior = RepeatBehavior.Forever;
-Storyboard.SetTarget(animation, target);
-Storyboard.SetTargetProperty(animation, &quot;(UIElement.Projection).(PlaneProjection.Rotation&quot; + axis + &quot;)&quot;);
-rotation.Children.Clear();
-rotation.Children.Add(animation);
-rotation.Begin();
-rotating = true;&lt;/pre&gt;
-</code></pre>不过看个人爱好了，我还是喜欢XAML。</pre></li>
-</ul>
-<p>&nbsp;</p>
-
-          
+          <p align = "center"><br>动画编程小尝试<br>. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/24/UWP开发笔记三：动画编程之图形的翻转/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1324,46 +820,12 @@ rotating = true;&lt;/pre&gt;
 
       
         
-          
-            <p>AppBar和CommandBar也算是比较常用的控件了，不过个人不太喜欢这些，主要是觉得很非主流，我还是喜欢把功能都做到汉堡菜单里。</p>
-<p>1，CommandBar被包裹住了，一般放在页面顶部或底部。</p>
-<p><pre class="lang:default decode:true ">&lt;Page<br>    x:Class=”ApplicationBar.MainPage”<br>    xmlns=”<a href="http://schemas.microsoft.com/winfx/2006/xaml/presentation" target="_blank" rel="external">http://schemas.microsoft.com/winfx/2006/xaml/presentation</a>“<br>    xmlns:x=”<a href="http://schemas.microsoft.com/winfx/2006/xaml" target="_blank" rel="external">http://schemas.microsoft.com/winfx/2006/xaml</a>“<br>    xmlns:local=”using:ApplicationBar”<br>    xmlns:d=”<a href="http://schemas.microsoft.com/expression/blend/2008" target="_blank" rel="external">http://schemas.microsoft.com/expression/blend/2008</a>“<br>    xmlns:mc=”<a href="http://schemas.openxmlformats.org/markup-compatibility/2006" target="_blank" rel="external">http://schemas.openxmlformats.org/markup-compatibility/2006</a>“<br>    mc:Ignorable=”d”&gt;</pre></p>
-<p>  &lt;Page.BottomAppBar&gt;<br>        &lt;CommandBar&gt;</p>
-<pre><code>    &amp;lt;/CommandBar&amp;gt;
-&amp;lt;/Page.BottomAppBar&amp;gt;
-&amp;lt;Grid Background=&quot;{ThemeResource ApplicationPageBackgroundThemeBrush}&quot;&amp;gt;
-&amp;lt;/Grid&amp;gt;
-</code></pre><p>&lt;/Page&gt;<br>所以就是这种效果，在CommandBar中有两种菜单可选</p>
-<p>图标文字：添加AppBarButton即可</p>
-<p><img src="http://images.chenyalun.cn/2016/04/20/001.png" alt=""></p>
-<p><pre class="lang:default decode:true ">&lt;AppBarButton Name=”FirstAppBarButton”<br>    Icon=”Account”<br>     Label=”主页”<br>    Click=”FirstAppBarButton_Click”/&gt;</pre><br>文字列表：需要夹在&lt;CommandBar.SecondaryCommands&gt;&lt;/CommandBar.SecondaryCommands&gt;中间</p>
-<p><img src="http://images.chenyalun.cn/2016/04/20/002.png" alt=""></p>
-<p><pre class="lang:default decode:true ">&lt;CommandBar.SecondaryCommands&gt;<br>                &lt;AppBarButton Name=”TextAppBarButton1”<br>                              Label=”文字1”<br>                              Click=”TextAppBarButton1_Click”/&gt;<br>&lt;/CommandBar.SecondaryCommands&gt;</pre><br>2,AppBar 的话，可能更强大一点，它可以嵌套着命令栏CommandBar，不过也是需要放在页面顶部或者底部</p>
-<p><img src="http://images.chenyalun.cn/2016/04/20/005.png" alt=""></p>
-<p><pre class="lang:default decode:true">&lt;Page.TopAppBar&gt;<br>        &lt;AppBar  &gt;</pre></p>
-<pre><code>    &amp;lt;/AppBar&amp;gt;
-&amp;lt;/Page.TopAppBar&amp;gt;&lt;/pre&gt;
-</code></pre><p>对于每个命令栏按钮，依然可以添加Click事件进行处理。</p>
-<p><img src="http://images.chenyalun.cn/2016/04/20/003.png" alt=""></p>
-<p><img src="http://images.chenyalun.cn/2016/04/20/004.png" alt=""></p>
-<hr>
-<hr>
-<h3 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h3><p>1,</p>
-<p><pre class="lang:default decode:true ">&lt;Page.TopAppBar&gt;<br>        &lt;AppBar  IsSticky=”True” &gt;<br>            &lt;StackPanel Orientation=”Horizontal” &gt;<br>                &lt;CommandBar&gt;<br>                    &lt;!–第二命令栏–&gt;<br>                    &lt;CommandBar.SecondaryCommands&gt;<br>                        &lt;AppBarButton Name=”Hide” Icon=”Cancel” Label=”文本” Visibility=”Collapsed” Click=”Show_Click”/&gt;<br>                    &lt;/CommandBar.SecondaryCommands&gt;<br>                     &lt;!–设置命令栏内容–&gt;<br>                    &lt;CommandBar.Content&gt;<br>                        &lt;TextBlock Text=”Now playing…” Margin=”12,14”/&gt;<br>                    &lt;/CommandBar.Content&gt;<br>                &lt;/CommandBar&gt;<br>                     &lt;!–分割线–&gt;<br>                &lt;AppBarSeparator/&gt;<br>                &lt;AppBarButton Name=”Show”<br>                              Icon=”Accept”<br>                              Label=”Show Other”<br>                              Click=”Show_Click”<br>                              IsCompact=”True”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.TopAppBar&gt;</pre><br>如上所示，AppBar中包裹命令栏。若菜单栏中只包含AppBarButton（普通按钮）、AppBarToggleButton（切换按钮）、AppBarSeparator（分割线） 这几个控件，且没有特殊布局格式要求，CommandBar 控件可以解决大多数问题。</p>
-<p>第二命令栏需要使用：CommandBar.SecondaryCommands</p>
-<p>命令栏内容：CommandBar.Content</p>
-<p>命令按钮分割线： &lt;AppBarSeparator/&gt;</p>
-<p>标签：label</p>
-<p>图标: icon</p>
-<p>顶部命令栏：&lt;Page.TopAppBar&gt;&lt;/Page.TopAppBar&gt;</p>
-<p>底部命令栏： &lt;Page.BottomAppBar&gt; &lt;/Page.BottomAppBar&gt;</p>
-<p>单词：toggle 切换   Separator分隔符</p>
-<p>在AppBar属性中：IsSticky=”True”表示打开命令栏后，除非用户显式地点击鼠标右键或按Win+z, 或用手指从屏幕顶端或底端划过才会隐藏，否则AppBar会一直显示。一般不设置。</p>
-<p>IsOpen=”True” 一直完全显示图标+文字，一般不设置。</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-          
+          <p align = "center"><br>AppBar和CommandBar<br>. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/22/UWP开发笔记二：AppBar和CommandBar/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

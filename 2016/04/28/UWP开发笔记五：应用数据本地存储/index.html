@@ -90,24 +90,18 @@
 
 
 
-<meta name="description" content="应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。
-命令栏代码：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar&amp;gt;            &amp;lt;StackPanel Orientation=”Horizontal”&amp;gt;                &amp;lt;AppBarButt">
+<meta name="description" content="应用数据存储.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UWP开发笔记五：应用数据本地存储">
 <meta property="og:url" content="http://yoursite.com/2016/04/28/UWP开发笔记五：应用数据本地存储/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。
-命令栏代码：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar&amp;gt;            &amp;lt;StackPanel Orientation=”Horizontal”&amp;gt;                &amp;lt;AppBarButt">
+<meta property="og:description" content="应用数据存储.">
 <meta property="og:image" content="http://images.chenyalun.cn/2016/04/21/005.png">
 <meta property="og:image" content="http://images.chenyalun.cn/2016/04/21/006.png">
-<meta property="og:updated_time" content="2016-08-21T12:15:24.000Z">
+<meta property="og:updated_time" content="2016-10-28T13:39:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UWP开发笔记五：应用数据本地存储">
-<meta name="twitter:description" content="应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。
-命令栏代码：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar&amp;gt;            &amp;lt;StackPanel Orientation=”Horizontal”&amp;gt;                &amp;lt;AppBarButt">
+<meta name="twitter:description" content="应用数据存储.">
 <meta name="twitter:image" content="http://images.chenyalun.cn/2016/04/21/005.png">
 
 
@@ -336,7 +330,10 @@
       
 
       
-        <p>应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。</p>
+        <p align="center"><br>应用数据存储. </p>
+
+<a id="more"></a>
+<p>应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。</p>
 <p>命令栏代码：</p>
 <p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Icon=”Page”<br>                              Label=”新建”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”LoadAppBarButton”<br>                              Icon=”Folder”<br>                              Label=”显示”<br>                              Click=”LoadAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”SaveAppBarButton”<br>                              Icon=”Save”<br>                              Label=”保存”<br>                              Click=”SaveAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
 <p><pre class="lang:default decode:true "> &lt;StackPanel&gt;<br>            &lt;TextBox Name=”Email”<br>                     PlaceholderText=”邮箱”<br>                     Margin=”20”<br>                     InputScope=”EmailSmtpAddress”/&gt;<br>            &lt;TextBox Name=”Web”<br>                     PlaceholderText=”网址”<br>                     Margin=”20”<br>                     InputScope=”Url”/&gt;<br>            &lt;TextBox Name=”Tel”<br>                     PlaceholderText=”手机号码”<br>                     Margin=”20”<br>                     InputScope=”TelephoneNumber”/&gt;<br>        &lt;/StackPanel&gt;</pre><br>后台逻辑：</p>

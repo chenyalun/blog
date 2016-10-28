@@ -90,21 +90,18 @@
 
 
 
-<meta name="description" content="严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。
-所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。看到这时，确实很不high，还木有到链表呢，何必那么心急引入指针，而">
+<meta name="description" content="简单探讨顺序表的插入与删除.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="泛谈顺序表的插入与删除">
 <meta property="og:url" content="http://yoursite.com/2015/11/02/泛谈顺序表的插入与删除/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。
-所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。看到这时，确实很不high，还木有到链表呢，何必那么心急引入指针，而">
+<meta property="og:description" content="简单探讨顺序表的插入与删除.">
 <meta property="og:image" content="http://source.chenyalun.cn/images/201510/5103102.jpg">
 <meta property="og:image" content="http://source.chenyalun.cn/images/201510/5103101.jpg">
-<meta property="og:updated_time" content="2016-08-21T12:15:24.000Z">
+<meta property="og:updated_time" content="2016-10-28T13:54:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="泛谈顺序表的插入与删除">
-<meta name="twitter:description" content="严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。
-所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。看到这时，确实很不high，还木有到链表呢，何必那么心急引入指针，而">
+<meta name="twitter:description" content="简单探讨顺序表的插入与删除.">
 <meta name="twitter:image" content="http://source.chenyalun.cn/images/201510/5103102.jpg">
 
 
@@ -333,29 +330,106 @@
       
 
       
-        <p>严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。</p>
-<p>所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。看到这时，确实很不high，还木有到链表呢，何必那么心急引入指针，而且我又不爱指针。</p>
-<p><pre class="lang:default decode:true ">typedef struct{<br>    Elemtype *elem;<br>    int length;<br>    int listsize;<br>}SqList;</pre><br>没有指责的意思，只是我辈太愚笨罢了。</p>
-<p>翻翻资料。发现还有一种更巧妙而且容易理解的方式：</p>
-<p><pre class="lang:default decode:true ">typedef struct{<br>    int data[Max];<br>    int length;<br>}SqList;</pre><br>这样一来，整个顺序表就与数组特别特别相似啦。</p>
+        <p align="center"><br>简单探讨顺序表的插入与删除<br>. </p>
+
+<a id="more"></a>
+<p>所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。</p>
+<pre><code>typedef struct{
+    Elemtype *elem;
+    int length;
+    int listsize;
+}SqList;
+</code></pre><p>翻翻资料。发现还有一种更巧妙而且容易理解的方式：</p>
+<pre><code>typedef struct{
+    int data[Max];
+    int length;
+}SqList;
+</code></pre><p>这样一来，整个顺序表就与数组特别特别相似啦。</p>
 <p>那么，声明一个很长很长但是彼此知道的Max长度数组，作为默认“表长”（其实不是表长），再给它一个长度length，如此，顺序表横空出世了。</p>
 <p>既然如此，那关于什么插入、删除操作就不在话下了。</p>
-<h3 id="1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m"><a href="#1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m" class="headerlink" title="1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m"></a>1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m</h3><p>题目很清楚，插入元素m后，后面的元素自然往后移动啦。先看代码。</p>
-<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;<br>//#include&lt;malloc.h&gt;<br>//#include&lt;stdlib.h&gt;   //一般这两个是需要的</pre></p>
-<p>#define Max 200<br>//定义并初始化顺序表<br>typedef struct{<br>    int data[Max];<br>    int length=10;<br>}SqList;<br>//顺序表l中查找元素e的位置<br>int LocatElem(SqList l,int e){<br>    int i=0;<br>    for(;i&lt;l.length;++i)<br>      if(l.data[i]==e)<br>      return i+1;<br>}</p>
-<p>//在元素e的位置插入元素m<br>void Insert(SqList &amp;l,int e,int m) {<br>    int i=l.length,p=LocatElem(l,e);<br>    for(;i&gt;=p;–i){<br>        l.data[i]=l.data[i-1];<br>    }<br>    l.data[i]=m;<br>    l.length++;<br>}</p>
-<p>int main(){<br>    int i=0,e=18,m=200;<br>    SqList a;<br>    for(;i&lt;a.length;++i)<br>         scanf(“%d”,&amp;a.data[i]);<br>    Insert(a,e,m);<br>    for(int i=0;i&lt;a.length;++i)<br>         printf(“%d\n”,a.data[i]);<br>    return 0;<br>}<br>这里假设我们输入从11，12一直到20的整数值，首先查找元素e=18的值的位置，插入m的值200。</p>
+<p>1 已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m</p>
+<p>题目很清楚，插入元素m后，后面的元素自然往后移动啦。</p>
+<pre><code>    #include&lt;stdio.h&gt;
+    //#include&lt;malloc.h&gt;
+    //#include&lt;stdlib.h&gt;   //一般这两个是需要的
+
+    #define Max 200
+    //定义并初始化顺序表
+    typedef struct{
+    int data[Max];
+    int length=10;
+    }SqList;
+    //顺序表l中查找元素e的位置
+    int LocatElem(SqList l,int e){
+    int i=0;
+    for(;i&lt;l.length;++i)
+    if(l.data[i]==e)
+    return i+1;
+    }
+
+    //在元素e的位置插入元素m
+    void Insert(SqList &amp;l,int e,int m) {
+    int i=l.length,p=LocatElem(l,e);
+    for(;i&gt;=p;–i){
+    l.data[i]=l.data[i-1];
+    }
+    l.data[i]=m;
+    l.length++;
+    }
+
+    int main(){
+    int i=0,e=18,m=200;
+    SqList a;
+    for(;i&lt;a.length;++i)
+    scanf(“%d”,&amp;a.data[i]);
+    Insert(a,e,m);
+    for(int i=0;i&lt;a.length;++i)
+    printf(“%d\n”,a.data[i]);
+    return 0;
+}
+</code></pre><p>这里假设我们输入从11，12一直到20的整数值，首先查找元素e=18的值的位置，插入m的值200。</p>
 <p>原来：11 12 13 14 15 16 17 18 19 20</p>
 <p>run后：11 12 13 14 15 16 17 200 18 19 20</p>
 <p><img src="http://source.chenyalun.cn/images/201510/5103102.jpg" alt=""></p>
-<h3 id="2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素"><a href="#2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素" class="headerlink" title="2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素"></a>2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素</h3><p><pre class="lang:default decode:true">#include&lt;stdio.h&gt;<br>//#include&lt;malloc.h&gt;<br>//#include&lt;stdlib.h&gt;</pre></p>
-<p>#define Max 200<br>//定义并初始化顺序表<br>typedef struct{<br>    int data[Max];<br>    int length=10;<br>}SqList;<br>//顺序表l中查找元素e的位置<br>int LocatElem(SqList l,int e){<br>    int i=0;<br>    for(;i&lt;l.length;++i)<br>      if(l.data[i]==e)<br>      return i+1;<br>}</p>
-<p>//删除顺序表中值为e的元素<br>void Delete(SqList &amp;l,int e){<br>    int i=LocatElem(l,e);<br>    for(;i&lt;=l.length;++i)<br>       l.data[i-1]=l.data[i];<br>       l.length–;<br>}<br>int main(){<br>    int i=0, e=15;//e的值自己说了算<br>    SqList a;<br>     for(;i&lt;a.length;++i)<br>          scanf(“%d”,&amp;a.data[i]);<br>     Delete(a,e);<br>    for(int i=0;i&lt;a.length;++i)<br>          printf(“%d\n”,a.data[i]);<br>     return 0;<br>}<br>改动不大，添加个函数而已。这里删除的是15，具体题目具体分析。</p>
+<p>2 已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素</p>
+<pre><code>    #include&lt;stdio.h&gt;
+    //#include&lt;malloc.h&gt;
+    //#include&lt;stdlib.h&gt;
+
+    #define Max 200
+    //定义并初始化顺序表
+    typedef struct{
+    int data[Max];
+    int length=10;
+    }SqList;
+    //顺序表l中查找元素e的位置
+    int LocatElem(SqList l,int e){
+    int i=0;
+    for(;i&lt;l.length;++i)
+    if(l.data[i]==e)
+    return i+1;
+    }
+
+    //删除顺序表中值为e的元素
+    void Delete(SqList &amp;l,int e){
+    int i=LocatElem(l,e);
+    for(;i&lt;=l.length;++i)
+    l.data[i-1]=l.data[i];
+    l.length–;
+    }
+    int main(){
+    int i=0, e=15;//e的值自己说了算
+    SqList a;
+    for(;i&lt;a.length;++i)
+    scanf(“%d”,&amp;a.data[i]);
+    Delete(a,e);
+    for(int i=0;i&lt;a.length;++i)
+    printf(“%d\n”,a.data[i]);
+    return 0;
+}
+</code></pre><p>改动不大，添加个函数而已。这里删除的是15，具体题目具体分析。</p>
 <p>原来：11 12 13 14 15 16 17 18 19 20</p>
-<p>run后：11 12 13 14  16 17  18 19 20</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5103101.jpg" alt=""></p>
-<p>说这么多，无非是想分享一个模板，插入、删除搞定了，其他也很容易拿下了。当然变的是题目，不变的是方法论。</p>
-<p>&nbsp;</p>
+<p>run后：11 12 13 14 16 17 18 19 20<br><img src="http://source.chenyalun.cn/images/201510/5103101.jpg" alt=""></p>
 
       
     </div>
@@ -550,7 +624,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m"><span class="nav-number">1.</span> <span class="nav-text">1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素"><span class="nav-number">2.</span> <span class="nav-text">2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

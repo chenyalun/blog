@@ -90,24 +90,18 @@
 
 
 
-<meta name="description" content="这个和UWP开发笔记四：随机数与筛子游戏有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。
-命令栏：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar&amp;gt;            &amp;lt;StackPanel Orientation=”Horizontal”&amp;gt;">
+<meta name="description" content="幸运彩色小球游戏.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UWP开发笔记六：幸运彩色小球">
 <meta property="og:url" content="http://yoursite.com/2016/04/30/UWP开发笔记六：幸运彩色小球/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="这个和UWP开发笔记四：随机数与筛子游戏有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。
-命令栏：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar&amp;gt;            &amp;lt;StackPanel Orientation=”Horizontal”&amp;gt;">
+<meta property="og:description" content="幸运彩色小球游戏.">
 <meta property="og:image" content="http://images.chenyalun.cn/2016/04/22/001.png">
 <meta property="og:image" content="http://images.chenyalun.cn/2016/04/22/002.png">
-<meta property="og:updated_time" content="2016-08-21T12:15:24.000Z">
+<meta property="og:updated_time" content="2016-10-28T13:36:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UWP开发笔记六：幸运彩色小球">
-<meta name="twitter:description" content="这个和UWP开发笔记四：随机数与筛子游戏有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。
-命令栏：
-&amp;lt;Page.BottomAppBar&amp;gt;        &amp;lt;AppBar&amp;gt;            &amp;lt;StackPanel Orientation=”Horizontal”&amp;gt;">
+<meta name="twitter:description" content="幸运彩色小球游戏.">
 <meta name="twitter:image" content="http://images.chenyalun.cn/2016/04/22/001.png">
 
 
@@ -336,119 +330,180 @@
       
 
       
-        <p>这个和<a href="http://www.chenyalun.cn/uwp开发笔记四：随机数与筛子游戏.html" target="_blank" rel="external">UWP开发笔记四：随机数与筛子游戏</a>有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。</p>
+        <p align="center"><br>幸运彩色小球游戏. </p>
+
+<a id="more"></a>
+<p>这个和随机数与筛子游戏有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。</p>
 <p>命令栏：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Label=”新建”<br>                              Icon=”NewFolder”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
-<p><pre class="lang:default decode:true ">&lt;StackPanel HorizontalAlignment=”Center”<br>            VerticalAlignment=”Center”<br>            Name=”DisplayStackPanel”<br>                    Orientation=”Horizontal”/&gt;</pre><br>当然，为了方便起见，创建一个ShowBall类：需要引入的命名空间有：</p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>完整代码：</p>
-<p><pre class="lang:default decode:true ">using System;<br>using System.Collections.Generic;<br>using System.Linq;<br>using System.Text;<br>using System.Threading.Tasks;<br>//color<br>using Windows.UI;</pre></p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>namespace Lucky_Lotto<br>{<br>   public  class ShowBall<br>    {<br>        // 定义随机数(种子为日期和时间的计时周期）<br>        private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<pre><code>    // 定义获取数字集合方法
-    private List&amp;lt;int&amp;gt; GetNumbers()
+<pre><code>&lt;Page.BottomAppBar&gt;
+        &lt;AppBar&gt;
+            &lt;StackPanel Orientation=”Horizontal”&gt;
+                &lt;AppBarButton Name=”NewAppBarButton”
+                              Label=”新建”
+                              Icon=”NewFolder”
+                              Click=”NewAppBarButton_Click”/&gt;
+            &lt;/StackPanel&gt;
+        &lt;/AppBar&gt;
+    &lt;/Page.BottomAppBar&gt;
+</code></pre><p>页面代码：</p>
+<pre><code>&lt;StackPanel HorizontalAlignment=”Center”
+            VerticalAlignment=”Center”
+            Name=”DisplayStackPanel”
+                    Orientation=”Horizontal”/&gt;
+</code></pre><p>当然，为了方便起见，创建一个ShowBall类：需要引入的命名空间有：</p>
+<pre><code>//Thickness
+using Windows.UI.Xaml;
+//控件
+using Windows.UI.Xaml.Controls;
+//SolidColorBrush
+using Windows.UI.Xaml.Media;
+//球
+using Windows.UI.Xaml.Shapes;
+</code></pre><p>完整代码：</p>
+<pre><code>    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    //color
+    using Windows.UI;
+
+    //Thickness
+    using Windows.UI.Xaml;
+    //控件
+    using Windows.UI.Xaml.Controls;
+    //SolidColorBrush
+    using Windows.UI.Xaml.Media;
+    //球
+    using Windows.UI.Xaml.Shapes;
+
+    namespace Lucky_Lotto
     {
-        int Number;
-        // 定义Numbers集合
-        List&amp;lt;int&amp;gt; Numbers = new List&amp;lt;int&amp;gt;();
-        // 当Numbers集合中整数个数小于6时，自动增加
-        while (Numbers.Count &amp;lt; 6)
+    public class ShowBall
+    {
+    // 定义随机数(种子为日期和时间的计时周期）
+    private Random random = new Random((int)DateTime.Now.Ticks);
+
+        // 定义获取数字集合方法
+        private List&amp;lt;int&amp;gt; GetNumbers()
         {
-            // 随机获取1到50之间的整数赋予Number（Number可以取1，不可取50）
-            Number = random.Next(1, 50);
-            // 将产生的随机数添加到集合之中
-            // 处理当集合中的整数与产生的随机数相同的情况
-            if (!Numbers.Contains(Number)||Number&amp;lt;1)
+            int Number;
+            // 定义Numbers集合
+            List&amp;lt;int&amp;gt; Numbers = new List&amp;lt;int&amp;gt;();
+            // 当Numbers集合中整数个数小于6时，自动增加
+            while (Numbers.Count &amp;lt; 6)
             {
-                Numbers.Add(Number);
+                // 随机获取1到50之间的整数赋予Number（Number可以取1，不可取50）
+                Number = random.Next(1, 50);
+                // 将产生的随机数添加到集合之中
+                // 处理当集合中的整数与产生的随机数相同的情况
+                if (!Numbers.Contains(Number)||Number&amp;lt;1)
+                {
+                    Numbers.Add(Number);
+                }
+                // 对集合中的数字进行有序整理（美观起见）
+                Numbers.Sort();
             }
-            // 对集合中的数字进行有序整理（美观起见）
-            Numbers.Sort();
+
+            return Numbers;
+
         }
-
-        return Numbers;
-
-    }
-    // 对StackPanel进行处理：创建小球，增添颜色等
-    // 将每个小球分别放在Canva中s，6个Canvas放在一个StackPanel中
-    public void PlayBall(ref StackPanel stackpanel)
-    {
-        // 清空原先讯在的元素
-        stackpanel.Children.Clear();
-
-        // 对数字集合遍历
-        foreach(int number in GetNumbers())
+        // 对StackPanel进行处理：创建小球，增添颜色等
+        // 将每个小球分别放在Canva中s，6个Canvas放在一个StackPanel中
+        public void PlayBall(ref StackPanel stackpanel)
         {
-            // 定义Canvas
-            Canvas canvas = new Canvas();
-            canvas.Width = 48;
-            canvas.Height = 48;
-            canvas.Margin = new Thickness(2);
+            // 清空原先讯在的元素
+            stackpanel.Children.Clear();
 
-            // 定义球
-            Ellipse ellipse = new Ellipse();
-            ellipse.Width = canvas.Width;
-            ellipse.Height = canvas.Height;
-            // 设置小球边框颜色是黑色
-            ellipse.Stroke = new SolidColorBrush(Colors.Black);
+            // 对数字集合遍历
+            foreach(int number in GetNumbers())
+            {
+                // 定义Canvas
+                Canvas canvas = new Canvas();
+                canvas.Width = 48;
+                canvas.Height = 48;
+                canvas.Margin = new Thickness(2);
 
-            // 根据数字的大小设置小球的填充颜色
-            if (number &amp;gt;= 1 &amp;amp;&amp;amp; number &amp;lt;= 9)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.White);
-            }
-            else if (number &amp;gt; 9 &amp;amp;&amp;amp; number &amp;lt;= 19)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 200, 236));
-            }
-            else if (number &amp;gt; 19 &amp;amp;&amp;amp; number &amp;lt;= 29)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Magenta);
-            }
-            else if (number &amp;gt; 29 &amp;amp;&amp;amp; number &amp;lt;= 39)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 255, 0));
-            }
-            else if (number &amp;gt; 39 &amp;amp;&amp;amp; number &amp;lt;= 49)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Yellow);
-            }
+                // 定义球
+                Ellipse ellipse = new Ellipse();
+                ellipse.Width = canvas.Width;
+                ellipse.Height = canvas.Height;
+                // 设置小球边框颜色是黑色
+                ellipse.Stroke = new SolidColorBrush(Colors.Black);
 
-            // 定义球中的文本（数字）
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = number.ToString();
-            textBlock.FontSize = 16;
-            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-            textBlock.Margin = new Thickness(16, 12, 16, 12);
+                // 根据数字的大小设置小球的填充颜色
+                if (number &amp;gt;= 1 &amp;amp;&amp;amp; number &amp;lt;= 9)
+                {
+                    ellipse.Fill = new SolidColorBrush(Colors.White);
+                }
+                else if (number &amp;gt; 9 &amp;amp;&amp;amp; number &amp;lt;= 19)
+                {
+                    ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 200, 236));
+                }
+                else if (number &amp;gt; 19 &amp;amp;&amp;amp; number &amp;lt;= 29)
+                {
+                    ellipse.Fill = new SolidColorBrush(Colors.Magenta);
+                }
+                else if (number &amp;gt; 29 &amp;amp;&amp;amp; number &amp;lt;= 39)
+                {
+                    ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 255, 0));
+                }
+                else if (number &amp;gt; 39 &amp;amp;&amp;amp; number &amp;lt;= 49)
+                {
+                    ellipse.Fill = new SolidColorBrush(Colors.Yellow);
+                }
 
-            // 将文本（数字）、小球添加到canvas中，将canvas添加到stackpanel中
-            // 一定先添加球，再添加文本，否则文本不会显示
-            canvas.Children.Add(ellipse);
-            canvas.Children.Add(textBlock);
-            stackpanel.Children.Add(canvas);
+                // 定义球中的文本（数字）
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = number.ToString();
+                textBlock.FontSize = 16;
+                textBlock.Foreground = new SolidColorBrush(Colors.Black);
+                textBlock.Margin = new Thickness(16, 12, 16, 12);
+
+                // 将文本（数字）、小球添加到canvas中，将canvas添加到stackpanel中
+                // 一定先添加球，再添加文本，否则文本不会显示
+                canvas.Children.Add(ellipse);
+                canvas.Children.Add(textBlock);
+                stackpanel.Children.Add(canvas);
         }
     }
 }
-</code></pre><p>}<br><br>这样主页面的后台代码就可以轻松的调用了：</p>
-<p><pre class="lang:default decode:true "> // 新建类的实例<br>        public  ShowBall showball = new ShowBall();<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {</pre></p>
-<pre><code>  showball.PlayBall(ref DisplayStackPanel);
+
+}
+</code></pre><p>这样主页面的后台代码就可以轻松的调用了：</p>
+<pre><code> // 新建类的实例
+        public  ShowBall showball = new ShowBall();
+        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+  showball.PlayBall(ref DisplayStackPanel);
 }&lt;/pre&gt;
 </code></pre><p>演示：</p>
 <p><img src="http://images.chenyalun.cn/2016/04/22/001.png" alt=""><img src="http://images.chenyalun.cn/2016/04/22/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>// 对数字集合遍历<br>foreach(int number in GetNumbers())  {}</p>
-<p>// 设置小球边框颜色是黑色<br>ellipse.Stroke = new SolidColorBrush(Colors.Black);</p>
-<p>//设置margin</p>
-<p>textBlock.Margin = new Thickness(16, 12, 16, 12);</p>
-<p>// 一定先添加球，再添加文本，否则文本不会显示<br>canvas.Children.Add(ellipse);<br>canvas.Children.Add(textBlock);<br>stackpanel.Children.Add(canvas);</p>
-<p>// 清空原先存在的元素<br>stackpanel.Children.Clear();</p>
-<p>// 对集合中的数字进行有序整理（美观起见）<br>Numbers.Sort();</p>
-<p>// 定义随机数(种子为日期和时间的计时周期）<br>private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<p>// 定义Numbers集合<br>List&lt;int&gt; Numbers = new List&lt;int&gt;();</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><pre><code>// 对数字集合遍历
+foreach(int number in GetNumbers())  {}
 
+// 设置小球边框颜色是黑色
+ellipse.Stroke = new SolidColorBrush(Colors.Black);
+
+//设置margin
+
+textBlock.Margin = new Thickness(16, 12, 16, 12);
+
+// 一定先添加球，再添加文本，否则文本不会显示
+canvas.Children.Add(ellipse);
+canvas.Children.Add(textBlock);
+stackpanel.Children.Add(canvas);
+
+// 清空原先存在的元素
+stackpanel.Children.Clear();
+
+// 对集合中的数字进行有序整理（美观起见）
+Numbers.Sort();
+
+// 定义随机数(种子为日期和时间的计时周期）
+private Random random = new Random((int)DateTime.Now.Ticks);
+</code></pre>
       
     </div>
 
@@ -652,7 +707,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-gt-笔记"><span class="nav-number">1.</span> <span class="nav-text">>>笔记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#笔记"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a></li></ol></div>
             
           </div>
         </section>

@@ -1080,10 +1080,10 @@ NSLog(@”r2的值是%i”,r2);
     <link href="http://yoursite.com/2016/05/16/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%B1%9E%E6%80%A7/"/>
     <id>http://yoursite.com/2016/05/16/Objective-C学习笔记二：继承与属性/</id>
     <published>2016-05-16T11:22:17.000Z</published>
-    <updated>2016-10-25T14:35:44.000Z</updated>
+    <updated>2016-10-28T13:20:28.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>2016.10.25 温习</p>
+<p>2016.10.25 回顾</p>
 </blockquote>
 <p align="center"> 关于继承与属性的笔记. </p>
 
@@ -1346,7 +1346,7 @@ NSLog(@”%lu”,(unsigned long)size);
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;2016.10.25 温习&lt;/p&gt;
+&lt;p&gt;2016.10.25 回顾&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p align = &quot;center&quot;&gt; 关于继承与属性的笔记. &lt;/p&gt;
     
@@ -1366,133 +1366,155 @@ NSLog(@”%lu”,(unsigned long)size);
     <link href="http://yoursite.com/2016/05/12/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9A%E7%B1%BB/"/>
     <id>http://yoursite.com/2016/05/12/Objective-C学习笔记一：类/</id>
     <published>2016-05-11T21:00:49.000Z</published>
-    <updated>2016-08-21T12:42:48.000Z</updated>
+    <updated>2016-10-28T13:22:05.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h3><p>三要素：事物名称（类名）；属性；行为（功能）</p>
+    <content type="html"><![CDATA[<blockquote>
+<p>2016.10.28 回顾</p>
+</blockquote>
+<p align="center"> 万物皆是对象. </p>
+
+<a id="more"></a>
+<h1 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h1><p>三要素：事物名称（类名）；属性；行为（功能）</p>
 <p>具有相同（或者类似）属性和行为的对象可以抽象出一个类。</p>
-<h3 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h3><p>类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识</p>
-<p>行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上</p>
-<p><span class="s1">#import </span><span class="s2">&lt;Foundation/Foundation.h&gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多API。</span></p>
-<p><span class="s1">#import </span><span class="s2">用来拷贝某个文件的内容，与#include的区别：自动防止文件内容被拷贝多次</span></p>
-<p><span class="s1">@interface</span><span class="s2"> Person : </span><span class="s3">NSObject</span></p>
-<p><span class="s2">{</span></p>
-<p><span class="s2">@public</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">int</span><span class="s2"> _age;</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">bool</span><span class="s2"> _sex;</span></p>
-<p><span class="s2">}</span></p>
-<p><span class="s2">-(</span><span class="s1">void</span><span class="s2">)print;</span></p>
-<p><span class="s2">@end</span></p>
-<p>大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.</p>
-<p><span class="s1">: </span><span class="s2">NSObject（继承基类）使声明的类具有创建对象的能力。</span></p>
-<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><p><span class="s1">@implementation</span><span class="s2"> Person</span></p>
-<p><span class="s1">-(</span><span class="s3">void</span><span class="s1">)print</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s1">(</span><span class="s5">@”输出内容”</span><span class="s1">);</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">@end</span></p>
-<p>已经导入声明文件<span class="s1">#import </span><span class="s2">“Person.h” 类的实现即方法的实现。<a id="more"></a> </span></p>
-<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p><span class="s2">Person</span><span class="s1"> *p=[[</span><span class="s2">Person</span> <span class="s3">alloc</span><span class="s1">] </span><span class="s3">init</span><span class="s1">];</span></p>
-<p><span class="s1">[p </span><span class="s2">print</span><span class="s1">];</span></p>
-<p>对象的本质是结构体，对象需要通过指针操纵。</p>
+<h1 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h1><p>类名<br>1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识</p>
+<p>行为<br>哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上</p>
+<pre><code>@interface Person : NSObject
+
+{
+
+@public
+
+int _age;
+
+bool _sex;
+
+}
+
+-(void)print;
+
+@end
+</code></pre><p>大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.</p>
+<p><code>: NSObject</code>（继承基类）使声明的类具有创建对象的能力。</p>
+<h1 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h1><pre><code>@implementation Person
+
+-(void)print
+
+{
+
+NSLog(@”输出内容”);
+
+}
+
+@end
+</code></pre><p>已经导入声明文件<code>#import “Person.h”</code><br>类的实现即方法的实现。</p>
+<h1 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h1><pre><code>Person *p=[[Person alloc] init];
+
+[p print];
+</code></pre><p>对象的本质是结构体，对象需要通过指针操纵。</p>
 <p>类在内存中也占据存储空间，在创建对象之前为类分配一份内存空间，将类加载进内存。而且只存储方法列表，其中由类产生的对象，都有一个isa指针指向类。</p>
-<p>方法调用：[行为执行者   行为名称];</p>
-<p>[Person new]执行Person这个类的new行为创建对象，返回对象地址。</p>
-<p>Person  <em>p=[Person new];定义一个Person </em>类型的指针变量p，指向Person类型的对象。指针的类型是Person *，指针指向的类型是Person。</p>
-<p><span class="s1">[p </span><span class="s2">print</span><span class="s1">]表示给p指向的对象发送一条print消息。</span></p>
-<p>Person  <em>p=[Person new];等价于 Person </em>p;p=[Person new];另外Person *p2=p;表示p2、p指向同一个内容。p=p2:将p2存储的指针交给p，使p存储的也是p2存储的内容。</p>
-<h3 id="方法与函数的区别以及注意"><a href="#方法与函数的区别以及注意" class="headerlink" title="方法与函数的区别以及注意"></a>方法与函数的区别以及注意</h3><ul>
-<li><span class="s2">OC方法只能声明在@interface和@end之间，只能实现在@implementation和@end之间。也就是说OC方法不能独立于类存在</span></li>
-<li><span class="s2">C函数不属于类，跟类没有联系，C函数只归定义函数的文件所有</span></li>
-<li><span class="s2">C函数不能访问OC对象的成员</span></li>
-<li><p>对象方法归类／对象所有，函数属于整个文件所有，任何地方都可以放置函数（如果放在<span class="s1">@interface</span>与<span class="s1">@end</span>之间，将会忽略掉函数，即未定义）</p>
+<p>方法调用：<code>[行为执行者   行为名称]</code>;</p>
+<p><code>[Person new]</code>执行Person这个类的new行为创建对象，返回对象地址。</p>
+<p><code>Person *p=[Person new];</code>定义一个Person 类型的指针变量p，指向Person类型的对象。指针的类型是Person *，指针指向的类型是Person。</p>
+<p><code>[p print];</code>表示给p指向的对象发送一条print消息。</p>
+<p><code>Person p=[Person new];</code>等价于 <code>Person p;p=[Person new];</code>另外<code>Person *p2=p;</code>表示p2、p指向同一个内容。<code>p=p2</code>:将p2存储的指针交给p，使p存储的也是p2存储的内容。</p>
+<h1 id="方法与函数的区别以及注意"><a href="#方法与函数的区别以及注意" class="headerlink" title="方法与函数的区别以及注意"></a>方法与函数的区别以及注意</h1><ul>
+<li><p>OC方法只能声明在@interface和@end之间，只能实现在@implementation和@end之间。也就是说OC方法不能独立于类存在</p>
 </li>
-<li><p><span class="s2">方法只有声明，没有实现（经典错误）</span></p>
+<li><p>C函数不属于类，跟类没有联系，C函数只归定义函数的文件所有</p>
 </li>
-<li><span class="s2">方法没有声明，只有实现（编译器警告，但是能调用，OC的弱语法）</span></li>
-<li><span class="s2">编译的时候：访问没有的成员变量直接报错，访问没有的方法，只是警告</span></li>
-<li><span class="s2">同一个类中不允许两个对象方法同名</span></li>
+<li><p>C函数不能访问OC对象的成员</p>
+</li>
+<li><p>对象方法归类／对象所有，函数属于整个文件所有，任何地方都可以放置函数（如果放在@interface与@end之间，将会忽略掉函数，即未定义）</p>
+</li>
+<li><p>方法只有声明，没有实现（经典错误）</p>
+</li>
+<li>方法没有声明，只有实现（编译器警告，但是能调用，OC的弱语法）</li>
+<li>编译的时候：访问没有的成员变量直接报错，访问没有的方法，只是警告</li>
+<li>同一个类中不允许两个对象方法同名</li>
 </ul>
-<h3 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h3><ul>
-<li><p><span class="s2">属性访问  </span>[Car  new]-&gt;speed = 200;</p>
-</li>
-<li><p><span class="s2">方法调用    </span>[ [Car  new]  run];</p>
-</li>
-</ul>
-<h3 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h3><p>不带参数的对象方法：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print;  方法名print</span></p>
+<h1 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h1><p>属性访问 <code>[Car new]-&gt;speed = 200;</code></p>
+<p>方法调用<code>[ [Car new] run];</code></p>
+<h1 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h1><p>不带参数的对象方法：</p>
+<p><code>-(void)print; 方法名print</code></p>
 <p>带一个参数的对象方法：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print:(</span><span class="s2">int</span><span class="s1">) a; 方法名print :</span></p>
+<p><code>-(void)print:(int) a; 方法名print :</code></p>
 <p>带多个参数的对象方法：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print:(</span><span class="s2">int</span><span class="s1">) a WithOther:(</span><span class="s2">int</span><span class="s1">) b; 方法名</span></p>
-<p><span class="s1">print</span><span class="s1"> : WithOther:</span></p>
-<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><p>typedef enum<span class="s1">｛</span></p>
-<p><span class="Apple-converted-space">          </span>SexMan,</p>
-<p><span class="Apple-converted-space">          </span>SexWoman</p>
-<p><span class="s1">｝</span>Sex;</p>
-<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>typedef struct{</p>
-<p><span class="Apple-converted-space">   </span>int year;</p>
-<p><span class="Apple-converted-space">   </span>int month;</p>
-<p><span class="Apple-converted-space">   </span>int day;</p>
-<p>} Date;</p>
-<p>访问枚举：s-&gt;sex=SexMan;</p>
-<p>访问结构体：s-&gt;birthday.year=2016;</p>
+<p><code>-(void)print:(int) a WithOther:(int) b;</code>方法名</p>
+<p><code>print : WithOther:</code></p>
+<h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><pre><code>typedef enum｛
+
+SexMan,
+
+SexWoman
+
+｝Sex;
+</code></pre><h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><pre><code>typedef struct{
+
+int year;
+
+int month;
+
+int day;
+
+} Date;
+</code></pre><p>访问枚举：<code>s-&gt;sex=SexMan;</code></p>
+<p>访问结构体：<code>s-&gt;birthday.year=2016;</code></p>
 <p>定义结构体：</p>
-<p>Date d={2016,4,30};</p>
+<p><code>Date d={2016,4,30};</code></p>
 <p>访问结构体：</p>
-<p>s-&gt;birthday.year=2016;</p>
-<p>s-&gt;birthday.month=4;</p>
-<p>s-&gt;birthday.day=16;</p>
-<p>等价于：</p>
-<p>Date d={2016,4,16};</p>
-<p>s-&gt;birthday=d;</p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>打印函数中注意％与<span class="s1">%</span>的区别</li>
-<li>定义枚举、结构体等必需放在<span class="s1">@interface</span>的前面方可使用</li>
-<li><span class="s1">OC</span>方法中一个参数一个冒号</li>
+<pre><code>s-&gt;birthday.year=2016;
+
+s-&gt;birthday.month=4;
+
+s-&gt;birthday.day=16;
+</code></pre><p>等价于：</p>
+<pre><code>Date d={2016,4,16};
+
+s-&gt;birthday=d;
+</code></pre><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ul>
+<li>打印函数中注意％与%的区别</li>
+<li>定义枚举、结构体等必需放在@interface的前面方可使用</li>
+<li>OC方法中一个参数一个冒号</li>
 <li>对象中有对象</li>
 </ul>
-<p>@interface Student : NSObject</p>
-<p>{</p>
-<p><span class="Apple-converted-space">    </span>@public</p>
-<p><span class="Apple-converted-space">    </span>//<span class="s1">狗</span></p>
-<p><span class="Apple-converted-space">    </span>Dog *dog;</p>
-<p>}</p>
-<p>-(void)letDogRun</p>
-<p>{</p>
-<p><span class="Apple-converted-space">    </span>[dog run];</p>
-<p>}</p>
-<p>main.m</p>
-<p>Student *stu=[Student new];</p>
-<p><span class="Apple-converted-space">        </span>Dog *dog=[Dog new];</p>
-<p><span class="Apple-converted-space">            </span>stu-&gt;dog=dog;</p>
-<p><span class="Apple-converted-space">        </span>[stu letDogRun];</p>
-]]></content>
+<pre><code>@interface Student : NSObject
+
+{
+
+@public
+
+//狗
+
+Dog *dog;
+
+}
+
+-(void)letDogRun
+
+{
+
+[dog run];
+
+}
+
+
+// main.m文件
+
+Student *stu=[Student new];
+
+Dog *dog=[Dog new];
+
+stu-&gt;dog=dog;
+
+[stu letDogRun];
+</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;类的设计&quot;&gt;&lt;a href=&quot;#类的设计&quot; class=&quot;headerlink&quot; title=&quot;类的设计&quot;&gt;&lt;/a&gt;类的设计&lt;/h3&gt;&lt;p&gt;三要素：事物名称（类名）；属性；行为（功能）&lt;/p&gt;
-&lt;p&gt;具有相同（或者类似）属性和行为的对象可以抽象出一个类。&lt;/p&gt;
-&lt;h3 id=&quot;类的声明&quot;&gt;&lt;a href=&quot;#类的声明&quot; class=&quot;headerlink&quot; title=&quot;类的声明&quot;&gt;&lt;/a&gt;类的声明&lt;/h3&gt;&lt;p&gt;类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识&lt;/p&gt;
-&lt;p&gt;行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;#import &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;lt;Foundation/Foundation.h&amp;gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多API。&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;#import &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;用来拷贝某个文件的内容，与#include的区别：自动防止文件内容被拷贝多次&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;@interface&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Person : &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;NSObject&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;@public&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; _age;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;bool&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; _sex;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;)print;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s2&quot;&gt;@end&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;NSObject（继承基类）使声明的类具有创建对象的能力。&lt;/span&gt;&lt;/p&gt;
-&lt;h3 id=&quot;类的实现&quot;&gt;&lt;a href=&quot;#类的实现&quot; class=&quot;headerlink&quot; title=&quot;类的实现&quot;&gt;&lt;/a&gt;类的实现&lt;/h3&gt;&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;@implementation&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; Person&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;)print&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;{&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;    &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot;&gt;NSLog&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s5&quot;&gt;@”输出内容”&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;);&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;s1&quot;&gt;@end&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;已经导入声明文件&lt;span class=&quot;s1&quot;&gt;#import &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;“Person.h” 类的实现即方法的实现。
+      &lt;blockquote&gt;
+&lt;p&gt;2016.10.28 回顾&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p align = &quot;center&quot;&gt; 万物皆是对象. &lt;/p&gt;
     
     </summary>
     
@@ -1608,145 +1630,127 @@ NSLog(@”%lu”,(unsigned long)size);
     <link href="http://yoursite.com/2016/05/04/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AB%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84RSS%E9%98%85%E8%AF%BB%E5%99%A8/"/>
     <id>http://yoursite.com/2016/05/04/UWP开发笔记八：简单的RSS阅读器/</id>
     <published>2016-05-03T21:00:23.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:28:05.000Z</updated>
     
-    <content type="html"><![CDATA[<p>一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。</p>
+    <content type="html"><![CDATA[<p align="center"><br>一个简单的RSS阅读器. </p>
+
+<a id="more"></a>
+<p>一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。</p>
 <p>这次起，把所有功能代码放在类中，MainPage不能再那么随便了。</p>
 <p>新建RSSClass类：</p>
-<pre class="lang:default decode:true ">using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-// ItemsControl
-using Windows.UI.Xaml.Controls;
-// KeyRoutedEventArgs 
-using Windows.UI.Xaml.Input;
-// SyndicationClient 
-using Windows.Web.Syndication;
+<pre><code>    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    // ItemsControl
+    using Windows.UI.Xaml.Controls;
+    // KeyRoutedEventArgs 
+    using Windows.UI.Xaml.Input;
+    // SyndicationClient 
+    using Windows.Web.Syndication;
 
-namespace RSS阅读器
-{
-  public   class RssClass
+    namespace RSS阅读器
     {
-        // 下载指定url的feed条目，逐一将其整合到集合控件ItemsControl中
-        private async void Load(ItemsControl list,Uri url)
+      public   class RssClass
         {
-            // 从URL异步检索源
-            SyndicationClient client = new SyndicationClient();
-            // 开始一个异步操作以下载从给定的URI的聚合feed。
-            SyndicationFeed feed =await client.RetrieveFeedAsync(url);
-            // 遍历feed中的所有item，将其添加到list中
-            foreach (var item in feed.Items)
+            // 下载指定url的feed条目，逐一将其整合到集合控件ItemsControl中
+            private async void Load(ItemsControl list,Uri url)
             {
-                list.Items.Add(item);
+                // 从URL异步检索源
+                SyndicationClient client = new SyndicationClient();
+                // 开始一个异步操作以下载从给定的URI的聚合feed。
+                SyndicationFeed feed =await client.RetrieveFeedAsync(url);
+                // 遍历feed中的所有item，将其添加到list中
+                foreach (var item in feed.Items)
+                {
+                    list.Items.Add(item);
+                }
+            }
+
+            // 
+            public void Start(ref ItemsControl list,string url,KeyRoutedEventArgs args)
+            {
+                // 当按下回车键时
+                if (args.Key== Windows.System.VirtualKey.Enter)
+                {
+                    try
+                    {
+                        Load(list, new Uri(url));
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                    // 设置控件的焦点
+                    list.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+                }
             }
         }
-
-        // 
-        public void Start(ref ItemsControl list,string url,KeyRoutedEventArgs args)
-        {
-            // 当按下回车键时
-            if (args.Key== Windows.System.VirtualKey.Enter)
-            {
-                try
-                {
-                    Load(list, new Uri(url));
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-                // 设置控件的焦点
-                list.Focus(Windows.UI.Xaml.FocusState.Keyboard);
-            }
-        }
-    }
 }
-</pre>
-页面代码：
-<pre class="lang:default decode:true "> &lt;Grid.RowDefinitions&gt;
-            &lt;RowDefinition Height="Auto"/&gt;
-            &lt;RowDefinition Height="*"/&gt;
-        &lt;/Grid.RowDefinitions&gt;
-        &lt;TextBox Name="URLTextBox"
-                 Margin="10"
-                 KeyDown="URLTextBox_KeyDown"
-                 PlaceholderText="请输入RSS地址"/&gt;
-        &lt;ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto"
-                      Margin="20"
-                      Grid.Row="1"&gt;
+</code></pre><p>页面代码：</p>
+<pre><code>&lt;Grid.RowDefinitions&gt;
+           &lt;RowDefinition Height=&quot;Auto&quot;/&gt;
+           &lt;RowDefinition Height=&quot;*&quot;/&gt;
+       &lt;/Grid.RowDefinitions&gt;
+       &lt;TextBox Name=&quot;URLTextBox&quot;
+                Margin=&quot;10&quot;
+                KeyDown=&quot;URLTextBox_KeyDown&quot;
+                PlaceholderText=&quot;请输入RSS地址&quot;/&gt;
+       &lt;ScrollViewer VerticalScrollBarVisibility=&quot;Auto&quot;
+                     HorizontalScrollBarVisibility=&quot;Auto&quot;
+                     Margin=&quot;20&quot;
+                     Grid.Row=&quot;1&quot;&gt;
 
-            &lt;ItemsControl Name="ListItemsControl"&gt;
-                    &lt;ItemsControl.ItemTemplate&gt;
-                        &lt;!--数据模板--&gt;
-                        &lt;DataTemplate&gt;
-                        &lt;StackPanel&gt;
-                            &lt;!--超链接--&gt;
-                            &lt;HyperlinkButton NavigateUri="{Binding Path=Links[0].Uri}"&gt;
-                                &lt;!--超链接标题--&gt;
-                                &lt;HyperlinkButton.Content&gt;
-                                    &lt;TextBlock Text="{Binding Path=Title.Text}"/&gt;
-                                &lt;/HyperlinkButton.Content&gt;
-                            &lt;/HyperlinkButton&gt;
+           &lt;ItemsControl Name=&quot;ListItemsControl&quot;&gt;
+                   &lt;ItemsControl.ItemTemplate&gt;
+                       &lt;!--数据模板--&gt;
+                       &lt;DataTemplate&gt;
+                       &lt;StackPanel&gt;
+                           &lt;!--超链接--&gt;
+                           &lt;HyperlinkButton NavigateUri=&quot;{Binding Path=Links[0].Uri}&quot;&gt;
+                               &lt;!--超链接标题--&gt;
+                               &lt;HyperlinkButton.Content&gt;
+                                   &lt;TextBlock Text=&quot;{Binding Path=Title.Text}&quot;/&gt;
+                               &lt;/HyperlinkButton.Content&gt;
+                           &lt;/HyperlinkButton&gt;
 
-                            &lt;!--文章日期--&gt;
-                            &lt;TextBlock Text="{Binding Path=PublishedDate}"/&gt;
-                        &lt;/StackPanel&gt;
-                        &lt;/DataTemplate&gt;
-                    &lt;/ItemsControl.ItemTemplate&gt;
-                &lt;/ItemsControl&gt;
+                           &lt;!--文章日期--&gt;
+                           &lt;TextBlock Text=&quot;{Binding Path=PublishedDate}&quot;/&gt;
+                       &lt;/StackPanel&gt;
+                       &lt;/DataTemplate&gt;
+                   &lt;/ItemsControl.ItemTemplate&gt;
+               &lt;/ItemsControl&gt;
 
-        &lt;/ScrollViewer&gt;
-</pre>
-cs逻辑代码：
-<pre class="lang:default decode:true "> private RssClass rss = new RssClass();
-        private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            rss.Start(ref ListItemsControl, URLTextBox.Text, e);
-        }</pre>
-明显清晰许多。![](http://images.chenyalun.cn/2016/04/23/005.png)
-
-原谅我又无耻地用了自己网站的RSS源做示例。
-
-* * *
-
-* * *
-
-* * *
-
-## &gt;&gt;笔记
-
-*   #### ItemsControl的数据绑定：
-<pre class="lang:default decode:true">&lt;ItemsControl Name="ListItemsControl"&gt;
+       &lt;/ScrollViewer&gt;
+</code></pre><p>cs逻辑代码：</p>
+<pre><code>private RssClass rss = new RssClass();
+       private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+       {
+           rss.Start(ref ListItemsControl, URLTextBox.Text, e);
+       }
+</code></pre><p>明显清晰许多。</p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>ItemsControl的数据绑定：</p>
+<pre><code>&lt;ItemsControl Name=&quot;ListItemsControl&quot;&gt;
             &lt;ItemsControl.ItemTemplate&gt;
                              &lt;DataTemplate&gt;
 
                               &lt;/DataTemplate&gt;
              &lt;/ItemsControl.ItemTemplate&gt;
-&lt;/ItemsControl&gt;</pre>
-
-<ul>
-<li><h4 id="ScrollViewer的两个属性："><a href="#ScrollViewer的两个属性：" class="headerlink" title="ScrollViewer的两个属性："></a>ScrollViewer的两个属性：</h4><p>VerticalScrollBarVisibility=”Auto”<br>HorizontalScrollBarVisibility=”Auto”</p>
-</li>
-<li><h4 id="绑定RSS内容："><a href="#绑定RSS内容：" class="headerlink" title="绑定RSS内容："></a>绑定RSS内容：</h4><p>链接：<strong> </strong>&lt;HyperlinkButton NavigateUri=”{Binding Path=<strong>Links[0].Uri</strong>}”&gt;</p>
-</li>
-</ul>
-<p>链接标题：&lt;TextBlock Text=”{Binding Path=<strong>Title.Text</strong>}”/&gt;</p>
-<p>文章日期：&lt;TextBlock Text=”{Binding Path=<strong>PublishedDate</strong>}”/&gt;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+&lt;/ItemsControl&gt;
+</code></pre><p>ScrollViewer的两个属性：</p>
+<pre><code>VerticalScrollBarVisibility=”Auto”
+HorizontalScrollBarVisibility=”Auto”
+</code></pre><p>绑定RSS内容：</p>
+<p>链接：<br>        <code>&lt;HyperlinkButton NavigateUri=”{Binding Path=Links[0].Uri}”&gt;</code></p>
+<p>链接标题：<code>&lt;TextBlock Text=”{Binding Path=Title.Text}”/&gt;</code></p>
+<p>文章日期：<br>        <code>&lt;TextBlock Text=”{Binding Path=PublishedDate}”/&gt;</code></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。&lt;/p&gt;
-&lt;p&gt;这次起，把所有功能代码放在类中，MainPage不能再那么随便了。&lt;/p&gt;
-&lt;p&gt;新建RSSClass类：&lt;/p&gt;
-&lt;pre class=&quot;lang:d
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;一个简单的RSS阅读器. &lt;/p&gt;
     
     </summary>
     
@@ -1762,58 +1766,102 @@ cs逻辑代码：
     <link href="http://yoursite.com/2016/05/02/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%83%EF%BC%9AWebView%E4%B8%8E%E7%AE%80%E5%8D%95%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     <id>http://yoursite.com/2016/05/02/UWP开发笔记七：WebView与简单浏览器/</id>
     <published>2016-05-01T21:00:18.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:33:09.000Z</updated>
     
-    <content type="html"><![CDATA[<p>利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。</p>
+    <content type="html"><![CDATA[<p align="center"><br>利用webview控件可以简单制作一个浏览器. </p>
+
+<a id="more"></a>
+<p>利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。</p>
 <p>命令栏代码：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar IsOpen=”True”&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”BackAppBarButton”<br>                              Click=”BackAppBarButton_Click”<br>                              Label=”返回”<br>                              Icon=”Back”/&gt;<br>                &lt;AppBarButton Name=”ForwardAppBarButton”<br>                              Label=”前进”<br>                              Icon=”Forward”<br>                              Click=”ForwardAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”RefreshAppBarButton”<br>                              Label=”刷新”<br>                              Icon=”Refresh”<br>                              Click=”RefreshAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”StopAppBarButton”<br>                              Click=”StopAppBarButton_Click”<br>                              Label=”停止”<br>                              Icon=”Stop”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面：</p>
-<p><pre class="lang:default decode:true ">&lt;Grid.RowDefinitions&gt;<br>            &lt;RowDefinition Height=”Auto”/&gt;<br>            &lt;RowDefinition Height=”*”/&gt;<br>        &lt;/Grid.RowDefinitions&gt;<br>        &lt;TextBox Name=”URLTextBox”<br>                 InputScope=”Url”<br>                 KeyDown=”URLTextBox_KeyDown”<br>                 Margin=”20”/&gt;<br>        &lt;WebView Name=”Web”<br>                 Grid.Row=”1”<br>                 NavigationCompleted=”Web_NavigationCompleted”/&gt;</pre></p>
-<pre><code>&amp;lt;/Grid&amp;gt;&lt;/pre&gt;
+<pre><code>&lt;Page.BottomAppBar&gt;
+        &lt;AppBar IsOpen=”True”&gt;
+            &lt;StackPanel Orientation=”Horizontal”&gt;
+                &lt;AppBarButton Name=”BackAppBarButton”
+                              Click=”BackAppBarButton_Click”
+                              Label=”返回”
+                              Icon=”Back”/&gt;
+                &lt;AppBarButton Name=”ForwardAppBarButton”
+                              Label=”前进”
+                              Icon=”Forward”
+                              Click=”ForwardAppBarButton_Click”/&gt;
+                &lt;AppBarButton Name=”RefreshAppBarButton”
+                              Label=”刷新”
+                              Icon=”Refresh”
+                              Click=”RefreshAppBarButton_Click”/&gt;
+                &lt;AppBarButton Name=”StopAppBarButton”
+                              Click=”StopAppBarButton_Click”
+                              Label=”停止”
+                              Icon=”Stop”/&gt;
+            &lt;/StackPanel&gt;
+        &lt;/AppBar&gt;
+    &lt;/Page.BottomAppBar&gt;
+</code></pre><p>页面：</p>
+<pre><code>&lt;Grid.RowDefinitions&gt;
+            &lt;RowDefinition Height=”Auto”/&gt;
+            &lt;RowDefinition Height=”*”/&gt;
+        &lt;/Grid.RowDefinitions&gt;
+        &lt;TextBox Name=”URLTextBox”
+                 InputScope=”Url”
+                 KeyDown=”URLTextBox_KeyDown”
+                 Margin=”20”/&gt;
+        &lt;WebView Name=”Web”
+                 Grid.Row=”1”
+                 NavigationCompleted=”Web_NavigationCompleted”/&gt;
+
+&lt;/Grid&gt;
 </code></pre><p>后台逻辑：</p>
-<p><pre class="lang:default decode:true "> // 返回处理<br>        private void BackAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            if (Web.CanGoBack)<br>            {<br>                Web.GoBack();<br>            }<br>        }</pre></p>
-<pre><code>// 前进处理
-private void ForwardAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    if (Web.CanGoForward)
+<pre><code>     // 返回处理
+            private void BackAppBarButton_Click(object sender, RoutedEventArgs e)
+            {
+                if (Web.CanGoBack)
+                {
+                    Web.GoBack();
+                }
+            }
+
+    // 前进处理
+    private void ForwardAppBarButton_Click(object sender, RoutedEventArgs e)
     {
-        Web.GoForward();
-    }
-}
-
-// 刷新
-private void RefreshAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Web.Refresh();
-}
-
-// 停止
-private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Web.Stop();
-}
-
-// 按（回车）键处理
-private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-{
-    // 如果按下的键是回车键
-    if (e.Key== Windows.System.VirtualKey.Enter)
-    {
-        // 导航到文本框中的地址
-        Web.Navigate(new Uri(URLTextBox.Text));
+        if (Web.CanGoForward)
+        {
+            Web.GoForward();
+        }
     }
 
-    // 处理焦点
-    Web.Focus(FocusState.Keyboard);
-}
-
-// 导航完成事件处理
-private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-{
-    // 导航是否成功
-    if (args.IsSuccess)
+    // 刷新
+    private void RefreshAppBarButton_Click(object sender, RoutedEventArgs e)
     {
-        // 参数传递到地址栏
-        URLTextBox.Text = args.Uri.ToString();
+        Web.Refresh();
+    }
+
+    // 停止
+    private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
+    {
+        Web.Stop();
+    }
+
+    // 按（回车）键处理
+    private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+    {
+        // 如果按下的键是回车键
+        if (e.Key== Windows.System.VirtualKey.Enter)
+        {
+            // 导航到文本框中的地址
+            Web.Navigate(new Uri(URLTextBox.Text));
+        }
+
+        // 处理焦点
+        Web.Focus(FocusState.Keyboard);
+    }
+
+    // 导航完成事件处理
+    private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+    {
+        // 导航是否成功
+        if (args.IsSuccess)
+        {
+            // 参数传递到地址栏
+            URLTextBox.Text = args.Uri.ToString();
     }
 
 }&lt;/pre&gt;
@@ -1821,18 +1869,23 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
 <p>初始页面：<img src="http://images.chenyalun.cn/2016/04/23/001.png" alt=""></p>
 <p>打开新链接：</p>
 <p><img src="http://images.chenyalun.cn/2016/04/23/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>对键盘的按键（回车）键处理：<br>private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)<br>{<br>// 如果按下的键是回车键<br>if (e.Key== Windows.System.VirtualKey.Enter)<br>{<br>// 导航到文本框中的地址<br>Web.Navigate(new Uri(URLTextBox.Text));<br>}<br>}</p>
-<p>对焦点的处理：<br>Web.Focus(FocusState.Keyboard);</p>
-<p>还有就是，文本框（地址栏）输入的文本必须是URL，即 <a href="http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。" target="_blank" rel="external">http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。</a></p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>对键盘的按键（回车）键处理：</p>
+<pre><code>private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+{
+// 如果按下的键是回车键
+if (e.Key== Windows.System.VirtualKey.Enter)
+{
+// 导航到文本框中的地址
+Web.Navigate(new Uri(URLTextBox.Text));
+}
+}
+</code></pre><p>对焦点的处理：<br><code>Web.Focus(FocusState.Keyboard);</code></p>
+<p>还有就是，文本框（地址栏）输入的文本必须是URL，即 <a href="http://chenyalun.com/" target="_blank" rel="external">http://chenyalun.com/</a> 如果是chenyalun.com那就会报错了。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。&lt;/p&gt;
-&lt;p&gt;命令栏代码：&lt;/p&gt;
-&lt;p&gt;&lt;
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;利用webview控件可以简单制作一个浏览器. &lt;/p&gt;
     
     </summary>
     
@@ -1848,125 +1901,186 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
     <link href="http://yoursite.com/2016/04/30/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AD%EF%BC%9A%E5%B9%B8%E8%BF%90%E5%BD%A9%E8%89%B2%E5%B0%8F%E7%90%83/"/>
     <id>http://yoursite.com/2016/04/30/UWP开发笔记六：幸运彩色小球/</id>
     <published>2016-04-29T21:00:46.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:36:49.000Z</updated>
     
-    <content type="html"><![CDATA[<p>这个和<a href="http://www.chenyalun.cn/uwp开发笔记四：随机数与筛子游戏.html" target="_blank" rel="external">UWP开发笔记四：随机数与筛子游戏</a>有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。</p>
+    <content type="html"><![CDATA[<p align="center"><br>幸运彩色小球游戏. </p>
+
+<a id="more"></a>
+<p>这个和随机数与筛子游戏有异曲同工之妙，通过随机函数产生一定范围大小的数字，根据数字大小设定不同的颜色，点击命令栏的新建按钮，面板清空，重新产生一轮数字。</p>
 <p>命令栏：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Label=”新建”<br>                              Icon=”NewFolder”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
-<p><pre class="lang:default decode:true ">&lt;StackPanel HorizontalAlignment=”Center”<br>            VerticalAlignment=”Center”<br>            Name=”DisplayStackPanel”<br>                    Orientation=”Horizontal”/&gt;</pre><br>当然，为了方便起见，创建一个ShowBall类：需要引入的命名空间有：</p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>完整代码：</p>
-<p><pre class="lang:default decode:true ">using System;<br>using System.Collections.Generic;<br>using System.Linq;<br>using System.Text;<br>using System.Threading.Tasks;<br>//color<br>using Windows.UI;</pre></p>
-<p>//Thickness<br>using Windows.UI.Xaml;<br>//控件<br>using Windows.UI.Xaml.Controls;<br>//SolidColorBrush<br>using Windows.UI.Xaml.Media;<br>//球<br>using Windows.UI.Xaml.Shapes;</p>
-<p>namespace Lucky_Lotto<br>{<br>   public  class ShowBall<br>    {<br>        // 定义随机数(种子为日期和时间的计时周期）<br>        private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<pre><code>    // 定义获取数字集合方法
-    private List&amp;lt;int&amp;gt; GetNumbers()
+<pre><code>&lt;Page.BottomAppBar&gt;
+        &lt;AppBar&gt;
+            &lt;StackPanel Orientation=”Horizontal”&gt;
+                &lt;AppBarButton Name=”NewAppBarButton”
+                              Label=”新建”
+                              Icon=”NewFolder”
+                              Click=”NewAppBarButton_Click”/&gt;
+            &lt;/StackPanel&gt;
+        &lt;/AppBar&gt;
+    &lt;/Page.BottomAppBar&gt;
+</code></pre><p>页面代码：</p>
+<pre><code>&lt;StackPanel HorizontalAlignment=”Center”
+            VerticalAlignment=”Center”
+            Name=”DisplayStackPanel”
+                    Orientation=”Horizontal”/&gt;
+</code></pre><p>当然，为了方便起见，创建一个ShowBall类：需要引入的命名空间有：</p>
+<pre><code>//Thickness
+using Windows.UI.Xaml;
+//控件
+using Windows.UI.Xaml.Controls;
+//SolidColorBrush
+using Windows.UI.Xaml.Media;
+//球
+using Windows.UI.Xaml.Shapes;
+</code></pre><p>完整代码：</p>
+<pre><code>    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    //color
+    using Windows.UI;
+
+    //Thickness
+    using Windows.UI.Xaml;
+    //控件
+    using Windows.UI.Xaml.Controls;
+    //SolidColorBrush
+    using Windows.UI.Xaml.Media;
+    //球
+    using Windows.UI.Xaml.Shapes;
+
+    namespace Lucky_Lotto
     {
-        int Number;
-        // 定义Numbers集合
-        List&amp;lt;int&amp;gt; Numbers = new List&amp;lt;int&amp;gt;();
-        // 当Numbers集合中整数个数小于6时，自动增加
-        while (Numbers.Count &amp;lt; 6)
+    public class ShowBall
+    {
+    // 定义随机数(种子为日期和时间的计时周期）
+    private Random random = new Random((int)DateTime.Now.Ticks);
+
+        // 定义获取数字集合方法
+        private List&amp;lt;int&amp;gt; GetNumbers()
         {
-            // 随机获取1到50之间的整数赋予Number（Number可以取1，不可取50）
-            Number = random.Next(1, 50);
-            // 将产生的随机数添加到集合之中
-            // 处理当集合中的整数与产生的随机数相同的情况
-            if (!Numbers.Contains(Number)||Number&amp;lt;1)
+            int Number;
+            // 定义Numbers集合
+            List&amp;lt;int&amp;gt; Numbers = new List&amp;lt;int&amp;gt;();
+            // 当Numbers集合中整数个数小于6时，自动增加
+            while (Numbers.Count &amp;lt; 6)
             {
-                Numbers.Add(Number);
+                // 随机获取1到50之间的整数赋予Number（Number可以取1，不可取50）
+                Number = random.Next(1, 50);
+                // 将产生的随机数添加到集合之中
+                // 处理当集合中的整数与产生的随机数相同的情况
+                if (!Numbers.Contains(Number)||Number&amp;lt;1)
+                {
+                    Numbers.Add(Number);
+                }
+                // 对集合中的数字进行有序整理（美观起见）
+                Numbers.Sort();
             }
-            // 对集合中的数字进行有序整理（美观起见）
-            Numbers.Sort();
+
+            return Numbers;
+
         }
-
-        return Numbers;
-
-    }
-    // 对StackPanel进行处理：创建小球，增添颜色等
-    // 将每个小球分别放在Canva中s，6个Canvas放在一个StackPanel中
-    public void PlayBall(ref StackPanel stackpanel)
-    {
-        // 清空原先讯在的元素
-        stackpanel.Children.Clear();
-
-        // 对数字集合遍历
-        foreach(int number in GetNumbers())
+        // 对StackPanel进行处理：创建小球，增添颜色等
+        // 将每个小球分别放在Canva中s，6个Canvas放在一个StackPanel中
+        public void PlayBall(ref StackPanel stackpanel)
         {
-            // 定义Canvas
-            Canvas canvas = new Canvas();
-            canvas.Width = 48;
-            canvas.Height = 48;
-            canvas.Margin = new Thickness(2);
+            // 清空原先讯在的元素
+            stackpanel.Children.Clear();
 
-            // 定义球
-            Ellipse ellipse = new Ellipse();
-            ellipse.Width = canvas.Width;
-            ellipse.Height = canvas.Height;
-            // 设置小球边框颜色是黑色
-            ellipse.Stroke = new SolidColorBrush(Colors.Black);
+            // 对数字集合遍历
+            foreach(int number in GetNumbers())
+            {
+                // 定义Canvas
+                Canvas canvas = new Canvas();
+                canvas.Width = 48;
+                canvas.Height = 48;
+                canvas.Margin = new Thickness(2);
 
-            // 根据数字的大小设置小球的填充颜色
-            if (number &amp;gt;= 1 &amp;amp;&amp;amp; number &amp;lt;= 9)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.White);
-            }
-            else if (number &amp;gt; 9 &amp;amp;&amp;amp; number &amp;lt;= 19)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 200, 236));
-            }
-            else if (number &amp;gt; 19 &amp;amp;&amp;amp; number &amp;lt;= 29)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Magenta);
-            }
-            else if (number &amp;gt; 29 &amp;amp;&amp;amp; number &amp;lt;= 39)
-            {
-                ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 255, 0));
-            }
-            else if (number &amp;gt; 39 &amp;amp;&amp;amp; number &amp;lt;= 49)
-            {
-                ellipse.Fill = new SolidColorBrush(Colors.Yellow);
-            }
+                // 定义球
+                Ellipse ellipse = new Ellipse();
+                ellipse.Width = canvas.Width;
+                ellipse.Height = canvas.Height;
+                // 设置小球边框颜色是黑色
+                ellipse.Stroke = new SolidColorBrush(Colors.Black);
 
-            // 定义球中的文本（数字）
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = number.ToString();
-            textBlock.FontSize = 16;
-            textBlock.Foreground = new SolidColorBrush(Colors.Black);
-            textBlock.Margin = new Thickness(16, 12, 16, 12);
+                // 根据数字的大小设置小球的填充颜色
+                if (number &amp;gt;= 1 &amp;amp;&amp;amp; number &amp;lt;= 9)
+                {
+                    ellipse.Fill = new SolidColorBrush(Colors.White);
+                }
+                else if (number &amp;gt; 9 &amp;amp;&amp;amp; number &amp;lt;= 19)
+                {
+                    ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 200, 236));
+                }
+                else if (number &amp;gt; 19 &amp;amp;&amp;amp; number &amp;lt;= 29)
+                {
+                    ellipse.Fill = new SolidColorBrush(Colors.Magenta);
+                }
+                else if (number &amp;gt; 29 &amp;amp;&amp;amp; number &amp;lt;= 39)
+                {
+                    ellipse.Fill = new SolidColorBrush(Color.FromArgb(255, 112, 255, 0));
+                }
+                else if (number &amp;gt; 39 &amp;amp;&amp;amp; number &amp;lt;= 49)
+                {
+                    ellipse.Fill = new SolidColorBrush(Colors.Yellow);
+                }
 
-            // 将文本（数字）、小球添加到canvas中，将canvas添加到stackpanel中
-            // 一定先添加球，再添加文本，否则文本不会显示
-            canvas.Children.Add(ellipse);
-            canvas.Children.Add(textBlock);
-            stackpanel.Children.Add(canvas);
+                // 定义球中的文本（数字）
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = number.ToString();
+                textBlock.FontSize = 16;
+                textBlock.Foreground = new SolidColorBrush(Colors.Black);
+                textBlock.Margin = new Thickness(16, 12, 16, 12);
+
+                // 将文本（数字）、小球添加到canvas中，将canvas添加到stackpanel中
+                // 一定先添加球，再添加文本，否则文本不会显示
+                canvas.Children.Add(ellipse);
+                canvas.Children.Add(textBlock);
+                stackpanel.Children.Add(canvas);
         }
     }
 }
-</code></pre><p>}<br><br>这样主页面的后台代码就可以轻松的调用了：</p>
-<p><pre class="lang:default decode:true "> // 新建类的实例<br>        public  ShowBall showball = new ShowBall();<br>        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {</pre></p>
-<pre><code>  showball.PlayBall(ref DisplayStackPanel);
+
+}
+</code></pre><p>这样主页面的后台代码就可以轻松的调用了：</p>
+<pre><code> // 新建类的实例
+        public  ShowBall showball = new ShowBall();
+        private void NewAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+  showball.PlayBall(ref DisplayStackPanel);
 }&lt;/pre&gt;
 </code></pre><p>演示：</p>
 <p><img src="http://images.chenyalun.cn/2016/04/22/001.png" alt=""><img src="http://images.chenyalun.cn/2016/04/22/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>// 对数字集合遍历<br>foreach(int number in GetNumbers())  {}</p>
-<p>// 设置小球边框颜色是黑色<br>ellipse.Stroke = new SolidColorBrush(Colors.Black);</p>
-<p>//设置margin</p>
-<p>textBlock.Margin = new Thickness(16, 12, 16, 12);</p>
-<p>// 一定先添加球，再添加文本，否则文本不会显示<br>canvas.Children.Add(ellipse);<br>canvas.Children.Add(textBlock);<br>stackpanel.Children.Add(canvas);</p>
-<p>// 清空原先存在的元素<br>stackpanel.Children.Clear();</p>
-<p>// 对集合中的数字进行有序整理（美观起见）<br>Numbers.Sort();</p>
-<p>// 定义随机数(种子为日期和时间的计时周期）<br>private Random random = new Random((int)DateTime.Now.Ticks);</p>
-<p>// 定义Numbers集合<br>List&lt;int&gt; Numbers = new List&lt;int&gt;();</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-]]></content>
+<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><pre><code>// 对数字集合遍历
+foreach(int number in GetNumbers())  {}
+
+// 设置小球边框颜色是黑色
+ellipse.Stroke = new SolidColorBrush(Colors.Black);
+
+//设置margin
+
+textBlock.Margin = new Thickness(16, 12, 16, 12);
+
+// 一定先添加球，再添加文本，否则文本不会显示
+canvas.Children.Add(ellipse);
+canvas.Children.Add(textBlock);
+stackpanel.Children.Add(canvas);
+
+// 清空原先存在的元素
+stackpanel.Children.Clear();
+
+// 对集合中的数字进行有序整理（美观起见）
+Numbers.Sort();
+
+// 定义随机数(种子为日期和时间的计时周期）
+private Random random = new Random((int)DateTime.Now.Ticks);
+</code></pre>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;这个和&lt;a href=&quot;http://www.chenyalun.cn/uwp开发笔记四：随机数与筛子游戏.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;UWP开发笔记四：随机数与筛子游戏&lt;/a&gt;有异曲同工之妙，通过随机函数产生一定范围大小的数字
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;幸运彩色小球游戏. &lt;/p&gt;
     
     </summary>
     
@@ -1982,9 +2096,12 @@ private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedE
     <link href="http://yoursite.com/2016/04/28/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%94%EF%BC%9A%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/"/>
     <id>http://yoursite.com/2016/04/28/UWP开发笔记五：应用数据本地存储/</id>
     <published>2016-04-27T21:00:59.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:39:45.000Z</updated>
     
-    <content type="html"><![CDATA[<p>应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。</p>
+    <content type="html"><![CDATA[<p align="center"><br>应用数据存储. </p>
+
+<a id="more"></a>
+<p>应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。</p>
 <p>命令栏代码：</p>
 <p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”NewAppBarButton”<br>                              Icon=”Page”<br>                              Label=”新建”<br>                              Click=”NewAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”LoadAppBarButton”<br>                              Icon=”Folder”<br>                              Label=”显示”<br>                              Click=”LoadAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”SaveAppBarButton”<br>                              Icon=”Save”<br>                              Label=”保存”<br>                              Click=”SaveAppBarButton_Click”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
 <p><pre class="lang:default decode:true "> &lt;StackPanel&gt;<br>            &lt;TextBox Name=”Email”<br>                     PlaceholderText=”邮箱”<br>                     Margin=”20”<br>                     InputScope=”EmailSmtpAddress”/&gt;<br>            &lt;TextBox Name=”Web”<br>                     PlaceholderText=”网址”<br>                     Margin=”20”<br>                     InputScope=”Url”/&gt;<br>            &lt;TextBox Name=”Tel”<br>                     PlaceholderText=”手机号码”<br>                     Margin=”20”<br>                     InputScope=”TelephoneNumber”/&gt;<br>        &lt;/StackPanel&gt;</pre><br>后台逻辑：</p>
@@ -2038,9 +2155,7 @@ public string Load(string key)
     
     <summary type="html">
     
-      &lt;p&gt;应用数据存储有两种形式，一种存储在本地，另一种是漫游到云端。输入信息，保存在本地，点击显示按钮，重新显现刚刚输入的信息。&lt;/p&gt;
-&lt;p&gt;命令栏代码：&lt;/p&gt;
-&lt;p&gt;&lt;pre class=&quot;lang:default decode:true &quot;&gt;&amp;lt;Page.BottomA
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;应用数据存储. &lt;/p&gt;
     
     </summary>
     
@@ -2056,9 +2171,12 @@ public string Load(string key)
     <link href="http://yoursite.com/2016/04/26/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%8E%E7%AD%9B%E5%AD%90%E6%B8%B8%E6%88%8F/"/>
     <id>http://yoursite.com/2016/04/26/UWP开发笔记四：随机数与筛子游戏/</id>
     <published>2016-04-25T21:00:25.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:41:18.000Z</updated>
     
-    <content type="html"><![CDATA[<p>点击方块，方块随机出现类似筛子的点数，连续点击，连续出现随机的数。当然，是有两个方块的。点击底部命令栏的刷新按钮，两块“筛子”均恢复空白状态。</p>
+    <content type="html"><![CDATA[<p align="center"><br>随机数与筛子游戏<br>. </p>
+
+<a id="more"></a>
+<p>点击方块，方块随机出现类似筛子的点数，连续点击，连续出现随机的数。当然，是有两个方块的。点击底部命令栏的刷新按钮，两块“筛子”均恢复空白状态。</p>
 <p>命令栏：</p>
 <p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                    &lt;AppBarButton Name=”NewAppBarButton”<br>                                  Icon=”Page”<br>                                  Click=”NewAppBarButton_Click”<br>                                  Label=”刷新”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面代码：</p>
 <p><pre class="lang:default decode:true "> &lt;Grid.ColumnDefinitions&gt;<br>            &lt;ColumnDefinition Width=”<em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”</em>“/&gt;<br>            &lt;ColumnDefinition Width=”Auto”/&gt;<br>            &lt;ColumnDefinition Width=”*”/&gt;<br>        &lt;/Grid.ColumnDefinitions&gt;</pre></p>
@@ -2235,9 +2353,7 @@ public string Load(string key)
     
     <summary type="html">
     
-      &lt;p&gt;点击方块，方块随机出现类似筛子的点数，连续点击，连续出现随机的数。当然，是有两个方块的。点击底部命令栏的刷新按钮，两块“筛子”均恢复空白状态。&lt;/p&gt;
-&lt;p&gt;命令栏：&lt;/p&gt;
-&lt;p&gt;&lt;pre class=&quot;lang:default decode:true &quot;&gt;&amp;lt;Pag
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;随机数与筛子游戏&lt;br&gt;. &lt;/p&gt;
     
     </summary>
     
@@ -2253,9 +2369,12 @@ public string Load(string key)
     <link href="http://yoursite.com/2016/04/24/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E5%8A%A8%E7%94%BB%E7%BC%96%E7%A8%8B%E4%B9%8B%E5%9B%BE%E5%BD%A2%E7%9A%84%E7%BF%BB%E8%BD%AC/"/>
     <id>http://yoursite.com/2016/04/24/UWP开发笔记三：动画编程之图形的翻转/</id>
     <published>2016-04-23T21:00:40.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:42:06.000Z</updated>
     
-    <content type="html"><![CDATA[<p>动画编程可以实现很酷的很炫的效果，能让开发出的App散发无穷无尽的魅力，在颜值至上的时代，好看是检验UI的唯一标准。图形的翻转主要有三种形式：RotationX，RotationY，RotationZ，就是获取或设置围绕旋转的 X 轴或Y轴或Z轴旋转对象的角度。</p>
+    <content type="html"><![CDATA[<p align="center"><br>动画编程小尝试<br>. </p>
+
+<a id="more"></a>
+<p>动画编程可以实现很酷的很炫的效果，能让开发出的App散发无穷无尽的魅力，在颜值至上的时代，好看是检验UI的唯一标准。图形的翻转主要有三种形式：RotationX，RotationY，RotationZ，就是获取或设置围绕旋转的 X 轴或Y轴或Z轴旋转对象的角度。</p>
 <p>计划在文本框中键入图片的地址源，按回车载入图片，点击命令栏中按钮，图片做出相应变换。</p>
 <p>XAML代码：</p>
 <pre class="lang:default decode:true ">&lt;!--命令栏--&gt;
@@ -2440,8 +2559,7 @@ rotating = true;&lt;/pre&gt;
     
     <summary type="html">
     
-      &lt;p&gt;动画编程可以实现很酷的很炫的效果，能让开发出的App散发无穷无尽的魅力，在颜值至上的时代，好看是检验UI的唯一标准。图形的翻转主要有三种形式：RotationX，RotationY，RotationZ，就是获取或设置围绕旋转的 X 轴或Y轴或Z轴旋转对象的角度。&lt;/p&gt;
-&lt;
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;动画编程小尝试&lt;br&gt;. &lt;/p&gt;
     
     </summary>
     
@@ -2457,9 +2575,12 @@ rotating = true;&lt;/pre&gt;
     <link href="http://yoursite.com/2016/04/22/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9AAppBar%E5%92%8CCommandBar/"/>
     <id>http://yoursite.com/2016/04/22/UWP开发笔记二：AppBar和CommandBar/</id>
     <published>2016-04-21T21:00:36.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:42:33.000Z</updated>
     
-    <content type="html"><![CDATA[<p>AppBar和CommandBar也算是比较常用的控件了，不过个人不太喜欢这些，主要是觉得很非主流，我还是喜欢把功能都做到汉堡菜单里。</p>
+    <content type="html"><![CDATA[<p align="center"><br>AppBar和CommandBar<br>. </p>
+
+<a id="more"></a>
+<p>AppBar和CommandBar也算是比较常用的控件了，不过个人不太喜欢这些，主要是觉得很非主流，我还是喜欢把功能都做到汉堡菜单里。</p>
 <p>1，CommandBar被包裹住了，一般放在页面顶部或底部。</p>
 <p><pre class="lang:default decode:true ">&lt;Page<br>    x:Class=”ApplicationBar.MainPage”<br>    xmlns=”<a href="http://schemas.microsoft.com/winfx/2006/xaml/presentation" target="_blank" rel="external">http://schemas.microsoft.com/winfx/2006/xaml/presentation</a>“<br>    xmlns:x=”<a href="http://schemas.microsoft.com/winfx/2006/xaml" target="_blank" rel="external">http://schemas.microsoft.com/winfx/2006/xaml</a>“<br>    xmlns:local=”using:ApplicationBar”<br>    xmlns:d=”<a href="http://schemas.microsoft.com/expression/blend/2008" target="_blank" rel="external">http://schemas.microsoft.com/expression/blend/2008</a>“<br>    xmlns:mc=”<a href="http://schemas.openxmlformats.org/markup-compatibility/2006" target="_blank" rel="external">http://schemas.openxmlformats.org/markup-compatibility/2006</a>“<br>    mc:Ignorable=”d”&gt;</pre></p>
 <p>  &lt;Page.BottomAppBar&gt;<br>        &lt;CommandBar&gt;</p>
@@ -2500,9 +2621,7 @@ rotating = true;&lt;/pre&gt;
     
     <summary type="html">
     
-      &lt;p&gt;AppBar和CommandBar也算是比较常用的控件了，不过个人不太喜欢这些，主要是觉得很非主流，我还是喜欢把功能都做到汉堡菜单里。&lt;/p&gt;
-&lt;p&gt;1，CommandBar被包裹住了，一般放在页面顶部或底部。&lt;/p&gt;
-&lt;p&gt;&lt;pre class=&quot;lang:default
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;AppBar和CommandBar&lt;br&gt;. &lt;/p&gt;
     
     </summary>
     
@@ -2518,9 +2637,12 @@ rotating = true;&lt;/pre&gt;
     <link href="http://yoursite.com/2016/04/20/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AHello_UWP%E4%B8%8E%E5%AF%B9%E8%AF%9D%E6%A1%86/"/>
     <id>http://yoursite.com/2016/04/20/UWP开发笔记一：Hello_UWP与对话框/</id>
     <published>2016-04-19T21:00:51.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:42:57.000Z</updated>
     
-    <content type="html"><![CDATA[<p>这段时间在悄悄地学习UWP开发，不过担心会忘记，所以感觉还是记下笔记比较好。一来自己没事可以翻着看看，可解闷了，二来欢迎志同道合的童鞋一起交流。</p>
+    <content type="html"><![CDATA[<p align="center"><br>Hello World UWP<br>. </p>
+
+<a id="more"></a>
+<p>这段时间在悄悄地学习UWP开发，不过担心会忘记，所以感觉还是记下笔记比较好。一来自己没事可以翻着看看，可解闷了，二来欢迎志同道合的童鞋一起交流。</p>
 <p>1，假定PC装好VS2015，文件–新建–项目–windows通用应用</p>
 <p><img src="http://images.chenyalun.cn/2016/04/19/001.png" alt=""></p>
 <p>设置版本：</p>
@@ -2578,9 +2700,7 @@ rotating = true;&lt;/pre&gt;
     
     <summary type="html">
     
-      &lt;p&gt;这段时间在悄悄地学习UWP开发，不过担心会忘记，所以感觉还是记下笔记比较好。一来自己没事可以翻着看看，可解闷了，二来欢迎志同道合的童鞋一起交流。&lt;/p&gt;
-&lt;p&gt;1，假定PC装好VS2015，文件–新建–项目–windows通用应用&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;Hello World UWP&lt;br&gt;. &lt;/p&gt;
     
     </summary>
     
@@ -2596,37 +2716,124 @@ rotating = true;&lt;/pre&gt;
     <link href="http://yoursite.com/2015/11/04/%E6%B3%9B%E8%B0%88%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
     <id>http://yoursite.com/2015/11/04/泛谈单链表的插入与删除/</id>
     <published>2015-11-03T21:00:32.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:49:06.000Z</updated>
     
-    <content type="html"><![CDATA[<p>谈过<a href="http://www.chenyalun.cn/泛谈顺序表的插入与删除.html" target="_blank" rel="external">顺序表的插入与删除</a>，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。</p>
-<p>先看定义：</p>
-<p><pre class="lang:default decode:true ">typedef struct LNode{<br>    int data;<br>    struct LNode <em>next;<br>}LNode;</em></pre><br>数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你咬我呀，哈哈。</p>
-<p>江湖传言LNode *p等价于LinkList p，不知道有木有人认同呢？闲话少说，看代码：</p>
-<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;</pre></p>
-<p>#include&lt;malloc.h&gt;<br>//定义并初始化单链表<br>typedef struct LNode{<br>    int data;<br>    struct LNode *next;<br>}LNode;</p>
-<p>//单链表的创建与初始化，设定共n个节点（不含头节点）<br>void CreateLinkList(LNode <em>a,int n) {<br>        LNode </em>p,<em>q;<br>        p=a;<br>    while(n–){<br>         q=(LNode </em>)malloc(sizeof(LNode *));<br>         scanf(“%d”,&amp;q-&gt;data);<br>           q-&gt;next=NULL;<br>        p-&gt;next=q;<br>        p=q;<br>    }<br>}</p>
-<p>//查找是否存在一个值为x的节点，若存在，删之，并返回OK，否则返回NOT FOUND<br>char <em>SearchAndDelete(LNode </em>c,int x){<br>    LNode <em>p,</em>q;<br>    p=c;<br>    //开始查找<br>    while(p-&gt;next!=NULL)<br>    {<br>        if(p-&gt;next-&gt;data==x)<br>        break;<br>        p=p-&gt;next;<br>    }<br>    //若找到则开始删除<br>    if(p-&gt;next==NULL)<br>    return “NOT FOUND”;<br>    else<br>    {<br>        q=p-&gt;next;<br>        p-&gt;next=p-&gt;next-&gt;next;<br>        free(q);<br>        return “OK”;<br>    }<br>}</p>
-<p>//在链表c中第n个节点位置插入元素e<br>void Insert(LNode <em>c,int n,int e){<br>    LNode </em>p=( LNode <em>)malloc(sizeof(LNode </em>)),<br>    <em>q=( LNode </em>)malloc(sizeof(LNode <em>));//插入的节点<br>    p=c;<br>    q-&gt;data=e;<br>    //找到要插入节点的位置<br>    for(int i=1;i&lt;n;i++){<br>        p=p-&gt;next;<br>    }<br>    //插入节点<br>    q-&gt;next=p-&gt;next;<br>    p-&gt;next=q;<br>}<br>//打印单链表<br>void Print(LNode </em>a){<br>    LNode <em>p=( LNode </em>)malloc(sizeof(LNode *));<br>    p=a-&gt;next;<br>    while(p!=NULL){<br>        printf(“%d\n”,p-&gt;data);<br>        p=p-&gt;next;<br>    }<br>}</p>
-<p>int main(){<br>   LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));<br>    CreateLinkList(a,5);<br>   Insert(a,3,10086);//假定在第3个位置插入数值为10086的节点<br> Print(a);<br>   printf(“—————-\n”);<br>SearchAndDelete(a,13);//查找并执行删除数值为13的节点<br>  Print(a);<br>return 0;<br>}<br><br>说明如下：</p>
+    <content type="html"><![CDATA[<p align="center"><br>简单探讨单链表的插入与删除<br>. </p>
+
+<a id="more"></a>
+<p>其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。</p>
+<p>定义：</p>
+<pre><code>typedef struct LNode{
+    int data;
+    struct LNode next;
+}LNode;
+</code></pre><p>江湖传言LNode *p等价于LinkList p，不知道有木有人认同呢？</p>
+<pre><code>    #include&lt;stdio.h&gt;
+
+    #include&lt;malloc.h&gt;
+    //定义并初始化单链表
+    typedef struct LNode{
+    int data;
+    struct LNode *next;
+    }LNode;
+
+    //单链表的创建与初始化，设定共n个节点（不含头节点）
+    void CreateLinkList(LNode a,int n) {
+    LNode p,q;
+    p=a;
+    while(n–){
+    q=(LNode )malloc(sizeof(LNode *));
+    scanf(“%d”,&amp;q-&gt;data);
+    q-&gt;next=NULL;
+    p-&gt;next=q;
+    p=q;
+    }
+    }
+
+    //查找是否存在一个值为x的节点，若存在，删之，并返回OK，否则返回NOT FOUND
+    char SearchAndDelete(LNode c,int x){
+    LNode p,q;
+    p=c;
+    //开始查找
+    while(p-&gt;next!=NULL)
+    {
+    if(p-&gt;next-&gt;data==x)
+    break;
+    p=p-&gt;next;
+    }
+    //若找到则开始删除
+    if(p-&gt;next==NULL)
+    return “NOT FOUND”;
+    else
+    {
+    q=p-&gt;next;
+    p-&gt;next=p-&gt;next-&gt;next;
+    free(q);
+    return “OK”;
+    }
+    }
+
+    //在链表c中第n个节点位置插入元素e
+    void Insert(LNode c,int n,int e){
+    LNode p=( LNode )malloc(sizeof(LNode )),
+    q=( LNode )malloc(sizeof(LNode ));//插入的节点
+    p=c;
+    q-&gt;data=e;
+    //找到要插入节点的位置
+    for(int i=1;i&lt;n;i++){
+    p=p-&gt;next;
+    }
+    //插入节点
+    q-&gt;next=p-&gt;next;
+    p-&gt;next=q;
+    }
+    //打印单链表
+    void Print(LNode a){
+    LNode p=( LNode )malloc(sizeof(LNode *));
+    p=a-&gt;next;
+    while(p!=NULL){
+    printf(“%d\n”,p-&gt;data);
+    p=p-&gt;next;
+    }
+    }
+
+    int main(){
+    LNode a=( LNode )malloc(sizeof(LNode *));
+    CreateLinkList(a,5);
+    Insert(a,3,10086);//假定在第3个位置插入数值为10086的节点
+    Print(a);
+    printf(“—————-\n”);
+    SearchAndDelete(a,13);//查找并执行删除数值为13的节点
+    Print(a);
+    return 0;
+}
+</code></pre><p>说明如下：</p>
 <p>1，假定输入的是11 12 13 14 15五个数值。在第三个位置（13的位置）插入一个数据域为10086的节点。此时原来的数值已经变成了11 12 10086 13 14 15</p>
 <p>2，完事后，我为了方便不再另写代码，在11 12 10086 13 14 15的基础上假定查找并删除数据域为13的节点。</p>
 <p><img src="http://source.chenyalun.cn/images/201511/5110101.jpg" alt=""></p>
-<p>当然还有值得体会的是，我把节点的内存分配放在主函数里，不知道是不是有人想打我呢？</p>
+<p>当然还有值得体会的是，把节点的内存分配放在主函数里.</p>
 <p>像这样：</p>
-<p><pre class="nums:false lang:default decode:true ">LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>当然，清晰一点就是</p>
-<p>&nbsp;</p>
-<p><pre class="nums:false lang:default decode:true ">LNode <em>a;<br>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>两者效果一样。这不是重点。看下面的两段代码：</p>
-<p><pre class="lang:default decode:true ">void Print(LNode *a){</pre></p>
-<p>}<br>和</p>
-<p><pre class="lang:default decode:true">void Print(LNode <em>&amp;a){<br>    a=( LNode </em>)malloc(sizeof(LNode *));</pre></p>
-<p>}<br>这才是重点，和小伙伴研究一下，决定采取有违伦理惨无人道的第一种方式。最后在主函数中再调用malloc觉得还是蛮灵活轻便的。</p>
+<pre><code>LNode a=( LNode )malloc(sizeof(LNode *));
+</code></pre><p>当然，清晰一点就是</p>
+<pre><code>LNode a;
+a=( LNode )malloc(sizeof(LNode *));
+</code></pre><p>两者效果一样。</p>
+<pre><code>void Print(LNode *a){
+
+}
+和
+
+void Print(LNode &amp;a){
+    a=( LNode )malloc(sizeof(LNode *));
+
+}
+</code></pre><p>这才是重点，和小伙伴研究一下，决定采取有违伦理惨无人道的第一种方式。最后在主函数中再调用malloc觉得还是蛮灵活轻便的。</p>
 <p>当然，上面的代码不是为了解题，只是提供一个思路，具体可视情况修改。</p>
-<p>&nbsp;</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;谈过&lt;a href=&quot;http://www.chenyalun.cn/泛谈顺序表的插入与删除.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;顺序表的插入与删除&lt;/a&gt;，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;简单探讨单链表的插入与删除&lt;br&gt;. &lt;/p&gt;
     
     </summary>
     
@@ -2640,37 +2847,113 @@ rotating = true;&lt;/pre&gt;
     <link href="http://yoursite.com/2015/11/02/%E6%B3%9B%E8%B0%88%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
     <id>http://yoursite.com/2015/11/02/泛谈顺序表的插入与删除/</id>
     <published>2015-11-01T21:00:11.000Z</published>
-    <updated>2016-08-21T12:15:24.000Z</updated>
+    <updated>2016-10-28T13:54:12.000Z</updated>
     
-    <content type="html"><![CDATA[<p>严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。</p>
-<p>所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。看到这时，确实很不high，还木有到链表呢，何必那么心急引入指针，而且我又不爱指针。</p>
-<p><pre class="lang:default decode:true ">typedef struct{<br>    Elemtype *elem;<br>    int length;<br>    int listsize;<br>}SqList;</pre><br>没有指责的意思，只是我辈太愚笨罢了。</p>
-<p>翻翻资料。发现还有一种更巧妙而且容易理解的方式：</p>
-<p><pre class="lang:default decode:true ">typedef struct{<br>    int data[Max];<br>    int length;<br>}SqList;</pre><br>这样一来，整个顺序表就与数组特别特别相似啦。</p>
+    <content type="html"><![CDATA[<p align="center"><br>简单探讨顺序表的插入与删除<br>. </p>
+
+<a id="more"></a>
+<p>所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。</p>
+<pre><code>typedef struct{
+    Elemtype *elem;
+    int length;
+    int listsize;
+}SqList;
+</code></pre><p>翻翻资料。发现还有一种更巧妙而且容易理解的方式：</p>
+<pre><code>typedef struct{
+    int data[Max];
+    int length;
+}SqList;
+</code></pre><p>这样一来，整个顺序表就与数组特别特别相似啦。</p>
 <p>那么，声明一个很长很长但是彼此知道的Max长度数组，作为默认“表长”（其实不是表长），再给它一个长度length，如此，顺序表横空出世了。</p>
 <p>既然如此，那关于什么插入、删除操作就不在话下了。</p>
-<h3 id="1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m"><a href="#1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m" class="headerlink" title="1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m"></a>1，已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m</h3><p>题目很清楚，插入元素m后，后面的元素自然往后移动啦。先看代码。</p>
-<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;<br>//#include&lt;malloc.h&gt;<br>//#include&lt;stdlib.h&gt;   //一般这两个是需要的</pre></p>
-<p>#define Max 200<br>//定义并初始化顺序表<br>typedef struct{<br>    int data[Max];<br>    int length=10;<br>}SqList;<br>//顺序表l中查找元素e的位置<br>int LocatElem(SqList l,int e){<br>    int i=0;<br>    for(;i&lt;l.length;++i)<br>      if(l.data[i]==e)<br>      return i+1;<br>}</p>
-<p>//在元素e的位置插入元素m<br>void Insert(SqList &amp;l,int e,int m) {<br>    int i=l.length,p=LocatElem(l,e);<br>    for(;i&gt;=p;–i){<br>        l.data[i]=l.data[i-1];<br>    }<br>    l.data[i]=m;<br>    l.length++;<br>}</p>
-<p>int main(){<br>    int i=0,e=18,m=200;<br>    SqList a;<br>    for(;i&lt;a.length;++i)<br>         scanf(“%d”,&amp;a.data[i]);<br>    Insert(a,e,m);<br>    for(int i=0;i&lt;a.length;++i)<br>         printf(“%d\n”,a.data[i]);<br>    return 0;<br>}<br>这里假设我们输入从11，12一直到20的整数值，首先查找元素e=18的值的位置，插入m的值200。</p>
+<p>1 已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m</p>
+<p>题目很清楚，插入元素m后，后面的元素自然往后移动啦。</p>
+<pre><code>    #include&lt;stdio.h&gt;
+    //#include&lt;malloc.h&gt;
+    //#include&lt;stdlib.h&gt;   //一般这两个是需要的
+
+    #define Max 200
+    //定义并初始化顺序表
+    typedef struct{
+    int data[Max];
+    int length=10;
+    }SqList;
+    //顺序表l中查找元素e的位置
+    int LocatElem(SqList l,int e){
+    int i=0;
+    for(;i&lt;l.length;++i)
+    if(l.data[i]==e)
+    return i+1;
+    }
+
+    //在元素e的位置插入元素m
+    void Insert(SqList &amp;l,int e,int m) {
+    int i=l.length,p=LocatElem(l,e);
+    for(;i&gt;=p;–i){
+    l.data[i]=l.data[i-1];
+    }
+    l.data[i]=m;
+    l.length++;
+    }
+
+    int main(){
+    int i=0,e=18,m=200;
+    SqList a;
+    for(;i&lt;a.length;++i)
+    scanf(“%d”,&amp;a.data[i]);
+    Insert(a,e,m);
+    for(int i=0;i&lt;a.length;++i)
+    printf(“%d\n”,a.data[i]);
+    return 0;
+}
+</code></pre><p>这里假设我们输入从11，12一直到20的整数值，首先查找元素e=18的值的位置，插入m的值200。</p>
 <p>原来：11 12 13 14 15 16 17 18 19 20</p>
 <p>run后：11 12 13 14 15 16 17 200 18 19 20</p>
 <p><img src="http://source.chenyalun.cn/images/201510/5103102.jpg" alt=""></p>
-<h3 id="2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素"><a href="#2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素" class="headerlink" title="2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素"></a>2，已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素</h3><p><pre class="lang:default decode:true">#include&lt;stdio.h&gt;<br>//#include&lt;malloc.h&gt;<br>//#include&lt;stdlib.h&gt;</pre></p>
-<p>#define Max 200<br>//定义并初始化顺序表<br>typedef struct{<br>    int data[Max];<br>    int length=10;<br>}SqList;<br>//顺序表l中查找元素e的位置<br>int LocatElem(SqList l,int e){<br>    int i=0;<br>    for(;i&lt;l.length;++i)<br>      if(l.data[i]==e)<br>      return i+1;<br>}</p>
-<p>//删除顺序表中值为e的元素<br>void Delete(SqList &amp;l,int e){<br>    int i=LocatElem(l,e);<br>    for(;i&lt;=l.length;++i)<br>       l.data[i-1]=l.data[i];<br>       l.length–;<br>}<br>int main(){<br>    int i=0, e=15;//e的值自己说了算<br>    SqList a;<br>     for(;i&lt;a.length;++i)<br>          scanf(“%d”,&amp;a.data[i]);<br>     Delete(a,e);<br>    for(int i=0;i&lt;a.length;++i)<br>          printf(“%d\n”,a.data[i]);<br>     return 0;<br>}<br>改动不大，添加个函数而已。这里删除的是15，具体题目具体分析。</p>
+<p>2 已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素</p>
+<pre><code>    #include&lt;stdio.h&gt;
+    //#include&lt;malloc.h&gt;
+    //#include&lt;stdlib.h&gt;
+
+    #define Max 200
+    //定义并初始化顺序表
+    typedef struct{
+    int data[Max];
+    int length=10;
+    }SqList;
+    //顺序表l中查找元素e的位置
+    int LocatElem(SqList l,int e){
+    int i=0;
+    for(;i&lt;l.length;++i)
+    if(l.data[i]==e)
+    return i+1;
+    }
+
+    //删除顺序表中值为e的元素
+    void Delete(SqList &amp;l,int e){
+    int i=LocatElem(l,e);
+    for(;i&lt;=l.length;++i)
+    l.data[i-1]=l.data[i];
+    l.length–;
+    }
+    int main(){
+    int i=0, e=15;//e的值自己说了算
+    SqList a;
+    for(;i&lt;a.length;++i)
+    scanf(“%d”,&amp;a.data[i]);
+    Delete(a,e);
+    for(int i=0;i&lt;a.length;++i)
+    printf(“%d\n”,a.data[i]);
+    return 0;
+}
+</code></pre><p>改动不大，添加个函数而已。这里删除的是15，具体题目具体分析。</p>
 <p>原来：11 12 13 14 15 16 17 18 19 20</p>
-<p>run后：11 12 13 14  16 17  18 19 20</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5103101.jpg" alt=""></p>
-<p>说这么多，无非是想分享一个模板，插入、删除搞定了，其他也很容易拿下了。当然变的是题目，不变的是方法论。</p>
-<p>&nbsp;</p>
+<p>run后：11 12 13 14 16 17 18 19 20<br><img src="http://source.chenyalun.cn/images/201510/5103101.jpg" alt=""></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;严蔚敏版的数据结构着实编写的十分专业，可惜本人愚钝，思索再三还是木有想的十分明白，去翻翻资料，发现原来顺序表是如此easy，特别感叹作者的机智，当然，此时写下也是希望经常提醒自己，毕竟我对数据结构不是非常感冒。&lt;/p&gt;
-&lt;p&gt;所谓的顺序表，在严版的书中，定义的异常专业巧妙。
+      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;简单探讨顺序表的插入与删除&lt;br&gt;. &lt;/p&gt;
     
     </summary>
     

@@ -90,28 +90,22 @@
 
 
 
-<meta name="description" content="类的设计三要素：事物名称（类名）；属性；行为（功能）
-具有相同（或者类似）属性和行为的对象可以抽象出一个类。
-类的声明类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识
-行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上
-#import &amp;lt;Foundation/Foundation.h&amp;gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多">
+<meta name="description" content="2016.10.28 回顾
+
+ 万物皆是对象.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Objective-C学习笔记一：类">
 <meta property="og:url" content="http://yoursite.com/2016/05/12/Objective-C学习笔记一：类/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="类的设计三要素：事物名称（类名）；属性；行为（功能）
-具有相同（或者类似）属性和行为的对象可以抽象出一个类。
-类的声明类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识
-行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上
-#import &amp;lt;Foundation/Foundation.h&amp;gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多">
-<meta property="og:updated_time" content="2016-08-21T12:42:48.000Z">
+<meta property="og:description" content="2016.10.28 回顾
+
+ 万物皆是对象.">
+<meta property="og:updated_time" content="2016-10-28T13:22:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C学习笔记一：类">
-<meta name="twitter:description" content="类的设计三要素：事物名称（类名）；属性；行为（功能）
-具有相同（或者类似）属性和行为的对象可以抽象出一个类。
-类的声明类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识
-行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上
-#import &amp;lt;Foundation/Foundation.h&amp;gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多">
+<meta name="twitter:description" content="2016.10.28 回顾
+
+ 万物皆是对象.">
 
 
 
@@ -339,105 +333,146 @@
       
 
       
-        <h3 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h3><p>三要素：事物名称（类名）；属性；行为（功能）</p>
+        <blockquote>
+<p>2016.10.28 回顾</p>
+</blockquote>
+<p align="center"> 万物皆是对象. </p>
+
+<a id="more"></a>
+<h1 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h1><p>三要素：事物名称（类名）；属性；行为（功能）</p>
 <p>具有相同（或者类似）属性和行为的对象可以抽象出一个类。</p>
-<h3 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h3><p>类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识</p>
-<p>行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上</p>
-<p><span class="s1">#import </span><span class="s2">&lt;Foundation/Foundation.h&gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多API。</span></p>
-<p><span class="s1">#import </span><span class="s2">用来拷贝某个文件的内容，与#include的区别：自动防止文件内容被拷贝多次</span></p>
-<p><span class="s1">@interface</span><span class="s2"> Person : </span><span class="s3">NSObject</span></p>
-<p><span class="s2">{</span></p>
-<p><span class="s2">@public</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">int</span><span class="s2"> _age;</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">bool</span><span class="s2"> _sex;</span></p>
-<p><span class="s2">}</span></p>
-<p><span class="s2">-(</span><span class="s1">void</span><span class="s2">)print;</span></p>
-<p><span class="s2">@end</span></p>
-<p>大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.</p>
-<p><span class="s1">: </span><span class="s2">NSObject（继承基类）使声明的类具有创建对象的能力。</span></p>
-<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><p><span class="s1">@implementation</span><span class="s2"> Person</span></p>
-<p><span class="s1">-(</span><span class="s3">void</span><span class="s1">)print</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s1">(</span><span class="s5">@”输出内容”</span><span class="s1">);</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">@end</span></p>
-<p>已经导入声明文件<span class="s1">#import </span><span class="s2">“Person.h” 类的实现即方法的实现。<a id="more"></a> </span></p>
-<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p><span class="s2">Person</span><span class="s1"> *p=[[</span><span class="s2">Person</span> <span class="s3">alloc</span><span class="s1">] </span><span class="s3">init</span><span class="s1">];</span></p>
-<p><span class="s1">[p </span><span class="s2">print</span><span class="s1">];</span></p>
-<p>对象的本质是结构体，对象需要通过指针操纵。</p>
+<h1 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h1><p>类名<br>1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识</p>
+<p>行为<br>哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上</p>
+<pre><code>@interface Person : NSObject
+
+{
+
+@public
+
+int _age;
+
+bool _sex;
+
+}
+
+-(void)print;
+
+@end
+</code></pre><p>大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.</p>
+<p><code>: NSObject</code>（继承基类）使声明的类具有创建对象的能力。</p>
+<h1 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h1><pre><code>@implementation Person
+
+-(void)print
+
+{
+
+NSLog(@”输出内容”);
+
+}
+
+@end
+</code></pre><p>已经导入声明文件<code>#import “Person.h”</code><br>类的实现即方法的实现。</p>
+<h1 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h1><pre><code>Person *p=[[Person alloc] init];
+
+[p print];
+</code></pre><p>对象的本质是结构体，对象需要通过指针操纵。</p>
 <p>类在内存中也占据存储空间，在创建对象之前为类分配一份内存空间，将类加载进内存。而且只存储方法列表，其中由类产生的对象，都有一个isa指针指向类。</p>
-<p>方法调用：[行为执行者   行为名称];</p>
-<p>[Person new]执行Person这个类的new行为创建对象，返回对象地址。</p>
-<p>Person  <em>p=[Person new];定义一个Person </em>类型的指针变量p，指向Person类型的对象。指针的类型是Person *，指针指向的类型是Person。</p>
-<p><span class="s1">[p </span><span class="s2">print</span><span class="s1">]表示给p指向的对象发送一条print消息。</span></p>
-<p>Person  <em>p=[Person new];等价于 Person </em>p;p=[Person new];另外Person *p2=p;表示p2、p指向同一个内容。p=p2:将p2存储的指针交给p，使p存储的也是p2存储的内容。</p>
-<h3 id="方法与函数的区别以及注意"><a href="#方法与函数的区别以及注意" class="headerlink" title="方法与函数的区别以及注意"></a>方法与函数的区别以及注意</h3><ul>
-<li><span class="s2">OC方法只能声明在@interface和@end之间，只能实现在@implementation和@end之间。也就是说OC方法不能独立于类存在</span></li>
-<li><span class="s2">C函数不属于类，跟类没有联系，C函数只归定义函数的文件所有</span></li>
-<li><span class="s2">C函数不能访问OC对象的成员</span></li>
-<li><p>对象方法归类／对象所有，函数属于整个文件所有，任何地方都可以放置函数（如果放在<span class="s1">@interface</span>与<span class="s1">@end</span>之间，将会忽略掉函数，即未定义）</p>
+<p>方法调用：<code>[行为执行者   行为名称]</code>;</p>
+<p><code>[Person new]</code>执行Person这个类的new行为创建对象，返回对象地址。</p>
+<p><code>Person *p=[Person new];</code>定义一个Person 类型的指针变量p，指向Person类型的对象。指针的类型是Person *，指针指向的类型是Person。</p>
+<p><code>[p print];</code>表示给p指向的对象发送一条print消息。</p>
+<p><code>Person p=[Person new];</code>等价于 <code>Person p;p=[Person new];</code>另外<code>Person *p2=p;</code>表示p2、p指向同一个内容。<code>p=p2</code>:将p2存储的指针交给p，使p存储的也是p2存储的内容。</p>
+<h1 id="方法与函数的区别以及注意"><a href="#方法与函数的区别以及注意" class="headerlink" title="方法与函数的区别以及注意"></a>方法与函数的区别以及注意</h1><ul>
+<li><p>OC方法只能声明在@interface和@end之间，只能实现在@implementation和@end之间。也就是说OC方法不能独立于类存在</p>
 </li>
-<li><p><span class="s2">方法只有声明，没有实现（经典错误）</span></p>
+<li><p>C函数不属于类，跟类没有联系，C函数只归定义函数的文件所有</p>
 </li>
-<li><span class="s2">方法没有声明，只有实现（编译器警告，但是能调用，OC的弱语法）</span></li>
-<li><span class="s2">编译的时候：访问没有的成员变量直接报错，访问没有的方法，只是警告</span></li>
-<li><span class="s2">同一个类中不允许两个对象方法同名</span></li>
+<li><p>C函数不能访问OC对象的成员</p>
+</li>
+<li><p>对象方法归类／对象所有，函数属于整个文件所有，任何地方都可以放置函数（如果放在@interface与@end之间，将会忽略掉函数，即未定义）</p>
+</li>
+<li><p>方法只有声明，没有实现（经典错误）</p>
+</li>
+<li>方法没有声明，只有实现（编译器警告，但是能调用，OC的弱语法）</li>
+<li>编译的时候：访问没有的成员变量直接报错，访问没有的方法，只是警告</li>
+<li>同一个类中不允许两个对象方法同名</li>
 </ul>
-<h3 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h3><ul>
-<li><p><span class="s2">属性访问  </span>[Car  new]-&gt;speed = 200;</p>
-</li>
-<li><p><span class="s2">方法调用    </span>[ [Car  new]  run];</p>
-</li>
-</ul>
-<h3 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h3><p>不带参数的对象方法：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print;  方法名print</span></p>
+<h1 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h1><p>属性访问 <code>[Car new]-&gt;speed = 200;</code></p>
+<p>方法调用<code>[ [Car new] run];</code></p>
+<h1 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h1><p>不带参数的对象方法：</p>
+<p><code>-(void)print; 方法名print</code></p>
 <p>带一个参数的对象方法：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print:(</span><span class="s2">int</span><span class="s1">) a; 方法名print :</span></p>
+<p><code>-(void)print:(int) a; 方法名print :</code></p>
 <p>带多个参数的对象方法：</p>
-<p><span class="s1">-(</span><span class="s2">void</span><span class="s1">)print:(</span><span class="s2">int</span><span class="s1">) a WithOther:(</span><span class="s2">int</span><span class="s1">) b; 方法名</span></p>
-<p><span class="s1">print</span><span class="s1"> : WithOther:</span></p>
-<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><p>typedef enum<span class="s1">｛</span></p>
-<p><span class="Apple-converted-space">          </span>SexMan,</p>
-<p><span class="Apple-converted-space">          </span>SexWoman</p>
-<p><span class="s1">｝</span>Sex;</p>
-<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>typedef struct{</p>
-<p><span class="Apple-converted-space">   </span>int year;</p>
-<p><span class="Apple-converted-space">   </span>int month;</p>
-<p><span class="Apple-converted-space">   </span>int day;</p>
-<p>} Date;</p>
-<p>访问枚举：s-&gt;sex=SexMan;</p>
-<p>访问结构体：s-&gt;birthday.year=2016;</p>
+<p><code>-(void)print:(int) a WithOther:(int) b;</code>方法名</p>
+<p><code>print : WithOther:</code></p>
+<h1 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h1><pre><code>typedef enum｛
+
+SexMan,
+
+SexWoman
+
+｝Sex;
+</code></pre><h1 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h1><pre><code>typedef struct{
+
+int year;
+
+int month;
+
+int day;
+
+} Date;
+</code></pre><p>访问枚举：<code>s-&gt;sex=SexMan;</code></p>
+<p>访问结构体：<code>s-&gt;birthday.year=2016;</code></p>
 <p>定义结构体：</p>
-<p>Date d={2016,4,30};</p>
+<p><code>Date d={2016,4,30};</code></p>
 <p>访问结构体：</p>
-<p>s-&gt;birthday.year=2016;</p>
-<p>s-&gt;birthday.month=4;</p>
-<p>s-&gt;birthday.day=16;</p>
-<p>等价于：</p>
-<p>Date d={2016,4,16};</p>
-<p>s-&gt;birthday=d;</p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
-<li>打印函数中注意％与<span class="s1">%</span>的区别</li>
-<li>定义枚举、结构体等必需放在<span class="s1">@interface</span>的前面方可使用</li>
-<li><span class="s1">OC</span>方法中一个参数一个冒号</li>
+<pre><code>s-&gt;birthday.year=2016;
+
+s-&gt;birthday.month=4;
+
+s-&gt;birthday.day=16;
+</code></pre><p>等价于：</p>
+<pre><code>Date d={2016,4,16};
+
+s-&gt;birthday=d;
+</code></pre><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ul>
+<li>打印函数中注意％与%的区别</li>
+<li>定义枚举、结构体等必需放在@interface的前面方可使用</li>
+<li>OC方法中一个参数一个冒号</li>
 <li>对象中有对象</li>
 </ul>
-<p>@interface Student : NSObject</p>
-<p>{</p>
-<p><span class="Apple-converted-space">    </span>@public</p>
-<p><span class="Apple-converted-space">    </span>//<span class="s1">狗</span></p>
-<p><span class="Apple-converted-space">    </span>Dog *dog;</p>
-<p>}</p>
-<p>-(void)letDogRun</p>
-<p>{</p>
-<p><span class="Apple-converted-space">    </span>[dog run];</p>
-<p>}</p>
-<p>main.m</p>
-<p>Student *stu=[Student new];</p>
-<p><span class="Apple-converted-space">        </span>Dog *dog=[Dog new];</p>
-<p><span class="Apple-converted-space">            </span>stu-&gt;dog=dog;</p>
-<p><span class="Apple-converted-space">        </span>[stu letDogRun];</p>
+<pre><code>@interface Student : NSObject
 
+{
+
+@public
+
+//狗
+
+Dog *dog;
+
+}
+
+-(void)letDogRun
+
+{
+
+[dog run];
+
+}
+
+
+// main.m文件
+
+Student *stu=[Student new];
+
+Dog *dog=[Dog new];
+
+stu-&gt;dog=dog;
+
+[stu letDogRun];
+</code></pre>
       
     </div>
 
@@ -641,7 +676,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类的设计"><span class="nav-number">1.</span> <span class="nav-text">类的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的声明"><span class="nav-number">2.</span> <span class="nav-text">类的声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的实现"><span class="nav-number">3.</span> <span class="nav-text">类的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建对象"><span class="nav-number">4.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法与函数的区别以及注意"><span class="nav-number">5.</span> <span class="nav-text">方法与函数的区别以及注意</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名对象"><span class="nav-number">6.</span> <span class="nav-text">匿名对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象方法"><span class="nav-number">7.</span> <span class="nav-text">对象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举"><span class="nav-number">8.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体"><span class="nav-number">9.</span> <span class="nav-text">结构体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number"></span> <span class="nav-text">注意</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类的设计"><span class="nav-number">1.</span> <span class="nav-text">类的设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的声明"><span class="nav-number">2.</span> <span class="nav-text">类的声明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的实现"><span class="nav-number">3.</span> <span class="nav-text">类的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建对象"><span class="nav-number">4.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法与函数的区别以及注意"><span class="nav-number">5.</span> <span class="nav-text">方法与函数的区别以及注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匿名对象"><span class="nav-number">6.</span> <span class="nav-text">匿名对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象方法"><span class="nav-number">7.</span> <span class="nav-text">对象方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#枚举"><span class="nav-number">8.</span> <span class="nav-text">枚举</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构体"><span class="nav-number">9.</span> <span class="nav-text">结构体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意"><span class="nav-number">10.</span> <span class="nav-text">注意</span></a></li></ol></div>
             
           </div>
         </section>

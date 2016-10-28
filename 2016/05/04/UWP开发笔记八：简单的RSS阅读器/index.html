@@ -90,37 +90,16 @@
 
 
 
-<meta name="description" content="一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。
-这次起，把所有功能代码放在类中，MainPage不能再那么随便了。
-新建RSSClass类：
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.">
+<meta name="description" content="一个简单的RSS阅读器.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UWP开发笔记八：简单的RSS阅读器">
 <meta property="og:url" content="http://yoursite.com/2016/05/04/UWP开发笔记八：简单的RSS阅读器/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。
-这次起，把所有功能代码放在类中，MainPage不能再那么随便了。
-新建RSSClass类：
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.">
-<meta property="og:updated_time" content="2016-08-21T12:15:24.000Z">
+<meta property="og:description" content="一个简单的RSS阅读器.">
+<meta property="og:updated_time" content="2016-10-28T13:28:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UWP开发笔记八：简单的RSS阅读器">
-<meta name="twitter:description" content="一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。
-这次起，把所有功能代码放在类中，MainPage不能再那么随便了。
-新建RSSClass类：
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.">
+<meta name="twitter:description" content="一个简单的RSS阅读器.">
 
 
 
@@ -348,135 +327,120 @@ using System.">
       
 
       
-        <p>一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。</p>
+        <p align="center"><br>一个简单的RSS阅读器. </p>
+
+<a id="more"></a>
+<p>一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。</p>
 <p>这次起，把所有功能代码放在类中，MainPage不能再那么随便了。</p>
 <p>新建RSSClass类：</p>
-<pre class="lang:default decode:true ">using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-// ItemsControl
-using Windows.UI.Xaml.Controls;
-// KeyRoutedEventArgs 
-using Windows.UI.Xaml.Input;
-// SyndicationClient 
-using Windows.Web.Syndication;
+<pre><code>    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    // ItemsControl
+    using Windows.UI.Xaml.Controls;
+    // KeyRoutedEventArgs 
+    using Windows.UI.Xaml.Input;
+    // SyndicationClient 
+    using Windows.Web.Syndication;
 
-namespace RSS阅读器
-{
-  public   class RssClass
+    namespace RSS阅读器
     {
-        // 下载指定url的feed条目，逐一将其整合到集合控件ItemsControl中
-        private async void Load(ItemsControl list,Uri url)
+      public   class RssClass
         {
-            // 从URL异步检索源
-            SyndicationClient client = new SyndicationClient();
-            // 开始一个异步操作以下载从给定的URI的聚合feed。
-            SyndicationFeed feed =await client.RetrieveFeedAsync(url);
-            // 遍历feed中的所有item，将其添加到list中
-            foreach (var item in feed.Items)
+            // 下载指定url的feed条目，逐一将其整合到集合控件ItemsControl中
+            private async void Load(ItemsControl list,Uri url)
             {
-                list.Items.Add(item);
+                // 从URL异步检索源
+                SyndicationClient client = new SyndicationClient();
+                // 开始一个异步操作以下载从给定的URI的聚合feed。
+                SyndicationFeed feed =await client.RetrieveFeedAsync(url);
+                // 遍历feed中的所有item，将其添加到list中
+                foreach (var item in feed.Items)
+                {
+                    list.Items.Add(item);
+                }
+            }
+
+            // 
+            public void Start(ref ItemsControl list,string url,KeyRoutedEventArgs args)
+            {
+                // 当按下回车键时
+                if (args.Key== Windows.System.VirtualKey.Enter)
+                {
+                    try
+                    {
+                        Load(list, new Uri(url));
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                    // 设置控件的焦点
+                    list.Focus(Windows.UI.Xaml.FocusState.Keyboard);
+                }
             }
         }
-
-        // 
-        public void Start(ref ItemsControl list,string url,KeyRoutedEventArgs args)
-        {
-            // 当按下回车键时
-            if (args.Key== Windows.System.VirtualKey.Enter)
-            {
-                try
-                {
-                    Load(list, new Uri(url));
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-                // 设置控件的焦点
-                list.Focus(Windows.UI.Xaml.FocusState.Keyboard);
-            }
-        }
-    }
 }
-</pre>
-页面代码：
-<pre class="lang:default decode:true "> &lt;Grid.RowDefinitions&gt;
-            &lt;RowDefinition Height="Auto"/&gt;
-            &lt;RowDefinition Height="*"/&gt;
-        &lt;/Grid.RowDefinitions&gt;
-        &lt;TextBox Name="URLTextBox"
-                 Margin="10"
-                 KeyDown="URLTextBox_KeyDown"
-                 PlaceholderText="请输入RSS地址"/&gt;
-        &lt;ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto"
-                      Margin="20"
-                      Grid.Row="1"&gt;
+</code></pre><p>页面代码：</p>
+<pre><code>&lt;Grid.RowDefinitions&gt;
+           &lt;RowDefinition Height=&quot;Auto&quot;/&gt;
+           &lt;RowDefinition Height=&quot;*&quot;/&gt;
+       &lt;/Grid.RowDefinitions&gt;
+       &lt;TextBox Name=&quot;URLTextBox&quot;
+                Margin=&quot;10&quot;
+                KeyDown=&quot;URLTextBox_KeyDown&quot;
+                PlaceholderText=&quot;请输入RSS地址&quot;/&gt;
+       &lt;ScrollViewer VerticalScrollBarVisibility=&quot;Auto&quot;
+                     HorizontalScrollBarVisibility=&quot;Auto&quot;
+                     Margin=&quot;20&quot;
+                     Grid.Row=&quot;1&quot;&gt;
 
-            &lt;ItemsControl Name="ListItemsControl"&gt;
-                    &lt;ItemsControl.ItemTemplate&gt;
-                        &lt;!--数据模板--&gt;
-                        &lt;DataTemplate&gt;
-                        &lt;StackPanel&gt;
-                            &lt;!--超链接--&gt;
-                            &lt;HyperlinkButton NavigateUri="{Binding Path=Links[0].Uri}"&gt;
-                                &lt;!--超链接标题--&gt;
-                                &lt;HyperlinkButton.Content&gt;
-                                    &lt;TextBlock Text="{Binding Path=Title.Text}"/&gt;
-                                &lt;/HyperlinkButton.Content&gt;
-                            &lt;/HyperlinkButton&gt;
+           &lt;ItemsControl Name=&quot;ListItemsControl&quot;&gt;
+                   &lt;ItemsControl.ItemTemplate&gt;
+                       &lt;!--数据模板--&gt;
+                       &lt;DataTemplate&gt;
+                       &lt;StackPanel&gt;
+                           &lt;!--超链接--&gt;
+                           &lt;HyperlinkButton NavigateUri=&quot;{Binding Path=Links[0].Uri}&quot;&gt;
+                               &lt;!--超链接标题--&gt;
+                               &lt;HyperlinkButton.Content&gt;
+                                   &lt;TextBlock Text=&quot;{Binding Path=Title.Text}&quot;/&gt;
+                               &lt;/HyperlinkButton.Content&gt;
+                           &lt;/HyperlinkButton&gt;
 
-                            &lt;!--文章日期--&gt;
-                            &lt;TextBlock Text="{Binding Path=PublishedDate}"/&gt;
-                        &lt;/StackPanel&gt;
-                        &lt;/DataTemplate&gt;
-                    &lt;/ItemsControl.ItemTemplate&gt;
-                &lt;/ItemsControl&gt;
+                           &lt;!--文章日期--&gt;
+                           &lt;TextBlock Text=&quot;{Binding Path=PublishedDate}&quot;/&gt;
+                       &lt;/StackPanel&gt;
+                       &lt;/DataTemplate&gt;
+                   &lt;/ItemsControl.ItemTemplate&gt;
+               &lt;/ItemsControl&gt;
 
-        &lt;/ScrollViewer&gt;
-</pre>
-cs逻辑代码：
-<pre class="lang:default decode:true "> private RssClass rss = new RssClass();
-        private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            rss.Start(ref ListItemsControl, URLTextBox.Text, e);
-        }</pre>
-明显清晰许多。![](http://images.chenyalun.cn/2016/04/23/005.png)
-
-原谅我又无耻地用了自己网站的RSS源做示例。
-
-* * *
-
-* * *
-
-* * *
-
-## &gt;&gt;笔记
-
-*   #### ItemsControl的数据绑定：
-<pre class="lang:default decode:true">&lt;ItemsControl Name="ListItemsControl"&gt;
+       &lt;/ScrollViewer&gt;
+</code></pre><p>cs逻辑代码：</p>
+<pre><code>private RssClass rss = new RssClass();
+       private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+       {
+           rss.Start(ref ListItemsControl, URLTextBox.Text, e);
+       }
+</code></pre><p>明显清晰许多。</p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>ItemsControl的数据绑定：</p>
+<pre><code>&lt;ItemsControl Name=&quot;ListItemsControl&quot;&gt;
             &lt;ItemsControl.ItemTemplate&gt;
                              &lt;DataTemplate&gt;
 
                               &lt;/DataTemplate&gt;
              &lt;/ItemsControl.ItemTemplate&gt;
-&lt;/ItemsControl&gt;</pre>
-
-<ul>
-<li><h4 id="ScrollViewer的两个属性："><a href="#ScrollViewer的两个属性：" class="headerlink" title="ScrollViewer的两个属性："></a>ScrollViewer的两个属性：</h4><p>VerticalScrollBarVisibility=”Auto”<br>HorizontalScrollBarVisibility=”Auto”</p>
-</li>
-<li><h4 id="绑定RSS内容："><a href="#绑定RSS内容：" class="headerlink" title="绑定RSS内容："></a>绑定RSS内容：</h4><p>链接：<strong> </strong>&lt;HyperlinkButton NavigateUri=”{Binding Path=<strong>Links[0].Uri</strong>}”&gt;</p>
-</li>
-</ul>
-<p>链接标题：&lt;TextBlock Text=”{Binding Path=<strong>Title.Text</strong>}”/&gt;</p>
-<p>文章日期：&lt;TextBlock Text=”{Binding Path=<strong>PublishedDate</strong>}”/&gt;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+&lt;/ItemsControl&gt;
+</code></pre><p>ScrollViewer的两个属性：</p>
+<pre><code>VerticalScrollBarVisibility=”Auto”
+HorizontalScrollBarVisibility=”Auto”
+</code></pre><p>绑定RSS内容：</p>
+<p>链接：<br>        <code>&lt;HyperlinkButton NavigateUri=”{Binding Path=Links[0].Uri}”&gt;</code></p>
+<p>链接标题：<code>&lt;TextBlock Text=”{Binding Path=Title.Text}”/&gt;</code></p>
+<p>文章日期：<br>        <code>&lt;TextBlock Text=”{Binding Path=PublishedDate}”/&gt;</code></p>
 
       
     </div>
@@ -681,7 +645,7 @@ cs逻辑代码：
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ScrollViewer的两个属性："><span class="nav-number">1.</span> <span class="nav-text">ScrollViewer的两个属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绑定RSS内容："><span class="nav-number">2.</span> <span class="nav-text">绑定RSS内容：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#笔记"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a></li></ol></div>
             
           </div>
         </section>

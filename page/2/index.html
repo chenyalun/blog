@@ -333,7 +333,7 @@
       
         
           <blockquote>
-<p>2016.10.25 温习</p>
+<p>2016.10.25 回顾</p>
 </blockquote>
 <p align = "center"> 关于继承与属性的笔记. </p>
           <div class="post-more-link text-center">
@@ -457,29 +457,10 @@
 
       
         
-          <h3 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h3><p>三要素：事物名称（类名）；属性；行为（功能）</p>
-<p>具有相同（或者类似）属性和行为的对象可以抽象出一个类。</p>
-<h3 id="类的声明"><a href="#类的声明" class="headerlink" title="类的声明"></a>类的声明</h3><p>类名   1，首字母大写；2，不能有下划线；3，多个英文单词，使用驼峰标识</p>
-<p>行为   哪个对象最清楚行为怎么做，就把行为设计在哪个对象身上</p>
-<p><span class="s1">#import </span><span class="s2">&lt;Foundation/Foundation.h&gt;框架包含很多头文件，开发OC、iOS、Mac的必备框架，具有许多API。</span></p>
-<p><span class="s1">#import </span><span class="s2">用来拷贝某个文件的内容，与#include的区别：自动防止文件内容被拷贝多次</span></p>
-<p><span class="s1">@interface</span><span class="s2"> Person : </span><span class="s3">NSObject</span></p>
-<p><span class="s2">{</span></p>
-<p><span class="s2">@public</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">int</span><span class="s2"> _age;</span></p>
-<p><span class="s2"><span class="Apple-converted-space">    </span></span><span class="s1">bool</span><span class="s2"> _sex;</span></p>
-<p><span class="s2">}</span></p>
-<p><span class="s2">-(</span><span class="s1">void</span><span class="s2">)print;</span></p>
-<p><span class="s2">@end</span></p>
-<p>大括号内用来声明对象属性（成员变量也即实例变量）,@public让外界指针可以间接访问对象内部的成员变量。成员变量默认会初始化为0.</p>
-<p><span class="s1">: </span><span class="s2">NSObject（继承基类）使声明的类具有创建对象的能力。</span></p>
-<h3 id="类的实现"><a href="#类的实现" class="headerlink" title="类的实现"></a>类的实现</h3><p><span class="s1">@implementation</span><span class="s2"> Person</span></p>
-<p><span class="s1">-(</span><span class="s3">void</span><span class="s1">)print</span></p>
-<p><span class="s1">{</span></p>
-<p><span class="s1"><span class="Apple-converted-space">    </span></span><span class="s4">NSLog</span><span class="s1">(</span><span class="s5">@”输出内容”</span><span class="s1">);</span></p>
-<p><span class="s1">}</span></p>
-<p><span class="s1">@end</span></p>
-<p>已经导入声明文件<span class="s1">#import </span><span class="s2">“Person.h” 类的实现即方法的实现。
+          <blockquote>
+<p>2016.10.28 回顾</p>
+</blockquote>
+<p align = "center"> 万物皆是对象. </p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/12/Objective-C学习笔记一：类/#more" rel="contents">
               阅读全文 &raquo;
@@ -723,138 +704,12 @@
 
       
         
-          
-            <p>一个简单的RSS阅读器，实现任意开启RSS网站内容订阅，不过，只能在阅读器中搜集到标题、日期。后期再补充。</p>
-<p>这次起，把所有功能代码放在类中，MainPage不能再那么随便了。</p>
-<p>新建RSSClass类：</p>
-<pre class="lang:default decode:true ">using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-// ItemsControl
-using Windows.UI.Xaml.Controls;
-// KeyRoutedEventArgs 
-using Windows.UI.Xaml.Input;
-// SyndicationClient 
-using Windows.Web.Syndication;
-
-namespace RSS阅读器
-{
-  public   class RssClass
-    {
-        // 下载指定url的feed条目，逐一将其整合到集合控件ItemsControl中
-        private async void Load(ItemsControl list,Uri url)
-        {
-            // 从URL异步检索源
-            SyndicationClient client = new SyndicationClient();
-            // 开始一个异步操作以下载从给定的URI的聚合feed。
-            SyndicationFeed feed =await client.RetrieveFeedAsync(url);
-            // 遍历feed中的所有item，将其添加到list中
-            foreach (var item in feed.Items)
-            {
-                list.Items.Add(item);
-            }
-        }
-
-        // 
-        public void Start(ref ItemsControl list,string url,KeyRoutedEventArgs args)
-        {
-            // 当按下回车键时
-            if (args.Key== Windows.System.VirtualKey.Enter)
-            {
-                try
-                {
-                    Load(list, new Uri(url));
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-                // 设置控件的焦点
-                list.Focus(Windows.UI.Xaml.FocusState.Keyboard);
-            }
-        }
-    }
-}
-</pre>
-页面代码：
-<pre class="lang:default decode:true "> &lt;Grid.RowDefinitions&gt;
-            &lt;RowDefinition Height="Auto"/&gt;
-            &lt;RowDefinition Height="*"/&gt;
-        &lt;/Grid.RowDefinitions&gt;
-        &lt;TextBox Name="URLTextBox"
-                 Margin="10"
-                 KeyDown="URLTextBox_KeyDown"
-                 PlaceholderText="请输入RSS地址"/&gt;
-        &lt;ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto"
-                      Margin="20"
-                      Grid.Row="1"&gt;
-
-            &lt;ItemsControl Name="ListItemsControl"&gt;
-                    &lt;ItemsControl.ItemTemplate&gt;
-                        &lt;!--数据模板--&gt;
-                        &lt;DataTemplate&gt;
-                        &lt;StackPanel&gt;
-                            &lt;!--超链接--&gt;
-                            &lt;HyperlinkButton NavigateUri="{Binding Path=Links[0].Uri}"&gt;
-                                &lt;!--超链接标题--&gt;
-                                &lt;HyperlinkButton.Content&gt;
-                                    &lt;TextBlock Text="{Binding Path=Title.Text}"/&gt;
-                                &lt;/HyperlinkButton.Content&gt;
-                            &lt;/HyperlinkButton&gt;
-
-                            &lt;!--文章日期--&gt;
-                            &lt;TextBlock Text="{Binding Path=PublishedDate}"/&gt;
-                        &lt;/StackPanel&gt;
-                        &lt;/DataTemplate&gt;
-                    &lt;/ItemsControl.ItemTemplate&gt;
-                &lt;/ItemsControl&gt;
-
-        &lt;/ScrollViewer&gt;
-</pre>
-cs逻辑代码：
-<pre class="lang:default decode:true "> private RssClass rss = new RssClass();
-        private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            rss.Start(ref ListItemsControl, URLTextBox.Text, e);
-        }</pre>
-明显清晰许多。![](http://images.chenyalun.cn/2016/04/23/005.png)
-
-原谅我又无耻地用了自己网站的RSS源做示例。
-
-* * *
-
-* * *
-
-* * *
-
-## &gt;&gt;笔记
-
-*   #### ItemsControl的数据绑定：
-<pre class="lang:default decode:true">&lt;ItemsControl Name="ListItemsControl"&gt;
-            &lt;ItemsControl.ItemTemplate&gt;
-                             &lt;DataTemplate&gt;
-
-                              &lt;/DataTemplate&gt;
-             &lt;/ItemsControl.ItemTemplate&gt;
-&lt;/ItemsControl&gt;</pre>
-
-<ul>
-<li><h4 id="ScrollViewer的两个属性："><a href="#ScrollViewer的两个属性：" class="headerlink" title="ScrollViewer的两个属性："></a>ScrollViewer的两个属性：</h4><p>VerticalScrollBarVisibility=”Auto”<br>HorizontalScrollBarVisibility=”Auto”</p>
-</li>
-<li><h4 id="绑定RSS内容："><a href="#绑定RSS内容：" class="headerlink" title="绑定RSS内容："></a>绑定RSS内容：</h4><p>链接：<strong> </strong>&lt;HyperlinkButton NavigateUri=”{Binding Path=<strong>Links[0].Uri</strong>}”&gt;</p>
-</li>
-</ul>
-<p>链接标题：&lt;TextBlock Text=”{Binding Path=<strong>Title.Text</strong>}”/&gt;</p>
-<p>文章日期：&lt;TextBlock Text=”{Binding Path=<strong>PublishedDate</strong>}”/&gt;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-          
+          <p align = "center"><br>一个简单的RSS阅读器. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/04/UWP开发笔记八：简单的RSS阅读器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -971,71 +826,12 @@ cs逻辑代码：
 
       
         
-          
-            <p>利用webview控件可以简单制作一个浏览器，实现基本的前进、后退、刷新、停止等功能。不过需要注意的是，如果网页是在新窗口打开，那就承受不了了，将自动用系统默认浏览器打开。所以，前进、后退功能的前提是：打开的网页是在同一个窗口。</p>
-<p>命令栏代码：</p>
-<p><pre class="lang:default decode:true ">&lt;Page.BottomAppBar&gt;<br>        &lt;AppBar IsOpen=”True”&gt;<br>            &lt;StackPanel Orientation=”Horizontal”&gt;<br>                &lt;AppBarButton Name=”BackAppBarButton”<br>                              Click=”BackAppBarButton_Click”<br>                              Label=”返回”<br>                              Icon=”Back”/&gt;<br>                &lt;AppBarButton Name=”ForwardAppBarButton”<br>                              Label=”前进”<br>                              Icon=”Forward”<br>                              Click=”ForwardAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”RefreshAppBarButton”<br>                              Label=”刷新”<br>                              Icon=”Refresh”<br>                              Click=”RefreshAppBarButton_Click”/&gt;<br>                &lt;AppBarButton Name=”StopAppBarButton”<br>                              Click=”StopAppBarButton_Click”<br>                              Label=”停止”<br>                              Icon=”Stop”/&gt;<br>            &lt;/StackPanel&gt;<br>        &lt;/AppBar&gt;<br>    &lt;/Page.BottomAppBar&gt;</pre><br>页面：</p>
-<p><pre class="lang:default decode:true ">&lt;Grid.RowDefinitions&gt;<br>            &lt;RowDefinition Height=”Auto”/&gt;<br>            &lt;RowDefinition Height=”*”/&gt;<br>        &lt;/Grid.RowDefinitions&gt;<br>        &lt;TextBox Name=”URLTextBox”<br>                 InputScope=”Url”<br>                 KeyDown=”URLTextBox_KeyDown”<br>                 Margin=”20”/&gt;<br>        &lt;WebView Name=”Web”<br>                 Grid.Row=”1”<br>                 NavigationCompleted=”Web_NavigationCompleted”/&gt;</pre></p>
-<pre><code>&amp;lt;/Grid&amp;gt;&lt;/pre&gt;
-</code></pre><p>后台逻辑：</p>
-<p><pre class="lang:default decode:true "> // 返回处理<br>        private void BackAppBarButton_Click(object sender, RoutedEventArgs e)<br>        {<br>            if (Web.CanGoBack)<br>            {<br>                Web.GoBack();<br>            }<br>        }</pre></p>
-<pre><code>// 前进处理
-private void ForwardAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    if (Web.CanGoForward)
-    {
-        Web.GoForward();
-    }
-}
-
-// 刷新
-private void RefreshAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Web.Refresh();
-}
-
-// 停止
-private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
-{
-    Web.Stop();
-}
-
-// 按（回车）键处理
-private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
-{
-    // 如果按下的键是回车键
-    if (e.Key== Windows.System.VirtualKey.Enter)
-    {
-        // 导航到文本框中的地址
-        Web.Navigate(new Uri(URLTextBox.Text));
-    }
-
-    // 处理焦点
-    Web.Focus(FocusState.Keyboard);
-}
-
-// 导航完成事件处理
-private void Web_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-{
-    // 导航是否成功
-    if (args.IsSuccess)
-    {
-        // 参数传递到地址栏
-        URLTextBox.Text = args.Uri.ToString();
-    }
-
-}&lt;/pre&gt;
-</code></pre><p>可以看到效果(原谅我无耻地用了自己的博客）：</p>
-<p>初始页面：<img src="http://images.chenyalun.cn/2016/04/23/001.png" alt=""></p>
-<p>打开新链接：</p>
-<p><img src="http://images.chenyalun.cn/2016/04/23/002.png" alt=""></p>
-<hr>
-<hr>
-<h2 id="gt-gt-笔记"><a href="#gt-gt-笔记" class="headerlink" title="&gt;&gt;笔记"></a>&gt;&gt;笔记</h2><p>对键盘的按键（回车）键处理：<br>private void URLTextBox_KeyDown(object sender, KeyRoutedEventArgs e)<br>{<br>// 如果按下的键是回车键<br>if (e.Key== Windows.System.VirtualKey.Enter)<br>{<br>// 导航到文本框中的地址<br>Web.Navigate(new Uri(URLTextBox.Text));<br>}<br>}</p>
-<p>对焦点的处理：<br>Web.Focus(FocusState.Keyboard);</p>
-<p>还有就是，文本框（地址栏）输入的文本必须是URL，即 <a href="http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。" target="_blank" rel="external">http://www.chenyalun.cn/如果是www.chenyalun.cn那就会报错了。</a></p>
-
-          
+          <p align = "center"><br>利用webview控件可以简单制作一个浏览器. </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/05/02/UWP开发笔记七：WebView与简单浏览器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

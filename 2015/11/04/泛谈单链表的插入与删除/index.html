@@ -90,23 +90,17 @@
 
 
 
-<meta name="description" content="谈过顺序表的插入与删除，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。
-先看定义：
-typedef struct LNode{    int data;    struct LNode next;}LNode;数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你">
+<meta name="description" content="简单探讨单链表的插入与删除.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="泛谈单链表的插入与删除">
 <meta property="og:url" content="http://yoursite.com/2015/11/04/泛谈单链表的插入与删除/index.html">
 <meta property="og:site_name" content="陈亚伦博客">
-<meta property="og:description" content="谈过顺序表的插入与删除，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。
-先看定义：
-typedef struct LNode{    int data;    struct LNode next;}LNode;数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你">
+<meta property="og:description" content="简单探讨单链表的插入与删除.">
 <meta property="og:image" content="http://source.chenyalun.cn/images/201511/5110101.jpg">
-<meta property="og:updated_time" content="2016-08-21T12:15:24.000Z">
+<meta property="og:updated_time" content="2016-10-28T13:49:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="泛谈单链表的插入与删除">
-<meta name="twitter:description" content="谈过顺序表的插入与删除，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。
-先看定义：
-typedef struct LNode{    int data;    struct LNode next;}LNode;数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你">
+<meta name="twitter:description" content="简单探讨单链表的插入与删除.">
 <meta name="twitter:image" content="http://source.chenyalun.cn/images/201511/5110101.jpg">
 
 
@@ -335,30 +329,117 @@ typedef struct LNode{    int data;    struct LNode next;}LNode;数据域和下�
       
 
       
-        <p>谈过<a href="http://www.chenyalun.cn/泛谈顺序表的插入与删除.html" target="_blank" rel="external">顺序表的插入与删除</a>，其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。还是那句话，本人对指针不感冒。</p>
-<p>先看定义：</p>
-<p><pre class="lang:default decode:true ">typedef struct LNode{<br>    int data;<br>    struct LNode <em>next;<br>}LNode;</em></pre><br>数据域和下个节点的指针，可惜我木有写上 LinkList，我是故意的，你咬我呀，哈哈。</p>
-<p>江湖传言LNode *p等价于LinkList p，不知道有木有人认同呢？闲话少说，看代码：</p>
-<p><pre class="lang:default decode:true ">#include&lt;stdio.h&gt;</pre></p>
-<p>#include&lt;malloc.h&gt;<br>//定义并初始化单链表<br>typedef struct LNode{<br>    int data;<br>    struct LNode *next;<br>}LNode;</p>
-<p>//单链表的创建与初始化，设定共n个节点（不含头节点）<br>void CreateLinkList(LNode <em>a,int n) {<br>        LNode </em>p,<em>q;<br>        p=a;<br>    while(n–){<br>         q=(LNode </em>)malloc(sizeof(LNode *));<br>         scanf(“%d”,&amp;q-&gt;data);<br>           q-&gt;next=NULL;<br>        p-&gt;next=q;<br>        p=q;<br>    }<br>}</p>
-<p>//查找是否存在一个值为x的节点，若存在，删之，并返回OK，否则返回NOT FOUND<br>char <em>SearchAndDelete(LNode </em>c,int x){<br>    LNode <em>p,</em>q;<br>    p=c;<br>    //开始查找<br>    while(p-&gt;next!=NULL)<br>    {<br>        if(p-&gt;next-&gt;data==x)<br>        break;<br>        p=p-&gt;next;<br>    }<br>    //若找到则开始删除<br>    if(p-&gt;next==NULL)<br>    return “NOT FOUND”;<br>    else<br>    {<br>        q=p-&gt;next;<br>        p-&gt;next=p-&gt;next-&gt;next;<br>        free(q);<br>        return “OK”;<br>    }<br>}</p>
-<p>//在链表c中第n个节点位置插入元素e<br>void Insert(LNode <em>c,int n,int e){<br>    LNode </em>p=( LNode <em>)malloc(sizeof(LNode </em>)),<br>    <em>q=( LNode </em>)malloc(sizeof(LNode <em>));//插入的节点<br>    p=c;<br>    q-&gt;data=e;<br>    //找到要插入节点的位置<br>    for(int i=1;i&lt;n;i++){<br>        p=p-&gt;next;<br>    }<br>    //插入节点<br>    q-&gt;next=p-&gt;next;<br>    p-&gt;next=q;<br>}<br>//打印单链表<br>void Print(LNode </em>a){<br>    LNode <em>p=( LNode </em>)malloc(sizeof(LNode *));<br>    p=a-&gt;next;<br>    while(p!=NULL){<br>        printf(“%d\n”,p-&gt;data);<br>        p=p-&gt;next;<br>    }<br>}</p>
-<p>int main(){<br>   LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));<br>    CreateLinkList(a,5);<br>   Insert(a,3,10086);//假定在第3个位置插入数值为10086的节点<br> Print(a);<br>   printf(“—————-\n”);<br>SearchAndDelete(a,13);//查找并执行删除数值为13的节点<br>  Print(a);<br>return 0;<br>}<br><br>说明如下：</p>
+        <p align="center"><br>简单探讨单链表的插入与删除<br>. </p>
+
+<a id="more"></a>
+<p>其实单链表也是比较有意思的，可惜我弄了好久才些微明白些。在顺序表中，一个数组就将近定义一个结构，但在单链表中，却又要和指针扯上关系了。</p>
+<p>定义：</p>
+<pre><code>typedef struct LNode{
+    int data;
+    struct LNode next;
+}LNode;
+</code></pre><p>江湖传言LNode *p等价于LinkList p，不知道有木有人认同呢？</p>
+<pre><code>    #include&lt;stdio.h&gt;
+
+    #include&lt;malloc.h&gt;
+    //定义并初始化单链表
+    typedef struct LNode{
+    int data;
+    struct LNode *next;
+    }LNode;
+
+    //单链表的创建与初始化，设定共n个节点（不含头节点）
+    void CreateLinkList(LNode a,int n) {
+    LNode p,q;
+    p=a;
+    while(n–){
+    q=(LNode )malloc(sizeof(LNode *));
+    scanf(“%d”,&amp;q-&gt;data);
+    q-&gt;next=NULL;
+    p-&gt;next=q;
+    p=q;
+    }
+    }
+
+    //查找是否存在一个值为x的节点，若存在，删之，并返回OK，否则返回NOT FOUND
+    char SearchAndDelete(LNode c,int x){
+    LNode p,q;
+    p=c;
+    //开始查找
+    while(p-&gt;next!=NULL)
+    {
+    if(p-&gt;next-&gt;data==x)
+    break;
+    p=p-&gt;next;
+    }
+    //若找到则开始删除
+    if(p-&gt;next==NULL)
+    return “NOT FOUND”;
+    else
+    {
+    q=p-&gt;next;
+    p-&gt;next=p-&gt;next-&gt;next;
+    free(q);
+    return “OK”;
+    }
+    }
+
+    //在链表c中第n个节点位置插入元素e
+    void Insert(LNode c,int n,int e){
+    LNode p=( LNode )malloc(sizeof(LNode )),
+    q=( LNode )malloc(sizeof(LNode ));//插入的节点
+    p=c;
+    q-&gt;data=e;
+    //找到要插入节点的位置
+    for(int i=1;i&lt;n;i++){
+    p=p-&gt;next;
+    }
+    //插入节点
+    q-&gt;next=p-&gt;next;
+    p-&gt;next=q;
+    }
+    //打印单链表
+    void Print(LNode a){
+    LNode p=( LNode )malloc(sizeof(LNode *));
+    p=a-&gt;next;
+    while(p!=NULL){
+    printf(“%d\n”,p-&gt;data);
+    p=p-&gt;next;
+    }
+    }
+
+    int main(){
+    LNode a=( LNode )malloc(sizeof(LNode *));
+    CreateLinkList(a,5);
+    Insert(a,3,10086);//假定在第3个位置插入数值为10086的节点
+    Print(a);
+    printf(“—————-\n”);
+    SearchAndDelete(a,13);//查找并执行删除数值为13的节点
+    Print(a);
+    return 0;
+}
+</code></pre><p>说明如下：</p>
 <p>1，假定输入的是11 12 13 14 15五个数值。在第三个位置（13的位置）插入一个数据域为10086的节点。此时原来的数值已经变成了11 12 10086 13 14 15</p>
 <p>2，完事后，我为了方便不再另写代码，在11 12 10086 13 14 15的基础上假定查找并删除数据域为13的节点。</p>
 <p><img src="http://source.chenyalun.cn/images/201511/5110101.jpg" alt=""></p>
-<p>当然还有值得体会的是，我把节点的内存分配放在主函数里，不知道是不是有人想打我呢？</p>
+<p>当然还有值得体会的是，把节点的内存分配放在主函数里.</p>
 <p>像这样：</p>
-<p><pre class="nums:false lang:default decode:true ">LNode <em>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>当然，清晰一点就是</p>
-<p>&nbsp;</p>
-<p><pre class="nums:false lang:default decode:true ">LNode <em>a;<br>a=( LNode </em>)malloc(sizeof(LNode *));</pre><br>两者效果一样。这不是重点。看下面的两段代码：</p>
-<p><pre class="lang:default decode:true ">void Print(LNode *a){</pre></p>
-<p>}<br>和</p>
-<p><pre class="lang:default decode:true">void Print(LNode <em>&amp;a){<br>    a=( LNode </em>)malloc(sizeof(LNode *));</pre></p>
-<p>}<br>这才是重点，和小伙伴研究一下，决定采取有违伦理惨无人道的第一种方式。最后在主函数中再调用malloc觉得还是蛮灵活轻便的。</p>
+<pre><code>LNode a=( LNode )malloc(sizeof(LNode *));
+</code></pre><p>当然，清晰一点就是</p>
+<pre><code>LNode a;
+a=( LNode )malloc(sizeof(LNode *));
+</code></pre><p>两者效果一样。</p>
+<pre><code>void Print(LNode *a){
+
+}
+和
+
+void Print(LNode &amp;a){
+    a=( LNode )malloc(sizeof(LNode *));
+
+}
+</code></pre><p>这才是重点，和小伙伴研究一下，决定采取有违伦理惨无人道的第一种方式。最后在主函数中再调用malloc觉得还是蛮灵活轻便的。</p>
 <p>当然，上面的代码不是为了解题，只是提供一个思路，具体可视情况修改。</p>
-<p>&nbsp;</p>
 
       
     </div>
