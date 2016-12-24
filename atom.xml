@@ -4,9 +4,9 @@
   <subtitle>Write Less, Do More.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2016-11-12T02:07:54.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://blog.chenyalun.com/"/>
+  <updated>2016-12-24T08:31:30.000Z</updated>
+  <id>http://blog.chenyalun.com/</id>
   
   <author>
     <name>陈亚伦</name>
@@ -16,9 +16,760 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Python3入门笔记</title>
+    <link href="http://blog.chenyalun.com/2016/12/20/Python3%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    <id>http://blog.chenyalun.com/2016/12/20/Python3入门笔记/</id>
+    <published>2016-12-20T10:22:17.000Z</published>
+    <updated>2016-12-24T08:31:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p align="center"> 人生苦短,我用Python. </p>
+
+<a id="more"></a>
+<h1 id="钩玄"><a href="#钩玄" class="headerlink" title="钩玄"></a>钩玄</h1><ul>
+<li>让Python打印出指定的文字，可以用print()函数，然后把希望打印的文字用单引号或者双引号括起来，但不能混用单引号和双引号</li>
+<li>用exit()退出Python</li>
+<li>在Python交互式命令行下，可以直接输入代码，然后执行，并立刻得到结果。</li>
+<li>直接输入python进入交互模式，相当于启动了Python解释器，但是等待你一行一行地输入源代码，每输入一行就执行一行。直接运行.py文件相当于启动了Python解释器，然后一次性把.py文件的源代码给执行了，你是没有机会以交互的方式输入源代码的。</li>
+<li>print()函数也可以接受多个字符串，用逗号“,”隔开，就可以连成一串输出,会依次打印每个字符串，遇到逗号“,”会输出一个空格</li>
+<li>Python提供了一个input(“提示文本,可以为空”)，可以让用户输入字符串，并存放到一个变量里。</li>
+<li>以#开头的语句是注释,Python程序是大小写敏感的</li>
+<li>当语句以冒号:结尾时，缩进的语句视为代码块。Python使用缩进来组织代码块，请务必遵守约定俗成的习惯，坚持使用4个空格的缩进。在文本编辑器中，需要设置把Tab自动转换为4个空格，确保不混用Tab和空格。</li>
+<li>Python还允许用r’’表示’’内部的字符串默认不转义:<code>print(r&#39;\\\n&#39;)</code></li>
+<li>Python允许用<code>’’’…’’’</code>的格式表示多行内容</li>
+<li>一个布尔值只有True、False两种值</li>
+<li>布尔值可以用and、or和not运算。</li>
+<li>空值是Python里一个特殊的值，用None表示。None不能理解为0，因为0是有意义的，而None是一个特殊的空值。</li>
+<li>在Python中，通常用全部大写的变量名表示常量,事实上仍然是一个变量，Python根本没有任何机制保证不会被改变</li>
+<li>/除法计算结果是浮点数，即使是两个整数恰好整除，结果也是浮点数,//称为地板除，两个整数的除法仍然是整数</li>
+<li>Python的整数没有大小限制，而某些语言的整数根据其存储长度是有大小限制的，Python的浮点数也没有大小限制，但是超出一定范围就直接表示为inf（无限大）。</li>
+<li>ASCII编码是1个字节，而Unicode编码通常是2个字节。UTF-8编码把一个Unicode字符根据不同的数字大小编码成1-6个字节，常用的英文字母被编码成1个字节，汉字通常是3个字节，只有很生僻的字符才会被编码成4-6个字节。</li>
+<li>在计算机内存中，统一使用Unicode编码，当需要保存到硬盘或者需要传输的时候，就转换为UTF-8编码。最新的Python 3版本中，字符串是以Unicode编码的，也就是说，Python的字符串支持多语言</li>
+<li>对于单个字符的编码，Python提供了ord()函数获取字符的整数表示，chr()函数把编码转换为对应的字符</li>
+<li>由于Python的字符串类型是str，在内存中以Unicode表示，一个字符对应若干个字节。如果要在网络上传输，或者保存到磁盘上，就需要把str变为以字节为单位的bytes。Python对bytes类型的数据用带b前缀的单引号或双引号表示<code>x = b&#39;ABC&#39;</code></li>
+<li>bytes的每个字符都只占用一个字节,以Unicode表示的str通过encode()方法可以编码为指定的bytes,<code>&#39;中文&#39;.encode(&#39;utf-8&#39;)</code>,含有中文的str无法用ASCII编码，因为中文编码的范围超过了ASCII编码的范围，Python会报错</li>
+<li>在bytes中，无法显示为ASCII字符的字节，用\x##显示</li>
+<li>果我们从网络或磁盘上读取了字节流，那么读到的数据就是bytes。要把bytes变为str，就需要用decode()方法</li>
+<li><p>计算str包含多少个字符，可以用len()函数,len()函数计算的是str的字符数，如果换成bytes，len()函数就计算字节数,<code>len(&#39;中文&#39;)</code></p>
+<pre><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+第一行注释是为了告诉Linux/OS X系统，这是一个Python可执行程序，Windows系统会忽略这个注释；
+第二行注释是为了告诉Python解释器，按照UTF-8编码读取源代码，否则，你在源代码中写的中文输出可能会有乱码。
+</code></pre><p>字符串里面的%是一个普通字符怎么办？这个时候就需要转义，用%%来表示一个%</p>
+</li>
+</ul>
+<h1 id="实练"><a href="#实练" class="headerlink" title="实练"></a>实练</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div><div class="line">533</div><div class="line">534</div><div class="line">535</div><div class="line">536</div><div class="line">537</div><div class="line">538</div><div class="line">539</div><div class="line">540</div><div class="line">541</div><div class="line">542</div><div class="line">543</div><div class="line">544</div><div class="line">545</div><div class="line">546</div><div class="line">547</div><div class="line">548</div><div class="line">549</div><div class="line">550</div><div class="line">551</div><div class="line">552</div><div class="line">553</div><div class="line">554</div><div class="line">555</div><div class="line">556</div><div class="line">557</div><div class="line">558</div><div class="line">559</div><div class="line">560</div><div class="line">561</div><div class="line">562</div><div class="line">563</div><div class="line">564</div><div class="line">565</div><div class="line">566</div><div class="line">567</div><div class="line">568</div><div class="line">569</div><div class="line">570</div><div class="line">571</div><div class="line">572</div><div class="line">573</div><div class="line">574</div><div class="line">575</div><div class="line">576</div><div class="line">577</div><div class="line">578</div><div class="line">579</div><div class="line">580</div><div class="line">581</div><div class="line">582</div><div class="line">583</div><div class="line">584</div><div class="line">585</div><div class="line">586</div><div class="line">587</div><div class="line">588</div><div class="line">589</div><div class="line">590</div><div class="line">591</div><div class="line">592</div><div class="line">593</div><div class="line">594</div><div class="line">595</div><div class="line">596</div><div class="line">597</div><div class="line">598</div><div class="line">599</div><div class="line">600</div><div class="line">601</div><div class="line">602</div><div class="line">603</div><div class="line">604</div><div class="line">605</div><div class="line">606</div><div class="line">607</div><div class="line">608</div><div class="line">609</div><div class="line">610</div><div class="line">611</div><div class="line">612</div><div class="line">613</div><div class="line">614</div><div class="line">615</div><div class="line">616</div><div class="line">617</div><div class="line">618</div><div class="line">619</div><div class="line">620</div><div class="line">621</div><div class="line">622</div><div class="line">623</div><div class="line">624</div><div class="line">625</div><div class="line">626</div><div class="line">627</div><div class="line">628</div><div class="line">629</div><div class="line">630</div><div class="line">631</div><div class="line">632</div><div class="line">633</div><div class="line">634</div><div class="line">635</div><div class="line">636</div><div class="line">637</div><div class="line">638</div><div class="line">639</div><div class="line">640</div><div class="line">641</div><div class="line">642</div><div class="line">643</div><div class="line">644</div><div class="line">645</div><div class="line">646</div><div class="line">647</div><div class="line">648</div><div class="line">649</div><div class="line">650</div><div class="line">651</div><div class="line">652</div><div class="line">653</div><div class="line">654</div><div class="line">655</div><div class="line">656</div><div class="line">657</div><div class="line">658</div><div class="line">659</div><div class="line">660</div><div class="line">661</div><div class="line">662</div><div class="line">663</div><div class="line">664</div><div class="line">665</div><div class="line">666</div><div class="line">667</div><div class="line">668</div><div class="line">669</div><div class="line">670</div><div class="line">671</div><div class="line">672</div><div class="line">673</div><div class="line">674</div><div class="line">675</div><div class="line">676</div><div class="line">677</div><div class="line">678</div><div class="line">679</div><div class="line">680</div><div class="line">681</div><div class="line">682</div><div class="line">683</div><div class="line">684</div><div class="line">685</div><div class="line">686</div><div class="line">687</div><div class="line">688</div><div class="line">689</div><div class="line">690</div><div class="line">691</div><div class="line">692</div><div class="line">693</div><div class="line">694</div><div class="line">695</div><div class="line">696</div><div class="line">697</div><div class="line">698</div><div class="line">699</div><div class="line">700</div><div class="line">701</div><div class="line">702</div><div class="line">703</div><div class="line">704</div><div class="line">705</div><div class="line">706</div><div class="line">707</div><div class="line">708</div><div class="line">709</div><div class="line">710</div><div class="line">711</div><div class="line">712</div><div class="line">713</div><div class="line">714</div><div class="line">715</div><div class="line">716</div><div class="line">717</div><div class="line">718</div><div class="line">719</div><div class="line">720</div><div class="line">721</div><div class="line">722</div><div class="line">723</div><div class="line">724</div><div class="line">725</div><div class="line">726</div><div class="line">727</div><div class="line">728</div><div class="line">729</div><div class="line">730</div><div class="line">731</div><div class="line">732</div><div class="line">733</div><div class="line">734</div><div class="line">735</div><div class="line">736</div><div class="line">737</div><div class="line">738</div><div class="line">739</div><div class="line">740</div><div class="line">741</div><div class="line">742</div><div class="line">743</div><div class="line">744</div><div class="line">745</div><div class="line">746</div><div class="line">747</div><div class="line">748</div><div class="line">749</div><div class="line">750</div><div class="line">751</div><div class="line">752</div><div class="line">753</div><div class="line">754</div><div class="line">755</div><div class="line">756</div><div class="line">757</div><div class="line">758</div><div class="line">759</div><div class="line">760</div><div class="line">761</div><div class="line">762</div><div class="line">763</div><div class="line">764</div><div class="line">765</div><div class="line">766</div><div class="line">767</div><div class="line">768</div><div class="line">769</div><div class="line">770</div><div class="line">771</div><div class="line">772</div><div class="line">773</div><div class="line">774</div><div class="line">775</div><div class="line">776</div><div class="line">777</div><div class="line">778</div><div class="line">779</div><div class="line">780</div><div class="line">781</div><div class="line">782</div><div class="line">783</div><div class="line">784</div><div class="line">785</div><div class="line">786</div><div class="line">787</div><div class="line">788</div><div class="line">789</div><div class="line">790</div><div class="line">791</div><div class="line">792</div><div class="line">793</div><div class="line">794</div><div class="line">795</div><div class="line">796</div><div class="line">797</div><div class="line">798</div><div class="line">799</div><div class="line">800</div><div class="line">801</div><div class="line">802</div><div class="line">803</div><div class="line">804</div><div class="line">805</div><div class="line">806</div><div class="line">807</div><div class="line">808</div><div class="line">809</div><div class="line">810</div><div class="line">811</div><div class="line">812</div><div class="line">813</div><div class="line">814</div><div class="line">815</div><div class="line">816</div><div class="line">817</div><div class="line">818</div><div class="line">819</div><div class="line">820</div><div class="line">821</div><div class="line">822</div><div class="line">823</div><div class="line">824</div><div class="line">825</div><div class="line">826</div><div class="line">827</div><div class="line">828</div><div class="line">829</div><div class="line">830</div><div class="line">831</div><div class="line">832</div><div class="line">833</div><div class="line">834</div><div class="line">835</div><div class="line">836</div><div class="line">837</div><div class="line">838</div><div class="line">839</div><div class="line">840</div><div class="line">841</div><div class="line">842</div><div class="line">843</div><div class="line">844</div><div class="line">845</div><div class="line">846</div><div class="line">847</div><div class="line">848</div><div class="line">849</div><div class="line">850</div><div class="line">851</div><div class="line">852</div><div class="line">853</div><div class="line">854</div><div class="line">855</div><div class="line">856</div><div class="line">857</div><div class="line">858</div><div class="line">859</div><div class="line">860</div><div class="line">861</div><div class="line">862</div><div class="line">863</div><div class="line">864</div><div class="line">865</div><div class="line">866</div><div class="line">867</div><div class="line">868</div><div class="line">869</div><div class="line">870</div><div class="line">871</div><div class="line">872</div><div class="line">873</div><div class="line">874</div><div class="line">875</div><div class="line">876</div><div class="line">877</div><div class="line">878</div><div class="line">879</div><div class="line">880</div><div class="line">881</div><div class="line">882</div><div class="line">883</div><div class="line">884</div><div class="line">885</div><div class="line">886</div><div class="line">887</div><div class="line">888</div><div class="line">889</div><div class="line">890</div><div class="line">891</div><div class="line">892</div><div class="line">893</div><div class="line">894</div><div class="line">895</div><div class="line">896</div><div class="line">897</div><div class="line">898</div><div class="line">899</div><div class="line">900</div><div class="line">901</div><div class="line">902</div><div class="line">903</div><div class="line">904</div><div class="line">905</div><div class="line">906</div><div class="line">907</div><div class="line">908</div><div class="line">909</div><div class="line">910</div><div class="line">911</div><div class="line">912</div><div class="line">913</div><div class="line">914</div><div class="line">915</div><div class="line">916</div><div class="line">917</div><div class="line">918</div><div class="line">919</div><div class="line">920</div><div class="line">921</div><div class="line">922</div><div class="line">923</div><div class="line">924</div><div class="line">925</div><div class="line">926</div><div class="line">927</div><div class="line">928</div><div class="line">929</div><div class="line">930</div><div class="line">931</div><div class="line">932</div><div class="line">933</div><div class="line">934</div><div class="line">935</div><div class="line">936</div><div class="line">937</div><div class="line">938</div><div class="line">939</div><div class="line">940</div><div class="line">941</div><div class="line">942</div><div class="line">943</div><div class="line">944</div><div class="line">945</div><div class="line">946</div><div class="line">947</div><div class="line">948</div><div class="line">949</div><div class="line">950</div><div class="line">951</div><div class="line">952</div><div class="line">953</div><div class="line">954</div><div class="line">955</div><div class="line">956</div><div class="line">957</div><div class="line">958</div><div class="line">959</div><div class="line">960</div><div class="line">961</div><div class="line">962</div><div class="line">963</div><div class="line">964</div><div class="line">965</div><div class="line">966</div><div class="line">967</div><div class="line">968</div><div class="line">969</div><div class="line">970</div><div class="line">971</div><div class="line">972</div><div class="line">973</div><div class="line">974</div></pre></td><td class="code"><pre><div class="line">&apos;&apos;&apos;</div><div class="line">1,代码中有中文必须设置utf-8</div><div class="line">&apos;&apos;&apos;</div><div class="line">#coding=utf-8</div><div class="line"></div><div class="line">#2,单行注释,以#开头</div><div class="line">import time #引入时间模块</div><div class="line">import random</div><div class="line">import calendar,os</div><div class="line">import math</div><div class="line"></div><div class="line">#爬取数据</div><div class="line">import urllib.request</div><div class="line">#指定math模块中的sqrt函数</div><div class="line">from math import sqrt</div><div class="line"></div><div class="line">&apos;&apos;&apos;</div><div class="line">当你导入一个模块，Python解析器对模块位置的搜索顺序是：</div><div class="line"></div><div class="line">1.当前目录</div><div class="line">2.如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。</div><div class="line">3.如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/</div><div class="line">4.模块搜索路径存储在system模块的sys.path变量中。</div><div class="line">变量里包含当前目录，PYTHONPATH和由安装过程决定的默认目录。</div><div class="line"></div><div class="line"></div><div class="line">  在Python中，每个Python文件都可以作为一个模块，模块的名字就是文件的名字。</div><div class="line">  创建text.py文件,定义相关函数,import text 即可引用自己的模块</div><div class="line">  注意,倘若在text.py中定义并执行相关函数,其他文件引用之后,并不会执行</div><div class="line">  测试函数代码，应该是单独执行text.py文件时才会执行</div><div class="line"></div><div class="line">  from math import *</div><div class="line"></div><div class="line">  可以根据__name__变量的结果能够判断出，是直接执行的python脚本还是被引入执行的，</div><div class="line">  从而能够有选择性的执行测试代码</div><div class="line"> &apos;&apos;&apos; </div><div class="line"></div><div class="line">#区分文件是主动执行的，还是被调用执行的。</div><div class="line">如果当前文件是主动执行的，__name__ 变量的值就是：__main__，</div><div class="line">如果是被导入执行的，则是被导入的文件名</div><div class="line"></div><div class="line">if __name__ == &quot;__main__&quot;:</div><div class="line">	print(&quot;是直接执行的py脚本,而非引入&quot;)</div><div class="line">#3,多行注释,使用3个单引号</div><div class="line"></div><div class="line"></div><div class="line">#3,输出,使用print函数,字符串格式化]</div><div class="line">&apos;&apos;&apos;</div><div class="line">%c %s %i %d %u无符号十进制整数</div><div class="line">%o %x十六进制小写 %X十六进制大写 %f</div><div class="line"></div><div class="line">&apos;&apos;&apos;</div><div class="line"></div><div class="line">print(&quot;hello world&quot;)</div><div class="line"></div><div class="line">a = 12</div><div class="line">b = 58</div><div class="line">c = &quot;swe&quot;</div><div class="line">print(&quot;hello %s 这孩子 %s 啊啊啊 %s&quot;%(a,b,c))</div><div class="line"></div><div class="line">print(&quot;sss&quot;,a)</div><div class="line"></div><div class="line">#4,输入</div><div class="line">inputs = input(&quot;请输入数字&quot;)</div><div class="line">print(&quot;您的数字是:%s&quot;%inputs)</div><div class="line"></div><div class="line">if inputs == 12:</div><div class="line">	print(&quot;哈哈哈哈&quot;)</div><div class="line">	print(&quot;嘻嘻嘻嘻&quot;)</div><div class="line"></div><div class="line">if inputs != 12:</div><div class="line">	print(&quot;哦哦哦哦&quot;)</div><div class="line"></div><div class="line"></div><div class="line">#5,数据类型</div><div class="line">&apos;&apos;&apos;</div><div class="line">在python中，只要定义了一个变量，而且它有数据，那么它的类型就已经确定了</div><div class="line">可以使用type(变量的名字)，来查看变量的类型:type(a)</div><div class="line">常用的数据类型:</div><div class="line">* Numbers(包括int long float complex)</div><div class="line">* 布尔 True/False</div><div class="line">* String </div><div class="line">* List</div><div class="line">* Tuple(元组)</div><div class="line">* Dictionary</div><div class="line">&apos;&apos;&apos;</div><div class="line"></div><div class="line"></div><div class="line">#6,标识符</div><div class="line"># 标识符由字符数字下划线组成,没有美元符号,且区分大小写</div><div class="line"># 命名规则:驼峰式或者下划线连接</div><div class="line"></div><div class="line"></div><div class="line">#7,运算符</div><div class="line">&apos;&apos;&apos;</div><div class="line">* %取余 3%2</div><div class="line">* **幂 3**2  3的2次方</div><div class="line">* // 取整除</div><div class="line">* / 正常除法,可有余数</div><div class="line">* //=  **/ </div><div class="line">&apos;&apos;&apos;</div><div class="line"></div><div class="line"></div><div class="line">#8,逻辑运算 and or not</div><div class="line"># 与</div><div class="line">if inputs == 15 and a == 12:</div><div class="line">	print(&quot;and&quot;)</div><div class="line"></div><div class="line"># 或</div><div class="line">if inputs == 15 or b == 58:</div><div class="line">	print(&quot;or&quot;)</div><div class="line"></div><div class="line"># 非</div><div class="line">if not a == 12:</div><div class="line">	print(&quot;not&quot;)</div><div class="line"></div><div class="line">#9,多重判断 if 与 elif</div><div class="line">score = 99</div><div class="line">if score &lt; 60:</div><div class="line">	print(&quot;不及格&quot;)</div><div class="line">elif score &lt;80:</div><div class="line">	print(&quot;良好&quot;)</div><div class="line">elif score &lt; 90:</div><div class="line">	print(&quot;不错&quot;)</div><div class="line">else:</div><div class="line">	print(&quot;优秀&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">#10,if嵌套</div><div class="line">if a == 12:</div><div class="line">	print(&quot;a==12&quot;)</div><div class="line">	if a &gt; 12:</div><div class="line">		print(&quot;a&gt;12&quot;)</div><div class="line">	else:</div><div class="line">		print(&quot;a&lt;=12&quot;)</div><div class="line">else:</div><div class="line">	print(&quot;a!=12&quot;)</div><div class="line"></div><div class="line"></div><div class="line">#11,while循环与循环嵌套</div><div class="line">while a == 12:</div><div class="line">	print(&quot;你不好&quot;)</div><div class="line">	a = 13</div><div class="line">	while b == 58:</div><div class="line">		print(&quot;哈哈哈哈&quot;)</div><div class="line">		b = 59</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">#12,for循环:i从0开始,每次自增1</div><div class="line">for i in range(12):</div><div class="line">	if i == 5:</div><div class="line">		continue#跳过i==5这次</div><div class="line">	print(&apos;i=%s&apos;%i)</div><div class="line"></div><div class="line">	if i == 10:</div><div class="line">		print(&quot;停止break&quot;)</div><div class="line">		break</div><div class="line"></div><div class="line"></div><div class="line">#13,定义函数 print1</div><div class="line">def print1():</div><div class="line">	print(&quot;函数&quot;)</div><div class="line">	print(&quot;函数&quot;)</div><div class="line"></div><div class="line">	print(&quot;函数&quot;)</div><div class="line"></div><div class="line">#调用函数print1</div><div class="line">print1()</div><div class="line"></div><div class="line">#14,常用函数</div><div class="line">#时间函数import time</div><div class="line">t = time.time()#取出当前时间,以秒为单位的浮点小数</div><div class="line">t2 = time.localtime(t)#取出本地时间</div><div class="line">t3 = time.asctime(t2) #标准格式Fri Jun 10 10:58:53 2016</div><div class="line">print(t3)</div><div class="line"></div><div class="line">#日历函数 import calendar</div><div class="line">cal = calendar.month(2016,8)</div><div class="line">print(cal) #打印日历</div><div class="line"></div><div class="line">#随机数函数 import random</div><div class="line">r = random.randint(1,3)#从1到3范围内的整数,包括1和3</div><div class="line">print(r)</div><div class="line"></div><div class="line">r2 = random.randrange(1,25,5)#从1开始到25结束递增基数为5</div><div class="line">print(r2)</div><div class="line"></div><div class="line">r3 = random.uniform(1,5) #最小值1最大值5,返回浮点数</div><div class="line">print(r3)</div><div class="line"></div><div class="line">random.random() #生成0&lt;=n&lt;=1的浮点数</div><div class="line"></div><div class="line">#15,字符串,相当于字符数组,可以通过下标取出字符,</div><div class="line">ss = &quot;qwertyu&quot;</div><div class="line">print(ss[1])</div><div class="line"></div><div class="line">#取出下标从1到3 的字符,包括上边界,不包括下边界</div><div class="line">print(ss[1:3])</div><div class="line"></div><div class="line">#从下标2开始 取到最后</div><div class="line">print(ss[2:])</div><div class="line"></div><div class="line">#从下标2开始到下标-2,不包括下标-2</div><div class="line">print(ss[2:-2])</div><div class="line"></div><div class="line">#取出最后4个字符</div><div class="line">print(ss[-4:])</div><div class="line"></div><div class="line">#16,字符串常见操作</div><div class="line">sub = &quot;my&quot;</div><div class="line">s = &quot;itismyapple&quot;</div><div class="line"></div><div class="line">#查找:检测sub是否在s中:s.find(sub, start=0, end=len(mystr))</div><div class="line">#查找成功返回开始的索引,否则返回-1</div><div class="line">s.find(sub)</div><div class="line">re = s.find(sub,1,8)#从下标1开始查找,到下标为8结束</div><div class="line">print(re)</div><div class="line"></div><div class="line">s.index(sub)#与find相同,只不过没有找到会抛出异常</div><div class="line"></div><div class="line">#返回 在start和end之间(包括) 在 s里面出现的次数</div><div class="line">c = s.count(&quot;i&quot;, 0,8)</div><div class="line">print(c)</div><div class="line"></div><div class="line">#把 s 中的 str1 替换成 str2,如果 count 指定，则替换不超过 count 次.</div><div class="line">s.replace(&quot;t&quot;,&quot;d&quot;,2)</div><div class="line"></div><div class="line">#以 &quot; &quot; 为分隔符切片 s，如果 maxsplit有指定值，则仅分隔 maxsplit 个子字符串</div><div class="line">s.split(&quot; &quot;,5)</div><div class="line"></div><div class="line">#把字符串的第一个字符大写</div><div class="line">s.capitalize()</div><div class="line"></div><div class="line">#检查字符串是否是以 obj 开头, 是则返回 True，否则返回 False</div><div class="line">s.startswith(&quot;i&quot;)</div><div class="line"></div><div class="line">#检查字符串是否以obj结束，如果是返回True,否则返回 False.</div><div class="line">s.endswith(&quot;d&quot;)</div><div class="line"></div><div class="line">#转换 s 中所有大写字符为小写</div><div class="line">s.lower()</div><div class="line"></div><div class="line">#转换 s 中的小写字母为大写</div><div class="line">s.upper()</div><div class="line"></div><div class="line">#返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串</div><div class="line">s.ljust(5) #返回 &quot;itismyapple     &quot;</div><div class="line"></div><div class="line">#返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串</div><div class="line">s.rjust(5) #返回&quot;     itismyapple&quot;</div><div class="line"></div><div class="line">#返回一个原字符串居中,并使用空格填充至长度 width 的新字符串</div><div class="line">&quot;s&quot;.center(10) #&quot;    s     &quot;</div><div class="line"></div><div class="line">#删除 s 左边的空格</div><div class="line">s.lstrip()</div><div class="line"></div><div class="line">#删除 s 字符串末尾的空格</div><div class="line">s.rstrip()</div><div class="line"></div><div class="line">#类似于 find()函数，不过是从右边开始查找.</div><div class="line">&quot;sieiess&quot;.rfind(&quot;ie&quot;) #返回3</div><div class="line"></div><div class="line"># 类似于 index()，不过是从右边开始.</div><div class="line">s.rindex(&quot;s&quot;)</div><div class="line"></div><div class="line">#把&quot;asdeeeads&quot;以str分割成三部分,str前，str和str后</div><div class="line">&quot;asdeeeads&quot;.partition(&quot;eee&quot;)</div><div class="line"></div><div class="line">#类似于 partition()函数,不过是从右边开始.</div><div class="line">&quot;asdeeeads&quot;.rpartition(&quot;eee&quot;)</div><div class="line"></div><div class="line">#按照行分隔，返回一个包含各行作为元素的列表</div><div class="line">&quot;asas\nds&quot;.splitlines()</div><div class="line"></div><div class="line">#如果 mystr 所有字符都是字母或数字则返回 True,否则返回 False</div><div class="line">&quot;ssd&quot;.isalnum()</div><div class="line"></div><div class="line">#如果 mystr 所有字符都是字母 则返回 True,否则返回 False</div><div class="line">&quot;ssd&quot;.isalpha()</div><div class="line"></div><div class="line">#如果 mystr 只包含数字则返回 True 否则返回 False.</div><div class="line">&quot;232&quot;.isdigit()</div><div class="line"></div><div class="line">#如果 mystr 中只包含空格，则返回 True，否则返回 False.</div><div class="line">&quot; &quot;.isspace()</div><div class="line"></div><div class="line">#如果 mystr 所有字符都是大写，则返回 True，否则返回 False</div><div class="line">&quot;sd&quot;.isupper()</div><div class="line"></div><div class="line">#mystr 中每个字符后面插入str,构造出一个新的字符串</div><div class="line">&quot;sasd&quot;.join(&quot;s&quot;)</div><div class="line"></div><div class="line"></div><div class="line">#17,列表</div><div class="line">A = [&quot;ds3s&quot;,&quot;ds4s&quot;,&quot;a4sd&quot;]</div><div class="line">print(A[0])</div><div class="line"></div><div class="line">for a in A:</div><div class="line">	print(a)#打印每一个元素</div><div class="line"></div><div class="line">#18,列表增加元素</div><div class="line">A.append(&quot;asasdad&quot;)</div><div class="line">for a in A:</div><div class="line">	print(a)#打印每一个元素</div><div class="line"></div><div class="line">#19,修改</div><div class="line">A[0] = &quot;1&quot;</div><div class="line"></div><div class="line">#20,查找</div><div class="line">if &quot;1&quot; in A:</div><div class="line">	print(&quot;1存在于a中&quot;)</div><div class="line">if &quot;1&quot; not in A:</div><div class="line">	print(&quot;1不存在与a中&quot;)</div><div class="line"></div><div class="line">#21,删除元素</div><div class="line">&apos;&apos;&apos;</div><div class="line">    del：根据下标进行删除</div><div class="line">    pop：删除最后一个元素</div><div class="line">    remove：根据元素的值进行删除</div><div class="line">&apos;&apos;&apos;</div><div class="line">del A[0]</div><div class="line">A.pop()</div><div class="line">A.remove(&quot;ds4s&quot;)</div><div class="line">for a in A:</div><div class="line">	print(a)#打印每一个元素</div><div class="line"></div><div class="line">#21,统计字符个数</div><div class="line">cstr = input(&quot;请输入字符&quot;)</div><div class="line">for c in cstr:</div><div class="line">	print(&quot;%c:%d&quot;%(c,cstr.count(c)))</div><div class="line"></div><div class="line"></div><div class="line">#22,字典</div><div class="line">info = &#123;&quot;name&quot;:&quot;zhangsan&quot;,&quot;age&quot;:12&#125;</div><div class="line">print(info[&quot;name&quot;])</div><div class="line">#增加键值对</div><div class="line">info[&quot;sex&quot;] = &quot;man&quot;</div><div class="line"></div><div class="line">#删除元素</div><div class="line">del info[&quot;age&quot;]</div><div class="line"></div><div class="line">#清空字典</div><div class="line">info.clear()</div><div class="line"></div><div class="line">#删除整个字典</div><div class="line">del info</div><div class="line">#注意删除字典和清空字典的区别</div><div class="line"></div><div class="line">#字典常用操作</div><div class="line">info2 = &#123;&quot;name&quot;:&quot;zhangsan&quot;,&quot;age&quot;:12&#125;</div><div class="line">#测量字典中，键值对的个数</div><div class="line">len(info2)</div><div class="line"></div><div class="line">#返回一个包含字典所有KEY的列表</div><div class="line">info2.keys()</div><div class="line"></div><div class="line">#返回一个包含字典所有value的列表</div><div class="line">info2.values()</div><div class="line"></div><div class="line">#返回一个包含所有（键，值）元组的列表</div><div class="line">info2.items()</div><div class="line"></div><div class="line">#if &quot;name&quot; in info2如果key在字典中，返回True，否则返回False</div><div class="line">if &quot;name&quot; in info2:</div><div class="line">	print(&quot;存在&quot;)</div><div class="line"></div><div class="line">#遍历键/值/键值对</div><div class="line">for key,value in info2.items():</div><div class="line">	print(key,value)</div><div class="line"></div><div class="line">#23,Python的元组与列表类似，不同之处在于元组的元素不能修改。</div><div class="line">也可进行分片 和 连接操作. 元组使用小括号，列表使用方括号。</div><div class="line">atuple = (&quot;as&quot;,121,True,False,0)</div><div class="line">atuple2 = (&quot;a&quot;,121,True,False,40)</div><div class="line">print(atuple[1])</div><div class="line"></div><div class="line">#合成新元组</div><div class="line">atuple3 = atuple + atuple2</div><div class="line"></div><div class="line">#删除元素</div><div class="line">#元组中的元素值是不允许删除的，但我们可以使用del语句来删除整个元组</div><div class="line">del atuple3</div><div class="line"></div><div class="line">#24,元组运算符</div><div class="line">#与字符串一样，元组之间可以使用 + 号和 * 号进行运算。</div><div class="line">这就意味着他们可以组合和复制，运算后会生成一个新的元组。</div><div class="line">(1, 2, 3) + (4, 5, 6)</div><div class="line">[&apos;Hi!&apos;] * 4 #[&apos;Hi!&apos;, &apos;Hi!&apos;, &apos;Hi!&apos;, &apos;Hi!&apos;]</div><div class="line">3 in (1, 2, 3) #True</div><div class="line"></div><div class="line">#25,元组索引截取</div><div class="line">#因为元组也是一个序列，所以我们可以访问元组中的指定位置的元素，也可以截取索引中的一段元素</div><div class="line">#比较两个元组元素。</div><div class="line"></div><div class="line">#cmp(tuple1, tuple2)</div><div class="line">tuple2 = (12,234,546,56)</div><div class="line">tuple2s = [12,23]</div><div class="line">#计算元组元素个数。</div><div class="line">len(tuple2)</div><div class="line">#返回元组中元素最大值。</div><div class="line">max(tuple2)</div><div class="line">#返回元组中元素最小值。</div><div class="line">min(tuple2)</div><div class="line">#将列表转换为元组。</div><div class="line">tuple(tuple2s)</div><div class="line"></div><div class="line">#25,多维元组</div><div class="line">tuple3 = [(2,4,5,4),(2,5,6)]</div><div class="line">tuple3[1] #(2,5,6)</div><div class="line">tuple3[1][0] #2</div><div class="line"></div><div class="line">#26,带有参数和有返回值的函数</div><div class="line">def sum(a,b):</div><div class="line">	return a+b</div><div class="line"></div><div class="line">print(sum(45,1))</div><div class="line"></div><div class="line">#27,缺省函数</div><div class="line">def sum2(a,b = 25):</div><div class="line">	return a+b</div><div class="line">print(sum2(232))</div><div class="line">print(sum2(232,1))</div><div class="line"></div><div class="line">#28,不定长参数</div><div class="line">#加了星号（*）的变量名会存放所有未命名的变量参数。</div><div class="line">#参数以一个＊号开头的代表着一个任意长度的元组(tuple)，可以接收连续一串参数</div><div class="line">def printinfo(a,b,*cs):</div><div class="line">	print(a,b)</div><div class="line">	for c in cs:</div><div class="line">		print(c)</div><div class="line">printinfo(23,3,34,4,6,2)</div><div class="line"></div><div class="line"></div><div class="line">#29,函数的嵌套使用</div><div class="line">def print3(a,b):</div><div class="line">	print(a,b)</div><div class="line">	print(sum(a,b))</div><div class="line">print3(2,23)</div><div class="line"></div><div class="line">#30,打印指定条横线</div><div class="line">def printline():</div><div class="line">	print(&quot;-&quot;*20)</div><div class="line"></div><div class="line">def printlinewithnum(a):</div><div class="line">	for i in range(a):</div><div class="line">		printline()</div><div class="line">		print(&quot;\n&quot;)</div><div class="line"></div><div class="line">printlinewithnum(5)</div><div class="line"></div><div class="line">#31,变量</div><div class="line">#局部变量,是在函数内部定义的变量</div><div class="line">#全局变量,能在某一函数中使用,也能在其他函数中使用</div><div class="line">#全局变量能够在所以的函数中进行访问</div><div class="line">#如果在函数中修改全局变量，那么就需要使用global进行声明，否则出错</div><div class="line">gol = 12</div><div class="line">def chnum():</div><div class="line">	global gol #声明此处的gol是特指全局变量,而非重名的局部变量</div><div class="line">	gol = 13</div><div class="line">	print(gol)</div><div class="line">chnum()</div><div class="line">print(gol)</div><div class="line"></div><div class="line">#32,递归函数,一个函数在内部调用自己</div><div class="line">#示例:计算n的阶乘</div><div class="line">def calnum(n):</div><div class="line">	i = 1</div><div class="line">	result = 1</div><div class="line">	while i &lt;= n:</div><div class="line">		result *= i</div><div class="line">		i += 1</div><div class="line">	return result</div><div class="line">print(calnum(1))</div><div class="line">print(calnum(0))</div><div class="line"></div><div class="line">def calnum2(n):</div><div class="line">	if n &gt;= 1:</div><div class="line">		return n * calnum2(n-1)</div><div class="line">	else:</div><div class="line">		return 1</div><div class="line">print(calnum2(1))</div><div class="line">print(calnum2(0))</div><div class="line"></div><div class="line">#33,匿名函数</div><div class="line">#用lambda关键词能创建小型匿名函数。</div><div class="line">#Lambda函数能接收任何数量的参数但只能返回一个表达式的值</div><div class="line">#匿名函数不能直接调用print，因为lambda需要一个表达式</div><div class="line">sum4 = lambda a,b,c,d:a + b + c + d</div><div class="line">print(sum4(1,3,4,6))</div><div class="line"></div><div class="line">#34,位运算:直接操作二进制数</div><div class="line">&apos;&apos;&apos;</div><div class="line">&amp; 按位与 只有对应的两个二进位均为1时,结果位才为1</div><div class="line">| 按位或 只要对应的二个二进位有一个为1时,结果位就为1,否则为0</div><div class="line">^ 按位异或 不同为1 当对应的二进位相异(不相同)时,结果为1,否则为0</div><div class="line">~ 按位取反</div><div class="line">&lt;&lt; 按位左移:左移一位即乘以2,可能改变一个数的正负</div><div class="line">&gt;&gt; 按位右移::右移一位即除以2</div><div class="line">&apos;&apos;&apos;</div><div class="line">0b1011 &amp; 0b1001010110</div><div class="line">0b1000110 | 0b10010</div><div class="line">0b11101 ^ 0b110000011</div><div class="line">~132</div><div class="line">print(12&lt;&lt;3)</div><div class="line">print(1024&gt;&gt;4)</div><div class="line">#进制书写</div><div class="line">0o377 #八进制</div><div class="line">0xFF #十六进制</div><div class="line">0b010010110 #二进制</div><div class="line"></div><div class="line">#进制转换</div><div class="line">print(type(oct(25))) #转八进制字符串</div><div class="line">hex(25) #转十六进制字符串</div><div class="line">bin(25) #转二进制字符串</div><div class="line"></div><div class="line">#35,数据类型转换</div><div class="line">int(&quot;123&quot;) #字符串转数值</div><div class="line">float(&quot;2324.3&quot;) #将字符串转换为浮点数</div><div class="line">print(complex(1.2,3.2)) #创建一个复数,在 Python 中，复数的虚部被表示为 j</div><div class="line">print(3.2+1.4j)</div><div class="line"></div><div class="line">print(str(23)) #将23转换为字符串</div><div class="line">print(repr(124)) #转换为表达式字符串</div><div class="line">tuple([23,3])</div><div class="line">list((23,234))</div><div class="line">chr(2)</div><div class="line">ord(&quot;d&quot;)</div><div class="line"></div><div class="line">#35,实现乘法表</div><div class="line">def print6():</div><div class="line">	i = 1</div><div class="line">	while i &lt;= 9:</div><div class="line">		j = i</div><div class="line">		while j &lt;= 9:</div><div class="line">			print(&quot;%d*%d=%d&quot;%(i,j,i*j))</div><div class="line">			j += 1</div><div class="line">		i += 1</div><div class="line"></div><div class="line">print6()</div><div class="line">		</div><div class="line">#36,打开文件</div><div class="line">#使用open函数，可以打开一个已经存在的文件，或者创建一个新文件</div><div class="line">#open(文件名，访问模式) 返回文件句柄</div><div class="line">f = open(&quot;s.txt&quot;,&quot;w&quot;)</div><div class="line">f.close()#关闭文件</div><div class="line">&apos;&apos;&apos;</div><div class="line">r 	以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</div><div class="line">w 	打开一个文件只用于写入。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。</div><div class="line">a 	打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。</div><div class="line">也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</div><div class="line"></div><div class="line">rb 以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。</div><div class="line"></div><div class="line">wb 以二进制格式打开一个文件只用于写入。如果该文件已存在则将其覆盖。</div><div class="line">如果该文件不存在，创建新文件。</div><div class="line"></div><div class="line">ab 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。</div><div class="line">也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</div><div class="line"></div><div class="line">r+ 打开一个文件用于读写。文件指针将会放在文件的开头。</div><div class="line">w+ 打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。</div><div class="line"></div><div class="line">a+ 打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。</div><div class="line">文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</div><div class="line">rb+ 以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。</div><div class="line">wb+ 以二进制格式打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。</div><div class="line"></div><div class="line">ab+ 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。</div><div class="line">如果该文件不存在，创建新文件用于读写。</div><div class="line">&apos;&apos;&apos;</div><div class="line"></div><div class="line">#37,写数据到文件</div><div class="line">f = open(&quot;s1&quot;,&quot;w&quot;)</div><div class="line">f.write(&quot;hello world&quot;)</div><div class="line">f.close()</div><div class="line"></div><div class="line">#38,读数据</div><div class="line">f = open(&quot;s1&quot;)</div><div class="line">content = f.read(5) #读取数据长度,字节为单位</div><div class="line">print(content)</div><div class="line">f.close()</div><div class="line"></div><div class="line">#readlines按照行的方式把整个文件中的内容进行一次性读取，返回的是一个列表，每一行的数据为一个元素</div><div class="line">f = open(&quot;s&quot;)</div><div class="line">content2 = f.readlines()</div><div class="line">print(content2[2])</div><div class="line">f.close()</div><div class="line"></div><div class="line">#38,获取当前读写的位置</div><div class="line">f = open(&quot;222.txt&quot;, &quot;r+&quot;)</div><div class="line">f.write(&quot;123243454566&quot;)</div><div class="line">str12 = f.read(3)</div><div class="line">print(&quot;读取的数据是 : &quot;,str12)</div><div class="line"></div><div class="line"># 查找当前位置</div><div class="line">position = f.tell()</div><div class="line">print(&quot;当前文件位置 : &quot;, position)</div><div class="line">f.close()</div><div class="line">#如果在读写文件的过程中，需要从另外一个位置进行操作的话，可以使用seek()</div><div class="line">&apos;&apos;&apos;</div><div class="line">seek(offset, from)有2个参数</div><div class="line"></div><div class="line">    offset:偏移量</div><div class="line">    from:方向</div><div class="line">        0:表示文件开头</div><div class="line">        1:表示当前位置</div><div class="line">        2:表示文件末尾</div><div class="line"></div><div class="line">&apos;&apos;&apos;</div><div class="line">f = open(&quot;s&quot;, &quot;r&quot;)</div><div class="line">str33 = f.read(30)</div><div class="line">print(&quot;读取的数据是 : &quot;, str33)</div><div class="line"></div><div class="line"># 查找当前位置</div><div class="line">position = f.tell()</div><div class="line">print(&quot;当前文件位置 : &quot;, position)</div><div class="line"></div><div class="line"># 重新设置位置</div><div class="line">f.seek(5,0)</div><div class="line">f.close()</div><div class="line"></div><div class="line">#39,文件操作</div><div class="line">#文件重命名</div><div class="line">#需要import os</div><div class="line">&apos;&apos;&apos;</div><div class="line">#os模块中的rename()可以完成对文件的重命名操作</div><div class="line">os.rename(&quot;s1&quot;,&quot;s111&quot;)</div><div class="line"></div><div class="line">#删除文件</div><div class="line">os.remove(&quot;s111&quot;)</div><div class="line"></div><div class="line">#创建文件夹</div><div class="line">os.mkdir(&quot;haha&quot;)</div><div class="line"></div><div class="line">#获取当前目录</div><div class="line">print(os.getcwd())</div><div class="line"></div><div class="line">#改变默认目录</div><div class="line">os.chdir(&quot;../&quot;)</div><div class="line"></div><div class="line">#获取目录中内容列表,返回数组</div><div class="line">os.listdir(&quot;./&quot;)</div><div class="line"></div><div class="line">#删除文件夹</div><div class="line">os.rmdir(&quot;haha&quot;)</div><div class="line"></div><div class="line">#判断是否是目录</div><div class="line">os.path.isdir(&quot;./react&quot;)</div><div class="line"></div><div class="line">#判断是否是文件</div><div class="line">os.path.isfile(&quot;./s&quot;)</div><div class="line">&apos;&apos;&apos;</div><div class="line">#40,捕获异常</div><div class="line">try:</div><div class="line">	open(&quot;ssss&quot;,&quot;r&quot;)</div><div class="line">#指定异常类型 定义异常变量</div><div class="line">except IOError as errmsg:</div><div class="line">	print(&quot;捕获到异常&quot;,errmsg)</div><div class="line">	print(&quot;-&quot;*10)</div><div class="line"></div><div class="line">#多个异常</div><div class="line">try:</div><div class="line">	open(&quot;ssss&quot;,&quot;r&quot;)</div><div class="line">#指定异常类型 定义异常变量</div><div class="line">except (IOError,NameError) as errmsg:</div><div class="line">	print(&quot;捕获到异常&quot;,errmsg)</div><div class="line">	print(&quot;-&quot;*10)</div><div class="line"></div><div class="line">#不指定异常</div><div class="line">try:</div><div class="line">	open(&quot;ssss&quot;,&quot;r&quot;)</div><div class="line">#指定异常类型 定义异常变量</div><div class="line">except :</div><div class="line">	print(&quot;捕获到异常&quot;)</div><div class="line">	print(&quot;-&quot;*10)</div><div class="line"></div><div class="line">&apos;&apos;&apos;</div><div class="line">常见异常：</div><div class="line"></div><div class="line">Exception           所有异常的基类</div><div class="line"></div><div class="line">AttributeError      特性应用或赋值失败时引发</div><div class="line"></div><div class="line">IOError             试图打开不存在的文件时引发</div><div class="line"></div><div class="line">IndexError          在使用序列中不存在的索引时引发</div><div class="line"></div><div class="line">KeyError            在使用映射不存在的键时引发</div><div class="line"></div><div class="line">NameError           在找不到名字（变量）时引发</div><div class="line"></div><div class="line">SyntaxError         在代码为错误形式时引发</div><div class="line"></div><div class="line">TypeError          在内建操作或者函数应用于错误类型的对象是引发</div><div class="line"></div><div class="line">ValueError:       </div><div class="line">在内建操作或者函数应用于正确类型的对象，但是该对象使用不合适的值时引发</div><div class="line"></div><div class="line">ZeroDivisionError  在除法或者摸除操作的第二个参数为0时引发</div><div class="line">&apos;&apos;&apos;</div><div class="line">#finally语句</div><div class="line">try:</div><div class="line">	open(&quot;ssss&quot;,&quot;r&quot;)</div><div class="line">#指定异常类型 定义异常变量</div><div class="line">except :</div><div class="line">	print(&quot;捕获到异常&quot;)</div><div class="line">	print(&quot;-&quot;*10)</div><div class="line">finally:</div><div class="line">	print(&quot;一定执行的语句&quot;)</div><div class="line"></div><div class="line"></div><div class="line">#else应用</div><div class="line">try:</div><div class="line">    num = 100</div><div class="line">    print(num)</div><div class="line">except NameError as errorMsg:</div><div class="line">        print(&apos;产生错误了:%s&apos;%errorMsg)</div><div class="line">else:</div><div class="line">        print(&apos;没有捕获到异常，真高兴&apos;)</div><div class="line">finally:</div><div class="line">        print(&apos;我一定会执行的哦&apos;)</div><div class="line"></div><div class="line">#41,定义类</div><div class="line">class Person:</div><div class="line"></div><div class="line">	#属性列表</div><div class="line">	#公有属性</div><div class="line">	name = &quot;AB&quot;</div><div class="line"></div><div class="line">	#私有属性,私有属性是不能够在类外通过对象名来进行访问的</div><div class="line">	__age = 20</div><div class="line"></div><div class="line">	#在类中定义的方法至少会有一个参数，，一般以名为self的变量作为该参数，而且需要作为第一个参数。</div><div class="line">	#公有方法列表</div><div class="line">	def getName(self):</div><div class="line">		print(self.name)</div><div class="line"></div><div class="line">	#私有方法</div><div class="line">	def __getAge(self):</div><div class="line">		print(self.__age)</div><div class="line"></div><div class="line">	#def get():报错</div><div class="line">	#	print(&quot;无参数方法&quot;)</div><div class="line"></div><div class="line">	#构造器方法:在创建对象后执行</div><div class="line">	#def __init__():</div><div class="line">	#	self.name = &quot;QWE&quot;</div><div class="line"></div><div class="line">	#传递参数的构造器方法</div><div class="line">	def __init__(self,name):</div><div class="line">		self.name = name</div><div class="line"></div><div class="line">	#析构方法</div><div class="line">	def __del__(self):</div><div class="line">		print(&quot;析构方法被调用&quot;)</div><div class="line"></div><div class="line">#创建对象</div><div class="line">p = Person(&quot;zhangsan&quot;)</div><div class="line">print(p.name)</div><div class="line">p.getName()</div><div class="line"></div><div class="line"># 提示找不到该属性p.__age</div><div class="line"># 提示找不到该方法p.__getAge()</div><div class="line">#self是对象自身的意思，在用某个对象调用该方法时，就将该对象作为第一个参数传递给self。</div><div class="line"></div><div class="line">del p</div><div class="line"></div><div class="line"></div><div class="line">#42,继承</div><div class="line">class Student(Person):</div><div class="line">	def setName(self,name):</div><div class="line">		self.name = name</div><div class="line">	def print(self):</div><div class="line">		print(&quot;学生的姓名是&quot;,self.name)</div><div class="line"></div><div class="line">stu = Student(&quot;zhangsan&quot;)</div><div class="line">stu.setName(&quot;李四&quot;)</div><div class="line">stu.print()</div><div class="line"></div><div class="line">#  python中是可以多继承的</div><div class="line">#  父类中的方法、属性，子类会继承</div><div class="line">#  多继承:class HighStudent(Student,Worker)</div><div class="line"># 假设A,B中都有方法test()</div><div class="line">#若C继承A与B class C(A,B)  则调用A中的方法</div><div class="line">#若C继承A与B class C(B,A)  则调用B中的方法</div><div class="line">#若C继承A与B class C(A,B)  且C中也有test()方法,则调用C中重写的方法</div><div class="line"></div><div class="line">#43,重写</div><div class="line">class Ani:</div><div class="line">	def print(self):</div><div class="line">		print(&quot;调用Ani的方法&quot;)</div><div class="line"></div><div class="line">class Dog(Ani):</div><div class="line">	def print(self):</div><div class="line">		print(&quot;调用Dog的方法&quot;)</div><div class="line"></div><div class="line">		</div><div class="line">dog = Dog()</div><div class="line">dog.print() #调用自己的方法</div><div class="line"></div><div class="line"></div><div class="line">#44,多态</div><div class="line">class A:</div><div class="line">	pass</div><div class="line"></div><div class="line">class A1(A):</div><div class="line">	def show(self):</div><div class="line">		print(&quot;A1&quot;)</div><div class="line"></div><div class="line">class A2(A):</div><div class="line">	def show(self):</div><div class="line">		print(&quot;A2&quot;)</div><div class="line"></div><div class="line">a1 = A1()</div><div class="line">a2 = A2()</div><div class="line"></div><div class="line">def showFunc(a):</div><div class="line">	a.show()</div><div class="line">		</div><div class="line">showFunc(a1)</div><div class="line">showFunc(a2)</div><div class="line"></div><div class="line"></div><div class="line">#45,类属性</div><div class="line">#类属性就是类对象所拥有的属性，它被所有类对象的实例对象所共有，</div><div class="line">#内存中只存在一个副本，对于公有的类属性，在类外可以通过类对象和实例对象访问</div><div class="line"></div><div class="line"></div><div class="line">class object:</div><div class="line">	name = &quot;object&quot;</div><div class="line"></div><div class="line">obj1 = object()</div><div class="line">obj2 = object()</div><div class="line">print(obj1.name) #实例没有name,会查找类的name,结果:object</div><div class="line">object.name = &quot;lisi&quot;</div><div class="line">print(obj2.name) #显示 lisi</div><div class="line">print(obj1.name) #显示 lisi</div><div class="line"></div><div class="line">#给实例obj1增加实例属性</div><div class="line">obj1.name = &quot;ads&quot;</div><div class="line">print(obj1.name) #屏蔽掉类属性,显示ads</div><div class="line">print(object.name) #显示 lisi</div><div class="line"></div><div class="line">#结论:</div><div class="line">#相同名称的实例属性将屏蔽掉类属性</div><div class="line">#但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。</div><div class="line">#Python是动态语言,可以动态增加属性</div><div class="line">#想要修改类属性，如果在类外，可以通过类对象修改，如果在类里面，只有在类方法中进行修改。</div><div class="line"></div><div class="line">#46,类方法</div><div class="line">&apos;&apos;&apos;</div><div class="line">是类对象所拥有的方法，需要用修饰器@classmethod来标识其为类方法</div><div class="line">对于类方法，第一个参数必须是类对象，一般以cls作为第一个参数</div><div class="line">当然可以用其他名称的变量作为其第一个参数.</div><div class="line">但是大部分人都习惯以&apos;cls&apos;作为第一个参数的名字，就最好用&apos;cls&apos;了</div><div class="line">能够通过实例对象和类对象去访问。</div><div class="line">&apos;&apos;&apos;</div><div class="line">class people:</div><div class="line">    country = &apos;china&apos;</div><div class="line"></div><div class="line">    #类方法，用classmethod来进行修饰</div><div class="line">    @classmethod</div><div class="line">    def getCountry(cls):</div><div class="line">        return cls.country</div><div class="line"></div><div class="line">class Car:</div><div class="line">    #类属性</div><div class="line">    price = &quot;1000&quot;</div><div class="line"></div><div class="line">	#类方法</div><div class="line">    @classmethod</div><div class="line">    def getPrice(cls,price):</div><div class="line">        cls.price = price</div><div class="line">        return cls.price</div><div class="line"></div><div class="line">car1 = Car()</div><div class="line">print(car1.getPrice(200))</div><div class="line"></div><div class="line">#47,静态方法</div><div class="line">#通过修饰器@staticmethod来进行修饰，静态方法不需要多定义参数</div><div class="line">class Cat:</div><div class="line">	name = &quot;Tom&quot;</div><div class="line"></div><div class="line">	@staticmethod</div><div class="line">	#静态方法</div><div class="line">	def getName():</div><div class="line">		print(Cat.name)</div><div class="line"></div><div class="line">Cat.getName()</div><div class="line"></div><div class="line"></div><div class="line">#48,爬取数据</div><div class="line">response = urllib.request.urlopen(&quot;http://acm.hit.edu.cn&quot;)</div><div class="line">html = response.read()</div><div class="line">#中文转码</div><div class="line">htmlC = html.decode(&quot;utf-8&quot;)</div><div class="line">print(htmlC)</div><div class="line"></div><div class="line">#将网页存入文本</div><div class="line">f = open(&quot;t.html&quot;,&quot;wb&quot;)#python是types格式，得用二进制读写. </div><div class="line">f.write(html) #写入原始文件,不需要解码</div><div class="line">f.close()</div><div class="line"></div><div class="line">#49,get参数拼接</div><div class="line">query = &#123;&#125;</div><div class="line">query[&quot;key&quot;] = &quot;python3&quot;</div><div class="line">queryURL = urllib.parse.urlencode(query) #得到key=python3</div><div class="line">url = &quot;http://chenyalun.com/s?&quot; + queryURL</div><div class="line">print(url)</div><div class="line"></div><div class="line">#50,使用BeautifulSoup</div><div class="line">html = &quot;&quot;&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">    &lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;</div><div class="line">    &lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were</div><div class="line">    &lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,</div><div class="line">    &lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and</div><div class="line">    &lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;</div><div class="line">    and they lived at the bottom of a well.&lt;/p&gt;</div><div class="line">    &lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;</div><div class="line">    &quot;&quot;&quot;</div><div class="line">from bs4 import BeautifulSoup</div><div class="line">soup = BeautifulSoup(html)</div><div class="line">print(soup.prettify())</div><div class="line"></div><div class="line">#打印标签</div><div class="line">print(&quot;标题是:&quot;,soup.title)</div><div class="line"></div><div class="line">print(&quot;头部是&quot;,soup.head)</div><div class="line"></div><div class="line">print(&quot;第一个a标签&quot;,soup.a)</div><div class="line"></div><div class="line">print(&quot;第一个p标签&quot;,soup.p)</div><div class="line"></div><div class="line">#它查找的是在所有内容中的第一个符合要求的标签</div><div class="line">#标签的两个重要的属性:name 和 attrs</div><div class="line">print(soup.a.name)</div><div class="line">print(soup.p.attrs)</div><div class="line">#属性的值</div><div class="line">print(&quot;属性的值&quot;,soup.p.attrs[&quot;name&quot;]) </div><div class="line">print(&quot;属性的值&quot;,soup.p[&quot;name&quot;])#attrs可以省略</div><div class="line"></div><div class="line">#用 .string获取文字</div><div class="line">print(soup.p.string)</div><div class="line"></div><div class="line"></div><div class="line">#利用&quot;CSS选择器&quot;查找标签</div><div class="line">#通过标签名查找</div><div class="line">print(soup.select(&quot;title&quot;))</div><div class="line"></div><div class="line">#通过类名查找</div><div class="line">print(soup.select(&quot;.sister&quot;))</div><div class="line"></div><div class="line">#通过id查找</div><div class="line">print(soup.select(&quot;#link1&quot;))</div><div class="line"></div><div class="line">#组合查找</div><div class="line">print(soup.select(&quot;p #link1&quot;)) #格式同CSS</div><div class="line"></div><div class="line">#直接子标签查找</div><div class="line">print(soup.select(&quot;head &gt; title&quot;))</div><div class="line"></div><div class="line">#属性查找</div><div class="line">#属性需要用中括号括起来，注意属性和标签属于同一节点，所以中间不能加空格</div><div class="line">print(soup.select(&apos;a[class=&quot;sister&quot;]&apos;))</div><div class="line">print(soup.select(&apos;a[href=&quot;http://example.com/elsie&quot;]&apos;))</div><div class="line">print(soup.select(&apos;p a[href=&quot;http://example.com/elsie&quot;]&apos;))</div><div class="line"></div><div class="line"># select 方法返回的结果都是列表形式，可以遍历形式输出，然后用 get_text() 方法来获取它的内容</div><div class="line">for title in soup.select(&quot;title&quot;):</div><div class="line">	print(title.get_text)</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p align = &quot;center&quot;&gt; 人生苦短,我用Python. &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="http://blog.chenyalun.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://blog.chenyalun.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML/CSS/JavaScript学习笔记</title>
+    <link href="http://blog.chenyalun.com/2016/12/06/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20/"/>
+    <id>http://blog.chenyalun.com/2016/12/06/前端学习笔记 /</id>
+    <published>2016-12-06T04:22:17.000Z</published>
+    <updated>2016-12-24T09:21:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p align="center"> 大前端时代. </p>
+
+<a id="more"></a>
+<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><ul>
+<li><code>&lt;html&gt;&lt;/html&gt;</code>是根标签,<code>&lt;heal&gt;</code>定义文档的头部,常包含<code>&lt;title&gt; &lt;script&gt;</code></li>
+<li><code>&lt;style&gt; &lt;meta&gt; &lt;link&gt;</code></li>
+<li><code>&lt;em&gt;</code>表示强调，<code>&lt;strong&gt;</code> 表示更强烈的强调。并且在浏览器中<code>&lt;em&gt;</code> 默认用斜体表示，<code>&lt;strong&gt;</code>用粗体表示。</li>
+<li><code>&lt;span&gt;</code>标签是没有语义的，它的作用就是为了设置单独的样式用的。</li>
+<li>用<code>&lt;q&gt;</code>标签引用别人的语句,是对简短文本的引用:加上双引号</li>
+<li><code>&lt;blockquote</code>是长文本引用:整体缩进</li>
+<li>空标签现在一般使用 xhtml1.0 的版本的写法,如<code>&lt;br/&gt; &lt;img/&gt; &lt;hr/&gt;</code></li>
+<li>在html代码中输入空格、回车都是没有作用的。要想输入空格，必须写入<code>&amp;nbsp;</code>。</li>
+<li><code>&lt;adress&gt;</code>标签,添加地址:显示为斜体</li>
+<li><code>&lt;code&gt;</code>标签:添加一行代码,<code>&lt;pre&gt;</code>预显示格式标签,被包围在 pre 元素中的文本通常会保留空格和换行符:添加一段代码(会转换其中的<code>&lt;br/&gt;</code>等)</li>
+<li>ul-li是没有前后顺序的信息列表:每项li前都自带一个圆点</li>
+<li>ol-li是有前后顺序的信息列表:每项li前都自带一个序号,序号默认从1开始</li>
+<li>容器标签<code>&lt;div&gt;</code>,为网页划分独立的版块,给div命名:添加唯一的id属性，使逻辑更加清晰<br>创建表格的五个元素：`table、tr(一行)、th(表格表头)、td(一个单元格,有几个说明就有几列,表格中列的个数，取决于一行中数据单元格的个数。),</li>
+<li>注意<code>tbody</code>:当表格内容非常多时，表格会下载一点显示一点，但如果加上<tbody>标签后，这个表格就要等表格内容全部下载完才会显示。注意1、table表格在没有添加css样式之前，在浏览器中显示是没有表格线的 2、表头，也就是th标签中的文本默认为粗体并且居中显示</tbody></li>
+<li><code>&lt;table summary=&quot;表格简介文本&quot;&gt;</code>添加表格摘要,表格摘要并不会显示,<code>&lt;caption&gt;标题文本&lt;/caption&gt;</code>添加表格标题,显示在表格上方居中,需要包含在table标签中</li>
+<li><code>&lt;a  href=&quot;目标网址&quot;  title=&quot;鼠标滑过显示的文本&quot;&gt;链接显示的文本&lt;/a&gt;</code>,title属性的作用，鼠标滑过链接文字时会显示这个属性的文本内容。加入a标签后，文字的颜色就会自动变为蓝色（被点击过的文本颜色为紫色）</li>
+<li>新窗口打开超链接<code>&lt;a href=&quot;目标网址&quot; target=&quot;_blank&quot;&gt;click here!&lt;/a&gt;</code></li>
+<li>使用mailto协议发送电子邮件,<code>mailto://abc@qq.com?&amp;cc=abcd@qq.com&amp;bcc=ab@qq.com&amp;subject=主题&amp;body=邮件内容</code>,其中,cc表示抄送,bcc表示密件抄送</li>
+<li>插入图片语法<code>&lt;img src=&quot;图片地址&quot; alt=&quot;下载失败时的替换文本&quot; title = &quot;提示文本&quot;&gt;</code></li>
+<li>表单是可以把浏览者输入的数据传送到服务器端,语法:<code>&lt;form   method=&quot;传送方式&quot;   action=&quot;服务器文件&quot;&gt;</code>,action ：浏览者输入的数据被传送到的地方,比如一个PHP页面(save.php)。method ： 数据传送的方式（get/post）</li>
+<li><p>文本输入框input的类型:<code>text：文本框 password：密码框 raido：单选按钮 checkbox：复选框 file：文件选择框 submit：提交按钮,reset:重置</code></p>
+<pre><code>&lt;form&gt;
+   &lt;input type=&quot;text/password&quot; name=&quot;名称&quot; value=&quot;文本&quot; /&gt;
+&lt;/form&gt;`其中name为文本框命名,方便后台使用,value为文本框设置默认值,一般起提示作用
+
+文本输入域`&lt;textarea  rows=&quot;行数&quot; cols=&quot;列数&quot;&gt;文本&lt;/textarea&gt;`,在&lt;textarea&gt;&lt;/textarea&gt;标签之间可以输入默认值。注意这两个属性可用css样式的width和height来代替：col用width、row用height来代替。
+</code></pre></li>
+<li>单选框与复选框:注意:同一组的单选按钮，name 取值一定要一致</li>
+<li><p>下拉列表:</p>
+<pre><code>&lt;select&gt;
+  &lt;option value=&quot;看书&quot;&gt;看书&lt;/option&gt;
+  &lt;option value=&quot;旅游&quot;&gt;旅游&lt;/option&gt;
+  &lt;option value=&quot;运动&quot;&gt;运动&lt;/option&gt;
+  &lt;option value=&quot;购物&quot;&gt;购物&lt;/option&gt;
+&lt;/select&gt;` value为向服务器提交的值,设置selected=“selected”属性,则默认选中.
+</code></pre></li>
+<li>下拉列表也可以进行多选操作，在<code>&lt;select&gt;</code>标签中设置multiple=”multiple”属性，就可以实现多选功能，在 windows 操作系统下，进行多选时按下Ctrl键同时进行单击（在 Mac下使用 Command +单击），可以选择多个选项。</li>
+<li><p>form表单中的label标签:用于显示提示文本,并且当用户点击label时,将焦点转移到与之对应的控件(常用输入框)上,但是标签的 for 属性中的值应当与相关控件的 id 属性值一定要相同。 </p>
+<pre><code>&lt;label for=&quot;male&quot;&gt;男&lt;/label&gt;
+&lt;input type=&quot;radio&quot; name=&quot;gender&quot; id=&quot;male&quot; /&gt;
+</code></pre></li>
+</ul>
+<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><ul>
+<li>css 样式由选择符和声明组成，而声明又由属性和值组成,属性和值之间用英文冒号“：”分隔。当有多条声明时，中间可以英文分号“;”分隔,最后一条声明可以没有分号，但是为了以后修改方便，一般也加上分号。</li>
+<li>CSS中有注释语句：用<code>/*</code>注释语句<code>*/</code>来标明,（Html中使用<code>&lt;!--注释语句--&gt;</code>)</li>
+<li>内联式css样式表就是把css代码直接写在现有的HTML标签中，注意要写在元素的开始标签里,css样式代码要写在style=””双引号中，如果有多条css样式代码设置可以写在一起，中间用分号隔开</li>
+<li><p>嵌入式css样式，写在当前的文件中.嵌入式css样式必须写在<code>&lt;style&gt;&lt;/style&gt;之间</code>，并且一般情况下嵌入式css样式写在<code>&lt;head&gt;&lt;/head&gt;</code>之间。注意设置style的type属性.</p>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;
+span{
+   color:blue;
+}
+&lt;/style&gt;
+</code></pre></li>
+<li>外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，在<code>&lt;head&gt;</code>内（不是在<code>&lt;style&gt;</code>标签内）使用<code>&lt;link&gt;</code>标签将css样式文件链接到HTML文件内,<code>&lt;link href=&quot;base.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;</code>,<code>rel=&quot;stylesheet&quot; type=&quot;text/css&quot;</code>是固定写法不可修改。<code>&lt;link&gt;</code>标签位置一般写在<code>&lt;head&gt;</code>标签之内。</li>
+<li>标签选择器; <code>标签名称{css样式代码;}</code></li>
+<li>类选择器:<code>.类选器名称{css样式代码;}</code></li>
+<li>ID选择器:<code>#id名称{css样式代码;}</code></li>
+<li>子选择器:即大于符号(&gt;),用于选择指定标签元素的第一代子元素(只能是孩子)。<code>.food&gt;li{border:1px solid red;}</code></li>
+<li>包含选择器:加入空格,用于选择指定标签元素下的后辈元素。<code>.first  span{color:red;}</code></li>
+<li>通用选择器是功能最强大的选择器，它使用一个（*）号指定，它的作用是匹配html中所有标签元素</li>
+<li>伪类选择符:<code>a:hover{color:red;}</code></li>
+<li>分组选择符:为html中多个<strong>标签元素</strong>设置同一个样式（，)<code>h1,span{color:red;}</code></li>
+<li>类选择器和ID选择器的区别:1.ID选择器只能在文档中使用一次,类选择器可以使用多次,也即id选择器(名称)具有唯一性;2.可以使用类选择器词列表方法为一个元素同时设置多个样式。也即一个元素可以具有多个类,但只能有一个id:<code>&lt;span class=&quot;stress bigsize&quot;&gt;三年级&lt;/span&gt;</code></li>
+<li><code>border:1px solid red;相当于border-width:1px;//边框宽度    border-style:solid; //边框风格    border-color:red; //边框颜色</code></li>
+<li>继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。<code>border:1px solid red;</code>无法继承.</li>
+<li>标签的权值为1，类选择符的权值为10，ID选择符的权值最高为100。层叠就是在html文件中对于同一个元素可以有多个css样式存在，当有相同权重的样式存在时，会根据这些css样式的前后顺序来决定，处于最后面的css样式会被应用。</li>
+<li>继承是指标签的样式可以由子代继承，但有些标签是不能继承的，eg：border。<br>特殊性指用用权重来确定最后起作用的样式，id=100，class=10，标签=1，继承=0.1；<br>层叠指当权重相同时，后面的样式覆盖前面的样式。<br>important的使用。</li>
+<li>浏览器默认的样式 &lt; 网页制作者样式 &lt; 用户自己设置的样式，但记住!important优先级样式是个例外，权值高于用户自己设置的样式。<code>p{color:red !important;}</code>注意分号放在!important的后面</li>
+<li>任意浏览器的默认字体高度16px（16像素）。所有未经调整的浏览器都符合:1em=16px。为了简化font-size的换算，需要在css中的body选择器中声明font-size=62.5%，这就使em值变为16px*62.5%=10px,这样12px=1.2em,10px=1em,也就是说只需要将你的原来的px数值除以10，然后换上em作为单位就行了。注：建议不要使用em作为中文站点的文字单位，会导致文字变形十分严重的。em的值并不是固定的； em会继承父级元素的字体大小。</li>
+<li><p>图片居中，不能直接对img标签使用<code>text-align:center;</code>而是对该img标签所在的div或者其他块级元素使用才会达到这种效果。</p>
+<pre><code>字体:`font-family:”Microsoft Yahei”;`
+文字颜色,字号:`font-size:12px;color:#666`
+文字粗体:`font-weight:bold;`
+文字斜体:`font-style:italic;`
+文字下划线;`text-decoration:underline;`
+文字删除线:`text-decoration:line-through;`
+文本缩进:`text-indent:2em;`两个空格
+行间距(行高):`line-height:2em;`
+设置文字间隔或者字母间隔:`letter-spacing:50px;`注意：这个样式使用在英文单词时，是设置字母与字母之间的间距。
+单词间距:`word-spacing:50px;`
+为块状元素中的文本、图片设置居中样式:`text-align:center;`
+常用的块状元素有：`&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;...&lt;h6&gt;、&lt;ol&gt;、&lt;ul&gt;、&lt;dl&gt;、&lt;table&gt;、&lt;address&gt;、&lt;blockquote&gt; 、&lt;form&gt;`
+常用的内联元素有：`&lt;a&gt;、&lt;span&gt;、&lt;br&gt;、&lt;i&gt;、&lt;em&gt;、&lt;strong&gt;、&lt;label&gt;、&lt;q&gt;、&lt;var&gt;、&lt;cite&gt;、&lt;code&gt;`
+常用的内联块状元素有：`&lt;img&gt;、&lt;input&gt;`
+</code></pre></li>
+<li>块状元素都自带换行效果；内联元素都是定义行内小区域且不换行，但如果没有内容就没有意义，不占空间；内联块状元素除了不换行，即使没有内容也会占空间。</li>
+<li>在html中<code>&lt;div&gt;、 &lt;p&gt;、&lt;h1&gt;、&lt;form&gt;、&lt;ul&gt; 和 &lt;li&gt;</code>就是块级元素。设置<code>display:block</code>就是将元素显示为块级元素。</li>
+<li>将内联元素转换为块级元素:<code>a{display:block;}</code></li>
+<li>块级元素特点：1、每个块级元素都从新的一行开始，并且其后的元素也另起一行。（真霸道，一个块级元素独占一行）2、元素的高度、宽度、行高以及顶和底边距都可设置。3、元素宽度在不设置的情况下，是它本身父容器的100%（和父元素的宽度一致），除非设定一个宽度。</li>
+<li>在html中，<code>&lt;span&gt;、&lt;a&gt;、&lt;label&gt;、 &lt;strong&gt; 和&lt;em&gt;</code>就是典型的内联元素（行内元素）（inline）元素。当然块状元素也可以通过代码<code>display:inline</code>将元素设置为内联元素。<code>display:inline;</code></li>
+<li>内联元素特点：1、和其他元素都在一行上；2、元素的高度、宽度及顶部和底部边距不可设置；3、元素的宽度就是它包含的文字或图片的宽度，不可改变。</li>
+<li>联块状元素（inline-block）就是同时具备内联元素、块状元素的特点，代码<code>display:inline-block</code>就是将元素设置为内联块状元素。(css2.1新增)，<code>&lt;img&gt;、&lt;input&gt;</code>标签就是这种内联块状标签。</li>
+<li>inline-block 元素特点：1、和其他元素都在一行上；2、元素的高度、宽度、行高以及顶和底边距都可设置。</li>
+<li>边框:<code>border:2px  solid  red;</code>对应:<code>border-width:2px;border-style:solid;border-color:red;</code>border-style（边框样式）常见样式有：<br>dashed（虚线）| dotted（点线）| solid（实线）。border-width（边框宽度）中的宽度也可以设置为：thin | medium | thick（但不是很常用），最常还是用像素（px）</li>
+<li>单独设置下边框:<code>border-bottom:1px solid red;</code> top right left bottom</li>
+<li>css内定义的宽（width）和高（height），指的是填充以里的内容范围。因此一个元素实际宽度（盒子的宽度）=左边界+左边框+左填充+内容宽度+右填充+右边框+右边界。</li>
+<li>元素与其它元素之间的距离可以使用边界（margin）来设置。</li>
+<li>元素内容与边框之间是可以设置距离的，称之为“填充”<code>padding-top</code>。 顺时针:上 右 下 左  或者 上下 左右 或者 上下左右</li>
+<li>CSS包含3种基本的布局模型，用英文概括为：Flow、Layer 和 Float。在网页中，元素有三种布局模型：1、流动模型（Flow）2、浮动模型 (Float)3、层模型（Layer）</li>
+<li>流动（Flow）是默认的网页布局模式。也就是说网页在默认状态下的 HTML 网页元素都是根据流动模型来分布网页内容的。流动布局模型具有2个比较典型的特征：第一点，块状元素都会在所处的包含元素内自上而下按顺序垂直延伸分布，因为在默认状态下，块状元素的宽度都为100%。实际上，块状元素都会以行的形式占据位置。第二点，在流动模型下，内联元素都会在所处的包含元素内从左到右水平分布显示。（内联元素可不像块状元素这么霸道独占一行）</li>
+<li>块状元素这么霸道都是独占一行，设置元素浮动就可以实现让两个块状元素并排显示。<br>任何元素在默认情况下是不能浮动的，但可以用 CSS 定义为浮动.<code>float:left;</code></li>
+<li>层布局模型就像是图像软件PhotoShop中非常流行的图层编辑功能一样，每个图层能够精确定位操作.CSS定义了一组定位（positioning）属性来支持层布局模型。层模型有三种形式：1、绝对定位(position: absolute)2、相对定位(position: relative)3、固定定位(position: fixed)</li>
+<li>设置position:absolute(表示绝对定位)，作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口。对于以前位置(<strong>右上角</strong>）向左移动100像素，向下移动20像素。<code>right:100px;   top:20px;</code>right的是让right的margin变为100px，同理top是让top的margin变为20px，所以要向右和向下移。</li>
+<li>如果想为元素设置层模型中的相对定位，需要设置position:relative（表示相对定位），它通过left、right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动。<code>position:relative;    left:100px;    top:50px;</code>（相对于以前位置<strong>左上角</strong>）向右移动100像素，向下移动50像素。</li>
+<li>absolute表里如一，移动了就是移动了。relative只是表面显示移动了，但实际还在文档流中原有位置，别的元素无法占据。</li>
+<li>fixed：表示固定定位，与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响，这与<code>background-attachment:fixed;</code>属性功能相同。</li>
+<li>使用<code>position:relative</code>,相对于其它元素进行定位,参照定位的元素必须是相对定位元素的前辈元素;参照定位的元素必须加入position:relative;定位元素加入position:absolute，便可以使用top、bottom、left、right来进行偏移定位了</li>
+<li><p>参照物不是浏览器</p>
+<pre><code>#box1{
+    width:200px;
+    height:200px;
+    position:relative;        
+    }
+
+#box2{
+    position:absolute;
+    top:20px;
+    left:30px;
+    } //box2就可以相对于父元素box1定位
+</code></pre></li>
+<li><p>设置的颜色是16进制的色彩值时，如果每两位的值相同，可以缩写一半。<code>p{color:#000000;} == p{color:#000;} p{color: #336699;}==p{color: #369;}</code></p>
+</li>
+<li>字体的缩写<code>body{    font:12px/1.5em  &quot;宋体&quot;,sans-serif;}</code>1、使用这一简写方式你至少要指定 font-size 和 font-family 属性，其他的属性(如 font-weight、font-style、font-varient、line-height)如未指定将自动使用默认值。2、在缩写时 font-size 与 line-height 中间要加入“/”斜扛。</li>
+<li>设置颜色值的三种方式:1,英文命令.2.RGB <code>p{color:rgb(133,45,200);}</code>每一项在0-255之间,也可以是百分数<code>p{color:rgb(20%,33%,25%);}</code>.3.十六进制(较普遍)<code>p{color:#00ffff;}</code></li>
+<li><p>长度单位</p>
+<pre><code>目前比较常用到px（像素）、em、% 百分比，要注意其实这三种单位都是相对单位。
+1、像素
+像素为什么是相对单位呢？因为像素指的是显示器上的小点（CSS规范中假设“90像素=1英寸”）。实际情况是浏览器会使用显示器的实际像素值有关，在目前大多数的设计者都倾向于使用像素（px）作为单位。
+2、em
+就是本元素给定字体的 **font-size 值**，如果元素的 font-size 为 14px ，那么 1em = 14px；如果 font-size 为 18px，那么 1em = 18px。如下代码：
+p{font-size:12px;text-indent:2em;}
+上面代码就是可以实现段落首行缩进 24px（也就是两个字体大小的距离）。
+下面注意一个特殊情况：
+但当给 font-size 设置单位为 em 时，此时计算的标准以 p 的父元素的 font-size 为基础。如下代码：
+html:
+&lt;p&gt;以这个&lt;span&gt;例子&lt;/span&gt;为例。&lt;/p&gt;
+css:
+p{font-size:14px}
+span{font-size:0.8em;}
+结果 span 中的字体“例子”字体大小就为 11.2px（14 * 0.8 = 11.2px）。
+3、百分比
+p{font-size:12px;line-height:130%}
+设置行高（行间距）为字体的130%（12 * 1.3 = 15.6px）。
+</code></pre></li>
+<li><p>水平居中设置-行内元素:如果被设置元素为文本、图片等行内元素时，水平居中是通过给父元素设置 <code>text-align:center</code>来实现的。</p>
+</li>
+<li>水平居中设置-定宽块状元素:当被设置元素为 块状元素 时用 <code>text-align：center</code>就不起作用了，这时也分两种情况：定宽块状元素和不定宽块状元素。定宽块状元素：块状元素的宽度width为固定值。满足定宽和块状两个条件的元素是可以通过设置“左右margin”值为“auto”来实现居中的。</li>
+<li><p>水平居中设置-不定宽块状元素方法（一）:(不定宽块状元素：块状元素的宽度width不固定。)不定宽度的块状元素有三种方法居中（这三种方法目前使用的都很多）:1.加入 table 标签,为这个 table 设置“左右 margin 居中”（这个和定宽块状元素的方法一样,利用table标签的长度自适应性,可以看做一个定宽度块元素)<br>2.设置 display: inline 方法：与第一种类似，显示类型设为 行内元素，进行不定宽元素的属性设置3.设置 position:relative 和 left:50%：利用 相对定位 的方式，将元素向左偏移 50% ，即达到居中的目的</p>
+<pre><code>&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;
+    &lt;ul&gt;
+        &lt;li&gt;我是第一行文本&lt;/li&gt;
+        &lt;li&gt;我是第二行文本&lt;/li&gt;
+        &lt;li&gt;我是第三行文本&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+或者直接设置`display:table; margin:0 auto;
+`也即 .wrap{background:#ccc;display:table;margin:0 auto;
+}
+</code></pre></li>
+<li><p>水平居中设置-不定宽块状元素方法（二）:改变块级元素的 display 为 inline 类型（设置为 行内元素 显示），然后使用 text-align:center 来实现居中效果。它将块状元素的 display 类型改为 inline，变成了行内元素，所以少了一些功能，比如设定长度值。</p>
+</li>
+<li>水平居中设置-不定宽块状元素方法（三）:通过给父元素设置 float值为left，然后给父元素设置 position:relative 和 left:50%，子元素设置 position:relative 和 left: -50% 来实现水平居中。</li>
+<li>垂直居中-父元素高度确定的单行文本:设置父元素的 height 和 line-height 高度一致来实现的。(height: 该元素的高度，line-height: 顾名思义，行高（行间距），指在文本中，行与行之间的 基线间的距离 )。这种文字行高与块高一致带来了一个弊端：当文字内容的长度大于块的宽时，就有内容脱离了块。</li>
+<li>垂直居中-父元素高度确定的多行文本（方法一）:插入 table标签，同时设置 vertical-align：middle。</li>
+<li>垂直居中-父元素高度确定的多行文本（方法二）:设置块级元素的 display 为 table-cell（设置为表格单元显示），激活 vertical-align 属性，但注意 IE6、7 并不支持这个样式, 兼容性比较差。    <code>display:table-cell;/*IE8以上及Chrome、Firefox*/    vertical-align:middle;/*IE8以上及Chrome、Firefox*/</code></li>
+<li>隐性改变display类型:有一个有趣的现象就是当为元素（不论之前是什么类型元素，display:none 除外）设置以下 2 个句之一： 1. position : absolute  2. float : left 或 float:right 简单来说，只要html代码中出现以上两句之一，元素的display显示类型就会自动变为以 display:inline-block（块状元素）的方式显示，当然就可以设置元素的 width 和 height 了，且默认宽度不占满父元素。</li>
+</ul>
+<h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><ul>
+<li>我们可以将JavaScript代码放在html文件中任何位置，但是我们一般放在网页的head或者body部分。放在<head>部分最常用的方式是在页面中head部分放置script&gt;元素，浏览器解析head部分就会执行这个代码，然后才解析页面的其余部分。</head></li>
+<li><p>放在<body>部分JavaScript代码在网页读取到该语句的时候就会执行。注意: javascript作为一种脚本语言可以放在html页面中任何位置，但是浏览器解释html时是按先后顺序的，所以前面的script就先被执行。比如进行页面显示初始化的js必须放在head里面，因为初始化都要求提前进行（如给页面body设置css等）；而如果是通过事件调用执行的function那么对位置没什么要求的。</body></p>
+<pre><code> &lt;script type=&quot;text/javascript&quot;&gt;
+  document.write(&quot;I love JS&quot;)
+&lt;/script&gt;
+</code></pre></li>
+<li>单行注释，在注释内容前加符号 “//”。多行注释以”/<em>“开始，以”</em>/“结束。</li>
+<li>1.变量必须使用字母、下划线(<em>)或者美元符(<code>$</code>)开始。2.然后可以使用任意多个英文字母、数字、下划线(</em>)或者美元符(<code>$</code>)组成。 3.不能使用JavaScript关键词与JavaScript保留字。变量要先声明再赋值，JS中区分大小写，如变量mychar与myChar是不一样的，表示是两个变量。 变量虽然也可以不声明，直接使用，但不规范，需要先声明，后使用。</li>
+<li>document.write() 可用于直接向 HTML 输出流写内容。简单的说就是直接在网页中输出内容。第一种:输出内容用””括起，直接输出””号内的内容。第二种:通过变量，输出内容.第三种:输出多项内容，内容之间用+号连接。第四种:输出HTML标签，并起作用，标签使用<code>&quot;&quot;</code>括起来。<code>document.write(mystr+&quot;&lt;br&gt;&quot;);</code></li>
+<li>js输出空格:<code>&quot;&amp;nbsp;”</code>或者<code>document.write(&quot;&lt;span style=&#39;white-space:pre;&#39;&gt;&quot;+&quot;  1        2    3    &quot;+&quot;&lt;/span&gt;”);</code>输出时添加<code>“white-space:pre;”</code>样式属性。这个样式表示”空白会被浏览器保留”</li>
+<li>JavaScript-警告（alert 消息对话框）</li>
+<li><p>JavaScript-确认（confirm 消息对话框）弹出对话框(包括一个确定按钮和一个取消按钮)。 <code>confirm(str);</code>当用户点击”确定”按钮时，返回true当用户点击”取消”按钮时，返回false</p>
+<pre><code>function rec(){
+   var mymessage=confirm(&quot;你好棒&quot;)         ;
+   if(mymessage==true)
+   {
+       document.write(&quot;你是女士!&quot;);
+   }
+   else
+   {
+       document.write(&quot;你是男士!&quot;);
+   }
+ }    
+</code></pre></li>
+<li><p>JavaScript-提问（prompt 消息对话框）弹出消息对话框（包含一个确定按钮、取消按钮与一个文本输入框）。<code>prompt(str1, str2);</code>str1: 要显示在消息对话框中的文本，不可修改,str2：文本框中的内容，可以修改.1. 点击确定按钮，文本框中的内容将作为函数返回值2. 点击取消按钮，将返回null.注:在用户点击对话框的按钮前，不能进行任何其它操作。</p>
+<pre><code>score =  prompt(&quot;哈喽哈&quot;,&quot;默认值&quot;);
+if(score&gt;=90)
+{
+   document.write(&quot;你很棒!&quot;);
+}
+</code></pre></li>
+<li><p>JavaScript-打开新窗口（window.open）<code>window.open([URL], [窗口名称], [参数字符串])</code></p>
+<pre><code>           URL：可选参数，在窗口中要显示网页的网址或路径。如果省略这个参数，或者它的值是空字符串，那么窗口就不显示任何文档。
+          窗口名称：可选参数，被打开窗口的名称。                  
+
+ 1.该名称由字母、数字和下划线字符组成。
+ 2.&quot;_top&quot;、&quot;_blank&quot;、&quot;_self&quot;具有特殊意义的名称。
+    _blank：在新窗口显示目标网页
+    _self：在当前窗口显示目标网页
+    _top：框架网页中在上部窗口中显示目标网页
+ 3.相同 name 的窗口只能创建一个，要想创建多个窗口则 name 不能相同。
+4.name 不能包含有空格。
+</code></pre></li>
+<li><p>参数字符串：可选参数，设置窗口参数，各参数用逗号隔开。toolbar工具栏,scrollbars滚动条,status状态栏menubar菜单栏 值为yes/no 窗口宽高度width/height以及窗口顶部/左端距离屏幕顶部的像素数top/left  </p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt; window.open(&apos;http://www.imooc.com&apos;,
+&apos;_blank&apos;,&apos;width=300,height=200,
+menubar=no,toolbar=no, status=no,scrollbars=yes’)
+    &lt;/script&gt;
+</code></pre></li>
+</ul>
+<ul>
+<li><p>JavaScript-关闭窗口（window.close）</p>
+<pre><code> window.close();   //关闭本窗口
+ &lt;窗口对象&gt;.close();   //关闭指定的窗口
+ &lt;script type=&quot;text/javascript&quot;&gt;
+   var mywin=window.open(&apos;http://www.imooc.com&apos;); //将新打的窗口对象，存储在变量mywin中
+   mywin.close();
+&lt;/script&gt;
+</code></pre></li>
+<li>文档对象模型DOM（Document Object Model）定义访问和处理HTML文档的标准方法。DOM 将HTML文档呈现为带有元素、属性和文本的树结构（节点树）。</li>
+<li><p>HTML文档可以说由节点构成的集合，三种常见的DOM节点:1. 元素节点：上图中<code>&lt;html&gt;、&lt;body&gt;、&lt;p&gt;</code>等都是元素节点，即标签。2. 文本节点:向用户展示的内容，如<code>&lt;li&gt;...&lt;/li&gt;</code>中的JavaScript、DOM、CSS等文本。3. 属性节点:元素属性，如<code>&lt;a&gt;</code>标签的链接属性<code>href=&quot;http://www.chenyalun.com&quot;</code>。</p>
+</li>
+<li><p>通过ID获取元素:<code>document.getElementById(“id”)</code>,返回<code>[object HTMLParagraphElement]</code> ,注:获取的元素是一个对象，如想对元素进行操作，我们要通过它的属性或方法。用<code>document.getELementById().innerHTML;</code>才可以获取到其中的内容.</p>
+</li>
+<li>innerHTML 属性用于获取或替换 HTML 元素的内容。Object.innerHTML,1.Object是获取的元素对象，如通过document.getElementById(“ID”)获取的元素。2.注意书写，innerHTML区分大小写。</li>
+<li>改变 HTML 样式:<code>Object.style.property=new style;</code>例如:<code>mychar.style.color=red;</code></li>
+<li>显示和隐藏（display属性）Object.style.display = value,其中value为none隐藏,value为block块级元素显示.其中none与block要加上引号</li>
+<li>控制类名（className 属性）className 属性设置或返回元素的class 属性。<code>object.className = classname</code>作用:1.获取元素的class 属性2. 为网页内的某个元素指定一个css样式来更改该元素的外观</li>
+<li>删除修改的样式:<code>document.getElementById(&quot;txt&quot;).removeAttribute(&quot;style&quot;);</code></li>
+<li>外部引入JS <code>&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;</code></li>
+<li>变量:字母数字下划线美元符,变量名区分大小写,不允许使用关键字保留字</li>
+<li>变量也可以不声明，直接使用，但为了规范，需要先声明，后使用。</li>
+<li>“+”连接字符串时,符号两边不能有空格</li>
+<li><code>jq1=numa + 30 &gt;10 &amp;&amp; numb * 3&lt;20;</code>算术操作符 → 比较操作符 → 逻辑操作符 → “=”赋值符号</li>
+<li>定义数组: <code>var myarr=new Array();  myarr[0]=80;</code>实际上数组都是变长的,即使指定了长度为8，仍然可以将元素存储在规定长度以外。</li>
+<li>创建数组:<code>var myarr = new Array(11,25,35); var myarr = [12,25,416];</code></li>
+<li>只需使用下一个未用的索引，任何时刻可以不断向数组增加新元素。<code>myarray[5]=88; //使用一个新索引，为数组增加一个新元素</code></li>
+<li>数组的属性:length长度</li>
+<li>二维数组的表示:<code>myarray[ ][ ]</code>,简单定义:<code>var Myarr = [[0 , 1 , 2 ],[1 , 2 , 3]]</code>,也可以使用循环,myarr[0][1]=5; //将5的值传入到数组中，覆盖原有值。</li>
+<li><code>==先转换类型再比较，===先判断类型，如果不是同一类型直接为false。</code></li>
+<li>函数调用的两种情况:1.script标签中直接调用,2.点击按钮调用onClick事件</li>
+<li>有参数的函数:<code>function 函数名(参数1,参数2){     函数代码}</code>,参数不要声明类型</li>
+<li><code>function add2(x,y){   sum = x + y;   return sum; //返回函数值,return后面的值叫做返回值。}</code></li>
+<li>事件是可以被 JavaScript 侦测到的行为。 网页中的每个元素都可以产生某些可以触发 JavaScript 函数或程序的事件。</li>
+<li><p>常用JS事件:</p>
+<pre><code>onclick鼠标单击事件
+onmouseover鼠标经过事件
+onmouseout鼠标移开事件
+onchange文本框**内容**改变事件,一般是textarea
+onselect文本框**内容**选中事件,一般是textarea
+onfocus光标聚焦
+onblur光标移开
+onload网页加载后,事件会在页面加载完成后，立即发生，同时执行被调用的程序。
+加载页面时，触发onload事件，**事件写在&lt;body&gt;标签内**。
+onunload卸载事件,当用户退出页面时（页面关闭、页面刷新等），触发onUnload事件，
+同时执行被调用的程序。该事件目前只对IE起作用。
+</code></pre></li>
+<li><p>使用parseInt()函数可解析一个字符串,并返回一个整数。</p>
+</li>
+<li>JavaScript 中的所有事物都是对象，如:字符串、数值、数组、函数等，每个对象带有属性和方法。对象的属性：反映该对象某些特定的性质的，如：字符串的长度、图像的长宽等；对象的方法：能够在对象上执行的动作。例如，表单的“提交”(Submit)，时间的“获取”(getYear)等；</li>
+</ul>
+<h2 id="Date日期对象"><a href="#Date日期对象" class="headerlink" title="Date日期对象"></a>Date日期对象</h2><ul>
+<li><p>日期对象,使用关键字new，Date()的首字母必须大写。</p>
+<pre><code>// 日期的相关属性与方法
+get/setDate() 返回设置日期
+get/setFullYear()  返回设置年份,用四位数表示
+get/setYear() 返回/设置年份
+get/setMonth() 返回/设置月份
+get/setHours() 返回/设置小时,24小时制
+get/setMinutes() 返回/设置分钟数
+get/setSeconds() 返回/设置秒钟数
+get/setTime() 返回/设置时间(毫秒为单位)
+getDay() 返回星期，返回的是0-6的数字，0 表示星期天。
+</code></pre></li>
+<li><p>使用 String 对象的 toUpperCase() 方法来将字符串小写字母转换为大写.使用toLowerCase()方法，将字符串所有大写字母都变成小写的字符串</p>
+</li>
+<li>charAt() 方法可返回指定位置的字符。返回的字符是长度为 1 的字符串。</li>
+<li>注意：1.字符串中第一个字符的下标是 0。最后一个字符的下标为字符串长度减一（string.length-1）。2.如果参数 index 不在 0 与 string.length-1 之间，该方法将返回一个空字符串。</li>
+<li>indexOf(,) 方法可返回某个指定的字符串值在字符串中首次出现的位置。1.该方法将从头到尾地检索字符串 stringObject，看它是否含有子串 substring。2.可选参数，从stringObject的startpos位置开始查找substring，如果没有此参数将从stringObject的开始位置查找。3.如果找到一个 substring，则返回 substring 的第一次出现的位置。stringObject 中的字符位置是从 0 开始的。</li>
+<li>split(separator,limit) 方法将字符串分割为字符串数组，并返回此数组。注意：如果把空字符串 (“”) 用作 separator，那么 stringObject 中的每个字符之间都会被分割。separator必须,从该参数指定的地方分割stringObject,limite,可选参数,分割的次数,如果设置该参数,则返回的子串不会多于这个参数指定的数组,如果无参数,则不限定次数</li>
+<li>substring(起始位置,可选的结束位置(不包含该位置的字符)) 方法用于提取字符串中介于两个指定下标之间的字符。注意：1. 返回的内容是从 start开始(包含start位置的字符)到 stop-1 处的所有字符，其长度为 stop 减start。2. 如果参数 start 与 stop 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。3. 如果 start 比 stop 大，那么该方法在提取子串之前会先交换这两个参数。</li>
+<li>substr() 方法从字符串中提取从 startPos位置开始的指定数目的字符串。<code>stringObject.substr(startPos,length)</code>  注意：如果参数startPos是负数，从字符串的尾部开始算起的位置。也就是说，-1 指字符串中最后一个字符，-2 指倒数第二个字符，以此类推。如果startPos为负数且绝对值大于字符串长度，startPos为0。</li>
+<li>string.substring( 起点 ， 终点 )  string.substr( 起点 ，长度 )</li>
+<li>Math 对象是一个固有的对象，无需创建它，直接把 Math 作为对象使用就可以调用其所有属性和方法。这是它与Date,String对象的区别。</li>
+</ul>
+<h2 id="MATH常用属性方法"><a href="#MATH常用属性方法" class="headerlink" title="MATH常用属性方法"></a>MATH常用属性方法</h2><ul>
+<li><p>MATH</p>
+<pre><code>E 返回算数常量e(约为2.71828)
+LN2 返回2的自然对数
+LN10 返回10的自然对数
+LOG2E 返回以2为底的e的对数
+LOG10E 返回以10为底的e的对数
+PI 圆周率
+SQRT1_2 返回2的平方根的倒数
+SQRT2 返回2 的平方根
+MATH常用方法
+abs(x) 返回数的绝对值
+acos(x) 返回数的反余弦值
+asin(x) 返回数的反正弦值
+atan(x) 返回数的反正切值
+atan2(y,x)返回由x轴到点(x,y)的角度(以弧度为单位)
+ceil(x)对数进行上舍入
+cos(x) 返回数的余弦
+exp(x) 返回e的指数
+floor(x)对数进行下舍入
+log(x) 返回数的自然对数
+max(x,y) 返回最高值
+min(x,y) 返回最小值
+pow(x,y) 返回x的y 次方
+random() 返回0--1之间的随机数
+round(x) 把数四舍五入最为接近的数
+sin(x) 正弦
+cos(x) 余弦
+tan(x) 正切
+sqrt(x) 平方根
+toSourse() 返回该对象的源代码
+value() 返回MATH对象的原始值
+</code></pre></li>
+</ul>
+<h2 id="数组常用方法"><a href="#数组常用方法" class="headerlink" title="数组常用方法"></a>数组常用方法</h2><ul>
+<li><p>数组</p>
+<pre><code>concat() 连接两个或更多的数组,并返回结果
+join() 把数组的所有元素放入一个字符串,元素通过指定的分隔符分割
+pop() 删除并返回数组的最后一个元素
+push() 向数组的末尾添加一个或更多元素,并返回新的长度
+reverse() 颠倒数组元素的顺序
+shift() 删除并返回数组的第一个元素
+slice(start,可选的end) 从某个已有的数组返回选定的元素
+sort() 对数组的元素进行排序
+splice() 删除元素,并向数组添加新元素
+toSource() 返回该对象的源代码
+toString() 把数组转换为字符串,并返回结果
+toLocalString() 把数组转化为本地数组,并返回结果
+unshift() 向数组的开头添加一个或者更多元素,并返回新的长度()
+valueOf() 返回数组对象的原始值
+</code></pre></li>
+</ul>
+<h2 id="window对象方法"><a href="#window对象方法" class="headerlink" title="window对象方法"></a>window对象方法</h2><ul>
+<li><p>window</p>
+<pre><code>alert() 显示带有一段消息和一个确定按钮的警告框
+prompt() 显示可以提示用户输入的对话框
+confirm() 显示带有一段消息以及确认按钮和取消按钮的对话框
+open() 打开一个新的浏览器窗口或者查找一个已命名的窗口
+close() 关闭浏览器窗口
+print() 打印当前窗口的内容
+focus() 把键盘焦点给予一个窗口
+blur() 把键盘焦点从顶层窗口移开
+moveBy() 相对窗口的当前坐标移动指定的像素
+moveTo() 把窗口的左上角移动一个指定的坐标
+resizeBy() 按照指定的像素调整窗口的大小
+resizeTo() 把窗口的大小调整到指定的宽度和高度
+scrollBy() 按照指定的像素滚动内容
+scrollTo() 把内容滚动到指定的坐标
+setInterval(代码,间隔时间) 每隔一定时间执行代码(间隔性触发计时器),在执行时,从载入页面后每隔指定的时间执行代码。代码:函数或代码串,如”clock()”或者clock,交互时间:以毫秒为单位.返回该定时器
+setTimeout() 在指定的时间延迟后指定代码(一次性计时器)
+clearInterval() 取消setInterval() 的设置,传入定时器
+clearTimeout() 取消setTimeout() 的设置
+</code></pre></li>
+</ul>
+<h2 id="history对象"><a href="#history对象" class="headerlink" title="history对象"></a>history对象</h2><ul>
+<li><p>history对象记录了用户曾经浏览过的页面(URL)，并可以实现浏览器前进与后退相似导航的功能。从窗口被打开的那一刻开始记录，每个浏览器窗口、每个标签页乃至每个框架，都有自己的history对象与特定的window对象关联。<code>window.history.[属性|方法]</code></p>
+<pre><code>length 返回浏览器历史列表的URL数量
+back() 加载history列表中前一个URL
+forward() 加载history列表下一个URL
+go(number) 加载history列表某一个具体的页面,0:当前页面
+back()相当于go(-1),forward()相当于go(1)
+</code></pre></li>
+</ul>
+<h2 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h2><ul>
+<li><p>location用于获取或设置窗体的URL，并且可以用于解析URL。<code>location.[属性|方法]</code></p>
+<pre><code>hash 设置或返回从#开始的URL(锚点)
+host 设置或返回主机名和当前URL的端口号
+hostname 设置或返回当前URL的主机名
+href 设置或返回完成的URL
+pathname 设置或返回当前URL的路径部分
+port 设置或返回当前URL的端口号
+protocol 设置或返回当前URL的协议
+search 设置或者返回从?开始的URL(查询部分)
+assign() 加载新的文档
+reload() 重新加载当前文档
+replace() 用新的文档替换当前文档
+</code></pre></li>
+</ul>
+<h2 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h2><ul>
+<li><p>navigator 对* navigator 对象包含有关浏览器的信息</p>
+<pre><code>appCodeName 浏览器代码名的字符串表示
+appName 浏览器的名称
+appVersion 浏览器平台以及版本
+platform 运行浏览器的操作系统平台
+userAgent 返回user-agent头部的值
+</code></pre></li>
+</ul>
+<h2 id="window中的screen-对象"><a href="#window中的screen-对象" class="headerlink" title="window中的screen 对象"></a>window中的screen 对象</h2><ul>
+<li>window.screen 对象在编写时可以不使用 window 这个前缀。</li>
+<li><p>screen对象用于获取用户的屏幕信息。<code>window.screen.属性</code>    </p>
+<pre><code>height 屏幕的高度,单位像素
+width  屏幕的宽度,单位像素
+availHeight 窗口可用的屏幕高度,单位像素,减去界面特性，比如任务栏。
+availWidth 窗口可用的屏幕宽度,单位像素,减去界面特性，比如任务栏。
+colorDepth 用户浏览器表示的颜色位数,通常32位(每像素的位数)
+pixelDepth 浏览器颜色位数,通常32位(每像素的位数)(IE不支持)
+</code></pre></li>
+</ul>
+<h2 id="文档对象模型"><a href="#文档对象模型" class="headerlink" title="文档对象模型"></a>文档对象模型</h2><ul>
+<li><p>节点属性与方法</p>
+<pre><code>nodeName 返回一个字符串,其内容是给定节点的名字
+nodeType 返回一个整数,这个数值代表给定节点的类型
+nodeValue 返回给定节点的当前值
+innerHTML 节点内置文本
+childNodes 返回一个数组,这个数组由给定元素节点的子节点构成
+firstChild 返回第一个子节点
+lastChild 返回最后一个子节点
+parentNode 返回一个给定节点的父节点
+nextSibling返回给定节点的下一个子节点
+previousSibling 返回给定节点的上一个子节点
+document.createElement(&quot;elementType&quot;) 创建一个新的元素节点
+
+document.cr    document.createTextNode(&quot;text&quot;) 创建一个包含着给定文本的新文本节点,text为文本
+appendChild(node) 指定节点的最后一个子节点列表后添加一个新的子节点
+insertBefore(newnode,node) 将一个给定节点插入到一个给定元素节点的给定节点前面
+removeChild(node) 从一个给定元素中删除一个子节点
+replaceChild(newnode,oldnew) 把一个给定元素里的一个子节点替换为另外一个节点
+</code></pre><h3 id="docuument常用方法"><a href="#docuument常用方法" class="headerlink" title="docuument常用方法"></a>docuument常用方法</h3></li>
+<li>document.getElementsByName(name) 返回带有指定名称的节点对象的集合。与getElementById() 方法不同的是，通过元素的 name 属性查询元素，而不是通过 id 属性</li>
+<li>document.getElementsByTagName(Tagname)  Tagname是标签的名称，如p、a、img等标签名。和数组类似也有length属性，可以和访问数组一样的方法来访问，所以从0开始。</li>
+<li>elementNode.getAttribute(name),其中elementNode：使用getElementById()、getElementsByTagName()等方法，获取到的元素节点.name：要想查询的元素节点的属性名字.</li>
+<li>elementNode.setAttribute(name,value),name: 要设置的属性名。value: 要设置的属性值。把指定的属性设置为指定的值。如果不存在具有指定名称的属性，该方法将创建一个新属性。类似于getAttribute()方法，setAttribute()方法只能通过元素节点对象调用的函数。</li>
+<li><p>在文档对象模型 (DOM) 中，每个节点都是一个对象。DOM 节点有三个重要的属性 ：nodeName : 节点的名称,nodeValue ：节点的值,nodeType ：节点的类型</p>
+</li>
+<li><p>nodeName 属性: 节点的名称，是只读的。</p>
+<pre><code>1. 元素节点的 nodeName 与标签名相同
+2. 属性节点的 nodeName 是属性的名称
+3. 文本节点的 nodeName 永远是 #text
+4. 文档节点的 nodeName 永远是 #document
+</code></pre></li>
+<li><p>nodeValue 属性：节点的值</p>
+<pre><code>1. 元素节点的 nodeValue 是 undefined 或 null
+2. 文本节点的 nodeValue 是文本自身
+3. 属性节点的 nodeValue 是属性的值
+</code></pre></li>
+<li><p>nodeType 属性: 节点的类型，是只读的。以下常用的几种结点类型:</p>
+<pre><code>元素类型    节点类型
+  元素          1
+  属性          2
+  文本          3
+  注释          8
+  文档          9
+</code></pre></li>
+<li><p>elementNode.childNodes,访问子节点.</p>
+</li>
+<li>node.firstChild,node.lastChild,访问子节点的第一项,最后一项,如果选定的节点没有子节点，则该属性返回 NULL。</li>
+<li>elementNode.parentNode,获取指定节点的父节点,父节点只能有一个。览器兼容问题，chrome、firefox等浏览器标签之间的空白也算是一个文本节点。</li>
+<li><code>nodeObject.nextSibling,nodeObject.previousSibling</code>,访问兄弟节点</li>
+<li>appendChild(newnode),在指定节点的最后一个子节点列表之后添加一个新的子节点。</li>
+<li>removeChild(),把删除的子节点赋值给 x，这个子节点不在DOM树中，但是还存在内存中，可通过 x 操作。如果要完全删除对象，给 x 赋 null 值</li>
+<li><code>document.documentElement.clientHeight</code>表示HTML文档所在窗口的当前高度。,<code>window.innerHeight</code>- 浏览器窗口的内部高度,<code>document.body.clientHeight</code>,Document对象的body属性对应HTML文档的<body>标签</body></li>
+<li><p>通用解决方案:</p>
+<pre><code>var w=document.documentElement.scrollWidth
+   || 
+   document.body.scrollWidth;
+var h=document.documentElement.scrollHeight
+   || 
+   document.body.scrollHeight;
+</code></pre></li>
+</ul>
+<ul>
+<li>网页尺寸:scrollHeight和scrollWidth，获取网页内容高度和宽度。scrollHeight 是网页内容实际高度，可以小于 clientHeight。scrollHeight 是网页内容高度，不过最小值是 clientHeight。也就是说网页内容实际高度小于 clientHeight 时，scrollHeight 返回 clientHeight 。</li>
+<li><p>通用解决方案:</p>
+<pre><code>var w=document.documentElement.scrollWidth || 
+document.body.scrollWidt h;
+var h=document.documentElement.scrollHeight || 
+document.body.scrollHeight;
+</code></pre></li>
+<li><p>offsetHeight和offsetWidth，获取网页内容高度和宽度(包括滚动条等边线，会随窗口的显示大小改变)。</p>
+</li>
+<li><p>通用解决方案</p>
+<pre><code>var w= document.documentElement.offsetWidth || 
+document.body.offsetWidth;
+var h= document.documentElement.offsetHeight || 
+document.body.offsetHeight;       
+</code></pre></li>
+<li><p>scrollLeft:设置或获取位于给定对象左边界与窗口中目前可见内容的最左端之间的距离 ，即左边灰色的内容。</p>
+</li>
+<li>scrollTop:设置或获取位于对象最顶端与窗口中可见内容的最顶端之间的距离 ，即上边灰色的内容。</li>
+<li>offsetLeft:获取指定对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置 。</li>
+<li>offsetTop:获取指定对象相对于版面或由 offsetParent 属性指定的父坐标的计算顶端位置 。</li>
+<li>offsetParent：布局中设置postion属性(Relative、Absolute、fixed)的父容器，从最近的父节点开始，一层层向上找，直到HTML的body。</li>
+<li>clientHeight,大家对 clientHeight 都没有什么异议，都认为是内容可视区域的高度，也就是说页面浏览器中可以看到内容的这个区域的高度，一般是最后一个工具条以下到状态栏以上的这个区域，与页面内容无关。</li>
+<li>offsetHeight,IE、Opera 认为 offsetHeight = clientHeight + 滚动条 + 边框。,NS、FF 认为 offsetHeight 是网页内容实际高度，可以小于 clientHeight。</li>
+<li>scrollHeight,IE、Opera 认为 scrollHeight 是网页内容实际高度，可以小于 clientHeight。,NS、FF 认为 scrollHeight 是网页内容高度，不过最小值是 clientHeight。</li>
+<li>浏览器中负责执行JavaScript代码的引擎会自动在每个语句的结尾补上;</li>
+<li>JavaScript不区分整数和浮点数，统一用Number表示</li>
+<li>NaN;NaN表示Not a Number，当无法计算结果时用NaN表示.Infinity;Infinity表示无限大，当数值超过了JavaScript的Number所能表示的最大值时，就表示为Infinity</li>
+<li><code>==</code>比较，它会自动转换数据类型再比较，很多时候，会得到非常诡异的结果；<br>第二种是<code>===</code>比较，它不会自动转换数据类型，如果数据类型不一致，返回false，如果一致，再比较。始终坚持使用===比较</li>
+<li>NaN这个特殊的Number与所有其他值都不相等，包括它自己,唯一能判断NaN的方法是通过isNaN()函数,<code>isNaN(NaN); // true</code></li>
+<li>Swift用nil，Python用None表示,JavaScript用null</li>
+<li>JavaScript的数组可以包括任意数据类型。</li>
+<li>JavaScript的对象是一组由键-值组成的无序集合,JavaScript对象的键都是字符串类型，值可以是任意数据类型。</li>
+<li>变量本身类型不固定的语言称之为动态语言，与之对应的是静态语言。静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。</li>
+<li>如果一个变量没有通过var申明就被使用，那么该变量就自动被申明为全局变量,在strict模式下运行的JavaScript代码，强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误,启用strict模式的方法是在JavaScript代码的第一行写上：<code>&#39;use strict&#39;;</code></li>
+<li><code>`你好, ${name}, 你今年${age}岁了!</code>;`注意不是单引号</li>
+<li>直接给Array的length赋一个新的值会导致Array大小的变化,如果通过索引赋值时，索引超过了范围，同样会引起Array大小的变化</li>
+<li>空数组继续pop不会报错，而是返回undefined,如果要往Array的头部添加若干元素，使用unshift()方法，shift()方法则把Array的第一个元素删掉</li>
+<li>空数组继续shift不会报错，而是返回undefined</li>
+<li>splice()方法是修改Array的“万能方法”，它可以从指定的索引开始删除若干元素，然后再从该位置添加若干元素,从索引2开始删除3个元素,然后再添加两个元素:<code>arr.splice(2, 3, &#39;Google&#39;, &#39;Facebook’);</code></li>
+<li>concat()方法可以接收任意个元素和Array，并且自动把Array拆开，然后全部添加到新的Array里</li>
+<li>unshift()和push()对应,头部添加若干元素,shift()和pop()对应删除末尾元素.</li>
+<li><p>声明对象</p>
+<pre><code>var person = {
+name : “AA”,
+age : 12,
+&apos;m-s&apos;: &apos;No&apos;,// 非有效变量
+sex : true
+};
+// 访问:person.name;  person[&apos;m-s&apos;]; person.a;
+// 访问不存在的属性不报错，而是返回undefined
+// 自由增加属性:person.b = 12;
+// 删除属性 delete person.age;
+// 检测对象以及父类具有某属性 &apos;name&apos; in person 返回布尔
+// 检测某对象具有某属性 person.hasOwnProperty(&apos;name&apos;); 返回布尔
+</code></pre></li>
+<li><p>JavaScript把null、undefined、0、NaN和空字符串’’视为false，其他值一概视为true</p>
+</li>
+<li>for (var index in array) {// 此处的index是索引而非array中的元素}</li>
+<li><p>Map是一组键值对的结构，具有极快的查找速度。<br><code>var m = new Map([[&#39;Michael&#39;, 95], [&#39;Bob&#39;, 75], [&#39;Tracy&#39;, 85]]); m.get(&#39;Michael&#39;); // 95</code><br>常用操作:</p>
+<pre><code>var m = new Map(); // 空Map
+m.set(&apos;Adam&apos;, 67); // 添加新的key-value
+m.set(&apos;Bob&apos;, 59);
+m.has(&apos;Adam&apos;); // 是否存在key &apos;Adam&apos;: true
+m.get(&apos;Adam&apos;); // 67
+m.delete(&apos;Adam&apos;); // 删除key &apos;Adam&apos;
+m.get(&apos;Adam&apos;); // undefined
+</code></pre></li>
+<li><p>Set和Map类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在Set中，没有重复的key。<code>var s2 = new Set([1, 2, 3]); // 含1, 2, 3</code>.通过add(key)方法可以添加元素到Set中,通过delete(key)方法可以删除元素</p>
+</li>
+<li>遍历Array可以采用下标循环，遍历Map和Set就无法使用下标。为了统一集合类型，ES6标准引入了新的iterable类型，Array、Map和Set都属于iterable类型。具有iterable类型的集合可以通过新的for … of循环来遍历。</li>
+<li>for … in循环由于历史遗留问题，它遍历的实际上是对象的属性名称。索引+属性</li>
+<li>for … of循环则完全修复了这些问题，它只循环集合本身的元素,元素本身</li>
+<li><p>forEach遍历</p>
+<pre><code>var a = [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;];
+a.forEach(function (element, index, array) {
+    // element: 指向当前元素的值
+    // index: 指向当前索引
+    // array: 指向Array对象本身
+    alert(element);
+});
+
+var s = new Set([&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]);
+s.forEach(function (element, sameElement, set) {
+    alert(element);
+});
+
+var m = new Map([[1, &apos;x&apos;], [2, &apos;y&apos;], [3, &apos;z&apos;]]);
+m.forEach(function (value, key, map) {
+    alert(value);
+});
+</code></pre></li>
+<li>JavaScript允许传入任意个参数而不影响调用,传入的参数比定义的少也没有问题</li>
+<li>JavaScript还有一个关键字arguments，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。类似数组不是数组</li>
+<li><p>不在任何函数内定义的变量就具有全局作用域。全局变量会绑定到window上，不同的JavaScript文件如果使用了相同的全局变量，或者定义了相同名字的顶层函数，都会造成命名冲突，并且很难被发现。减少冲突的一个方法是把自己的所有变量和函数全部绑定到一个全局变量中。</p>
+<pre><code>// 唯一的全局变量MYAPP:
+var MYAPP = {};
+
+// 其他变量:
+MYAPP.name = &apos;myapp&apos;;
+MYAPP.version = 1.0;
+
+// 其他函数:
+MYAPP.foo = function () {
+    return &apos;foo&apos;;
+};
+</code></pre></li>
+<li>JavaScript的变量作用域实际上是函数内部,用let替代var可以申明一个块级作用域的变量,const来定义常量，const与let都具有块级作用域</li>
+<li>绑定到对象上的函数称为方法，和普通函数也没啥区别，但是它在内部使用了一个this关键字</li>
+<li>非strict环境下:直接使用this没毛病,strict环境下:函数内部首先写上var that = this;之后使用that</li>
+<li>据是否是strict模式，this指向undefined或window</li>
+<li>apply()把参数打包成Array再传入；  call()把参数按顺序传入。</li>
+<li>简单的高阶函数:一个函数就可以接收另一个函数作为参数，这种函数就称之为高阶函数</li>
+<li><p>map():对<strong>数组</strong>中的每一个且仅是单独的元素执行操作,</p>
+<pre><code>// 把每一个元素转化为字符串 ,得到的仍是数组
+array.map(String)
+
+// 执行pow()
+function pow(x) {
+    return x * x;
+}
+array.map(pow),得到的仍是数组
+</code></pre></li>
+<li><p>reduce():对<strong>数组</strong>中的最开始两个元素进行操作,将结果与第三个元素操作,以此类推</p>
+<pre><code>// 数组求和
+arr.reduce(function (x, y) {
+    return x + y;
+});
+</code></pre></li>
+<li><p>filter():根据传入的函数,作用于每一个元素,返回true或false,把数组中的某些元素过滤掉,返回剩余的元素</p>
+<pre><code>var r = arr.filter(function (s) {
+    return  x % 2 !== 0; 
+            });
+arr; // [&apos;A&apos;, &apos;B&apos;, &apos;C&apos;]
+</code></pre></li>
+<li>sort():排序,默认把所有元素先转换为String再排序,传入的排序函数,根据返回-1进行排序</li>
+<li><p>箭头函数:在箭头函数中,可以直接使用this,而非that</p>
+<pre><code>x =&gt; x*x
+// 相当于
+function (x) {
+return x*x;
+}
+// 含有多条语句,多个参数时
+(x,y) =&gt; {
+if (x &gt;0 ) {
+return 0;
+}
+return x*y;
+}
+// 不能省略{}
+// 特别注意返回一个对象:
+x =&gt; ({ foo: x })
+</code></pre></li>
+<li><p>generator和函数不同的是，generator由function*定义,除了return语句，还可以用yield返回多次。调用generator对象有两个方法，一是不断地调用generator对象的next()方法,第二个方法是直接用for … of循环迭代generator对象</p>
+</li>
+<li>用typeof操作符获取对象的类型，它总是返回一个字符串:’number’,’boolean’,’string’,’function’,’object’,’undefined’,特别注意null的类型是object，Array的类型也是object</li>
+<li>包装对象:<code>var n = new Number(123);</code>,返回object</li>
+<li>JavaScript的月份范围用整数表示是0~11，0表示一月，1表示二月</li>
+<li>RegExp中:在正则表达式中，如果直接给出字符，就是精确匹配。<code>用\d可以匹配一个数字，\w可以匹配一个字母或数字,.可以匹配任意字符，用*表示任意个字符（包括0个），用+表示至少一个字符，用?表示0个或1个字符，用{n}表示n个字符，用{n,m}表示n-m个字符,\s可以匹配一个空格（也包括Tab等空白符），所以\s+表示至少有一个空格</code></li>
+<li>更精确的匹配,[]表示范围:<code>[0-9a-zA-Z\_]可以匹配一个数字、字母或者下划线,[0-9a-zA-Z\_]+可以匹配至少由一个数字、字母或者下划线组成的字符串,[a-zA-Z\_\$][0-9a-zA-Z\_\$]{0, 19}更精确地限制了变量的长度是1-20个字符（前面1个字符+后面最多19个字符）,A|B可以匹配A或B,^表示行的开头，^\d表示必须以数字开头。$表示行的结束，\d$表示必须以数字结束。js也可以匹配&#39;jsp&#39;，但是加上^js$就变成了整行匹配，就只能匹配&#39;js&#39;了</code></li>
+<li><p>JavaScript有两种方式创建一个正则表达式：第一种方式是直接通过/正则表达式/写出来，第二种方式是通过new RegExp(‘正则表达式’)创建一个RegExp对象。</p>
+<pre><code>var re1 = /as\_32/; // 最好,不用考虑转义问题
+var re2 = new RegExp(“as\\_32”);
+// 如果使用第二种写法，因为字符串的转义问题，字符串的两个\\实际上是一个\
+
+//RegExp对象的test()方法用于测试给定的字符串是否符合条件
+re1.test(&apos;sfdf&apos;);// 返回false
+</code></pre></li>
+<li><p>用()表示的就是要提取的分组（Group）,exec()方法在匹配成功后，会返回一个Array，第一个元素是正则表达式匹配到的整个字符串，后面的字符串表示匹配成功的子串。exec()方法在匹配失败时返回null</p>
+<pre><code>var re = /^(\d{3})-(\d{3,8})$/;
+re.exec(&apos;010-12345&apos;); // [&apos;010-12345&apos;, &apos;010&apos;, &apos;12345&apos;]
+</code></pre></li>
+<li>正则匹配默认是贪婪匹配，也就是匹配尽可能多的字符,加个?就可以让\d+采用非贪婪匹配</li>
+<li><code>g表示全局匹配,var r1 = /test/g;// 等价于:var r2 = new RegExp(&#39;test&#39;, &#39;g&#39;);指定i标志，表示忽略大小写，m标志，表示执行多行匹配</code></li>
+<li>注意,在范围匹配[]中,字符要加上反斜杠\,在一般匹配中不需要</li>
+<li><code>[a-zA-Z_]其实就是\w</code></li>
+<li>JSON序列化:JSON.stringify(object,[propertyName:value],’  ‘); 第二个参数用于控制如何筛选对象的键值，标明指定属性可以输出指定的属性,也可以传入函数进行处理,可以不写,第三个参数是缩进</li>
+<li>反序列化:JSON.parse()把它变成一个JavaScript对象</li>
+<li>JavaScript不区分类和实例的概念，而是通过原型（prototype）来实现面向对象编程。<code>xiaoming.__proto__ = Student;</code></li>
+<li>JavaScript的原型链和Java的Class区别就在，它没有“Class”的概念，所有对象都是实例，所谓继承关系不过是把一个对象的原型指向另一个对象而已。</li>
+<li>如果写了new，它就变成了一个构造函数，它绑定的this指向新创建的对象，并默认返回this，也就是说，不需要在最后写return this;</li>
+<li>造函数首字母应当大写，而普通函数首字母应当小写</li>
+</ul>
+<p><br></p>
+<p>花了一个周末学习一下前端方面的知识,笔记略微粗糙,复习时再做修正.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p align = &quot;center&quot;&gt; 大前端时代. &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://blog.chenyalun.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="HTML" scheme="http://blog.chenyalun.com/tags/HTML/"/>
+    
+      <category term="CSS" scheme="http://blog.chenyalun.com/tags/CSS/"/>
+    
+      <category term="JavaScript" scheme="http://blog.chenyalun.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>读「王中周博客」</title>
-    <link href="http://yoursite.com/2016/11/10/%E8%AF%BB%E7%8E%8B%E4%B8%AD%E5%91%A8%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://yoursite.com/2016/11/10/读王中周博客/</id>
+    <link href="http://blog.chenyalun.com/2016/11/10/%E8%AF%BB%E7%8E%8B%E4%B8%AD%E5%91%A8%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://blog.chenyalun.com/2016/11/10/读王中周博客/</id>
     <published>2016-11-10T08:02:17.000Z</published>
     <updated>2016-11-12T02:07:54.000Z</updated>
     
@@ -360,21 +1111,24 @@ NSArray *arr = [NSArray arrayWithObjects:@&quot;wang&quot;,@&quot;zz&quot;,[NSNu
     
     </summary>
     
-      <category term="博记" scheme="http://yoursite.com/categories/%E5%8D%9A%E8%AE%B0/"/>
+      <category term="博记" scheme="http://blog.chenyalun.com/categories/%E5%8D%9A%E8%AE%B0/"/>
     
     
-      <category term="ios开发" scheme="http://yoursite.com/tags/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/tags/ios%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>读「李明杰博客」</title>
-    <link href="http://yoursite.com/2016/10/28/%E8%AF%BB%E6%9D%8E%E6%98%8E%E6%9D%B0%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://yoursite.com/2016/10/28/读李明杰博客/</id>
+    <link href="http://blog.chenyalun.com/2016/10/28/%E8%AF%BB%E6%9D%8E%E6%98%8E%E6%9D%B0%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://blog.chenyalun.com/2016/10/28/读李明杰博客/</id>
     <published>2016-10-28T11:22:17.000Z</published>
-    <updated>2016-11-10T07:58:50.000Z</updated>
+    <updated>2016-12-04T12:49:57.000Z</updated>
     
-    <content type="html"><![CDATA[<p align="center"> 李明杰老师是我很尊敬的iOS启蒙老师. </p>
+    <content type="html"><![CDATA[<blockquote>
+<p>2016.12.4 修改并回顾</p>
+</blockquote>
+<p align="center"> 李明杰老师是我很尊敬的iOS启蒙老师. </p>
 
 <a id="more"></a>
 <h1 id="读感"><a href="#读感" class="headerlink" title="读感"></a>读感</h1><p>这次零零碎碎花了一周时间拜读老师的博客,很多知识点理解地更透彻了,尤其是C语言方面的.不太熟悉或将近遗忘的知识点记录下来,做复习巩固之用.</p>
@@ -626,20 +1380,29 @@ printf(&quot;%d&quot;, ss);// 是10
     char *name;
     int age;
 };
+// 利用上面结构体定义结构体变量stu
 struct Student stu;
 </code></pre></li>
 </ol>
-<pre><code>struct Student {
+<pre><code>// 直接定义结构体变量stu
+struct Student {
     char *name;
     int age;
 } stu;
 
 
-
+// 定义结构体变量stu后,此结构体永不再用
 struct {
     char *name;
     int age;
 } stu;
+
+
+// 特殊:struct前放置typedef表示声明此&quot;匿名&quot;结构体的名字为Student
+typedef struct {
+    char *name;
+    int age;
+} Student;
 </code></pre><ol>
 <li>定义结构体类型，只是说明了该类型的组成情况，并没有给它分配存储空间，就像系统不为int类型本身分配空间一样。只有当定义属于结构体类型的变量时，系统才会分配存储空间给该变量.结构体变量占用的内存空间是其成员所占内存之和，而且各成员在内存中按定义的顺序依次排列.</li>
 <li>将结构体变量作为函数参数进行传递时，其实传递的是全部成员的值，也就是将实参中成员的值一一赋值给对应的形参成员。因此，形参的改变不会影响到实参.</li>
@@ -770,28 +1533,32 @@ String2 str3, str4;
 </ol>
 <blockquote>
 <p>向作者致谢!<br>M了个J:<a href="http://www.cnblogs.com/mjios/" target="_blank" rel="external">http://www.cnblogs.com/mjios/</a></p>
+<p>参考博客<br>C语言中文网:<a href="http://c.biancheng.net/cpp/html/88.html" target="_blank" rel="external">http://c.biancheng.net/cpp/html/88.html</a></p>
 </blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p align = &quot;center&quot;&gt; 李明杰老师是我很尊敬的iOS启蒙老师. &lt;/p&gt;
+      &lt;blockquote&gt;
+&lt;p&gt;2016.12.4 修改并回顾&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p align = &quot;center&quot;&gt; 李明杰老师是我很尊敬的iOS启蒙老师. &lt;/p&gt;
     
     </summary>
     
-      <category term="博记" scheme="http://yoursite.com/categories/%E5%8D%9A%E8%AE%B0/"/>
+      <category term="博记" scheme="http://blog.chenyalun.com/categories/%E5%8D%9A%E8%AE%B0/"/>
     
     
-      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
+      <category term="C语言" scheme="http://blog.chenyalun.com/tags/C%E8%AF%AD%E8%A8%80/"/>
     
-      <category term="ios开发" scheme="http://yoursite.com/tags/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/tags/ios%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>C语言交换两个数值的八种方法</title>
-    <link href="http://yoursite.com/2016/10/23/C%E8%AF%AD%E8%A8%80%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%80%BC%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/10/23/C语言交换两个数值的八种方法/</id>
+    <link href="http://blog.chenyalun.com/2016/10/23/C%E8%AF%AD%E8%A8%80%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%80%BC%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
+    <id>http://blog.chenyalun.com/2016/10/23/C语言交换两个数值的八种方法/</id>
     <published>2016-10-23T02:20:17.000Z</published>
     <updated>2016-10-25T14:07:28.000Z</updated>
     
@@ -892,17 +1659,17 @@ int a = 2147483648;
     
     </summary>
     
-      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/categories/ios%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="C语言" scheme="http://yoursite.com/tags/C%E8%AF%AD%E8%A8%80/"/>
+      <category term="C语言" scheme="http://blog.chenyalun.com/tags/C%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
   <entry>
     <title>iOS学习笔记一：Cocoapods的安装与使用</title>
-    <link href="http://yoursite.com/2016/10/10/iOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9ACocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2016/10/10/iOS学习笔记一：Cocoapods的安装与使用/</id>
+    <link href="http://blog.chenyalun.com/2016/10/10/iOS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9ACocoapods%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/"/>
+    <id>http://blog.chenyalun.com/2016/10/10/iOS学习笔记一：Cocoapods的安装与使用/</id>
     <published>2016-10-10T04:50:17.000Z</published>
     <updated>2016-10-25T14:36:57.000Z</updated>
     
@@ -1032,17 +1799,17 @@ killall Finder
     
     </summary>
     
-      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/categories/ios%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="ios开发" scheme="http://yoursite.com/tags/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/tags/ios%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>Objective-C学习笔记四：分类与代理</title>
-    <link href="http://yoursite.com/2016/07/16/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E5%88%86%E7%B1%BB/"/>
-    <id>http://yoursite.com/2016/07/16/Objective-C学习笔记四：分类/</id>
+    <link href="http://blog.chenyalun.com/2016/07/16/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E5%88%86%E7%B1%BB/"/>
+    <id>http://blog.chenyalun.com/2016/07/16/Objective-C学习笔记四：分类/</id>
     <published>2016-07-16T09:50:17.000Z</published>
     <updated>2016-10-25T14:37:22.000Z</updated>
     
@@ -1261,17 +2028,17 @@ NSLog(@&quot;%i&quot;,MySum(10,20));
     
     </summary>
     
-      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/categories/ios%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+      <category term="Objective-C" scheme="http://blog.chenyalun.com/tags/Objective-C/"/>
     
   </entry>
   
   <entry>
     <title>Objective-C学习笔记三：点语法与自动属性</title>
-    <link href="http://yoursite.com/2016/05/18/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E7%82%B9%E8%AF%AD%E6%B3%95%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%B1%9E%E6%80%A7/"/>
-    <id>http://yoursite.com/2016/05/18/Objective-C学习笔记三：点语法与自动属性/</id>
+    <link href="http://blog.chenyalun.com/2016/05/18/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E7%82%B9%E8%AF%AD%E6%B3%95%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%B1%9E%E6%80%A7/"/>
+    <id>http://blog.chenyalun.com/2016/05/18/Objective-C学习笔记三：点语法与自动属性/</id>
     <published>2016-05-17T21:00:07.000Z</published>
     <updated>2016-10-25T14:09:58.000Z</updated>
     
@@ -1420,17 +2187,17 @@ NSLog(@”r2的值是%i”,r2);
     
     </summary>
     
-      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/categories/ios%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+      <category term="Objective-C" scheme="http://blog.chenyalun.com/tags/Objective-C/"/>
     
   </entry>
   
   <entry>
     <title>Objective-C学习笔记二：继承与属性</title>
-    <link href="http://yoursite.com/2016/05/16/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%B1%9E%E6%80%A7/"/>
-    <id>http://yoursite.com/2016/05/16/Objective-C学习笔记二：继承与属性/</id>
+    <link href="http://blog.chenyalun.com/2016/05/16/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%B1%9E%E6%80%A7/"/>
+    <id>http://blog.chenyalun.com/2016/05/16/Objective-C学习笔记二：继承与属性/</id>
     <published>2016-05-16T11:22:17.000Z</published>
     <updated>2016-10-28T13:20:28.000Z</updated>
     
@@ -1704,19 +2471,19 @@ NSLog(@”%lu”,(unsigned long)size);
     
     </summary>
     
-      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/categories/ios%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+      <category term="Objective-C" scheme="http://blog.chenyalun.com/tags/Objective-C/"/>
     
-      <category term="ios开发" scheme="http://yoursite.com/tags/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/tags/ios%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>Objective-C学习笔记一：类</title>
-    <link href="http://yoursite.com/2016/05/12/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9A%E7%B1%BB/"/>
-    <id>http://yoursite.com/2016/05/12/Objective-C学习笔记一：类/</id>
+    <link href="http://blog.chenyalun.com/2016/05/12/Objective-C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9A%E7%B1%BB/"/>
+    <id>http://blog.chenyalun.com/2016/05/12/Objective-C学习笔记一：类/</id>
     <published>2016-05-11T21:00:49.000Z</published>
     <updated>2016-10-28T13:22:05.000Z</updated>
     
@@ -1870,17 +2637,17 @@ stu-&gt;dog=dog;
     
     </summary>
     
-      <category term="ios开发" scheme="http://yoursite.com/categories/ios%E5%BC%80%E5%8F%91/"/>
+      <category term="ios开发" scheme="http://blog.chenyalun.com/categories/ios%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Objective-C" scheme="http://yoursite.com/tags/Objective-C/"/>
+      <category term="Objective-C" scheme="http://blog.chenyalun.com/tags/Objective-C/"/>
     
   </entry>
   
   <entry>
     <title>浅谈负债哲学</title>
-    <link href="http://yoursite.com/2016/05/06/%E6%B5%85%E8%B0%88%E8%B4%9F%E5%80%BA%E5%93%B2%E5%AD%A6/"/>
-    <id>http://yoursite.com/2016/05/06/浅谈负债哲学/</id>
+    <link href="http://blog.chenyalun.com/2016/05/06/%E6%B5%85%E8%B0%88%E8%B4%9F%E5%80%BA%E5%93%B2%E5%AD%A6/"/>
+    <id>http://blog.chenyalun.com/2016/05/06/浅谈负债哲学/</id>
     <published>2016-05-05T21:00:45.000Z</published>
     <updated>2016-10-25T14:15:15.000Z</updated>
     
@@ -1970,17 +2737,17 @@ stu-&gt;dog=dog;
     
     </summary>
     
-      <category term="金融理财" scheme="http://yoursite.com/categories/%E9%87%91%E8%9E%8D%E7%90%86%E8%B4%A2/"/>
+      <category term="金融理财" scheme="http://blog.chenyalun.com/categories/%E9%87%91%E8%9E%8D%E7%90%86%E8%B4%A2/"/>
     
     
-      <category term="金融" scheme="http://yoursite.com/tags/%E9%87%91%E8%9E%8D/"/>
+      <category term="金融" scheme="http://blog.chenyalun.com/tags/%E9%87%91%E8%9E%8D/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记八：简单的RSS阅读器</title>
-    <link href="http://yoursite.com/2016/05/04/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AB%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84RSS%E9%98%85%E8%AF%BB%E5%99%A8/"/>
-    <id>http://yoursite.com/2016/05/04/UWP开发笔记八：简单的RSS阅读器/</id>
+    <link href="http://blog.chenyalun.com/2016/05/04/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AB%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84RSS%E9%98%85%E8%AF%BB%E5%99%A8/"/>
+    <id>http://blog.chenyalun.com/2016/05/04/UWP开发笔记八：简单的RSS阅读器/</id>
     <published>2016-05-03T21:00:23.000Z</published>
     <updated>2016-10-28T13:28:05.000Z</updated>
     
@@ -2106,17 +2873,17 @@ HorizontalScrollBarVisibility=”Auto”
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记七：WebView与简单浏览器</title>
-    <link href="http://yoursite.com/2016/05/02/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%83%EF%BC%9AWebView%E4%B8%8E%E7%AE%80%E5%8D%95%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
-    <id>http://yoursite.com/2016/05/02/UWP开发笔记七：WebView与简单浏览器/</id>
+    <link href="http://blog.chenyalun.com/2016/05/02/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%83%EF%BC%9AWebView%E4%B8%8E%E7%AE%80%E5%8D%95%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
+    <id>http://blog.chenyalun.com/2016/05/02/UWP开发笔记七：WebView与简单浏览器/</id>
     <published>2016-05-01T21:00:18.000Z</published>
     <updated>2016-10-28T13:33:09.000Z</updated>
     
@@ -2241,17 +3008,17 @@ Web.Navigate(new Uri(URLTextBox.Text));
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记六：幸运彩色小球</title>
-    <link href="http://yoursite.com/2016/04/30/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AD%EF%BC%9A%E5%B9%B8%E8%BF%90%E5%BD%A9%E8%89%B2%E5%B0%8F%E7%90%83/"/>
-    <id>http://yoursite.com/2016/04/30/UWP开发笔记六：幸运彩色小球/</id>
+    <link href="http://blog.chenyalun.com/2016/04/30/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%85%AD%EF%BC%9A%E5%B9%B8%E8%BF%90%E5%BD%A9%E8%89%B2%E5%B0%8F%E7%90%83/"/>
+    <id>http://blog.chenyalun.com/2016/04/30/UWP开发笔记六：幸运彩色小球/</id>
     <published>2016-04-29T21:00:46.000Z</published>
     <updated>2016-10-28T13:36:49.000Z</updated>
     
@@ -2436,17 +3203,17 @@ private Random random = new Random((int)DateTime.Now.Ticks);
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记五：应用数据本地存储</title>
-    <link href="http://yoursite.com/2016/04/28/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%94%EF%BC%9A%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/"/>
-    <id>http://yoursite.com/2016/04/28/UWP开发笔记五：应用数据本地存储/</id>
+    <link href="http://blog.chenyalun.com/2016/04/28/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%94%EF%BC%9A%E5%BA%94%E7%94%A8%E6%95%B0%E6%8D%AE%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/"/>
+    <id>http://blog.chenyalun.com/2016/04/28/UWP开发笔记五：应用数据本地存储/</id>
     <published>2016-04-27T21:00:59.000Z</published>
     <updated>2016-10-28T13:39:45.000Z</updated>
     
@@ -2511,17 +3278,17 @@ public string Load(string key)
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记四：随机数与筛子游戏</title>
-    <link href="http://yoursite.com/2016/04/26/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%8E%E7%AD%9B%E5%AD%90%E6%B8%B8%E6%88%8F/"/>
-    <id>http://yoursite.com/2016/04/26/UWP开发笔记四：随机数与筛子游戏/</id>
+    <link href="http://blog.chenyalun.com/2016/04/26/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E5%9B%9B%EF%BC%9A%E9%9A%8F%E6%9C%BA%E6%95%B0%E4%B8%8E%E7%AD%9B%E5%AD%90%E6%B8%B8%E6%88%8F/"/>
+    <id>http://blog.chenyalun.com/2016/04/26/UWP开发笔记四：随机数与筛子游戏/</id>
     <published>2016-04-25T21:00:25.000Z</published>
     <updated>2016-10-28T13:41:18.000Z</updated>
     
@@ -2709,17 +3476,17 @@ public string Load(string key)
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记三：动画编程之图形的翻转</title>
-    <link href="http://yoursite.com/2016/04/24/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E5%8A%A8%E7%94%BB%E7%BC%96%E7%A8%8B%E4%B9%8B%E5%9B%BE%E5%BD%A2%E7%9A%84%E7%BF%BB%E8%BD%AC/"/>
-    <id>http://yoursite.com/2016/04/24/UWP开发笔记三：动画编程之图形的翻转/</id>
+    <link href="http://blog.chenyalun.com/2016/04/24/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%89%EF%BC%9A%E5%8A%A8%E7%94%BB%E7%BC%96%E7%A8%8B%E4%B9%8B%E5%9B%BE%E5%BD%A2%E7%9A%84%E7%BF%BB%E8%BD%AC/"/>
+    <id>http://blog.chenyalun.com/2016/04/24/UWP开发笔记三：动画编程之图形的翻转/</id>
     <published>2016-04-23T21:00:40.000Z</published>
     <updated>2016-10-28T13:42:06.000Z</updated>
     
@@ -2915,17 +3682,17 @@ rotating = true;&lt;/pre&gt;
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记二：AppBar和CommandBar</title>
-    <link href="http://yoursite.com/2016/04/22/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9AAppBar%E5%92%8CCommandBar/"/>
-    <id>http://yoursite.com/2016/04/22/UWP开发笔记二：AppBar和CommandBar/</id>
+    <link href="http://blog.chenyalun.com/2016/04/22/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%BA%8C%EF%BC%9AAppBar%E5%92%8CCommandBar/"/>
+    <id>http://blog.chenyalun.com/2016/04/22/UWP开发笔记二：AppBar和CommandBar/</id>
     <published>2016-04-21T21:00:36.000Z</published>
     <updated>2016-10-28T13:42:33.000Z</updated>
     
@@ -2977,17 +3744,17 @@ rotating = true;&lt;/pre&gt;
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>UWP开发笔记一：Hello UWP与对话框</title>
-    <link href="http://yoursite.com/2016/04/20/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AHello_UWP%E4%B8%8E%E5%AF%B9%E8%AF%9D%E6%A1%86/"/>
-    <id>http://yoursite.com/2016/04/20/UWP开发笔记一：Hello_UWP与对话框/</id>
+    <link href="http://blog.chenyalun.com/2016/04/20/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E4%B8%80%EF%BC%9AHello_UWP%E4%B8%8E%E5%AF%B9%E8%AF%9D%E6%A1%86/"/>
+    <id>http://blog.chenyalun.com/2016/04/20/UWP开发笔记一：Hello_UWP与对话框/</id>
     <published>2016-04-19T21:00:51.000Z</published>
     <updated>2016-10-28T13:42:57.000Z</updated>
     
@@ -3056,17 +3823,17 @@ rotating = true;&lt;/pre&gt;
     
     </summary>
     
-      <category term="UWP开发笔记" scheme="http://yoursite.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
+      <category term="UWP开发笔记" scheme="http://blog.chenyalun.com/categories/UWP%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="UWP开发" scheme="http://yoursite.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
+      <category term="UWP开发" scheme="http://blog.chenyalun.com/tags/UWP%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
   <entry>
     <title>泛谈单链表的插入与删除</title>
-    <link href="http://yoursite.com/2015/11/04/%E6%B3%9B%E8%B0%88%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
-    <id>http://yoursite.com/2015/11/04/泛谈单链表的插入与删除/</id>
+    <link href="http://blog.chenyalun.com/2015/11/04/%E6%B3%9B%E8%B0%88%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
+    <id>http://blog.chenyalun.com/2015/11/04/泛谈单链表的插入与删除/</id>
     <published>2015-11-03T21:00:32.000Z</published>
     <updated>2016-10-28T13:49:06.000Z</updated>
     
@@ -3189,127 +3956,7 @@ void Print(LNode &amp;a){
     
     </summary>
     
-      <category term="编程技巧" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>泛谈顺序表的插入与删除</title>
-    <link href="http://yoursite.com/2015/11/02/%E6%B3%9B%E8%B0%88%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E6%8F%92%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/"/>
-    <id>http://yoursite.com/2015/11/02/泛谈顺序表的插入与删除/</id>
-    <published>2015-11-01T21:00:11.000Z</published>
-    <updated>2016-10-28T13:54:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<p align="center"><br>简单探讨顺序表的插入与删除<br>. </p>
-
-<a id="more"></a>
-<p>所谓的顺序表，在严版的书中，定义的异常专业巧妙。存储空间基址、当前长度、分配的存储容量，这三部分融合而成线性表之顺序表。</p>
-<pre><code>typedef struct{
-    Elemtype *elem;
-    int length;
-    int listsize;
-}SqList;
-</code></pre><p>翻翻资料。发现还有一种更巧妙而且容易理解的方式：</p>
-<pre><code>typedef struct{
-    int data[Max];
-    int length;
-}SqList;
-</code></pre><p>这样一来，整个顺序表就与数组特别特别相似啦。</p>
-<p>那么，声明一个很长很长但是彼此知道的Max长度数组，作为默认“表长”（其实不是表长），再给它一个长度length，如此，顺序表横空出世了。</p>
-<p>既然如此，那关于什么插入、删除操作就不在话下了。</p>
-<p>1 已知顺序表的所有元素值（自行输入），在元素e的位置插入元素m</p>
-<p>题目很清楚，插入元素m后，后面的元素自然往后移动啦。</p>
-<pre><code>    #include&lt;stdio.h&gt;
-    //#include&lt;malloc.h&gt;
-    //#include&lt;stdlib.h&gt;   //一般这两个是需要的
-
-    #define Max 200
-    //定义并初始化顺序表
-    typedef struct{
-    int data[Max];
-    int length=10;
-    }SqList;
-    //顺序表l中查找元素e的位置
-    int LocatElem(SqList l,int e){
-    int i=0;
-    for(;i&lt;l.length;++i)
-    if(l.data[i]==e)
-    return i+1;
-    }
-
-    //在元素e的位置插入元素m
-    void Insert(SqList &amp;l,int e,int m) {
-    int i=l.length,p=LocatElem(l,e);
-    for(;i&gt;=p;–i){
-    l.data[i]=l.data[i-1];
-    }
-    l.data[i]=m;
-    l.length++;
-    }
-
-    int main(){
-    int i=0,e=18,m=200;
-    SqList a;
-    for(;i&lt;a.length;++i)
-    scanf(“%d”,&amp;a.data[i]);
-    Insert(a,e,m);
-    for(int i=0;i&lt;a.length;++i)
-    printf(“%d\n”,a.data[i]);
-    return 0;
-}
-</code></pre><p>这里假设我们输入从11，12一直到20的整数值，首先查找元素e=18的值的位置，插入m的值200。</p>
-<p>原来：11 12 13 14 15 16 17 18 19 20</p>
-<p>run后：11 12 13 14 15 16 17 200 18 19 20</p>
-<p><img src="http://source.chenyalun.cn/images/201510/5103102.jpg" alt=""></p>
-<p>2 已知顺序表所有元素的值（自行输入），删除顺序表中值为e的元素</p>
-<pre><code>    #include&lt;stdio.h&gt;
-    //#include&lt;malloc.h&gt;
-    //#include&lt;stdlib.h&gt;
-
-    #define Max 200
-    //定义并初始化顺序表
-    typedef struct{
-    int data[Max];
-    int length=10;
-    }SqList;
-    //顺序表l中查找元素e的位置
-    int LocatElem(SqList l,int e){
-    int i=0;
-    for(;i&lt;l.length;++i)
-    if(l.data[i]==e)
-    return i+1;
-    }
-
-    //删除顺序表中值为e的元素
-    void Delete(SqList &amp;l,int e){
-    int i=LocatElem(l,e);
-    for(;i&lt;=l.length;++i)
-    l.data[i-1]=l.data[i];
-    l.length–;
-    }
-    int main(){
-    int i=0, e=15;//e的值自己说了算
-    SqList a;
-    for(;i&lt;a.length;++i)
-    scanf(“%d”,&amp;a.data[i]);
-    Delete(a,e);
-    for(int i=0;i&lt;a.length;++i)
-    printf(“%d\n”,a.data[i]);
-    return 0;
-}
-</code></pre><p>改动不大，添加个函数而已。这里删除的是15，具体题目具体分析。</p>
-<p>原来：11 12 13 14 15 16 17 18 19 20</p>
-<p>run后：11 12 13 14 16 17 18 19 20<br><img src="http://source.chenyalun.cn/images/201510/5103101.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p align = &quot;center&quot;&gt;&lt;br&gt;简单探讨顺序表的插入与删除&lt;br&gt;. &lt;/p&gt;
-    
-    </summary>
-    
-      <category term="编程技巧" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
+      <category term="编程技巧" scheme="http://blog.chenyalun.com/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
     
     
   </entry>
