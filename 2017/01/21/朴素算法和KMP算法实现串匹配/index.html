@@ -96,7 +96,7 @@
 <meta property="og:url" content="http://blog.chenyalun.com/2017/01/21/朴素算法和KMP算法实现串匹配/index.html">
 <meta property="og:site_name" content="Ya">
 <meta property="og:description" content="串匹配.">
-<meta property="og:updated_time" content="2017-01-21T02:06:16.000Z">
+<meta property="og:updated_time" content="2017-01-21T02:10:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="朴素算法和KMP算法实现串匹配">
 <meta name="twitter:description" content="串匹配.">
@@ -335,8 +335,7 @@
         <p align="center"> 串匹配. </p>
 
 <a id="more"></a>
-<p>#钩玄</p>
-<ul>
+<h1 id="钩玄"><a href="#钩玄" class="headerlink" title="钩玄"></a>钩玄</h1><ul>
 <li>长度为 0 的串称为空串</li>
 <li>串中字符的个数称为串的长度 </li>
 <li>s1 和 s2 相等:其长度相等，且对应位置的各字符分别相同</li>
@@ -355,8 +354,7 @@
 <li>在数值中:<code>&amp;按位与 |按位或 ^按位异或 ~按位取反</code></li>
 <li>pop() 函数用于移除列表中的一个元素（默认最后一个元素），并且返回该元素的值。</li>
 </ul>
-<p>#朴素匹配算法</p>
-<p>##逐个字符匹配<br>t为目标串 p为匹配串</p>
+<h1 id="朴素匹配算法"><a href="#朴素匹配算法" class="headerlink" title="朴素匹配算法"></a>朴素匹配算法</h1><h2 id="逐个字符匹配"><a href="#逐个字符匹配" class="headerlink" title="逐个字符匹配"></a>逐个字符匹配</h2><p>t为目标串 p为匹配串</p>
 <pre><code>def naiveMatch1(t,p):
     n,m = len(t),len(p)
     i,j = 0,0
@@ -372,7 +370,7 @@
         return i - j #返回匹配成功的首字符的索引(从0开始)
     print(&quot;匹配失败&quot;)
     return -1
-</code></pre><p>##整个串匹配<br>(时间复杂度:O(n*m))</p>
+</code></pre><h2 id="整个串匹配"><a href="#整个串匹配" class="headerlink" title="整个串匹配"></a>整个串匹配</h2><p>(时间复杂度:O(n*m))</p>
 <pre><code>def naiveMatch2(t,p):
     n = len(t)
     m = len(p)
@@ -396,9 +394,8 @@ naiveMatch2(t,p2)
 <li>一旦比较到两个串中有字符不匹配,直接将匹配串整体向右移动一位</li>
 <li>不管不顾前面已经成功匹配的字符</li>
 </ul>
-<p>#KMP算法<br>设法利用已匹配的字符数信息，根据部分匹配表移动多位而不是1位,提高效率</p>
-<p>##部分匹配表 </p>
-<ul>
+<h1 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h1><p>设法利用已匹配的字符数信息，根据部分匹配表移动多位而不是1位,提高效率</p>
+<h2 id="部分匹配表"><a href="#部分匹配表" class="headerlink" title="部分匹配表"></a>部分匹配表</h2><ul>
 <li>前缀:指除了最后一个字符以外，一个字符串的全部头部组合</li>
 <li>后缀:指除了第一个字符以外，一个字符串的全部尾部组合</li>
 <li>部分匹配值:前缀和后缀的’最长的’共有元素的长度</li>
@@ -417,9 +414,7 @@ naiveMatch2(t,p2)
 </li>
 </ol>
 <p><strong>移动位数 = 已匹配的字符数 - 对应的部分匹配值</strong></p>
-<p>##部分匹配表算法实现</p>
-<p>###方法一:</p>
-<pre><code>#1.拆分匹配串
+<h2 id="部分匹配表算法实现"><a href="#部分匹配表算法实现" class="headerlink" title="部分匹配表算法实现"></a>部分匹配表算法实现</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一:"></a>方法一:</h3><pre><code>#1.拆分匹配串
 def getPart(p):
     part = []
     for i in range(1,len(p)+1):
@@ -443,8 +438,7 @@ def partialTable1(p):
     for elem in getPart(p):
         result.append(getLength(elem))
     return result
-</code></pre><p>###方法二:</p>
-<pre><code>#部分匹配表  
+</code></pre><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二:"></a>方法二:</h3><pre><code>#部分匹配表  
 def partialTable2(p):   
     prefix = set()  
     suffix = set()  
@@ -457,9 +451,8 @@ def partialTable2(p):
 
 print(partialTable1(&quot;ABCDABDABCDABDABCDABDABCDABDABCDABDABCDABD&quot;))
 print(partialTable2(&quot;ABCDABDABCDABDABCDABDABCDABDABCDABDABCDABD&quot;))
-
-#KMP核心算法(必须使用逐个字符匹配,不能使用整个串匹配)
-def kmpMatch(t,p):
+</code></pre><h2 id="KMP核心算法"><a href="#KMP核心算法" class="headerlink" title="KMP核心算法"></a>KMP核心算法</h2><p>必须使用逐个字符匹配,不能使用整个串匹配</p>
+<pre><code>def kmpMatch(t,p):
     n,m = len(t),len(p)
     table = partialTable2(p) #获取匹配串的部分匹配表
     cur = 0
@@ -667,7 +660,7 @@ kmpMatch(&quot;BBC ABCDAB ABCDABCDABDE&quot;,&quot;ABCDABD&quot;)
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#钩玄"><span class="nav-number">1.</span> <span class="nav-text">钩玄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#朴素匹配算法"><span class="nav-number">2.</span> <span class="nav-text">朴素匹配算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逐个字符匹配"><span class="nav-number">2.1.</span> <span class="nav-text">逐个字符匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整个串匹配"><span class="nav-number">2.2.</span> <span class="nav-text">整个串匹配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KMP算法"><span class="nav-number">3.</span> <span class="nav-text">KMP算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#部分匹配表"><span class="nav-number">3.1.</span> <span class="nav-text">部分匹配表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部分匹配表算法实现"><span class="nav-number">3.2.</span> <span class="nav-text">部分匹配表算法实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">3.2.1.</span> <span class="nav-text">方法一:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.2.</span> <span class="nav-text">方法二:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP核心算法"><span class="nav-number">3.3.</span> <span class="nav-text">KMP核心算法</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
