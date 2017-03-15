@@ -92,20 +92,20 @@
 
 <meta name="description" content="2016.12.4 修改并回顾
 
- C语言方面.">
+ C语言方面。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读「李明杰博客」">
 <meta property="og:url" content="http://blog.chenyalun.com/2016/10/28/读李明杰博客/index.html">
 <meta property="og:site_name" content="Ya">
 <meta property="og:description" content="2016.12.4 修改并回顾
 
- C语言方面.">
-<meta property="og:updated_time" content="2017-03-03T15:04:50.000Z">
+ C语言方面。">
+<meta property="og:updated_time" content="2017-03-15T09:48:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读「李明杰博客」">
 <meta name="twitter:description" content="2016.12.4 修改并回顾
 
- C语言方面.">
+ C语言方面。">
 
 
 
@@ -329,7 +329,7 @@
         <blockquote>
 <p>2016.12.4 修改并回顾</p>
 </blockquote>
-<p align="center"> C语言方面. </p>
+<p align="center"> C语言方面。 </p>
 
 <a id="more"></a>
 <h1 id="读感"><a href="#读感" class="headerlink" title="读感"></a>读感</h1><p>这次零零碎碎花了一周时间拜读老师的博客,很多知识点理解地更透彻了,尤其是C语言方面的.不太熟悉或将近遗忘的知识点记录下来,做复习巩固之用.</p>
@@ -347,15 +347,15 @@
 <li>枚举与结构体定义的三种方式?</li>
 <li>为何不要在description方法中同时使用%@和self?</li>
 </ol>
-<h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><ol>
+<h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><ul>
 <li><p>不要在UIViewController的loadView方法中改变状态栏的可视性,会导致重复调用2次loadView和viewDidLoad方法.</p>
 </li>
 <li><p>控制打印格式</p>
-<p> printf(“My height is %8.1f”, 179.95f);</p>
-<p> scanf(“%d-%d-%d”, &amp;a, &amp;b, &amp;c);<br> scanf(“%d %d %d”, &amp;a, &amp;b, &amp;c);</p>
+<p>  printf(“My height is %8.1f”, 179.95f);</p>
+<p>  scanf(“%d-%d-%d”, &amp;a, &amp;b, &amp;c);<br>  scanf(“%d %d %d”, &amp;a, &amp;b, &amp;c);</p>
 </li>
-</ol>
-<ol>
+</ul>
+<ul>
 <li><p>计算机中的内存是以字节为单位的存储空间.<br>内存的每一个字节都有一个唯一的编号，这个编号就称为地址.<br>凡存放在内存中的程序和数据都有一个地址，也就是说，一个函数也有自己的内存地址。变量存储单元的第一个字节的地址就是该变量的地址.</p>
 </li>
 <li><p>二维数组的&amp;a[i] == (a+i)</p>
@@ -374,7 +374,7 @@ int main()
     return 0;
 }
 </code></pre></li>
-</ol>
+</ul>
 <pre><code>putchar(65); // A
 
 putchar(&apos;A&apos;); // A
@@ -384,7 +384,7 @@ putchar(a); // A
 
 char c;
 c = getchar();
-</code></pre><ol>
+</code></pre><ul>
 <li><p>包含string.h头文件后,strlen\strcpy\strcat\strcmp函数的用法</p>
 <pre><code>// 长度为2,遇空字符\0断!
 int size = strlen(&quot;mj&quot;);
@@ -485,8 +485,8 @@ int main()
     return 0;
 }
 </code></pre></li>
-</ol>
-<ol>
+</ul>
+<ul>
 <li><p>将函数作为参数在函数间传递</p>
 <pre><code> // 减法运算
  int minus(int a, int b) {
@@ -584,7 +584,7 @@ printf(&quot;%d&quot;, ss);// 是10
 // 利用上面结构体定义结构体变量stu
 struct Student stu;
 </code></pre></li>
-</ol>
+</ul>
 <pre><code>// 直接定义结构体变量stu
 struct Student {
     char *name;
@@ -604,7 +604,7 @@ typedef struct {
     char *name;
     int age;
 } Student;
-</code></pre><ol>
+</code></pre><ul>
 <li>定义结构体类型，只是说明了该类型的组成情况，并没有给它分配存储空间，就像系统不为int类型本身分配空间一样。只有当定义属于结构体类型的变量时，系统才会分配存储空间给该变量.结构体变量占用的内存空间是其成员所占内存之和，而且各成员在内存中按定义的顺序依次排列.</li>
 <li>将结构体变量作为函数参数进行传递时，其实传递的是全部成员的值，也就是将实参中成员的值一一赋值给对应的形参成员。因此，形参的改变不会影响到实参.</li>
 <li>结构体指针变量的定义形式：<code>struct 结构体名称 *指针变量名</code>,三种访问方式:<ul>
@@ -619,13 +619,13 @@ String str = &quot;This is a string!&quot;;
 </code></pre></li>
 <li><p>typedef给结构体起别名</p>
 </li>
-</ol>
+</ul>
 <pre><code>    struct CGRect {
     CGPoint origin;
     CGSize size;
 };
 typedef struct CGRect CGRect;
-</code></pre><ol>
+</code></pre><ul>
 <li><p>typedef给指向结构体的指针起别名</p>
 <pre><code>#include &lt;stdio.h&gt;
 
@@ -662,7 +662,8 @@ int main(int argc, const char * argv[]) {
 
      return 0;
  }
-</code></pre><p>43.typedef给指向函数的指针类型起别名</p>
+</code></pre></li>
+<li><p>typedef给指向函数的指针类型起别名</p>
 <pre><code>#include &lt;stdio.h&gt;
 
 // 定义一个sum函数，计算a跟b的和
@@ -684,8 +685,8 @@ int main(int argc, const char * argv[]) {
     return 0;
  }
 </code></pre></li>
-</ol>
-<ol>
+</ul>
+<ul>
 <li><p>typedef与#define,给类型起别名，最好使用typedef，而不是使用#define.</p>
 <pre><code>typedef char *String1;
 #define String2 char *
@@ -731,7 +732,7 @@ String2 str3, str4;
 执行可执行文件  ./a.out
 </code></pre></li>
 <li>当使用基本数据类型（char、int、float等）作为实参时，实参和形参之间只是值传递，修改形参的值并不影响到实参</li>
-</ol>
+</ul>
 <blockquote>
 <p>向作者致谢!<br>M了个J:<a href="http://www.cnblogs.com/mjios/" target="_blank" rel="external">http://www.cnblogs.com/mjios/</a></p>
 <p>参考博客<br>C语言中文网:<a href="http://c.biancheng.net/cpp/html/88.html" target="_blank" rel="external">http://c.biancheng.net/cpp/html/88.html</a></p>
@@ -847,7 +848,7 @@ String2 str3, str4;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -864,7 +865,7 @@ String2 str3, str4;
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

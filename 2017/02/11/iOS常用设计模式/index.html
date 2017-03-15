@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="关于设计模式.">
+<meta name="description" content="关于设计模式。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS常用设计模式">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/02/11/iOS常用设计模式/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="关于设计模式.">
-<meta property="og:updated_time" content="2017-03-05T09:10:34.000Z">
+<meta property="og:description" content="关于设计模式。">
+<meta property="og:updated_time" content="2017-03-15T09:09:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常用设计模式">
-<meta name="twitter:description" content="关于设计模式.">
+<meta name="twitter:description" content="关于设计模式。">
 
 
 
@@ -320,391 +320,122 @@
       
 
       
-        <p align="center"> 关于设计模式. </p>
+        <p align="center"> 关于设计模式。 </p>
 
 <a id="more"></a>
 <h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><ul>
-<li><p>原型模式是通过克隆已有的对象来创建新的对象,已有的对象即为原型.(Objective-C中的深复制)</p>
+<li><p>原型模式是通过克隆已有的对象来创建新的对象，已有的对象即为原型。(Objective-C中的深复制)</p>
 </li>
-<li><p>优点:将创建对象的代码隐藏,屏蔽初始化的具体细节,避免重复耗时的过程.</p>
+<li><p>优点:将创建对象的代码隐藏，屏蔽初始化的具体细节，避免重复耗时的过程。</p>
 </li>
-<li><p>当需要创建一个新的实例,但不想依赖初始化器,使用此模式</p>
+<li><p>当需要创建一个新的实例，但不想依赖初始化器，使用此模式。</p>
 </li>
-<li><p>注意:深复制与浅复制的问题.浅复制:复制对象的引用,深复制:复制对象本身.不可变对象的copy操作是浅复制,其他情况是深复制,但是集合类对象即便是深复制,也是复制集合类对象自身,里面的元素并未复制,或者说是单层深复制,而要对集合类对象进行完全彻底的复制,归档可以解决.</p>
+<li><p>注意:深复制与浅复制的问题。浅复制:复制对象的引用，深复制:复制对象本身。不可变对象的copy操作是浅复制，其他情况是深复制，但是集合类对象即便是深复制，也是复制集合类对象自身，里面的元素并未复制，或者说是单层深复制，而要对集合类对象进行完全彻底的复制，归档可以解决。</p>
 </li>
-<li><p>应用:实现NSCopying协议并保证类的基类是NSObject.</p>
+<li><p>应用:实现NSCopying协议并保证类的基类是NSObject。</p>
 </li>
-<li><p>实现方法: 根类遵循NSCopying协议,重写copyWithZone方法,创建一个复制方法Operation,方便自身以及增加属性的子类再次复制.</p>
+<li><p>实现方法: 根类遵循NSCopying协议，重写copyWithZone方法，创建一个复制方法Operation，方便自身以及增加属性的子类再次复制。</p>
 </li>
-<li><p>YAObject担当根类,遵循NSCopying协议,重写copyWithZone方法,提供复制接口copyWithObject,方便自身以及子类复制.YAPerson增加两个属性,且类型是集合类.</p>
-<pre><code>@interface YAObject : NSObject &lt;NSCopying&gt;
-/** 年龄 */
-@property (nonatomic,assign) NSInteger age;
-/** 姓名 */
-@property (nonatomic,copy) NSString *name;
-
-/** 复制操作 */
-- (void)copyWithObject:(NSObject *)object;
-@end
-
-@interface YAPerson : YAObject
-/** 书籍 */
-@property (nonatomic,strong) NSArray *books;
-/** 朋友 */
-@property (nonatomic,strong) NSMutableArray *friends;
-@end
-</code></pre></li>
-</ul>
-<ul>
-<li><p>copyWithZone操作中,[self class]使子类也能调用此方法,子类中,重写copyWithObject操作,当有集合类元素的时候,不能单纯的[array copy],这样仅是复制了集合元素自身,却没有复制集合中的元素,是单层深复制,要copyItems.</p>
-<pre><code>@implementation YAObject
-// 实现的时候用copyWithZone，调用的时候用copy,最顶层的根类重写该方法,子类调用但不得重写
-- (id)copyWithZone:(NSZone *)zone {
-    YAObject *object = [[[self class] allocWithZone:zone] init];
-    // 把自己copy后赋予object
-    [self copyWithObject:object];
-    return object;
-}
-
-// 自身以及子类实现该方法以赋值给object
-- (void)copyWithObject:(YAObject *)object {
-    object.name = self.name;
-    object.age = self.age;
-}
-@end
-
-@implementation YAPerson
-// 又增加了属性
-// 自身以及子类实现该方法以赋值给object
-- (void)copyWithObject:(YAPerson *)object {
-    [super copyWithObject:object];
-    object.books = [[NSArray alloc] initWithArray:self.books copyItems:YES];
-    object.friends = [[NSMutableArray alloc] initWithArray:self.friends copyItems:YES];
-}
-@end
-</code></pre></li>
+<li><p>YAObject担当根类，遵循NSCopying协议，重写copyWithZone方法，提供复制接口copyWithObject，方便自身以及子类复制.YAPerson增加两个属性，且类型是集合类。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAObject</span> : <span class="title">NSObject</span> &lt;<span class="title">NSCopying</span>&gt;</span></div><div class="line"><span class="comment">/** 年龄 */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>，<span class="keyword">assign</span>) <span class="built_in">NSInteger</span> age;</div><div class="line"><span class="comment">/** 姓名 */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>，<span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</div><div class="line">   </div><div class="line"><span class="comment">/** 复制操作 */</span></div><div class="line">- (<span class="keyword">void</span>)copyWithObject:(<span class="built_in">NSObject</span> *)object;</div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAPerson</span> : <span class="title">YAObject</span></span></div><div class="line"><span class="comment">/** 书籍 */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>，<span class="keyword">strong</span>) <span class="built_in">NSArray</span> *books;</div><div class="line"><span class="comment">/** 朋友 */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>，<span class="keyword">strong</span>) <span class="built_in">NSMutableArray</span> *friends;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>copyWithZone操作中，[self class]使子类也能调用此方法，子类中，重写copyWithObject操作，当有集合类元素的时候，不能单纯的[array copy]，这样仅是复制了集合元素自身，却没有复制集合中的元素，是单层深复制，要copyItems。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="meta">@implementation</span> <span class="type">YAObject</span></div><div class="line"><span class="comment">// 实现的时候用copyWithZone，调用的时候用copy，最顶层的根类重写该方法，子类调用但不得重写</span></div><div class="line">- (id)copyWithZone:(<span class="type">NSZone</span> *)zone &#123;</div><div class="line">    <span class="type">YAObject</span> *<span class="class"><span class="keyword">object</span> </span>= [[[self <span class="class"><span class="keyword">class</span>] <span class="title">allocWithZone</span></span>:zone] init];</div><div class="line">    <span class="comment">// 把自己copy后赋予object</span></div><div class="line">    [self copyWithObject:<span class="class"><span class="keyword">object</span>]</span>;</div><div class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">object</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 自身以及子类实现该方法以赋值给object</span></div><div class="line">- (void)copyWithObject:(<span class="type">YAObject</span> *)<span class="class"><span class="keyword">object</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">object</span>.<span class="title">name</span> </span>= self.name;</div><div class="line">    <span class="class"><span class="keyword">object</span>.<span class="title">age</span> </span>= self.age;</div><div class="line">&#125;</div><div class="line"><span class="meta">@end</span></div><div class="line"></div><div class="line"><span class="meta">@implementation</span> <span class="type">YAPerson</span></div><div class="line"><span class="comment">// 又增加了属性</span></div><div class="line"><span class="comment">// 自身以及子类实现该方法以赋值给object</span></div><div class="line">- (void)copyWithObject:(<span class="type">YAPerson</span> *)<span class="class"><span class="keyword">object</span> </span>&#123;</div><div class="line">    [<span class="keyword">super</span> copyWithObject:<span class="class"><span class="keyword">object</span>]</span>;</div><div class="line">    <span class="class"><span class="keyword">object</span>.<span class="title">books</span> </span>= [[<span class="type">NSArray</span> alloc] initWithArray:self.books copyItems:<span class="type">YES</span>];</div><div class="line">    <span class="class"><span class="keyword">object</span>.<span class="title">friends</span> </span>= [[<span class="type">NSMutableArray</span> alloc] initWithArray:self.friends copyItems:<span class="type">YES</span>];</div><div class="line">&#125;</div><div class="line"><span class="meta">@end</span></div></pre></td></tr></table></figure>
+</li>
 <li><p>测试</p>
-<pre><code>YAObject *object = [[YAObject alloc] init];
-object.name = @&quot;Aaron&quot;;
-object.age = 22;
-kLog(@&quot;%@--%ld&quot;,object.name, object.age);
-
-YAObject *objectB = [object copy];
-kLog(@&quot;%@--%ld&quot;,objectB.name, objectB.age);
-
-YAPerson *person = [[YAPerson alloc] init];
-person.name = @&quot;A&quot;;
-person.age = 25;
-person.books = @[@&quot;V&quot;,@&quot;T&quot;,@&quot;N&quot;];
-person.friends = [NSMutableArray arrayWithObjects:@&quot;QQ&quot;,@&quot;WeChat&quot;, nil];
-
-YAPerson *personB = [person copy];
-kLog(@&quot;%@-%ld-%@-%@&quot;,personB.name, personB.age, personB.books, personB.friends);
-</code></pre></li>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line">YAObject *object = [[YAObject alloc] init]<span class="comment">;</span></div><div class="line">object.name = @<span class="string">"Aaron"</span><span class="comment">;</span></div><div class="line">object.age = <span class="number">22</span><span class="comment">;</span></div><div class="line">kLog(@<span class="string">"%@--%ld"</span>，object.name， object.age)<span class="comment">;</span></div><div class="line">  </div><div class="line">YAObject *objectB = [object copy]<span class="comment">;</span></div><div class="line">kLog(@<span class="string">"%@--%ld"</span>，objectB.name， objectB.age)<span class="comment">;</span></div><div class="line">  </div><div class="line">YAPerson *person = [[YAPerson alloc] init]<span class="comment">;</span></div><div class="line">person.name = @<span class="string">"A"</span><span class="comment">;</span></div><div class="line">person.age = <span class="number">25</span><span class="comment">;</span></div><div class="line">person.<span class="keyword">books </span>= @[@<span class="string">"V"</span>，@<span class="string">"T"</span>，@<span class="string">"N"</span>]<span class="comment">;</span></div><div class="line">person.friends = [NSMutableArray arrayWithObjects:@<span class="string">"QQ"</span>，@<span class="string">"WeChat"</span>， nil]<span class="comment">;</span></div><div class="line">  </div><div class="line">YAPerson *personB = [person copy]<span class="comment">;</span></div><div class="line">kLog(@<span class="string">"%@-%ld-%@-%@"</span>，personB.name， personB.age， personB.<span class="keyword">books， </span>personB.friends)<span class="comment">;</span></div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h1 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h1><ul>
-<li><p>单例模式保证某个类型的对象在应用中只存在一个实例</p>
+<li><p>单例模式保证某个类型的对象在应用中只存在一个实例。</p>
 </li>
-<li><p>封装共享资源,管理代表现实世界资源的对象</p>
+<li><p>封装共享资源，管理代表现实世界资源的对象。</p>
 </li>
-<li><p>当进一步创建对象却不能增加现实中的可用资源,或者希望对象只存在一个实例时使用</p>
+<li><p>当进一步创建对象却不能增加现实中的可用资源，或者希望对象只存在一个实例时使用。</p>
 </li>
-<li><p>要求该实例无法真正意义上被复制克隆</p>
+<li><p>要求该实例无法真正意义上被复制克隆。</p>
 </li>
-<li><p>实现:考虑多线程,重写alloc init方法</p>
+<li><p>实现:考虑多线程，重写alloc init方法。</p>
 </li>
-<li><p>考虑调用copy等方法,不遵循NSCopying协议,重写Copy等方法</p>
-<pre><code>@interface YASingleton : NSObject
-// 接口
-+ (instancetype)sharedSingleton;
-@end
-
-@implementation YASingleton
-   // 重写alloc  init
-   static YASingleton *singleton = nil;
-   + (instancetype)allocWithZone:(struct _NSZone *)zone {
-       if (singleton == nil) {
-           static dispatch_once_t onceToken;
-           dispatch_once(&amp;onceToken, ^{
-               singleton = [super allocWithZone:zone];
-           });
-       }
-       return singleton;
-   }
-
-   - (instancetype)init {
-       static dispatch_once_t onceToken;
-       dispatch_once(&amp;onceToken, ^{
-           singleton = [super init];
-       });
-       return singleton;
-   }
-
-   // 考虑复制的情况
-   /*
-    不建议
-   - (id)mutableCopyWithZone:(struct _NSZone *)zone {
-       return singleton;
-   }
-
-   - (id)copyWithZone:(struct _NSZone *)zone {
-       return singleton;
-   }
-   */
-   - (id)copy {
-       return singleton;
-   }
-
-   - (id)mutableCopy {
-       return singleton;
-   }
-   // 接口
-   + (instancetype)sharedSingleton {
-       return [[self alloc] init];
-    }
-   @end
-</code></pre></li>
-<li><p>除了使用GCD,也可以使用互斥锁</p>
-<pre><code>// 互斥锁的形式
-+ (instancetype)allocWithZone:(struct _NSZone *)zone {
-    if (singleton == nil) {
-    @synchronized (self) {
-        singleton = [super allocWithZone:zone];
-    }
-    }
-    return singleton;
-}
-</code></pre></li>
-<li><p>打印地址,验证</p>
-<pre><code>YASingleton *sing = [YASingleton sharedSingleton];
-YASingleton *singB = [sing copy];
-YASingleton *singC = [sing mutableCopy];
-YASingleton *singD = [[YASingleton alloc] init];
-kLog(@&quot;%p-%p-%p-%p&quot;,sing, singB, singC, singD);
-</code></pre></li>
-<li><p>似乎封装成宏更好一点</p>
-<pre><code>// 单例
-#define YASingH(Name) + (instancetype)shared##Name;
-
-#define YASingM(Name) \
-static id _instace = nil; \
-+ (id)allocWithZone:(struct _NSZone *)zone \
-{ \
-if (_instace == nil) { \
-static dispatch_once_t onceToken; \
-dispatch_once(&amp;onceToken, ^{ \
-_instace = [super allocWithZone:zone]; \
-}); \
-} \
-return _instace; \
-} \
-\
-- (id)init \
-{ \
-static dispatch_once_t onceToken; \
-dispatch_once(&amp;onceToken, ^{ \
-_instace = [super init]; \
-}); \
-return _instace; \
-} \
-\
-+ (instancetype)shared##Name \
-{ \
-return [[self alloc] init]; \
-} \
-- (instancetype)copy \
-{ \
-return _instace; \
-} \
-\
-- (instancetype)mutableCopy \
-{ \
-return _instace; \
-}
-</code></pre></li>
+<li><p>考虑调用copy等方法，不遵循NSCopying协议，重写Copy等方法。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YASingleton</span> : <span class="title">NSObject</span></span></div><div class="line">  <span class="comment">// 接口</span></div><div class="line">  + (<span class="keyword">instancetype</span>)sharedSingleton;</div><div class="line">  <span class="keyword">@end</span></div><div class="line">  </div><div class="line">  <span class="class"><span class="keyword">@implementation</span> <span class="title">YASingleton</span></span></div><div class="line">     <span class="comment">// 重写alloc  init</span></div><div class="line">     <span class="keyword">static</span> YASingleton *singleton = <span class="literal">nil</span>;</div><div class="line">     + (<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone &#123;</div><div class="line">         <span class="keyword">if</span> (singleton == <span class="literal">nil</span>) &#123;</div><div class="line">             <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">             <span class="built_in">dispatch_once</span>(&amp;onceToken， ^&#123;</div><div class="line">                 singleton = [<span class="keyword">super</span> allocWithZone:zone];</div><div class="line">             &#125;);</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> singleton;</div><div class="line">     &#125;</div><div class="line">     </div><div class="line">     - (<span class="keyword">instancetype</span>)init &#123;</div><div class="line">         <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">         <span class="built_in">dispatch_once</span>(&amp;onceToken， ^&#123;</div><div class="line">             singleton = [<span class="keyword">super</span> init];</div><div class="line">         &#125;);</div><div class="line">         <span class="keyword">return</span> singleton;</div><div class="line">     &#125;</div><div class="line">     </div><div class="line">     <span class="comment">// 考虑复制的情况</span></div><div class="line">     <span class="comment">/*</span></div><div class="line">      不建议</div><div class="line">     - (id)mutableCopyWithZone:(struct _NSZone *)zone &#123;</div><div class="line">         return singleton;</div><div class="line">     &#125;</div><div class="line">     </div><div class="line">     - (id)copyWithZone:(struct _NSZone *)zone &#123;</div><div class="line">         return singleton;</div><div class="line">     &#125;</div><div class="line">     */</div><div class="line">     - (<span class="keyword">id</span>)<span class="keyword">copy</span> &#123;</div><div class="line">         <span class="keyword">return</span> singleton;</div><div class="line">     &#125;</div><div class="line">     </div><div class="line">     - (<span class="keyword">id</span>)mutableCopy &#123;</div><div class="line">         <span class="keyword">return</span> singleton;</div><div class="line">     &#125;</div><div class="line">     <span class="comment">// 接口</span></div><div class="line">     + (<span class="keyword">instancetype</span>)sharedSingleton &#123;</div><div class="line">         <span class="keyword">return</span> [[<span class="keyword">self</span> alloc] init];</div><div class="line">      &#125;</div><div class="line">     <span class="keyword">@end</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>除了使用GCD，也可以使用互斥锁。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 互斥锁的形式</span></div><div class="line">+ (<span class="keyword">instancetype</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone &#123;</div><div class="line">    <span class="keyword">if</span> (singleton == <span class="literal">nil</span>) &#123;</div><div class="line">    <span class="keyword">@synchronized</span> (<span class="keyword">self</span>) &#123;</div><div class="line">        singleton = [<span class="keyword">super</span> allocWithZone:zone];</div><div class="line">    &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> singleton;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>打印地址，验证：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line">YASingleton *sing = [YASingleton <span class="keyword">sharedSingleton];</span></div><div class="line">YASingleton *singB = [sing copy]<span class="comment">;</span></div><div class="line">YASingleton *singC = [sing mutableCopy]<span class="comment">;</span></div><div class="line">YASingleton *singD = [[YASingleton alloc] init]<span class="comment">;</span></div><div class="line">kLog(@<span class="string">"%p-%p-%p-%p"</span>，sing， singB， singC， singD)<span class="comment">;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>似乎封装成宏更好一点：</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 单例</span></div><div class="line"><span class="meta">#define YASingH(Name) + (instancetype)shared##Name;</span></div><div class="line">   </div><div class="line"><span class="meta">#define YASingM(Name) \</span></div><div class="line"><span class="keyword">static</span> <span class="keyword">id</span> _instace = <span class="literal">nil</span>; \</div><div class="line">+ (<span class="keyword">id</span>)allocWithZone:(<span class="keyword">struct</span> _NSZone *)zone \</div><div class="line">&#123; \</div><div class="line"><span class="keyword">if</span> (_instace == <span class="literal">nil</span>) &#123; \</div><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</div><div class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken， ^&#123; \</div><div class="line">_instace = [<span class="keyword">super</span> allocWithZone:zone]; \</div><div class="line">&#125;); \</div><div class="line">&#125; \</div><div class="line"><span class="keyword">return</span> _instace; \</div><div class="line">&#125; \</div><div class="line">\</div><div class="line">- (<span class="keyword">id</span>)init \</div><div class="line">&#123; \</div><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken; \</div><div class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken， ^&#123; \</div><div class="line">_instace = [<span class="keyword">super</span> init]; \</div><div class="line">&#125;); \</div><div class="line"><span class="keyword">return</span> _instace; \</div><div class="line">&#125; \</div><div class="line">\</div><div class="line">+ (<span class="keyword">instancetype</span>)shared<span class="meta">##Name \</span></div><div class="line">&#123; \</div><div class="line"><span class="keyword">return</span> [[<span class="keyword">self</span> alloc] init]; \</div><div class="line">&#125; \</div><div class="line">- (<span class="keyword">instancetype</span>)<span class="keyword">copy</span> \</div><div class="line">&#123; \</div><div class="line"><span class="keyword">return</span> _instace; \</div><div class="line">&#125; \</div><div class="line">\</div><div class="line">- (<span class="keyword">instancetype</span>)mutableCopy \</div><div class="line">&#123; \</div><div class="line"><span class="keyword">return</span> _instace; \</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h1 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a>适配器</h1><ul>
-<li><p>适配器使得两个不兼容的API组件协同工作,用于连接两种不同种类的对象</p>
+<li><p>适配器使得两个不兼容的API组件协同工作，用于连接两种不同种类的对象。</p>
 </li>
-<li><p>解决无法修改或者不修改源代码的组件的兼容性问题</p>
+<li><p>解决无法修改或者不修改源代码的组件的兼容性问题。</p>
 </li>
-<li><p>类适配器:适配器继承主功能组件,遵循适配接口协议.</p>
+<li><p>类适配器:适配器继承主功能组件，遵循适配接口协议。</p>
 </li>
-<li><p>对象适配器:适配器持有主功能组件(作为成员变量),遵循适配接口协议</p>
+<li><p>对象适配器:适配器持有主功能组件(作为成员变量)，遵循适配接口协议。</p>
 </li>
 <li><p>类适配器的实现</p>
-<pre><code>@interface YAMac : NSObject
-// Mac自带显示接口
-- (void)show;
-@end
-
-// 一般显示器DVI接口
-@protocol YADVI &lt;NSObject&gt;
-- (void)dvi;
-@end
-
-// 适配器:继承自Mac,有显示的功能,遵循YADVI协议,可以显示到一般显示器上
-@interface YAMacDVIAdapter : YAMac &lt;YADVI&gt;
- @end
-
-@implementation YAMac
-- (void)show {
-    kLog(@&quot;Mac自带显示接口&quot;);
-}
-@end
-
-// 适配器实现
-@implementation YAMacDVIAdapter
-
-- (void)dvi {
-    [super show]; // 可以显示内容
-    kLog(@&quot;可以连接到一般的显示器&quot;);
-}
-@end
-
-// 具体使用,调用接口即可
-    YAMacDVIAdapter *adapter = [[YAMacDVIAdapter alloc] init];
-     [adapter dvi];
-</code></pre></li>
-<li><p>当不再继承主功能组件,而是把它作为属性持有的时候,便是对象适配器</p>
-<pre><code>@interface YAMac : NSObject
-// Mac自带显示接口
-- (void)show;
-@end
-
-// 一般显示器DVI接口
-@protocol YADVI &lt;NSObject&gt;
-- (void)dvi;
-@end
-
-// 适配器:遵循YADVI协议,可以显示到一般显示器上,拥有Mac属性,有显示的功能
-@interface YAMacDVIAdapter : NSObject &lt;YADVI&gt;
-@property (nonatomic,strong) YAMac *mac;
-@end
-
-@implementation YAMac
-- (void)show {
-    kLog(@&quot;Mac自带显示接口&quot;);
-}
-@end
-
-// 适配器实现
-@implementation YAMacDVIAdapter
-
-- (void)dvi {
-    self.mac = [[YAMac alloc] init];
-    [self.mac show];
-    kLog(@&quot;可以连接到一般的显示器&quot;);
-}
-
-@end
-
-// 然而.使用方式没有改变
-    YAMacDVIAdapter *adapter = [[YAMacDVIAdapter alloc] init];
-    [adapter dvi];
-</code></pre></li>
+<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="variable">@interface</span> <span class="attribute">YAMac </span>: NSObject</div><div class="line"><span class="comment">// Mac自带显示接口</span></div><div class="line">- (void)show;</div><div class="line"><span class="variable">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 一般显示器DVI接口</span></div><div class="line"><span class="variable">@protocol</span> YADVI &lt;NSObject&gt;</div><div class="line">- (void)dvi;</div><div class="line"><span class="variable">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 适配器:继承自Mac，有显示的功能，遵循YADVI协议，可以显示到一般显示器上</span></div><div class="line"><span class="variable">@interface</span> <span class="attribute">YAMacDVIAdapter </span>: YAMac &lt;YADVI&gt;</div><div class="line"><span class="variable">@end</span></div><div class="line">  </div><div class="line"><span class="variable">@implementation</span> YAMac</div><div class="line">- (void)show &#123;</div><div class="line">  kLog(@"Mac自带显示接口");</div><div class="line">&#125;</div><div class="line"><span class="variable">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 适配器实现</span></div><div class="line"><span class="variable">@implementation</span> YAMacDVIAdapter</div><div class="line">   </div><div class="line">- (void)dvi &#123;</div><div class="line">  <span class="selector-attr">[super show]</span>; <span class="comment">// 可以显示内容</span></div><div class="line">  kLog(@"可以连接到一般的显示器");</div><div class="line">&#125;</div><div class="line"><span class="variable">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 具体使用，调用接口即可</span></div><div class="line">YAMacDVIAdapter *adapter = [[YAMacDVIAdapter alloc] init];</div><div class="line"><span class="selector-attr">[adapter dvi]</span>;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>当不再继承主功能组件，而是把它作为属性持有的时候，便是对象适配器。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAMac</span> : <span class="title">NSObject</span></span></div><div class="line"><span class="comment">// Mac自带显示接口</span></div><div class="line">- (<span class="keyword">void</span>)show;</div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 一般显示器DVI接口</span></div><div class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">YADVI</span> &lt;<span class="title">NSObject</span>&gt;</span></div><div class="line">- (<span class="keyword">void</span>)dvi;</div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 适配器:遵循YADVI协议，可以显示到一般显示器上，拥有Mac属性，有显示的功能</span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAMacDVIAdapter</span> : <span class="title">NSObject</span> &lt;<span class="title">YADVI</span>&gt;</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>，<span class="keyword">strong</span>) YAMac *mac;</div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">YAMac</span></span></div><div class="line">- (<span class="keyword">void</span>)show &#123;</div><div class="line">  kLog(<span class="string">@"Mac自带显示接口"</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 适配器实现</span></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">YAMacDVIAdapter</span></span></div><div class="line">   </div><div class="line">- (<span class="keyword">void</span>)dvi &#123;</div><div class="line">  <span class="keyword">self</span>.mac = [[YAMac alloc] init];</div><div class="line">  [<span class="keyword">self</span>.mac show];</div><div class="line">  kLog(<span class="string">@"可以连接到一般的显示器"</span>);</div><div class="line">&#125;</div><div class="line">    </div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="comment">// 然而.使用方式没有改变</span></div><div class="line">YAMacDVIAdapter *adapter = [[YAMacDVIAdapter alloc] init];</div><div class="line">[adapter dvi];</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><ul>
-<li><p>MVC 能使整个应用结构化,使应用的各个部分更易开发测试维护</p>
+<li><p>MVC 能使整个应用结构化，使应用的各个部分更易开发测试维护。</p>
 </li>
-<li><p>M是指数据模型，V是指用户界面，C则是控制器</p>
+<li><p>M是指数据模型，V是指用户界面，C则是控制器。</p>
 </li>
-<li><p>模型对象封装了应用程序的数据,并定义操控和处理该数据的逻辑和运算.视图对象是应用程序中用户可以看见的对象.控制器对象解释在视图对象中进行的用户操作,并将新的或更改过的数据传达给模型对象</p>
+<li><p>模型对象封装了应用程序的数据，并定义操控和处理该数据的逻辑和运算.视图对象是应用程序中用户可以看见的对象.控制器对象解释在视图对象中进行的用户操作，并将新的或更改过的数据传达给模型对象。</p>
 </li>
-<li><p>Model 和 View 永远不能相互通信，只能通过Controller传递</p>
+<li><p>Model 和 View 永远不能相互通信，只能通过Controller传递。</p>
 </li>
-<li><p>Controller 与 Model 的通信: Notification 和 KVO</p>
+<li><p>Controller 与 Model 的通信: Notification 和 KVO。</p>
 </li>
-<li><p>Controller 与 View 的通信:outlet, action, 数据源,代理等</p>
+<li><p>Controller 与 View 的通信:outlet， action， 数据源，代理等。</p>
 </li>
 </ul>
 <h1 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h1><ul>
 <li><p>MVC升级版</p>
 </li>
-<li><p>ViewController 从 ViewModel 层中读取数据然后显示在View上</p>
+<li><p>ViewController 从 ViewModel 层中读取数据然后显示在View上。</p>
 </li>
-<li><p>ViewController与ViewModel的通信:Block回调和ReactiveCocoa</p>
+<li><p>ViewController与ViewModel的通信:Block回调和ReactiveCocoa。</p>
 </li>
 <li><p>….// 待补充</p>
 </li>
 </ul>
 <h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1><ul>
-<li><p>一个代理对象可以代表其他资源.</p>
+<li><p>一个代理对象可以代表其他资源。</p>
 </li>
 <li><p>当A对象要监听B对象的一些行为时，A成为B的代理.当B对象要通知A对象一些事情时(消息传递)，A成为B的代理。</p>
 </li>
-<li><p>遵守协议,设置代理,实现方法</p>
+<li><p>遵守协议，设置代理，实现方法。</p>
 </li>
 <li><p>实现:</p>
-<pre><code>// 定义协议
-@protocol YACodeDelegate &lt;NSObject&gt;
-@required
-- (void)code;
-@end
-
-@interface YAMan : NSObject
-// 代理属性
-@property (nonatomic, weak) id delegate;
-@end
-
-@interface YACoder : NSObject &lt;YACodeDelegate&gt;
-@end
-
-@implementation YAMan
-- (void)setup {
-    if ([self.delegate respondsToSelector:@selector(code)]) {
-        // 告诉代理要做的事
-    }
-}
-
-@end
-
-@implementation YACoder
-- (void)code {
-    // 实现必须实现的方法
-}
-
-@end
-
-// 具体使用时,设置代理
-    YAMan *man = [[YAMan alloc] init];
-    YACoder *coder = [[YACoder alloc] init];
-    man.delegate = coder;
-</code></pre></li>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 定义协议</span></div><div class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">YACodeDelegate</span> &lt;<span class="title">NSObject</span>&gt;</span></div><div class="line"><span class="keyword">@required</span></div><div class="line">- (<span class="keyword">void</span>)code;</div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAMan</span> : <span class="title">NSObject</span></span></div><div class="line"><span class="comment">// 代理属性</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>， <span class="keyword">weak</span>) <span class="keyword">id</span> delegate;</div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YACoder</span> : <span class="title">NSObject</span> &lt;<span class="title">YACodeDelegate</span>&gt;</span></div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">YAMan</span></span></div><div class="line">- (<span class="keyword">void</span>)setup &#123;</div><div class="line">  <span class="keyword">if</span> ([<span class="keyword">self</span>.delegate respondsToSelector:<span class="keyword">@selector</span>(code)]) &#123;</div><div class="line">      <span class="comment">// 告诉代理要做的事</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="keyword">@end</span></div><div class="line">   </div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">YACoder</span></span></div><div class="line">- (<span class="keyword">void</span>)code &#123;</div><div class="line">  <span class="comment">// 实现必须实现的方法</span></div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="keyword">@end</span></div><div class="line">    </div><div class="line"><span class="comment">// 具体使用时，设置代理</span></div><div class="line">YAMan *man = [[YAMan alloc] init];</div><div class="line">YACoder *coder = [[YACoder alloc] init];</div><div class="line">man.delegate = coder;</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h1 id="观察者"><a href="#观察者" class="headerlink" title="观察者"></a>观察者</h1><ul>
-<li><p>观察者模式定义了一种一对多的依赖关系，让一个或者多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己. </p>
+<li><p>观察者模式定义了一种一对多的依赖关系，让一个或者多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己。 </p>
 </li>
-<li><p>一个对象需要在不依赖另一个对象的情况下,接收到另一个对象的通知.</p>
+<li><p>一个对象需要在不依赖另一个对象的情况下，接收到另一个对象的通知。</p>
 </li>
-<li><p>实现:通知中心.假定A是观察者,B是被观察者</p>
-<pre><code> // 在A中
- // 添加自己为观察者,通知产生执行show方法
- [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(show) name:@&quot;show&quot; object:nil];
-
-// 在自己即将销毁的那刻移除通知
-- (void)dealloc {
-[[NSNotificationCenter defaultCenter] removeObserver:self];
-        } 
-
-// 在B中,负责适时发送通知
-// 发出通知
- [[NSNotificationCenter defaultCenter] postNotificationName:@&quot;show&quot; object:nil userInfo:nil];
-</code></pre></li>
+<li><p>实现:通知中心.假定A是观察者，B是被观察者。</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 在A中</span></div><div class="line"><span class="comment">// 添加自己为观察者，通知产生执行show方法</span></div><div class="line">[[NSNotificationCenter defaultCenter] <span class="string">addObserver:</span>self <span class="string">selector:</span><span class="meta">@selector</span>(show) <span class="string">name:</span>@<span class="string">"show"</span> <span class="string">object:</span>nil];</div><div class="line"></div><div class="line"><span class="comment">// 在自己即将销毁的那刻移除通知</span></div><div class="line">- (<span class="keyword">void</span>)dealloc &#123;</div><div class="line">[[NSNotificationCenter defaultCenter] <span class="string">removeObserver:</span>self];</div><div class="line"> &#125; </div><div class="line"> </div><div class="line"><span class="comment">// 在B中，负责适时发送通知</span></div><div class="line"><span class="comment">// 发出通知</span></div><div class="line">[[NSNotificationCenter defaultCenter] <span class="string">postNotificationName:</span>@<span class="string">"show"</span> <span class="string">object:</span>nil <span class="string">userInfo:</span>nil];</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <ul>
 <li><p>键值观察(某个属性值改变时通知被观察者)</p>
-<pre><code> // 为view的alpha属性添加自己为观察者
-UIView *view = [[UIView alloc] init];
-    [view addObserver:self forKeyPath:@&quot;alpha&quot; options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
-    // 当自身销毁时为view移除观察
-    - (void)dealloc {
-    [self.view removeObserver:self forKeyPath:@&quot;alpha&quot;];
-}
-    // 当alpha属性改变,就会进入
-    - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary&lt;NSKeyValueChangeKey,id&gt; *)change context:(void *)context {
-}
-</code></pre></li>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 为view的alpha属性添加自己为观察者</span></div><div class="line"><span class="built_in">UIView</span> *view = [[<span class="built_in">UIView</span> alloc] init];</div><div class="line">[view addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"alpha"</span> options:<span class="built_in">NSKeyValueObservingOptionOld</span> | <span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="literal">nil</span>];</div><div class="line"></div><div class="line"><span class="comment">// 当自身销毁时为view移除观察</span></div><div class="line">- (<span class="keyword">void</span>)dealloc &#123;</div><div class="line">    [<span class="keyword">self</span>.view removeObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"alpha"</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 当alpha属性改变，就会进入</span></div><div class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSKeyValueChangeKey</span>，<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -745,8 +476,8 @@ UIView *view = [[UIView alloc] init];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/14/iOS应用优化方案/" rel="prev" title="iOS应用优化方案">
-                iOS应用优化方案 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/14/iOS应用优化总结/" rel="prev" title="iOS应用优化总结">
+                iOS应用优化总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -815,7 +546,7 @@ UIView *view = [[UIView alloc] init];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -832,7 +563,7 @@ UIView *view = [[UIView alloc] init];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

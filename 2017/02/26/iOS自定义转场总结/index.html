@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="自定义转场总结.">
+<meta name="description" content="自定义转场总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS自定义转场总结">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/02/26/iOS自定义转场总结/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="自定义转场总结.">
-<meta property="og:updated_time" content="2017-03-04T12:31:39.000Z">
+<meta property="og:description" content="自定义转场总结。">
+<meta property="og:updated_time" content="2017-03-15T08:37:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS自定义转场总结">
-<meta name="twitter:description" content="自定义转场总结.">
+<meta name="twitter:description" content="自定义转场总结。">
 
 
 
@@ -320,282 +320,53 @@
       
 
       
-        <p align="center"> 自定义转场总结. </p>
+        <p align="center"> 自定义转场总结。 </p>
 
 <a id="more"></a>
-<h1 id="勾弦"><a href="#勾弦" class="headerlink" title="勾弦"></a>勾弦</h1><ul>
-<li><p>转场的本质是下一场景的视图替换当前场景的视图以及相应的控制器的替换，表现为当前视图消失和下一视图出现</p>
-</li>
-<li><p>容器类 VC 的转场里 fromView 和 toView 是 containerView 的子层次的视图，而 Modal 转场里 presentingView 与 containerView 是同层次的视图，只有 presentedView 是 containerView 的子层次视图</p>
-</li>
-<li><p>Custom 模式下 Modal 转场结束时 fromView 并未从视图结构中移除；FullScreen 模式的 Modal 转场结束后 fromView 主动被从视图结构中移除了</p>
-</li>
-<li><p>Custom 模式下,在 dismissal 中，不要像其他转场中那样将 toView加入 containerView 中，否则 dismiss 结束后本来可见的 presentingView 将会随着 containerView 一起被移除</p>
-</li>
-<li><p>在 Modal 转场中，presentingView 并非 containerView 的子视图，这时通过viewForKey:方法来获取 presentingView 得到的是 nil，必须通过viewControllerForKey:得到 presentingVC 后来获取</p>
-</li>
-<li><p>当 UIViewController 的modalPresentationStyle属性为.Custom 或.FullScreen时，我们就有机会定制转场效果，此时modalTransitionStyle指定的转场动画将会被忽略</p>
-</li>
-<li><p>容器 VC 的转场的代理由容器 VC 自身的代理提供不同，Modal 转场的代理由 presentedVC(目标控制器) 提供。</p>
-</li>
-<li><p>Modal 转场在 Custom 模式下必须区分 presentation 和 dismissal 转场，而在 FullScreen 模式下可以不用这么做，因为 UIKit 会在 dismissal 转场结束后自动将 presentingView 放置到原来的位置</p>
-</li>
-<li><p>转场代理（Transitioning Delegate）根据不同的转场类型提供其所需要的动画控制类和交互控制类</p>
-</li>
-<li><p>动画控制类(器)（Animation Controller）遵从UIViewControllerAnimatedTransitioning协议，并且负责执行实际的动画。</p>
-</li>
-<li><p>交互控制类(器)（Interaction Controller）遵从UIViewControllerInteractiveTransition协议来控制可交互的转场动画</p>
-</li>
-<li><p>转场上下文（Transitioning Context）定义了转场时需要的元数据（比如转场所参与了的视图控制器和视图的属性），其遵从UIViewControllerContextTransitioning协议，并且这是由系统负责生成和提供</p>
-</li>
-<li><p>转场协调器（Transition Coordinators）可以在运行转场动画时，并行的运行其他动画。转场协调器遵从UIViewControllerTransitionCoordinator协议</p>
-</li>
-<li><p>转场动画交互方式分两种，第一种是属于非交互式：必须要实现动画控制类，第二种交互式：必须要实现动画控制类和交互控制类（例如可以通过手势的滑动距离来控制转场动画的一个进度，一般应用中都可以通过手势的滑动来推出一个视图控制器）</p>
-</li>
-</ul>
-<h1 id="简单转场"><a href="#简单转场" class="headerlink" title="简单转场"></a>简单转场</h1><ul>
-<li><p>View的简单转场</p>
-<pre><code>1.基本类型
-UIViewAnimationOptionLayoutSubviews：动画过程中保证子视图跟随运动。
-UIViewAnimationOptionAllowUserInteraction：动画过程中允许用户交互。
-UIViewAnimationOptionBeginFromCurrentState：所有视图从当前状态开始运行。
-UIViewAnimationOptionRepeat：重复运行动画。
-UIViewAnimationOptionAutoreverse ：动画运行到结束点后仍然以动画方式回到初始点。
-UIViewAnimationOptionOverrideInheritedDuration：忽略嵌套动画时间设置。
-UIViewAnimationOptionOverrideInheritedCurve：忽略嵌套动画速度设置。
-UIViewAnimationOptionAllowAnimatedContent：动画过程中重绘视图（注意仅仅适用于转场动画）。
-UIViewAnimationOptionShowHideTransitionViews：视图切换时直接隐藏旧视图、显示新视图，而不是将旧视图从父视图移除（仅仅适用于转场动画）
-UIViewAnimationOptionOverrideInheritedOptions ：不继承父动画设置或动画类型。
+<h1 id="一、勾弦"><a href="#一、勾弦" class="headerlink" title="一、勾弦"></a>一、勾弦</h1><p>转场的本质是下一场景的视图替换当前场景的视图以及相应的控制器的替换，表现为当前视图消失和下一视图出现。容器类 VC 的转场里 fromView 和 toView 是 containerView 的子层次的视图，而 Modal 转场里 presentingView 与ontainerView 是同层次的视图，只有 presentedView 是 containerView 的子层次视图。Custom 模式下 Modal 转场结束时 fromView 并未从视图结构中移除；FullScreen 模式的 Modal 转场结束后 fromView 主动被从视图结构中移除了。Custom 模式下，在 dismissal 中，不要像其他转场中那样将 toView加入 containerView 中，否则 dismiss 结束后本来可见的 presentingView 将会随着 containerView 一起被移除。</p>
+<p>在 Modal 转场中，presentingView 并非 containerView 的子视图，这时通过viewForKey:方法来获取presentingView 得到的是 nil，必须通过viewControllerForKey:得到presentingVC 后来获取。当 UIViewController 的modalPresentationStyle属性为.Custom 或.FullScreen时，就有机会定制转场效果，此时modalTransitionStyle指定的转场动画将会被忽略。</p>
+<p>容器 VC 的转场的代理由容器 VC 自身的代理提供不同，Modal 转场的代理由 presentedVC(目标控制器) 提供。Modal 转场在 Custom 模式下必须区分 presentation 和 dismissal 转场，而在 FullScreen 模式下可以不用这么做，因为 UIKit 会在 dismissal 转场结束后自动将 presentingView 放置到原来的位置。转场代理（Transitioning Delegate）根据不同的转场类型提供其所需要的动画控制类和交互控制类。</p>
+<p>动画控制类(器)（Animation Controller）遵从UIViewControllerAnimatedTransitioning协议，并且负责执行实际的动画。交互控制类(器)（Interaction Controller）遵从UIViewControllerInteractiveTransition协议来控制可交互的转场动画。转场上下文（Transitioning Context）定义了转场时需要的元数据（比如转场所参与了的视图控制器和视图的属性），其遵从UIViewControllerContextTransitioning协议，并且这是由系统负责生成和提供。</p>
+<p>转场协调器（Transition Coordinators）可以在运行转场动画时，并行的运行其他动画。转场协调器遵从UIViewControllerTransitionCoordinator协议。转场动画交互方式分两种，第一种是属于非交互式：必须要实现动画控制类，第二种交互式：必须要实现动画控制类和交互控制类（例如可以通过手势的滑动距离来控制转场动画的一个进度，一般应用中都可以通过手势的滑动来推出一个视图控制器)。</p>
+<h1 id="二、简单转场"><a href="#二、简单转场" class="headerlink" title="二、简单转场"></a>二、简单转场</h1><p>基本类型</p>
+<blockquote>
+<p>UIViewAnimationOptionLayoutSubviews：动画过程中保证子视图跟随运动。<br>UIViewAnimationOptionAllowUserInteraction：动画过程中允许用户交互。<br>UIViewAnimationOptionBeginFromCurrentState：所有视图从当前状态开始运行。<br>UIViewAnimationOptionRepeat：重复运行动画。<br>UIViewAnimationOptionAutoreverse ：动画运行到结束点后仍然以动画方式回到初始点。<br>UIViewAnimationOptionOverrideInheritedDuration：忽略嵌套动画时间设置。<br>UIViewAnimationOptionOverrideInheritedCurve：忽略嵌套动画速度设置。<br>UIViewAnimationOptionAllowAnimatedContent：动画过程中重绘视图（注意仅仅适用于转场 动画）。</p>
+<p>UIViewAnimationOptionShowHideTransitionViews：视图切换时直接隐藏旧视图、显示新视图，<br>而不是将旧视图从父视图移除（仅仅适用于转场动画）<br>UIViewAnimationOptionOverrideInheritedOptions ：不继承父动画设置或动画类型。</p>
+</blockquote>
+<p>动画速度控制（可从其中选择一个设置）</p>
+<blockquote>
+<p>UIViewAnimationOptionCurveEaseInOut：动画先缓慢，然后逐渐加速。<br>UIViewAnimationOptionCurveEaseIn ：动画逐渐变慢。<br>UIViewAnimationOptionCurveEaseOut：动画逐渐加速。<br>UIViewAnimationOptionCurveLinear ：动画匀速执行，默认值。</p>
+</blockquote>
+<p>转场类型（仅适用于转场动画设置，可以从中选择一个进行设置，基本动画、关键帧动画不需要设置）</p>
+<blockquote>
+<p>UIViewAnimationOptionTransitionNone：没有转场动画效果。<br>UIViewAnimationOptionTransitionFlipFromLeft ：从左侧翻转效果。<br>UIViewAnimationOptionTransitionFlipFromRight：从右侧翻转效果。<br>UIViewAnimationOptionTransitionCurlUp：向后翻页的动画过渡效果。<br>UIViewAnimationOptionTransitionCurlDown ：向前翻页的动画过渡效果。<br>UIViewAnimationOptionTransitionCrossDissolve：旧视图溶解消失显示下一个新视图的效果。<br>UIViewAnimationOptionTransitionFlipFromTop ：从上方翻转效果。<br>UIViewAnimationOptionTransitionFlipFromBottom：从底部翻转效果。</p>
+</blockquote>
+<p>简单使用<br>  作用于fromView的父视图，切换两个view，将formView从其父视图上移除，将toView重新粘在其父视图上，展现一个动画效果。</p>
+  <figure class="highlight clojure"><table><tr><td class="code"><pre><div class="line">[UIView transitionFromView:self.view toView:redView duration:5.0 options:</div><div class="line">UIViewAnimationOptionCurveLinear completion:^(<span class="name">BOOL</span> finished) &#123;</div><div class="line">        kLog(@<span class="string">"转场动画完成"</span>)<span class="comment">;</span></div><div class="line">&#125;]<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>  重绘View视图，任何其子视图的改变或者其自身的改变都会触发转场动画的效果。</p>
+  <figure class="highlight clojure"><table><tr><td class="code"><pre><div class="line">[UIView transitionWithView:self.view duration:2.0 options:</div><div class="line">UIViewAnimationOptionCurveLinear animations:<span class="comment">^&#123;</span></div><div class="line">        self.view.alpha = 0.1;</div><div class="line">&#125; completion:^(<span class="name">BOOL</span> finished) &#123;</div><div class="line">        kLog(@<span class="string">"动画完成"</span>)<span class="comment">;</span></div><div class="line">&#125;]<span class="comment">;</span></div></pre></td></tr></table></figure>
+<h1 id="三、模态转场"><a href="#三、模态转场" class="headerlink" title="三、模态转场"></a>三、模态转场</h1><p>源控制器A–&gt;目标控制器B</p>
+<h2 id="1-提要"><a href="#1-提要" class="headerlink" title="(1) 提要"></a>(1) 提要</h2><p>可以只使用一个动画控制器Animator，但是要对Present/Dismiss分别实现。模态的类型默认为FullScreen，即在Present时，会移除fromView，而类型设置为Custom时，就会使fromView与toView共存。present时，要把toView加入到container的视图层级，dismiss时，要把fromView从container的视图层级中移除。非交互式转场，需要在动画执行完毕声明complete<code>[transitionContext completeTransition:YES];</code>交互式转场，需要判断转场完成或者取消。</p>
+  <figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="built_in">BOOL</span> isCancelled = transitionContext.transitionWasCancelled;</div><div class="line"><span class="comment">// 考虑到转场中途可能取消的情况，转场结束后，恢复视图状态。</span></div><div class="line">fromView.transform = <span class="built_in">CGAffineTransformIdentity</span>;</div><div class="line">toView.transform = <span class="built_in">CGAffineTransformIdentity</span>;</div></pre></td></tr></table></figure>
+<p>在模态中，设置将要跳转到的视图控制器(presentedViewController)的transitioningDelegate。充当代理的对象可以是源视图控制器(presentingViewController)，也可以是自己创建的对象，它需要为转场动画提供一个animator对象。animator对象的animateTransition是整个动画的核心逻辑。</p>
+<h2 id="2-无交互"><a href="#2-无交互" class="headerlink" title="(2) 无交互"></a>(2) 无交互</h2><p>设置<strong>目标控制器B</strong>的代理(可以是A，也可以是B)以及模态动画类型(常用UIModalPresentationCustom或UIModalPresentationFullScreen)。</p>
+  <figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">YAShareViewController *shareViewController = [[YAShareViewController alloc] init];</div><div class="line">   </div><div class="line"><span class="comment">// 设置转场代理</span></div><div class="line">shareViewController.transitioningDelegate = <span class="keyword">self</span>;</div><div class="line"><span class="comment">// 设置转场动画类型</span></div><div class="line">shareViewController.modalPresentationStyle = <span class="built_in">UIModalPresentationCustom</span>;</div><div class="line">[<span class="keyword">self</span> presentViewController:shareViewController animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</div><div class="line">  </div><div class="line"></div><div class="line"><span class="comment">// 目标控制器的代理遵守UIViewControllerTransitioningDelegate协议并相关实现方法</span></div><div class="line"><span class="meta">#pragma mark - Transitioning Delegate</span></div><div class="line"></div><div class="line"><span class="comment">// 无交互出现动画</span></div><div class="line">- (<span class="keyword">id</span>&lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;)animationControllerForPresentedController:(<span class="built_in">UIViewController</span> *)presented presentingController:(<span class="built_in">UIViewController</span> *)presenting sourceController:(<span class="built_in">UIViewController</span> *)source &#123;</div><div class="line"> YATransitionAnimator *animator = [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorPresent];</div><div class="line"> </div><div class="line">     <span class="keyword">return</span> animator;</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="comment">// 无交互消失动画</span></div><div class="line">- (<span class="keyword">id</span>&lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;)animationControllerForDismissedController:(<span class="built_in">UIViewController</span> *)dismissed &#123;</div><div class="line"> YATransitionAnimator *animator = [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorDismiss];</div><div class="line">     <span class="keyword">return</span> animator;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代理方法中的动画管理者Animator独立存在，可以新建一继承自NSObject且遵守<code>UIViewControllerAnimatedTransitioning</code>协议的对象担任(仅仅遵守协议实现方法即可，不需设置代理)。</p>
+  <figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="meta">#pragma mark – Life Cycle</span></div><div class="line">   </div><div class="line">+ (<span class="keyword">instancetype</span>)transitionAnimatorWithType:(TransitionAnimatorType)transitionAnimatorType &#123;</div><div class="line">  YATransitionAnimator *animator = [[YATransitionAnimator alloc] init];</div><div class="line">  animator.transitionAnimatorType = transitionAnimatorType;</div><div class="line">  <span class="keyword">return</span> animator;</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="meta">#pragma mark - AnimatedTransitioning delegate</span></div><div class="line">   </div><div class="line"><span class="comment">//返回动画时间</span></div><div class="line">- (<span class="built_in">NSTimeInterval</span>)transitionDuration:(<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerContextTransitioning</span>&gt;)transitionContext &#123;</div><div class="line">  <span class="keyword">return</span> <span class="number">5.0</span>;</div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="comment">//执行动画的地方</span></div><div class="line">- (<span class="keyword">void</span>)animateTransition:(<span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerContextTransitioning</span>&gt;)transitionContext &#123;</div><div class="line">   </div><div class="line">  <span class="comment">// 1.获取动画必要元素</span></div><div class="line">  <span class="built_in">UIView</span> *containerView = [transitionContext containerView];</div><div class="line">  <span class="built_in">UIView</span> *fromView = [transitionContext viewForKey:<span class="built_in">UITransitionContextFromViewKey</span>];</div><div class="line">  <span class="built_in">UIView</span> *toView = [transitionContext viewForKey:<span class="built_in">UITransitionContextToViewKey</span>];</div><div class="line">  </div><div class="line">  toView.origin = <span class="built_in">CGPointMake</span>(<span class="number">0</span>， kScreenHeight);      </div><div class="line">  </div><div class="line">  <span class="comment">// 2.动画</span></div><div class="line">  <span class="comment">// 出场</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">self</span>.transitionAnimatorType == TransitionAnimatorPresent) &#123;</div><div class="line">      <span class="comment">// 2.添加toView，不一定是addSubview方式</span></div><div class="line">      [containerView addSubview:toView];</div><div class="line">      [<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.5</span> animations:^&#123;</div><div class="line">          toView.origin = <span class="built_in">CGPointMake</span>(<span class="number">0</span>， <span class="number">0</span>);</div><div class="line">      &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</div><div class="line">          <span class="comment">// 完成</span></div><div class="line">          [transitionContext completeTransition:<span class="literal">YES</span>];</div><div class="line">      &#125;];</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="comment">// 消失</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">self</span>.transitionAnimatorType == TransitionAnimatorDismiss) &#123;</div><div class="line">      [<span class="built_in">UIView</span> animateWithDuration:<span class="number">2.5</span> animations:^&#123;</div><div class="line">          fromView.origin = <span class="built_in">CGPointMake</span>(<span class="number">0</span>， kScreenHeight);</div><div class="line">      &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</div><div class="line">          <span class="comment">// 2.添加toView，不一定是addSubview方式</span></div><div class="line">          [fromView removeFromSuperview];</div><div class="line">          <span class="comment">// 完成</span></div><div class="line">          [transitionContext completeTransition:<span class="literal">YES</span>];</div><div class="line">  &#125;];</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-交互"><a href="#3-交互" class="headerlink" title="(3) 交互"></a>(3) 交互</h2><p>(坑多，所以一般不用下列方式，取而代之使用UIPresentationController。)</p>
+<p>在目标控制器的代理方法中，实现交互式代理方法:</p>
+  <figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 2.交互出现动画</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerInteractiveTransitioning</span>&gt;)interactionControllerForPresentation:(<span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;)animator &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> [[YAInteractiveTransition alloc] init];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 2.交互消失动画</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerInteractiveTransitioning</span>&gt;)interactionControllerForDismissal:(<span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;)animator &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> [[YAInteractiveTransition alloc] init];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新建一继承自UIPercentDrivenInteractiveTransition的交互组件类(最好这么做，也可以自定义类遵守UIViewControllerInteractiveTransitioning协议，但极不推荐)，实现必须的startInteractiveTransition方法。</p>
+  <figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)startInteractiveTransition:(<span class="keyword">id</span>&lt;<span class="built_in">UIViewControllerContextTransitioning</span>&gt;)transitionContext &#123;&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-UIPresentationController"><a href="#4-UIPresentationController" class="headerlink" title="(4) UIPresentationController"></a>(4) UIPresentationController</h2><p>iOS8后的新API，极其方便。<br>把管理权限交给UIPresentationController.设置模态动画类型后，只需要在目标控制器的代理方法中实现:</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-</span> (nullable UIPresentationController *)<span class="selector-tag">presentationControllerForPresentedViewController</span><span class="selector-pseudo">:(UIViewController</span> *)<span class="selector-tag">presented</span> <span class="selector-tag">presentingViewController</span><span class="selector-pseudo">:(nullable</span> <span class="selector-tag">UIViewController</span> *)<span class="selector-tag">presenting</span> <span class="selector-tag">sourceViewController</span><span class="selector-pseudo">:(UIViewController</span> *)<span class="selector-tag">source</span> &#123;</div><div class="line">        return <span class="selector-attr">[[YAPresentationController alloc]</span> <span class="selector-tag">initWithPresentedViewController</span><span class="selector-pseudo">:presented</span> <span class="selector-tag">presentingViewController</span><span class="selector-pseudo">:presenting</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么所有的工作就在YAPresentationController控制器中了。<br>实现相应的方法:</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="comment">//在呈现过渡即将开始的时候被调用的</span></div><div class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">presentationTransitionWillBegin</span>&#123;</div><div class="line">  </div><div class="line">  <span class="comment">// 源控制器的View</span></div><div class="line">  <span class="selector-attr">[self.containerView addSubview:self.presentingViewController.view]</span>;</div><div class="line">  <span class="comment">// 背景View</span></div><div class="line">  <span class="selector-attr">[self.containerView addSubview:self.backgroundView]</span>;</div><div class="line">  <span class="comment">// 目标控制器View</span></div><div class="line">  <span class="selector-attr">[self.containerView addSubview:self.presentedView]</span>;</div><div class="line">            </div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="comment">//在呈现过渡结束时被调用的</span></div><div class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">presentationTransitionDidEnd</span><span class="selector-pseudo">:(BOOL)completed</span>&#123;</div><div class="line">   </div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="comment">//在退出过渡即将开始的时候被调用的</span></div><div class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">dismissalTransitionWillBegin</span>&#123;</div><div class="line"> </div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="comment">//在退出的过渡结束时被调用的</span></div><div class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">dismissalTransitionDidEnd</span><span class="selector-pseudo">:(BOOL)completed</span>&#123;</div><div class="line">     </div><div class="line">&#125;</div><div class="line">   </div><div class="line">   </div><div class="line"><span class="comment">// 调整呈现的View的frame</span></div><div class="line"><span class="selector-tag">-</span> (CGRect)<span class="selector-tag">frameOfPresentedViewInContainerView</span>&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="四、NavigationController转场"><a href="#四、NavigationController转场" class="headerlink" title="四、NavigationController转场"></a>四、NavigationController转场</h1><p>设置源控制器的导航控制器的代理，遵守UINavigationControllerDelegate协议，根据交互式或者非交互式实现相应方法.在方法中根据Push或者Pop返回相应的自定义动画控制器(或者交互控制器)。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 交互式</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerInteractiveTransitioning</span>&gt;)navigationController:(<span class="built_in">UINavigationController</span> *)navigationController</div><div class="line">                                 interactionControllerForAnimationController:(<span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;) animationController &#123;</div><div class="line">  </div><div class="line">&#125;</div><div class="line">   </div><div class="line"><span class="comment">// 非交互式</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;)navigationController:(<span class="built_in">UINavigationController</span> *)navigationController</div><div class="line">                                          animationControllerForOperation:(<span class="built_in">UINavigationControllerOperation</span>)operation</div><div class="line">                                                       fromViewController:(<span class="built_in">UIViewController</span> *)fromVC</div><div class="line">                                                         toViewController:(<span class="built_in">UIViewController</span> *)toVC &#123;</div><div class="line">  </div><div class="line">  <span class="comment">// Push情况下</span></div><div class="line">  <span class="keyword">if</span> (operation == <span class="built_in">UINavigationControllerOperationPush</span>) &#123;</div><div class="line">      <span class="keyword">return</span> [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorPush];</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (operation == <span class="built_in">UINavigationControllerOperationPop</span>) &#123; <span class="comment">// Pop情况下</span></div><div class="line">      <span class="keyword">return</span> [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorPop];</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> <span class="literal">nil</span>;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="五、TabBarController转场"><a href="#五、TabBarController转场" class="headerlink" title="五、TabBarController转场"></a>五、TabBarController转场</h1><p>与导航控制器类似，设置源控制器的tabBarController的代理，遵循UITabBarControllerDelegate，实现相应的方法，只不过它既没有模态的Present和Dismiss，也没有导航控制器的Push和Pop，只有一种方式，更加简单，同样，在方法中返回自定义的动画控制器(或者交互控制器)。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerInteractiveTransitioning</span>&gt;)tabBarController: <span class="built_in">UITabBarController</span> *)tabBarControllerinteractionControllerForAnimationController:(<span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;)animationController &#123;&#125;</div><div class="line">  </div><div class="line"></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span> &lt;<span class="built_in">UIViewControllerAnimatedTransitioning</span>&gt;)tabBarController:(<span class="built_in">UITabBarController</span> *)tabBarController animationControllerForTransitionFromViewController:(<span class="built_in">UIViewController</span> *)fromVC  toViewController:(<span class="built_in">UIViewController</span> *)toVC &#123;&#125;</div></pre></td></tr></table></figure>
 
-2.动画速度控制（可从其中选择一个设置）
-UIViewAnimationOptionCurveEaseInOut：动画先缓慢，然后逐渐加速。
-UIViewAnimationOptionCurveEaseIn ：动画逐渐变慢。
-UIViewAnimationOptionCurveEaseOut：动画逐渐加速。
-UIViewAnimationOptionCurveLinear ：动画匀速执行，默认值。
-
-3.转场类型（仅适用于转场动画设置，可以从中选择一个进行设置，基本动画、关键帧动画不需要设置）
-UIViewAnimationOptionTransitionNone：没有转场动画效果。
-UIViewAnimationOptionTransitionFlipFromLeft ：从左侧翻转效果。
-UIViewAnimationOptionTransitionFlipFromRight：从右侧翻转效果。
-UIViewAnimationOptionTransitionCurlUp：向后翻页的动画过渡效果。
-UIViewAnimationOptionTransitionCurlDown ：向前翻页的动画过渡效果。
-UIViewAnimationOptionTransitionCrossDissolve：旧视图溶解消失显示下一个新视图的效果。
-UIViewAnimationOptionTransitionFlipFromTop ：从上方翻转效果。    
-UIViewAnimationOptionTransitionFlipFromBottom：从底部翻转效果。
-</code></pre></li>
-<li><p>简单使用</p>
-<pre><code>作用于fromView的父视图，切换两个view，将formView从其父视图上移除，将toView重新粘在其父视图上，展现一个动画效果.
-[UIView transitionFromView:self.view toView:redView duration:5.0 options:UIViewAnimationOptionCurveLinear completion:^(BOOL finished) {
-kLog(@&quot;转场动画完成&quot;);
-}];
-
-重绘View视图，任何其子视图的改变或者其自身的改变都会触发转场动画的效果
-[UIView transitionWithView:self.view duration:2.0 options:UIViewAnimationOptionCurveLinear animations:^{
-self.view.alpha = 0.1;
-} completion:^(BOOL finished) {
-kLog(@&quot;动画完成&quot;);
-}];
-</code></pre></li>
-</ul>
-<h1 id="模态转场"><a href="#模态转场" class="headerlink" title="模态转场"></a>模态转场</h1><p>源控制器A–&gt;目标控制器B</p>
-<h2 id="提要"><a href="#提要" class="headerlink" title="提要"></a>提要</h2><ul>
-<li>可以只使用一个动画控制器Animator,但是要对Present/Dismiss分别实现</li>
-<li>模态的类型默认为FullScreen,即在Present时,会移除fromView,而类型设置为Custom时,就会使fromView与toView共存</li>
-<li>present时，要把toView加入到container的视图层级</li>
-<li>dismiss时，要把fromView从container的视图层级中移除</li>
-<li>非交互式转场,需要在动画执行完毕声明complete<code>[transitionContext completeTransition:YES];</code></li>
-<li><p>交互式转场,需要判断转场完成或者取消</p>
-<pre><code> BOOL isCancelled = transitionContext.transitionWasCancelled;
-// 考虑到转场中途可能取消的情况，转场结束后，恢复视图状态。
-    fromView.transform = CGAffineTransformIdentity;
-    toView.transform = CGAffineTransformIdentity;
-</code></pre></li>
-</ul>
-<ul>
-<li>在模态中,设置将要跳转到的视图控制器(presentedViewController)的transitioningDelegate</li>
-<li>充当代理的对象可以是源视图控制器(presentingViewController)，也可以是自己创建的对象，它需要为转场动画提供一个animator对象</li>
-<li>animator对象的animateTransition是整个动画的核心逻辑</li>
-</ul>
-<h2 id="无交互"><a href="#无交互" class="headerlink" title="无交互"></a>无交互</h2><ul>
-<li><p>设置<strong>目标控制器B</strong>的代理(可以是A,也可以是B)以及模态动画类型(常用UIModalPresentationCustom或UIModalPresentationFullScreen)</p>
-<pre><code>YAShareViewController *shareViewController = [[YAShareViewController alloc] init];
-
-// 设置转场代理
-shareViewController.transitioningDelegate = self;
-// 设置转场动画类型
-/*
- UIModalPresentationFullScreen = 0
- UIModalPresentationPageSheet
- UIModalPresentationFormSheet
- UIModalPresentationCurrentContext 
- UIModalPresentationCustom 
- UIModalPresentationOverFullScreen 
- UIModalPresentationOverCurrentContext
- UIModalPresentationPopover
- UIModalPresentationNone
- */
-shareViewController.modalPresentationStyle = UIModalPresentationCustom;
-[self presentViewController:shareViewController animated:YES completion:nil];
-</code></pre></li>
-<li><p>目标控制器的代理遵守`UIViewControllerTransitioningDelegate协议并相关实现方法</p>
-<pre><code>    #pragma mark - Transitioning Delegate
-
-    // 无交互出现动画
-    - (id&lt;UIViewControllerAnimatedTransitioning&gt;)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-        YATransitionAnimator *animator = [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorPresent];
-
-        return animator;
-    }
-
-    // 无交互消失动画
-    - (id&lt;UIViewControllerAnimatedTransitioning&gt;)animationControllerForDismissedController:(UIViewController *)dismissed {
-        YATransitionAnimator *animator = [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorDismiss];
-        return animator;
-}
-</code></pre></li>
-<li><p>代理方法中的动画管理者Animator独立存在,可以新建一继承自NSObject且遵守<code>UIViewControllerAnimatedTransitioning</code>协议的对象担任(仅仅遵守协议实现方法即可,不需设置代理).</p>
-<pre><code>#pragma mark – Life Cycle
-
-+ (instancetype)transitionAnimatorWithType:(TransitionAnimatorType)transitionAnimatorType {
-    YATransitionAnimator *animator = [[YATransitionAnimator alloc] init];
-    animator.transitionAnimatorType = transitionAnimatorType;
-    return animator;
-}
-
-#pragma mark - AnimatedTransitioning delegate
-
-//返回动画时间
-- (NSTimeInterval)transitionDuration:(nullable id &lt;UIViewControllerContextTransitioning&gt;)transitionContext {
-    return 5.0;
-}
-
-//执行动画的地方
-- (void)animateTransition:(id &lt;UIViewControllerContextTransitioning&gt;)transitionContext {
-
-    // 1.获取动画必要元素
-    UIView *containerView = [transitionContext containerView];
-    UIView *fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
-    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
-
-    toView.origin = CGPointMake(0, kScreenHeight);      
-
-    // 2.动画
-    // 出场
-    if (self.transitionAnimatorType == TransitionAnimatorPresent) {
-        // 2.添加toView,不一定是addSubview方式
-        [containerView addSubview:toView];
-        [UIView animateWithDuration:2.5 animations:^{
-            toView.origin = CGPointMake(0, 0);
-        } completion:^(BOOL finished) {
-            // 完成
-            [transitionContext completeTransition:YES];
-        }];
-    }
-
-    // 消失
-    if (self.transitionAnimatorType == TransitionAnimatorDismiss) {
-        [UIView animateWithDuration:2.5 animations:^{
-            fromView.origin = CGPointMake(0, kScreenHeight);
-        } completion:^(BOOL finished) {
-            // 2.添加toView,不一定是addSubview方式
-            [fromView removeFromSuperview];
-            // 完成
-            [transitionContext completeTransition:YES];
-    }];
-}
-}
-</code></pre></li>
-</ul>
-<h2 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h2><p>(坑多,所以一般不用下列方式,取而代之使用UIPresentationController)</p>
-<ul>
-<li><p>在目标控制器的代理方法中,实现交互式代理方法:</p>
-<pre><code>// 2.交互出现动画
-- (nullable id &lt;UIViewControllerInteractiveTransitioning&gt;)interactionControllerForPresentation:(id &lt;UIViewControllerAnimatedTransitioning&gt;)animator {
-
-    return [[YAInteractiveTransition alloc] init];
-}
-
-// 2.交互消失动画
-- (nullable id &lt;UIViewControllerInteractiveTransitioning&gt;)interactionControllerForDismissal:(id &lt;UIViewControllerAnimatedTransitioning&gt;)animator {
-
-    return [[YAInteractiveTransition alloc] init];
-}
-</code></pre></li>
-</ul>
-<ul>
-<li><p>新建一继承自UIPercentDrivenInteractiveTransition的交互组件类(最好这么做,也可以自定义类遵守UIViewControllerInteractiveTransitioning协议,但极不推荐),实现必须的startInteractiveTransition方法</p>
-<pre><code>- (void)startInteractiveTransition:(id&lt;UIViewControllerContextTransitioning&gt;)transitionContext {}
-</code></pre></li>
-</ul>
-<h2 id="UIPresentationController"><a href="#UIPresentationController" class="headerlink" title="UIPresentationController"></a>UIPresentationController</h2><p>iOS8后的新API,极其方便.<br>把管理权限交给UIPresentationController.设置模态动画类型后,只需要在目标控制器的代理方法中实现:</p>
-<pre><code>- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(nullable UIViewController *)presenting sourceViewController:(UIViewController *)source {
-    return [[YAPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
-}
-</code></pre><p>那么所有的工作就在YAPresentationController控制器中了.<br>实现相应的方法:</p>
-<pre><code>//在呈现过渡即将开始的时候被调用的
-- (void)presentationTransitionWillBegin{
-
-    // 源控制器的View
-    [self.containerView addSubview:self.presentingViewController.view];
-    // 背景View
-    [self.containerView addSubview:self.backgroundView];
-    // 目标控制器View
-    [self.containerView addSubview:self.presentedView];
-
-// ...            
-}
-
-//在呈现过渡结束时被调用的
-- (void)presentationTransitionDidEnd:(BOOL)completed{
-
-}
-
-//在退出过渡即将开始的时候被调用的
-- (void)dismissalTransitionWillBegin{
-
-}
-
-//在退出的过渡结束时被调用的
-- (void)dismissalTransitionDidEnd:(BOOL)completed{
-
-}
-
-
-// 调整呈现的View的frame
-- (CGRect)frameOfPresentedViewInContainerView{
-
-}
-</code></pre><h1 id="NavigationController转场"><a href="#NavigationController转场" class="headerlink" title="NavigationController转场"></a>NavigationController转场</h1><p>设置源控制器的导航控制器的代理,遵守UINavigationControllerDelegate协议,根据交互式或者非交互式实现相应方法.在方法中根据Push或者Pop返回相应的自定义动画控制器(或者交互控制器).</p>
-<pre><code>// 交互式
-- (nullable id &lt;UIViewControllerInteractiveTransitioning&gt;)navigationController:(UINavigationController *)navigationController
-                                   interactionControllerForAnimationController:(id &lt;UIViewControllerAnimatedTransitioning&gt;) animationController {
-
-}
-
-// 非交互式
-- (nullable id &lt;UIViewControllerAnimatedTransitioning&gt;)navigationController:(UINavigationController *)navigationController
-                                            animationControllerForOperation:(UINavigationControllerOperation)operation
-                                                         fromViewController:(UIViewController *)fromVC
-                                                           toViewController:(UIViewController *)toVC {
-
-    // Push情况下
-    if (operation == UINavigationControllerOperationPush) {
-        return [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorPush];
-    } else if (operation == UINavigationControllerOperationPop) { // Pop情况下
-        return [YATransitionAnimator transitionAnimatorWithType:TransitionAnimatorPop];
-    } else {
-        return nil;
-    }
-
-}
-</code></pre><h1 id="TabBarController转场"><a href="#TabBarController转场" class="headerlink" title="TabBarController转场"></a>TabBarController转场</h1><p>与导航控制器类似,设置源控制器的tabBarController的代理,遵循UITabBarControllerDelegate,实现相应的方法,只不过它既没有模态的Present和Dismiss,也没有导航控制器的Push和Pop,只有一种方式,更加简单,同样,在方法中返回自定义的动画控制器(或者交互控制器).</p>
-<pre><code>- (nullable id &lt;UIViewControllerInteractiveTransitioning&gt;)tabBarController:(UITabBarController *)tabBarController
-                      interactionControllerForAnimationController: (id &lt;UIViewControllerAnimatedTransitioning&gt;)animationController {}
-
-- (nullable id &lt;UIViewControllerAnimatedTransitioning&gt;)tabBarController:(UITabBarController *)tabBarController
-            animationControllerForTransitionFromViewController:(UIViewController *)fromVC
-                                              toViewController:(UIViewController *)toVC {}
-</code></pre>
       
     </div>
 
@@ -633,6 +404,10 @@ shareViewController.modalPresentationStyle = UIModalPresentationCustom;
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/05/排序算法实现/" rel="prev" title="排序算法实现">
+                排序算法实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -700,7 +475,7 @@ shareViewController.modalPresentationStyle = UIModalPresentationCustom;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -717,7 +492,7 @@ shareViewController.modalPresentationStyle = UIModalPresentationCustom;
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -782,7 +557,7 @@ shareViewController.modalPresentationStyle = UIModalPresentationCustom;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#勾弦"><span class="nav-number">1.</span> <span class="nav-text">勾弦</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单转场"><span class="nav-number">2.</span> <span class="nav-text">简单转场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模态转场"><span class="nav-number">3.</span> <span class="nav-text">模态转场</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#提要"><span class="nav-number">3.1.</span> <span class="nav-text">提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无交互"><span class="nav-number">3.2.</span> <span class="nav-text">无交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互"><span class="nav-number">3.3.</span> <span class="nav-text">交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIPresentationController"><span class="nav-number">3.4.</span> <span class="nav-text">UIPresentationController</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NavigationController转场"><span class="nav-number">4.</span> <span class="nav-text">NavigationController转场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TabBarController转场"><span class="nav-number">5.</span> <span class="nav-text">TabBarController转场</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、勾弦"><span class="nav-number">1.</span> <span class="nav-text">一、勾弦</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、简单转场"><span class="nav-number">2.</span> <span class="nav-text">二、简单转场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、模态转场"><span class="nav-number">3.</span> <span class="nav-text">三、模态转场</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-提要"><span class="nav-number">3.1.</span> <span class="nav-text">(1) 提要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-无交互"><span class="nav-number">3.2.</span> <span class="nav-text">(2) 无交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-交互"><span class="nav-number">3.3.</span> <span class="nav-text">(3) 交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-UIPresentationController"><span class="nav-number">3.4.</span> <span class="nav-text">(4) UIPresentationController</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、NavigationController转场"><span class="nav-number">4.</span> <span class="nav-text">四、NavigationController转场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、TabBarController转场"><span class="nav-number">5.</span> <span class="nav-text">五、TabBarController转场</span></a></li></ol></div>
             
           </div>
         </section>

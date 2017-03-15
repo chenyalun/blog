@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="栈与队列.">
+<meta name="description" content="栈与队列。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栈与队列的实现">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/01/22/栈与队列的实现/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="栈与队列.">
-<meta property="og:updated_time" content="2017-01-22T06:16:19.000Z">
+<meta property="og:description" content="栈与队列。">
+<meta property="og:updated_time" content="2017-03-15T09:26:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栈与队列的实现">
-<meta name="twitter:description" content="栈与队列.">
+<meta name="twitter:description" content="栈与队列。">
 
 
 
@@ -332,13 +332,13 @@
       
 
       
-        <p align="center"> 栈与队列. </p>
+        <p align="center"> 栈与队列。 </p>
 
 <a id="more"></a>
 <p>栈(stack)，又称堆栈，是一种容器，可存入数据元素、 访问元素、删除元素。</p>
 <p>栈保证任何时刻可以访问、删除的元素都是在此之前最后存入的那个 元素。</p>
-<h1 id="list实现栈"><a href="#list实现栈" class="headerlink" title="list实现栈"></a>list实现栈</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#自定义异常</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackUnderFlow</span><span class="params">(ValueError)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line">    </div><div class="line"><span class="comment">#list开头设置为栈底 list结尾设置为栈顶</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment">#初始化</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.elems = []</div><div class="line"></div><div class="line">    <span class="comment">#判断为空</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.elems == []</div><div class="line"></div><div class="line">    <span class="comment">#返回栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">top</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.isEmpty():</div><div class="line">            <span class="keyword">raise</span> StackUnderFlow</div><div class="line">        <span class="keyword">return</span> self.elems[len(self.elems) - <span class="number">1</span>]</div><div class="line"></div><div class="line">    <span class="comment">#将元素压入栈中</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,data)</span>:</span></div><div class="line">        self.elems.append(data)</div><div class="line"></div><div class="line">    <span class="comment">#弹出栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.isEmpty():</div><div class="line">            <span class="keyword">raise</span> StackUnderFlow</div><div class="line">        <span class="keyword">return</span> self.elems.pop()</div></pre></td></tr></table></figure>
-<h1 id="链表实现栈"><a href="#链表实现栈" class="headerlink" title="链表实现栈"></a>链表实现栈</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#链表头部设为栈顶,链表尾部设为栈底</span></div><div class="line"><span class="comment">#定义结点:数据域+指针域</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,data,nextNode=None)</span>:</span><span class="comment">#缺省函数,指向的下一个结点默认为None</span></div><div class="line">        self.data = data <span class="comment">#当前结点的数据域</span></div><div class="line">        self.next = nextNode <span class="comment">#指向下一个结点</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkStack</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment">#初始化</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.topNode = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="comment">#判断为空</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.topNode == <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="comment">#返回栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">top</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.isEmpty():</div><div class="line">            <span class="keyword">raise</span> StackUnderFlow</div><div class="line">        <span class="keyword">return</span> self.topNode.data</div><div class="line"></div><div class="line">    <span class="comment">#将元素压入栈中</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,data)</span>:</span></div><div class="line">    	self.topNode = Node(data,self.topNode)</div><div class="line"></div><div class="line">    <span class="comment">#弹出栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">    	<span class="keyword">if</span> self.isEmpty():</div><div class="line">    		<span class="keyword">raise</span> StackUnderFlow</div><div class="line">    	pnode = self.topNode</div><div class="line">    	self.topNode = pnode.next</div><div class="line">    	<span class="keyword">return</span> pnode.data</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#演练</span></div><div class="line">stack1 = Stack()</div><div class="line"></div><div class="line"><span class="comment">#返回栈顶元素</span></div><div class="line"><span class="comment">#print(stack1.top())</span></div><div class="line"></div><div class="line"><span class="comment">#将元素压入栈中</span></div><div class="line">stack1.push(<span class="number">12</span>)</div><div class="line">stack1.push(<span class="number">11</span>)</div><div class="line">print(stack1.top())</div><div class="line"></div><div class="line"><span class="comment">#弹出栈顶元素</span></div><div class="line">stack1.pop()</div><div class="line">print(stack1.top())</div><div class="line"></div><div class="line"><span class="comment">#判断为空</span></div><div class="line">print(stack1.isEmpty())</div><div class="line"></div><div class="line"></div><div class="line">stack2 = LinkStack()</div><div class="line"></div><div class="line"><span class="comment">#返回栈顶元素</span></div><div class="line"><span class="comment">#print(stack2.top())</span></div><div class="line"></div><div class="line"><span class="comment">#将元素压入栈中</span></div><div class="line">stack2.push(<span class="number">12</span>)</div><div class="line">stack2.push(<span class="number">11</span>)</div><div class="line">print(stack2.top())</div><div class="line"></div><div class="line"><span class="comment">#弹出栈顶元素</span></div><div class="line">stack2.pop()</div><div class="line">print(stack2.top())</div><div class="line"></div><div class="line"><span class="comment">#判断为空</span></div><div class="line">print(stack2.isEmpty())</div></pre></td></tr></table></figure>
+<h1 id="list实现栈"><a href="#list实现栈" class="headerlink" title="list实现栈"></a>list实现栈</h1><figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="comment">#自定义异常</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">StackUnderFlow</span><span class="params">(ValueError)</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line">    </div><div class="line"><span class="comment">#list开头设置为栈底 list结尾设置为栈顶</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment">#初始化</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.elems = []</div><div class="line"></div><div class="line">    <span class="comment">#判断为空</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.elems == []</div><div class="line"></div><div class="line">    <span class="comment">#返回栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">top</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.isEmpty():</div><div class="line">            <span class="keyword">raise</span> StackUnderFlow</div><div class="line">        <span class="keyword">return</span> self.elems[len(self.elems) - <span class="number">1</span>]</div><div class="line"></div><div class="line">    <span class="comment">#将元素压入栈中</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,data)</span>:</span></div><div class="line">        self.elems.append(data)</div><div class="line"></div><div class="line">    <span class="comment">#弹出栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.isEmpty():</div><div class="line">            <span class="keyword">raise</span> StackUnderFlow</div><div class="line">        <span class="keyword">return</span> self.elems.pop()</div></pre></td></tr></table></figure>
+<h1 id="链表实现栈"><a href="#链表实现栈" class="headerlink" title="链表实现栈"></a>链表实现栈</h1><figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="comment">#链表头部设为栈顶,链表尾部设为栈底</span></div><div class="line"><span class="comment">#定义结点:数据域+指针域</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,data,nextNode=None)</span>:</span><span class="comment">#缺省函数,指向的下一个结点默认为None</span></div><div class="line">        self.data = data <span class="comment">#当前结点的数据域</span></div><div class="line">        self.next = nextNode <span class="comment">#指向下一个结点</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkStack</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment">#初始化</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.topNode = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="comment">#判断为空</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self.topNode == <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="comment">#返回栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">top</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">if</span> self.isEmpty():</div><div class="line">            <span class="keyword">raise</span> StackUnderFlow</div><div class="line">        <span class="keyword">return</span> self.topNode.data</div><div class="line"></div><div class="line">    <span class="comment">#将元素压入栈中</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,data)</span>:</span></div><div class="line">    	self.topNode = Node(data,self.topNode)</div><div class="line"></div><div class="line">    <span class="comment">#弹出栈顶元素</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">    	<span class="keyword">if</span> self.isEmpty():</div><div class="line">    		<span class="keyword">raise</span> StackUnderFlow</div><div class="line">    	pnode = self.topNode</div><div class="line">    	self.topNode = pnode.next</div><div class="line">    	<span class="keyword">return</span> pnode.data</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#演练</span></div><div class="line">stack1 = Stack()</div><div class="line"></div><div class="line"><span class="comment">#返回栈顶元素</span></div><div class="line"><span class="comment">#print(stack1.top())</span></div><div class="line"></div><div class="line"><span class="comment">#将元素压入栈中</span></div><div class="line">stack1.push(<span class="number">12</span>)</div><div class="line">stack1.push(<span class="number">11</span>)</div><div class="line">print(stack1.top())</div><div class="line"></div><div class="line"><span class="comment">#弹出栈顶元素</span></div><div class="line">stack1.pop()</div><div class="line">print(stack1.top())</div><div class="line"></div><div class="line"><span class="comment">#判断为空</span></div><div class="line">print(stack1.isEmpty())</div><div class="line"></div><div class="line"></div><div class="line">stack2 = LinkStack()</div><div class="line"></div><div class="line"><span class="comment">#返回栈顶元素</span></div><div class="line"><span class="comment">#print(stack2.top())</span></div><div class="line"></div><div class="line"><span class="comment">#将元素压入栈中</span></div><div class="line">stack2.push(<span class="number">12</span>)</div><div class="line">stack2.push(<span class="number">11</span>)</div><div class="line">print(stack2.top())</div><div class="line"></div><div class="line"><span class="comment">#弹出栈顶元素</span></div><div class="line">stack2.pop()</div><div class="line">print(stack2.top())</div><div class="line"></div><div class="line"><span class="comment">#判断为空</span></div><div class="line">print(stack2.isEmpty())</div></pre></td></tr></table></figure>
 <p>细节:当LinkStack类中含有self.top()方法时,不要再设置self.top重名属性<br>否则报错:object is not callable</p>
 <h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><p>队列(queue)，或称为队，也是一种容器<br>可存入数据元素、访问元素、删除元素</p>
 <ul>
@@ -350,17 +350,8 @@
 <p>考虑首元素出队后元素不前移，记住新队头位置。<br>这一设计也有问题: 反复入队出队，如果元素存储区固定，一定会在某次入队时出现队<br>尾溢出表尾(表满)的情况<br>出现这种溢出时，顺序表前部通常会有一些空闲位置 这是“假性溢出”，并不是真的用完了整个元素区<br>如果元素存储区自动增长(如 list)，首端将留下越来越大的空区。 而且这片空区永远也不会用到(完全浪费了)</p>
 <ul>
 <li><p>使用环形队列(把数组看作环形)可以解决这个问题</p>
-<pre><code>q.rear 是最后元素之后空位的下标
-q.head 是首元素的下标
-[q.head, q.rear) 是队列中所有元 素(看作按照环形排列)
-入队时，先存入，后移位
-当队列空: q.head == q.rear 
-当队列满:(q.rear + 1) % q.len == q.head
-
-入队出队时的下标更新语句
-q.head = (q.head+1) % q.len 
-q.rear = (q.rear + 1) % q.len
-</code></pre></li>
+<figure class="highlight nix"><table><tr><td class="code"><pre><div class="line">q.rear 是最后元素之后空位的下标</div><div class="line">q.head 是首元素的下标</div><div class="line">[q.head, q.rear) 是队列中所有元 素(看作按照环形排列)</div><div class="line">入队时，先存入，后移位</div><div class="line">当队列空: q.<span class="attr">head</span> == q.rear </div><div class="line">当队列满:(q.rear + <span class="number">1</span>) % q.<span class="attr">len</span> == q.head</div><div class="line"></div><div class="line">入队出队时的下标更新语句</div><div class="line">q.<span class="attr">head</span> = (q.head+<span class="number">1</span>) % q.len </div><div class="line">q.<span class="attr">rear</span> = (q.rear + <span class="number">1</span>) % q.len</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h1 id="队列的实现"><a href="#队列的实现" class="headerlink" title="队列的实现"></a>队列的实现</h1><ul>
 <li>elems引用着队列的元素存储区，是一个list 对象</li>
@@ -368,65 +359,11 @@ q.rear = (q.rear + 1) % q.len
 <li>head  是队列首元素(当时在队列里的存入最早的那个元素)的下标</li>
 <li>elemNum始终记录着队列中元素的个数</li>
 <li>队列里的元素在 elems 里连续存放，但需要在下标 len 存入元素时，操作改在下标 0 的位置存入</li>
-<li>在 elemNum == len 的情况下，入队列操作将自动扩张存储区</li>
+<li><p>在 elemNum == len 的情况下，入队列操作将自动扩张存储区</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueueUnderFlow</span><span class="params">(ValueError)</span>:</span></div><div class="line">  <span class="keyword">pass</span></div><div class="line">   </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span><span class="params">()</span>:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,length = <span class="number">10</span>)</span>:</span></div><div class="line">      self.length = length <span class="comment">#存储区容量</span></div><div class="line">      self.elems = [<span class="number">0</span>] * self.length <span class="comment">#存储数据元素</span></div><div class="line">      self.head = <span class="number">0</span> <span class="comment">#队列首元素</span></div><div class="line">      self.elemNum = <span class="number">0</span> <span class="comment">#队列中元素个数</span></div><div class="line">   </div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span><span class="params">(self)</span>:</span></div><div class="line">      <span class="keyword">return</span> self.elemNum == <span class="number">0</span></div><div class="line">   </div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">firstElem</span><span class="params">(self)</span>:</span> <span class="comment">#获取队头元素</span></div><div class="line">      <span class="keyword">if</span> self.isEmpty():</div><div class="line">          <span class="keyword">raise</span> QueueUnderFlow</div><div class="line">      <span class="keyword">return</span> self.elems[self.head]</div><div class="line">   </div><div class="line">  <span class="comment">#出队</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">dequeue</span><span class="params">(self)</span>:</span></div><div class="line">      <span class="keyword">if</span> self.isEmpty():</div><div class="line">          <span class="keyword">raise</span> QueueUnderFlow</div><div class="line">      e = self.elems[self.head]</div><div class="line">      self.head = (self.head + <span class="number">1</span>) % self.length</div><div class="line">      self.elemNum -= <span class="number">1</span></div><div class="line">      <span class="keyword">return</span> e</div><div class="line">   </div><div class="line">  <span class="comment">#入队</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">enqueue</span><span class="params">(self,data)</span>:</span></div><div class="line">      <span class="comment">#检验队列是否已满</span></div><div class="line">      <span class="keyword">if</span> self.elemNum == self.length:</div><div class="line">          self.extend() <span class="comment">#扩张存储区</span></div><div class="line">      self.elems[(self.head + self.elemNum) % self.length] = data</div><div class="line">      self.elemNum += <span class="number">1</span></div><div class="line">   </div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">extend</span><span class="params">(self)</span>:</span></div><div class="line">      oldLen = self.length</div><div class="line">      self.length *= <span class="number">2</span></div><div class="line">      newElems = [<span class="number">0</span>] * (self.length)</div><div class="line">      <span class="keyword">for</span> i <span class="keyword">in</span> range(oldLen):</div><div class="line">          newElems[i] = self.elems[(self.head + i) % oldLen]</div><div class="line">      self.elems = newElems</div><div class="line">      self.head = <span class="number">0</span></div><div class="line">   </div><div class="line">   </div><div class="line"><span class="comment"># 演练</span></div><div class="line">queue = Queue()</div><div class="line">   </div><div class="line">queue.enqueue(<span class="number">11</span>)</div><div class="line">queue.enqueue(<span class="number">12</span>)</div><div class="line">queue.enqueue(<span class="number">13</span>)</div><div class="line">   </div><div class="line">print(queue.firstElem())</div><div class="line">   </div><div class="line">queue.dequeue()</div><div class="line">print(queue.firstElem())</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<pre><code>class QueueUnderFlow(ValueError):
-    pass
 
-class Queue():
-    def __init__(self,length = 10):
-        self.length = length #存储区容量
-        self.elems = [0] * self.length #存储数据元素
-        self.head = 0 #队列首元素
-        self.elemNum = 0 #队列中元素个数
-
-    def isEmpty(self):
-        return self.elemNum == 0
-
-    def firstElem(self): #获取队头元素
-        if self.isEmpty():
-            raise QueueUnderFlow
-        return self.elems[self.head]
-
-    #出队
-    def dequeue(self):
-        if self.isEmpty():
-            raise QueueUnderFlow
-        e = self.elems[self.head]
-        self.head = (self.head + 1) % self.length
-        self.elemNum -= 1
-        return e
-
-    #入队
-    def enqueue(self,data):
-        #检验队列是否已满
-        if self.elemNum == self.length:
-            self.extend() #扩张存储区
-        self.elems[(self.head + self.elemNum) % self.length] = data
-        self.elemNum += 1
-
-    def extend(self):
-        oldLen = self.length
-        self.length *= 2
-        newElems = [0] * (self.length)
-        for i in range(oldLen):
-            newElems[i] = self.elems[(self.head + i) % oldLen]
-        self.elems = newElems
-        self.head = 0
-
-
-# 演练
-queue = Queue()
-
-queue.enqueue(11)
-queue.enqueue(12)
-queue.enqueue(13)
-
-print(queue.firstElem())
-
-queue.dequeue()
-print(queue.firstElem())
-</code></pre>
       
     </div>
 
@@ -541,7 +478,7 @@ print(queue.firstElem())
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -558,7 +495,7 @@ print(queue.firstElem())
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

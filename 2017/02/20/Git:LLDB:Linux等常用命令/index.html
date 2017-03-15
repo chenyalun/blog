@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结.">
+<meta name="description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git/LLDB/Linux等常用命令">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/02/20/Git:LLDB:Linux等常用命令/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结.">
-<meta property="og:updated_time" content="2017-03-04T01:04:55.000Z">
+<meta property="og:description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
+<meta property="og:updated_time" content="2017-03-15T08:37:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git/LLDB/Linux等常用命令">
-<meta name="twitter:description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结.">
+<meta name="twitter:description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
 
 
 
@@ -320,12 +320,12 @@
       
 
       
-        <p align="center"> Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结. </p>
+        <p align="center"> Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。 </p>
 
 <a id="more"></a>
 <h1 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h1><pre><code>pod install --verbose --no-repo-update 
-</code></pre><h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>源代码管理工具能追踪一个项目从诞生一直到定案的过程,记录一个项目的所有内容变化,方便地查阅特定版本的修订情况.</p>
-<p>Git与SVN的对比:<br>1.Git是分布式,有本地分支,SVN是集中式,无本地分支.<br>2.git合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）.<br>svn合并操作把来源多个提交合并成了一个合并提交.<br>3.git：可以修正提交(在自己的分支)。<br>svn：一旦提交就到服务器上，实际使用中就是不能修改。<br>4.SVN没有tag和真正意义的分支(它的分支是一个完整的目录。且这个目录拥有完整的实际文件),Git支持<br>5.Git有暂存区,提交速度快</p>
+</code></pre><h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>源代码管理工具能追踪一个项目从诞生一直到定案的过程，记录一个项目的所有内容变化，方便地查阅特定版本的修订情况。</p>
+<p>Git与SVN的对比:<br>1.Git是分布式，有本地分支，SVN是集中式，无本地分支。<br>2.git合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。<br>svn合并操作把来源多个提交合并成了一个合并提交。<br>3.git：可以修正提交(在自己的分支)。<br>svn：一旦提交就到服务器上，实际使用中就是不能修改。<br>4.SVN没有tag和真正意义的分支(它的分支是一个完整的目录。且这个目录拥有完整的实际文件)，Git支持。<br>5.Git有暂存区，提交速度快。</p>
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>1.清除本地以及远程的.DS_Store文件(修复后添加.gitignore)</p>
 <pre><code>find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
 </code></pre><p>2.克隆仓库到本地</p>
@@ -336,7 +336,7 @@
 <pre><code>git commit -m &quot;注释&quot;
 </code></pre><p>5.推送到远程仓库</p>
 <pre><code>git push YAKit(仓库名称) origin(分支名称)
-</code></pre><h2 id="初步"><a href="#初步" class="headerlink" title="初步"></a>初步</h2><p>在git中，版本号是一个由SHA1生成的哈希值<br> 查看git所有命令的帮助</p>
+</code></pre><h2 id="初步"><a href="#初步" class="headerlink" title="初步"></a>初步</h2><p>在git中，版本号是一个由SHA1生成的哈希值。<br> 查看git所有命令的帮助</p>
 <pre><code>$ git help 子命令
 # 要退出帮助信息，按&quot;q&quot;
 # 翻看下页，按&quot;空格&quot;
@@ -358,11 +358,11 @@ git config --global alias.lg &quot;log --color --graph --pretty=format:&apos;%Cr
 <pre><code>git init
 </code></pre><p>加载所有的文件/指定的文件</p>
 <pre><code>git add .
-git add a.h,a.m
-</code></pre><p>提交文件,添加注释,要使用 -m 参数指定修改的备注信息</p>
+git add a.h，a.m
+</code></pre><p>提交文件，添加注释，要使用 -m 参数指定修改的备注信息</p>
 <pre><code>git commit -m &quot;初始化仓库&quot;
 使用git时，每一次修改都需要添加(add)再提交(commit)，这一点是与svn不一样
-</code></pre><p>查询代码库当前状态(已加载,未加载等)</p>
+</code></pre><p>查询代码库当前状态(已加载，未加载等)</p>
 <pre><code>git status
 </code></pre><p>查看所有版本库日志</p>
 <pre><code>git log
@@ -480,37 +480,37 @@ svn st
 &apos;M&apos; 被修改
 &apos;R&apos; 被替换
 &apos;X&apos; 外部定义创建的版本目录
-&apos;?&apos; 文件没有被添加到本地版本库内,不在SVN的管理之下
+&apos;?&apos; 文件没有被添加到本地版本库内，不在SVN的管理之下
 &apos;!&apos; 文件丢失或者不完整(不识别该文件)
 &apos;~&apos; 受控文件被其他文件阻隔
 &apos;U&apos; 更新最新的代码到本地(本地有文件的情况下)
-&apos;G&apos; 产生冲突后,更新操作去解决冲突,相当于进行合并
+&apos;G&apos; 产生冲突后，更新操作去解决冲突，相当于进行合并
 </code></pre><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>Trunk<br>目前项目正在开发的版本</p>
 <p>Tags<br>存放已经上线的重大版本</p>
 <p>Branches<br>当发生重大bug或者有新需求时</p>
 <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><ol>
-<li>读权限（r）写权限（w) 可执行权限（x）</li>
+<li>读权限（r）写权限（w) 可执行权限（x）。</li>
 <li><p>第1个字母代表文件的类型：“d” 代表文件夹、“-” 代表普通文件、“c” 代表硬件字符设备、“b” 代表硬件块设备、“s”表示管道文件、“l” 代表软链接文件。</p>
 </li>
-<li><p>文件类型+所有者+用户组+其他用户</p>
+<li><p>文件类型+所有者+用户组+其他用户。</p>
 </li>
-<li>空格:下一屏 回车:    4. 空格:下一屏 回车:一行 q:退出 /word:搜索word (以及tab的自动补全)</li>
+<li>空格:下一屏 回车:一行 q:退出 /word:搜索word (以及tab的自动补全)</li>
 </ol>
 <h2 id="初步-2"><a href="#初步-2" class="headerlink" title="初步"></a>初步</h2><p>最基本(不阐述)</p>
 <pre><code>cd clear pwd mkdir rmdir who whoami exit ping
 </code></pre><p>查看</p>
 <pre><code>ls -a(所有) -l(列表) -h(显示大小)
-</code></pre><p>重定向(结果重定向到一个文件,不存在创建,存在覆盖)</p>
+</code></pre><p>重定向(结果重定向到一个文件，不存在创建，存在覆盖)</p>
 <pre><code>ls &gt; a.txt 
 </code></pre><p>分屏</p>
 <pre><code>more
 </code></pre><p>管道(一个命令的结果作为另一个命令的输入)</p>
 <pre><code>ls -a | more
 </code></pre><p>删除</p>
-<pre><code>rm Dir/ -r 递归地删除,删除文件夹必带
-rm a.txt -f 强制删除,忽略不存在的文件，无需提示
+<pre><code>rm Dir/ -r 递归地删除，删除文件夹必带
+rm a.txt -f 强制删除，忽略不存在的文件，无需提示
 rm b -i 交互式
-</code></pre><p>链接<br>软链接:软链接不占用磁盘空间，源文件删除则软链接失效。(快捷方式)<br>硬链接:硬链接只能链接普通文件，不能链接目录。两个文件占用相同大小的硬盘空间,不常用.</p>
+</code></pre><p>链接<br>软链接:软链接不占用磁盘空间，源文件删除则软链接失效。(快捷方式)<br>硬链接:硬链接只能链接普通文件，不能链接目录。两个文件占用相同大小的硬盘空间，不常用。</p>
 <pre><code>ln 源文件 链接文件 (硬链接)
 ln -s 源文件 链接文件 
 </code></pre><p>查看或合并</p>
@@ -544,7 +544,7 @@ gzip  [选项]  被压缩文件
 <pre><code>su 不切换目录
 su - 切换目录
 su root 到root
-su -root 到root,同时到/root目录
+su -root 到root，同时到/root目录
 </code></pre><h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><p>日历</p>
 <pre><code>cal
 </code></pre><p>时间</p>
@@ -595,9 +595,9 @@ a: 插入光标后一个字符
 
 A: 插入行未 
 
-o: 向下新开一行,插入行首 
+o: 向下新开一行，插入行首 
 
-O: 向上新开一行,插入行首
+O: 向上新开一行，插入行首
 </code></pre><p>ESC:从插入模式或末行模式进入命令模式</p>
 <p>移动光标:</p>
 <pre><code>h: 左移 
@@ -612,15 +612,15 @@ M: 光标移动到中间行
 
 L: 光标移动到屏幕最后一行行首 
 
-G: 移动到指定行,行号 -G
+G: 移动到指定行，行号 -G
 
 w: 向后一次移动一个字 
 
 b: 向前一次移动一个字
 
-{: 按段移动,上移 
+{: 按段移动，上移 
 
-}: 按段移动,下移
+}: 按段移动，下移
 
 Ctr-d: 向下翻半屏 
 
@@ -634,15 +634,15 @@ gg: 光标移动文件开头
 
 G: 光标移动到文件末尾
 </code></pre><p>删除命令:</p>
-<pre><code>x: 删除光标后一个字符,相当于 Del 
+<pre><code>x: 删除光标后一个字符，相当于 Del 
 
-X: 删除光标前一个字符,相当于 Backspace
+X: 删除光标前一个字符，相当于 Backspace
 
-dd: 删除光标所在行,n dd 删除指定的行数 D: 删除光标后本行所有内容,包含光标所在字符 
+dd: 删除光标所在行，n dd 删除指定的行数 D: 删除光标后本行所有内容，包含光标所在字符 
 
-d0: 删除光标前本行所有内容,不包含光标所在字符
+d0: 删除光标前本行所有内容，不包含光标所在字符
 
-dw: 删除光标开始位置的字,包含光标所在字符
+dw: 删除光标开始位置的字，包含光标所在字符
 </code></pre><p>撤销命令:</p>
 <pre><code>u: 一步一步撤销 
 
@@ -654,12 +654,12 @@ Ctr-r: 反撤销
 <pre><code>&gt;&gt;:文本行右移动
 &lt;&lt;:文本行左移动
 </code></pre><p>复制粘贴:</p>
-<pre><code>yy: 复制当前行,n yy 复制 n 行 
-p: 在光标所在位置向下新开辟一行,粘贴
+<pre><code>yy: 复制当前行，n yy 复制 n 行 
+p: 在光标所在位置向下新开辟一行，粘贴
 </code></pre><p>可视模式:</p>
-<pre><code>v: 按字符移动,选中文本 
+<pre><code>v: 按字符移动，选中文本 
 
-V: 按行移动,选中文本可视模式可以配合 d, y, &gt;&gt;, &lt;&lt; 实现对文本块的删除,复制,左右移动
+V: 按行移动，选中文本可视模式可以配合 d， y， &gt;&gt;， &lt;&lt; 实现对文本块的删除，复制，左右移动
 </code></pre><p>替换操作:</p>
 <pre><code>r: 替换当前字符 
 
@@ -674,9 +674,9 @@ N：上一个
 :%s/abc/123/g
 
 末行模式下，将第一行至第10行之间的abc替换成123
-:1, 10s/abc/123/g
+:1， 10s/abc/123/g
 </code></pre><p>vim里执行 shell 下命令:</p>
-<pre><code>末行模式里输入!,后面跟命令
+<pre><code>末行模式里输入!，后面跟命令
 </code></pre><h1 id="LLDB"><a href="#LLDB" class="headerlink" title="LLDB"></a>LLDB</h1><h2 id="初步-4"><a href="#初步-4" class="headerlink" title="初步"></a>初步</h2><pre><code>help
 </code></pre><p>输出</p>
 <pre><code>p (int)self.view.subviews.count 基本类型 
@@ -727,8 +727,8 @@ expr int $c = 10 声明一个新变量
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/14/iOS应用优化方案/" rel="next" title="iOS应用优化方案">
-                <i class="fa fa-chevron-left"></i> iOS应用优化方案
+              <a href="/2017/02/14/iOS应用优化总结/" rel="next" title="iOS应用优化总结">
+                <i class="fa fa-chevron-left"></i> iOS应用优化总结
               </a>
             
           </div>
@@ -805,7 +805,7 @@ expr int $c = 10 声明一个新变量
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -822,7 +822,7 @@ expr int $c = 10 声明一个新变量
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

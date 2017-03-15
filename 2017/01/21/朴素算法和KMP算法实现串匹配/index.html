@@ -90,16 +90,16 @@
 
 
 
-<meta name="description" content="串匹配.">
+<meta name="description" content="串匹配。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="朴素算法和KMP算法实现串匹配">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/01/21/朴素算法和KMP算法实现串匹配/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="串匹配.">
-<meta property="og:updated_time" content="2017-01-21T02:10:22.000Z">
+<meta property="og:description" content="串匹配。">
+<meta property="og:updated_time" content="2017-03-15T09:32:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="朴素算法和KMP算法实现串匹配">
-<meta name="twitter:description" content="串匹配.">
+<meta name="twitter:description" content="串匹配。">
 
 
 
@@ -332,7 +332,7 @@
       
 
       
-        <p align="center"> 串匹配. </p>
+        <p align="center"> 串匹配。 </p>
 
 <a id="more"></a>
 <h1 id="钩玄"><a href="#钩玄" class="headerlink" title="钩玄"></a>钩玄</h1><ul>
@@ -347,48 +347,19 @@
 <li>后缀就是该串后的一段字符构成的子串</li>
 <li>空串既是 s 的前缀，也是 s 的后缀</li>
 <li>串s的n次幂是连续n个s拼接而成的串（在Python语言里用s * n表示）</li>
-<li><code>&quot;==&quot; 与 &quot;is&quot;</code>的区别：<code>&quot;==&quot;</code>是比较内容相当，如变量值相等;<code>&quot;is&quot;</code>是比较对象的id是否相等。</li>
-<li>or是从左到有计算表达式，返回第一个为真的值。</li>
-<li>and从左到右计算表达式，若所有值均为真，则返回最后一个值，若存在假，返回第一个假值。</li>
+<li><code>&quot;==&quot; 与 &quot;is&quot;</code>的区别：<code>&quot;==&quot;</code>是比较内容相当，如变量值相等;<code>&quot;is&quot;</code>是比较对象的id是否相等</li>
+<li>or是从左到有计算表达式，返回第一个为真的值</li>
+<li>and从左到右计算表达式，若所有值均为真，则返回最后一个值，若存在假，返回第一个假值</li>
 <li>在集合中:<code>&amp;求交集 |求并集 -求差集</code></li>
 <li>在数值中:<code>&amp;按位与 |按位或 ^按位异或 ~按位取反</code></li>
-<li>pop() 函数用于移除列表中的一个元素（默认最后一个元素），并且返回该元素的值。</li>
+<li>pop() 函数用于移除列表中的一个元素（默认最后一个元素），并且返回该元素的值</li>
 </ul>
 <h1 id="朴素匹配算法"><a href="#朴素匹配算法" class="headerlink" title="朴素匹配算法"></a>朴素匹配算法</h1><h2 id="逐个字符匹配"><a href="#逐个字符匹配" class="headerlink" title="逐个字符匹配"></a>逐个字符匹配</h2><p>t为目标串 p为匹配串</p>
-<pre><code>def naiveMatch1(t,p):
-    n,m = len(t),len(p)
-    i,j = 0,0
-    while i &lt; n and j &lt; m:
-        if t[i] == p[j]: #该字符匹配成功,匹配下一个字符
-            i += 1
-            j += 1
-        else:
-            i = i - j + 1 #将j恢复至原位置加1
-            j = 0 #将匹配串复位
-    if j == m:
-        print(&quot;匹配成功&quot;)
-        return i - j #返回匹配成功的首字符的索引(从0开始)
-    print(&quot;匹配失败&quot;)
-    return -1
-</code></pre><h2 id="整个串匹配"><a href="#整个串匹配" class="headerlink" title="整个串匹配"></a>整个串匹配</h2><p>(时间复杂度:O(n*m))</p>
-<pre><code>def naiveMatch2(t,p):
-    n = len(t)
-    m = len(p)
-    for i in range(n-m+1): #实际上最多移动n-m+1次,而不是n次
-        if t[i:i+m] == p: #t串中从i位置开始的连续m个字符与p串比较
-            print(&quot;匹配成功&quot;)
-            return i #返回匹配成功的首字符的索引(从0开始)
-    print(&quot;匹配失败&quot;)
-    return -1
-</code></pre><p> 演练</p>
-<pre><code>t = &quot;abcdefghijklmnopqrst&quot;
-p = &quot;opq&quot;
-p2 = &quot;opqw&quot;
-naiveMatch1(t,p)
-naiveMatch1(t,p2)
-naiveMatch2(t,p)
-naiveMatch2(t,p2)
-</code></pre><ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">naiveMatch1</span><span class="params">(t,p)</span>:</span></div><div class="line">   n,m = len(t),len(p)</div><div class="line">   i,j = <span class="number">0</span>,<span class="number">0</span></div><div class="line">   <span class="keyword">while</span> i &lt; n <span class="keyword">and</span> j &lt; m:</div><div class="line">       <span class="keyword">if</span> t[i] == p[j]: <span class="comment">#该字符匹配成功,匹配下一个字符</span></div><div class="line">           i += <span class="number">1</span></div><div class="line">           j += <span class="number">1</span></div><div class="line">       <span class="keyword">else</span>:</div><div class="line">           i = i - j + <span class="number">1</span> <span class="comment">#将j恢复至原位置加1</span></div><div class="line">           j = <span class="number">0</span> <span class="comment">#将匹配串复位</span></div><div class="line">   <span class="keyword">if</span> j == m:</div><div class="line">       print(<span class="string">"匹配成功"</span>)</div><div class="line">       <span class="keyword">return</span> i - j <span class="comment">#返回匹配成功的首字符的索引(从0开始)</span></div><div class="line">   print(<span class="string">"匹配失败"</span>)</div><div class="line">   <span class="keyword">return</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<h2 id="整个串匹配"><a href="#整个串匹配" class="headerlink" title="整个串匹配"></a>整个串匹配</h2><p>(时间复杂度:O(n*m))<br><figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">naiveMatch2</span><span class="params">(t,p)</span>:</span></div><div class="line">   n = len(t)</div><div class="line">   m = len(p)</div><div class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> range(n-m+<span class="number">1</span>): <span class="comment">#实际上最多移动n-m+1次,而不是n次</span></div><div class="line">       <span class="keyword">if</span> t[i:i+m] == p: <span class="comment">#t串中从i位置开始的连续m个字符与p串比较</span></div><div class="line">           print(<span class="string">"匹配成功"</span>)</div><div class="line">           <span class="keyword">return</span> i <span class="comment">#返回匹配成功的首字符的索引(从0开始)</span></div><div class="line">   print(<span class="string">"匹配失败"</span>)</div><div class="line">   <span class="keyword">return</span> <span class="number">-1</span></div></pre></td></tr></table></figure></p>
+<p> 演练</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">t = <span class="string">"abcdefghijklmnopqrst"</span></div><div class="line"><span class="selector-tag">p</span> = <span class="string">"opq"</span></div><div class="line">p2 = <span class="string">"opqw"</span></div><div class="line"><span class="function"><span class="title">naiveMatch1</span><span class="params">(t,p)</span></span></div><div class="line"><span class="function"><span class="title">naiveMatch1</span><span class="params">(t,p2)</span></span></div><div class="line"><span class="function"><span class="title">naiveMatch2</span><span class="params">(t,p)</span></span></div><div class="line"><span class="function"><span class="title">naiveMatch2</span><span class="params">(t,p2)</span></span></div></pre></td></tr></table></figure>
+<ul>
 <li>串p从左端对齐,依次向右边移动一位,直至目标串与匹配串完全匹配</li>
 <li>朴素匹配算法简单但是效率低下,主要原因是:</li>
 <li>一旦比较到两个串中有字符不匹配,直接将匹配串整体向右移动一位</li>
@@ -414,62 +385,10 @@ naiveMatch2(t,p2)
 </li>
 </ol>
 <p><strong>移动位数 = 已匹配的字符数 - 对应的部分匹配值</strong></p>
-<h2 id="部分匹配表算法实现"><a href="#部分匹配表算法实现" class="headerlink" title="部分匹配表算法实现"></a>部分匹配表算法实现</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一:"></a>方法一:</h3><pre><code>#1.拆分匹配串
-def getPart(p):
-    part = []
-    for i in range(1,len(p)+1):
-        part.append(p[:i])
-    return part
+<h2 id="部分匹配表算法实现"><a href="#部分匹配表算法实现" class="headerlink" title="部分匹配表算法实现"></a>部分匹配表算法实现</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一:"></a>方法一:</h3><figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="comment">#1.拆分匹配串</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPart</span><span class="params">(p)</span>:</span></div><div class="line">   part = []</div><div class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(p)+<span class="number">1</span>):</div><div class="line">       part.append(p[:i])</div><div class="line">   <span class="keyword">return</span> part</div><div class="line">    </div><div class="line"><span class="comment">#2.根据某串获取其前缀后缀最长共有元素长度</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getLength</span><span class="params">(p)</span>:</span></div><div class="line">   prefix = set()</div><div class="line">   suffix = set()</div><div class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(p)):</div><div class="line">       prefix.add(p[:i])</div><div class="line">       suffix.add(p[i:])</div><div class="line">   <span class="comment">#如果交集为空,则返回空串集合&#123;""&#125;的长度0</span></div><div class="line">   <span class="comment">#如果交集不为空,则返回交集中最后一个元素(也即最长元素)的长度</span></div><div class="line">   <span class="keyword">return</span> len((prefix &amp; suffix <span class="keyword">or</span> &#123;<span class="string">""</span>&#125;).pop())</div><div class="line">    </div><div class="line"><span class="comment">#3.获取部分匹配表</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">partialTable1</span><span class="params">(p)</span>:</span></div><div class="line">   result = []</div><div class="line">   <span class="keyword">for</span> elem <span class="keyword">in</span> getPart(p):</div><div class="line">       result.append(getLength(elem))</div><div class="line">   <span class="keyword">return</span> result</div></pre></td></tr></table></figure>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二:"></a>方法二:</h3><figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="comment">#部分匹配表  </span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">partialTable2</span><span class="params">(p)</span>:</span>   </div><div class="line">   prefix = set()  </div><div class="line">   suffix = set()  </div><div class="line">   ret = [<span class="number">0</span>]  <span class="comment">#第一个字符的前缀后缀都为空,共有元素长度是0</span></div><div class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,len(p)):  </div><div class="line">       prefix.add(p[:i])  </div><div class="line">       suffix = &#123;p[j:i+<span class="number">1</span>] <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,i+<span class="number">1</span>)&#125; </div><div class="line">       ret.append(len((prefix &amp; suffix <span class="keyword">or</span> &#123;<span class="string">""</span>&#125;).pop())) </div><div class="line">   <span class="keyword">return</span> ret  </div><div class="line">    </div><div class="line">print(partialTable1(<span class="string">"ABCDABDABCDABDABCDABDABCDABDABCDABDABCDABD"</span>))</div><div class="line">print(partialTable2(<span class="string">"ABCDABDABCDABDABCDABDABCDABDABCDABDABCDABD"</span>))</div></pre></td></tr></table></figure>
+<h2 id="KMP核心算法"><a href="#KMP核心算法" class="headerlink" title="KMP核心算法"></a>KMP核心算法</h2><p>必须使用逐个字符匹配,不能使用整个串匹配<br><figure class="highlight python"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kmpMatch</span><span class="params">(t,p)</span>:</span></div><div class="line">   n,m = len(t),len(p)</div><div class="line">   table = partialTable2(p) <span class="comment">#获取匹配串的部分匹配表</span></div><div class="line">   cur = <span class="number">0</span></div><div class="line">   <span class="keyword">while</span> cur &lt;= n - m:</div><div class="line">   	<span class="keyword">for</span> i <span class="keyword">in</span> range(m):</div><div class="line">   		<span class="keyword">if</span> t[i + cur] != p[i]:</div><div class="line">   			cur += max(i - table[i - <span class="number">1</span>],<span class="number">1</span>)</div><div class="line">   			<span class="keyword">break</span></div><div class="line">   	<span class="keyword">else</span>:</div><div class="line">   		print(<span class="string">"匹配成功"</span>)</div><div class="line">   		<span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">   print(<span class="string">"匹配失败"</span>)</div><div class="line">   <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">   </div><div class="line">    </div><div class="line">kmpMatch(<span class="string">"BBC ABCDAB ABCDABCDABDE"</span>,<span class="string">"ABCDABD"</span>)</div></pre></td></tr></table></figure></p>
 
-#2.根据某串获取其前缀后缀最长共有元素长度
-def getLength(p):
-    prefix = set()
-    suffix = set()
-    for i in range(1,len(p)):
-        prefix.add(p[:i])
-        suffix.add(p[i:])
-    #如果交集为空,则返回空串集合{&quot;&quot;}的长度0
-    #如果交集不为空,则返回交集中最后一个元素(也即最长元素)的长度
-    return len((prefix &amp; suffix or {&quot;&quot;}).pop())
-
-#3.获取部分匹配表
-def partialTable1(p):
-    result = []
-    for elem in getPart(p):
-        result.append(getLength(elem))
-    return result
-</code></pre><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二:"></a>方法二:</h3><pre><code>#部分匹配表  
-def partialTable2(p):   
-    prefix = set()  
-    suffix = set()  
-    ret = [0]  #第一个字符的前缀后缀都为空,共有元素长度是0
-    for i in range(1,len(p)):  
-        prefix.add(p[:i])  
-        suffix = {p[j:i+1] for j in range(1,i+1)} 
-        ret.append(len((prefix &amp; suffix or {&quot;&quot;}).pop())) 
-    return ret  
-
-print(partialTable1(&quot;ABCDABDABCDABDABCDABDABCDABDABCDABDABCDABD&quot;))
-print(partialTable2(&quot;ABCDABDABCDABDABCDABDABCDABDABCDABDABCDABD&quot;))
-</code></pre><h2 id="KMP核心算法"><a href="#KMP核心算法" class="headerlink" title="KMP核心算法"></a>KMP核心算法</h2><p>必须使用逐个字符匹配,不能使用整个串匹配</p>
-<pre><code>def kmpMatch(t,p):
-    n,m = len(t),len(p)
-    table = partialTable2(p) #获取匹配串的部分匹配表
-    cur = 0
-    while cur &lt;= n - m:
-        for i in range(m):
-            if t[i + cur] != p[i]:
-                cur += max(i - table[i - 1],1)
-                break
-        else:
-            print(&quot;匹配成功&quot;)
-            return True
-    print(&quot;匹配失败&quot;)
-    return False
-
-
-kmpMatch(&quot;BBC ABCDAB ABCDABCDABDE&quot;,&quot;ABCDABD&quot;)
-</code></pre>
       
     </div>
 
@@ -582,7 +501,7 @@ kmpMatch(&quot;BBC ABCDAB ABCDABCDABDE&quot;,&quot;ABCDABD&quot;)
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -599,7 +518,7 @@ kmpMatch(&quot;BBC ABCDAB ABCDABCDABDE&quot;,&quot;ABCDABD&quot;)
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
