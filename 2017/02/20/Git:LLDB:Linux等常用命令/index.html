@@ -90,16 +90,22 @@
 
 
 
-<meta name="description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
+<meta name="description" content="2017.04.02 补充
+
+ Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git/LLDB/Linux等常用命令">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/02/20/Git:LLDB:Linux等常用命令/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
-<meta property="og:updated_time" content="2017-03-15T08:37:11.000Z">
+<meta property="og:description" content="2017.04.02 补充
+
+ Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
+<meta property="og:updated_time" content="2017-04-02T03:06:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git/LLDB/Linux等常用命令">
-<meta name="twitter:description" content="Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
+<meta name="twitter:description" content="2017.04.02 补充
+
+ Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
 
 
 
@@ -320,7 +326,10 @@
       
 
       
-        <p align="center"> Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。 </p>
+        <blockquote>
+<p>2017.04.02 补充</p>
+</blockquote>
+<p align="center"> Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。 </p>
 
 <a id="more"></a>
 <h1 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h1><pre><code>pod install --verbose --no-repo-update 
@@ -349,16 +358,26 @@ git config  user.email iChenYalun@gmail.com
 git config --global user.name &quot;chenyalun&quot;
 git config --global user.email iChenYalun@gmail.com 
 
- // 查看当前所有配置
+ 查看当前所有配置
 git config -l
 
-配置带颜色的log别名
-git config --global alias.lg &quot;log --color --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&apos; --abbrev-commit&quot;
-</code></pre><p>在需要的目录下初始化仓库</p>
+ 编辑(全局)配置文件
+git config -e [--global]
+</code></pre><p>在当前目录下初始化仓库</p>
 <pre><code>git init
-</code></pre><p>加载所有的文件/指定的文件</p>
+</code></pre><p>新建一个目录，将其初始化为Git代码库</p>
+<pre><code>git init [目录]
+</code></pre><p>添加所有的文件/指定的文件到暂存区</p>
 <pre><code>git add .
 git add a.h，a.m
+</code></pre><p>添加目录到暂存区</p>
+<pre><code>git add [dir]
+</code></pre><p>删除工作区文件</p>
+<pre><code>git rm a.h a.m
+</code></pre><p>停止追踪指定文件,但是文件会保存在工作区</p>
+<pre><code>git rm --cached a.h
+</code></pre><p>改名,并且将这个改名放入暂存区</p>
+<pre><code>git mv old.h new.h
 </code></pre><p>提交文件，添加注释，要使用 -m 参数指定修改的备注信息</p>
 <pre><code>git commit -m &quot;初始化仓库&quot;
 使用git时，每一次修改都需要添加(add)再提交(commit)，这一点是与svn不一样
@@ -374,31 +393,64 @@ git add forgotten_file
 git commit --amend
 </code></pre><p>撤销某次提交</p>
 <pre><code>git revert commitId
-</code></pre><h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>回到当前版本，放弃所有没有提交的修改</p>
-<pre><code>git reset --hard HEAD
-</code></pre><p>回到上一个版本</p>
-<pre><code>git reset --hard HEAD^
-</code></pre><p>回到之前第3个修订版本</p>
-<pre><code>git reset --hard HEAD~3
-</code></pre><p>查看git最后一次提交的hash值</p>
-<pre><code>git rev-list head | head -1
-</code></pre><p>回到指定版本号的版本</p>
-<pre><code>git reset --hard e695b67
-</code></pre><p>撤销对文件的修改(<strong>不可逆</strong>)</p>
-<pre><code>git checkout -- fileName
+</code></pre><p>提交时显示所有diff信息</p>
+<pre><code>git commit -v
+</code></pre><p>使用一次新的commit，替代上一次提交<br>如果代码没有任何新变化，则用来改写上一次commit的提交信息</p>
+<pre><code>git commit --amend -m [message]
+</code></pre><p>重做上一次commit，并包括指定文件的新变化</p>
+<pre><code>git commit --amend a.h a.m
+</code></pre><h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>恢复暂存区的指定文件到工作区</p>
+<pre><code>git checkout a.h
+</code></pre><p>恢复某个commit的指定文件到暂存区和工作区</p>
+<pre><code>git checkout [commit] [file]
+</code></pre><p>恢复暂存区的所有文件到工作区</p>
+<pre><code>git checkout .
+</code></pre><p>重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</p>
+<pre><code>git reset a.h
+</code></pre><p>重置暂存区与工作区，与上一次commit保持一致</p>
+<pre><code>git reset --hard
+</code></pre><p>重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</p>
+<pre><code>git reset [commit]
+</code></pre><p>重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</p>
+<pre><code>git reset --hard [commit]
+</code></pre><p>重置当前HEAD为指定commit，但保持暂存区和工作区不变</p>
+<pre><code>git reset --keep [commit]
+</code></pre><p>新建一个commit，用来撤销指定commit<br>后者的所有变化都将被前者抵消，并且应用到当前分支</p>
+<pre><code>git revert [commit]
+</code></pre><p>暂时将未提交的变化移除，稍后再移入</p>
+<pre><code>git stash
+git stash pop
 </code></pre><p>查看git的总提交次数</p>
 <pre><code>git rev-list head | sort | wc -l
-</code></pre><h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>新建分支并切换到新建的分支</p>
-<pre><code>git checkout -b branchName
-</code></pre><p>查看项目下的所有分支</p>
+</code></pre><h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>列出所有本地分支</p>
 <pre><code>git branch
-</code></pre><p>切换分支</p>
-<pre><code>git checkout branchName
-</code></pre><p>合并分支(将branchName合并到当前的分支)</p>
-<pre><code>git merge --no-ff branchName
+</code></pre><p>列出所有远程分支</p>
+<pre><code>git branch -r
+</code></pre><p>列出所有本地分支和远程分支</p>
+<pre><code>git branch -a
+</code></pre><p>新建一个分支，但依然停留在当前分支</p>
+<pre><code>git branch [branch-name]
+</code></pre><p>新建一个分支，并切换到该分支</p>
+<pre><code>git checkout -b [branch]
+</code></pre><p>新建一个分支，指向指定commit</p>
+<pre><code>git branch [branch] [commit]
+</code></pre><p>新建一个分支，与指定的远程分支建立追踪关系</p>
+<pre><code>git branch --track [branch] [remote-branch]
+</code></pre><p>切换到指定分支，并更新工作区</p>
+<pre><code>git checkout [branch-name]
+</code></pre><p>切换到上一个分支</p>
+<pre><code>git checkout -
+</code></pre><p>建立追踪关系，在现有分支与指定的远程分支之间</p>
+<pre><code>git branch --set-upstream [branch] [remote-branch]
+</code></pre><p>合并指定分支到当前分支</p>
+<pre><code>git merge [branch]
+</code></pre><p>选择一个commit，合并进当前分支</p>
+<pre><code>git cherry-pick [commit]
 </code></pre><p>删除分支</p>
-<pre><code>git branch -d branchName //删除本地的分支
-git push &lt;name&gt; :branchName //删除远程分支
+<pre><code>git branch -d [branch-name]
+</code></pre><p>删除远程分支</p>
+<pre><code>git push origin --delete [branch-name]
+git branch -dr [remote/branch]
 </code></pre><h2 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h2><p>添加新的远程仓库</p>
 <pre><code>git remote add &lt;name&gt; &lt;url&gt;
 </code></pre><p>拉取远程仓库的内容</p>
@@ -410,19 +462,40 @@ git pull &lt;name&gt;  [branchName] //拉取并且合并
 <pre><code>git remote rename oldShortName newShortName
 </code></pre><p>查看远程仓库的url</p>
 <pre><code>git remote -v
-</code></pre><h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>创建标签</p>
-<pre><code>git tag -a 1.2.0 -m &apos;my version 1.2.0&apos;
-//在之前的某次提交commitId打标签
-git tag -a 1.1.9 9fceb02
-</code></pre><p>推送标签到远程仓库</p>
-<pre><code>git push name --tags  //推送所有本地标签
-git push name 1.2.0 //推送特定的标签
-</code></pre><p>检出到特定的标签</p>
-<pre><code>git checkout -b branchname tagname
-git checkout -b branchName 1.2.0
-</code></pre><p>删除标签</p>
-<pre><code>git tag -d tagName //删除本地的tag
-git push name --delete tag tagName //删除远程的tag
+</code></pre><h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>列出所有tag</p>
+<pre><code>git tag
+</code></pre><p>新建一个tag在当前commit</p>
+<pre><code>git tag [tag]
+</code></pre><p>新建一个tag在指定commit</p>
+<pre><code>git tag [tag] [commit]
+</code></pre><p>删除本地tag</p>
+<pre><code>git tag -d [tag]
+</code></pre><p>删除远程tag</p>
+<pre><code>git push origin :refs/tags/[tagName]
+</code></pre><p>查看tag信息</p>
+<pre><code>git show [tag]
+</code></pre><p>提交指定tag</p>
+<pre><code>git push [remote] [tag]
+</code></pre><p>提交所有tag</p>
+<pre><code>git push [remote] --tags
+</code></pre><p>新建一个分支，指向某个tag</p>
+<pre><code>git checkout -b [branch] [tag]
+</code></pre><h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><p>下载远程仓库的所有变动</p>
+<pre><code>git fetch [remote]
+</code></pre><p>显示所有远程仓库</p>
+<pre><code>git remote -v
+</code></pre><p>显示某个远程仓库的信息</p>
+<pre><code>git remote show [remote]
+</code></pre><p>增加一个新的远程仓库，并命名</p>
+<pre><code>git remote add [shortname] [url]
+</code></pre><p>取回远程仓库的变化，并与本地分支合并</p>
+<pre><code>git pull [remote] [branch]
+</code></pre><p>上传本地指定分支到远程仓库</p>
+<pre><code>git push [remote] [branch]
+</code></pre><p>强行推送当前分支到远程仓库，即使有冲突</p>
+<pre><code>git push [remote] --force
+</code></pre><p>推送所有分支到远程仓库</p>
+<pre><code>git push [remote] --all
 </code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>设置git别名</p>
 <pre><code>git config --global alias.co checkout
 git config --global alias.br branch
@@ -887,7 +960,7 @@ expr int $c = 10 声明一个新变量
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CocoaPods"><span class="nav-number">1.</span> <span class="nav-text">CocoaPods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git"><span class="nav-number">2.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步"><span class="nav-number">2.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">2.3.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">2.4.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仓库"><span class="nav-number">2.5.</span> <span class="nav-text">仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">2.6.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">2.7.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SVN"><span class="nav-number">3.</span> <span class="nav-text">SVN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-1"><span class="nav-number">3.1.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkout"><span class="nav-number">3.2.</span> <span class="nav-text">checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">3.3.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-number">3.4.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVN-st"><span class="nav-number">3.5.</span> <span class="nav-text">SVN st</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">3.6.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">4.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">4.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-2"><span class="nav-number">4.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统"><span class="nav-number">4.3.</span> <span class="nav-text">系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vim"><span class="nav-number">5.</span> <span class="nav-text">Vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-3"><span class="nav-number">5.1.</span> <span class="nav-text">初步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LLDB"><span class="nav-number">6.</span> <span class="nav-text">LLDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-4"><span class="nav-number">6.1.</span> <span class="nav-text">初步</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CocoaPods"><span class="nav-number">1.</span> <span class="nav-text">CocoaPods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git"><span class="nav-number">2.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步"><span class="nav-number">2.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">2.3.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">2.4.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仓库"><span class="nav-number">2.5.</span> <span class="nav-text">仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">2.6.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程"><span class="nav-number">2.7.</span> <span class="nav-text">远程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">2.8.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SVN"><span class="nav-number">3.</span> <span class="nav-text">SVN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-1"><span class="nav-number">3.1.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkout"><span class="nav-number">3.2.</span> <span class="nav-text">checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">3.3.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-number">3.4.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVN-st"><span class="nav-number">3.5.</span> <span class="nav-text">SVN st</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">3.6.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">4.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">4.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-2"><span class="nav-number">4.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统"><span class="nav-number">4.3.</span> <span class="nav-text">系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vim"><span class="nav-number">5.</span> <span class="nav-text">Vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-3"><span class="nav-number">5.1.</span> <span class="nav-text">初步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LLDB"><span class="nav-number">6.</span> <span class="nav-text">LLDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-4"><span class="nav-number">6.1.</span> <span class="nav-text">初步</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
