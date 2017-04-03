@@ -100,12 +100,14 @@
 <meta property="og:description" content="2017.4.3 修改2016.12.4 修改
 
  C语言方面。">
-<meta property="og:updated_time" content="2017-04-03T03:22:47.000Z">
+<meta property="og:image" content="http://static.chenyalun.com/2017/04/03/20170403001.png">
+<meta property="og:updated_time" content="2017-04-03T09:27:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读「李明杰博客」">
 <meta name="twitter:description" content="2017.4.3 修改2016.12.4 修改
 
  C语言方面。">
+<meta name="twitter:image" content="http://static.chenyalun.com/2017/04/03/20170403001.png">
 
 
 
@@ -172,7 +174,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">Write Less, Do More.</p>
+  <p class="site-subtitle"></p>
 </div>
 
 <div class="site-nav-toggle">
@@ -396,6 +398,7 @@ char *p2 = &quot;lmj&quot;;定义的是一个字符串常量
 <h2 id="22-position与anchorPoint"><a href="#22-position与anchorPoint" class="headerlink" title="22.position与anchorPoint"></a>22.position与anchorPoint</h2><p>position可以用来设置CALayer在父层中的位置，它是以父层的左上角为坐标原点(0, 0);anchorPoint称为”定位点”，它决定着CALayer身上的哪个点会在position属性所指的位置。它的x、y取值范围都是0~1，默认值为(0.5, 0.5).</p>
 <h2 id="23-Core-Animation会阻塞主线程吗"><a href="#23-Core-Animation会阻塞主线程吗" class="headerlink" title="23.Core Animation会阻塞主线程吗"></a>23.Core Animation会阻塞主线程吗</h2><p>Core Animation的动画执行过程都是在后台操作的，不会阻塞主线程,而且是直接作用在CALayer上的，并非UIView.</p>
 <h2 id="24-空指针"><a href="#24-空指针" class="headerlink" title="24.空指针"></a>24.空指针</h2><p>没有存储任何内存地址的指针就称为空指针(NULL指针,指向nil),空指针就是被赋值为0的指针，在没有被具体初始化之前，其值为0。可以给空指针发送消息,但消息发送不出去.”野指针”不是NULL指针，是指向”垃圾”内存（不可用内存）的指针.</p>
+<h2 id="25-不同编译器下各类型所占字节"><a href="#25-不同编译器下各类型所占字节" class="headerlink" title="25.不同编译器下各类型所占字节"></a>25.不同编译器下各类型所占字节</h2><p><img src="http://static.chenyalun.com/2017/04/03/20170403001.png" alt=""></p>
 <blockquote>
 <p>向作者致谢!<br>M了个J:<a href="http://www.cnblogs.com/mjios/" target="_blank" rel="external">http://www.cnblogs.com/mjios/</a></p>
 <p>参考博客<br>C语言中文网:<a href="http://c.biancheng.net/cpp/html/88.html" target="_blank" rel="external">http://c.biancheng.net/cpp/html/88.html</a></p>
@@ -511,7 +514,7 @@ char *p2 = &quot;lmj&quot;;定义的是一个字符串常量
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>
@@ -519,7 +522,7 @@ char *p2 = &quot;lmj&quot;;定义的是一个字符串常量
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -528,7 +531,7 @@ char *p2 = &quot;lmj&quot;;定义的是一个字符串常量
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -593,7 +596,7 @@ char *p2 = &quot;lmj&quot;;定义的是一个字符串常量
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#读感"><span class="nav-number">1.</span> <span class="nav-text">读感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#钩玄"><span class="nav-number">2.</span> <span class="nav-text">钩玄</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C语言中怎么控制输入与输出格式"><span class="nav-number">2.1.</span> <span class="nav-text">1.C语言中怎么控制输入与输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-getchar-scanf-gets的区别"><span class="nav-number">2.2.</span> <span class="nav-text">2.getchar/scanf/gets的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-puts-prints-putchar的区别"><span class="nav-number">2.3.</span> <span class="nav-text">3.puts/prints/putchar的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-介绍指针"><span class="nav-number">2.4.</span> <span class="nav-text">4.介绍指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-常见字符串处理函数的用法"><span class="nav-number">2.5.</span> <span class="nav-text">5.常见字符串处理函数的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-如何使一个函数有多个返回值"><span class="nav-number">2.6.</span> <span class="nav-text">6.如何使一个函数有多个返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-字符串常量与字符串变量"><span class="nav-number">2.7.</span> <span class="nav-text">7.字符串常量与字符串变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-返回指针的函数"><span class="nav-number">2.8.</span> <span class="nav-text">8.返回指针的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-指向函数的指针"><span class="nav-number">2.9.</span> <span class="nav-text">9.指向函数的指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-将函数作为参数在函数间传递"><span class="nav-number">2.10.</span> <span class="nav-text">10.将函数作为参数在函数间传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-宏的使用"><span class="nav-number">2.11.</span> <span class="nav-text">11.宏的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-include中-lt-gt-与””的区别"><span class="nav-number">2.12.</span> <span class="nav-text">12.include中<>与””的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-如何避免-include重复包含同一个头文件"><span class="nav-number">2.13.</span> <span class="nav-text">13.如何避免#include重复包含同一个头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-变量的作用域"><span class="nav-number">2.14.</span> <span class="nav-text">14.变量的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-编译链接流程"><span class="nav-number">2.15.</span> <span class="nav-text">15.编译链接流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-extern与static关键字的作用"><span class="nav-number">2.16.</span> <span class="nav-text">16.extern与static关键字的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-如何定义结构体"><span class="nav-number">2.17.</span> <span class="nav-text">17.如何定义结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-结构体指针的使用"><span class="nav-number">2.18.</span> <span class="nav-text">18.结构体指针的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-typedef的主要使用"><span class="nav-number">2.19.</span> <span class="nav-text">19.typedef的主要使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-import与include的区别"><span class="nav-number">2.20.</span> <span class="nav-text">20.import与include的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-UIView显示的过程"><span class="nav-number">2.21.</span> <span class="nav-text">21.UIView显示的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-position与anchorPoint"><span class="nav-number">2.22.</span> <span class="nav-text">22.position与anchorPoint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-Core-Animation会阻塞主线程吗"><span class="nav-number">2.23.</span> <span class="nav-text">23.Core Animation会阻塞主线程吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-空指针"><span class="nav-number">2.24.</span> <span class="nav-text">24.空指针</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#读感"><span class="nav-number">1.</span> <span class="nav-text">读感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#钩玄"><span class="nav-number">2.</span> <span class="nav-text">钩玄</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C语言中怎么控制输入与输出格式"><span class="nav-number">2.1.</span> <span class="nav-text">1.C语言中怎么控制输入与输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-getchar-scanf-gets的区别"><span class="nav-number">2.2.</span> <span class="nav-text">2.getchar/scanf/gets的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-puts-prints-putchar的区别"><span class="nav-number">2.3.</span> <span class="nav-text">3.puts/prints/putchar的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-介绍指针"><span class="nav-number">2.4.</span> <span class="nav-text">4.介绍指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-常见字符串处理函数的用法"><span class="nav-number">2.5.</span> <span class="nav-text">5.常见字符串处理函数的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-如何使一个函数有多个返回值"><span class="nav-number">2.6.</span> <span class="nav-text">6.如何使一个函数有多个返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-字符串常量与字符串变量"><span class="nav-number">2.7.</span> <span class="nav-text">7.字符串常量与字符串变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-返回指针的函数"><span class="nav-number">2.8.</span> <span class="nav-text">8.返回指针的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-指向函数的指针"><span class="nav-number">2.9.</span> <span class="nav-text">9.指向函数的指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-将函数作为参数在函数间传递"><span class="nav-number">2.10.</span> <span class="nav-text">10.将函数作为参数在函数间传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-宏的使用"><span class="nav-number">2.11.</span> <span class="nav-text">11.宏的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-include中-lt-gt-与””的区别"><span class="nav-number">2.12.</span> <span class="nav-text">12.include中<>与””的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-如何避免-include重复包含同一个头文件"><span class="nav-number">2.13.</span> <span class="nav-text">13.如何避免#include重复包含同一个头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-变量的作用域"><span class="nav-number">2.14.</span> <span class="nav-text">14.变量的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-编译链接流程"><span class="nav-number">2.15.</span> <span class="nav-text">15.编译链接流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-extern与static关键字的作用"><span class="nav-number">2.16.</span> <span class="nav-text">16.extern与static关键字的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-如何定义结构体"><span class="nav-number">2.17.</span> <span class="nav-text">17.如何定义结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-结构体指针的使用"><span class="nav-number">2.18.</span> <span class="nav-text">18.结构体指针的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-typedef的主要使用"><span class="nav-number">2.19.</span> <span class="nav-text">19.typedef的主要使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-import与include的区别"><span class="nav-number">2.20.</span> <span class="nav-text">20.import与include的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-UIView显示的过程"><span class="nav-number">2.21.</span> <span class="nav-text">21.UIView显示的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-position与anchorPoint"><span class="nav-number">2.22.</span> <span class="nav-text">22.position与anchorPoint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-Core-Animation会阻塞主线程吗"><span class="nav-number">2.23.</span> <span class="nav-text">23.Core Animation会阻塞主线程吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-空指针"><span class="nav-number">2.24.</span> <span class="nav-text">24.空指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25-不同编译器下各类型所占字节"><span class="nav-number">2.25.</span> <span class="nav-text">25.不同编译器下各类型所占字节</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
