@@ -90,20 +90,20 @@
 
 
 
-<meta name="description" content="2016.12.4 修改
+<meta name="description" content="2017.4.3 修改2016.12.4 修改
 
  C语言方面。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读「李明杰博客」">
 <meta property="og:url" content="http://blog.chenyalun.com/2016/10/28/读李明杰博客/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="2016.12.4 修改
+<meta property="og:description" content="2017.4.3 修改2016.12.4 修改
 
  C语言方面。">
-<meta property="og:updated_time" content="2017-04-02T00:51:25.000Z">
+<meta property="og:updated_time" content="2017-04-03T03:22:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读「李明杰博客」">
-<meta name="twitter:description" content="2016.12.4 修改
+<meta name="twitter:description" content="2017.4.3 修改2016.12.4 修改
 
  C语言方面。">
 
@@ -327,412 +327,75 @@
 
       
         <blockquote>
-<p>2016.12.4 修改</p>
+<p>2017.4.3 修改<br>2016.12.4 修改</p>
 </blockquote>
 <p align="center"> C语言方面。 </p>
 
 <a id="more"></a>
 <h1 id="读感"><a href="#读感" class="headerlink" title="读感"></a>读感</h1><p>这次零零碎碎花了一周时间拜读老师的博客,很多知识点理解地更透彻了,尤其是C语言方面的.不太熟悉或将近遗忘的知识点记录下来,做复习巩固之用.</p>
-<h1 id="钩玄"><a href="#钩玄" class="headerlink" title="钩玄"></a>钩玄</h1><ol>
-<li><p>loadView、viewDidLoad及viewDidUnload的关系是怎样的?</p>
-</li>
-<li><p>为什么默认情况下UIImageView内的按钮无法点击?忽略视图的四种方法?</p>
-</li>
-<li><p>只声明一个局部int类型变量与只声明一个全局的int类型变量,却不初始化,其值是?</p>
-</li>
-<li><p>使用char存储大写字母A有哪两种赋值方式?</p>
-</li>
-<li><p>逗号表达式的运算过程<code>c = (++a, a *= 2, b = a * 5);</code>是怎样的?</p>
-</li>
-<li>枚举与结构体定义的三种方式?</li>
-<li>为何不要在description方法中同时使用%@和self?</li>
-</ol>
-<h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><ul>
-<li><p>不要在UIViewController的loadView方法中改变状态栏的可视性,会导致重复调用2次loadView和viewDidLoad方法.</p>
-</li>
-<li><p>控制打印格式</p>
-<p>  printf(“My height is %8.1f”, 179.95f);</p>
-<p>  scanf(“%d-%d-%d”, &amp;a, &amp;b, &amp;c);<br>  scanf(“%d %d %d”, &amp;a, &amp;b, &amp;c);</p>
-</li>
-</ul>
-<ul>
-<li><p>计算机中的内存是以字节为单位的存储空间.<br>内存的每一个字节都有一个唯一的编号，这个编号就称为地址.<br>凡存放在内存中的程序和数据都有一个地址，也就是说，一个函数也有自己的内存地址。变量存储单元的第一个字节的地址就是该变量的地址.</p>
-</li>
-<li><p>二维数组的&amp;a[i] == (a+i)</p>
-</li>
-<li><p>gets可以读入包含空格、tab的字符串，直到遇到回车为止；<br>getchar函数可以读入空格、TAB，直到遇到回车为止。scanf则不能读入空格和TAB。scanf不能用来读取空格、tab.</p>
-<pre><code>#include &lt;stdio.h&gt;
-int main()
-{
-    char a[10];
-    char b[10];
-    gets(a);
-    puts(a);
-
-    scanf(&quot;%s&quot;,b);
-    puts(b);
-    return 0;
-}
-</code></pre></li>
-</ul>
-<pre><code>putchar(65); // A
-
-putchar(&apos;A&apos;); // A
-
-int a = 65;
-putchar(a); // A
-
-char c;
-c = getchar();
-</code></pre><ul>
-<li><p>包含string.h头文件后,strlen\strcpy\strcat\strcmp函数的用法</p>
-<pre><code>// 长度为2,遇空字符\0断!
-int size = strlen(&quot;mj&quot;);
-
-// 遇空字符\0断!
-char s[10];
-strcpy(s, &quot;lmj&quot;);
-
-// 遇空字符\0断!
-char s1[30] = &quot;LOVE&quot;;
-strcat(s1, &quot;OC&quot;);
-
-// 左减右,比字符ASCII码差值
-strcmp(s1, s2);
-</code></pre></li>
-<li><p>通过变量名引用变量，由系统自动完成变量名和其存储地址之间的转换，称为变量的”直接引用”方式.<br>首先将变量a的地址存放在另一个变量中，比如存放在变量b中，然后通过变量b来间接引用变量a，间接读写变量a的值。这就是”间接引用”.</p>
-</li>
-<li><p>在指针变量没有指向确定地址之前，不要对它所指的内容赋值。<code>int *p; *p = 10; //这是错误的</code>.</p>
-</li>
-<li>基本数据类型作为函数实参时，只是纯粹地将值传递给形参，形参的改变并不影响实参。</li>
-<li><p>如何使一个函数有多个返回值.</p>
-<pre><code>int test(int a, int b,int *c) {
-    // 赋值给指针指向的变量
-    *c = a + b;
-    return a * b;
-}
-
-int main(int argc, const char * argv[]) {
-    int m = 2,n = 4,s1,s2;
-    s1 =  test(m, n, &amp;s2);
-
-    printf(&quot;%d---%d&quot;,s1,s2);
-    return 0;
-}
-</code></pre></li>
-<li>二维数组中,可以根据a[0]的地址获取其他元素的地址，使p=&amp;a[0],p+1就是a[1]的地址。这里的p+1不一定代表p的值加1，也可能是加2、加4或者加8。究竟加多少，这跟指针的类型有关.</li>
-<li>指针操作中,数组名a是个常量,不能进行赋值运算！<code>*(p+i)和*(a+i)都表示数组元素a[i]</code><pre><code>char s[10];
+<h1 id="钩玄"><a href="#钩玄" class="headerlink" title="钩玄"></a>钩玄</h1><h2 id="1-C语言中怎么控制输入与输出格式"><a href="#1-C语言中怎么控制输入与输出格式" class="headerlink" title="1.C语言中怎么控制输入与输出格式"></a>1.C语言中怎么控制输入与输出格式</h2><figure class="highlight perl"><table><tr><td class="code"><pre><div class="line"><span class="keyword">printf</span>(<span class="string">"My height is %8.1f"</span>, <span class="number">179.95</span>f);<span class="regexp">//</span> 左对齐,小数点后<span class="number">1</span>位        </div><div class="line">   </div><div class="line"><span class="keyword">printf</span>(<span class="string">"My height is %-4d"</span>, <span class="number">60</span>); <span class="regexp">//</span> 左对齐，右边填空格</div><div class="line">scanf(<span class="string">"%d-%d-%d"</span>, &amp;a, &amp;b, &amp;c);</div><div class="line">scanf(<span class="string">"%d %d %d"</span>, &amp;a, &amp;b, &amp;c);</div><div class="line"></div><div class="line"><span class="regexp">//</span> putchar一次只能输出一个字符，而<span class="keyword">printf</span>可以同时输出多个字符</div><div class="line"><span class="keyword">int</span> a = <span class="number">65</span>;</div><div class="line">putchar(a);</div></pre></td></tr></table></figure>
+<h2 id="2-getchar-scanf-gets的区别"><a href="#2-getchar-scanf-gets的区别" class="headerlink" title="2.getchar/scanf/gets的区别"></a>2.getchar/scanf/gets的区别</h2><p>1.gets和getchar函数可以读入空格、TAB，直到遇到回车为止。scanf则不能读入空格和TAB。</p>
+<p>2.gets一次只能读取一个字符串,getchar一次只能读入一个字符。scanf则可以同时接收多个字符。</p>
+<p>3.getchar还能读入回车换行符，这时候要敲2次回车键。第1次敲的回车换行符被getchar读入，第2次敲的回车键代表输入结束。</p>
+<h2 id="3-puts-prints-putchar的区别"><a href="#3-puts-prints-putchar的区别" class="headerlink" title="3.puts/prints/putchar的区别"></a>3.puts/prints/putchar的区别</h2><p>1.putchar一次只能输出一个字符,puts函数一次只能输出一个字符串，printf函数则可以同时输出多个字符串</p>
+<p>2.printf与puts函数会首地址开始输出字符，一直到\0字符为止。</p>
+<h2 id="4-介绍指针"><a href="#4-介绍指针" class="headerlink" title="4.介绍指针"></a>4.介绍指针</h2><p>1.计算机中的内存是以字节为单位的存储空间,内存的每一个字节都有一个唯一的编号，这个编号就称为地址.<br>2.凡存放在内存中的程序和数据都有一个地址，也就是说，一个函数也有自己的内存地址。变量存储单元的第一个字节的地址就是该变量的地址.<br>3.通过变量名引用变量，由系统自动完成变量名和其存储地址之间的转换，称为变量的”直接引用”方式.首先将变量a的地址存放在另一个变量中，比如存放在变量b中，然后通过变量b来间接引用变量a，间接读写变量a的值。这就是”间接引用”.</p>
+<p>4.在指针变量没有指向确定地址之前，不要对它所指的内容赋值。<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> *p; *p = <span class="number">10</span>; <span class="comment">//这是错误的</span></div><div class="line"></div><div class="line"><span class="comment">// 正确做法</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="comment">// 也可以int *b = &amp;a;</span></div><div class="line"><span class="keyword">int</span> *b; <span class="comment">//b是指针变量</span></div><div class="line">b = &amp;a;</div><div class="line"></div><div class="line"><span class="comment">// 通过*b间接修改a的值</span></div><div class="line">*b = <span class="number">15</span>; <span class="comment">// 根据b地址访问对应的存储值</span></div></pre></td></tr></table></figure></p>
+<p>5.指针操作中,数组名a是个常量,不能进行赋值运算</p>
+<pre><code>char s[10];
 s = &quot;mj&quot;;// 错误! s是常量
-</code></pre></li>
-<li>用数组名作为函数实参时，是把实参数组的首地址传递给形参数组，两个数组共同占用同一段内存空间，这样形参数组中的元素值发生变化就会使实参数组的元素值也同时变化.</li>
-<li><code>char *s = &quot;mj&quot;;3 *s = &quot;like&quot;;</code>的两个错误:1,s指向的是”mj”的首字符’m’,只有一个字节,要”like”存进1个字节的空间内，肯定内存溢出.2,s指向的是字符串常量”mj”,不能再通过指针来修改字符串内容(字符数组可以修改).</li>
-<li><p>分辨:</p>
+</code></pre><h2 id="5-常见字符串处理函数的用法"><a href="#5-常见字符串处理函数的用法" class="headerlink" title="5.常见字符串处理函数的用法"></a>5.常见字符串处理函数的用法</h2><p>包含string.h头文件后,strlen\strcpy\strcat\strcmp函数的用法<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 测量字符串的字符个数，不包括\0</span></div><div class="line"><span class="comment">// 长度为7</span></div><div class="line"><span class="keyword">int</span> size = <span class="built_in">strlen</span>(<span class="string">"abcdefg"</span>);</div><div class="line"><span class="comment">// 长度为2</span></div><div class="line"><span class="keyword">char</span> s[] = &#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'\0'</span>,<span class="string">'c'</span>&#125;;</div><div class="line"> </div><div class="line"><span class="comment">// 右边拷贝到左边,</span></div><div class="line"><span class="keyword">char</span> s[<span class="number">10</span>];</div><div class="line"><span class="built_in">strcpy</span>(s, <span class="string">"abcdefg"</span>);</div><div class="line"><span class="comment">// 遇到\0截断</span></div><div class="line"><span class="keyword">char</span> c[] = &#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'\0'</span>,<span class="string">'c'</span>&#125;;</div><div class="line"><span class="built_in">strcpy</span>(s,c);<span class="comment">// 结果ab</span></div><div class="line"></div><div class="line"><span class="comment">// 右边拼接到左边,遇到\0截断</span></div><div class="line"><span class="keyword">char</span> s1[<span class="number">30</span>] = &#123;<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'\0'</span>, <span class="string">'d'</span>&#125;;</div><div class="line"><span class="built_in">strcat</span>(s1, <span class="string">"OC"</span>);<span class="comment">// 结果abOC</span></div><div class="line"></div><div class="line"><span class="comment">// 左减右,逐字符比较ASCII码差值,直到字符不相同或者遇见'\0'为止</span></div><div class="line"><span class="built_in">strcmp</span>(s1, s2);</div></pre></td></tr></table></figure></p>
+<p>注意:strcpy中若数组长度不足以容纳整个字符串，则程序运行崩溃</p>
+<h2 id="6-如何使一个函数有多个返回值"><a href="#6-如何使一个函数有多个返回值" class="headerlink" title="6.如何使一个函数有多个返回值"></a>6.如何使一个函数有多个返回值</h2><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b,<span class="keyword">int</span> *c)</span> </span>&#123;</div><div class="line">    <span class="comment">// 赋值给指针指向的变量</span></div><div class="line">    *c = a + b;</div><div class="line">    <span class="keyword">return</span> a * b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> m = <span class="number">2</span>,n = <span class="number">4</span>,s1,s2;</div><div class="line">    s1 =  test(m, n, &amp;s2);</div><div class="line">    </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d---%d"</span>,s1,s2);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-字符串常量与字符串变量"><a href="#7-字符串常量与字符串变量" class="headerlink" title="7.字符串常量与字符串变量"></a>7.字符串常量与字符串变量</h2><p><code>char *s = &quot;mj&quot;;3 *s = &quot;like&quot;;</code><br>两个错误:<br>1,s指向的是”mj”的首字符’m’,只有一个字节,要”like”存进1个字节的空间内，肯定内存溢出.<br>2,s指向的是字符串常量”mj”,不能再通过指针来修改字符串内容(字符数组可以修改).</p>
 <pre><code>char a[] = &quot;lmj&quot;;定义的是一个字符串变量
 char *p2 = &quot;lmj&quot;;定义的是一个字符串常量
-</code></pre></li>
-<li><p>返回指针的函数</p>
-<pre><code>   // 将字符串str中的小写字母变成大写字母，并返回改变后的字符串
-   // 注意的是：这里的参数要传字符串变量，不能传字符串常量
-   char * upper(char *str) {
-       // 先保留最初的地址。因为等会str指向的位置会变来变去的。
-       char *dest = str;
-
-   // 如果还不是空字符
-   while (*str != &apos;\0&apos;) {
-       // 如果是小写字母
-       if (*str &gt;= &apos;a&apos; &amp;&amp; *str &lt;= &apos;z&apos;) {
-           // 变为大写字母。小写和大写字母的ASCII值有个固定的差值
-           *str -= &apos;a&apos; - &apos;A&apos;;
-       }
-
-       // 遍历下一个字符
-       str++;
-   }
-
-   // 返回字符串
-   return dest;
-}
-// 调用:
-   int main()
-   {
-       // 定义一个字符串变量
-       char str[] = &quot;lmj&quot;;
-
-       // 调用函数
-       char *dest = upper(str);
-
-       printf(&quot;%s&quot;, dest);
-       return 0;
-   }
-</code></pre></li>
-<li><p>指向函数的指针</p>
-<pre><code>int sum(int a, int b) {
-    return a + b;
-}
-
-int main()
-{
-    // 定义一个指针变量p，指向sum函数
-    int (*p)(int a, int b) = sum;
-    // 或者 int (*p)(int, int) = sum;
-    // 或者 int (*p)() = sum;
-
-    // 利用指针变量p调用函数
-    int result = (*p)(1, 3);
-    // 或者 int result = p(1, 3);
-
-    printf(&quot;%d&quot;, result);
-    return 0;
-}
-</code></pre></li>
-</ul>
-<ul>
-<li><p>将函数作为参数在函数间传递</p>
-<pre><code> // 减法运算
- int minus(int a, int b) {
-    return a - b;
- }
-
-// 加法运算
-int sum(int a, int b) {
-    return a + b;
-}
-
-// 这个counting函数是用来做a和b之间的计算，至于做加法还是减法运算，由函数的第1个参数决定
-void counting( int (*p)(int, int) , int a, int b) {
-    int result = p(a, b);
-    printf(&quot;计算结果为：%d\n&quot;, result);
-}
-
-int main()
-{
-    // 进行加法运算
-    counting(sum, 6, 4);
-
-    // 进行减法运算
-    counting(minus, 6, 4);
-
-    return 0;
- }
-</code></pre></li>
-<li><p>所有预处理指令都以符号”#”开头，并且结尾不用分号,作用范围是从它出现的位置到文件尾,主要有：宏定义、文件包含、条件编译.</p>
-</li>
-<li>使用带参数的宏定义,最好将参数和结果都用括号括起来.</li>
-<li>宏定义不涉及存储空间的分配、参数类型匹配、参数传递、返回值问题,宏替换只在编译预处理阶段进行,带参数的宏比函数具有更高的执行效率.</li>
-<li><p>条件编译</p>
-<pre><code>#if 条件1
- ...code1...
-#elif 条件2
- ...code2...
-#else
- ...code3...
-#endif
-
-#if defined(MAX)
-     ...code...
-#endif
-
-#if !defined(MAX)
-     ...code...
-#endif
-</code></pre></li>
-<li><p><code>#include　&lt;文件名&gt;</code>到C语言库函数头文件所在的目录中寻找文件,<code>#include　&quot;文件名&quot;</code>系统会先在源程序当前目录下寻找，若找不到，再到操作系统的path路径中查找，最后才到C语言库函数头文件所在目录中查找.</p>
-</li>
-<li><p>避免#include重复包含同一个头文件:使用条件编译</p>
-<pre><code>#ifndef _ONE_H_
-#define _ONE_H_
-
-void one();
-
-#endif
-</code></pre></li>
-<li>在函数内部定义的变量，称为局部变量。形式参数也属于局部变量,在所有函数外部定义的变量，称为全局变量.</li>
-<li>所有的局部变量在默认情况下都是自动变量,是存储在堆栈中的.所有的全局变量和被关键字static修饰的局部变量都是静态变量,是存储在静态内存中的，也就是不属于堆栈.</li>
-<li>静态变量在程序运行之前创建，在程序的整个运行期间始终存在，直到程序结束。在程序执行到声明自动变量的代码块(函数)时，自动变量才被创建；当自动变量所在的代码块(函数)执行完毕后，这些自动变量就会自行销毁.</li>
-<li><p>被关键字register修饰的自动变量都是寄存器变量,是存储在硬件寄存器中的,其生命周期即是自动变量的生命周期.寄存器变量只限于int、char和指针类型变量使用,将一些频繁使用的自动变量定义为寄存器变量，这样程序尽可能地为它分配寄存器存放，而不用内存.</p>
-<pre><code>register int a;
-register char b;
-register int *c;
-</code></pre></li>
-<li>如果一个程序中有多个源文件(.c)，编译成功会生成对应的多个目标文件(.obj)，这些目标文件不能单独运行，因为这些目标文件之间可能会有关联。将这些相关联的目标文件链接在一起后才能生成可执行文件。</li>
-<li>所谓编译，就是单独检查每个源文件的语法是否合理，并不会检查每个源文件之间的关联关系，一个源文件编译成功就生成一个目标文件。所谓链接，就是检查目标文件的关联关系，将相关联的目标文件组合在一起，生成可执行文件。</li>
-<li>根据在当前文件中定义的函数是否允许其他文件访问,可将函数分为内部函数和外部函数.默认情况下，所有的函数都是外部函数,不允许重复定义同一个外部函数.</li>
-<li><p>使用extern关键字，表示引用其他文件的”外部函数”: <code>extern void test();</code>,然而extern可以省略,故直接声明即可.正规的项目里面，把”外部函数”的声明另写到一个头文件中,使用时直接包含头文件即可.</p>
-<pre><code>#ifndef one_h
-#define one_h
-
-#include &lt;stdio.h&gt;
-void test();
-#endif /* one_h */
-</code></pre></li>
-<li><p>在定义函数时，在函数的最左边加上static可以把该函数声明为内部函数(又叫静态函数),不允许其他文件访问.不同的文件中有同名的内部函数，则互不干扰。</p>
-</li>
-<li><p>默认情况下，一个函数不可以访问在它后面定义的全局变量.不同源文件中的同名全局变量代表着同一个变量</p>
-<pre><code>// a文件
-int ss =10;
-
-// b文件
-extern int  ss ;
-printf(&quot;%d&quot;, ss);// 是10
-</code></pre></li>
-<li>在定义全局变量的时候加上static关键字，此时static的作用在于限制该全局变量的作用域，只能在定义该全局变量的文件中才能使用，跟其他源文件中的同名变量互不干扰</li>
-<li><p>定义结构体的三种形式(枚举变量的定义与之类似)</p>
-<pre><code>struct Student {
-    char *name;
-    int age;
-};
-// 利用上面结构体定义结构体变量stu
-struct Student stu;
-</code></pre></li>
-</ul>
-<pre><code>// 直接定义结构体变量stu
-struct Student {
-    char *name;
-    int age;
-} stu;
-
-
-// 定义结构体变量stu后,此结构体永不再用
-struct {
-    char *name;
-    int age;
-} stu;
-
-
-// 特殊:struct前放置typedef表示声明此&quot;匿名&quot;结构体的名字为Student
-typedef struct {
-    char *name;
-    int age;
-} Student;
-</code></pre><ul>
-<li>定义结构体类型，只是说明了该类型的组成情况，并没有给它分配存储空间，就像系统不为int类型本身分配空间一样。只有当定义属于结构体类型的变量时，系统才会分配存储空间给该变量.结构体变量占用的内存空间是其成员所占内存之和，而且各成员在内存中按定义的顺序依次排列.</li>
-<li>将结构体变量作为函数参数进行传递时，其实传递的是全部成员的值，也就是将实参中成员的值一一赋值给对应的形参成员。因此，形参的改变不会影响到实参.</li>
-<li>结构体指针变量的定义形式：<code>struct 结构体名称 *指针变量名</code>,三种访问方式:<ul>
-<li>结构体变量名.成员名</li>
-<li>(*指针变量名).成员名</li>
-<li>指针变量名-&gt;成员名</li>
-</ul>
-</li>
-<li><p>typedef也可以给指针起别名:<code>typedef char *String;</code></p>
-<pre><code>// 相当于char *str = &quot;This is a string!&quot;;
-String str = &quot;This is a string!&quot;;
-</code></pre></li>
-<li><p>typedef给结构体起别名</p>
-</li>
-</ul>
-<pre><code>    struct CGRect {
-    CGPoint origin;
-    CGSize size;
-};
-typedef struct CGRect CGRect;
-</code></pre><ul>
-<li><p>typedef给指向结构体的指针起别名</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-// 定义一个结构体并起别名
-typedef struct {
-    float x;
-    float y;
-} Point;
-
-// 起别名
-typedef Point *PP;
-
-int main(int argc, const char * argv[]) {
-    // 定义结构体变量
-    Point point = {10, 20};
-
-    // 定义指针变量Point *p = &amp;point;
-    PP p = &amp;point;
-
-    // 利用指针变量访问结构体成员
-    printf(&quot;x=%f，y=%f&quot;, p-&gt;x, p-&gt;y);
-    return 0;
- }
-</code></pre></li>
-<li><p>typedef与枚举类型</p>
-<pre><code>// 定义枚举类型
- enum Season {spring, summer, autumn, winter};
- // 给枚举类型起别名
- typedef enum Season Season;
-
- int main(int argc, const char * argv[]) {
-     // 定义枚举变量
-     Season s = spring;
-
-     return 0;
- }
-</code></pre></li>
-<li><p>typedef给指向函数的指针类型起别名</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-// 定义一个sum函数，计算a跟b的和
-int sum(int a, int b) {
-    int c = a + b;
-    printf(&quot;%d + %d = %d&quot;, a, b, c);
-    return c;
-}
-
-typedef int (*MySum)(int, int);
-
-int main(int argc, const char * argv[]) {
-    // 定义一个指向sum函数的指针变量p
-    MySum p = sum;
-
-    // 利用指针变量p调用sum函数
-    (*p)(4, 5);
-
-    return 0;
- }
-</code></pre></li>
-</ul>
-<ul>
-<li><p>typedef与#define,给类型起别名，最好使用typedef，而不是使用#define.</p>
-<pre><code>typedef char *String1;
-#define String2 char *
-
-// 相当于char *str1;char *str2;
-String1 str1, str2;
-// 相当于char *str3;char  str4;产生误会
-String2 str3, str4;
-</code></pre></li>
-<li><p>C语言的源文件拓展名为”.c”，OC的源文件拓展名为”.m”,编译器会将.m文件编译为.o目标文件.编译器只会编译.m文件，并不会编译.h文件.</p>
-</li>
-<li><code>#import</code>是一个预处理指令，作用跟C语言的<code>#include</code>类似，都是 包含(拷贝)某个文件的内容 到 预处理指令所在的位置。在OC中，使用#import来包含头文件，可以自动防止同一个头文件被包含多次。<code>#import &lt;...&gt;</code>表示包含系统自带的文件，<code>#import &quot;...&quot;</code>表示包含开发人员自己创建的文件.</li>
-<li><code>+</code>表示静态方法,<code>-</code>表示动态方法,在.h中声明的所有方法作用域都是public类型，不能更改.成员变量默认作用域是@protected,成员变量必须写在大括号{ }里面.</li>
-<li>OC建议get方法的名字跟成员变量保持一致</li>
-<li>静态方法alloc分配存储空间,返回分配好内存的对象;对象的构造方法init进行初始化.</li>
-<li>访问公共变量age:对象-&gt;成员变量,<code>stu-&gt;_age = 10; int a = stu-&gt;_age;</code></li>
-<li>OC点语法的本质是方法调用，不是直接访问成员变量.</li>
-<li>UIView之所以能显示在屏幕上，完全是因为它内部的一个层(CALayer对象)。当UIView需要显示到屏幕上时，会调用drawRect:方法进行绘图，并且会将所有内容绘制在自己的层上，绘图完毕后，系统会将层拷贝到屏幕上，于是就完成了UIView的显示。</li>
-<li>通过layer属性可以设置shadowColor\shadowOffset\shadowOpacity\cornerRadius\borderWidth\borderColor等;maskToBounds=YES：是强制内部的所有子层支持圆角效果，少了这个设置，是不会有圆角效果的,如果设置了maskToBounds=YES，那将不会有阴影效果.</li>
-<li>CALayer是定义在QuartzCore框架中的；CGImageRef、CGColorRef两种数据类型是定义在CoreGraphics框架中的；UIColor、UIImage是定义在UIKit框架中的.</li>
-<li>每一个UIView内部都默认关联着一个CALayer，这个Layer为Root Layer（根层）;所有的非Root Layer，也就是手动创建的CALayer对象，都存在着隐式动画。当对非Root Layer的部分属性进行相应的修改时，默认会自动产生一些动画效果，这些属性称为Animatable Properties(可动画属性)。<ul>
-<li>bounds：用于设置CALayer的宽度和高度。修改这个属性会产生缩放动画</li>
-<li>backgroundColor：用于设置CALayer的背景色。修改这个属性会产生背景色的渐变动画</li>
-<li>position：用于设置CALayer的位置。修改这个属性会产生平移动画</li>
-</ul>
-</li>
-<li>position可以用来设置CALayer在父层中的位置，它是以父层的左上角为坐标原点(0, 0);anchorPoint称为”定位点”，它决定着CALayer身上的哪个点会在position属性所指的位置。它的x、y取值范围都是0~1，默认值为(0.5, 0.5).</li>
-<li>不能再将某个UIView设置为CALayer的delegate，因为UIView对象已经是它内部根层的delegate.</li>
-<li>当UIView需要显示时，它内部的层会准备好一个CGContextRef(图形上下文)，然后调用delegate(这里就是UIView)的drawLayer:inContext:方法，并且传入已经准备好的CGContextRef对象。而UIView在drawLayer:inContext:方法中又会调用自己的drawRect:方法.</li>
-<li>平时在drawRect:中通过UIGraphicsGetCurrentContext()获取的就是由层传入的CGContextRef对象，在drawRect:中完成的所有绘图都会填入层的CGContextRef中，然后被拷贝至屏幕.</li>
-<li>Core Animation的动画执行过程都是在后台操作的，不会阻塞主线程,而且是直接作用在CALayer上的，并非UIView.</li>
-<li>没有存储任何内存地址的指针就称为空指针(NULL指针,指向nil),空指针就是被赋值为0的指针，在没有被具体初始化之前，其值为0。可以给空指针发送消息,但消息发送不出去.”野指针”不是NULL指针，是指向”垃圾”内存（不可用内存）的指针.</li>
-<li>源文件编译成功后，会生成一个.o目标文件，这就是一个二进制文件.</li>
-<li><p>clang指令汇总</p>
-<pre><code>编译单个c源文件，并产生一个目标文件  cc -c one.c
-编译多个c源文件，并为每个文件产生一个目标文件  cc -c one.c two.c three.c
-链接单个目标文件产生一个名为a.out的可执行文件  cc one.o
-链接多个目标文件  cc one.o two.o three.o
-编译并链接一个c源文件  cc one.c
-编译并链接多个c源文件  cc one.c two.c three.c
-编译一个c源文件，并把它和现存的目标文件链接在一起  cc one.o two.o three.c
-可执行文件重命名加上“-o name”这个选项  cc -o abc one.c
-执行可执行文件  ./a.out
-</code></pre></li>
-<li>当使用基本数据类型（char、int、float等）作为实参时，实参和形参之间只是值传递，修改形参的值并不影响到实参</li>
-</ul>
+</code></pre><h2 id="8-返回指针的函数"><a href="#8-返回指针的函数" class="headerlink" title="8.返回指针的函数"></a>8.返回指针的函数</h2><figure class="highlight axapta"><table><tr><td class="code"><pre><div class="line"> <span class="comment">// 将字符串str中的小写字母变成大写字母，并返回改变后的字符串</span></div><div class="line"> <span class="comment">// 注意的是：这里的参数要传字符串变量，不能传字符串常量</span></div><div class="line"> <span class="keyword">char</span> * upper(<span class="keyword">char</span> *<span class="keyword">str</span>) &#123;</div><div class="line">     <span class="comment">// 先保留最初的地址。因为等会str指向的位置会变来变去的。</span></div><div class="line">     <span class="keyword">char</span> *dest = <span class="keyword">str</span>;</div><div class="line"> </div><div class="line"> <span class="comment">// 如果还不是空字符</span></div><div class="line"> <span class="keyword">while</span> (*<span class="keyword">str</span> != <span class="string">'\0'</span>) &#123;</div><div class="line">     <span class="comment">// 如果是小写字母</span></div><div class="line">     <span class="keyword">if</span> (*<span class="keyword">str</span> &gt;= <span class="string">'a'</span> &amp;&amp; *<span class="keyword">str</span> &lt;= <span class="string">'z'</span>) &#123;</div><div class="line">         <span class="comment">// 变为大写字母。小写和大写字母的ASCII值有个固定的差值</span></div><div class="line">         *<span class="keyword">str</span> -= <span class="string">'a'</span> - <span class="string">'A'</span>;</div><div class="line">     &#125;</div><div class="line">     </div><div class="line">     <span class="comment">// 遍历下一个字符</span></div><div class="line">     <span class="keyword">str</span>++;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> <span class="comment">// 返回字符串</span></div><div class="line"> <span class="keyword">return</span> dest;</div><div class="line">&#125;</div><div class="line">        </div><div class="line">        </div><div class="line">   </div><div class="line"><span class="comment">// 调用:</span></div><div class="line"> <span class="keyword">int</span> main()</div><div class="line"> &#123;</div><div class="line">     <span class="comment">// 定义一个字符串变量</span></div><div class="line">     <span class="keyword">char</span> <span class="keyword">str</span>[] = <span class="string">"lmj"</span>;</div><div class="line">     </div><div class="line">     <span class="comment">// 调用函数</span></div><div class="line">     <span class="keyword">char</span> *dest = upper(<span class="keyword">str</span>);</div><div class="line">     </div><div class="line">     printf(<span class="string">"%s"</span>, dest);</div><div class="line">     <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="9-指向函数的指针"><a href="#9-指向函数的指针" class="headerlink" title="9.指向函数的指针"></a>9.指向函数的指针</h2><p>函数名的本质就是函数的地址.<br>假定函数名为func,返回一个整型<br><code>int *a = func; // 指针a与指针func一致</code></p>
+<p>调用的三种方式:<br><figure class="highlight swift"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span><span class="params">()</span></span>; <span class="comment">// 原先的调用方式:通过指针func调用</span></div><div class="line">*a(); <span class="comment">// *a指向函数本身</span></div><div class="line">a(); <span class="comment">// 相当于func();</span></div></pre></td></tr></table></figure></p>
+<p>实例:</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><div class="line"><span class="built_in">int</span> <span class="built_in">sum</span>(<span class="built_in">int</span> a, <span class="built_in">int</span> b) &#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">int</span> main()</div><div class="line">&#123;</div><div class="line">    // 定义一个指针变量p，指向<span class="built_in">sum</span>函数</div><div class="line">    // 把函数名替换为(*p)即可,*p就相当于<span class="built_in">sum</span></div><div class="line">    <span class="built_in">int</span> (*p)(<span class="built_in">int</span> a, <span class="built_in">int</span> b) = <span class="built_in">sum</span>;</div><div class="line">    // 或者 <span class="built_in">int</span> (*p)(<span class="built_in">int</span>, <span class="built_in">int</span>) = <span class="built_in">sum</span>;</div><div class="line">    // 或者 <span class="built_in">int</span> (*p)() = <span class="built_in">sum</span>;</div><div class="line">    </div><div class="line">    // *p就相当于<span class="built_in">sum</span></div><div class="line">    <span class="built_in">int</span> result = (*p)(<span class="number">1</span>, <span class="number">3</span>);</div><div class="line">    // 或者</div><div class="line">    <span class="built_in">int</span> result = p(<span class="number">1</span>, <span class="number">3</span>);</div><div class="line">    </div><div class="line">    printf(<span class="string">"%d"</span>, result);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="10-将函数作为参数在函数间传递"><a href="#10-将函数作为参数在函数间传递" class="headerlink" title="10.将函数作为参数在函数间传递"></a>10.将函数作为参数在函数间传递</h2><figure class="highlight cs"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 减法运算</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minus</span>(<span class="params"><span class="keyword">int</span> a, <span class="keyword">int</span> b</span>) </span>&#123;</div><div class="line"> <span class="keyword">return</span> a - b;</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="comment">// 加法运算</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span>(<span class="params"><span class="keyword">int</span> a, <span class="keyword">int</span> b</span>) </span>&#123;</div><div class="line"> <span class="keyword">return</span> a + b;</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="comment">// 这个counting函数是用来做a和b之间的计算，至于做加法还是减法运算，由函数的第1个参数决定</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">counting</span>(<span class="params"> <span class="keyword">int</span> (*p</span>)(<span class="params"><span class="keyword">int</span>, <span class="keyword">int</span></span>) , <span class="keyword">int</span> a, <span class="keyword">int</span> b) </span>&#123;</div><div class="line"> <span class="keyword">int</span> result = p(a, b);</div><div class="line"> printf(<span class="string">"计算结果为：%d\n"</span>, result);</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line"> <span class="comment">// 进行加法运算,传进来函数指针sum</span></div><div class="line"> counting(sum, <span class="number">6</span>, <span class="number">4</span>);</div><div class="line"> </div><div class="line"> <span class="comment">// 进行减法运算</span></div><div class="line"> counting(minus, <span class="number">6</span>, <span class="number">4</span>);</div><div class="line"> </div><div class="line"> <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="11-宏的使用"><a href="#11-宏的使用" class="headerlink" title="11.宏的使用"></a>11.宏的使用</h2><p>1.所有预处理指令都以符号”#”开头，并且结尾不用分号,作用范围是从它出现的位置到文件尾,主要有：宏定义、文件包含、条件编译.</p>
+<p>2.使用带参数的宏定义,最好将参数和结果都用括号括起来.</p>
+<p>3.宏定义不涉及存储空间的分配、参数类型匹配、参数传递、返回值<br>问题,宏替换只在编译预处理阶段进行,带参数的宏比函数具有更高的执行效率.</p>
+<p>4.条件编译<br><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line"><span class="selector-id">#if</span> 条件<span class="number">1</span></div><div class="line"> ..<span class="selector-class">.code1</span>...</div><div class="line"><span class="selector-id">#elif</span> 条件<span class="number">2</span></div><div class="line"> ..<span class="selector-class">.code2</span>...</div><div class="line"><span class="selector-id">#else</span></div><div class="line"> ..<span class="selector-class">.code3</span>...</div><div class="line"><span class="selector-id">#endif</span></div><div class="line"></div><div class="line"><span class="selector-id">#if</span> defined(MAX)</div><div class="line">     ..<span class="selector-class">.code</span>...</div><div class="line"><span class="selector-id">#endif</span></div><div class="line"></div><div class="line"><span class="selector-id">#if</span> !defined(MAX)</div><div class="line">     ..<span class="selector-class">.code</span>...</div><div class="line">#endif</div></pre></td></tr></table></figure></p>
+<h2 id="12-include中-lt-gt-与””的区别"><a href="#12-include中-lt-gt-与””的区别" class="headerlink" title="12.include中&lt;&gt;与””的区别"></a>12.include中&lt;&gt;与””的区别</h2><p><code>#include　&lt;文件名&gt;</code>到C语言库函数头文件所在的目录中寻找文件<br><code>#include　&quot;文件名&quot;</code>系统会先在源程序当前目录下寻找，若找不到，再到操作系统的path路径中查找，最后才到C语言库函数头文件所在目录中查找.</p>
+<h2 id="13-如何避免-include重复包含同一个头文件"><a href="#13-如何避免-include重复包含同一个头文件" class="headerlink" title="13.如何避免#include重复包含同一个头文件"></a>13.如何避免#include重复包含同一个头文件</h2><p>使用条件编译<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _ONE_H_</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _ONE_H_</span></div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">one</span><span class="params">()</span></span>;</div><div class="line"> </div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
+<h2 id="14-变量的作用域"><a href="#14-变量的作用域" class="headerlink" title="14.变量的作用域"></a>14.变量的作用域</h2><p>1.在函数内部定义的变量，称为局部变量。形式参数也属于局部变量,在所有函数外部定义的变量，称为全局变量.</p>
+<p>2.所有的局部变量在默认情况下都是自动变量,是存储在堆栈中的.所有的全局变量和被关键字static修饰的局部变量都是静态变量,是存储在静态内存中的，也就是不属于堆栈.</p>
+<p>3.静态变量在程序运行之前创建，在程序的整个运行期间始终存在，直到程序结束。在程序执行到声明自动变量的代码块(函数)时，自动变量才被创建；当自动变量所在的代码块(函数)执行完毕后，这些自动变量就会自行销毁.</p>
+<p>4.被关键字<strong>register修饰</strong>的<strong>自动变量</strong>都是寄存器变量,是存储在硬件寄存器中的,其生命周期即是自动变量的生命周期.寄存器变量只限于int、char和指针类型变量使用,将一些频繁使用的自动变量定义为寄存器变量，这样程序尽可能地为它分配寄存器存放，而不用内存.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">register</span> <span class="keyword">int</span> a;</div><div class="line"><span class="keyword">register</span> <span class="keyword">char</span> b;</div><div class="line"><span class="keyword">register</span> <span class="keyword">int</span> *c;</div></pre></td></tr></table></figure>
+<h2 id="15-编译链接流程"><a href="#15-编译链接流程" class="headerlink" title="15.编译链接流程"></a>15.编译链接流程</h2><p>1.如果一个程序中有多个源文件(.c)，编译成功会生成对应的多个目标文件(.obj)，这些目标文件不能单独运行，因为这些目标文件之间可能会有关联。将这些相关联的目标文件链接在一起后才能生成可执行文件。</p>
+<p>2.所谓编译，就是单独检查每个源文件的语法是否合理，并不会检查每个源文件之间的关联关系，一个源文件编译成功就生成一个目标文件。所谓链接，就是检查目标文件的关联关系，将相关联的目标文件组合在一起，生成可执行文件。</p>
+<p>3.根据在当前文件中定义的函数是否允许其他文件访问,可将函数分为内部函数和外部函数.默认情况下，所有的函数都是外部函数,不允许重复定义同一个外部函数.</p>
+<h2 id="16-extern与static关键字的作用"><a href="#16-extern与static关键字的作用" class="headerlink" title="16.extern与static关键字的作用"></a>16.extern与static关键字的作用</h2><p>使用extern关键字，表示引用其他文件的”外部函数”: <code>extern void test();</code>,然而extern可以省略,故直接声明即可.正规的项目里面，把”外部函数”的声明另写到一个头文件中,使用时直接包含头文件即可.</p>
+<p>在定义函数时，在函数的最左边加上static可以把该函数声明为内部函数(又叫静态函数),不允许其他文件访问.不同的文件中有同名的内部函数，则互不干扰。</p>
+<p>默认情况下，一个函数不可以访问在它后面定义的全局变量.不同源文件中的同名全局变量代表着同一个变量</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// a文件</span></div><div class="line"><span class="keyword">int</span> ss =<span class="number">10</span>;</div><div class="line">  </div><div class="line"><span class="comment">// b文件</span></div><div class="line"><span class="keyword">extern</span> <span class="keyword">int</span>  ss ;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, ss);<span class="comment">// 是10</span></div></pre></td></tr></table></figure>
+<p>在定义全局变量的时候加上static关键字，此时static的作用在于限制该全局变量的作用域，只能在定义该全局变量的文件中才能使用，跟其他源文件中的同名变量互不干扰</p>
+<h2 id="17-如何定义结构体"><a href="#17-如何定义结构体" class="headerlink" title="17.如何定义结构体"></a>17.如何定义结构体</h2><p>定义结构体的三种形式(枚举变量的定义与之类似)</p>
+<figure class="highlight rust"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span> &#123;</div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 利用上面结构体定义结构体变量stu</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span> stu;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 直接定义结构体变量stu</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span></span> &#123;</div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; stu;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 定义结构体变量stu后,此结构体永不再用</span></div><div class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; stu;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 特殊:struct前放置typedef表示声明此"匿名"结构体的名字为Student</span></div><div class="line">typedef <span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">&#125; Student;</div></pre></td></tr></table></figure>
+<p>注意:<br>1.定义结构体类型，只是说明了该类型的组成情况，并没有给它分配存储空间</p>
+<p>2.将结构体变量作为函数参数进行传递时，其实传递的是全部成员的值，也就是将实参中成员的值一一赋值给对应的形参成员。因此，形参的改变不会影响到实参.</p>
+<h2 id="18-结构体指针的使用"><a href="#18-结构体指针的使用" class="headerlink" title="18.结构体指针的使用"></a>18.结构体指针的使用</h2><p>结构体指针变量的定义形式：<code>struct 结构体名称 *指针变量名</code>,三种访问方式:</p>
+<pre><code>结构体变量名.成员名
+(*指针变量名).成员名
+指针变量名-&gt;成员名
+</code></pre><h2 id="19-typedef的主要使用"><a href="#19-typedef的主要使用" class="headerlink" title="19.typedef的主要使用"></a>19.typedef的主要使用</h2><p>1.typedef给指针起别名:<br><figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line">// 相当于char *<span class="keyword">str </span>= <span class="string">"This is a string!"</span><span class="comment">;</span></div><div class="line"><span class="keyword">String </span><span class="keyword">str </span>= <span class="string">"This is a string!"</span><span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>2.typedef给结构体起别名<br><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="keyword">struct</span> <span class="built_in">CGRect</span> &#123;</div><div class="line"><span class="built_in">CGPoint</span> origin;</div><div class="line"><span class="built_in">CGSize</span> size;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="built_in">CGRect</span> <span class="built_in">CGRect</span>;</div><div class="line"><span class="comment">// 为 struct CGRect 起别名叫作 CGRect</span></div></pre></td></tr></table></figure></p>
+<p>3.typedef给指向结构体的指针起别名</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// 定义一个结构体并起别名</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">float</span> x;</div><div class="line">    <span class="keyword">float</span> y;</div><div class="line">&#125; Point;</div><div class="line"></div><div class="line"><span class="comment">// 给Point *起别名PP</span></div><div class="line"><span class="keyword">typedef</span> Point *PP;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</div><div class="line">    <span class="comment">// 定义结构体变量</span></div><div class="line">    Point point = &#123;<span class="number">10</span>, <span class="number">20</span>&#125;;</div><div class="line">    </div><div class="line">    <span class="comment">// 定义指针变量Point *p = &amp;point;</span></div><div class="line">    PP p = &amp;point;</div><div class="line">    </div><div class="line">    <span class="comment">// 利用指针变量访问结构体成员</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"x=%f，y=%f"</span>, p-&gt;x, p-&gt;y);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>4.typedef与枚举类型<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 定义枚举类型</span></div><div class="line"> <span class="keyword">enum</span> Season &#123;spring, summer, autumn, winter&#125;;</div><div class="line"> <span class="comment">// 给枚举类型enum Season起别名为Season</span></div><div class="line"> <span class="keyword">typedef</span> <span class="keyword">enum</span> Season Season;</div><div class="line"> </div><div class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</div><div class="line">     <span class="comment">// 定义枚举变量</span></div><div class="line">     Season s = spring;</div><div class="line">     </div><div class="line">     <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>5.typedef给指向函数的指针类型起别名<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">// 定义一个sum函数，计算a跟b的和</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> c = a + b;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%d + %d = %d"</span>, a, b, c);</div><div class="line">    <span class="keyword">return</span> c;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*MySum)</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</div><div class="line">    <span class="comment">// 定义一个指向sum函数的指针变量p</span></div><div class="line">    MySum p = sum;</div><div class="line">    </div><div class="line">    <span class="comment">// 利用指针变量p调用sum函数</span></div><div class="line">    (*p)(<span class="number">4</span>, <span class="number">5</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>6.typedef与#define,给类型起别名，最好使用typedef，而不是使用#define.</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="symbol">typedef</span> char *<span class="keyword">String1;</span></div><div class="line"><span class="symbol">#define</span> <span class="keyword">String2 </span>char *</div><div class="line"></div><div class="line">// 相当于char *<span class="keyword">str1;char </span>*<span class="keyword">str2;</span></div><div class="line"><span class="keyword">String1 </span><span class="keyword">str1, </span><span class="keyword">str2;</span></div><div class="line">// 相当于char *<span class="keyword">str3;char </span> <span class="keyword">str4;产生误会</span></div><div class="line"><span class="keyword">String2 </span><span class="keyword">str3, </span><span class="keyword">str4;</span></div></pre></td></tr></table></figure>
+<h2 id="20-import与include的区别"><a href="#20-import与include的区别" class="headerlink" title="20.import与include的区别"></a>20.import与include的区别</h2><p> <code>#import</code>是一个预处理指令，作用跟C语言的<code>#include</code>类似，都是 包含(拷贝)某个文件的内容 到 预处理指令所在的位置。在OC中，使用#import来包含头文件，可以自动防止同一个头文件被包含多次。<code>#import &lt;...&gt;</code>表示包含系统自带的文件，<code>#import &quot;...&quot;</code>表示包含开发人员自己创建的文件.</p>
+<h2 id="21-UIView显示的过程"><a href="#21-UIView显示的过程" class="headerlink" title="21.UIView显示的过程"></a>21.UIView显示的过程</h2><p>UIView之所以能显示在屏幕上，完全是因为它内部的一个层(CALayer对象)。当UIView需要显示到屏幕上时，会调用drawRect:方法进行绘图，并且会将所有内容绘制在自己的层上，绘图完毕后，系统会将层拷贝到屏幕上，于是就完成了UIView的显示。<br>当UIView需要显示时，它内部的层会准备好一个CGContextRef(图形上下文)，然后调用delegate(这里就是UIView)的drawLayer:inContext:方法，并且传入已经准备好的CGContextRef对象。而UIView在drawLayer:inContext:方法中又会调用自己的drawRect:方法.</p>
+<h2 id="22-position与anchorPoint"><a href="#22-position与anchorPoint" class="headerlink" title="22.position与anchorPoint"></a>22.position与anchorPoint</h2><p>position可以用来设置CALayer在父层中的位置，它是以父层的左上角为坐标原点(0, 0);anchorPoint称为”定位点”，它决定着CALayer身上的哪个点会在position属性所指的位置。它的x、y取值范围都是0~1，默认值为(0.5, 0.5).</p>
+<h2 id="23-Core-Animation会阻塞主线程吗"><a href="#23-Core-Animation会阻塞主线程吗" class="headerlink" title="23.Core Animation会阻塞主线程吗"></a>23.Core Animation会阻塞主线程吗</h2><p>Core Animation的动画执行过程都是在后台操作的，不会阻塞主线程,而且是直接作用在CALayer上的，并非UIView.</p>
+<h2 id="24-空指针"><a href="#24-空指针" class="headerlink" title="24.空指针"></a>24.空指针</h2><p>没有存储任何内存地址的指针就称为空指针(NULL指针,指向nil),空指针就是被赋值为0的指针，在没有被具体初始化之前，其值为0。可以给空指针发送消息,但消息发送不出去.”野指针”不是NULL指针，是指向”垃圾”内存（不可用内存）的指针.</p>
 <blockquote>
 <p>向作者致谢!<br>M了个J:<a href="http://www.cnblogs.com/mjios/" target="_blank" rel="external">http://www.cnblogs.com/mjios/</a></p>
 <p>参考博客<br>C语言中文网:<a href="http://c.biancheng.net/cpp/html/88.html" target="_blank" rel="external">http://c.biancheng.net/cpp/html/88.html</a></p>
@@ -930,7 +593,7 @@ String2 str3, str4;
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#读感"><span class="nav-number">1.</span> <span class="nav-text">读感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#钩玄"><span class="nav-number">2.</span> <span class="nav-text">钩玄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识"><span class="nav-number">3.</span> <span class="nav-text">知识</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#读感"><span class="nav-number">1.</span> <span class="nav-text">读感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#钩玄"><span class="nav-number">2.</span> <span class="nav-text">钩玄</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C语言中怎么控制输入与输出格式"><span class="nav-number">2.1.</span> <span class="nav-text">1.C语言中怎么控制输入与输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-getchar-scanf-gets的区别"><span class="nav-number">2.2.</span> <span class="nav-text">2.getchar/scanf/gets的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-puts-prints-putchar的区别"><span class="nav-number">2.3.</span> <span class="nav-text">3.puts/prints/putchar的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-介绍指针"><span class="nav-number">2.4.</span> <span class="nav-text">4.介绍指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-常见字符串处理函数的用法"><span class="nav-number">2.5.</span> <span class="nav-text">5.常见字符串处理函数的用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-如何使一个函数有多个返回值"><span class="nav-number">2.6.</span> <span class="nav-text">6.如何使一个函数有多个返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-字符串常量与字符串变量"><span class="nav-number">2.7.</span> <span class="nav-text">7.字符串常量与字符串变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-返回指针的函数"><span class="nav-number">2.8.</span> <span class="nav-text">8.返回指针的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-指向函数的指针"><span class="nav-number">2.9.</span> <span class="nav-text">9.指向函数的指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-将函数作为参数在函数间传递"><span class="nav-number">2.10.</span> <span class="nav-text">10.将函数作为参数在函数间传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-宏的使用"><span class="nav-number">2.11.</span> <span class="nav-text">11.宏的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-include中-lt-gt-与””的区别"><span class="nav-number">2.12.</span> <span class="nav-text">12.include中<>与””的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-如何避免-include重复包含同一个头文件"><span class="nav-number">2.13.</span> <span class="nav-text">13.如何避免#include重复包含同一个头文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-变量的作用域"><span class="nav-number">2.14.</span> <span class="nav-text">14.变量的作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-编译链接流程"><span class="nav-number">2.15.</span> <span class="nav-text">15.编译链接流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-extern与static关键字的作用"><span class="nav-number">2.16.</span> <span class="nav-text">16.extern与static关键字的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-如何定义结构体"><span class="nav-number">2.17.</span> <span class="nav-text">17.如何定义结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-结构体指针的使用"><span class="nav-number">2.18.</span> <span class="nav-text">18.结构体指针的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-typedef的主要使用"><span class="nav-number">2.19.</span> <span class="nav-text">19.typedef的主要使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20-import与include的区别"><span class="nav-number">2.20.</span> <span class="nav-text">20.import与include的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-UIView显示的过程"><span class="nav-number">2.21.</span> <span class="nav-text">21.UIView显示的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-position与anchorPoint"><span class="nav-number">2.22.</span> <span class="nav-text">22.position与anchorPoint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-Core-Animation会阻塞主线程吗"><span class="nav-number">2.23.</span> <span class="nav-text">23.Core Animation会阻塞主线程吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24-空指针"><span class="nav-number">2.24.</span> <span class="nav-text">24.空指针</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

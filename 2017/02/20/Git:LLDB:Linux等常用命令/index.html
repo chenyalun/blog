@@ -90,22 +90,22 @@
 
 
 
-<meta name="description" content="2017.04.02 补充
+<meta name="description" content="2017.4.3 补充Clang指令2017.4.2 补充
 
- Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
+ Git/SVN/Linux/Vim/LLDB等常用、快忘记的命令总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git/LLDB/Linux等常用命令">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/02/20/Git:LLDB:Linux等常用命令/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="2017.04.02 补充
+<meta property="og:description" content="2017.4.3 补充Clang指令2017.4.2 补充
 
- Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
-<meta property="og:updated_time" content="2017-04-02T03:06:17.000Z">
+ Git/SVN/Linux/Vim/LLDB等常用、快忘记的命令总结。">
+<meta property="og:updated_time" content="2017-04-03T03:10:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git/LLDB/Linux等常用命令">
-<meta name="twitter:description" content="2017.04.02 补充
+<meta name="twitter:description" content="2017.4.3 补充Clang指令2017.4.2 补充
 
- Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。">
+ Git/SVN/Linux/Vim/LLDB等常用、快忘记的命令总结。">
 
 
 
@@ -327,9 +327,9 @@
 
       
         <blockquote>
-<p>2017.04.02 补充</p>
+<p>2017.4.3 补充Clang指令<br>2017.4.2 补充</p>
 </blockquote>
-<p align="center"> Git/SVN/Linux/Vim/LLDb等常用、快忘记的命令总结。 </p>
+<p align="center"> Git/SVN/Linux/Vim/LLDB等常用、快忘记的命令总结。 </p>
 
 <a id="more"></a>
 <h1 id="CocoaPods"><a href="#CocoaPods" class="headerlink" title="CocoaPods"></a>CocoaPods</h1><pre><code>pod install --verbose --no-repo-update 
@@ -765,6 +765,24 @@ expr int $c = 10 声明一个新变量
 </code></pre><p>寻址</p>
 <pre><code>image lookup --address 0x0000000103aca1e1
 寻找栈地址对应的代码位置
+</code></pre><h1 id="Clang"><a href="#Clang" class="headerlink" title="Clang"></a>Clang</h1><h2 id="初步-5"><a href="#初步-5" class="headerlink" title="初步"></a>初步</h2><p> 编译单个c源文件，并产生一个目标文件  </p>
+<pre><code>cc -c one.c
+</code></pre><p> 编译多个c源文件，并为每个文件产生一个目标文件  </p>
+<pre><code>cc -c one.c two.c three.c
+</code></pre><p> 链接单个目标文件产生一个名为a.out的可执行文件  </p>
+<pre><code>cc one.o
+</code></pre><p> 链接多个目标文件  </p>
+<pre><code>cc one.o two.o three.o
+</code></pre><p> 编译并链接一个c源文件  </p>
+<pre><code>cc one.c
+</code></pre><p> 编译并链接多个c源文件  </p>
+<pre><code>cc one.c two.c three.c
+</code></pre><p> 编译一个c源文件，并把它和现存的目标文件链接在一起  </p>
+<pre><code>cc one.o two.o three.c
+</code></pre><p> 可执行文件重命名加上“-o name”这个选项  </p>
+<pre><code>cc -o abc one.c
+</code></pre><p> 执行可执行文件  </p>
+<pre><code>./a.out
 </code></pre>
       
     </div>
@@ -960,7 +978,7 @@ expr int $c = 10 声明一个新变量
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CocoaPods"><span class="nav-number">1.</span> <span class="nav-text">CocoaPods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git"><span class="nav-number">2.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步"><span class="nav-number">2.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">2.3.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">2.4.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仓库"><span class="nav-number">2.5.</span> <span class="nav-text">仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">2.6.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程"><span class="nav-number">2.7.</span> <span class="nav-text">远程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">2.8.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SVN"><span class="nav-number">3.</span> <span class="nav-text">SVN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-1"><span class="nav-number">3.1.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkout"><span class="nav-number">3.2.</span> <span class="nav-text">checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">3.3.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-number">3.4.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVN-st"><span class="nav-number">3.5.</span> <span class="nav-text">SVN st</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">3.6.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">4.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">4.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-2"><span class="nav-number">4.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统"><span class="nav-number">4.3.</span> <span class="nav-text">系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vim"><span class="nav-number">5.</span> <span class="nav-text">Vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-3"><span class="nav-number">5.1.</span> <span class="nav-text">初步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LLDB"><span class="nav-number">6.</span> <span class="nav-text">LLDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-4"><span class="nav-number">6.1.</span> <span class="nav-text">初步</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CocoaPods"><span class="nav-number">1.</span> <span class="nav-text">CocoaPods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git"><span class="nav-number">2.</span> <span class="nav-text">Git</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步"><span class="nav-number">2.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本"><span class="nav-number">2.3.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支"><span class="nav-number">2.4.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仓库"><span class="nav-number">2.5.</span> <span class="nav-text">仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">2.6.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程"><span class="nav-number">2.7.</span> <span class="nav-text">远程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">2.8.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SVN"><span class="nav-number">3.</span> <span class="nav-text">SVN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-1"><span class="nav-number">3.1.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkout"><span class="nav-number">3.2.</span> <span class="nav-text">checkout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本"><span class="nav-number">3.3.</span> <span class="nav-text">基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态"><span class="nav-number">3.4.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVN-st"><span class="nav-number">3.5.</span> <span class="nav-text">SVN st</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">3.6.</span> <span class="nav-text">目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">4.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">4.1.</span> <span class="nav-text">文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-2"><span class="nav-number">4.2.</span> <span class="nav-text">初步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统"><span class="nav-number">4.3.</span> <span class="nav-text">系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vim"><span class="nav-number">5.</span> <span class="nav-text">Vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-3"><span class="nav-number">5.1.</span> <span class="nav-text">初步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LLDB"><span class="nav-number">6.</span> <span class="nav-text">LLDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-4"><span class="nav-number">6.1.</span> <span class="nav-text">初步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Clang"><span class="nav-number">7.</span> <span class="nav-text">Clang</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初步-5"><span class="nav-number">7.1.</span> <span class="nav-text">初步</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
