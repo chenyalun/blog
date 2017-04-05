@@ -100,7 +100,7 @@
 <meta property="og:description" content="2017.4.3 补充Clang指令2017.4.2 补充
 
  Git/SVN/Linux/Vim/LLDB等常用、快忘记的命令总结。">
-<meta property="og:updated_time" content="2017-04-03T05:12:56.000Z">
+<meta property="og:updated_time" content="2017-04-04T06:06:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git/LLDB/Linux等常用命令">
 <meta name="twitter:description" content="2017.4.3 补充Clang指令2017.4.2 补充
@@ -444,6 +444,8 @@ git stash pop
 <pre><code>git branch --set-upstream [branch] [remote-branch]
 </code></pre><p>合并指定分支到当前分支</p>
 <pre><code>git merge [branch]
+// 通常使用下面这条:
+git merge --no-ff [branch]
 </code></pre><p>选择一个commit，合并进当前分支</p>
 <pre><code>git cherry-pick [commit]
 </code></pre><p>删除分支</p>
@@ -898,7 +900,7 @@ expr int $c = 10 声明一个新变量
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">随笔</span>
             </a>
           </div>

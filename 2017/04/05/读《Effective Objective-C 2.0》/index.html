@@ -1,0 +1,695 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS开发," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ya" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="许多小技巧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《Effective Objective-C 2.0》">
+<meta property="og:url" content="http://blog.chenyalun.com/2017/04/05/读《Effective Objective-C 2.0》/index.html">
+<meta property="og:site_name" content="Ya">
+<meta property="og:description" content="许多小技巧。">
+<meta property="og:updated_time" content="2017-04-05T05:00:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《Effective Objective-C 2.0》">
+<meta name="twitter:description" content="许多小技巧。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 11510108,
+      author: 'YA'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.chenyalun.com/2017/04/05/读《Effective Objective-C 2.0》/"/>
+
+  <title> 读《Effective Objective-C 2.0》 | Ya </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-82867422-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ya</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fire"></i> <br />
+            
+            时间线
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-reading">
+          <a href="/categories/阅读/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            阅读
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                读《Effective Objective-C 2.0》
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-05T12:02:17+08:00" content="2017-04-05">
+              2017-04-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">阅读</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p align="center"> 许多小技巧。 </p>
+
+<a id="more"></a>
+<h1 id="读感"><a href="#读感" class="headerlink" title="读感"></a>读感</h1><p>一晚上加一早上时间读了一遍,很多技巧都屡有耳闻,不过还是收获许多.</p>
+<h1 id="钩玄"><a href="#钩玄" class="headerlink" title="钩玄"></a>钩玄</h1><ol>
+<li>.h文件中使用@class声明类,.m文件中使用import导入其他头文件,而不是只在.h文件中import头文件</li>
+<li>常量使用static const,其他情况(如[NSNotificationCenter defaultCenter])使用宏</li>
+<li>不需要位或运算的枚举使用NS_ENUM,需要使用位或运算的枚举使用NS_OPTIONS,避免C语言中的enum</li>
+<li>switch状态机下避免default分支(确保switch正确处理已知情况,往后增加新的的枚举值会有警告)</li>
+</ol>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="1-属性声明为-dynamic后该怎么做"><a href="#1-属性声明为-dynamic后该怎么做" class="headerlink" title="1.属性声明为@dynamic后该怎么做"></a>1.属性声明为@dynamic后该怎么做</h2><p>.h文件暴露属性</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</div></pre></td></tr></table></figure>
+<p>.m文件动态添加方法</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAHeader</span> ()</span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSString</span> *_name;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">YAHeader</span></span></div><div class="line"><span class="keyword">@dynamic</span> name;</div><div class="line"></div><div class="line"><span class="comment">// 添加set方法,要传入参数</span></div><div class="line"><span class="keyword">void</span> dynamicSetMethodIMP(YAHeader *<span class="keyword">self</span>, SEL _cmd, <span class="built_in">NSString</span> *prame) &#123;</div><div class="line">    <span class="keyword">self</span>-&gt;_name = prame;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 添加get方法,要返回NSString *类型</span></div><div class="line"><span class="built_in">NSString</span> *dynamicGetMethodIMP(YAHeader *<span class="keyword">self</span>, SEL _cmd) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>-&gt;_name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ (<span class="built_in">BOOL</span>)resolveInstanceMethod:(SEL)sel &#123;</div><div class="line">    <span class="keyword">if</span> (sel == <span class="keyword">@selector</span>(setName:)) &#123;</div><div class="line">        class_addMethod([<span class="keyword">self</span> <span class="keyword">class</span>], sel, (IMP)dynamicSetMethodIMP, <span class="string">"v@:@"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (sel == <span class="keyword">@selector</span>(name)) &#123;</div><div class="line">        class_addMethod([<span class="keyword">self</span> <span class="keyword">class</span>], sel, (IMP)dynamicGetMethodIMP, <span class="string">"v@:"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="literal">YES</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> [<span class="keyword">super</span> resolveInstanceMethod:sel];</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>注意:<br>1.按照本书所说,使用@dynamic将仅仅生成get/set方法的声明,不会生成get/set方法的实现,也不会合成成员变量</p>
+<p>2.由于没有合成成员变量,所以手动添加</p>
+<p>3.使用@property但是却没有合成成员变量的情景有:<br>(1):同时使用@property和@dynamic<br>(2):set和get方法均手动实现<br>(3):分类中@property<br>值得一提的是,当使用<code>@synthesize num;</code>时,将不会生成成员变量<code>_num</code>,而是生成成员变量<code>num</code></p>
+<h2 id="2-关联对象中为什么使用static修饰的指针"><a href="#2-关联对象中为什么使用static修饰的指针" class="headerlink" title="2.关联对象中为什么使用static修饰的指针"></a>2.关联对象中为什么使用static修饰的指针</h2><p>static的作用之一便是使变量在内存中只有一份拷贝,由于需要objc_setAssociatedObject和objc_getAssociatedObject中的两个键(void *key)需要匹配同一个值(关联的对象),所以需要两者是完全相同的指针,故而使用静态全局变量做键</p>
+<h2 id="3-简述Objective-C在发送消息时的动态性"><a href="#3-简述Objective-C在发送消息时的动态性" class="headerlink" title="3.简述Objective-C在发送消息时的动态性"></a>3.简述Objective-C在发送消息时的动态性</h2><p>静态绑定:将在运行期间调用的函数在编译期间已经确定<br>动态绑定:发送的消息部分转化为objc_msgSend函数,传入将要调用函数的对象、将要调用的函数以及将要调用的函数的参数,具体调用哪个函数,通过快速映射表、方法列表亦或是消息转发确定<br>objc_msgSend_stret:消息返回结构体调用<br>objc_msgSend_fpret:消息返回浮点数调用<br>objc_msgSendSuper:给超类发送消息调用</p>
+<h2 id="4-如何解决unrecognized-selector-send-to-instance"><a href="#4-如何解决unrecognized-selector-send-to-instance" class="headerlink" title="4.如何解决unrecognized selector send to instance"></a>4.如何解决unrecognized selector send to instance</h2><p>消息转发的三个流程<br>1.对象收到无法识别的消息,根据使类方法还是对象方法调用<br><code>+ (BOOL)resolveInstanceMethod:(SEL)selector</code><br><code>+ (BOOL)resolveClassMethod:(SEL)selector</code><br>前提:相关方法的实现代码已经写好<br>使用:根据类方法还是对象方法,在resolveMethod中为无法响应的selector动态添加方法实现(提供函数指针IMP)<br><figure class="highlight lisp"><table><tr><td class="code"><pre><div class="line">class_addMethod(<span class="name">self</span>, selector, (<span class="name">IMP</span>)methodImplemention,<span class="string">"v@:@"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>若没有做出处理,返回NO</p>
+<p>2.倘若没有相关方法实现,进入<br><code>- (id)forwardingTargetForSelector:(SEL)selector</code><br>将消息转发给其他对象,若找不到,返回nil</p>
+<p>3.完整的消息转发,调用对象方法<br><code>- (void)forwardInvocation:(NSInvocation *)invocation</code><br>首先发送-methodSignatureForSelector:获取函数的参数和返回值类型,若返回nil,直接挂掉,否则Runtime创建一个NSIn<br>vocation对象,发送forwardInvocation消息给目标对象</p>
+<h2 id="5-如何实现多重继承"><a href="#5-如何实现多重继承" class="headerlink" title="5.如何实现多重继承"></a>5.如何实现多重继承</h2><p>C类 继承自 A类,想让C类对象同时具备A类方法和 B类方法的能力<br>使C类对象中拥有B类对象(组合),在C类对象中实现对象方法forwardingTargetForSelect:方法,将发送来的B类方法转发给所拥有的B类对象处理</p>
+<h2 id="6-怎么实现方法实现的交换"><a href="#6-怎么实现方法实现的交换" class="headerlink" title="6.怎么实现方法实现的交换"></a>6.怎么实现方法实现的交换</h2><figure class="highlight ceylon"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 获取通过SEL获取一个方法</span></div><div class="line"><span class="keyword">class</span><span class="number">_</span>getInstanceMethod</div><div class="line"></div><div class="line"><span class="comment">// 获取一个方法的实现</span></div><div class="line">method<span class="number">_</span>getImplementation</div><div class="line"></div><div class="line"><span class="comment">// 获取一个OC实现的编码类型</span></div><div class="line">method<span class="number">_</span>getTypeEncoding</div><div class="line"></div><div class="line"><span class="comment">// 給方法添加实现</span></div><div class="line"><span class="keyword">class</span><span class="number">_</span>addMethod</div><div class="line"></div><div class="line"><span class="comment">// 用一个方法的实现替换另一个方法的实现</span></div><div class="line"><span class="keyword">class</span><span class="number">_</span>replaceMethod</div><div class="line"></div><div class="line"><span class="comment">// 交换两个方法的实现</span></div><div class="line">method<span class="number">_</span>exchangeImplementations</div></pre></td></tr></table></figure>
+<p>获取Method<br><figure class="highlight monkey"><table><tr><td class="code"><pre><div class="line">+ (void)load &#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">Method</span> <span class="title">lowercaseString</span> =</span> class_getInstanceMethod([NSString <span class="class"><span class="keyword">class</span>], @<span class="title">selector</span>(<span class="title">lowercaseString</span>));</span></div><div class="line">    <span class="function"><span class="keyword">Method</span> <span class="title">uppercaseString</span> =</span> class_getInstanceMethod([NSString <span class="class"><span class="keyword">class</span>], @<span class="title">selector</span>(<span class="title">uppercaseString</span>));</span></div><div class="line">    method_exchangeImplementations(lowercaseString, uppercaseString);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>表面上看是死循环:</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-</span> (NSString *)<span class="selector-tag">lowercaseString</span> &#123;</div><div class="line">    return self<span class="selector-class">.lowercaseString</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">-</span> (NSString *)<span class="selector-tag">uppercaseString</span> &#123;</div><div class="line">    return self<span class="selector-class">.uppercaseString</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-简述为代码加锁的方式"><a href="#7-简述为代码加锁的方式" class="headerlink" title="7.简述为代码加锁的方式"></a>7.简述为代码加锁的方式</h2><p>同步块:</p>
+<pre><code>@synchronized(self) {//...}
+</code></pre><p>滥用@synchronized(self)很危险,所有的块都会彼此抢夺同一个锁.</p>
+<p>锁对象:<br><figure class="highlight prolog"><table><tr><td class="code"><pre><div class="line"><span class="symbol">_lock</span> = [[<span class="symbol">NSLock</span> alloc] init];</div><div class="line"></div><div class="line">[<span class="symbol">_lock</span> lock];</div><div class="line">// ...</div><div class="line">[<span class="symbol">_lock</span> unlock];</div></pre></td></tr></table></figure></p>
+<h2 id="8-原子性一定安全吗-如何确保属性的线程安全"><a href="#8-原子性一定安全吗-如何确保属性的线程安全" class="headerlink" title="8.原子性一定安全吗,如何确保属性的线程安全"></a>8.原子性一定安全吗,如何确保属性的线程安全</h2><p>不一定.<br>原子性能保证存取方法的线程安全,也即读写操作是原子性的,在读或者写发生的时候,其他读或者写操作必须等待.<br>然而同一个线程上多次调用get方法,每一次获取到的值未必相同,多次访问期间,其他线程可能会写入新的值.比如当A线程的写操作结束后，B线程进行写操作，然后当A线程需要读操作时，却获得了在B线程中的值，这就破坏了线程安全.</p>
+<p>线程安全:不会出现数据不一致或者数据污染。</p>
+<p>使用串行同步队列,将读取以及写入操作都安排在同一个队列中,即可保证数据同步.</p>
+<p>方式一:同步派发(在set方法简单的时候使用)</p>
+<p>.h文件<br><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</div></pre></td></tr></table></figure></p>
+<p>.m文件<br>1.创建串行队列<br><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAHeader</span> ()</span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">dispatch_queue_t</span> _serialQueue;</div><div class="line">&#125;</div><div class="line"><span class="keyword">char</span> * <span class="keyword">const</span> label = <span class="string">"label"</span>;</div><div class="line"> _serialQueue = dispatch_queue_create(label, <span class="literal">NULL</span>);</div></pre></td></tr></table></figure></p>
+<p>2.合成属性(由于需要重写get/set方法,编译器已取消自动合成)<br><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">YAHeader</span></span></div><div class="line"></div><div class="line"><span class="keyword">@synthesize</span> name = _name;</div><div class="line"><span class="keyword">char</span> * <span class="keyword">const</span> label = <span class="string">"label"</span>;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)name &#123;</div><div class="line">    <span class="built_in">dispatch_sync</span>(_serialQueue, ^&#123;</div><div class="line">        _name = name;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)name &#123;</div><div class="line">   </div><div class="line">    __block <span class="built_in">NSString</span> *localName;</div><div class="line">    <span class="built_in">dispatch_sync</span>(_serialQueue, ^&#123;</div><div class="line">        localName = _name;</div><div class="line">    &#125;);</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> localName;</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure></p>
+<p>方式二:异步派发(在set方法复杂的时候使用)<br>改动set方法</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">setName</span><span class="selector-pseudo">:(NSString</span> *)<span class="selector-tag">name</span> &#123;</div><div class="line">    <span class="selector-tag">dispatch_async</span>(_serialQueue, ^&#123;</div><div class="line">         _name = name;</div><div class="line">         </div><div class="line">         <span class="comment">// ...(还有许多操作)</span></div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在异步派发的时候需要拷贝block,需要消耗一定时间,所以在set方法更复杂的场景下使用</p>
+<h2 id="9-performSelector的局限性有哪些"><a href="#9-performSelector的局限性有哪些" class="headerlink" title="9.performSelector的局限性有哪些"></a>9.performSelector的局限性有哪些</h2><p>1.由于无法确定将要执行的selector具体是什么,ARC无法将其纳入合适的内存管理方法中,可能有内存泄漏<br>2.selector的返回值类型和参数个数、类型受到限制<br>建议使用GCD中的dispatch_async/dispatch_after等代替相应的performSelector</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"></div><div class="line">- (void)fetchSelector:(NSInteger)condition &#123;</div><div class="line">    <span class="keyword">SEL </span><span class="keyword">selector;</span></div><div class="line">    <span class="meta">if</span> (condition == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">selector </span>= <span class="comment">@selector(dismiss);</span></div><div class="line">    &#125; <span class="meta">else</span> <span class="meta">if</span> (condition == <span class="number">1</span>)&#123;</div><div class="line">        <span class="keyword">selector </span>= <span class="comment">@selector(miss:);</span></div><div class="line">    &#125; <span class="meta">else</span> &#123;</div><div class="line">         <span class="keyword">selector </span>= <span class="comment">@selector(love);</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [<span class="keyword">self </span>performSelector:<span class="keyword">selector];</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>警告:/Users/chenyalun/Desktop/iOS/program/Demo170404/Demo170404/YAHeader.m:70:11: PerformSelector may cause a leak because its selector is unknown</p>
+<h2 id="10-bridge、bridge-retained与-bridge-transfer的区别"><a href="#10-bridge、bridge-retained与-bridge-transfer的区别" class="headerlink" title="10.bridge、bridge_retained与__bridge_transfer的区别"></a>10.<strong>bridge、</strong>bridge_retained与__bridge_transfer的区别</h2><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *array = @[@<span class="number">10</span>, @<span class="number">11</span>, @<span class="number">12</span>];</div><div class="line"><span class="built_in">CFArrayRef</span> cfarray = (__bridge <span class="built_in">CFArrayRef</span>)array;</div><div class="line"></div><div class="line"><span class="built_in">CFArrayRef</span> cfarray2 = (__bridge_retained <span class="built_in">CFArrayRef</span>)array;</div><div class="line"><span class="built_in">CFRelease</span>(cfarray2);</div><div class="line"></div><div class="line"><span class="built_in">NSArray</span> *array2 = (__bridge_transfer <span class="built_in">NSArray</span> *)cfarray;</div></pre></td></tr></table></figure>
+<p>__bridge表示ARC仍然具备该对象的所有权</p>
+<p>__bridge_retained表示ARC交出该对象的所有权(需手动release)</p>
+<p>__bridge_transfer:表示反向转换,同时ARC获取对象所有权</p>
+<h2 id="11-NSCache相较NSDictionary的优点"><a href="#11-NSCache相较NSDictionary的优点" class="headerlink" title="11.NSCache相较NSDictionary的优点"></a>11.NSCache相较NSDictionary的优点</h2><p>1.在系统发出低内存通知时,NSCache自动删减缓存,并且先行删减最久未使用的对象<br>2.增加键的引用计数而不是拷贝它<br>3.NSCache线程安全,可以多线程访问而不出错<br>4.NSPurgeableData是NSMutableData的子类,将它与NSCache搭配使用,当NSPurgeableData对象所占内存为系统所丢弃时,该对象自动从NSCache缓存中清除</p>
+<p>访问NSPurgeableData对象</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><div class="line">NSCache *cache = [[NSCache alloc] init];</div><div class="line"></div><div class="line">NSPurgeableData *purgeableData = [NSPurgeableData <span class="string">dataWithBytes:</span>@<span class="string">"ILOVEYOU"</span> <span class="string">length:</span><span class="number">10</span>];</div><div class="line">[cache <span class="string">setObject:</span>purgeableData <span class="string">forKey:</span>@<span class="number">00</span>];</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 访问NSPurgeableData</span></div><div class="line"><span class="keyword">if</span> (purgeableData) &#123;</div><div class="line">    <span class="comment">// 开始访问,现在还不应该丢弃自己所占用的内存</span></div><div class="line">    [purgeableData beginContentAccess];</div><div class="line">    </div><div class="line">    </div><div class="line">    [self <span class="string">useData:</span>purgeableData];</div><div class="line">    </div><div class="line">    <span class="comment">// 结束访问,现在可以丢弃自己所占用的内存啦</span></div><div class="line">    [purgeableData endContentAccess];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考资料:</p>
+<blockquote>
+<p>乞力马扎罗的雪的博客:<a href="http://blog.csdn.net/chenyufeng1991/article/details/49687215" target="_blank" rel="external"> blog.csdn.net/chenyufeng1991/article/details/49687215</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS开发/" rel="tag">#iOS开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/02/C++提要/" rel="next" title="C++提要">
+                <i class="fa fa-chevron-left"></i> C++提要
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://chenyaluncos-10005661.cos.myqcloud.com/touxiang.jpg"
+               alt="Ya" />
+          <p class="site-author-name" itemprop="name">Ya</p>
+          <p class="site-description motion-element" itemprop="description">Being a Full Stack Developer</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">随笔</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/icqk" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ChenYalun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/7026915/allen" target="_blank" title="SOF">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                  SOF
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#读感"><span class="nav-number">1.</span> <span class="nav-text">读感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#钩玄"><span class="nav-number">2.</span> <span class="nav-text">钩玄</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-属性声明为-dynamic后该怎么做"><span class="nav-number">3.1.</span> <span class="nav-text">1.属性声明为@dynamic后该怎么做</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-关联对象中为什么使用static修饰的指针"><span class="nav-number">3.2.</span> <span class="nav-text">2.关联对象中为什么使用static修饰的指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-简述Objective-C在发送消息时的动态性"><span class="nav-number">3.3.</span> <span class="nav-text">3.简述Objective-C在发送消息时的动态性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-如何解决unrecognized-selector-send-to-instance"><span class="nav-number">3.4.</span> <span class="nav-text">4.如何解决unrecognized selector send to instance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-如何实现多重继承"><span class="nav-number">3.5.</span> <span class="nav-text">5.如何实现多重继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-怎么实现方法实现的交换"><span class="nav-number">3.6.</span> <span class="nav-text">6.怎么实现方法实现的交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-简述为代码加锁的方式"><span class="nav-number">3.7.</span> <span class="nav-text">7.简述为代码加锁的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-原子性一定安全吗-如何确保属性的线程安全"><span class="nav-number">3.8.</span> <span class="nav-text">8.原子性一定安全吗,如何确保属性的线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-performSelector的局限性有哪些"><span class="nav-number">3.9.</span> <span class="nav-text">9.performSelector的局限性有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-bridge、bridge-retained与-bridge-transfer的区别"><span class="nav-number">3.10.</span> <span class="nav-text">10.bridge、bridge_retained与__bridge_transfer的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-NSCache相较NSDictionary的优点"><span class="nav-number">3.11.</span> <span class="nav-text">11.NSCache相较NSDictionary的优点</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ya</span>
+</div>
+
+<div class="powered-by">
+  May Be Better
+</div>
+
+<div class="theme-info">
+  心有猛虎，细嗅蔷薇。 
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
