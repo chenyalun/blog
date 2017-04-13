@@ -1,0 +1,813 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS开发," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ya" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="关于ARC/Block/GCD。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读《Objective-C高级编程》">
+<meta property="og:url" content="http://blog.chenyalun.com/2017/04/13/读《Objective-C高级编程》/index.html">
+<meta property="og:site_name" content="Ya">
+<meta property="og:description" content="关于ARC/Block/GCD。">
+<meta property="og:image" content="http://static.chenyalun.com/2017/04/13/20170413001.png">
+<meta property="og:image" content="http://static.chenyalun.com/2017/04/13/20170413002.png">
+<meta property="og:image" content="http://static.chenyalun.com/2017/04/13/20170413003.png">
+<meta property="og:updated_time" content="2017-04-13T13:44:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读《Objective-C高级编程》">
+<meta name="twitter:description" content="关于ARC/Block/GCD。">
+<meta name="twitter:image" content="http://static.chenyalun.com/2017/04/13/20170413001.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 11510108,
+      author: 'YA'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.chenyalun.com/2017/04/13/读《Objective-C高级编程》/"/>
+
+  <title> 读《Objective-C高级编程》 | Ya </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-82867422-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ya</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-fire"></i> <br />
+            
+            时间线
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-reading">
+          <a href="/categories/阅读/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            阅读
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                读《Objective-C高级编程》
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-13T21:05:17+08:00" content="2017-04-13">
+              2017-04-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">阅读</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p align="center"> 关于ARC/Block/GCD。 </p>
+
+<a id="more"></a>
+<h1 id="读感"><a href="#读感" class="headerlink" title="读感"></a>读感</h1><p>寒假里就大致看了一遍，但是吸收的不完全，尤其是block部分。这两三天又赶紧从图书馆借来翻一翻，还是收获满满。不过C++不够扎实，很多源码还是看不明白(摊手)。这里把一些重点问题整理出来，以问答的形式进行总结，所有代码都尝试验证一下，没毛病。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="一-为什么苹果主要采用散列表管理引用计数"><a href="#一-为什么苹果主要采用散列表管理引用计数" class="headerlink" title="一.为什么苹果主要采用散列表管理引用计数"></a>一.为什么苹果主要采用散列表管理引用计数</h2><p><strong>GNUstep将引用计数保存在对象占用内存块头部的变量中。</strong><br>优点：</p>
+<ol>
+<li>只需少量代码。</li>
+<li>能统一管理引用计数用内存块与对象用内存块。</li>
+</ol>
+<p><strong>苹果采用散列表（引用计数表，DenseMap 类实现）管理引用计数。</strong><br>优点：</p>
+<ol>
+<li>对象用内存块的分配无需考虑内存块头部。</li>
+<li>引用计数表记录中存有内存块地址，可追溯各对象的内存块。有助于检测对象的持有者是否存在，可检测内存泄漏。</li>
+</ol>
+<p>注:如果设备是 64 位环境并且使用 Objective-C 2.0，那么“一些”对象会使用其 isa 指针的一部分空间来存储它的引用计数。</p>
+<p><strong>苹果为什么不采用垃圾回收（GC）？</strong></p>
+<p>苹果曾在OS X 10.5 尝试使用，不过在 10.7 的时候把 GC 换成了 ARC。GC 有个问题让苹果不能忍：垃圾回收的时候，整个程序需要暂停，英文把这个过程叫做：Stop the World。所有的对象都需要一起回收时，造成用户体验不好。</p>
+<p><strong>ARC相对于GC所具有的优点：</strong></p>
+<ol>
+<li><p>ARC工作在编译期，在运行时没有额外开销。</p>
+</li>
+<li><p>ARC的内存回收是平稳进行的，对象不被使用时会立即被回收。而GC的内存回收是一阵一阵的，回收时需要暂停程序，会有一定的卡顿。</p>
+</li>
+</ol>
+<p><strong>简单介绍GC的原理</strong><br>基于事实：大部分的对象的生命期都很短。</p>
+<p>GC 将内存中的对象主要分成两个区域：Young 区和 Old 区。<br>对象先在 Young 区被创建，然后如果经过一段时间还存活着，则被移动到Old 区。（其实还有一个Perm区，但是内存回收算法通常不涉及这个区域）</p>
+<p>Young区的对象因为大部分生命期都很短，每次回收之后只有少部分能够存活，所以采用的算法叫Copying算法，简单说来就是直接把活着的对象复制到另一个地方。Young 区内部又分成了三块区域：Eden区 ,From区 ,To区。每次执行 Copying 算法时，即将存活的对象从 Eden 区和 From 区复制到To区，然后交换 From 区和To区的名字（即From 区变成 To 区，To区变成From区）。</p>
+<p>Old区的回收算法叫 Mark-Sweep 算法。简单来说，就是只是把不用的对象先标记（Mark）出来，然后回收（Sweep），活着的对象就不动它了。因为大部分对象都活着，所以回收下来的对象并不多。但是这个算法会有一个问题：它会产生内存碎片，所以它一般还会带有整理内存碎片的逻辑，在算法中叫做 Compact。</p>
+<h2 id="二-如何提高Objective-C方法的速度"><a href="#二-如何提高Objective-C方法的速度" class="headerlink" title="二.如何提高Objective-C方法的速度"></a>二.如何提高Objective-C方法的速度</h2><p>采用IMP Caching。一般而言速度是其他方法的两倍。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="keyword">id</span> autorelease_class = [<span class="built_in">NSAutoreleasePool</span> <span class="keyword">class</span>];</div><div class="line">SEL autorelease_sel = <span class="keyword">@selector</span>(addObject:);</div><div class="line">IMP autorelease_imp = [autorelease_class methodForSelector:autorelease_sel];</div><div class="line"></div><div class="line">- (<span class="keyword">id</span>) autorelease</div><div class="line">&#123;</div><div class="line">    (* autorelease_imp)(autorelease_class,autorelease_sel,<span class="keyword">self</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">id</span>)autorelease</div><div class="line">&#123;</div><div class="line">    [<span class="built_in">NSAutoreleasePool</span> addObject:<span class="keyword">self</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>IMP的使用:实例方法+有参数+有返回值</strong></p>
+<p>IMP默认是无参数，无返回值类型，且自带_cmd和selector。如果要使用带参数或者带返回值的IMP有两种方法。<br>方式一：关闭Xcode中的编译选项。<br><img src="http://static.chenyalun.com/2017/04/13/20170413001.png" alt=""></p>
+<p>方式二：重新定义一个“IMP”，但不能同名，否则会报错，显示</p>
+<p><code>Typedef redefinition with different types (&#39;id (*)(__strong id, SEL, ...)&#39; vs &#39;void (*)(void)&#39;)</code></p>
+<p>这里统一采取第二种方式，即重新定义函数指针_IMP。</p>
+<p><code>typedef id (*_IMP)(id, SEL,...);</code></p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// .h文件</span></div><div class="line">- (<span class="built_in">NSString</span> *)print:(<span class="built_in">NSString</span> *)name;</div></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// .m文件</span></div><div class="line">- (<span class="built_in">NSString</span> *)print:(<span class="built_in">NSString</span> *)name &#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,name);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"因为我刚好遇见你"</span>);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> name;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight protobuf"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 调用</span></div><div class="line"><span class="comment">// 创建对象</span></div><div class="line">YAUser *user = [[YAUser alloc] init];</div><div class="line">user.name = @<span class="string">"张无忌"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 获取SEL</span></div><div class="line">SEL sel = @selector(print:);</div><div class="line"></div><div class="line"><span class="comment">// 获取函数指针</span></div><div class="line">_IMP instanceIMP1 = (_IMP)[YAUser instanceMethodForSelector:sel];</div><div class="line">_IMP instanceIMP2 = (_IMP)[user methodForSelector:sel];</div><div class="line"></div><div class="line"><span class="comment">// 调用方法并返回字符串</span></div><div class="line">NSString *name1 = (*instanceIMP1)(user, sel, user.name);</div><div class="line">NSString *name2 = (*instanceIMP2)(user, sel, user.name);</div><div class="line">NSLog(@"%@--%@",name1, name2);</div></pre></td></tr></table></figure>
+<p><strong>IMP的使用:类方法+有参数+有返回值</strong></p>
+<figure class="highlight monkey"><table><tr><td class="code"><pre><div class="line">+ (NSString *)printClassName:(<span class="class"><span class="keyword">Class</span>)<span class="title">className</span>;</span></div></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"></div><div class="line">+ (<span class="built_in">NSString</span> *)printClassName:(Class)className &#123;</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,className);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"原谅我这一生不羁放纵爱自由"</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="built_in">NSStringFromClass</span>(className);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 调用</span></div><div class="line"><span class="comment">// 创建对象</span></div><div class="line">YAUser *user = [[YAUser alloc] init];</div><div class="line"></div><div class="line"><span class="comment">// 获取SEL</span></div><div class="line">SEL sel = <span class="meta">@selector(printClassName:)</span>;</div><div class="line"></div><div class="line"><span class="comment">// 获取函数指针</span></div><div class="line">_IMP classIMP = (_IMP)[[YAUser <span class="class"><span class="keyword">class</span>] <span class="title">methodForSelector</span>:<span class="type">sel];</span></span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 调用方法并返回字符串</span></div><div class="line">NSString *name = (*classIMP)(user, sel, [user <span class="class"><span class="keyword">class</span>]);</span></div><div class="line">NSLog(@<span class="string">"%@"</span>,name);</div></pre></td></tr></table></figure>
+<p><strong>实例方法/类方法+无参数+无返回值</strong></p>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><div class="line">- (<span class="name">void</span>)print<span class="comment">;</span></div><div class="line">+ (<span class="name">void</span>)printName<span class="comment">;</span></div></pre></td></tr></table></figure>
+<figure class="highlight erlang"><table><tr><td class="code"><pre><div class="line">- <span class="params">(void)</span>print&#123;</div><div class="line">    </div><div class="line">    NSLog<span class="params">(@<span class="string">"留下足迹才美丽"</span>)</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">+ <span class="params">(void)</span>printName &#123;</div><div class="line">    NSLog<span class="params">(@<span class="string">"风吹花落美如玉"</span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 获取SEL</span></div><div class="line">SEL sel1 = <span class="meta">@selector(print)</span>;</div><div class="line">SEL sel2 = <span class="meta">@selector(printName)</span>;</div><div class="line"></div><div class="line"><span class="comment">// 获取函数指针</span></div><div class="line">IMP instanceIMP = [[YAUser <span class="class"><span class="keyword">class</span>] <span class="title">instanceMethodForSelector</span>:<span class="type">sel1];</span></span></div><div class="line">IMP classIMP = [YAUser methodForSelector:sel2];</div><div class="line"></div><div class="line"><span class="comment">// 调用方法</span></div><div class="line">(*instanceIMP)();</div><div class="line">(*classIMP)();</div></pre></td></tr></table></figure>
+<h2 id="三-非显式使用-autoreleasing的场景有哪些"><a href="#三-非显式使用-autoreleasing的场景有哪些" class="headerlink" title="三.非显式使用__autoreleasing的场景有哪些"></a>三.非显式使用__autoreleasing的场景有哪些</h2><p><strong>场景一:@autoreleasepool。</strong></p>
+<p>编译器会检查@autoreleasepool块中的方法,如果<strong>不是</strong>以alloc/new/copy/mutableCopy开头，则自动把方法返回值的对象注册到autoreleasepool中。</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="variable">@autoreleasepool</span> &#123;</div><div class="line">    NSObject  *object = <span class="selector-attr">[[NSObject alloc]</span> <span class="selector-tag">init</span>];</div><div class="line">    <span class="comment">// ==&gt;NSObject __strong *object = [[NSObject alloc] init];</span></div><div class="line">    </div><div class="line">    NSArray *array = <span class="selector-attr">[NSArray array]</span>;</div><div class="line">    <span class="comment">// ==&gt;NSArray __autoreleasing  *array = [NSArray array];</span></div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>场景二:方法的返回值。</strong></p>
+<p>没有显式指定所有权修饰符，所以默认为__strong。由于return使得变量array超出作用域，强引用对应持有的对象会释放。但是该对象作为方法的返回值，编译器自动将其注册到自动释放池中，延缓释放(否则如果立即释放，那返回值就没有意义了)。</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><div class="line">- (id)<span class="keyword">array</span> &#123;</div><div class="line">    NSArray *<span class="keyword">array</span> = [NSArray <span class="keyword">array</span>];</div><div class="line">    // ==&gt;NSArray __strong *<span class="keyword">array</span> = [NSArray <span class="keyword">array</span>];</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="keyword">array</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>场景三:<code>__weak</code>修饰的变量。</strong><br><code>__weak</code>修饰的变量会被自动注册到自动释放池中。由于<code>__weak</code>不持有对象的强引用，在访问该对象的时候，该对象有可能已经释放，但是要保证能访问到该对象，所以把它注册到自动释放池中，确保@autoreleasepool块结束之前该对象存在。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="keyword">id</span> __<span class="keyword">weak</span> object;</div></pre></td></tr></table></figure>
+<p><strong>场景四:指向对象的指针的指针。</strong><br>指向对象的指针默认<strong>strong修饰。<br>指向对象的指针的指针默认</strong>autoreleasing修饰。</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><div class="line">NSObject *o<span class="comment">;</span></div><div class="line">// ==&gt;NSObject __strong *o<span class="comment">;</span></div><div class="line"></div><div class="line">NSObject **o<span class="comment">;</span></div><div class="line">// ==&gt;NSObject* __autoreleasing *o<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p><strong>为什么要使用指向对象的指针的指针?</strong><br>通常是回传值。<br>在C函数中，无法返回多个值，借助指针可以回传值。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 求两个数的和 积</span></div><div class="line"><span class="built_in">NSInteger</span> sum(<span class="built_in">NSInteger</span> a, <span class="built_in">NSInteger</span> b, <span class="built_in">NSInteger</span> *product) &#123;</div><div class="line">    <span class="comment">// 计算乘积</span></div><div class="line">    *product = a * b;</div><div class="line">    </div><div class="line">    <span class="comment">// 返回求和</span></div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用</span></div><div class="line">    <span class="built_in">NSInteger</span> a = <span class="number">3</span>, b = <span class="number">32</span>, summation, product;</div><div class="line">    summation = sum(a,b,&amp;product);</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld--%ld"</span>,summation,product);</div></pre></td></tr></table></figure>
+<p>在Objective-C中常用于NSError对象。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSError</span> *error = <span class="literal">nil</span>;</div><div class="line"><span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"这里是URL"</span>];</div><div class="line">[<span class="built_in">NSString</span> stringWithContentsOfURL:url encoding:<span class="built_in">NSUTF8StringEncoding</span> error:&amp;error];</div></pre></td></tr></table></figure>
+<p><code>stringWithContentsOfURL:encoding:error:</code>方法返回字符串，但是在获取字符串的时候可能发生错误，于是传入指向NSError对象的指针的指针，用于回传值(error是指向对象的指针，*error是该对象，&amp;error是指向对象的指针的指针)。</p>
+<p>赋给对象指针时，变量所有权修饰符必须保持一致，否则会出错。修饰error的是<strong>strong，而这里要求传入的指针的类型是</strong>autoreleasing:<code>(NSError * _Nullable __autoreleasing * _Nullable)</code>，修饰符不一致，不符合规则，但是编译器做了转换。</p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><div class="line">// 转换所有权修饰符</div><div class="line">NSError *error = nil;</div><div class="line">NSError __autoreleasing *tmp = error;</div><div class="line">BOOL result = [obj performOperationWithError:&amp;tmp];</div><div class="line"><span class="keyword">error </span>= tmp;</div></pre></td></tr></table></figure>
+<p><strong>可是为什么要使用__autoreleasing呢?</strong></p>
+<p>实际上不注册到自动释放池也能传(返回)值，就像C函数中的回传乘积值一样。但是这样做不符合内存管理原则，只有作为alloc/new/copy/mutableCopy 开头的方法，能够自己生成并持有。也即其他方法的返回值取得对象(就像场景二中的返回值取得对象一样)需要注册到自动释放池，这便是原则。</p>
+<p>如这种不符合内存管理原则的代码:</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> (<span class="type">CFGetRetainCount</span>(<span class="class"><span class="keyword">object</span>) <span class="title">!=</span> 1) </span>&#123;</div><div class="line">   <span class="type">CFRelease</span>(<span class="class"><span class="keyword">object</span>)</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">while</span> (_objc_rootRetainCount(<span class="class"><span class="keyword">object</span>) <span class="title">!=</span> 1) </span>&#123;</div><div class="line">   _objc_rootRelease(<span class="class"><span class="keyword">object</span>)</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="四-内存泄漏的场景有哪些"><a href="#四-内存泄漏的场景有哪些" class="headerlink" title="四.内存泄漏的场景有哪些"></a>四.内存泄漏的场景有哪些</h2><h4 id="1-Core-Fundation的类型转换"><a href="#1-Core-Fundation的类型转换" class="headerlink" title="1. Core Fundation的类型转换"></a>1. Core Fundation的类型转换</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"></div><div class="line">CFMutableArrayRef <span class="built_in">array</span> = CFArrayCreateMutable(kCFAllocatorDefault, <span class="number">0</span>, <span class="literal">NULL</span>);</div><div class="line"></div><div class="line"><span class="comment">// 引用计数为1</span></div><div class="line"><span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,CFGetRetainCount(<span class="built_in">array</span>));</div><div class="line"></div><div class="line">id obj = (<span class="number">__b</span>ridge id)<span class="built_in">array</span>;</div><div class="line"></div><div class="line"><span class="comment">// 引用计数为2</span></div><div class="line"><span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,CFGetRetainCount(<span class="built_in">array</span>));</div><div class="line"></div><div class="line"><span class="comment">// 不要使用_objc_rootRetainCount(),很不准很不准很不准</span></div><div class="line"><span class="comment">//NSLog(@"%d",_objc_rootRetainCount(fontRef));</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 如果不使用CFRelease()就会造成内存泄漏</span></div><div class="line">CFRelease(<span class="built_in">array</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,CFGetRetainCount(<span class="built_in">array</span>));</div></pre></td></tr></table></figure>
+<p>主要原因是获取到CF对象后没有对其引用计数做出合适的处理。</p>
+<h4 id="2-使用calloc函数创建动态数组"><a href="#2-使用calloc函数创建动态数组" class="headerlink" title="2. 使用calloc函数创建动态数组"></a>2. 使用calloc函数创建动态数组</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  声明动态数组</span></div><div class="line"><span class="comment">// 默认为__autoreleasing修饰,需显式指明为__strong</span></div><div class="line">id <span class="number">__</span>strong *<span class="built_in">array</span> = nil;</div><div class="line"></div><div class="line"><span class="comment">// 使用calloc分配内存</span></div><div class="line"><span class="built_in">array</span> = (id <span class="number">__</span>strong *)<span class="built_in">calloc</span>(<span class="number">10</span>, <span class="keyword">sizeof</span>(id));</div><div class="line"></div><div class="line"><span class="comment">// 使用</span></div><div class="line"><span class="built_in">array</span>[<span class="number">0</span>] = @<span class="string">"Aaren"</span>;</div><div class="line"></div><div class="line"><span class="comment">// 简单释放内存,造成内存泄漏</span></div><div class="line"><span class="comment">// 实际上对象array[0]还存在</span></div><div class="line"><span class="built_in">free</span>(<span class="built_in">array</span>);</div></pre></td></tr></table></figure>
+<p>正确做法:</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">//  声明动态数组</span></div><div class="line"><span class="comment">// 默认为__autoreleasing修饰,需显式指明为__strong</span></div><div class="line"><span class="keyword">id</span> __<span class="keyword">strong</span> *array = <span class="literal">nil</span>;</div><div class="line"></div><div class="line"><span class="comment">// 声明容量</span></div><div class="line"><span class="built_in">NSInteger</span> num = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="comment">// 使用calloc分配内存</span></div><div class="line">array = (<span class="keyword">id</span> __<span class="keyword">strong</span> *)calloc(num, <span class="keyword">sizeof</span>(<span class="keyword">id</span>));</div><div class="line"></div><div class="line"><span class="comment">// 使用</span></div><div class="line">array[<span class="number">0</span>] = <span class="string">@"Aaren"</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>;i &lt; num; i ++)&#123;</div><div class="line">    array[i] = <span class="literal">nil</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 释放内存</span></div><div class="line">free(array);</div></pre></td></tr></table></figure>
+<p>注意:<br>1.不要使用malloc函数分配内存，malloc函数分配内存区域没有被初始化为0，可能产生随机访问导致错误，所以还需要使用memset()函数将内存填充为0。</p>
+<p>2.对于NSMutableSet/NSMutableArray/NSMutableDictionary等容器，不需要人为手动管理。</p>
+<h4 id="3-MRC下的匿名对象"><a href="#3-MRC下的匿名对象" class="headerlink" title="3. MRC下的匿名对象"></a>3. MRC下的匿名对象</h4><figure class="highlight clojure"><table><tr><td class="code"><pre><div class="line">[[NSObject alloc] init]<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>匿名对象在MRC下会造成内存泄漏(C++中的匿名对象创建完毕后立即调用析构函数做销毁处理)。</p>
+<p>但是在ARC环境下，不会造成内存泄漏。</p>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><div class="line">id temp = objc_msgSend(<span class="name">NSObject</span>, @selector(<span class="name">alloc</span>))<span class="comment">;</span></div><div class="line">objc_msgSend(<span class="name">temp</span>,@selector(<span class="name">init</span>))<span class="comment">;</span></div><div class="line">objc_release(<span class="name">temp</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>创建完毕立即销毁，这也解释了为什么使用__weak修饰将要创建的对象会有警告。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSObject</span> * __<span class="keyword">weak</span> object = [[<span class="built_in">NSObject</span> alloc] init];</div><div class="line"></div><div class="line"><span class="comment">// 或者</span></div><div class="line"><span class="keyword">id</span> __<span class="keyword">weak</span> object = [[<span class="built_in">NSObject</span> alloc] init];</div></pre></td></tr></table></figure>
+<p>警告:Assigning retained object to weak variable; object will be released after assignment</p>
+<h4 id="4-block的循环引用"><a href="#4-block的循环引用" class="headerlink" title="4. block的循环引用"></a>4. block的循环引用</h4><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAUser</span> ()</span></div><div class="line">&#123;</div><div class="line">    block _block;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line"></div><div class="line">    <span class="comment">// 循环引用</span></div><div class="line">    _block = ^() &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,<span class="keyword">self</span>);</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="五-weak如何实现"><a href="#五-weak如何实现" class="headerlink" title="五.__weak如何实现"></a>五.__weak如何实现</h2><p>weak 表的作用是在对象执行 dealloc 的时候将所有指向该对象的 weak 指针的值设为 nil，避免悬空指针。苹果使用一个全局的 weak 表来保存所有的 weak 引用。并将对象作为键，weak_entry_t 作为值。weak_entry_t 中保存了所有指向该对象的 weak 指针。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">struct</span> <span class="keyword">weak_table_t</span> &#123;</div><div class="line">    <span class="keyword">weak_entry_t</span> *weak_entries;</div><div class="line">    <span class="keyword">size_t</span>    num_entries;</div><div class="line">    <span class="keyword">uintptr_t</span> mask;</div><div class="line">    <span class="keyword">uintptr_t</span> max_hash_displacement;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="六-Core-Fundation-与-Foundation如何转换"><a href="#六-Core-Fundation-与-Foundation如何转换" class="headerlink" title="六.Core Fundation 与 Foundation如何转换"></a>六.Core Fundation 与 Foundation如何转换</h2><p>1.<strong>__bridge</strong><br>只做类型转换，不修改相关对象的引用计数，原来的 Core Foundation 对象在不用时，需要调用 CFRelease 方法。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line">CFMutableArrayRef <span class="built_in">array</span> = CFArrayCreateMutable(kCFAllocatorDefault, <span class="number">0</span>, <span class="literal">NULL</span>);</div><div class="line"></div><div class="line"><span class="comment">// 引用计数为1</span></div><div class="line"><span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,CFGetRetainCount(<span class="built_in">array</span>));</div><div class="line"></div><div class="line"><span class="comment">// obj强引用该对象(默认为__strong)</span></div><div class="line">id obj = (<span class="number">__b</span>ridge id)<span class="built_in">array</span>;</div><div class="line"></div><div class="line"><span class="comment">// 引用计数为2</span></div><div class="line"><span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,CFGetRetainCount(<span class="built_in">array</span>));</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 如果不使用CFRelease()就会造成内存泄漏</span></div><div class="line">CFRelease(<span class="built_in">array</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%ld\n"</span>,CFGetRetainCount(<span class="built_in">array</span>));</div></pre></td></tr></table></figure>
+<p><img src="http://static.chenyalun.com/2017/04/13/20170413002.png" alt=""></p>
+<p>2.<strong>__bridge_transfer</strong><br>常用在CF对象转化成OC对象时，将CF对象的所有权交给OC对象，此时ARC就能自动管理该内存,作用同CFBridgingRelease()</p>
+<figure class="highlight smali"><table><tr><td class="code"><pre><div class="line"></div><div class="line">CFMutableArrayRef<span class="built_in"> array </span>= CFArrayCreateMutable(kCFAllocatorDefault, 0, NU<span class="class">LL);</span></div><div class="line"></div><div class="line">// 引用计数为1</div><div class="line">printf(<span class="string">"%ld\n"</span>,CFGetRetainCount(array));</div><div class="line"></div><div class="line">// obj持有对象 array放弃持有对象,相当于做了CFRelease()    </div><div class="line">id obj = (__bridge_transfer  id)array;</div></pre></td></tr></table></figure>
+<p>3.<strong>bridge_retained</strong><br>与bridge_transfer 相反，常用在将OC对象转化成CF对象，且OC对象的所有权也交给CF对象来管理，即OC对象转化成CF对象时，涉及到对象类型和对象所有权的转化，作用同CFBridgingRetain()</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="built_in">NSMutableArray</span> *obj = [<span class="built_in">NSMutableArray</span> array];</div><div class="line"></div><div class="line"><span class="built_in">CFMutableArrayRef</span> array2 = (__bridge_retained <span class="built_in">CFMutableArrayRef</span>)obj;</div><div class="line"></div><div class="line"><span class="comment">// 引用计数为2,obj持有对象,array2也持有对象</span></div><div class="line">printf(<span class="string">"%ld\n"</span>,<span class="built_in">CFGetRetainCount</span>(array2));</div><div class="line"></div><div class="line"><span class="comment">// 使用完毕,手动release,否则内存泄漏</span></div><div class="line"><span class="built_in">CFRelease</span>((array2));</div></pre></td></tr></table></figure>
+<h2 id="七-简单介绍block"><a href="#七-简单介绍block" class="headerlink" title="七.简单介绍block"></a>七.简单介绍block</h2><p>block是能持有作用域变量的匿名函数，本质上是Objective-C对象。<br>语法格式:<code>^ 返回值类型 参数列表 表达式</code>,其中返回值类型可省略，无参数时参数列表可省略。<br>声明block与声明函数指针类似，执行block与调用函数类似。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 返回值类型 (*f) 参数类型</span></div><div class="line"><span class="keyword">int</span> (*f)(<span class="keyword">int</span>) = &amp;<span class="function"><span class="keyword">func</span>;</span></div><div class="line"></div><div class="line">// 声明<span class="title">block</span></div><div class="line"><span class="title">int</span> <span class="params">(^blk)</span><span class="params">(<span class="keyword">int</span>)</span>;</div><div class="line"></div><div class="line">// 赋值</div><div class="line"><span class="title">int</span> <span class="params">(^blk2)</span><span class="params">(<span class="keyword">int</span>)</span> = ^<span class="params">(<span class="keyword">int</span> a)</span>&#123; <span class="keyword">return</span> <span class="number">0</span>;&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 起别名</span></div><div class="line">typedef <span class="keyword">int</span> (^block) (<span class="keyword">int</span>);</div></pre></td></tr></table></figure>
+<h3 id="block的三种类型"><a href="#block的三种类型" class="headerlink" title="block的三种类型"></a>block的三种类型</h3><ol>
+<li>如果block没有访问外部的局部变量，或者访问的局部变量被static修饰，block存储在静态区，是NSConcreteGlobalBlock。</li>
+<li>其他情况下，语法生成的block存放在栈中，是NSConcreteStackBlock。</li>
+<li>当把栈中的block复制到堆上时，是NSConcreteMallocBlock。</li>
+</ol>
+<h3 id="block复制到堆上的情况"><a href="#block复制到堆上的情况" class="headerlink" title="block复制到堆上的情况"></a>block复制到堆上的情况</h3><p>大部分情况下编译器通常会将创建在栈上的 block 自动拷贝到堆上，只有当 block 作为方法或函数的参数传递时，编译器不会自动调用 copy 方法；</p>
+<p>编译器或者方法内部已经实现copy代码的情况:</p>
+<ol>
+<li>block作为函数返回值</li>
+<li>赋值给 __strong id 类型的对象或 block 的成员变量</li>
+<li>Cocoa框架方法名含有usingBlock</li>
+<li>GCD中的API</li>
+</ol>
+<p>其他情况需要手动复制:</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"> <span class="comment">// 程序异常:栈上的block被废弃 </span></div><div class="line"> </div><div class="line"> <span class="keyword">typedef</span> <span class="keyword">void</span>(^block) (<span class="keyword">void</span>);</div><div class="line"> </div><div class="line">- (<span class="keyword">id</span>)getBlockArray</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> val = <span class="number">10</span>;</div><div class="line">    <span class="keyword">return</span> [[<span class="built_in">NSArray</span> alloc] initWithObjects:</div><div class="line">            ^&#123;<span class="built_in">NSLog</span>(<span class="string">@"blk0:%d"</span>, val);&#125;,</div><div class="line">            ^&#123;<span class="built_in">NSLog</span>(<span class="string">@"blk1:%d"</span>, val);&#125;, <span class="literal">nil</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    </div><div class="line">    block b = [<span class="keyword">self</span> getBlockArray][<span class="number">0</span>];</div><div class="line">    </div><div class="line">    b();</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>手动将block 复制到堆上:</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^block) (<span class="keyword">void</span>);</div><div class="line"></div><div class="line">- (<span class="keyword">id</span>)getBlockArray</div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> val = <span class="number">10</span>;</div><div class="line">    <span class="keyword">return</span> [[<span class="built_in">NSArray</span> alloc] initWithObjects:</div><div class="line">            [^&#123;<span class="built_in">NSLog</span>(<span class="string">@"blk0:%d"</span>, val);&#125; <span class="keyword">copy</span>],</div><div class="line">            [^&#123;<span class="built_in">NSLog</span>(<span class="string">@"blk1:%d"</span>, val);&#125; <span class="keyword">copy</span>], <span class="literal">nil</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    </div><div class="line">    block b = [<span class="keyword">self</span> getBlockArray][<span class="number">0</span>];</div><div class="line">    </div><div class="line">    b();</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="block捕获变量"><a href="#block捕获变量" class="headerlink" title="block捕获变量"></a>block捕获变量</h3><p><strong>1.对于实例变量、静态全局变量、静态局部变量，全局变量，无论其为基本类型还是对象类型，在block中可读可写。</strong></p>
+<p>定义在函数内部的变量称为局部变量（Local Variable）。<br>在所有函数外部定义的变量称为全局变量（Global Variable），它的作用域默认是整个程序，也就是所有的源文件。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 静态全局变量</span></div><div class="line"><span class="keyword">static</span> <span class="built_in">NSInteger</span> globalAge = <span class="number">10</span>;</div><div class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> *globalName = <span class="string">@"Aaren"</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    </div><div class="line">    <span class="comment">// 局部变量</span></div><div class="line">    <span class="built_in">NSInteger</span> age = <span class="number">12</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// 静态局部变量</span></div><div class="line">    <span class="keyword">static</span> <span class="built_in">NSInteger</span> staticAge = <span class="number">17</span>;</div><div class="line">    <span class="keyword">static</span> <span class="built_in">NSString</span> *staticName = <span class="string">@"Bob"</span>;</div><div class="line"></div><div class="line">    YAUser *user = [[YAUser alloc] init];</div><div class="line">    </div><div class="line">    <span class="keyword">void</span> (^func)() = ^() &#123;</div><div class="line">        </div><div class="line">        <span class="comment">// 修改实例变量</span></div><div class="line">        user.age = <span class="number">18</span>;</div><div class="line">        user.name = <span class="string">@"Jack"</span>;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,user.age);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,user.name);</div><div class="line">        </div><div class="line">        <span class="comment">// 修改静态局部变量</span></div><div class="line">        staticAge = <span class="number">22</span>;</div><div class="line">        staticName = <span class="string">@"Lucy"</span>;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,staticAge);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,staticName);</div><div class="line">        </div><div class="line">        <span class="comment">// 修改静态全局变量</span></div><div class="line">        globalAge = <span class="number">14</span>;</div><div class="line">        globalName = <span class="string">@"Allen"</span>;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,globalAge);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,globalName);</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    func();</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,user.age);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,user.name);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,staticAge);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,staticName);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,globalAge);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,globalName);</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p><strong>2.对于局部变量，无论其是基本类型还是对象类型，在block中为只读，当使用<strong>block修饰时，变量可读可写。</strong>block修饰的对象类型变量，在ARC环境下，block对其强引用。在非ARC环境下，block不会对其retain。</strong></p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">// 局部变量</span></div><div class="line">     __block <span class="built_in">NSInteger</span> age = <span class="number">17</span>;</div><div class="line">     __block <span class="built_in">NSString</span> *name = <span class="string">@"Bob"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">void</span> (^func)() = ^() &#123;</div><div class="line">        </div><div class="line">        <span class="comment">// 修改局部变量</span></div><div class="line">        age = <span class="number">18</span>;</div><div class="line">        name = <span class="string">@"Jack"</span>;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,age);</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,name);</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    func();</div><div class="line">    </div><div class="line">    <span class="comment">// 修改局部变量</span></div><div class="line">    age = <span class="number">22</span>;</div><div class="line">    name = <span class="string">@"Aaren"</span>;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%ld"</span>,age);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,name);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="block的循环引用"><a href="#block的循环引用" class="headerlink" title="block的循环引用"></a>block的循环引用</h3><p>Capturing ‘self’ strongly in this block is likely to lead to a retain cycle.</p>
+<p>.h文件</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAUser</span> : <span class="title">NSObject</span></span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSObject</span> *object;</div><div class="line">- (<span class="keyword">void</span>)func;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>.m文件</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span> (^block) ();</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">YAUser</span> ()</span></div><div class="line">&#123;</div><div class="line">    block _block;</div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">YAUser</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// 循环引用</span></div><div class="line">    <span class="keyword">self</span>.object = [[<span class="built_in">NSObject</span> alloc] init];</div><div class="line">    </div><div class="line">    _block = ^() &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,<span class="keyword">self</span>.object);</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    _block();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>由于block语法赋值给了成员变量，所以在栈上生成的block被复制到堆上。而block强引用了self的成员变量object，实际上是持有了self，self持有block的同时block持有self，于是self和block循环引用。</p>
+<p><img src="http://static.chenyalun.com/2017/04/13/20170413003.png" alt=""><br>解决方案一:采用__weak修饰。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"></div><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// __weak解决循环引用</span></div><div class="line">    <span class="keyword">self</span>.name = <span class="string">@"Aaren"</span>;</div><div class="line">    __<span class="keyword">weak</span> <span class="built_in">NSString</span> *weakName = <span class="keyword">self</span>.name;</div><div class="line"></div><div class="line">    <span class="comment">// ---此时weakName和self.name是同一个变量</span></div><div class="line"></div><div class="line">    _block = ^() &#123;</div><div class="line">        </div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,weakName);</div><div class="line">        </div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    _block();</div><div class="line"></div><div class="line">    <span class="comment">// ---此时weakName和self.name是同一个变量</span></div><div class="line">    </div><div class="line">    <span class="keyword">self</span>.name = <span class="string">@"Jack"</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// ---此时weakName和self.name不是同一个变量</span></div><div class="line"></div><div class="line">    <span class="comment">// 结果依然是@"Aaren"</span></div><div class="line">    _block();</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// __weak解决循环引用</span></div><div class="line">    <span class="keyword">self</span>.object = [[<span class="built_in">NSObject</span> alloc] init];</div><div class="line">    </div><div class="line">    <span class="comment">// 声明了一个self类型的weak指针，名字叫做weakSelf.</span></div><div class="line">    __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</div><div class="line"></div><div class="line">    _block = ^() &#123;</div><div class="line">        </div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,weakSelf.object);</div><div class="line">        </div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    _block();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>更改一方的强引用为弱引用打破了循环引用。但是有瑕疵:block内部可能捕获到空值。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// __weak解决循环引用</span></div><div class="line">    <span class="keyword">self</span>.object = [[<span class="built_in">NSObject</span> alloc] init];</div><div class="line">    </div><div class="line">    __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</div><div class="line">    </div><div class="line">    </div><div class="line">    _block = ^() &#123;</div><div class="line">        </div><div class="line">        <span class="comment">// 现在立即使用weakSelf.object</span></div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,weakSelf.object);</div><div class="line">        </div><div class="line">        <span class="comment">// 需要异步执行,但是却无法保证weakSelf.object一定存在</span></div><div class="line">        <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,weakSelf.object);</div><div class="line">        &#125;);</div><div class="line">        </div><div class="line">        </div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    <span class="comment">// 调用block</span></div><div class="line">    _block();</div><div class="line">    </div><div class="line">    <span class="comment">// 自以为block调用完毕,不再需要self.object的值了,大胆地将self.object改为其他值</span></div><div class="line">    <span class="keyword">self</span>.object = <span class="literal">nil</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种情况就造成block内部正在使用持有变量的时候，变量的值却意外地改变了，甚至为nil，极易引发问题。<br>最佳方案:弱引用加强引用:</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// __weak解决循环引用</span></div><div class="line">    <span class="keyword">self</span>.object = [[<span class="built_in">NSObject</span> alloc] init];</div><div class="line">    </div><div class="line">    __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</div><div class="line">    </div><div class="line">   </div><div class="line">    _block = ^() &#123;</div><div class="line">        </div><div class="line">        <span class="comment">// __strong可以不加,默认为__strong,但最好加上,更醒目</span></div><div class="line">        __<span class="keyword">strong</span> <span class="built_in">NSObject</span> *strongObject = weakSelf.object;</div><div class="line">        </div><div class="line">        <span class="comment">// 最好加上判断,保证strongObject不为空</span></div><div class="line">        <span class="keyword">if</span> (strongObject) &#123;</div><div class="line">            <span class="comment">// 现在立即使用weakSelf.object</span></div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,strongObject);</div><div class="line">            </div><div class="line">            <span class="comment">// 需要异步执行,可以保证weakSelf.object的值不改变</span></div><div class="line">            <span class="built_in">dispatch_async</span>(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</div><div class="line">                <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,strongObject);</div><div class="line">            &#125;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">// 调用block</span></div><div class="line">    _block();</div><div class="line">    </div><div class="line">    <span class="comment">// 放心地将self.object改为其他值</span></div><div class="line">    <span class="keyword">self</span>.object = <span class="literal">nil</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这么做可以保证在block执行期间持有的变量不改变。但如果在block执行之前该变量已经为nil，那回天乏力。</p>
+<p><strong>评价:</strong><br>这种方式不会造成循环引用:block弱引用的方式持有self.object，即不会影响self.object的释放。在block中是通过<strong>局部变量</strong>强引用self.object，作用域结束，局部变量销毁，不再强引用，从此你我是路人。</p>
+<p><strong>注意事项:</strong><br>1.除了使用typeof()之外，还可以直接声明与self相同类型的变量，但依然需要使用__weak修饰。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">__<span class="keyword">weak</span> YAUser *weakSelf = <span class="keyword">self</span>;</div></pre></td></tr></table></figure>
+<p>2.循环引用的本质是block强引用了self。但是如果以 以上代码为例:block持有了self的成员变量，完全可以通过以下方式解决。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// 循环引用</span></div><div class="line">    <span class="keyword">self</span>.object = [[<span class="built_in">NSObject</span> alloc] init];</div><div class="line">    <span class="built_in">NSObject</span> *weakObject = <span class="keyword">self</span>.object;</div><div class="line">    </div><div class="line">    _block = ^() &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,weakObject);</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    _block();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3.如果可以放宽要求，那么不把block设置为成员变量、把block中调用的代码抽取出来等都可以解决循环引用。<br><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// 循环引用</span></div><div class="line">    <span class="keyword">self</span>.object = [[<span class="built_in">NSObject</span> alloc] init];</div><div class="line">    __<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</div><div class="line">    </div><div class="line">    _block = ^() &#123;</div><div class="line">        [weakSelf log];</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">    _block();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 把方法抽取出来</span></div><div class="line">- (<span class="keyword">void</span>)log &#123;</div><div class="line">     <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,<span class="keyword">self</span>.object);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>使用场景:</strong><br>不需要对block中持有的变量进行写入操作，也即仅仅读取变量。<br>当block异步使用持有的变量时，注意弱引用+强引用配合使用。<br>建议统一采用 <code>typeof(self) + 弱引用 + 强引用的形式</code>。</p>
+<p>解决方案二:采用__block修饰。</p>
+<p>产生循环引用的代码:</p>
+<figure class="highlight erlang"><table><tr><td class="code"><pre><div class="line">- <span class="params">(void)</span>func &#123;</div><div class="line"></div><div class="line">    // 循环引用</div><div class="line">    _block = ^<span class="params">()</span> &#123;</div><div class="line">        NSLog<span class="params">(@<span class="string">"%p"</span>,self)</span>;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">- <span class="params">(void)</span>execBlock &#123;</div><div class="line">    _block<span class="params">()</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解决循环引用:</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line"></div><div class="line">    <span class="comment">// 解决循环引用</span></div><div class="line">    __block <span class="keyword">id</span> tmp = <span class="keyword">self</span>;</div><div class="line">    _block = ^() &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,tmp);</div><div class="line">        </div><div class="line">        <span class="comment">// 关键所在</span></div><div class="line">        tmp = <span class="literal">nil</span>;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)execBlock &#123;</div><div class="line">    _block();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>评价:</strong><br><strong>block本身不能解决循环引用，关键在于 在block中将</strong>block修饰的变量置为空。<br>当需要对持有的变量进行写入操作时可以使用。</p>
+<p><strong>注意事项:</strong><br><strong>block必须执行</strong>，否则仍然不会解决循环引用。如下面代码:</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)func &#123;</div><div class="line"></div><div class="line">    <span class="comment">// 解决循环引用</span></div><div class="line">    __block <span class="keyword">id</span> tmp = <span class="keyword">self</span>;</div><div class="line">    _block = ^() &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%p"</span>,tmp);</div><div class="line">        tmp = <span class="literal">nil</span>;</div><div class="line">    &#125;;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)execBlock &#123;</div><div class="line">    <span class="comment">// block没有执行,扔不能解决循环引用</span></div><div class="line">    <span class="comment">// _block();</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>为什么block没有执行就无法解决循环引用呢?</strong><br>在block中出现tmp的那刻起，block就已经持有了self，即产生了循环引用，如:</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><div class="line"><span class="attr">_block</span> = ^() &#123;tmp;&#125;;</div></pre></td></tr></table></figure>
+<p>而只有通过执行block才能把nil赋给tmp，才能打破循环引用。因此，执行block的目的是把nil赋予tmp，而把nil赋予tmp便能解决循环引用的原因是打破了self对block的强引用(self已经不存在了)。</p>
+<h2 id="八-简要介绍GCD常用API"><a href="#八-简要介绍GCD常用API" class="headerlink" title="八.简要介绍GCD常用API"></a>八.简要介绍GCD常用API</h2><h3 id="1-dispatch-async与dispatch-sync"><a href="#1-dispatch-async与dispatch-sync" class="headerlink" title="1.dispatch_async与dispatch_sync"></a>1.dispatch_async与dispatch_sync</h3><figure class="highlight less"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 异步执行</span></div><div class="line"><span class="selector-tag">dispatch_async</span>(dispatch_get_main_queue(), ^&#123; &#125;);</div><div class="line"></div><div class="line"><span class="comment">// 同步执行dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123; &#125;);</span></div></pre></td></tr></table></figure>
+<h3 id="2-dispatch-queue-t"><a href="#2-dispatch-queue-t" class="headerlink" title="2.dispatch_queue_t"></a>2.dispatch_queue_t</h3><p>使用系统提供的queue</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 主队列:串行队列</span></div><div class="line"><span class="keyword">dispatch_queue_t</span> mainQueue = dispatch_get_main_queue();</div><div class="line"></div><div class="line"><span class="comment">// 全局队列:并行队列</span></div><div class="line"><span class="keyword">dispatch_queue_t</span> globalQueue1 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, <span class="number">0</span>);</div><div class="line"><span class="keyword">dispatch_queue_t</span> globalQueue2 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</div><div class="line"><span class="keyword">dispatch_queue_t</span> globalQueue3 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, <span class="number">0</span>);</div><div class="line"><span class="keyword">dispatch_queue_t</span> globalQueue4 = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+<p>自己创建queue</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 一般指定这两种类型</span></div><div class="line"><span class="comment">// DISPATCH_QUEUE_SERIAL</span></div><div class="line"><span class="comment">// DISPATCH_QUEUE_CONCURRENT</span></div><div class="line"><span class="built_in">dispatch_queue_t</span> createQueue = dispatch_queue_create(<span class="string">"com.chenyalun.gcd.createQueue"</span>, DISPATCH_QUEUE_SERIAL);</div><div class="line"></div><div class="line"><span class="built_in">dispatch_async</span>(createQueue, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"  "</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// If your deployment target is iOS 6.0 or Mac OS X 10.8 or later</span></div><div class="line"><span class="comment">//dispatch_release(createQueue);</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 指定创建的队列与globalQueue享有同一优先级</span></div><div class="line"><span class="comment">// 不可指定系统的队列</span></div><div class="line">dispatch_set_target_queue(createQueue, globalQueue);</div></pre></td></tr></table></figure>
+<p>注意:</p>
+<ol>
+<li>现在适配的版本一般大于iOS6,因此不必也不能对自己创建的queue进行dispatch_release，不会造成内存泄漏。</li>
+<li>自己创建的队列严格按照格式来，尤其是作为第一个参数的queue的名称:”com.chenyalun.gcd.createQueue”</li>
+<li>第二个参数设置为NULL，则为串行队列。specify DISPATCH_QUEUE_SERIAL (or NULL) to create a serial queue or specify DISPATCH_QUEUE_CONCURRENT to create a concurrent queue. In earlier versions, you must specify NULL for this parameter.</li>
+</ol>
+<h3 id="3-dispatch-resume-dispatch-suspend"><a href="#3-dispatch-resume-dispatch-suspend" class="headerlink" title="3.dispatch_resume/dispatch_suspend"></a>3.dispatch_resume/dispatch_suspend</h3><p>队列的挂起与恢复</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 全局队列:并行队列</span></div><div class="line"><span class="built_in">dispatch_queue_t</span> globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, <span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="built_in">dispatch_async</span>(globalQueue, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"你在何方 眼看天亮"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 挂起</span></div><div class="line">dispatch_suspend(globalQueue);</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"都怪这夜色 撩人的疯狂"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 恢复执行</span></div><div class="line">dispatch_resume(globalQueue);</div></pre></td></tr></table></figure>
+<h3 id="4-dispatch-apply"><a href="#4-dispatch-apply" class="headerlink" title="4.dispatch_apply"></a>4.dispatch_apply</h3><figure class="highlight gherkin"><table><tr><td class="code"><pre><div class="line"></div><div class="line">// 指定迭代的次数</div><div class="line">NSArray <span class="symbol">*</span>array = <span class="meta">@[</span><span class="meta">@1,</span> <span class="meta">@2,</span> <span class="meta">@3,</span> <span class="meta">@4,</span> <span class="meta">@5,</span> <span class="meta">@6,</span> <span class="meta">@7];</span></div><div class="line">dispatch_apply(array.count, globalQueue, ^(size_t index) &#123;</div><div class="line">    NSLog(<span class="meta">@"%</span><span class="meta">@",</span> [array objectAtIndex:index]);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="5-dispatch-group"><a href="#5-dispatch-group" class="headerlink" title="5.dispatch_group"></a>5.dispatch_group</h3><figure class="highlight xquery"><table><tr><td class="code"><pre><div class="line"></div><div class="line">dispatch_group_t <span class="keyword">group</span> = dispatch_group_create();</div><div class="line">dispatch_group_async(<span class="keyword">group</span>, globalQueue, ^&#123;</div><div class="line">    NSLog(@<span class="string">"这夜的风儿吹"</span>);</div><div class="line">&#125;);</div><div class="line">dispatch_group_async(<span class="keyword">group</span>, globalQueue, ^&#123;</div><div class="line">    NSLog(@<span class="string">"我要 美丽的衣裳"</span>);</div><div class="line">&#125;);</div><div class="line">dispatch_group_async(<span class="keyword">group</span>, globalQueue, ^&#123;</div><div class="line">    NSLog(@<span class="string">"为你 对镜贴花黄"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// 保证以上三个任务执行完毕再执行下面的任务</div><div class="line">dispatch_group_notify(<span class="keyword">group</span>, dispatch_get_main_queue(), ^&#123;</div><div class="line">    NSLog(@<span class="string">"这夜色太紧张"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><div class="line"></div><div class="line">dispatch_group_t <span class="keyword">group</span> = dispatch_group_create();</div><div class="line">dispatch_group_async(<span class="keyword">group</span>, globalQueue, ^&#123;</div><div class="line">    NSLog(@<span class="string">"这夜的风儿吹"</span>);</div><div class="line">&#125;);</div><div class="line">dispatch_group_async(<span class="keyword">group</span>, globalQueue, ^&#123;</div><div class="line">    NSLog(@<span class="string">"我要 美丽的衣裳"</span>);</div><div class="line">&#125;);</div><div class="line">dispatch_group_async(<span class="keyword">group</span>, globalQueue, ^&#123;</div><div class="line">    NSLog(@<span class="string">"为你 对镜贴花黄"</span>);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 保证以上三个任务执行完毕再执行下面的任务</span></div><div class="line"><span class="comment">// DISPATCH_TIME_NOW 不等待</span></div><div class="line"><span class="comment">// DISPATCH_TIME_FOREVER 永久等待</span></div><div class="line">NSInteger result = dispatch_group_wait(<span class="keyword">group</span>, DISPATCH_TIME_FOREVER);</div><div class="line"><span class="keyword">if</span> (result == <span class="number">0</span>) &#123;</div><div class="line">    <span class="comment">// group中的任务全部执行完毕</span></div><div class="line">    NSLog(@<span class="string">"这夜色太紧张"</span>);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// 任务没有执行完毕</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="6-dispatch-barrier"><a href="#6-dispatch-barrier" class="headerlink" title="6.dispatch_barrier"></a>6.dispatch_barrier</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="built_in">dispatch_async</span>(globalQueue, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第一个任务"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(globalQueue, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第二个任务"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="comment">// 栅栏函数</span></div><div class="line">dispatch_barrier_async(globalQueue, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"英雄之所以被称为英雄，可能只是第一枪打中了而已。"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(globalQueue, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第四个任务。"</span>);</div><div class="line">&#125;);</div><div class="line"><span class="built_in">dispatch_async</span>(globalQueue, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第五个任务"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="7-dispatch-once"><a href="#7-dispatch-once" class="headerlink" title="7.dispatch_once"></a>7.dispatch_once</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><div class="line"><span class="comment">// typedef long dispatch_once_t;</span></div><div class="line"><span class="comment">// static long onceToken;</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line"><span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"仅仅执行一次"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="8-dispatch-after"><a href="#8-dispatch-after" class="headerlink" title="8.dispatch_after"></a>8.dispatch_after</h3><figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">dispatch_after(dispatch_time(DISPATCH_TIME_NOW, </span>(int64_t)(<span class="number">3</span>.<span class="number">0</span> * NSEC_PER_SEC)), <span class="keyword">dispatch_get_main_queue(), </span>^&#123;</div><div class="line">        NSLog(@<span class="string">"你在何方 眼看天亮"</span>)<span class="comment">;</span></div><div class="line">    &#125;)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>指定3秒之后把要执行的任务追加到主队列中。最早3.0秒后执行，最迟3+1/60秒后执行，若主线程有延迟，时间会更长。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// DISPATCH_TIME_NOW</span></div><div class="line"><span class="comment">// DISPATCH_TIME_FOREVER</span></div><div class="line"><span class="comment">// 时间的单位为毫微秒</span></div><div class="line"><span class="keyword">dispatch_time_t</span> time = dispatch_time(DISPATCH_TIME_FOREVER, <span class="number">3000000</span>);</div></pre></td></tr></table></figure>
+<h3 id="7-dispatch-semaphore"><a href="#7-dispatch-semaphore" class="headerlink" title="7.dispatch_semaphore"></a>7.dispatch_semaphore</h3><p>更细粒度的排他控制<br><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 全局队列:并行队列</span></div><div class="line"><span class="keyword">dispatch_queue_t</span> globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="comment">// 设置信号量为1,也即保证同时访问的数量为1</span></div><div class="line"><span class="keyword">dispatch_semaphore_t</span> semaphore = dispatch_semaphore_create(<span class="number">1</span>);</div><div class="line">NSMutableArray *<span class="built_in">array</span> = [NSMutableArray <span class="built_in">array</span>];</div><div class="line"></div><div class="line"><span class="comment">// 迭代添加对象</span></div><div class="line">dispatch_apply(<span class="number">100</span>, globalQueue, ^(<span class="keyword">size_t</span> index) &#123;</div><div class="line">    <span class="comment">// 将要添加元素前一直等待信号量为1</span></div><div class="line">    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</div><div class="line">    </div><div class="line">    <span class="comment">// 放心地给数组添加元素</span></div><div class="line">    [<span class="built_in">array</span> addObject:[NSNumber numberWithInt:(<span class="keyword">int</span>)index]];</div><div class="line">    </div><div class="line">    <span class="comment">// 添加完成后释放信号量</span></div><div class="line">    dispatch_semaphore_signal(semaphore);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS开发/" rel="tag">#iOS开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/09/读《SQL必知必会》/" rel="next" title="读《SQL必知必会》">
+                <i class="fa fa-chevron-left"></i> 读《SQL必知必会》
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://chenyaluncos-10005661.cos.myqcloud.com/touxiang.jpg"
+               alt="Ya" />
+          <p class="site-author-name" itemprop="name">Ya</p>
+          <p class="site-description motion-element" itemprop="description">Being a Full Stack Developer</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">随笔</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/icqk" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ChenYalun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/7026915/allen" target="_blank" title="SOF">
+                  
+                    <i class="fa fa-fw fa-stack-overflow"></i>
+                  
+                  SOF
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#读感"><span class="nav-number">1.</span> <span class="nav-text">读感</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-为什么苹果主要采用散列表管理引用计数"><span class="nav-number">2.1.</span> <span class="nav-text">一.为什么苹果主要采用散列表管理引用计数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-如何提高Objective-C方法的速度"><span class="nav-number">2.2.</span> <span class="nav-text">二.如何提高Objective-C方法的速度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-非显式使用-autoreleasing的场景有哪些"><span class="nav-number">2.3.</span> <span class="nav-text">三.非显式使用__autoreleasing的场景有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-内存泄漏的场景有哪些"><span class="nav-number">2.4.</span> <span class="nav-text">四.内存泄漏的场景有哪些</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Core-Fundation的类型转换"><span class="nav-number">2.4.0.1.</span> <span class="nav-text">1. Core Fundation的类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用calloc函数创建动态数组"><span class="nav-number">2.4.0.2.</span> <span class="nav-text">2. 使用calloc函数创建动态数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-MRC下的匿名对象"><span class="nav-number">2.4.0.3.</span> <span class="nav-text">3. MRC下的匿名对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-block的循环引用"><span class="nav-number">2.4.0.4.</span> <span class="nav-text">4. block的循环引用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-weak如何实现"><span class="nav-number">2.5.</span> <span class="nav-text">五.__weak如何实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-Core-Fundation-与-Foundation如何转换"><span class="nav-number">2.6.</span> <span class="nav-text">六.Core Fundation 与 Foundation如何转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-简单介绍block"><span class="nav-number">2.7.</span> <span class="nav-text">七.简单介绍block</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#block的三种类型"><span class="nav-number">2.7.1.</span> <span class="nav-text">block的三种类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#block复制到堆上的情况"><span class="nav-number">2.7.2.</span> <span class="nav-text">block复制到堆上的情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#block捕获变量"><span class="nav-number">2.7.3.</span> <span class="nav-text">block捕获变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#block的循环引用"><span class="nav-number">2.7.4.</span> <span class="nav-text">block的循环引用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八-简要介绍GCD常用API"><span class="nav-number">2.8.</span> <span class="nav-text">八.简要介绍GCD常用API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-dispatch-async与dispatch-sync"><span class="nav-number">2.8.1.</span> <span class="nav-text">1.dispatch_async与dispatch_sync</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-dispatch-queue-t"><span class="nav-number">2.8.2.</span> <span class="nav-text">2.dispatch_queue_t</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-dispatch-resume-dispatch-suspend"><span class="nav-number">2.8.3.</span> <span class="nav-text">3.dispatch_resume/dispatch_suspend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-dispatch-apply"><span class="nav-number">2.8.4.</span> <span class="nav-text">4.dispatch_apply</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-dispatch-group"><span class="nav-number">2.8.5.</span> <span class="nav-text">5.dispatch_group</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-dispatch-barrier"><span class="nav-number">2.8.6.</span> <span class="nav-text">6.dispatch_barrier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-dispatch-once"><span class="nav-number">2.8.7.</span> <span class="nav-text">7.dispatch_once</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-dispatch-after"><span class="nav-number">2.8.8.</span> <span class="nav-text">8.dispatch_after</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-dispatch-semaphore"><span class="nav-number">2.8.9.</span> <span class="nav-text">7.dispatch_semaphore</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ya</span>
+</div>
+
+<div class="powered-by">
+  May Be Better
+</div>
+
+<div class="theme-info">
+  心有猛虎，细嗅蔷薇。 
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
