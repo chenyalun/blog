@@ -34,28 +34,16 @@
 <link rel="canonical" href="http://blog.chenyalun.com/2018/07/10/读「YYModel」/"/>
 
 
-<meta name="description" content="关于Runtime的简单总结。 
-
-核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。
-代码中省略OBJC2_UNAVAILABLE,也即不可直接访问结构体中的成员.
-一、RuntimeClassClass的定义struct objc_class &amp;#123;    Class isa  OBJC_ISA_AVAILABILITY;#if !__OB">
+<meta name="description" content="关于Runtime的简单总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读「YYModel」">
 <meta property="og:url" content="http://blog.chenyalun.com/2018/07/10/读「YYModel」/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="关于Runtime的简单总结。 
-
-核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。
-代码中省略OBJC2_UNAVAILABLE,也即不可直接访问结构体中的成员.
-一、RuntimeClassClass的定义struct objc_class &amp;#123;    Class isa  OBJC_ISA_AVAILABILITY;#if !__OB">
-<meta property="og:updated_time" content="2018-07-10T09:49:16.103Z">
+<meta property="og:description" content="关于Runtime的简单总结。">
+<meta property="og:updated_time" content="2018-07-10T09:52:42.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读「YYModel」">
-<meta name="twitter:description" content="关于Runtime的简单总结。 
-
-核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。
-代码中省略OBJC2_UNAVAILABLE,也即不可直接访问结构体中的成员.
-一、RuntimeClassClass的定义struct objc_class &amp;#123;    Class isa  OBJC_ISA_AVAILABILITY;#if !__OB">
+<meta name="twitter:description" content="关于Runtime的简单总结。">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -206,8 +194,7 @@
 
     <div class="post-content">
       
-        <p align="center"> 关于Runtime的简单总结。 </p>
-
+        <p></p><p align="center"> 关于Runtime的简单总结。 </p><br><a id="more"></a><p></p>
 <p>核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。</p>
 <p>代码中省略<code>OBJC2_UNAVAILABLE</code>,也即不可直接访问结构体中的成员.</p>
 <h2 id="一、Runtime"><a href="#一、Runtime" class="headerlink" title="一、Runtime"></a>一、Runtime</h2><h3 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><div class="line">Class的定义</div><div class="line"><span class="keyword">struct</span> objc_class &#123;</div><div class="line">    Class isa  OBJC_ISA_AVAILABILITY;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">if</span> !__OBJC2__</span></div><div class="line">    <span class="comment">// 父类</span></div><div class="line">    Class super_class;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">long</span> version;</div><div class="line">    <span class="keyword">long</span> info;</div><div class="line">    <span class="keyword">long</span> instance_size;</div><div class="line">    <span class="keyword">struct</span> objc_ivar_list *ivars;</div><div class="line">    <span class="keyword">struct</span> objc_method_list **methodLists;</div><div class="line">    <span class="comment">// 方法缓存</span></div><div class="line">    <span class="keyword">struct</span> objc_cache *cache;</div><div class="line">    <span class="keyword">struct</span> objc_protocol_list *protocols;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> objc_cache &#123;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> mask <span class="comment">/* total = mask + 1 */</span>;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> occupied;</div><div class="line">    Method buckets[<span class="number">1</span>];</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"> YAPerson *person = [[YAPerson alloc] init];</div><div class="line">    Class cls = [person <span class="keyword">class</span>];</div><div class="line">    </div><div class="line">    <span class="comment">// 获取实例对象对应的Class</span></div><div class="line">    Class class1 = object_getClass(person);</div><div class="line">    </div><div class="line">    <span class="comment">// 获取指定名称的类对象</span></div><div class="line">    Class class3 = objc_getClass(<span class="string">"YAPerson"</span>);</div><div class="line">    Class class2 = objc_getRequiredClass(<span class="string">"YAPerson"</span>);</div><div class="line">    </div><div class="line">    <span class="comment">// 获取指定名称的元类对象</span></div><div class="line">    Class class4 = objc_getMetaClass(<span class="string">"YAPerson"</span>);</div><div class="line">    </div><div class="line">    <span class="comment">// 找到指定名称的类对象</span></div><div class="line">    Class class5 = objc_lookUpClass(<span class="string">"NSObject"</span>);</div><div class="line">    NSLog(@<span class="string">"%@%@%@%@%@"</span>,class1,class2,class3,class4,class5);</div><div class="line">    </div><div class="line">    <span class="comment">// 设置对象对应的Class,返回原先的class</span></div><div class="line">    Class oriClass = object_setClass(person, [NSObject <span class="keyword">class</span>]);</div><div class="line"></div><div class="line">    <span class="comment">// 是否是类对象或元类对象</span></div><div class="line">    BOOL isClass = object_isClass(person);</div><div class="line">    </div><div class="line">    <span class="comment">// 是否是元类对象</span></div><div class="line">    BOOL isMetaClass = class_isMetaClass(class4);</div><div class="line">    </div><div class="line">    <span class="comment">// 获取父类</span></div><div class="line">    Class superClass = class_getSuperclass(cls);</div><div class="line">    </div><div class="line">    <span class="comment">// 获取类的版本</span></div><div class="line">    <span class="keyword">int</span> version = class_getVersion(cls);</div><div class="line">    <span class="comment">// 设置类的版本</span></div><div class="line">    class_setVersion(cls, <span class="number">88</span>);</div><div class="line"></div><div class="line">    <span class="comment">// 获取实例大小</span></div><div class="line">    <span class="keyword">typedef</span> <span class="number">__</span>SIZE_TYPE__ <span class="keyword">size_t</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">size_t</span> size = class_getInstanceSize(cls);</div><div class="line">    </div><div class="line"><span class="comment">//    int objc_getClassList(Class *buffer, int bufferCount)</span></div><div class="line"><span class="comment">//    </span></div><div class="line"><span class="comment">//    Class *objc_copyClassList(unsigned int *outCount)</span></div><div class="line"><span class="comment">//    </span></div><div class="line">    <span class="comment">// 获取类的名称</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name = class_getName(cls);</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="comment">// 动态创建类</span></div><div class="line">    <span class="comment">//Class objc_allocateClassPair(Class superclass, const char *name, size_t extraBytes)</span></div><div class="line">    <span class="comment">//void objc_registerClassPair(Class cls)</span></div><div class="line">    </div><div class="line">    <span class="comment">// 动态废弃类</span></div><div class="line">    <span class="comment">//Class objc_duplicateClass(Class original, const char *name, size_t extraBytes)</span></div><div class="line">    <span class="comment">//void objc_disposeClassPair(Class cls)</span></div><div class="line">    </div><div class="line"></div><div class="line">    <span class="comment">//id o = objc_storeWeak(&amp;weakObject, weakObject);</span></div><div class="line">    <span class="comment">//id result = objc_loadWeak(&amp;weakObject);</span></div></pre></td></tr></table></figure>
