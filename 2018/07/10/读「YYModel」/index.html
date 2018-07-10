@@ -12,10 +12,12 @@
 
 
 
-  <meta name="description" content="Being a Full Stack Developer"/>
+  <meta name="description" content="读「YYModel」"/>
 
 
 
+
+  <meta name="keywords" content="iOS开发," />
 
 
 
@@ -29,18 +31,31 @@
 
 
 
-<link rel="canonical" href="http://blog.chenyalun.com/"/>
+<link rel="canonical" href="http://blog.chenyalun.com/2018/07/10/读「YYModel」/"/>
 
 
-<meta name="description" content="Being a Full Stack Developer">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ya">
-<meta property="og:url" content="http://blog.chenyalun.com/index.html">
+<meta name="description" content="关于Runtime的简单总结。 
+
+核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。
+代码中省略OBJC2_UNAVAILABLE,也即不可直接访问结构体中的成员.
+一、RuntimeClassClass的定义struct objc_class &amp;#123;    Class isa  OBJC_ISA_AVAILABILITY;#if !__OB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读「YYModel」">
+<meta property="og:url" content="http://blog.chenyalun.com/2018/07/10/读「YYModel」/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="Being a Full Stack Developer">
+<meta property="og:description" content="关于Runtime的简单总结。 
+
+核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。
+代码中省略OBJC2_UNAVAILABLE,也即不可直接访问结构体中的成员.
+一、RuntimeClassClass的定义struct objc_class &amp;#123;    Class isa  OBJC_ISA_AVAILABILITY;#if !__OB">
+<meta property="og:updated_time" content="2018-07-10T09:49:16.103Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ya">
-<meta name="twitter:description" content="Being a Full Stack Developer">
+<meta name="twitter:title" content="读「YYModel」">
+<meta name="twitter:description" content="关于Runtime的简单总结。 
+
+核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。
+代码中省略OBJC2_UNAVAILABLE,也即不可直接访问结构体中的成员.
+一、RuntimeClassClass的定义struct objc_class &amp;#123;    Class isa  OBJC_ISA_AVAILABILITY;#if !__OB">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -69,7 +84,7 @@
 
 
 
-    <title> Ya </title>
+    <title> 读「YYModel」 · Ya </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -163,14 +178,12 @@
         <div class="content-wrapper">
           <div id="content" class="content">
             
-  <section id="posts" class="posts">
-    
-      
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2018/07/10/读「YYModel」/">读「YYModel」</a>
+          读「YYModel」
         
       </h1>
 
@@ -183,14 +196,17 @@
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Runtime"><span class="toc-text">一、Runtime</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block"><span class="toc-text">Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEL"><span class="toc-text">SEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ivar"><span class="toc-text">Ivar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Property"><span class="toc-text">Property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Protocol"><span class="toc-text">Protocol</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、技能"><span class="toc-text">二、技能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#消息转发"><span class="toc-text">消息转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承"><span class="toc-text">多重继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关联引用"><span class="toc-text">关联引用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#给分类添加weak属性"><span class="toc-text">给分类添加weak属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法三"><span class="toc-text">方法三</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、要点"><span class="toc-text">三、要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#free"><span class="toc-text">free()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NONNULL"><span class="toc-text">NONNULL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#covariant"><span class="toc-text">__covariant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联"><span class="toc-text">内联</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
 
     <div class="post-content">
       
-        
-        
-
-        
-          <p align="center"> 关于Runtime的简单总结。 </p>
+        <p align="center"> 关于Runtime的简单总结。 </p>
 
 <p>核心是运用runtime获取类结构体中Ivars，进行KVC操作，然后根据不同情况进行分别处理。</p>
 <p>代码中省略<code>OBJC2_UNAVAILABLE</code>,也即不可直接访问结构体中的成员.</p>
@@ -295,201 +311,55 @@
 <p>参考并感谢<br><a href="http://www.cnblogs.com/ludashi/p/6294112.html" target="_blank" rel="external">青玉伏案</a><br><a href="http://southpeak.github.io/2014/11/06/objective-c-runtime-4/" target="_blank" rel="external">南峰子</a></p>
 </blockquote>
 
-        
       
     </div>
 
     
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/04/21/查找算法总结/">查找算法总结</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年4月21日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
       
-        
-        
-          
-        
 
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
         
-          <p align = "center"> 关于查找算法。 </p>
-          <div class="read-more">
-            <a href="/2017/04/21/查找算法总结/" class="read-more-link">...阅读全文</a>
+          <div class="post-tags">
+            
+              <a href="/tags/iOS开发/">iOS开发</a>
+            
           </div>
         
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
         
-          <a class="post-link" href="/2017/04/13/读《Objective-C高级编程》/">读《Objective-C高级编程》</a>
         
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年4月13日
-        </span>
-      </div>
-    </header>
-
+  <nav class="post-nav">
     
     
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p align = "center"> 关于ARC/Block/GCD。 </p>
-          <div class="read-more">
-            <a href="/2017/04/13/读《Objective-C高级编程》/" class="read-more-link">...阅读全文</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/04/09/读《SQL必知必会》/">读《SQL必知必会》</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年4月9日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p align = "center"> 关于SQLite数据库。 </p>
-          <div class="read-more">
-            <a href="/2017/04/09/读《SQL必知必会》/" class="read-more-link">...阅读全文</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/04/05/读《Effective Objective-C 2.0》/">读《Effective Objective-C 2.0》</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017年4月5日
-        </span>
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-          
-        
-
-        
-          <p align = "center"> 许多小技巧。 </p>
-          <div class="read-more">
-            <a href="/2017/04/05/读《Effective Objective-C 2.0》/" class="read-more-link">...阅读全文</a>
-          </div>
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    
-    
-      <a class="next" href="/page/2/">
-        <span class="next-text">下一页</span>
+      <a class="next" href="/2017/04/21/查找算法总结/">
+        <span class="next-text nav-default">查找算法总结</span>
+        <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
+
 
           </div>
           
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
 
         </div>  
       </main>
@@ -567,6 +437,22 @@
     </div>
 
     
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "f132359147224247aa1c3ad32d20490b",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
 
 
     
