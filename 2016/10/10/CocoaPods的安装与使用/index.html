@@ -35,11 +35,13 @@
 
 
 <meta name="description" content="CocoaPods是非常好用的第三方库管理工具。">
+<meta name="keywords" content="ios开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocoaPods的安装与使用">
 <meta property="og:url" content="http://blog.chenyalun.com/2016/10/10/CocoaPods的安装与使用/index.html">
 <meta property="og:site_name" content="Ya">
 <meta property="og:description" content="CocoaPods是非常好用的第三方库管理工具。">
+<meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2017-05-01T23:46:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods的安装与使用">
@@ -294,7 +296,7 @@ pod &apos;SVProgressHUD&apos;
 </code></pre><h2 id="Start"><a href="#Start" class="headerlink" title="Start!"></a>Start!</h2><p>以后打开项目点击xcworksapce后缀的文件，不要点击原来的项目文件。<br>导入头文件应该使用:</p>
 <pre><code>#import &lt;&lt;#header#&gt;&gt;
 </code></pre><h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>platform :ios, ‘9.0’ 用来设置所有第三方库所支持的iOS最低版本<br>pod ‘SDWebImage’,’~&gt;2.6’ 设置框架的名称和版本号</p>
-<p>版本号的规则：<br>‘&gt;1.0’    可以安装任何高于1.0的版本<br>‘&gt;=1.0’   可以安装任何高于或等于1.0的版本<br>‘<1.0' 任何低于1.0的版本="" '<="1.0'" 任何低于或等于1.0的版本="" '~="">0.1’   任何高于或等于0.1的版本，但是不包含高于1.0的版本<br>‘~&gt;0’     任何版本，相当于不指定版本，默认采用最新版本号</1.0'></p>
+<p>版本号的规则：<br>‘&gt;1.0’    可以安装任何高于1.0的版本<br>‘&gt;=1.0’   可以安装任何高于或等于1.0的版本<br>‘&lt;1.0’    任何低于1.0的版本<br>‘&lt;=1.0’   任何低于或等于1.0的版本<br>‘~&gt;0.1’   任何高于或等于0.1的版本，但是不包含高于1.0的版本<br>‘~&gt;0’     任何版本，相当于不指定版本，默认采用最新版本号</p>
 <h1 id="pod-install过程"><a href="#pod-install过程" class="headerlink" title="pod install过程"></a>pod install过程</h1><ol>
 <li>分析依赖:该步骤会分析Podfile,查看不同类库之间的依赖情况。如果有多个类库依赖于同一个类库，但是依赖于不同的版本，那么CocoaPods会自动设置一个兼容的版本。</li>
 <li><p>下载依赖:根据分析依赖的结果，下载指定版本的类库到本地项目中。</p>
@@ -310,7 +312,7 @@ killall Finder
 <pre><code>defaults write com.apple.finder AppleShowAllFiles -boolean false ; 
 killall Finder
 </code></pre><blockquote>
-<p>参考并致谢:<br><a href="http://blog.csdn.net/lissdy/article/details/9191351" target="_blank" rel="external">http://blog.csdn.net/lissdy/article/details/9191351</a><br><a href="http://www.cnblogs.com/yan520/p/5583362.html" target="_blank" rel="external">http://www.cnblogs.com/yan520/p/5583362.html</a><br><a href="http://www.jianshu.com/p/32d9cfb91471" target="_blank" rel="external">http://www.jianshu.com/p/32d9cfb91471</a></p>
+<p>参考并致谢:<br><a href="http://blog.csdn.net/lissdy/article/details/9191351" target="_blank" rel="noopener">http://blog.csdn.net/lissdy/article/details/9191351</a><br><a href="http://www.cnblogs.com/yan520/p/5583362.html" target="_blank" rel="noopener">http://www.cnblogs.com/yan520/p/5583362.html</a><br><a href="http://www.jianshu.com/p/32d9cfb91471" target="_blank" rel="noopener">http://www.jianshu.com/p/32d9cfb91471</a></p>
 </blockquote>
 
       
@@ -429,7 +431,7 @@ killall Finder
      
       2014 - 
     
-    2018
+    2019
 
     <span class="heart">
       <i class="iconfont icon-heart"></i>

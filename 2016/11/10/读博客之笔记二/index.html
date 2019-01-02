@@ -35,11 +35,13 @@
 
 
 <meta name="description" content="许多鞭辟入里的文章。">
+<meta name="keywords" content="iOS开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读博客之笔记二">
 <meta property="og:url" content="http://blog.chenyalun.com/2016/11/10/读博客之笔记二/index.html">
 <meta property="og:site_name" content="Ya">
 <meta property="og:description" content="许多鞭辟入里的文章。">
+<meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2017-04-04T09:20:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读博客之笔记二">
@@ -208,7 +210,7 @@ struct objc_super {
 };
 </code></pre><p> 而当使用<code>[super setName]</code> 调用时，会使用 <code>objc_msgSendSuper</code> 函数，结构体包含了两个成员，一个是 receiver，这个类似objc_msgSend 的第一个参数 receiver，第二个成员是记录所谓的“父类”。从 objc_super 结构体指向的 superClass 的方法列表开始找 setName 的 selector，找到后再以 <code>objc_super-&gt;receiver</code> 去调用这个 selector。</p>
 <h4 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h4><p>NSNotification使用的是同步操作，如果想让NSNotification的post处和observer处异步执行，可以通过NSNotificationQueue实现。对于同一个通知，如果注册了多个观察者，则这多个观察者的执行顺序和他们的注册顺序是保持一致的。observer的回调方法执行线程和post的线程保持一致，如果想让post的线程和转发的线程不同，可以通过NSNotification重定向技术实现。addObserver和removeObserver必须成对出现，或者说添加了Observer必须适时移除Observer。因为通知中心并不retain Observer，若不移除，会极易给释放的对象发送消息。</p>
-<h4 id="屏幕"><a href="#屏幕" class="headerlink" title="屏幕"></a>屏幕</h4><p>普屏中1点 = 1像素，Retina屏：1点 = 2像素。人手指的最小点击范围是44pixels，所以在iPhone的很多细节上都是44 pixels。使用图片资源时，方法：<code>[UIImage imageNamed:@&quot;adflower.png&quot;]]</code>，在实际运行时，如果发现当前的设备是Retina屏，会自动寻找图片”adflower@2x.png”。 <code>[UIScreen mainScreen].applicationFrame</code>获取app尺寸(去掉状态栏)，<code>[ UIScreen mainScreen].bounds</code>获取屏幕尺寸，<code>[[UIApplicationsharedApplication] statusBarFrame]</code>状态栏尺寸。</p>
+<h4 id="屏幕"><a href="#屏幕" class="headerlink" title="屏幕"></a>屏幕</h4><p>普屏中1点 = 1像素，Retina屏：1点 = 2像素。人手指的最小点击范围是44pixels，所以在iPhone的很多细节上都是44 pixels。使用图片资源时，方法：<code>[UIImage imageNamed:@&quot;adflower.png&quot;]]</code>，在实际运行时，如果发现当前的设备是Retina屏，会自动寻找图片”<a href="mailto:adflower@2x.png" target="_blank" rel="noopener">adflower@2x.png</a>“。 <code>[UIScreen mainScreen].applicationFrame</code>获取app尺寸(去掉状态栏)，<code>[ UIScreen mainScreen].bounds</code>获取屏幕尺寸，<code>[[UIApplicationsharedApplication] statusBarFrame]</code>状态栏尺寸。</p>
 <h4 id="程序启动"><a href="#程序启动" class="headerlink" title="程序启动"></a>程序启动</h4><p>在程序启动的时候任何类定义都对应于一块内存。在编译的时候，编译器会给每一个类生成一个且只生成一个”描述其定义的对象”,也就是类对象(class object),它是一个单例(singleton),这个类对象(class object)就是运行时库用来创建实例对象(instance object)的依据。任何直接或间接继承了NSObject的类，它的实例对象(instance objec)中都有一个isa指针，指向它的类对象(class object)。这个类对象(class object)中存储了关于这个  <strong>实例对象(instace object)</strong>  所属的类的定义的一切：包括变量，方法，遵守的协议等等。 类对象并不是类的实例本身。它没有自己的实例变量，也不能执行类的实例的方法。类对象是一个功能完整的对象，也能被动态识别（dynamically typed），接收消息，从其他类继承方法。特殊之处在于它们是由编译器创建的，缺少它们自己的数据结构(实例变量），只是在运行时产生实例的代理。类对象是元类对象的一个实例，元类是根元类(root class’s metaclass)的实例,而根元类是其自身的实例，即根元类的isa指针指向自身。</p>
 <p>一个消息发送给任何一个对象， 方法的检查 从对象的 isa 指针开始，然后是父类。实例方法在类中定义， 类方法 在元类和根类中定义。（根类的元类就是根类自己）。类对象(class object)中包含了类的实例变量、实例方法的定义，而元类对象(metaclass object)中包括了类的类方法的定义。类对象存的是关于实例对象的信息(变量，实例方法等)，而元类对象(metaclass object)中存储的是关于类的信息(类的版本，名字，类方法等)。</p>
 <p>①object_getClass跟随实例的isa指针，返回此实例所属的类，对于实例对象(instance)返回的是类(class),对于类(class)则返回的是元类(metaclass),<br>②<code>- class</code>方法对于实例对象(instance)会返回类(class),但对于类(class)则不会返回元类(metaclass),而只会返回类本身。<br>③class_isMetaClass可判断某类是否为元类.<br>④使用objc_allocateClassPair可在运行时创建新的类与元类对，使用class_addMethod和class_addIvar可向类中增加方法和实例变量，最后使用objc_registerClassPair注册后，就可以使用此类了。</p>
@@ -382,7 +384,7 @@ NSArray *arr = [NSArray arrayWithObjects:@&quot;wang&quot;,@&quot;zz&quot;,nil,@
 // 存储空的占位对象
 NSArray *arr = [NSArray arrayWithObjects:@&quot;wang&quot;,@&quot;zz&quot;,[NSNull null],@&quot;foogry&quot;];
 </code></pre><blockquote>
-<p>向作者致谢!<br>王中周的个人博客:<a href="http://blog.csdn.net/wzzvictory" target="_blank" rel="external">http://blog.csdn.net/wzzvictory</a></p>
+<p>向作者致谢!<br>王中周的个人博客:<a href="http://blog.csdn.net/wzzvictory" target="_blank" rel="noopener">http://blog.csdn.net/wzzvictory</a></p>
 </blockquote>
 
       
@@ -501,7 +503,7 @@ NSArray *arr = [NSArray arrayWithObjects:@&quot;wang&quot;,@&quot;zz&quot;,[NSNu
      
       2014 - 
     
-    2018
+    2019
 
     <span class="heart">
       <i class="iconfont icon-heart"></i>

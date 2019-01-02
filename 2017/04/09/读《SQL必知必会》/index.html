@@ -35,11 +35,13 @@
 
 
 <meta name="description" content="关于SQLite数据库。">
+<meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读《SQL必知必会》">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/04/09/读《SQL必知必会》/index.html">
 <meta property="og:site_name" content="Ya">
 <meta property="og:description" content="关于SQLite数据库。">
+<meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2017-04-09T09:28:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《SQL必知必会》">
@@ -229,18 +231,18 @@ INTEGER: 以Unix时间形式保存数据值，
 </code></pre></li>
 <li><p>DEFAULT:默认值，数据未指定的默认值，如默认时间:<code>date(&#39;now&#39;)</code>。</p>
 <pre><code>SALARY REAL DEFAULT 5000.0
-</code></pre> <figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="comment">-- 删除默认约束</span></div><div class="line"><span class="comment">-- 在SQLite中不可用</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> SALARY <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span></div></pre></td></tr></table></figure>
+</code></pre> <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 删除默认约束</span></span><br><span class="line"><span class="comment">-- 在SQLite中不可用</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> SALARY <span class="keyword">DROP</span> <span class="keyword">DEFAULT</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>UNIQUE:唯一,列中所有数据各不相同。</p>
 <pre><code>AGE INTEGER UNIQUE
 </code></pre></li>
 <li><p>主键:唯一标识数据表中的记录，不为空。</p>
 <pre><code>PRIMARY KEY(ID,name)
-</code></pre> <figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="comment">-- 增加主键(前提列已经声明为非空)</span></div><div class="line"><span class="comment">-- 在SQLite中不可用</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t <span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span>(<span class="keyword">ID</span>)</div><div class="line"></div><div class="line"><span class="comment">-- 删除主键</span></div><div class="line"><span class="comment">-- 在SQLite中不可用</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t <span class="keyword">DROP</span> PRIMARY <span class="keyword">KEY</span></div></pre></td></tr></table></figure>
+</code></pre> <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 增加主键(前提列已经声明为非空)</span></span><br><span class="line"><span class="comment">-- 在SQLite中不可用</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t <span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span>(<span class="keyword">ID</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除主键</span></span><br><span class="line"><span class="comment">-- 在SQLite中不可用</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t <span class="keyword">DROP</span> PRIMARY <span class="keyword">KEY</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>外键:唯一标识其他表中的一条记录。</p>
 <pre><code>FOREIGN KEY(name) REFERENCES q(name)
-</code></pre> <figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"><span class="comment">-- 增加外键</span></div><div class="line"><span class="comment">-- 在SQLite中不可用</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t</div><div class="line"><span class="keyword">ADD</span> FOREIGN <span class="keyword">KEY</span> (C_ID) <span class="keyword">REFERENCES</span> <span class="keyword">USER</span> (<span class="keyword">ID</span>)</div><div class="line"><span class="comment">-- 删除外键</span></div><div class="line"><span class="comment">-- 在SQLite中不可用</span></div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t <span class="keyword">DROP</span> FOREIGN <span class="keyword">KEY</span></div></pre></td></tr></table></figure>
+</code></pre> <figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 增加外键</span></span><br><span class="line"><span class="comment">-- 在SQLite中不可用</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t</span><br><span class="line"><span class="keyword">ADD</span> FOREIGN <span class="keyword">KEY</span> (C_ID) <span class="keyword">REFERENCES</span> <span class="keyword">USER</span> (<span class="keyword">ID</span>)</span><br><span class="line"><span class="comment">-- 删除外键</span></span><br><span class="line"><span class="comment">-- 在SQLite中不可用</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t <span class="keyword">DROP</span> FOREIGN <span class="keyword">KEY</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>CHECK:保证列中所有值满足某一条件。</p>
 <pre><code>AGE INT NOT NULL CHECK(AGE&lt;=18)
@@ -257,13 +259,14 @@ ADD CONSTRAINT checkConstraint CHECK(AGE&gt;=18)
 -- 在SQLite中不可用
 ALTER TABLE t
 DROP CONSTRAINT checkConstraint
+
 </code></pre></li>
 </ol>
 <h2 id="7-范式"><a href="#7-范式" class="headerlink" title="7.范式"></a>7.范式</h2><p>第一范式（1NF）：强调的是列的原子性，即列不能够再分成其他几列,如”地址”可以细分为:”省,市”。</p>
 <p>第二范式（2NF）：首先是 1NF，其次一是表必须有一个主键；二是没有包含在主键中的列必须完全依赖于主键，而不能只依赖于主键的一部分。</p>
 <p>第三范式（3NF）：首先是 2NF，其次非主键列必须直接依赖于主键，不能存在传递依赖。即不能存在：非主键列 A 依赖于非主键列 B，非主键列 B 依赖于主键的情况。</p>
 <h2 id="8-函数"><a href="#8-函数" class="headerlink" title="8.函数"></a>8.函数</h2><blockquote>
-<p>传送门：<br><a href="http://www.cnblogs.com/stephen-liu74/archive/2012/02/15/2322027.html" target="_blank" rel="external">http://www.cnblogs.com/stephen-liu74/archive/2012/02/15/2322027.html</a></p>
+<p>传送门：<br><a href="http://www.cnblogs.com/stephen-liu74/archive/2012/02/15/2322027.html" target="_blank" rel="noopener">http://www.cnblogs.com/stephen-liu74/archive/2012/02/15/2322027.html</a></p>
 </blockquote>
 <h3 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理:"></a>字符串处理:</h3><p>UPPER() 大写转换<br>LENGTH() 字符串长度<br>LOWER() 小写转换<br>LTRIM() 去掉字符串左边的空格<br>RTRIM() 去掉字符串右边的空格</p>
 <h3 id="日期时间处理"><a href="#日期时间处理" class="headerlink" title="日期时间处理"></a>日期时间处理</h3><p>date(‘now’) 返回当前日期。</p>
@@ -581,7 +584,7 @@ SELECT name, age FROM t;
 </code></pre><p>删除视图</p>
 <pre><code>DROP VIEW view_b;
 </code></pre><blockquote>
-<p>参考感谢：<br><a href="http://zhiwei.li/text/2010/08/23/sqlite%E5%A4%96%E9%94%AE/" target="_blank" rel="external">http://zhiwei.li/text/2010/08/23/sqlite%E5%A4%96%E9%94%AE/</a><br><a href="http://www.cnblogs.com/stephen-liu74/archive/2012/02/22/2325258.html" target="_blank" rel="external">http://www.cnblogs.com/stephen-liu74/archive/2012/02/22/2325258.html</a><br><a href="http://www.runoob.com/sqlite/sqlite-syntax.html" target="_blank" rel="external">http://www.runoob.com/sqlite/sqlite-syntax.html</a></p>
+<p>参考感谢：<br><a href="http://zhiwei.li/text/2010/08/23/sqlite%E5%A4%96%E9%94%AE/" target="_blank" rel="noopener">http://zhiwei.li/text/2010/08/23/sqlite%E5%A4%96%E9%94%AE/</a><br><a href="http://www.cnblogs.com/stephen-liu74/archive/2012/02/22/2325258.html" target="_blank" rel="noopener">http://www.cnblogs.com/stephen-liu74/archive/2012/02/22/2325258.html</a><br><a href="http://www.runoob.com/sqlite/sqlite-syntax.html" target="_blank" rel="noopener">http://www.runoob.com/sqlite/sqlite-syntax.html</a></p>
 </blockquote>
 
       
@@ -700,7 +703,7 @@ SELECT name, age FROM t;
      
       2014 - 
     
-    2018
+    2019
 
     <span class="heart">
       <i class="iconfont icon-heart"></i>

@@ -35,11 +35,13 @@
 
 
 <meta name="description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月。">
+<meta name="keywords" content="C语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言交换两个数值的八种方法">
 <meta property="og:url" content="http://blog.chenyalun.com/2016/10/23/C语言交换两个数值的八种方法/index.html">
 <meta property="og:site_name" content="Ya">
 <meta property="og:description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月。">
+<meta property="og:locale" content="zh-cn">
 <meta property="og:updated_time" content="2017-03-15T09:14:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言交换两个数值的八种方法">
@@ -198,7 +200,7 @@
 <blockquote>
 <p>编译器:XCode8.0</p>
 </blockquote>
-<h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><figure class="highlight excel"><table><tr><td class="code"><pre><div class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, const <span class="built_in">char</span> * argv[]) &#123;</div><div class="line">   <span class="built_in">int</span> m = <span class="number">5</span>, <span class="built_in">n</span> = <span class="number">3</span>;</div><div class="line">   m = m ^ <span class="built_in">n</span>;</div><div class="line">   <span class="built_in">n</span> = m ^ <span class="built_in">n</span>;</div><div class="line">   m = m ^ <span class="built_in">n</span>;</div><div class="line">   </div><div class="line">   printf(<span class="string">"m:%d---n:%d"</span>,m,<span class="built_in">n</span>);</div><div class="line">   return <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, const <span class="built_in">char</span> * argv[]) &#123;</span><br><span class="line">   <span class="built_in">int</span> m = <span class="number">5</span>, <span class="built_in">n</span> = <span class="number">3</span>;</span><br><span class="line">   m = m ^ <span class="built_in">n</span>;</span><br><span class="line">   <span class="built_in">n</span> = m ^ <span class="built_in">n</span>;</span><br><span class="line">   m = m ^ <span class="built_in">n</span>;</span><br><span class="line">   </span><br><span class="line">   printf(<span class="string">"m:%d---n:%d"</span>,m,<span class="built_in">n</span>);</span><br><span class="line">   return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>异或一般是针对二进制数.</p>
 <ol>
 <li>两数异或,相同则得0,不同则得1</li>
@@ -281,7 +283,7 @@ int main(int argc, const char * argv[]) {
 <pre><code>printf(&quot;%lu&quot;,sizeof(int));
 int a = 2147483648;
 </code></pre><blockquote>
-<p>参考并致谢:<br><a href="http://blog.csdn.net/ljx_5489464/article/details/50042571" target="_blank" rel="external">http://blog.csdn.net/ljx_5489464/article/details/50042571</a><br><a href="http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/" target="_blank" rel="external">http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/</a><br><a href="http://www.itdadao.com/articles/c15a428576p0.html" target="_blank" rel="external">http://www.itdadao.com/articles/c15a428576p0.html</a><br><a href="http://www.cnblogs.com/kubixuesheng/p/4104800.html" target="_blank" rel="external">http://www.cnblogs.com/kubixuesheng/p/4104800.html</a><br><a href="https://www.byvoid.com/blog/c-int64" target="_blank" rel="external">https://www.byvoid.com/blog/c-int64</a></p>
+<p>参考并致谢:<br><a href="http://blog.csdn.net/ljx_5489464/article/details/50042571" target="_blank" rel="noopener">http://blog.csdn.net/ljx_5489464/article/details/50042571</a><br><a href="http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/" target="_blank" rel="noopener">http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/</a><br><a href="http://www.itdadao.com/articles/c15a428576p0.html" target="_blank" rel="noopener">http://www.itdadao.com/articles/c15a428576p0.html</a><br><a href="http://www.cnblogs.com/kubixuesheng/p/4104800.html" target="_blank" rel="noopener">http://www.cnblogs.com/kubixuesheng/p/4104800.html</a><br><a href="https://www.byvoid.com/blog/c-int64" target="_blank" rel="noopener">https://www.byvoid.com/blog/c-int64</a></p>
 </blockquote>
 
       
@@ -400,7 +402,7 @@ int a = 2147483648;
      
       2014 - 
     
-    2018
+    2019
 
     <span class="heart">
       <i class="iconfont icon-heart"></i>
