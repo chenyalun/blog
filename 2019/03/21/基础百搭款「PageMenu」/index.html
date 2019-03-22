@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="description" content="基础百搭款「PageMenu」"/>
+
+
+
+
+  <meta name="keywords" content="iOS开发," />
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ya">
+
+
+
+
+
+
+<link rel="canonical" href="http://blog.chenyalun.com/2019/03/21/基础百搭款「PageMenu」/"/>
+
+
+<meta name="description" content="一个使用Swift写的PageMenu。">
+<meta name="keywords" content="iOS开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础百搭款「PageMenu」">
+<meta property="og:url" content="http://blog.chenyalun.com/2019/03/21/基础百搭款「PageMenu」/index.html">
+<meta property="og:site_name" content="Ya">
+<meta property="og:description" content="一个使用Swift写的PageMenu。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://image.chenyalun.com/2019/03/22/weibo.gif">
+<meta property="og:image" content="https://image.chenyalun.com/2019/03/22/ithome.gif">
+<meta property="og:updated_time" content="2019-03-22T03:05:15.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础百搭款「PageMenu」">
+<meta name="twitter:description" content="一个使用Swift写的PageMenu。">
+<meta name="twitter:image" content="https://image.chenyalun.com/2019/03/22/weibo.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=" />
+
+
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: function search() { [native code] },
+    searchPath: "/search.xml",
+    fancybox: ,
+    toc: ,
+  }
+</script>
+
+
+
+
+  
+
+  <script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-82867422-1', 'auto');
+        ga('send', 'pageview');
+  </script>
+
+
+
+    <title> 基础百搭款「PageMenu」 · Ya </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Ya</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Ya</a>
+</div>
+
+<nav class="site-navbar">
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          基础百搭款「PageMenu」
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019年3月21日
+        </span>
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#思路"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MenuStyle"><span class="toc-text">MenuStyle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PageTitle"><span class="toc-text">PageTitle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PageContent"><span class="toc-text">PageContent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PageMenu"><span class="toc-text">PageMenu</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UIColor-RGB"><span class="toc-text">UIColor+RGB</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#效果"><span class="toc-text">效果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p></p><p align="center"> 一个使用Swift写的PageMenu。 </p><br><a id="more"></a><p></p>
+<p>一个使用Swift写的PageMenu。没有那么多接口，自己可以根据实际需要扩展。写这个的目的一是为了练手，毕竟工作中使用Swift极少，再一个，PageMenu使用场景挺多的，我遇到过好几次，这次做一个总结。</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>MenuStyle: 用于标题的样式配置<br>PageTitleView: 私有的单个标题控件<br>PageTitle: 标题区视图<br>PageContent: 内容区视图<br>PageMenu: 继承自UIViewController的视图控制器，用于连接PageTitle和PageContent<br>UIColor+RGB: 一些对UIColor的拓展，主要是支持RGB的方式设置颜色</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="MenuStyle"><a href="#MenuStyle" class="headerlink" title="MenuStyle"></a>MenuStyle</h2><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MenuStyle</span>: <span class="type">UIView &#123;</span></span></span><br><span class="line">    <span class="comment">// 标题之间的间距</span></span><br><span class="line">    <span class="keyword">var</span> margin: CGFloat = <span class="number">10</span></span><br><span class="line">    <span class="comment">// 默认颜色</span></span><br><span class="line">    <span class="keyword">var</span> defaultColor = UIColor(r: <span class="number">0</span>, g: <span class="number">0</span>, b: <span class="number">0</span>)</span><br><span class="line">    <span class="comment">// 默认字体</span></span><br><span class="line">    <span class="keyword">var</span> defaultFont = UIFont.systemFont(ofSize: <span class="number">17</span>)</span><br><span class="line">    <span class="comment">// 选中态颜色</span></span><br><span class="line">    <span class="keyword">var</span> selectedColor = UIColor(r: <span class="number">239</span>, g: <span class="number">154</span>, b: <span class="number">64</span>)</span><br><span class="line">    <span class="comment">// 选中态字体</span></span><br><span class="line">    <span class="keyword">var</span> selectedFont = UIFont.systemFont(ofSize: <span class="number">18</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 指示条高度, 为0表示隐藏</span></span><br><span class="line">    <span class="keyword">var</span> lineHeight: CGFloat = <span class="number">2</span></span><br><span class="line">    <span class="comment">// 指示条宽度, 为0表示自适应</span></span><br><span class="line">    <span class="keyword">var</span> lineWidth: CGFloat = <span class="number">0</span></span><br><span class="line">    <span class="comment">// 指示条颜色, 默认与selectedColor保持一致</span></span><br><span class="line">    <span class="keyword">var</span> lineColor: UIColor?</span><br><span class="line">    <span class="comment">// 是否开启指示条颜色渐变</span></span><br><span class="line">    <span class="keyword">var</span> lineColorGradual = <span class="literal">true</span></span><br><span class="line">    <span class="comment">// 指示条圆角</span></span><br><span class="line">    <span class="keyword">var</span> lineCornerRadius: CGFloat = <span class="number">2</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 标题区的frame</span></span><br><span class="line">    <span class="keyword">var</span> pageTitleFrame = CGRect(x: <span class="number">0</span>, y: <span class="number">20</span>, width: UIScreen.main.bounds.width, height: <span class="number">25</span>)</span><br><span class="line">    <span class="comment">// 标题区与内容区的间距</span></span><br><span class="line">    <span class="keyword">var</span> titleContentMargin: CGFloat = <span class="number">5</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="PageTitle"><a href="#PageTitle" class="headerlink" title="PageTitle"></a>PageTitle</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">PageTitleDelegate</span> : <span class="title">class</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">pageTitleDidSelected</span><span class="params">(pageTitle: PageTitle, pageTitleView: PageTitleView)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 标题视图组件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageTitleView</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 索引</span></span><br><span class="line">    <span class="keyword">var</span> index: <span class="type">Int</span> = <span class="number">0</span></span><br><span class="line">    <span class="comment">// 标题</span></span><br><span class="line">    <span class="keyword">var</span> title: <span class="type">String</span>?</span><br><span class="line">    <span class="comment">// 渐变颜色</span></span><br><span class="line">    <span class="keyword">var</span> color: <span class="type">UIColor</span>? &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            label.textColor = color</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 样式</span></span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> style: <span class="type">MenuStyle</span></span><br><span class="line">    <span class="comment">// 选中状态</span></span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> isSelected: <span class="type">Bool</span> = <span class="literal">false</span> &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123; reloadState() &#125;<span class="comment">// 刷新数据</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 自身宽度</span></span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> width: <span class="type">CGFloat</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> title?.size(withAttributes: [<span class="type">NSAttributedString</span>.<span class="type">Key</span>.font: font]).width ?? <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 字体大小</span></span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> font: <span class="type">UIFont</span> &#123; <span class="keyword">return</span> isSelected ? style.selectedFont : style.defaultFont &#125;</span><br><span class="line">    <span class="comment">// 字体颜色</span></span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> fontColor: <span class="type">UIColor</span> &#123; <span class="keyword">return</span> isSelected ? style.selectedColor : style.defaultColor &#125;</span><br><span class="line">    <span class="comment">// 点击回调</span></span><br><span class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> tapCallBack: ((<span class="number">_</span> view: <span class="type">PageTitleView</span>) -&gt; <span class="type">Void</span>)?</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">lazy</span> <span class="keyword">var</span> label: <span class="type">UILabel</span> = &#123;</span><br><span class="line">        <span class="keyword">let</span> label = <span class="type">UILabel</span>()</span><br><span class="line">        <span class="keyword">let</span> gesture = <span class="type">UITapGestureRecognizer</span>(target: <span class="keyword">self</span>, action: #selector(action(<span class="number">_</span>:)))</span><br><span class="line">        label.addGestureRecognizer(gesture)</span><br><span class="line">        label.isUserInteractionEnabled = <span class="literal">true</span></span><br><span class="line">        <span class="keyword">return</span> label</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">init</span>(title: <span class="type">String</span>?, isSelected: <span class="type">Bool</span>, style: <span class="type">MenuStyle</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.title = title</span><br><span class="line">        <span class="keyword">self</span>.isSelected = isSelected</span><br><span class="line">        <span class="keyword">self</span>.style = style</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(frame: <span class="type">CGRect</span>.zero)</span><br><span class="line">        reloadState()</span><br><span class="line">        <span class="keyword">self</span>.addSubview(label)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 动态链接</span></span><br><span class="line">    <span class="meta">@objc</span> <span class="keyword">fileprivate</span> <span class="function"><span class="keyword">func</span> <span class="title">action</span><span class="params">(<span class="number">_</span> tap: UITapGestureRecognizer)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> tapCallBack != <span class="literal">nil</span> &#123;</span><br><span class="line">            tapCallBack!(<span class="keyword">self</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 刷新数据</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">reloadState</span><span class="params">()</span></span> &#123;</span><br><span class="line">        label.text = title</span><br><span class="line">        label.textColor = fontColor</span><br><span class="line">        label.font = font</span><br><span class="line">        label.sizeToFit()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 标题视图</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageTitle</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 代理</span></span><br><span class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> delegate: <span class="type">PageTitleDelegate</span>?</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> titleList: [<span class="type">String</span>]</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">lazy</span> <span class="keyword">var</span> scrollView: <span class="type">UIScrollView</span> = &#123;</span><br><span class="line">        <span class="keyword">var</span> scrollView = <span class="type">UIScrollView</span>(frame: bounds)</span><br><span class="line">        scrollView.showsHorizontalScrollIndicator = <span class="literal">false</span></span><br><span class="line">        addSubview(scrollView)</span><br><span class="line">        <span class="keyword">return</span> scrollView</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="comment">// 指示器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">lazy</span> <span class="keyword">var</span> lineView: <span class="type">UIView</span> = &#123;</span><br><span class="line">        <span class="keyword">var</span> lineView = <span class="type">UIView</span>()</span><br><span class="line">        lineView.backgroundColor = menuStyle.lineColor ?? menuStyle.selectedColor</span><br><span class="line">        lineView.layer.cornerRadius = menuStyle.lineCornerRadius</span><br><span class="line">        lineView.layer.masksToBounds = <span class="literal">true</span></span><br><span class="line">        scrollView.addSubview(lineView)</span><br><span class="line">        <span class="keyword">return</span> lineView</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="comment">// 样式</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> menuStyle: <span class="type">MenuStyle</span></span><br><span class="line">    <span class="comment">// 当前选中标题</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> currentSelectedView: <span class="type">PageTitleView</span>?</span><br><span class="line">    <span class="comment">// 标题列表</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> titleViewList = [<span class="type">PageTitleView</span>]()</span><br><span class="line">    <span class="keyword">init</span>(frame: <span class="type">CGRect</span>, menuStyle: <span class="type">MenuStyle</span>, titleList: [<span class="type">String</span>]) &#123;</span><br><span class="line">        <span class="keyword">self</span>.menuStyle = menuStyle</span><br><span class="line">        <span class="keyword">self</span>.titleList = titleList</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(frame: frame)</span><br><span class="line">        setupSubViews()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">setupSubViews</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> totalWidth: <span class="type">CGFloat</span> = <span class="number">0</span></span><br><span class="line">        <span class="comment">// 设置子控件</span></span><br><span class="line">        <span class="keyword">for</span> (idx, title) <span class="keyword">in</span> titleList.enumerated() &#123;</span><br><span class="line">            <span class="keyword">let</span> view = <span class="type">PageTitleView</span>(title: title <span class="keyword">as</span> <span class="type">String</span>, isSelected: <span class="literal">false</span>, style: menuStyle)</span><br><span class="line">            view.index = idx</span><br><span class="line">            titleViewList.append(view)</span><br><span class="line">            <span class="keyword">let</span> x = <span class="type">CGFloat</span>(idx + <span class="number">1</span>) * menuStyle.margin + totalWidth</span><br><span class="line">            view.frame = <span class="type">CGRect</span>(x: x, y: <span class="number">0</span>, width: view.width, height: frame.height - menuStyle.lineHeight)</span><br><span class="line">            totalWidth += view.width</span><br><span class="line">            scrollView.addSubview(view)</span><br><span class="line">            view.tapCallBack = &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] view <span class="keyword">in</span></span><br><span class="line">                <span class="keyword">guard</span> <span class="keyword">let</span> <span class="keyword">self</span> = <span class="keyword">self</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">                <span class="keyword">self</span>.changeToSelectedIndex(idx: view.index)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        scrollView.contentSize = <span class="type">CGSize</span>(width: totalWidth + <span class="type">CGFloat</span>(titleList.<span class="built_in">count</span> + <span class="number">1</span>) * menuStyle.margin, height: <span class="number">0</span>)</span><br><span class="line">        <span class="comment">// 默认选中的索引 0</span></span><br><span class="line">        changeToSelectedIndex()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: 切换过程中需要调用的函数</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">PageTitle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">changeToSelectedIndex</span><span class="params">(idx: Int = <span class="number">0</span>, progress: CGFloat = <span class="number">1</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 索引值越界</span></span><br><span class="line">        <span class="keyword">if</span> idx &gt; titleViewList.<span class="built_in">count</span> - <span class="number">1</span> || idx &lt; <span class="number">0</span> || titleViewList.<span class="built_in">count</span> &lt;= <span class="number">0</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="keyword">var</span> fromView, toView: <span class="type">PageTitleView</span></span><br><span class="line">        <span class="keyword">if</span> currentSelectedView == <span class="literal">nil</span> &#123;</span><br><span class="line">            fromView = titleViewList.first!</span><br><span class="line">            toView = fromView</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fromView = currentSelectedView!</span><br><span class="line">            toView = titleViewList[idx]</span><br><span class="line">            <span class="comment">// 同一个标题</span></span><br><span class="line">            <span class="keyword">if</span> fromView == toView &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> menuStyle.lineHeight != <span class="number">0</span> &#123;</span><br><span class="line">            refreshBottomLineFrame(fromView.frame, toView.frame, progress)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> menuStyle.lineColorGradual &#123;</span><br><span class="line">            refreshTitleViewColor(fromView, toView, progress)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> progress == <span class="number">1</span> &#123;</span><br><span class="line">            refreshTitleViewState(fromView, toView)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置指示条frame</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">refreshBottomLineFrame</span><span class="params">(<span class="number">_</span> from: CGRect, <span class="number">_</span> to: CGRect, <span class="number">_</span> progress: CGFloat)</span></span> &#123;</span><br><span class="line">        <span class="keyword">var</span> from = from</span><br><span class="line">        <span class="keyword">var</span> to = to</span><br><span class="line">        <span class="keyword">let</span> lineHeight = menuStyle.lineHeight</span><br><span class="line">        <span class="keyword">let</span> lineWidth = menuStyle.lineWidth</span><br><span class="line">        <span class="keyword">let</span> y = frame.height - lineHeight</span><br><span class="line">        <span class="keyword">let</span> isFixedLineWidth = lineWidth != <span class="number">0</span></span><br><span class="line">        <span class="keyword">let</span> fromWidth = isFixedLineWidth ? lineWidth : from.width</span><br><span class="line">        <span class="keyword">let</span> toWidth = isFixedLineWidth ? lineWidth : to.width</span><br><span class="line">        <span class="keyword">let</span> fromMinX = isFixedLineWidth ? from.midX - lineWidth * <span class="number">0.5</span> : from.minX</span><br><span class="line">        <span class="keyword">let</span> fromMaxX = isFixedLineWidth ? fromMinX + lineWidth : from.maxX</span><br><span class="line">        <span class="keyword">let</span> toMinX = isFixedLineWidth ? to.midX - lineWidth * <span class="number">0.5</span> : to.minX</span><br><span class="line">        <span class="keyword">let</span> toMaxX = isFixedLineWidth ? toMinX + lineWidth : to.maxX</span><br><span class="line">        from = <span class="type">CGRect</span>(x: fromMinX, y: y, width: fromWidth, height: lineHeight)</span><br><span class="line">        to = <span class="type">CGRect</span>(x: toMinX, y: y, width: toWidth, height: lineHeight)</span><br><span class="line">        <span class="keyword">let</span> isToLeft = toMinX &lt; fromMinX <span class="comment">// 向左</span></span><br><span class="line">        <span class="keyword">if</span> progress &lt; <span class="number">0.5</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> isToLeft &#123; <span class="comment">// 向左移动</span></span><br><span class="line">                <span class="keyword">let</span> offsetWidth = (fromMinX - toMinX) * <span class="number">2</span> * progress</span><br><span class="line">                lineView.frame = <span class="type">CGRect</span>(x: fromMinX - offsetWidth, y: y, width:  fromMaxX - fromMinX + offsetWidth, height: lineHeight)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> offsetWidth = (toMaxX - fromMaxX) * <span class="number">2</span> * progress</span><br><span class="line">                lineView.frame = <span class="type">CGRect</span>(x: fromMinX, y: y, width:from.width + offsetWidth, height: lineHeight)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> isToLeft &#123; <span class="comment">// 向左移动</span></span><br><span class="line">                <span class="keyword">let</span> offsetWidth = (fromMaxX - to.maxX) * (<span class="number">1</span> - (progress - <span class="number">0.5</span>) * <span class="number">2</span>)</span><br><span class="line">                lineView.frame = <span class="type">CGRect</span>(x: toMinX, y: y, width:to.width + offsetWidth, height: lineHeight)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> offsetWidth = (toMinX - fromMinX) * (<span class="number">1</span> - (progress - <span class="number">0.5</span>) * <span class="number">2</span>)</span><br><span class="line">                lineView.frame = <span class="type">CGRect</span>(x: toMinX - offsetWidth, y: y, width:toMaxX - toMinX + offsetWidth, height: lineHeight)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 刷新标题状态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">refreshTitleViewState</span><span class="params">(<span class="number">_</span> fromView: PageTitleView, <span class="number">_</span> toView: PageTitleView)</span></span> &#123;</span><br><span class="line">        <span class="comment">// 更新currentSelectedView</span></span><br><span class="line">        currentSelectedView?.isSelected = <span class="literal">false</span></span><br><span class="line">        toView.isSelected = <span class="literal">true</span></span><br><span class="line">        currentSelectedView = toView</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 设置标题居中</span></span><br><span class="line">        <span class="keyword">let</span> width = scrollView.bounds.width</span><br><span class="line">        <span class="keyword">let</span> contentWidth = scrollView.contentSize.width</span><br><span class="line">        <span class="keyword">var</span> offsetX = toView.center.x - width * <span class="number">0.5</span></span><br><span class="line">        offsetX = <span class="built_in">max</span>(offsetX, <span class="number">0</span>)</span><br><span class="line">        offsetX = <span class="built_in">min</span>(contentWidth - width, offsetX)</span><br><span class="line">        <span class="keyword">if</span> contentWidth &lt;= width &#123; <span class="comment">// 保持居中</span></span><br><span class="line">            <span class="keyword">let</span> viewWidth = <span class="type">CGFloat</span>(titleViewList.last?.frame.maxX ?? <span class="number">0</span>) - <span class="type">CGFloat</span>(titleViewList.first?.frame.minX ?? <span class="number">0</span>)</span><br><span class="line">            offsetX = -(width - viewWidth) * <span class="number">0.5</span> + menuStyle.margin</span><br><span class="line">        &#125;</span><br><span class="line">        scrollView.setContentOffset(<span class="type">CGPoint</span>(x: offsetX, y: <span class="number">0</span>), animated: <span class="literal">true</span>)</span><br><span class="line">        <span class="keyword">if</span> delegate != <span class="literal">nil</span> &#123;</span><br><span class="line">            delegate?.pageTitleDidSelected(pageTitle: <span class="keyword">self</span>, pageTitleView: toView)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 标题颜色渐变</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">refreshTitleViewColor</span><span class="params">(<span class="number">_</span> fromView: PageTitleView, <span class="number">_</span> toView: PageTitleView, <span class="number">_</span> progress: CGFloat)</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> toRGB = <span class="type">UIColor</span>.rgbValue(menuStyle.selectedColor)</span><br><span class="line">        <span class="keyword">let</span> fromRGB = <span class="type">UIColor</span>.rgbValue(menuStyle.defaultColor)</span><br><span class="line">        <span class="keyword">let</span> deltaRGB = (toRGB.<span class="number">0</span> - fromRGB.<span class="number">0</span>, toRGB.<span class="number">1</span> - fromRGB.<span class="number">1</span>, toRGB.<span class="number">2</span> - fromRGB.<span class="number">2</span>)</span><br><span class="line">        fromView.color = <span class="type">UIColor</span>(r: toRGB.<span class="number">0</span> - deltaRGB.<span class="number">0</span> * progress, g: toRGB.<span class="number">1</span> - deltaRGB.<span class="number">1</span> * progress, b: toRGB.<span class="number">2</span> - deltaRGB.<span class="number">2</span> * progress)</span><br><span class="line">        toView.color = <span class="type">UIColor</span>(r: fromRGB.<span class="number">0</span> + deltaRGB.<span class="number">0</span> * progress, g: fromRGB.<span class="number">1</span> + deltaRGB.<span class="number">1</span> * progress, b: fromRGB.<span class="number">2</span> + deltaRGB.<span class="number">2</span> * progress)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: PageContentDelegate</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">PageTitle</span> : <span class="title">PageContentDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">pageContentDidChange</span><span class="params">(pageContent: PageContent, targetIndex: Int, progress: CGFloat)</span></span> &#123;</span><br><span class="line">        changeToSelectedIndex(idx: targetIndex, progress: progress)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="PageContent"><a href="#PageContent" class="headerlink" title="PageContent"></a>PageContent</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理</span></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">PageContentDelegate</span> : <span class="title">class</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">pageContentDidChange</span><span class="params">(pageContent: PageContent, targetIndex: Int, progress: CGFloat)</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageContent</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> delegate: <span class="type">PageContentDelegate</span>?</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> controllerList: [<span class="type">UIViewController</span>]</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">let</span> identifier = <span class="string">"PageMenu_CollectionView_Identifier"</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> currentIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> shouldCallDelegate = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">lazy</span> <span class="keyword">var</span> collectionView: <span class="type">UICollectionView</span> = &#123;</span><br><span class="line">        <span class="keyword">let</span> layout = <span class="type">UICollectionViewFlowLayout</span>()</span><br><span class="line">        layout.itemSize = bounds.size</span><br><span class="line">        layout.scrollDirection = .horizontal</span><br><span class="line">        layout.minimumLineSpacing = <span class="number">0</span></span><br><span class="line">        layout.minimumInteritemSpacing = <span class="number">0</span></span><br><span class="line">        <span class="keyword">var</span> collectionView = <span class="type">UICollectionView</span>(frame: bounds, collectionViewLayout: layout)</span><br><span class="line">        collectionView.dataSource = <span class="keyword">self</span> <span class="keyword">as</span> <span class="type">UICollectionViewDataSource</span></span><br><span class="line">        collectionView.delegate = <span class="keyword">self</span> <span class="keyword">as</span> <span class="type">UICollectionViewDelegate</span></span><br><span class="line">        collectionView.showsHorizontalScrollIndicator = <span class="literal">false</span></span><br><span class="line">        collectionView.scrollsToTop = <span class="literal">false</span></span><br><span class="line">        collectionView.isPagingEnabled = <span class="literal">true</span></span><br><span class="line">        collectionView.bounces = <span class="literal">false</span></span><br><span class="line">        collectionView.backgroundColor = <span class="type">UIColor</span>.white</span><br><span class="line">        <span class="comment">// 注册cell</span></span><br><span class="line">        collectionView.register(<span class="type">UICollectionViewCell</span>.<span class="keyword">self</span>, forCellWithReuseIdentifier: identifier)</span><br><span class="line">        addSubview(collectionView)</span><br><span class="line">        <span class="keyword">return</span> collectionView</span><br><span class="line">    &#125;()</span><br><span class="line">    <span class="keyword">init</span>(frame: <span class="type">CGRect</span>, controllerList: [<span class="type">UIViewController</span>]) &#123;</span><br><span class="line">        <span class="keyword">self</span>.controllerList = controllerList</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(frame: frame)</span><br><span class="line">        <span class="keyword">self</span>.collectionView.reloadData()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: UICollectionViewDataSource</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">PageContent</span> : <span class="title">UICollectionViewDataSource</span>, <span class="title">UICollectionViewDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, numberOfItemsInSection section: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> controllerList.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)</span></span> -&gt; <span class="type">UICollectionViewCell</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, <span class="keyword">for</span>: indexPath)</span><br><span class="line">        <span class="keyword">let</span> view = controllerList[indexPath.row].view!</span><br><span class="line">        view.frame = cell.bounds</span><br><span class="line">        cell.contentView.addSubview(view)</span><br><span class="line">        <span class="keyword">return</span> cell</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: UIScrollViewDelegate</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">PageContent</span> : <span class="title">UIScrollViewDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidEndDecelerating</span><span class="params">(<span class="number">_</span> scrollView: UIScrollView)</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> index = <span class="type">Int</span>(scrollView.contentOffset.x / scrollView.bounds.width)</span><br><span class="line">        currentIndex = index</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">scrollViewWillBeginDragging</span><span class="params">(<span class="number">_</span> scrollView: UIScrollView)</span></span> &#123;</span><br><span class="line">        shouldCallDelegate = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidScroll</span><span class="params">(<span class="number">_</span> scrollView: UIScrollView)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> !shouldCallDelegate &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="keyword">let</span> width = scrollView.bounds.width</span><br><span class="line">        <span class="keyword">let</span> offsetX = scrollView.contentOffset.x - <span class="type">CGFloat</span>(currentIndex) * width</span><br><span class="line">        <span class="keyword">let</span> offsetIndex = offsetX &gt; <span class="number">0</span> ? <span class="number">1</span> : -<span class="number">1</span></span><br><span class="line">        <span class="keyword">let</span> progress = <span class="built_in">abs</span>(offsetX) / width</span><br><span class="line">        <span class="keyword">if</span> delegate != <span class="literal">nil</span> &#123;</span><br><span class="line">            delegate?.pageContentDidChange(pageContent: <span class="keyword">self</span>, targetIndex: currentIndex + offsetIndex, progress: progress)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: PageTitleDelegate</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">PageContent</span> : <span class="title">PageTitleDelegate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">internal</span> <span class="function"><span class="keyword">func</span> <span class="title">pageTitleDidSelected</span><span class="params">(pageTitle: PageTitle, pageTitleView: PageTitleView)</span></span> &#123;</span><br><span class="line">        shouldCallDelegate = <span class="literal">false</span></span><br><span class="line">        collectionView.scrollToItem(at: <span class="type">IndexPath</span>(item: pageTitleView.index, section: <span class="number">0</span>), at: .<span class="keyword">left</span>, animated: <span class="literal">false</span>)</span><br><span class="line">        currentIndex = pageTitleView.index</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="PageMenu"><a href="#PageMenu" class="headerlink" title="PageMenu"></a>PageMenu</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageMenu</span> : <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pageTitle: <span class="type">PageTitle</span></span><br><span class="line">    <span class="keyword">var</span> pageContent: <span class="type">PageContent</span></span><br><span class="line">    <span class="keyword">var</span> menuStyle: <span class="type">MenuStyle</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> controllerList: [<span class="type">UIViewController</span>]</span><br><span class="line">    <span class="keyword">init</span>(<span class="number">_</span> menuStyle: <span class="type">MenuStyle</span>, <span class="number">_</span> controllerList: [<span class="type">UIViewController</span>]) &#123;</span><br><span class="line">        <span class="keyword">var</span> titleList = [<span class="type">String</span>]()</span><br><span class="line">        <span class="keyword">for</span> controller <span class="keyword">in</span> controllerList &#123;</span><br><span class="line">            titleList.append(controller.title ?? <span class="string">"null"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">self</span>.pageTitle = <span class="type">PageTitle</span>(frame: menuStyle.pageTitleFrame, menuStyle: menuStyle, titleList: titleList)</span><br><span class="line">        <span class="keyword">self</span>.pageContent = <span class="type">PageContent</span>(frame: <span class="type">CGRect</span>(x: pageTitle.frame.minX, y: pageTitle.frame.maxY + menuStyle.titleContentMargin, width: pageTitle.frame.width, height: <span class="type">UIScreen</span>.main.bounds.height - pageTitle.frame.height), controllerList: controllerList)</span><br><span class="line">        <span class="keyword">self</span>.menuStyle = menuStyle</span><br><span class="line">        <span class="keyword">self</span>.controllerList = controllerList</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>(nibName: <span class="literal">nil</span>, bundle: <span class="literal">nil</span>)</span><br><span class="line">        configureComponent()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">required</span> <span class="keyword">init</span>?(coder aDecoder: <span class="type">NSCoder</span>) &#123;</span><br><span class="line">        <span class="built_in">fatalError</span>(<span class="string">"init(coder:) has not been implemented"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">configureComponent</span><span class="params">()</span></span> &#123;</span><br><span class="line">        view.addSubview(pageTitle)</span><br><span class="line">        view.addSubview(pageContent)</span><br><span class="line">        <span class="keyword">for</span> controller <span class="keyword">in</span> controllerList &#123;</span><br><span class="line">            addChild(controller)</span><br><span class="line">        &#125;</span><br><span class="line">        pageTitle.delegate = pageContent</span><br><span class="line">        pageContent.delegate = pageTitle</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="UIColor-RGB"><a href="#UIColor-RGB" class="headerlink" title="UIColor+RGB"></a>UIColor+RGB</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIColor</span> </span>&#123;</span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(r : <span class="type">CGFloat</span>, g : <span class="type">CGFloat</span>, b : <span class="type">CGFloat</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(red: r / <span class="number">255.0</span>, green: g / <span class="number">255.0</span>, blue: b / <span class="number">255.0</span>, alpha: <span class="number">1.0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">rgbValue</span>(<span class="title">_</span> <span class="title">color</span> : <span class="title">UIColor</span>) -&gt; (<span class="title">CGFloat</span>, <span class="title">CGFloat</span>, <span class="title">CGFloat</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> components = color.cgColor.components <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">fatalError</span>(<span class="string">"颜色按照RGB设置"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (components[<span class="number">0</span>] * <span class="number">255</span>, components[<span class="number">1</span>] * <span class="number">255</span>, components[<span class="number">2</span>] * <span class="number">255</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>简单配置一下MenuStyle，创建自己的视图控制器，就能直接使用了。</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line">    <span class="selector-tag">var</span> controllerList = [UIViewController]()</span><br><span class="line">    let style: MenuStyle = MenuStyle()</span><br><span class="line">    <span class="comment">// 创建style并配置样式</span></span><br><span class="line">    style<span class="selector-class">.margin</span> = <span class="number">30</span></span><br><span class="line">    style<span class="selector-class">.defaultColor</span> = UIColor(r: <span class="number">135</span>, g: <span class="number">135</span>, <span class="selector-tag">b</span>: <span class="number">135</span>)</span><br><span class="line">    style<span class="selector-class">.selectedColor</span> = UIColor(r: <span class="number">0</span>, g: <span class="number">0</span>, <span class="selector-tag">b</span>: <span class="number">0</span>)</span><br><span class="line">    <span class="comment">// 创建控制器</span></span><br><span class="line">    let red = UIViewController()</span><br><span class="line">    red<span class="selector-class">.view</span><span class="selector-class">.backgroundColor</span> = UIColor.red</span><br><span class="line">    red<span class="selector-class">.title</span> = <span class="string">"关注"</span></span><br><span class="line">    let blue = UIViewController()</span><br><span class="line">    blue<span class="selector-class">.view</span><span class="selector-class">.backgroundColor</span> = UIColor.blue</span><br><span class="line">    blue<span class="selector-class">.title</span> = <span class="string">"热门"</span></span><br><span class="line">    controllerList = [red, blue]</span><br><span class="line">    <span class="comment">// 创建PageMenu</span></span><br><span class="line">    let pageMenu = PageMenu(style, controllerList)</span><br><span class="line">    pageMenu<span class="selector-class">.pageTitle</span><span class="selector-class">.backgroundColor</span> = UIColor(r: <span class="number">45</span>, g: <span class="number">184</span>, <span class="selector-tag">b</span>: <span class="number">105</span>)</span><br><span class="line">    addChild(pageMenu)</span><br><span class="line">    view.addSubview(pageMenu.view)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p>微博样式：<br><img src="https://image.chenyalun.com/2019/03/22/weibo.gif" alt=""></p>
+<p>it之家样式：<br><img src="https://image.chenyalun.com/2019/03/22/ithome.gif" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>处理起来比较麻烦一点的就是，标题区指示条的frame渐变，要考虑左滑和右滑的情况，还要考虑进度progress的问题。不过还好，仔细想想都能解决的。</p>
+<p>再一个，PageTitle和PageContent之间互相通信的方案，我选择的是代理。PageTitle是PageContent的代理，同时，PageContent又是PageTitle的代理。由PageMenu负责连接。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/iOS开发/">iOS开发</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/01/28/实现通知中心/">
+        <span class="next-text nav-default">实现通知中心</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+
+<div class="copyright">
+  <span class="power-by">
+    May Be 
+  </span>
+  
+  <span class="theme-info">
+    Better  
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ya</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v="></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v="></script>
+
+    
+  <script type="text/html" id="search-result">
+    <article class="post">
+      <header class="post-header">
+        <h1 class="post-title">
+          <a href="$url$" class="post-link">
+            $title$
+          </a>
+        </h1>
+      </header>
+      <div class="post-content">
+        $content$
+        <div class="read-more">
+          <a href="$url$" class="read-more-link">
+            ...阅读全文
+          </a>
+        </div>
+      </div>
+    </article>
+  </script>
+  <script type="text/html" id="no-search-result">
+    <div class="no-result">
+      <h2>No result found!</h2>
+    </div>
+  </script>
+  <script type="text/javascript" src="/js/src/search.js?v="></script>
+
+  </body>
+</html>
