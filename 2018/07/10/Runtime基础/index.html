@@ -34,18 +34,18 @@
 <link rel="canonical" href="http://blog.chenyalun.com/2018/07/10/Runtime基础/"/>
 
 
-<meta name="description" content="2018.8.26 更新Class定义   关于Runtime的简单总结。">
+<meta name="description" content="2018.8.26 更新Class定义2019.3.25 更新设置weak关联属性   关于Runtime的简单总结。">
 <meta name="keywords" content="iOS开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Runtime基础">
 <meta property="og:url" content="http://blog.chenyalun.com/2018/07/10/Runtime基础/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="2018.8.26 更新Class定义   关于Runtime的简单总结。">
+<meta property="og:description" content="2018.8.26 更新Class定义2019.3.25 更新设置weak关联属性   关于Runtime的简单总结。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-12-12T09:26:45.693Z">
+<meta property="og:updated_time" content="2019-03-29T03:04:01.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runtime基础">
-<meta name="twitter:description" content="2018.8.26 更新Class定义   关于Runtime的简单总结。">
+<meta name="twitter:description" content="2018.8.26 更新Class定义2019.3.25 更新设置weak关联属性   关于Runtime的简单总结。">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -100,11 +100,11 @@
         </li>
       </a>
     
-      <a href="/categories/阅读/">
+      <a href="/tags/阅读/">
         <li class="mobile-menu-item">
           
           
-            Categories
+            Tags
           
         </li>
       </a>
@@ -140,7 +140,7 @@
         </li>
       
         <li class="menu-item">
-          <a class="menu-item-link" href="/categories/阅读/">
+          <a class="menu-item-link" href="/tags/阅读/">
             
             
               阅读
@@ -189,7 +189,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Runtime"><span class="toc-text">一、Runtime</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block"><span class="toc-text">Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEL"><span class="toc-text">SEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ivar"><span class="toc-text">Ivar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Property"><span class="toc-text">Property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Protocol"><span class="toc-text">Protocol</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、技能"><span class="toc-text">二、技能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#消息转发"><span class="toc-text">消息转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承"><span class="toc-text">多重继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关联引用"><span class="toc-text">关联引用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#给分类添加weak属性"><span class="toc-text">给分类添加weak属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法三"><span class="toc-text">方法三</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、要点"><span class="toc-text">三、要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#free"><span class="toc-text">free()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NONNULL"><span class="toc-text">NONNULL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#covariant"><span class="toc-text">__covariant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联"><span class="toc-text">内联</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Runtime"><span class="toc-text">一、Runtime</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block"><span class="toc-text">Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEL"><span class="toc-text">SEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ivar"><span class="toc-text">Ivar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Property"><span class="toc-text">Property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Protocol"><span class="toc-text">Protocol</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、技能"><span class="toc-text">二、技能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#消息转发"><span class="toc-text">消息转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承"><span class="toc-text">多重继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关联引用"><span class="toc-text">关联引用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#给分类添加weak属性"><span class="toc-text">给分类添加weak属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法三"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法四"><span class="toc-text">方法四</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、要点"><span class="toc-text">三、要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#free"><span class="toc-text">free()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NONNULL"><span class="toc-text">NONNULL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#covariant"><span class="toc-text">__covariant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联"><span class="toc-text">内联</span></a></li></ol></li></ol>
     </div>
   </div>
 
@@ -197,7 +197,7 @@
     <div class="post-content">
       
         <blockquote>
-<p>2018.8.26 更新Class定义</p>
+<p>2018.8.26 更新Class定义<br>2019.3.25 更新设置weak关联属性</p>
 </blockquote>
 <p></p><p align="center"> 关于Runtime的简单总结。 </p><br><a id="more"></a><p></p>
 <p>代码中省略<code>OBJC2_UNAVAILABLE</code>,也即不可直接访问结构体中的成员.</p>
@@ -293,6 +293,7 @@
 <p>用一个NSPointerArray（弱引用类型的数组）包一层就可以了。虽然关联属性的policy不支持weak，但是你可以把要关联的对象放入一个弱引用数组里面，然后把这个弱引用数组设置为关联对象，每次取值的时候，只需要从这个弱引用数组里面取就可以了。一样可以达到关联弱引用对象的效果。</p>
 </blockquote>
 <h5 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h5><p>A 关联 C<br>B 关联 C<br>C 销毁 通知B<br>B 再告诉 A</p>
+<h5 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h5><p>阅读大神博客发现的新方法，见2019年新写的文章： <a href="https://blog.chenyalun.com/2019/01/20/Weak%20Associated%20Object/">Weak Associated Object</a></p>
 <h2 id="三、要点"><a href="#三、要点" class="headerlink" title="三、要点"></a>三、要点</h2><h3 id="free"><a href="#free" class="headerlink" title="free()"></a>free()</h3><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">free</span>() 函数用来释放动态分配的内存空间，其原型为：</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">free</span> <span class="params">(<span class="keyword">void</span>* ptr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">free</span>() 可以释放由 <span class="built_in">malloc</span>()、<span class="built_in">calloc</span>()、<span class="built_in">realloc</span>() 分配的内存空间，以便其他程序再次使用。</span><br><span class="line"></span><br><span class="line"><span class="comment">// 及时释放字符串常量</span></span><br><span class="line"><span class="keyword">if</span> (argumentType) <span class="built_in">free</span>(argumentType);</span><br></pre></td></tr></table></figure>
 <h3 id="NONNULL"><a href="#NONNULL" class="headerlink" title="NONNULL"></a>NONNULL</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="built_in">NS_ASSUME_NONNULL_BEGIN</span>和<span class="built_in">NS_ASSUME_NONNULL_END</span>。</span><br><span class="line">在这两个宏之间的代码，所有简单指针对象都被假定为 <span class="keyword">nonnull</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#define NS_ASSUME_NONNULL_BEGIN _Pragma(<span class="meta-string">"clang assume_nonnull begin"</span>)</span></span><br><span class="line"><span class="meta">#define NS_ASSUME_NONNULL_END   _Pragma(<span class="meta-string">"clang assume_nonnull end"</span>)</span></span><br></pre></td></tr></table></figure>
 <h3 id="covariant"><a href="#covariant" class="headerlink" title="__covariant"></a>__covariant</h3><figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line"><span class="variable">__covariant</span> - 协变性，子类型可以强转到父类型（里氏替换原则）</span><br><span class="line"><span class="variable">__contravariant</span> - 逆变性，父类型可以强转到子类型（WTF）</span><br></pre></td></tr></table></figure>
