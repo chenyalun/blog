@@ -17,7 +17,7 @@
 
 
 
-  <meta name="keywords" content="iOS开发,阅读," />
+  <meta name="keywords" content="iOS开发," />
 
 
 
@@ -35,7 +35,7 @@
 
 
 <meta name="description" content="一个使用Swift写的PageMenu。">
-<meta name="keywords" content="iOS开发,阅读">
+<meta name="keywords" content="iOS开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础百搭款「PageMenu」">
 <meta property="og:url" content="http://blog.chenyalun.com/2019/03/21/基础百搭款「PageMenu」/index.html">
@@ -44,7 +44,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://image.chenyalun.com/2019/03/22/weibo.gif">
 <meta property="og:image" content="https://image.chenyalun.com/2019/03/22/ithome.gif">
-<meta property="og:updated_time" content="2019-03-29T03:00:59.806Z">
+<meta property="og:updated_time" content="2019-04-24T02:22:52.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础百搭款「PageMenu」">
 <meta name="twitter:description" content="一个使用Swift写的PageMenu。">
@@ -209,8 +209,8 @@
 <h2 id="UIColor-RGB"><a href="#UIColor-RGB" class="headerlink" title="UIColor+RGB"></a>UIColor+RGB</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">UIColor</span> </span>&#123;</span><br><span class="line">    <span class="keyword">convenience</span> <span class="keyword">init</span>(r : <span class="type">CGFloat</span>, g : <span class="type">CGFloat</span>, b : <span class="type">CGFloat</span>) &#123;</span><br><span class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(red: r / <span class="number">255.0</span>, green: g / <span class="number">255.0</span>, blue: b / <span class="number">255.0</span>, alpha: <span class="number">1.0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">rgbValue</span>(<span class="title">_</span> <span class="title">color</span> : <span class="title">UIColor</span>) -&gt; (<span class="title">CGFloat</span>, <span class="title">CGFloat</span>, <span class="title">CGFloat</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> components = color.cgColor.components <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">fatalError</span>(<span class="string">"颜色按照RGB设置"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (components[<span class="number">0</span>] * <span class="number">255</span>, components[<span class="number">1</span>] * <span class="number">255</span>, components[<span class="number">2</span>] * <span class="number">255</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>简单配置一下MenuStyle，创建自己的视图控制器，就能直接使用了。</p>
 <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">override func viewDidLoad() &#123;</span><br><span class="line">    super.viewDidLoad()</span><br><span class="line">    <span class="selector-tag">var</span> controllerList = [UIViewController]()</span><br><span class="line">    let style: MenuStyle = MenuStyle()</span><br><span class="line">    <span class="comment">// 创建style并配置样式</span></span><br><span class="line">    style<span class="selector-class">.margin</span> = <span class="number">30</span></span><br><span class="line">    style<span class="selector-class">.defaultColor</span> = UIColor(r: <span class="number">135</span>, g: <span class="number">135</span>, <span class="selector-tag">b</span>: <span class="number">135</span>)</span><br><span class="line">    style<span class="selector-class">.selectedColor</span> = UIColor(r: <span class="number">0</span>, g: <span class="number">0</span>, <span class="selector-tag">b</span>: <span class="number">0</span>)</span><br><span class="line">    <span class="comment">// 创建控制器</span></span><br><span class="line">    let red = UIViewController()</span><br><span class="line">    red<span class="selector-class">.view</span><span class="selector-class">.backgroundColor</span> = UIColor.red</span><br><span class="line">    red<span class="selector-class">.title</span> = <span class="string">"关注"</span></span><br><span class="line">    let blue = UIViewController()</span><br><span class="line">    blue<span class="selector-class">.view</span><span class="selector-class">.backgroundColor</span> = UIColor.blue</span><br><span class="line">    blue<span class="selector-class">.title</span> = <span class="string">"热门"</span></span><br><span class="line">    controllerList = [red, blue]</span><br><span class="line">    <span class="comment">// 创建PageMenu</span></span><br><span class="line">    let pageMenu = PageMenu(style, controllerList)</span><br><span class="line">    pageMenu<span class="selector-class">.pageTitle</span><span class="selector-class">.backgroundColor</span> = UIColor(r: <span class="number">45</span>, g: <span class="number">184</span>, <span class="selector-tag">b</span>: <span class="number">105</span>)</span><br><span class="line">    addChild(pageMenu)</span><br><span class="line">    view.addSubview(pageMenu.view)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p>微博样式：<br><img src="https://image.chenyalun.com/2019/03/22/weibo.gif" alt=""></p>
-<p>it之家样式：<br><img src="https://image.chenyalun.com/2019/03/22/ithome.gif" alt=""></p>
+<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p>微博样式：<br><img src="https://image.chenyalun.com/2019/03/22/weibo.gif" style="zoom:60%"></p>
+<p>it之家样式：<br><img src="https://image.chenyalun.com/2019/03/22/ithome.gif" style="zoom:60%"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>处理起来比较麻烦一点的就是，标题区指示条的frame渐变，要考虑左滑和右滑的情况，还要考虑进度progress的问题。不过还好，仔细想想都能解决的。</p>
 <p>再一个，PageTitle和PageContent之间互相通信的方案，我选择的是代理。PageTitle是PageContent的代理，同时，PageContent又是PageTitle的代理。由PageMenu负责连接。</p>
 
@@ -234,13 +234,17 @@
             
               <a href="/tags/iOS开发/">iOS开发</a>
             
-              <a href="/tags/阅读/">阅读</a>
-            
           </div>
         
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2019/04/25/读「FDFullscreenPopGesture」/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">读「FDFullscreenPopGesture」</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
     
       <a class="next" href="/2019/01/28/实现通知中心/">
