@@ -373,7 +373,7 @@ p{font-size:12px;line-height:130%}
 <li>隐性改变display类型:有一个有趣的现象就是当为元素（不论之前是什么类型元素，display:none 除外）设置以下 2 个句之一： 1. position : absolute  2. float : left 或 float:right 简单来说，只要html代码中出现以上两句之一，元素的display显示类型就会自动变为以 display:inline-block（块状元素）的方式显示，当然就可以设置元素的 width 和 height 了，且默认宽度不占满父元素。</li>
 </ul>
 <h1 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h1><ul>
-<li>我们可以将JavaScript代码放在html文件中任何位置，但是我们一般放在网页的head或者body部分。放在<head>部分最常用的方式是在页面中head部分放置script&gt;元素，浏览器解析head部分就会执行这个代码，然后才解析页面的其余部分。</head></li>
+<li>我们可以将JavaScript代码放在html文件中任何位置，但是我们一般放在网页的head或者body部分。放在<head><meta name="generator" content="Hexo 3.8.0">部分最常用的方式是在页面中head部分放置script&gt;元素，浏览器解析head部分就会执行这个代码，然后才解析页面的其余部分。</head></li>
 <li><p>放在<body>部分JavaScript代码在网页读取到该语句的时候就会执行。注意: javascript作为一种脚本语言可以放在html页面中任何位置，但是浏览器解释html时是按先后顺序的，所以前面的script就先被执行。比如进行页面显示初始化的js必须放在head里面，因为初始化都要求提前进行（如给页面body设置css等）；而如果是通过事件调用执行的function那么对位置没什么要求的。</body></p>
 <pre><code> &lt;script type=&quot;text/javascript&quot;&gt;
   document.write(&quot;I love JS&quot;)
