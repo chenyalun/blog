@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta charset="UTF-8">
+  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -10,71 +8,42 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-
-  <meta name="description" content="读「YYModel」">
-
-
-
-
-  <meta name="keywords" content="iOS开发,阅读,">
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Ya">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
-
-
-
+<meta name="description" content="读「YYModel」"><meta name="keywords" content="iOS开发, 阅读, Ya"><link rel="alternate" href="/atom.xml" title="Ya"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
 <link rel="canonical" href="http://blog.chenyalun.com/2018/12/20/读「YYModel」/">
 
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css"><link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
 
-<meta name="description" content="关于YYModel的简单总结。">
-<meta name="keywords" content="iOS开发,阅读">
-<meta property="og:type" content="article">
-<meta property="og:title" content="读「YYModel」">
-<meta property="og:url" content="http://blog.chenyalun.com/2018/12/20/读「YYModel」/index.html">
-<meta property="og:site_name" content="Ya">
-<meta property="og:description" content="关于YYModel的简单总结。">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-03-29T03:01:31.589Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读「YYModel」">
-<meta name="twitter:description" content="关于YYModel的简单总结。">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
-
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
-<script>
-  var CONFIG = {
-    search: false,
-    searchPath: "/search.xml",
-    fancybox: true,
-    toc: true,
-  }
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz",
+      appKey: "KV4HGemodXGubbgselgJbMls"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz","app_key":"KV4HGemodXGubbgselgJbMls"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
 </script>
 
-
-
-
-  
-
-
-
-    <title> 读「YYModel」 · Ya </title>
+    <title>读「YYModel」 - Ya</title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -89,114 +58,62 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    
-      <a href="/archives/">
-        <li class="mobile-menu-item">
-          
-          
-            Archives
-          
-        </li>
-      </a>
-    
-      <a href="/tags/阅读/">
-        <li class="mobile-menu-item">
-          
-          
-            Tags
-          
-        </li>
-      </a>
-    
-      <a href="/about">
-        <li class="mobile-menu-item">
-          
-          
-            About
-          
-        </li>
-      </a>
-    
-  </ul>
+  <ul class="mobile-menu-list"><a href="/archives/">
+        <li class="mobile-menu-item">时间线
+          </li>
+      </a><a href="/tags/阅读/">
+        <li class="mobile-menu-item">阅读
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
 </nav>
-
-    <div class="container" id="mobile-panel">
+<div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
   <a href="/." class="logo">Ya</a>
 </div>
 
-<nav class="site-navbar">
-  
-    <ul id="menu" class="menu">
-      
-        <li class="menu-item">
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            
-            
-              时间线
-            
-          </a>
+            时间线
+            </a>
         </li>
-      
-        <li class="menu-item">
+      <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            
-            
-              阅读
-            
-          </a>
+            阅读
+            </a>
         </li>
-      
-        <li class="menu-item">
+      <li class="menu-item">
           <a class="menu-item-link" href="/about">
-            
-            
-              关于
-            
-          </a>
+            关于
+            </a>
         </li>
-      
-      
-    </ul>
-  
-</nav>
-
-      </header>
+      </ul></nav>
+</header>
 
       <main id="main" class="main">
         <div class="content-wrapper">
-          <div id="content" class="content">
-            
-  
-  <article class="post">
+          <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">
-        
-          读「YYModel」
-        
-      </h1>
+      <h1 class="post-title">读「YYModel」
+        </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2018年12月20日
+          2018-12-20
+        </span><span class="post-visits" data-url="/2018/12/20/读「YYModel」/" data-title="读「YYModel」"> ^_^
+          
         </span>
-      </div>
+        </div>
     </header>
 
-    
-    
-  <div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分类"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展"><span class="toc-text">拓展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键点"><span class="toc-text">关键点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实践"><span class="toc-text">实践</span></a></li></ol>
     </div>
-  </div>
-
-
-    <div class="post-content">
-      
-        <p></p><p align="center"> 关于YYModel的简单总结。 </p><br><a id="more"></a><p></p>
+  </div><div class="post-content"><p></p><p align="center"> 关于YYModel的简单总结。 </p><br><a id="more"></a><p></p>
 <p>尝试阅读YYModel源码，发现有一些细节并不能十分透彻地理解清楚，只能略微窥探到其中主要原理。这里就当做第一遍阅读笔记😂😂😂。</p>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span> (<span class="title">YYModel</span>)</span></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)yy_modelWithJSON:(<span class="keyword">id</span>)json;</span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="keyword">instancetype</span>)yy_modelWithDictionary:(<span class="built_in">NSDictionary</span> *)dictionary;</span><br><span class="line">- (<span class="built_in">BOOL</span>)yy_modelSetWithJSON:(<span class="keyword">id</span>)json;</span><br><span class="line">- (<span class="built_in">BOOL</span>)yy_modelSetWithDictionary:(<span class="built_in">NSDictionary</span> *)dic;</span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)yy_modelToJSONObject;</span><br><span class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSData</span> *)yy_modelToJSONData;</span><br><span class="line">- (<span class="keyword">nullable</span> <span class="built_in">NSString</span> *)yy_modelToJSONString;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)yy_modelCopy;</span><br><span class="line">- (<span class="keyword">void</span>)yy_modelEncodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder;</span><br><span class="line">- (<span class="keyword">id</span>)yy_modelInitWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder;</span><br><span class="line">- (<span class="built_in">NSUInteger</span>)yy_modelHash;</span><br><span class="line">- (<span class="built_in">BOOL</span>)yy_modelIsEqual:(<span class="keyword">id</span>)model;</span><br><span class="line">- (<span class="built_in">NSString</span> *)yy_modelDescription;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSArray</span> (<span class="title">YYModel</span>)</span></span><br><span class="line"><span class="comment">// json到模型数组</span></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSArray</span> *)yy_modelArrayWithClass:(Class)cls json:(<span class="keyword">id</span>)json;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSDictionary</span> (<span class="title">YYModel</span>)</span></span><br><span class="line"><span class="comment">// json到字典</span></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span> *)yy_modelDictionaryWithClass:(Class)cls json:(<span class="keyword">id</span>)json;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@protocol</span> <span class="title">YYModel</span> &lt;<span class="title">NSObject</span>&gt;</span></span><br><span class="line"><span class="keyword">@optional</span></span><br><span class="line"><span class="comment">// 自定义模型属性与json's key的映射</span></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)modelCustomPropertyMapper;</span><br><span class="line">+ (<span class="built_in">NSDictionary</span> *)modelCustomPropertyMapper &#123;</span><br><span class="line">    <span class="keyword">return</span> @&#123; <span class="string">@"name"</span> : <span class="string">@"n"</span>,</span><br><span class="line">              <span class="string">@"count"</span> : <span class="string">@"ext.c"</span>,</span><br><span class="line">              <span class="string">@"desc1"</span> : <span class="string">@"ext.d"</span>,</span><br><span class="line">              <span class="string">@"desc4"</span> : <span class="string">@".ext"</span>,</span><br><span class="line">              <span class="string">@"modelID"</span> : @[<span class="string">@"ID"</span>, <span class="string">@"Id"</span>, <span class="string">@"id"</span>, <span class="string">@"ext.id"</span>]&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 黑名单, 若实现该方法, 黑名单之内的key均不作处理</span></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)modelPropertyBlacklist;</span><br><span class="line">+ (<span class="built_in">NSArray</span> *)modelPropertyBlacklist &#123;</span><br><span class="line">    <span class="keyword">return</span> @[<span class="string">@"name"</span>, <span class="string">@"age"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 白名单, 若实现该方法, 白名单之外的key均不作处理</span></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)modelPropertyWhitelist;</span><br><span class="line">+ (<span class="built_in">NSArray</span> *)modelPropertyWhitelist &#123;</span><br><span class="line">    <span class="keyword">return</span> @[<span class="string">@"name"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.要在JSON转Model的过程中根据情况创建不同类型的实例</span></span><br><span class="line">+ (<span class="keyword">nullable</span> Class)modelCustomClassForDictionary:(<span class="built_in">NSDictionary</span> *)dictionary;</span><br><span class="line">+ (Class)modelCustomClassForDictionary:(<span class="built_in">NSDictionary</span>*)dictionary &#123;</span><br><span class="line">    <span class="keyword">if</span> (dictionary[<span class="string">@"localName"</span>]) &#123;</span><br><span class="line">        <span class="keyword">return</span> [YYLocalUser <span class="keyword">class</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dictionary[<span class="string">@"remoteName"</span>]) &#123;</span><br><span class="line">        <span class="keyword">return</span> [YYRemoteUser <span class="keyword">class</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [YYBaseUser <span class="keyword">class</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.该方法发生在字典转模型之前, 最后对字典做一次处理</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span> *)modelCustomWillTransformFromDictionary:(<span class="built_in">NSDictionary</span> *)dic;</span><br><span class="line"><span class="comment">//- (NSDictionary *)modelCustomWillTransformFromDictionary:(NSDictionary *)dic&#123;</span></span><br><span class="line">    <span class="keyword">if</span> ([dic[<span class="string">@"sex"</span>] isEqualToString:<span class="string">@"Man"</span>]) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dic;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.JSON转为Model后, 进行数据校验</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)modelCustomTransformFromDictionary:(<span class="built_in">NSDictionary</span> *)dic;</span><br><span class="line">- (<span class="built_in">BOOL</span>)modelCustomTransformFromDictionary:(<span class="built_in">NSDictionary</span> *)dic &#123;</span><br><span class="line">    <span class="built_in">NSNumber</span> *timestamp = dic[<span class="string">@"timestamp"</span>];</span><br><span class="line">    <span class="keyword">if</span> (![timestamp isKindOfClass:[<span class="built_in">NSNumber</span> <span class="keyword">class</span>]]) <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    _createdAt = [<span class="built_in">NSDate</span> dateWithTimeIntervalSince1970:timestamp.floatValue];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模型容器属性中的所需要存放的数据类型</span></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)modelContainerPropertyGenericClass;</span><br><span class="line">+ (<span class="built_in">NSDictionary</span> *)modelContainerPropertyGenericClass &#123;</span><br><span class="line">    <span class="keyword">return</span> @&#123;<span class="string">@"shadows"</span> : [Shadow <span class="keyword">class</span>],</span><br><span class="line">             <span class="string">@"borders"</span> : Border.class,</span><br><span class="line">             <span class="string">@"attachments"</span> : <span class="string">@"Attachment"</span> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Model转为JSON后, 进行数据校验</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)modelCustomTransformToDictionary:(<span class="built_in">NSMutableDictionary</span> *)dic;</span><br><span class="line">- (<span class="built_in">BOOL</span>)modelCustomTransformToDictionary:(<span class="built_in">NSMutableDictionary</span> *)dic &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_createdAt) <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    dic[<span class="string">@"timestamp"</span>] = @(_createdAt.timeIntervalSince1970);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
@@ -234,181 +151,57 @@
 <p>参考资料<br> <a href="https://juejin.im/post/5a097435f265da431769a49c" target="_blank" rel="noopener">https://juejin.im/post/5a097435f265da431769a49c</a><br> <a href="https://juejin.im/post/5a1296e36fb9a044fb075d5e" target="_blank" rel="noopener">https://juejin.im/post/5a1296e36fb9a044fb075d5e</a><br> <a href="https://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/" target="_blank" rel="noopener">https://blog.ibireme.com/2015/10/23/ios_model_framework_benchmark/</a><br> <a href="https://blog.csdn.net/game3108/article/details/52416868" target="_blank" rel="noopener">https://blog.csdn.net/game3108/article/details/52416868</a></p>
 </blockquote>
 
+      </div>
       
-    </div>
-
-    
-      
-      
-
-
-
-      
-      
-    
-
-    
       <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/iOS开发/">iOS开发</a>
+            <a href="/tags/阅读/">阅读</a>
+            </div>
         
-          <div class="post-tags">
-            
-              <a href="/tags/iOS开发/">iOS开发</a>
-            
-              <a href="/tags/阅读/">阅读</a>
-            
-          </div>
-        
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2019/01/02/读「YYCache」/">
+        <nav class="post-nav"><a class="prev" href="/2019/01/02/读「YYCache」/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">读「YYCache」</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    
-    
-      <a class="next" href="/2018/09/30/详解performSelector/">
+    <a class="next" href="/2018/09/30/详解performSelector/">
         <span class="next-text nav-default">详解performSelector</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
-    
-  </nav>
-
-      </footer>
-    
-
-  </article>
-
-
-          </div>
-          
-  <div class="comments" id="comments">
-    
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
-  </div>
-
-
-        </div>  
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
       </main>
 
-      <footer id="footer" class="footer">
-
-  <div class="social-links">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
-        
-      
-    
-      
-        
-          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        
-      
-    
-    
-    
-  </div>
-
-
-<div class="copyright">
+      <footer id="footer" class="footer"><div class="social-links"><a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        </div><div class="copyright">
   <span class="power-by">
     May Be 
   </span>
-  
+  <span class="division"> </span>
   <span class="theme-info">
     Better  
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
+    <a class="theme-link" href="https://chenyalun.com"></a>
   </span>
 
-  <span class="copyright-year">
-    
-    &copy; 
-     
-      2014 - 
-    
-    2019
-
-    <span class="heart">
+  <span class="copyright-year">&copy;2014 - 2019<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>
   </span>
 </div>
-      </footer>
+</footer>
 
       <div class="back-to-top" id="back-to-top">
         <i class="iconfont icon-up"></i>
       </div>
-    </div>
-
-    
-  
-
-  
-  
-  <script>
-    var cloudTieConfig = {
-      url: document.location.href, 
-      sourceId: "",
-      productKey: "f132359147224247aa1c3ad32d20490b",
-      target: "cloud-tie-wrapper"
-    };
-  </script>
-  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-
-
-
-
-
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
-
-    
-  </body>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
 </html>

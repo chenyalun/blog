@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta charset="UTF-8">
+  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -10,74 +8,42 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-
-  <meta name="description" content="详解KVC源码">
-
-
-
-
-  <meta name="keywords" content="iOS开发,阅读,">
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Ya">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
-
-
-
+<meta name="description" content="详解KVC源码"><meta name="keywords" content="iOS开发, 阅读, Ya"><link rel="alternate" href="/atom.xml" title="Ya"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
 <link rel="canonical" href="http://blog.chenyalun.com/2019/05/05/详解KVC源码/">
 
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css"><link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
 
-<meta name="description" content="KVC源码阅读。">
-<meta name="keywords" content="iOS开发,阅读">
-<meta property="og:type" content="article">
-<meta property="og:title" content="详解KVC源码">
-<meta property="og:url" content="http://blog.chenyalun.com/2019/05/05/详解KVC源码/index.html">
-<meta property="og:site_name" content="Ya">
-<meta property="og:description" content="KVC源码阅读。">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://image.chenyalun.com/2019/05/05/001.png">
-<meta property="og:image" content="https://image.chenyalun.com/2019/05/05/002.png">
-<meta property="og:updated_time" content="2019-05-06T03:51:10.872Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="详解KVC源码">
-<meta name="twitter:description" content="KVC源码阅读。">
-<meta name="twitter:image" content="https://image.chenyalun.com/2019/05/05/001.png">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
-
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
-<script>
-  var CONFIG = {
-    search: false,
-    searchPath: "/search.xml",
-    fancybox: true,
-    toc: true,
-  }
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz",
+      appKey: "KV4HGemodXGubbgselgJbMls"
+    });
+  </script><script>
+  window.config = {"leancloud":{"app_id":"6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz","app_key":"KV4HGemodXGubbgselgJbMls"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
 </script>
 
-
-
-
-  
-
-
-
-    <title> 详解KVC源码 · Ya </title>
+    <title>详解KVC源码 - Ya</title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -92,114 +58,62 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    
-      <a href="/archives/">
-        <li class="mobile-menu-item">
-          
-          
-            Archives
-          
-        </li>
-      </a>
-    
-      <a href="/tags/阅读/">
-        <li class="mobile-menu-item">
-          
-          
-            Tags
-          
-        </li>
-      </a>
-    
-      <a href="/about">
-        <li class="mobile-menu-item">
-          
-          
-            About
-          
-        </li>
-      </a>
-    
-  </ul>
+  <ul class="mobile-menu-list"><a href="/archives/">
+        <li class="mobile-menu-item">时间线
+          </li>
+      </a><a href="/tags/阅读/">
+        <li class="mobile-menu-item">阅读
+          </li>
+      </a><a href="/about">
+        <li class="mobile-menu-item">关于
+          </li>
+      </a></ul>
 </nav>
-
-    <div class="container" id="mobile-panel">
+<div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
   <a href="/." class="logo">Ya</a>
 </div>
 
-<nav class="site-navbar">
-  
-    <ul id="menu" class="menu">
-      
-        <li class="menu-item">
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            
-            
-              时间线
-            
-          </a>
+            时间线
+            </a>
         </li>
-      
-        <li class="menu-item">
+      <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            
-            
-              阅读
-            
-          </a>
+            阅读
+            </a>
         </li>
-      
-        <li class="menu-item">
+      <li class="menu-item">
           <a class="menu-item-link" href="/about">
-            
-            
-              关于
-            
-          </a>
+            关于
+            </a>
         </li>
-      
-      
-    </ul>
-  
-</nav>
-
-      </header>
+      </ul></nav>
+</header>
 
       <main id="main" class="main">
         <div class="content-wrapper">
-          <div id="content" class="content">
-            
-  
-  <article class="post">
+          <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">
-        
-          详解KVC源码
-        
-      </h1>
+      <h1 class="post-title">详解KVC源码
+        </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019年5月5日
+          2019-05-05
+        </span><span class="post-visits" data-url="/2019/05/05/详解KVC源码/" data-title="详解KVC源码"> ^_^
+          
         </span>
-      </div>
+        </div>
     </header>
 
-    
-    
-  <div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#接口"><span class="toc-text">接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#集合代理对象"><span class="toc-text">集合代理对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSArray"><span class="toc-text">NSArray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSSet"><span class="toc-text">NSSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSOrderedSet"><span class="toc-text">NSOrderedSet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合操作"><span class="toc-text">集合操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分类的KVC"><span class="toc-text">分类的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#取值"><span class="toc-text">取值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#valueForKey"><span class="toc-text">valueForKey:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四"><span class="toc-text">方法四</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法五"><span class="toc-text">方法五</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法指针怎么查找"><span class="toc-text">方法指针怎么查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例变量怎么查找"><span class="toc-text">实例变量怎么查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DSKeyValueMethodGetter如何创建"><span class="toc-text">DSKeyValueMethodGetter如何创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-DSKeyValueMethodGetter构造方法中生成IMP"><span class="toc-text">1. DSKeyValueMethodGetter构造方法中生成IMP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在父类DSKeyValueAccessor中-对class-key-selector-imp-method-参数-参数数量等信息进行保存"><span class="toc-text">2. 在父类DSKeyValueAccessor中, 对class key selector imp method 参数 参数数量等信息进行保存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DSKeyValueIvarGetter如何创建"><span class="toc-text">DSKeyValueIvarGetter如何创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么根据Getter取值"><span class="toc-text">怎么根据Getter取值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-线程校验"><span class="toc-text">1. 线程校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-直接调用Getter中存储的方法实现-getter-implementation"><span class="toc-text">2. 直接调用Getter中存储的方法实现(getter.implementation)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#valueForKeyPath"><span class="toc-text">valueForKeyPath:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设值"><span class="toc-text">设值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#setValue"><span class="toc-text">setValue:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一-1"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二-1"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三-1"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四-1"><span class="toc-text">方法四</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么根据Setter设值"><span class="toc-text">怎么根据Setter设值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setValue-forKeyPath"><span class="toc-text">setValue:forKeyPath:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合对象的KVC"><span class="toc-text">集合对象的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSArray的KVC"><span class="toc-text">NSArray的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口-1"><span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#求和"><span class="toc-text">求和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求平均值"><span class="toc-text">求平均值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求数量"><span class="toc-text">求数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求最大值"><span class="toc-text">求最大值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求最小值"><span class="toc-text">求最小值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取数组"><span class="toc-text">获取数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重数组"><span class="toc-text">获取去重数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取成员数组"><span class="toc-text">获取成员数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重的成员数组"><span class="toc-text">获取去重的成员数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取集合数组"><span class="toc-text">获取集合数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重的集合数组"><span class="toc-text">获取去重的集合数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSSet的KVC"><span class="toc-text">NSSet的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSOrderedSet的KVC"><span class="toc-text">NSOrderedSet的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSDictionary的KVC"><span class="toc-text">NSDictionary的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他分类的KVC"><span class="toc-text">其他分类的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableDictionary的KVC"><span class="toc-text">NSMutableDictionary的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSUserDefaults的KVC"><span class="toc-text">NSUserDefaults的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSNull的KVC"><span class="toc-text">NSNull的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
-  </div>
-
-
-    <div class="post-content">
-      
-        <p></p><p align="center"> KVC源码阅读。 </p><br><a id="more"></a><p></p>
+  </div><div class="post-content"><p></p><p align="center"> KVC源码阅读。 </p><br><a id="more"></a><p></p>
 <p>源码来自：<a href="https://github.com/renjinkui2719/DIS_KVC_KVO" target="_blank" rel="noopener">https://github.com/renjinkui2719/DIS_KVC_KVO</a> 。感谢作者。</p>
 <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span>(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line"><span class="comment">// 是否可以直接访问实例变量(实例变量访问开关, 默认YES)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">class</span>, <span class="keyword">readonly</span>) <span class="built_in">BOOL</span> accessInstanceVariablesDirectly;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过key访问</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 尝试验证将要设定的value(ioValue指针指向的对象)是否合理有效</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> _Nullable * _Nonnull)ioValue forKey:(<span class="built_in">NSString</span> *)inKey error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</span><br><span class="line"><span class="comment">// 获取相对应的精确容器类型</span></span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="built_in">NSMutableOrderedSet</span> *)mutableOrderedSetValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="built_in">NSMutableSet</span> *)mutableSetValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过keyPath访问</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> _Nullable * _Nonnull)ioValue forKeyPath:(<span class="built_in">NSString</span> *)inKeyPath error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSMutableOrderedSet</span> *)mutableOrderedSetValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSMutableSet</span> *)mutableSetValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找key失败默认抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForUndefinedKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 设置value失败默认抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forUndefinedKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 设置value为nil时抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">void</span>)setNilValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 传入key数组, 返回一个成员变量名和变量值的键值对组成的字典(可用于模型转字典)</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)keys;</span><br><span class="line"><span class="comment">// 字典转模型</span></span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)keyedValues;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 容器扩展</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSArray</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">nullable</span> ObjectType)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSMutableDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> ObjectType)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSSet</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSOrderedSet</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <h2 id="集合代理对象"><a href="#集合代理对象" class="headerlink" title="集合代理对象"></a>集合代理对象</h2><p>这里简单总结集合代理对象的使用。</p>
@@ -397,175 +311,52 @@
 <p>参考资料<br><a href="https://nshipster.cn/kvc-collection-operators/" target="_blank" rel="noopener">https://nshipster.cn/kvc-collection-operators/</a><br><a href="https://www.jianshu.com/p/a50ea091e1f4" target="_blank" rel="noopener">https://www.jianshu.com/p/a50ea091e1f4</a><br><a href="http://hufeng825.github.io/2013/09/23/ios33/" target="_blank" rel="noopener">http://hufeng825.github.io/2013/09/23/ios33/</a><br><a href="https://www.jianshu.com/p/938855e842e4" target="_blank" rel="noopener">https://www.jianshu.com/p/938855e842e4</a><br><a href="https://suhou.github.io/2017/09/29/KVC原理小记/" target="_blank" rel="noopener">https://suhou.github.io/2017/09/29/KVC原理小记/</a><br><a href="http://blog.cocoabit.com/ios-settter-benchmark/" target="_blank" rel="noopener">http://blog.cocoabit.com/ios-settter-benchmark/</a></p>
 </blockquote>
 
+      </div>
       
-    </div>
-
-    
-      
-      
-
-
-
-      
-      
-    
-
-    
       <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/iOS开发/">iOS开发</a>
+            <a href="/tags/阅读/">阅读</a>
+            </div>
         
-          <div class="post-tags">
-            
-              <a href="/tags/iOS开发/">iOS开发</a>
-            
-              <a href="/tags/阅读/">阅读</a>
-            
-          </div>
-        
-        
-        
-  <nav class="post-nav">
-    
-    
-      <a class="next" href="/2019/04/25/读「FDFullscreenPopGesture」/">
+        <nav class="post-nav"><a class="next" href="/2019/04/25/读「FDFullscreenPopGesture」/">
         <span class="next-text nav-default">读「FDFullscreenPopGesture」</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
-    
-  </nav>
-
-      </footer>
-    
-
-  </article>
-
-
-          </div>
-          
-  <div class="comments" id="comments">
-    
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
-  </div>
-
-
-        </div>  
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
       </main>
 
-      <footer id="footer" class="footer">
-
-  <div class="social-links">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
-        
-      
-    
-      
-        
-          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        
-      
-    
-    
-    
-  </div>
-
-
-<div class="copyright">
+      <footer id="footer" class="footer"><div class="social-links"><a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        </div><div class="copyright">
   <span class="power-by">
     May Be 
   </span>
-  
+  <span class="division"> </span>
   <span class="theme-info">
     Better  
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
+    <a class="theme-link" href="https://chenyalun.com"></a>
   </span>
 
-  <span class="copyright-year">
-    
-    &copy; 
-     
-      2014 - 
-    
-    2019
-
-    <span class="heart">
+  <span class="copyright-year">&copy;2014 - 2019<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>
   </span>
 </div>
-      </footer>
+</footer>
 
       <div class="back-to-top" id="back-to-top">
         <i class="iconfont icon-up"></i>
       </div>
-    </div>
-
-    
-  
-
-  
-  
-  <script>
-    var cloudTieConfig = {
-      url: document.location.href, 
-      sourceId: "",
-      productKey: "f132359147224247aa1c3ad32d20490b",
-      target: "cloud-tie-wrapper"
-    };
-  </script>
-  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-
-
-
-
-
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
-
-    
-  </body>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
 </html>
