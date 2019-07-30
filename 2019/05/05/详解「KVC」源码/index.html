@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -8,42 +10,74 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 
-<meta name="theme-color" content="#f8f5ec">
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="详解「KVC」源码"><meta name="keywords" content="iOS开发, 阅读, Ya"><link rel="alternate" href="/atom.xml" title="Ya"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+
+  <meta name="description" content="详解「KVC」源码">
+
+
+
+
+  <meta name="keywords" content="iOS开发,阅读,">
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ya">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
+
+
+
 <link rel="canonical" href="http://blog.chenyalun.com/2019/05/05/详解「KVC」源码/">
 
-<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css"><link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
 
-<script id="baidu_push">
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
-  <script id="leancloud">
-    AV.init({
-      appId: "6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz",
-      appKey: "KV4HGemodXGubbgselgJbMls"
-    });
-  </script><script>
-  window.config = {"leancloud":{"app_id":"6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz","app_key":"KV4HGemodXGubbgselgJbMls"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+<meta name="description" content="KVC源码阅读。">
+<meta name="keywords" content="iOS开发,阅读">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解「KVC」源码">
+<meta property="og:url" content="http://blog.chenyalun.com/2019/05/05/详解「KVC」源码/index.html">
+<meta property="og:site_name" content="Ya">
+<meta property="og:description" content="KVC源码阅读。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://image.chenyalun.com/2019/05/05/001.png">
+<meta property="og:image" content="https://image.chenyalun.com/2019/05/05/002.png">
+<meta property="og:updated_time" content="2019-07-30T03:54:13.356Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="详解「KVC」源码">
+<meta name="twitter:description" content="KVC源码阅读。">
+<meta name="twitter:image" content="https://image.chenyalun.com/2019/05/05/001.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: true,
+    toc: true,
+  }
 </script>
 
-    <title>详解「KVC」源码 - Ya</title>
+
+
+
+  
+
+
+
+    <title> 详解「KVC」源码 · Ya </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -58,63 +92,115 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list"><a href="/archives/">
-        <li class="mobile-menu-item">时间线
-          </li>
-      </a><a href="/tags/阅读/">
-        <li class="mobile-menu-item">阅读
-          </li>
-      </a><a href="/about">
-        <li class="mobile-menu-item">关于
-          </li>
-      </a></ul>
+  <ul class="mobile-menu-list">
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags/阅读/">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            About
+          
+        </li>
+      </a>
+    
+  </ul>
 </nav>
-<div class="container" id="mobile-panel">
+
+    <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
   <a href="/." class="logo">Ya</a>
 </div>
 
-<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            时间线
-            </a>
+            
+            
+              时间线
+            
+          </a>
         </li>
-      <li class="menu-item">
+      
+        <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            阅读
-            </a>
+            
+            
+              阅读
+            
+          </a>
         </li>
-      <li class="menu-item">
+      
+        <li class="menu-item">
           <a class="menu-item-link" href="/about">
-            关于
-            </a>
+            
+            
+              关于
+            
+          </a>
         </li>
-      </ul></nav>
-</header>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
 
       <main id="main" class="main">
         <div class="content-wrapper">
-          <div id="content" class="content"><article class="post">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
     <header class="post-header">
-      <h1 class="post-title">详解「KVC」源码
-        </h1>
+      <h1 class="post-title">
+        
+          详解「KVC」源码
+        
+      </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019-05-05
-        </span><span class="post-visits" data-url="/2019/05/05/详解「KVC」源码/" data-title="详解「KVC」源码"> ^_^
-          
+          2019年5月5日
         </span>
-        </div>
+      </div>
     </header>
 
-    <div class="post-toc" id="post-toc">
+    
+    
+  <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#接口"><span class="toc-text">接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#集合代理对象"><span class="toc-text">集合代理对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSArray"><span class="toc-text">NSArray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSSet"><span class="toc-text">NSSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSOrderedSet"><span class="toc-text">NSOrderedSet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合操作"><span class="toc-text">集合操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分类的KVC"><span class="toc-text">分类的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#取值"><span class="toc-text">取值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#valueForKey"><span class="toc-text">valueForKey:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四"><span class="toc-text">方法四</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法五"><span class="toc-text">方法五</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法指针怎么查找"><span class="toc-text">方法指针怎么查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例变量怎么查找"><span class="toc-text">实例变量怎么查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSKeyValueMethodGetter如何创建"><span class="toc-text">NSKeyValueMethodGetter如何创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-NSKeyValueMethodGetter构造方法中生成IMP"><span class="toc-text">1. NSKeyValueMethodGetter构造方法中生成IMP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在父类NSKeyValueAccessor中-对class-key-selector-imp-method-参数-参数数量等信息进行保存"><span class="toc-text">2. 在父类NSKeyValueAccessor中, 对class key selector imp method 参数 参数数量等信息进行保存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSKeyValueIvarGetter如何创建"><span class="toc-text">NSKeyValueIvarGetter如何创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么根据Getter取值"><span class="toc-text">怎么根据Getter取值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-线程校验"><span class="toc-text">1. 线程校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-直接调用Getter中存储的方法实现-getter-implementation"><span class="toc-text">2. 直接调用Getter中存储的方法实现(getter.implementation)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#valueForKeyPath"><span class="toc-text">valueForKeyPath:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设值"><span class="toc-text">设值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#setValue"><span class="toc-text">setValue:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一-1"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二-1"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三-1"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四-1"><span class="toc-text">方法四</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么根据Setter设值"><span class="toc-text">怎么根据Setter设值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setValue-forKeyPath"><span class="toc-text">setValue:forKeyPath:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合对象的KVC"><span class="toc-text">集合对象的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSArray的KVC"><span class="toc-text">NSArray的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口-1"><span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#求和"><span class="toc-text">求和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求平均值"><span class="toc-text">求平均值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求数量"><span class="toc-text">求数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求最大值"><span class="toc-text">求最大值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求最小值"><span class="toc-text">求最小值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取数组"><span class="toc-text">获取数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重数组"><span class="toc-text">获取去重数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取成员数组"><span class="toc-text">获取成员数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重的成员数组"><span class="toc-text">获取去重的成员数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取集合数组"><span class="toc-text">获取集合数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重的集合数组"><span class="toc-text">获取去重的集合数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSSet的KVC"><span class="toc-text">NSSet的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSOrderedSet的KVC"><span class="toc-text">NSOrderedSet的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSDictionary的KVC"><span class="toc-text">NSDictionary的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他分类的KVC"><span class="toc-text">其他分类的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableDictionary的KVC"><span class="toc-text">NSMutableDictionary的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSUserDefaults的KVC"><span class="toc-text">NSUserDefaults的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSNull的KVC"><span class="toc-text">NSNull的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、接口"><span class="toc-text">一、接口</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#集合代理对象"><span class="toc-text">集合代理对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NSArray"><span class="toc-text">NSArray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSSet"><span class="toc-text">NSSet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSOrderedSet"><span class="toc-text">NSOrderedSet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#集合操作"><span class="toc-text">集合操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分类的KVC"><span class="toc-text">分类的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、取值"><span class="toc-text">二、取值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#valueForKey"><span class="toc-text">valueForKey:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四"><span class="toc-text">方法四</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法五"><span class="toc-text">方法五</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法指针怎么查找"><span class="toc-text">方法指针怎么查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例变量怎么查找"><span class="toc-text">实例变量怎么查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSKeyValueMethodGetter如何创建"><span class="toc-text">NSKeyValueMethodGetter如何创建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-NSKeyValueMethodGetter构造方法中生成IMP"><span class="toc-text">1. NSKeyValueMethodGetter构造方法中生成IMP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-在父类NSKeyValueAccessor中-对class-key-selector-imp-method-参数-参数数量等信息进行保存"><span class="toc-text">2. 在父类NSKeyValueAccessor中, 对class key selector imp method 参数 参数数量等信息进行保存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSKeyValueIvarGetter如何创建"><span class="toc-text">NSKeyValueIvarGetter如何创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么根据Getter取值"><span class="toc-text">怎么根据Getter取值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-线程校验"><span class="toc-text">1. 线程校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-直接调用Getter中存储的方法实现-getter-implementation"><span class="toc-text">2. 直接调用Getter中存储的方法实现(getter.implementation)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#valueForKeyPath"><span class="toc-text">valueForKeyPath:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、设值"><span class="toc-text">三、设值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#setValue"><span class="toc-text">setValue:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一-1"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二-1"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三-1"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法四-1"><span class="toc-text">方法四</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#怎么根据Setter设值"><span class="toc-text">怎么根据Setter设值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setValue-forKeyPath"><span class="toc-text">setValue:forKeyPath:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、集合对象的KVC"><span class="toc-text">四、集合对象的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSArray的KVC"><span class="toc-text">NSArray的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#接口"><span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#求和"><span class="toc-text">求和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求平均值"><span class="toc-text">求平均值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求数量"><span class="toc-text">求数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求最大值"><span class="toc-text">求最大值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求最小值"><span class="toc-text">求最小值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取数组"><span class="toc-text">获取数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重数组"><span class="toc-text">获取去重数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取成员数组"><span class="toc-text">获取成员数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重的成员数组"><span class="toc-text">获取去重的成员数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取集合数组"><span class="toc-text">获取集合数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取去重的集合数组"><span class="toc-text">获取去重的集合数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSSet的KVC"><span class="toc-text">NSSet的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSOrderedSet的KVC"><span class="toc-text">NSOrderedSet的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSDictionary的KVC"><span class="toc-text">NSDictionary的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#五、其他分类的KVC"><span class="toc-text">五、其他分类的KVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSMutableDictionary的KVC"><span class="toc-text">NSMutableDictionary的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSUserDefaults的KVC"><span class="toc-text">NSUserDefaults的KVC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSNull的KVC"><span class="toc-text">NSNull的KVC</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#六、总结"><span class="toc-text">六、总结</span></a></li></ol>
     </div>
-  </div><div class="post-content"><p></p><p align="center"> KVC源码阅读。 </p><br><a id="more"></a><p></p>
-<h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span>(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line"><span class="comment">// 是否可以直接访问实例变量(实例变量访问开关, 默认YES)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">class</span>, <span class="keyword">readonly</span>) <span class="built_in">BOOL</span> accessInstanceVariablesDirectly;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过key访问</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 尝试验证将要设定的value(ioValue指针指向的对象)是否合理有效</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> _Nullable * _Nonnull)ioValue forKey:(<span class="built_in">NSString</span> *)inKey error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</span><br><span class="line"><span class="comment">// 获取相对应的精确容器类型</span></span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="built_in">NSMutableOrderedSet</span> *)mutableOrderedSetValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="built_in">NSMutableSet</span> *)mutableSetValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过keyPath访问</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> _Nullable * _Nonnull)ioValue forKeyPath:(<span class="built_in">NSString</span> *)inKeyPath error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSMutableOrderedSet</span> *)mutableOrderedSetValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSMutableSet</span> *)mutableSetValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找key失败默认抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForUndefinedKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 设置value失败默认抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forUndefinedKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 设置value为nil时抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">void</span>)setNilValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 传入key数组, 返回一个成员变量名和变量值的键值对组成的字典(可用于模型转字典)</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)keys;</span><br><span class="line"><span class="comment">// 字典转模型</span></span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)keyedValues;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 容器扩展</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSArray</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">nullable</span> ObjectType)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSMutableDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> ObjectType)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSSet</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSOrderedSet</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p></p><p align="center"> KVC源码阅读。 </p><br><a id="more"></a><p></p>
+<h1 id="一、接口"><a href="#一、接口" class="headerlink" title="一、接口"></a>一、接口</h1><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSObject</span>(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line"><span class="comment">// 是否可以直接访问实例变量(实例变量访问开关, 默认YES)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">class</span>, <span class="keyword">readonly</span>) <span class="built_in">BOOL</span> accessInstanceVariablesDirectly;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过key访问</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 尝试验证将要设定的value(ioValue指针指向的对象)是否合理有效</span></span><br><span class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> _Nullable * _Nonnull)ioValue forKey:(<span class="built_in">NSString</span> *)inKey error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</span><br><span class="line"><span class="comment">// 获取相对应的精确容器类型</span></span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="built_in">NSMutableOrderedSet</span> *)mutableOrderedSetValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="built_in">NSMutableSet</span> *)mutableSetValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过keyPath访问</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> _Nullable * _Nonnull)ioValue forKeyPath:(<span class="built_in">NSString</span> *)inKeyPath error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSMutableOrderedSet</span> *)mutableOrderedSetValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line">- (<span class="built_in">NSMutableSet</span> *)mutableSetValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找key失败默认抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForUndefinedKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 设置value失败默认抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forUndefinedKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 设置value为nil时抛出异常, 可重写自行实现</span></span><br><span class="line">- (<span class="keyword">void</span>)setNilValueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 传入key数组, 返回一个成员变量名和变量值的键值对组成的字典(可用于模型转字典)</span></span><br><span class="line">- (<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)keys;</span><br><span class="line"><span class="comment">// 字典转模型</span></span><br><span class="line">- (<span class="keyword">void</span>)setValuesForKeysWithDictionary:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)keyedValues;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// 容器扩展</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSArray</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">nullable</span> ObjectType)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSMutableDictionary</span>&lt;<span class="title">KeyType</span>, <span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> ObjectType)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSSet</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSOrderedSet</span>&lt;<span class="title">ObjectType</span>&gt;(<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <h2 id="集合代理对象"><a href="#集合代理对象" class="headerlink" title="集合代理对象"></a>集合代理对象</h2><p>这里简单总结集合代理对象的使用。</p>
 <blockquote>
 <p>当我们在对象上调用 <code>-valueForKey:</code> 的时候，它可以返回 <code>NSArray</code>，<code>NSSet</code> 或是 <code>NSOrderedSet</code> 的集合代理对象。这个类没有实现通常的 <code>-&lt;Key&gt;</code> 方法，但是它实现了代理对象所需要使用的很多方法。</p>
@@ -148,7 +234,7 @@
 <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">Portion *p = [Portion <span class="keyword">new</span>];</span><br><span class="line">[p <span class="string">setValue:</span>@<span class="number">234</span> <span class="string">forKey:</span>@<span class="string">"volume"</span>];</span><br><span class="line">id m = [p <span class="string">valueForKey:</span>@<span class="string">"volume"</span>];</span><br></pre></td></tr></table></figure>
 <p>当然，本质上来讲，并KVC不介意这些方法在主类还是分类实现的，只有实现就成。上面的只是一个例子，实际上，完全依靠主类也是无妨的。</p>
 <figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Portion</span> :  <span class="title">NSObject</span></span></span><br><span class="line">- (<span class="built_in">NSNumber</span> *)primitiveVolume;</span><br><span class="line">- (<span class="keyword">void</span>)setPrimitiveVolume:(<span class="built_in">NSNumber</span> *)value;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Portion</span></span></span><br><span class="line"><span class="keyword">static</span> <span class="built_in">NSNumber</span> *gVolume;</span><br><span class="line">- (<span class="built_in">NSNumber</span> *)primitiveVolume &#123;</span><br><span class="line">    <span class="keyword">return</span> gVolume;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)setPrimitiveVolume:(<span class="built_in">NSNumber</span> *)value &#123;</span><br><span class="line">    gVolume = value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
-<h1 id="取值"><a href="#取值" class="headerlink" title="取值"></a>取值</h1><h2 id="valueForKey"><a href="#valueForKey" class="headerlink" title="valueForKey:"></a>valueForKey:</h2><p>苹果在接口这里已经给出了其基本原理：</p>
+<h1 id="二、取值"><a href="#二、取值" class="headerlink" title="二、取值"></a>二、取值</h1><h2 id="valueForKey"><a href="#valueForKey" class="headerlink" title="valueForKey:"></a>valueForKey:</h2><p>苹果在接口这里已经给出了其基本原理：</p>
 <blockquote>
 <p>The default implementation of this method does the following:</p>
 <ol>
@@ -224,7 +310,7 @@
 <h2 id="valueForKeyPath"><a href="#valueForKeyPath" class="headerlink" title="valueForKeyPath:"></a>valueForKeyPath:</h2><p>假定这里的keyPath为<code>@&quot;key1.key2.key3.key4&quot;</code>。</p>
 <figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath &#123;</span><br><span class="line">    <span class="keyword">if</span>(keyPath) &#123;</span><br><span class="line">        <span class="comment">// 字符串编码判断</span></span><br><span class="line">        <span class="built_in">CFStringEncoding</span> encoding = __CFDefaultEightBitStringEncoding;</span><br><span class="line">        <span class="keyword">if</span>(encoding == kCFStringEncodingInvalidId) &#123;</span><br><span class="line">            <span class="comment">// 编码无效 kCFStringEncodingInvalidId就是 (0xffffffffU)</span></span><br><span class="line">            encoding = __CFStringComputeEightBitStringEncoding();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 创建C字符串: "key1.key2.key3.key4"</span></span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *cStr = <span class="built_in">CFStringGetCStringPtr</span>((<span class="built_in">CFStringRef</span>)keyPath, encoding);</span><br><span class="line">        <span class="keyword">if</span>(cStr) &#123;</span><br><span class="line">            <span class="comment">// memchr函数:从头开始搜寻s 所指的内存内容前n 个字节，直到发现第一个值为c 的字节，则返回指向该字节的指针</span></span><br><span class="line">            <span class="comment">// 所以最后获取到包含'点符号'的后部分 即firstDotPointers为 ".key2.key3.key4"</span></span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">char</span> *firstDotPointer = memchr(cStr, <span class="string">'.'</span>, keyPath.length);</span><br><span class="line">            <span class="keyword">if</span>(firstDotPointer) &#123;</span><br><span class="line">                <span class="comment">// 这里的subKey是 "key1"</span></span><br><span class="line">                <span class="built_in">NSString</span> *subKey =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, firstDotPointer - cStr)] <span class="keyword">retain</span>];</span><br><span class="line">                <span class="comment">// 这里的subKeyPathLeft是 "key2.key3.key4"</span></span><br><span class="line">                <span class="built_in">NSString</span> *subKeyPathLeft =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(firstDotPointer - cStr + <span class="number">1</span>, keyPath.length -  (firstDotPointer - cStr + <span class="number">1</span>))] <span class="keyword">retain</span>];</span><br><span class="line">                <span class="comment">// 先获取到subKey的结果, 然后用它的结果再求subKeyPathLeft, 进入递归中</span></span><br><span class="line">                <span class="keyword">id</span> value = [[<span class="keyword">self</span> valueForKey:subKey] valueForKeyPath:subKeyPathLeft];</span><br><span class="line">                [subKey release];</span><br><span class="line">                [subKeyPathLeft release];</span><br><span class="line">                <span class="keyword">return</span> value;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// firstDotPointer不存在, 说明keyPath中没有'点符号', 则直接调用valueForKey</span></span><br><span class="line">                <span class="keyword">return</span> [<span class="keyword">self</span> valueForKey:keyPath];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 走到这里, 上面代码没有return, 说明keyPath为nil或者cStr为nil</span></span><br><span class="line">    <span class="built_in">NSRange</span> range = [keyPath rangeOfString:<span class="string">@"."</span> options:<span class="built_in">NSLiteralSearch</span> range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, keyPath.length)];</span><br><span class="line">    <span class="keyword">if</span>(range.length) &#123;</span><br><span class="line">        <span class="comment">// range.length不为0, 也即keyPath中有'点符号'</span></span><br><span class="line">        <span class="comment">// subKey为"key1"</span></span><br><span class="line">        <span class="built_in">NSString</span> *subKey =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, range.location)] <span class="keyword">retain</span>];</span><br><span class="line">        <span class="comment">// subKeyPathLeft为"key2.key3.key4"</span></span><br><span class="line">        <span class="built_in">NSString</span> *subKeyPathLeft =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(range.location + <span class="number">1</span>, keyPath.length -  (range.location + <span class="number">1</span>))] <span class="keyword">retain</span>];</span><br><span class="line">        <span class="comment">// 同样的, 先获取到subKey的结果, 然后用它的结果再求subKeyPathLeft, 进入递归中</span></span><br><span class="line">        <span class="keyword">id</span> value = [[<span class="keyword">self</span> valueForKey:subKey] valueForKeyPath:subKeyPathLeft];</span><br><span class="line">        [subKey release];</span><br><span class="line">        [subKeyPathLeft release];</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// keyPath为nil或者keyPath中没有'点符号', 直接调用valueForKey</span></span><br><span class="line">        <span class="keyword">return</span> [<span class="keyword">self</span> valueForKey:keyPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里就有一个问题了，相似的把keyPath拆分逻辑的逻辑为啥要写两个，一个转为C字符串拆分，一个直接拆分?  揣测两者的区别主要是对字符串编码的判断。</p>
-<h1 id="设值"><a href="#设值" class="headerlink" title="设值"></a>设值</h1><p>设值的流程就比较简单了。</p>
+<h1 id="三、设值"><a href="#三、设值" class="headerlink" title="三、设值"></a>三、设值</h1><p>设值的流程就比较简单了。</p>
 <blockquote>
 <p>The default implementation of this method does the following:</p>
 <ol>
@@ -266,7 +352,7 @@
 <p>直接调用Setter中存储的方法实现(getter.implementation)。</p>
 <h2 id="setValue-forKeyPath"><a href="#setValue-forKeyPath" class="headerlink" title="setValue:forKeyPath:"></a>setValue:forKeyPath:</h2><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath &#123;</span><br><span class="line">    <span class="keyword">if</span>(keyPath) &#123;</span><br><span class="line">        <span class="built_in">CFStringEncoding</span> encoding = __CFDefaultEightBitStringEncoding;</span><br><span class="line">        <span class="keyword">if</span>(encoding == kCFStringEncodingInvalidId) &#123;</span><br><span class="line">            encoding = __CFStringComputeEightBitStringEncoding();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> <span class="keyword">char</span> *keyPathCStr = <span class="built_in">CFStringGetCStringPtr</span>((<span class="built_in">CFStringRef</span>)keyPath, encoding);</span><br><span class="line">        <span class="keyword">if</span>(keyPathCStr) &#123;</span><br><span class="line">            <span class="keyword">const</span> <span class="keyword">char</span> *firstDotPointer = memchr(keyPathCStr, <span class="string">'.'</span>, keyPath.length);</span><br><span class="line">            <span class="keyword">if</span>(firstDotPointer) &#123;</span><br><span class="line">                <span class="built_in">NSString</span> *subKey =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, firstDotPointer - keyPathCStr)] <span class="keyword">retain</span>];</span><br><span class="line">                <span class="built_in">NSString</span> *subKeyPathAfterDot =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(firstDotPointer - keyPathCStr + <span class="number">1</span>, keyPath.length -  (firstDotPointer - keyPathCStr + <span class="number">1</span>))] <span class="keyword">retain</span>];</span><br><span class="line">                </span><br><span class="line">                [[<span class="keyword">self</span> valueForKey:subKey] setValue:value forKeyPath:subKeyPathAfterDot];</span><br><span class="line">                </span><br><span class="line">                [subKey release];</span><br><span class="line">                [subKeyPathAfterDot release];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                [<span class="keyword">self</span> setValue:value forKey:keyPath];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSRange</span> dotRange = [keyPath rangeOfString:<span class="string">@"."</span> options:<span class="built_in">NSLiteralSearch</span> range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, keyPath.length)];</span><br><span class="line">    <span class="keyword">if</span>(dotRange.length) &#123;</span><br><span class="line">        <span class="built_in">NSString</span> *subKey =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, dotRange.location)] <span class="keyword">retain</span>];</span><br><span class="line">        <span class="built_in">NSString</span> *subKeyPathAfterDot =  [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(dotRange.location + <span class="number">1</span>, keyPath.length -  (dotRange.location + <span class="number">1</span>))] <span class="keyword">retain</span>];</span><br><span class="line">        </span><br><span class="line">        [[<span class="keyword">self</span> valueForKey:subKey] setValue:value forKeyPath:subKeyPathAfterDot];</span><br><span class="line">        </span><br><span class="line">        [subKey release];</span><br><span class="line">        [subKeyPathAfterDot release];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">         [<span class="keyword">self</span> setValue:value forKey:keyPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>基本是与取值类似的逻辑。</p>
-<h1 id="集合对象的KVC"><a href="#集合对象的KVC" class="headerlink" title="集合对象的KVC"></a>集合对象的KVC</h1><h2 id="NSArray的KVC"><a href="#NSArray的KVC" class="headerlink" title="NSArray的KVC"></a>NSArray的KVC</h2><h3 id="接口-1"><a href="#接口-1" class="headerlink" title="接口"></a>接口</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSArray</span> (<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line"><span class="comment">// 返回Array内每个对象的“key”对应值组成的数组</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 如果keyPath中包含集合运算符, 则返回运算结果, 否则返回Array内每个对象的“keyPath”对应值组成的数组</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line"><span class="comment">// 设置Array里每个对象的key对应值为value</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h1 id="四、集合对象的KVC"><a href="#四、集合对象的KVC" class="headerlink" title="四、集合对象的KVC"></a>四、集合对象的KVC</h1><h2 id="NSArray的KVC"><a href="#NSArray的KVC" class="headerlink" title="NSArray的KVC"></a>NSArray的KVC</h2><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSArray</span> (<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line"><span class="comment">// 返回Array内每个对象的“key”对应值组成的数组</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="comment">// 如果keyPath中包含集合运算符, 则返回运算结果, 否则返回Array内每个对象的“keyPath”对应值组成的数组</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;</span><br><span class="line"><span class="comment">// 设置Array里每个对象的key对应值为value</span></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *operationKey = <span class="literal">nil</span>;</span><br><span class="line">    <span class="comment">// 集合运算符:如@count, @firstObject, @lastObject等</span></span><br><span class="line">    <span class="keyword">if</span> (key.length &amp;&amp; [key characterAtIndex:<span class="number">0</span>] == <span class="string">'@'</span> &amp;&amp; (operationKey = [key substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">1</span>, key.length - <span class="number">1</span>)])) &#123;</span><br><span class="line">        <span class="comment">// 去掉'@'便是operationKey</span></span><br><span class="line">        <span class="keyword">id</span> value =  [<span class="keyword">super</span> valueForKey:operationKey];</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 创建与自身相等数量的array</span></span><br><span class="line">        <span class="keyword">id</span> *objectsBuff = <span class="built_in">NSAllocateObjectArray</span>(<span class="keyword">self</span>.count);</span><br><span class="line">        <span class="comment">// 现在, 指针p与指针objectsBuff指向一致</span></span><br><span class="line">        <span class="keyword">id</span> *p = objectsBuff;</span><br><span class="line">        <span class="comment">// 遍历自身</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> <span class="keyword">self</span>) &#123;</span><br><span class="line">            <span class="comment">// 取出容器中的元素对应的value</span></span><br><span class="line">            <span class="keyword">id</span> eachValue = [object valueForKey:key];</span><br><span class="line">            <span class="comment">// 如果eachValue不存在, 则p的next指针指向的对象设置成 NSNull实例对象</span></span><br><span class="line">            <span class="comment">// 如果eachValue有值, 则p的next指针指向的对象设置为eachValue</span></span><br><span class="line">            *(p++) = (eachValue ? : [<span class="built_in">NSNull</span> null]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 根据objectsBuff创建一个数组, 这个objectsBuff就是'eachValue'的集合</span></span><br><span class="line">        <span class="comment">// 也即假定key为@"name", 遍历容器中所有元素, 取出每个元素key为@"name"对应的值, 这些值的集合就是数组arrayValue</span></span><br><span class="line">        <span class="built_in">NSArray</span> *arrayValue = [[[<span class="built_in">NSArray</span> alloc] initWithObjects:objectsBuff count:<span class="keyword">self</span>.count] autorelease];</span><br><span class="line">        <span class="comment">// 释放objectsBuff</span></span><br><span class="line">        <span class="built_in">NSFreeObjectArray</span>(objectsBuff);</span><br><span class="line">        <span class="keyword">return</span> arrayValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath &#123;</span><br><span class="line">    <span class="comment">// 集合运算符: 如@count, @firstObject, @"@unionOfObjects.friend.name"等</span></span><br><span class="line">    <span class="comment">// 这里以 @"@unionOfObjects.friend"为例</span></span><br><span class="line">    <span class="keyword">if</span>(keyPath.length &amp;&amp; [keyPath characterAtIndex:<span class="number">0</span>] == <span class="string">'@'</span>) &#123;</span><br><span class="line">        <span class="comment">// 说明keyPath中有'@符号', 且'@符号'在第0个位置处</span></span><br><span class="line">        <span class="built_in">NSRange</span> dotRange = [keyPath rangeOfString:<span class="string">@"."</span> options:<span class="built_in">NSLiteralSearch</span> range:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, keyPath.length)];</span><br><span class="line">        <span class="keyword">if</span>(dotRange.length) &#123;</span><br><span class="line">            <span class="comment">// dotRange.length不为0, 说明keyPath中有'@符号', 而且还有'点符号'</span></span><br><span class="line">            <span class="comment">// 取出包含运算符的那部分,如 @"unionOfObjects"</span></span><br><span class="line">            <span class="built_in">NSString</span> *operator = [keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">0</span>, dotRange.location)];</span><br><span class="line">            <span class="comment">// 取出除运算符之外的那部分,如 @"friend"</span></span><br><span class="line">            <span class="built_in">NSString</span> *keyPathForOperator = [keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(dotRange.location + <span class="number">1</span>, keyPath.length - (dotRange.location + <span class="number">1</span>))];</span><br><span class="line">            <span class="keyword">if</span>(keyPathForOperator) &#123;</span><br><span class="line">                <span class="comment">// 说明含运算符的那部分如 @"unionOfObjects" 和除运算符之外的那部分如 @"friend" 都存在</span></span><br><span class="line">                <span class="built_in">NSUInteger</span> operatorCStrLength = [operator lengthOfBytesUsingEncoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">                <span class="keyword">char</span> operatorCStr[operatorCStrLength + <span class="number">1</span>];</span><br><span class="line">                <span class="comment">// 转为C字符串operatorCStr, 也即 @"unionOfObjects" 转为 "unionOfObjects"</span></span><br><span class="line">                [operator getCString:operatorCStr maxLength:operatorCStrLength + <span class="number">1</span> encoding:<span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line">                <span class="comment">// 查找方法, 即: "unionOfObjectsForKeyPath:"</span></span><br><span class="line">                Method operatorMethod = <span class="built_in">NSKeyValueMethodForPattern</span>(<span class="keyword">self</span>.class, <span class="string">"%sForKeyPath:"</span>, operatorCStr);</span><br><span class="line">                <span class="keyword">if</span>(!operatorMethod) &#123;</span><br><span class="line">                    <span class="comment">// 上面的方法没找到, 就查找带下划线的那个: "_unionOfObjectsForKeyPath:"</span></span><br><span class="line">                    operatorMethod = <span class="built_in">NSKeyValueMethodForPattern</span>(<span class="keyword">self</span>.class, <span class="string">"_%sForKeyPath:"</span>, operatorCStr);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (operatorMethod) &#123;</span><br><span class="line">                    <span class="comment">// 查找成功, 调用运算符对应的方法</span></span><br><span class="line">                    <span class="keyword">id</span> value = ((<span class="keyword">id</span> (*)(<span class="keyword">id</span>,Method,<span class="built_in">NSString</span> *))methoinvoke)(<span class="keyword">self</span>,operatorMethod,keyPathForOperator);</span><br><span class="line">                    <span class="keyword">return</span> value;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// 没有找到, 说明是不支持的运算符</span></span><br><span class="line">                    [<span class="built_in">NSException</span> raise:<span class="built_in">NSInvalidArgumentException</span> format:<span class="string">@"[&lt;%@ %p&gt; valueForKeyPath:]: this class does not implement the %@ operation."</span>, <span class="keyword">self</span>.class,<span class="keyword">self</span>,operator];</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 说明只有包含运算符的那部分如 @"friend", 走NSObject的valueForKey逻辑</span></span><br><span class="line">                <span class="keyword">id</span> value = [<span class="keyword">super</span> valueForKey:operator];</span><br><span class="line">                <span class="keyword">return</span> value;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// keyPath中有'@符号', 但是没有'点符号', 取出除'@符号'之外的key</span></span><br><span class="line">            <span class="built_in">NSString</span> *key = [[keyPath substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">1</span>, keyPath.length - <span class="number">1</span>)] <span class="keyword">retain</span>];</span><br><span class="line">            <span class="comment">// 走NSObject的valueForKey逻辑</span></span><br><span class="line">            <span class="keyword">id</span> value = [<span class="keyword">super</span> valueForKey:key];</span><br><span class="line">            <span class="keyword">return</span> value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 没有'@符号',可能有'点符号', 走NSObject的valueForKeyPath逻辑</span></span><br><span class="line">        <span class="keyword">return</span> [<span class="keyword">super</span> valueForKeyPath: keyPath];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">id</span> object <span class="keyword">in</span> <span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="comment">// 对容器内的每一个元素都设值</span></span><br><span class="line">        [object setValue:value forKey:key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h4><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="comment">// @sum.keyPath, 例如 @"@sum.price", 传递到这个方法中, 参数keyPath为@"price"</span></span><br><span class="line">- (<span class="built_in">NSNumber</span> *)_sumForKeyPath:(<span class="built_in">NSString</span> *)keyPath &#123;</span><br><span class="line">    <span class="built_in">NSDecimal</span> resultDecimal = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="built_in">NSDecimalNumber</span> *zero = [<span class="built_in">NSDecimalNumber</span> zero];</span><br><span class="line">    <span class="keyword">if</span> (zero) resultDecimal = [zero decimalValue];</span><br><span class="line">    <span class="comment">// 这里使用NSDecimalNumber 保证精确度</span></span><br><span class="line">    <span class="built_in">NSDecimal</span> eachDecimal = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSUInteger</span> i=<span class="number">0</span>; i&lt;<span class="keyword">self</span>.count; ++i) &#123;</span><br><span class="line">        <span class="comment">// 获取每个对象的keyPath(如@"price")对应值</span></span><br><span class="line">        <span class="keyword">id</span> eachValue = [<span class="keyword">self</span> _valueForKeyPath:keyPath ofObjectAtIndex:i];</span><br><span class="line">        <span class="keyword">if</span> (eachValue) &#123;</span><br><span class="line">            eachDecimal = [eachValue decimalValue];</span><br><span class="line">            <span class="comment">// 累加</span></span><br><span class="line">            <span class="built_in">NSDecimalAdd</span>(&amp;resultDecimal, &amp;resultDecimal, &amp;eachDecimal, <span class="built_in">NSRoundBankers</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSDecimalNumber</span> decimalNumberWithDecimal:resultDecimal];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="求平均值"><a href="#求平均值" class="headerlink" title="求平均值"></a>求平均值</h4><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对 Array中每个对象的keyPath对应值 求平均值</span></span><br><span class="line"><span class="comment">// @avg.keyPath</span></span><br><span class="line">- (<span class="built_in">NSNumber</span> *)_avgForKeyPath:(<span class="built_in">NSString</span> *)keyPath &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.count) &#123;</span><br><span class="line">        <span class="comment">//总和 / 对象数</span></span><br><span class="line">        <span class="keyword">return</span> [(<span class="built_in">NSDecimalNumber</span>*)[<span class="keyword">self</span> _sumForKeyPath:keyPath]  decimalNumberByDividingBy:(<span class="built_in">NSDecimalNumber</span>*)[<span class="built_in">NSDecimalNumber</span> numberWithUnsignedInteger:<span class="keyword">self</span>.count]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -285,7 +371,7 @@
 <figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">- (id)<span class="symbol">valueForKey:</span>(NSString *)key &#123;</span><br><span class="line">    NSString *operationKey = <span class="literal">nil</span>;</span><br><span class="line">    /<span class="regexp">/ key中包含'@字符', 且'@字符'在第0位, 如 @"@count"</span></span><br><span class="line"><span class="regexp">    if(key.length &amp;&amp; [key characterAtIndex:0] == '@' &amp;&amp; (operationKey = [key substringWithRange:NSMakeRange(1, key.length - 1)])) &#123;</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/ 此时, operationKey为 @"count"</span></span><br><span class="line"><span class="regexp">        return [super valueForKey:operationKey];</span></span><br><span class="line"><span class="regexp">    &#125; else &#123;</span></span><br><span class="line"><span class="regexp">        /</span><span class="regexp">/ 没有'@字符', 走字典的objectForKey逻辑</span></span><br><span class="line"><span class="regexp">        return [self objectForKey:key];</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
 <p><code>valueForKey:</code>取值逻辑多了对<code>@</code>字符的处理。</p>
 <p><code>valueForKeyPath:</code>与NSArray的逻辑一致。</p>
-<h1 id="其他分类的KVC"><a href="#其他分类的KVC" class="headerlink" title="其他分类的KVC"></a>其他分类的KVC</h1><h2 id="NSMutableDictionary的KVC"><a href="#NSMutableDictionary的KVC" class="headerlink" title="NSMutableDictionary的KVC"></a>NSMutableDictionary的KVC</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="meta">@implementation</span> NSMutableDictionary (NSKeyValueCoding)</span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">setValue:</span>(id)value <span class="string">forKey:</span>(NSString *)key &#123;</span><br><span class="line">    <span class="keyword">if</span>(value) &#123;</span><br><span class="line">        [self <span class="string">setObject:</span>value <span class="string">forKey:</span>key];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        [self <span class="string">removeObjectForKey:</span>key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
+<h1 id="五、其他分类的KVC"><a href="#五、其他分类的KVC" class="headerlink" title="五、其他分类的KVC"></a>五、其他分类的KVC</h1><h2 id="NSMutableDictionary的KVC"><a href="#NSMutableDictionary的KVC" class="headerlink" title="NSMutableDictionary的KVC"></a>NSMutableDictionary的KVC</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="meta">@implementation</span> NSMutableDictionary (NSKeyValueCoding)</span><br><span class="line">- (<span class="keyword">void</span>)<span class="string">setValue:</span>(id)value <span class="string">forKey:</span>(NSString *)key &#123;</span><br><span class="line">    <span class="keyword">if</span>(value) &#123;</span><br><span class="line">        [self <span class="string">setObject:</span>value <span class="string">forKey:</span>key];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        [self <span class="string">removeObjectForKey:</span>key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@end</span></span><br></pre></td></tr></table></figure>
 <p>相比主类增加的特性是：在<code>NSMutableDictionary</code>中，如果设置的<code>value</code>为空，则自动将<code>key</code>对应的<code>value</code>移除。</p>
 <h2 id="NSUserDefaults的KVC"><a href="#NSUserDefaults的KVC" class="headerlink" title="NSUserDefaults的KVC"></a>NSUserDefaults的KVC</h2><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSUserDefaults</span> (<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key &#123;</span><br><span class="line">    <span class="built_in">NSString</span> *subKey = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">if</span>(key.length &amp;&amp; [key characterAtIndex:<span class="number">0</span>] == <span class="string">'@'</span> &amp;&amp; (subKey = [key substringWithRange:<span class="built_in">NSMakeRange</span>(<span class="number">1</span>, key.length - <span class="number">1</span>)])) &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="keyword">super</span> valueForKey:subKey];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="keyword">self</span> objectForKey:key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key &#123;</span><br><span class="line">    <span class="keyword">if</span>(value) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setObject:value forKey:key];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        [<span class="keyword">self</span> removeObjectForKey:key];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <p>整合了<code>NSDictionary</code>与<code>NSMutableDictionary</code>的特色。</p>
@@ -295,7 +381,7 @@
 </ol>
 <h2 id="NSNull的KVC"><a href="#NSNull的KVC" class="headerlink" title="NSNull的KVC"></a>NSNull的KVC</h2><figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSNull</span> (<span class="title">NSKeyValueCoding</span>)</span></span><br><span class="line">- (<span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <p>对于<code>NSNull</code>来说，无论怎么设值，取出来的值总是<code>NSNull</code>对象。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>纵观全流程，使用KVC与直接使用存取器相比，速度方面稍有逊色，揣测主要原因如下：</p>
+<h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><p>纵观全流程，使用KVC与直接使用存取器相比，速度方面稍有逊色，揣测主要原因如下：</p>
 <ol>
 <li>字符串处理。尤其是含有键路径的时候，使用到递归。（当然，含有<code>@</code>字符的集合运算符也算。）</li>
 <li>方法查找。流程颇多，尽管有使用<code>CFSet</code>作为缓存。</li>
@@ -311,57 +397,181 @@
 <p>参考资料<br><a href="https://nshipster.cn/kvc-collection-operators/" target="_blank" rel="noopener">https://nshipster.cn/kvc-collection-operators/</a><br><a href="https://www.jianshu.com/p/a50ea091e1f4" target="_blank" rel="noopener">https://www.jianshu.com/p/a50ea091e1f4</a><br><a href="http://hufeng825.github.io/2013/09/23/ios33/" target="_blank" rel="noopener">http://hufeng825.github.io/2013/09/23/ios33/</a><br><a href="https://www.jianshu.com/p/938855e842e4" target="_blank" rel="noopener">https://www.jianshu.com/p/938855e842e4</a><br><a href="https://suhou.github.io/2017/09/29/KVC原理小记/" target="_blank" rel="noopener">https://suhou.github.io/2017/09/29/KVC原理小记/</a><br><a href="http://blog.cocoabit.com/ios-settter-benchmark/" target="_blank" rel="noopener">http://blog.cocoabit.com/ios-settter-benchmark/</a></p>
 </blockquote>
 
-      </div>
       
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
       <footer class="post-footer">
-        <div class="post-tags">
-            <a href="/tags/iOS开发/">iOS开发</a>
-            <a href="/tags/阅读/">阅读</a>
-            </div>
         
-        <nav class="post-nav"><a class="prev" href="/2019/05/31/读「KVO」源码/">
+          <div class="post-tags">
+            
+              <a href="/tags/iOS开发/">iOS开发</a>
+            
+              <a href="/tags/阅读/">阅读</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/05/31/读「KVO」源码/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">读「KVO」源码</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    <a class="next" href="/2019/04/25/读「FDFullscreenPopGesture」/">
+    
+    
+      <a class="next" href="/2019/04/25/读「FDFullscreenPopGesture」/">
         <span class="next-text nav-default">读「FDFullscreenPopGesture」</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
-    </nav></footer>
-    </article></div><div class="comments" id="comments"></div></div>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
       </main>
 
-      <footer id="footer" class="footer"><div class="social-links"><a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
-        <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        </div><div class="copyright">
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+        
+          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
   <span class="power-by">
     May Be 
   </span>
-  <span class="division"> </span>
+  
   <span class="theme-info">
     Better  
-    <a class="theme-link" href="https://chenyalun.com"></a>
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
   </span>
 
-  <span class="copyright-year">&copy;2014 - 2019<span class="heart">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2014 - 
+    
+    2019
+
+    <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>
   </span>
 </div>
-</footer>
+      </footer>
 
       <div class="back-to-top" id="back-to-top">
         <i class="iconfont icon-up"></i>
       </div>
-    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
-  <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
-  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
-</body>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "f132359147224247aa1c3ad32d20490b",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
 </html>

@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.chenyalun.com/2019/01/02/%E8%AF%BB%E3%80%8CYYCache%E3%80%8D/</loc>
+    
+    <lastmod>2019-07-30T04:04:48.574Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/01/12/%E3%80%8CKVOController%E3%80%8D%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
+    
+    <lastmod>2019-07-30T03:58:22.122Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/03/21/%E5%9F%BA%E7%A1%80%E7%99%BE%E6%90%AD%E6%AC%BE%E3%80%8CPageMenu%E3%80%8D/</loc>
+    
+    <lastmod>2019-07-30T03:56:48.049Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.chenyalun.com/2019/04/25/%E8%AF%BB%E3%80%8CFDFullscreenPopGesture%E3%80%8D/</loc>
     
-    <lastmod>2019-06-05T02:24:42.221Z</lastmod>
+    <lastmod>2019-07-30T03:55:55.910Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/05/05/%E8%AF%A6%E8%A7%A3%E3%80%8CKVC%E3%80%8D%E6%BA%90%E7%A0%81/</loc>
+    
+    <lastmod>2019-07-30T03:54:13.356Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/07/31/%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/</loc>
+    
+    <lastmod>2019-07-30T03:51:57.540Z</lastmod>
     
   </url>
   
@@ -16,23 +51,9 @@
   </url>
   
   <url>
-    <loc>http://blog.chenyalun.com/2019/05/05/%E8%AF%A6%E8%A7%A3%E3%80%8CKVC%E3%80%8D%E6%BA%90%E7%A0%81/</loc>
-    
-    <lastmod>2019-05-30T12:02:34.464Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.chenyalun.com/2019/01/28/%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%9F%A5%E4%B8%AD%E5%BF%83/</loc>
     
     <lastmod>2019-05-20T07:00:23.582Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/03/21/%E5%9F%BA%E7%A1%80%E7%99%BE%E6%90%AD%E6%AC%BE%E3%80%8CPageMenu%E3%80%8D/</loc>
-    
-    <lastmod>2019-04-24T02:22:52.490Z</lastmod>
     
   </url>
   
@@ -47,20 +68,6 @@
     <loc>http://blog.chenyalun.com/2018/07/10/Runtime%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2019-03-29T03:04:01.874Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2017/01/12/Python3%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E8%A1%A8%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8/</loc>
-    
-    <lastmod>2019-03-29T03:03:57.189Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2017/01/13/Python3%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E8%A1%A8%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8/</loc>
-    
-    <lastmod>2019-03-29T03:03:52.013Z</lastmod>
     
   </url>
   
@@ -128,30 +135,9 @@
   </url>
   
   <url>
-    <loc>http://blog.chenyalun.com/2017/01/22/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0/</loc>
-    
-    <lastmod>2019-03-29T03:03:00.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2017/01/24/%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
-    
-    <lastmod>2019-03-29T03:02:53.931Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.chenyalun.com/2016/12/06/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20/</loc>
     
     <lastmod>2019-03-29T03:02:43.774Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2017/01/21/%E6%9C%B4%E7%B4%A0%E7%AE%97%E6%B3%95%E5%92%8CKMP%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E4%B8%B2%E5%8C%B9%E9%85%8D/</loc>
-    
-    <lastmod>2019-03-29T03:02:38.829Z</lastmod>
     
   </url>
   
@@ -208,20 +194,6 @@
     <loc>http://blog.chenyalun.com/2018/12/20/%E8%AF%BB%E3%80%8CYYModel%E3%80%8D/</loc>
     
     <lastmod>2019-03-29T03:01:31.589Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/01/12/%E3%80%8CKVOController%E3%80%8D%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
-    
-    <lastmod>2019-03-29T03:01:27.514Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/01/02/%E8%AF%BB%E3%80%8CYYCache%E3%80%8D/</loc>
-    
-    <lastmod>2019-03-29T03:01:03.911Z</lastmod>
     
   </url>
   

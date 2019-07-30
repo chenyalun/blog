@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -8,42 +10,71 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 
-<meta name="theme-color" content="#f8f5ec">
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-<meta name="description" content="实现通知中心"><meta name="keywords" content="iOS开发, Ya"><link rel="alternate" href="/atom.xml" title="Ya"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+
+  <meta name="description" content="实现通知中心">
+
+
+
+
+  <meta name="keywords" content="iOS开发,">
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ya">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
+
+
+
 <link rel="canonical" href="http://blog.chenyalun.com/2019/01/28/实现通知中心/">
 
-<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css"><link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
 
-<script id="baidu_push">
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-<script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
-  <script id="leancloud">
-    AV.init({
-      appId: "6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz",
-      appKey: "KV4HGemodXGubbgselgJbMls"
-    });
-  </script><script>
-  window.config = {"leancloud":{"app_id":"6TxhaeHxBXUD0Ve4JVeecCsg-gzGzoHsz","app_key":"KV4HGemodXGubbgselgJbMls"},"toc":true,"fancybox":true,"pjax":true,"latex":false};
+<meta name="description" content="自己去实现NotificationCenter。">
+<meta name="keywords" content="iOS开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现通知中心">
+<meta property="og:url" content="http://blog.chenyalun.com/2019/01/28/实现通知中心/index.html">
+<meta property="og:site_name" content="Ya">
+<meta property="og:description" content="自己去实现NotificationCenter。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-05-20T07:00:23.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实现通知中心">
+<meta name="twitter:description" content="自己去实现NotificationCenter。">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: true,
+    toc: true,
+  }
 </script>
 
-    <title>实现通知中心 - Ya</title>
+
+
+
+  
+
+
+
+    <title> 实现通知中心 · Ya </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -58,62 +89,114 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list"><a href="/archives/">
-        <li class="mobile-menu-item">时间线
-          </li>
-      </a><a href="/tags/阅读/">
-        <li class="mobile-menu-item">阅读
-          </li>
-      </a><a href="/about">
-        <li class="mobile-menu-item">关于
-          </li>
-      </a></ul>
+  <ul class="mobile-menu-list">
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags/阅读/">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            About
+          
+        </li>
+      </a>
+    
+  </ul>
 </nav>
-<div class="container" id="mobile-panel">
+
+    <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
   <a href="/." class="logo">Ya</a>
 </div>
 
-<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            时间线
-            </a>
+            
+            
+              时间线
+            
+          </a>
         </li>
-      <li class="menu-item">
+      
+        <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            阅读
-            </a>
+            
+            
+              阅读
+            
+          </a>
         </li>
-      <li class="menu-item">
+      
+        <li class="menu-item">
           <a class="menu-item-link" href="/about">
-            关于
-            </a>
+            
+            
+              关于
+            
+          </a>
         </li>
-      </ul></nav>
-</header>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
 
       <main id="main" class="main">
         <div class="content-wrapper">
-          <div id="content" class="content"><article class="post">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
     <header class="post-header">
-      <h1 class="post-title">实现通知中心
-        </h1>
+      <h1 class="post-title">
+        
+          实现通知中心
+        
+      </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019-01-28
-        </span><span class="post-visits" data-url="/2019/01/28/实现通知中心/" data-title="实现通知中心"> ^_^
-          
+          2019年1月28日
         </span>
-        </div>
+      </div>
     </header>
 
-    <div class="post-toc" id="post-toc">
+    
+    
+  <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#接口文件"><span class="toc-text">接口文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Checklist"><span class="toc-text">Checklist</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#功能测试"><span class="toc-text">功能测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现文件"><span class="toc-text">实现文件</span></a></li></ol>
     </div>
-  </div><div class="post-content"><p></p><p align="center"> 自己去实现NotificationCenter。 </p><br><a id="more"></a><p></p>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p></p><p align="center"> 自己去实现NotificationCenter。 </p><br><a id="more"></a><p></p>
 <p>有几个弱引用容器在日常工作中没有用过，但是又特别想亲手实践一番。偶尔看到一篇文章，说是自己实现了系统中通知中心的功能，出于好奇，于是自己也尝试一番。</p>
 <p>主要原理就是创建一个字典observerMap，notificationName作为key，NSMapTable作为value。在这个NSMapTable中，观察者observer作为key，用于存放观察者的NSHashSet作为value。挺绕的。</p>
 <h1 id="接口文件"><a href="#接口文件" class="headerlink" title="接口文件"></a>接口文件</h1><p>接口与系统保持一致。</p>
@@ -142,56 +225,179 @@
 <p>参考资料：<br><a href="http://southpeak.github.io/2015/03/20/cocoa-foundation-nsnotificationcenter/" target="_blank" rel="noopener">http://southpeak.github.io/2015/03/20/cocoa-foundation-nsnotificationcenter/</a></p>
 </blockquote>
 
-      </div>
       
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
       <footer class="post-footer">
-        <div class="post-tags">
-            <a href="/tags/iOS开发/">iOS开发</a>
-            </div>
         
-        <nav class="post-nav"><a class="prev" href="/2019/03/21/基础百搭款「PageMenu」/">
+          <div class="post-tags">
+            
+              <a href="/tags/iOS开发/">iOS开发</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/03/21/基础百搭款「PageMenu」/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">基础百搭款「PageMenu」</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    <a class="next" href="/2019/01/20/Weak Associated Object/">
+    
+    
+      <a class="next" href="/2019/01/20/Weak Associated Object/">
         <span class="next-text nav-default">Weak Associated Object</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
-    </nav></footer>
-    </article></div><div class="comments" id="comments"></div></div>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
       </main>
 
-      <footer id="footer" class="footer"><div class="social-links"><a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
-        <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        </div><div class="copyright">
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+        
+          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
   <span class="power-by">
     May Be 
   </span>
-  <span class="division"> </span>
+  
   <span class="theme-info">
     Better  
-    <a class="theme-link" href="https://chenyalun.com"></a>
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
   </span>
 
-  <span class="copyright-year">&copy;2014 - 2019<span class="heart">
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2014 - 
+    
+    2019
+
+    <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>
   </span>
 </div>
-</footer>
+      </footer>
 
       <div class="back-to-top" id="back-to-top">
         <i class="iconfont icon-up"></i>
       </div>
-    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
-  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
-  <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
-  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
-</body>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "f132359147224247aa1c3ad32d20490b",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
 </html>
