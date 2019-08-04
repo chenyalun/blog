@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="开源项目：YAScrollPlaceView">
+
+
+
+
+  <meta name="keywords" content="iOS开发,">
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ya">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
+
+
+
+<link rel="canonical" href="http://blog.chenyalun.com/2017/10/01/开源项目：YAScrollPlaceView/">
+
+
+<meta name="description" content="2019.8.4 补充内容   可以给UIScrollView、UITableView添加头尾视图。">
+<meta name="keywords" content="iOS开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开源项目：YAScrollPlaceView">
+<meta property="og:url" content="http://blog.chenyalun.com/2017/10/01/开源项目：YAScrollPlaceView/index.html">
+<meta property="og:site_name" content="Ya">
+<meta property="og:description" content="2019.8.4 补充内容   可以给UIScrollView、UITableView添加头尾视图。">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://image.chenyalun.com/2017/10/01/003.gif">
+<meta property="og:image" content="https://image.chenyalun.com/2017/10/01/005.gif">
+<meta property="og:image" content="https://image.chenyalun.com/2017/10/01/001.gif">
+<meta property="og:image" content="https://image.chenyalun.com/2017/10/01/002.gif">
+<meta property="og:updated_time" content="2019-08-04T08:46:19.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开源项目：YAScrollPlaceView">
+<meta name="twitter:description" content="2019.8.4 补充内容   可以给UIScrollView、UITableView添加头尾视图。">
+<meta name="twitter:image" content="https://image.chenyalun.com/2017/10/01/003.gif">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+
+<script>
+  var CONFIG = {
+    search: false,
+    searchPath: "/search.xml",
+    fancybox: true,
+    toc: true,
+  }
+</script>
+
+
+
+
+  
+
+
+
+    <title> 开源项目：YAScrollPlaceView · Ya </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Ya</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/tags/阅读/">
+        <li class="mobile-menu-item">
+          
+          
+            Tags
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            About
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Ya</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              时间线
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags/阅读/">
+            
+            
+              阅读
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          开源项目：YAScrollPlaceView
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017年10月1日
+        </span>
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、前言"><span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、思路"><span class="toc-text">二、思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、使用"><span class="toc-text">三、使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#给ScrollView设置占位图片"><span class="toc-text">给ScrollView设置占位图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#给tableView设置空白占位"><span class="toc-text">给tableView设置空白占位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态地显示或者隐藏"><span class="toc-text">动态地显示或者隐藏</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#四、总结"><span class="toc-text">四、总结</span></a></li>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <blockquote>
+<p>2019.8.4 补充内容</p>
+</blockquote>
+<p></p><p align="center"> 可以给UIScrollView、UITableView添加头尾视图。 </p><br><a id="more"></a><p></p>
+<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>百度畅听是我工作后的第一个项目，大概就是手百里面的“喜马拉雅”。</p>
+<p>某一天UE提了个需求，大意就是在<code>UITableView</code>底部加个logo图片，要求这张图片能随着<code>UITableViewCell</code>的滑动而跟着滑动。乍一想，可以使用直接使用<code>UITableView</code>的<code>tableFooterView</code>，赋值个<code>UIImageView</code>即可，可是还有一个要求：当数据很少的时候，这个logo图片必须紧挨着屏幕最下方。很显然，<code>tableFooterView</code>自己会跑到顶部，满足不了需求。</p>
+<p>关键是，那一阵子刚读了<code>MJRefresh</code>的源码，又痴迷于<code>Runtime</code>的各种魔法，走火入魔的厉害，还特别想写一个开源项目逞能，于是这个能给<code>UIScrollView</code>添加头部、尾部视图的框架产生了。</p>
+<p>项目地址:<a href="https://github.com/ChenYalun/YAScrollPlaceView" target="_blank" rel="noopener">https://github.com/ChenYalun/YAScrollPlaceView</a></p>
+<h1 id="二、思路"><a href="#二、思路" class="headerlink" title="二、思路"></a>二、思路</h1><p>思路很简单。</p>
+<ol>
+<li>使用KVO监听<code>UIScrollView</code>的<code>contentSize</code>和<code>contentOffset</code>。</li>
+<li><p>根据<code>contentSize</code>确定FooterView的位置。</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line">HeaderView<span class="selector-class">.y</span> = -size.<span class="attribute">height</span>;</span><br><span class="line">FooterView<span class="selector-class">.y</span> = contentSize.<span class="attribute">height</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置<code>UIScrollView</code>的<code>contentInset</code>，给占位视图腾出空间。</p>
+</li>
+<li>根据<code>contentOffset.y</code>确定当前占位视图是否可以跟着滑动。<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 伪代码</span></span><br><span class="line"><span class="built_in">if</span> (contentOffset.y + scrollView.<span class="built_in">height</span> - scrollView.contentInset.bottom - scrollView.contentSize.<span class="built_in">height</span> &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    FooterView.y = contentOffset.y + scrollView.<span class="built_in">height</span> - scrollView.contentInset.bottom;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>大致就是这样，剩下的就是时机和接口了。</p>
+<ol>
+<li><p>在<code>didMoveToSuperview</code>中添加KVO，在<code>willMoveToSuperview</code>中移除KVO。</p>
+<p> 这两个成双成对，之所以不放在<code>dealloc</code>里面移除，是考虑到有同一个视图被<code>didMoveToSuperview</code>多次的情况。当然，视图<code>dealloc</code>的时候是会调用<code>willMoveToSuperview</code>方法的，只不过这个<code>newSuperview</code>为空。</p>
+</li>
+<li><p>给<code>UIScrollView</code>添加关联属性。<br>无需多言，没有侵入性。</p>
+ <figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">-</span> (YAScrollHeaderView *)<span class="selector-tag">scrollHeaderView</span> &#123;</span><br><span class="line">    <span class="selector-tag">return</span> <span class="selector-tag">objc_getAssociatedObject</span>(self, <span class="variable">@selector</span>(scrollHeaderView));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">-</span> (void)<span class="selector-tag">setScrollHeaderView</span><span class="selector-pseudo">:(YAScrollHeaderView</span> *)<span class="selector-tag">scrollHeaderView</span> &#123;</span><br><span class="line">    <span class="selector-tag">if</span> (scrollHeaderView == self.scrollHeaderView) <span class="selector-tag">return</span> ;</span><br><span class="line">    <span class="selector-attr">[self.scrollHeaderView removeFromSuperview]</span>;</span><br><span class="line">    <span class="selector-attr">[self addSubview:scrollHeaderView]</span>;</span><br><span class="line">    <span class="selector-tag">objc_setAssociatedObject</span>(self, <span class="variable">@selector</span>(scrollHeaderView), scrollHeaderView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结构设计</p>
+</li>
+</ol>
+<ul>
+<li><code>YAScrollHeaderView</code>和<code>YAScrollFooterView</code>均继承自<code>YAScrollPlaceView</code>。（这是模仿了<code>MJRefresh</code>）。核心逻辑统一在上层实现。</li>
+<li><code>YAScrollHeaderView</code>在初始化的时候设置自己<code>scrollPlaceViewType</code>为<code>YAScrollPlaceViewTypeHeader</code>。</li>
+<li><code>YAScrollFooterView</code>在初始化的时候设置自己<code>scrollPlaceViewType</code>为<code>YAScrollPlaceViewTypeFooter</code>。<br>这样，<code>YAScrollPlaceView</code>就可以根据子类来确定占位视图的逻辑。</li>
+</ul>
+<h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1><p>暴露出来的接口很清晰。<code>isFixed</code>用于设置占位视图是否在offset超出可见区域（过大或者过小）时跟随着滑动。这个占位视图可以动态显示或者隐藏，<code>canAnimate</code>设置其动画效果，<code>showAnimationDuration</code>和<code>dismissAnimationDuration</code>不必多说，是动画时间。</p>
+<figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">BOOL</span> isFixed; <span class="comment">///&lt; default NO.Fix the place view to the top or bottom.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">BOOL</span> canAnimate; <span class="comment">///&lt; default YES.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">CGFloat</span> height; <span class="comment">///&lt; default 0</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>, <span class="keyword">readonly</span>) <span class="built_in">BOOL</span> isVisible;; <span class="comment">///&lt; default NO.</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">NSTimeInterval</span> showAnimationDuration;    <span class="comment">///&lt; default 0.15</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">assign</span>) <span class="built_in">NSTimeInterval</span> dismissAnimationDuration;   <span class="comment">///&lt; default 0.15</span></span><br><span class="line">- (<span class="keyword">void</span>)showWithCompletion:(YAScrollPlaceViewShowCompletion)completion;</span><br><span class="line">- (<span class="keyword">void</span>)dismissWithCompletion:(YAScrollPlaceViewDismissCompletion)completion;</span><br></pre></td></tr></table></figure>
+<h3 id="给ScrollView设置占位图片"><a href="#给ScrollView设置占位图片" class="headerlink" title="给ScrollView设置占位图片"></a>给ScrollView设置占位图片</h3><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">UIImage *headerImage = [UIImage imageNamed:@<span class="string">"header"</span>]<span class="comment">;</span></span><br><span class="line">YAScrollHeaderView *headerView = [YAScrollHeaderView <span class="keyword">scrollHeaderViewWithSize:CGSizeMake(self.view.bounds.size.width, </span><span class="number">100</span>) <span class="keyword">backgroundImage:headerImage];</span></span><br><span class="line"><span class="keyword">self.scrollView.scrollHeaderView </span>= headerView<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>左图：数据较多时，视图固定（也可以配置不固定）；<br>右图：数据极少时，视图不固定、跟着滑动（也可以配置为固定）。</p>
+<p><img src="https://image.chenyalun.com/2017/10/01/003.gif" style="zoom:40%"><img src="https://image.chenyalun.com/2017/10/01/005.gif" style="zoom:40%"></p>
+<h3 id="给tableView设置空白占位"><a href="#给tableView设置空白占位" class="headerlink" title="给tableView设置空白占位"></a>给tableView设置空白占位</h3><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">YAScrollFooterView *footerView = [YAScrollFooterView new]<span class="comment">;</span></span><br><span class="line">footerView.height = <span class="number">100</span><span class="comment">;</span></span><br><span class="line">footerView.isFixed = YES<span class="comment">;</span></span><br><span class="line">self.tableView.<span class="keyword">scrollFooterView </span>= footerView<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h3 id="动态地显示或者隐藏"><a href="#动态地显示或者隐藏" class="headerlink" title="动态地显示或者隐藏"></a>动态地显示或者隐藏</h3><figure class="highlight lasso"><table><tr><td class="code"><pre><span class="line"><span class="built_in">self</span>.tableView.scrollHeaderView = <span class="built_in">self</span>.<span class="keyword">header</span>;</span><br><span class="line"><span class="built_in">self</span>.<span class="keyword">header</span>.showAnimationDuration = <span class="number">0.8</span>f;</span><br><span class="line"><span class="built_in">self</span>.<span class="keyword">header</span>.dismissAnimationDuration = <span class="number">0.8</span>f;</span><br><span class="line"><span class="meta">[</span><span class="built_in">self</span>.<span class="keyword">header</span> show<span class="meta">]</span>;</span><br><span class="line">// <span class="meta">[</span><span class="built_in">self</span>.<span class="keyword">header</span> dismissWithCompletion:nil<span class="meta">]</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.chenyalun.com/2017/10/01/001.gif" style="zoom:40%"><img src="https://image.chenyalun.com/2017/10/01/002.gif" style="zoom:40%"></p>
+<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整体而言，比较简单，没有啥复杂的逻辑。不过作为我的第一个开源框架，还挺有纪念意义的。有一方有二，二生三，三生万物。</p>
+<blockquote>
+<p>后记<br>2017年10月，离开北京，去渡劫。<br>2018年秋，存在两年的百度畅听正式下线。喜马拉雅、懒人听书，还活着。<br>2019年8月，整理博客时，完善文章内容并修复框架的bug。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/iOS开发/">iOS开发</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/07/10/Runtime基础/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Runtime基础</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/04/21/查找算法总结/">
+        <span class="next-text nav-default">查找算法总结</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+        
+          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    May Be 
+  </span>
+  
+  <span class="theme-info">
+    Better  
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2014 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Ya</span>
+  </span>
+</div>
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+  
+  
+  <script>
+    var cloudTieConfig = {
+      url: document.location.href, 
+      sourceId: "",
+      productKey: "f132359147224247aa1c3ad32d20490b",
+      target: "cloud-tie-wrapper"
+    };
+  </script>
+  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+
+
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
+
+    
+  </body>
+</html>
