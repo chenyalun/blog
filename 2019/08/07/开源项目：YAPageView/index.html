@@ -43,9 +43,9 @@
 <meta property="og:description" content="轻量级、新样式轮播视图。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://image.chenyalun.com/2019/08/07/003.gif">
-<meta property="og:image" content="https://image.chenyalun.com/2019/08/07/001.gif">
 <meta property="og:image" content="https://image.chenyalun.com/2019/08/07/002.gif">
-<meta property="og:updated_time" content="2019-08-07T04:45:25.708Z">
+<meta property="og:image" content="https://image.chenyalun.com/2019/08/07/001.gif">
+<meta property="og:updated_time" content="2019-08-07T06:10:53.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源项目：YAPageView">
 <meta name="twitter:description" content="轻量级、新样式轮播视图。">
@@ -202,7 +202,7 @@
       
         <p></p><p align="center"> 轻量级、新样式轮播视图。 </p><br><a id="more"></a><p></p>
 <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>在拜读<a href="http://adad184.com/" target="_blank" rel="noopener">里脊串的开发随笔</a>大神的博客时，发现个好玩的东西：<a href="http://adad184.com/2015/07/01/opensource-xxpagingscrollview/" target="_blank" rel="noopener">《开源项目:XXPagingScrollView》</a>。虽然是很常见的轮播视图，但是这种新样式的实现思路挺有意思。记得两年前在写某个项目时也遇到过这个，但是当然确实没有想出来咋实现这种非全屏有间隙的轮播控件。</p>
-<p>读完大神的文章，很是兴奋，一般是不爱造重复的轮子，但是作者这个是<a href="(https://github.com/adad184/XXPagingScrollView/blob/master/Classes/XXPagingScrollView.swift">Swift版本</a>的，而且是基础组件，少了很多功能，所以心血来潮，在大神基础上再进一步。</p>
+<p>读完大神的文章，很是兴奋，一般是不爱造重复的轮子，但是作者这个是<a href="https://github.com/adad184/XXPagingScrollView/blob/master/Classes/XXPagingScrollView.swift" target="_blank" rel="noopener">Swift版本</a>的，而且是基础组件，少了很多功能，所以心血来潮，在大神基础上再进一步。</p>
 <p>相比较来说更加完善了：</p>
 <ul>
 <li>支持设置pagingWidth</li>
@@ -283,8 +283,8 @@
 <h4 id="设置点击回调"><a href="#设置点击回调" class="headerlink" title="设置点击回调"></a>设置点击回调</h4><p>别忘了循环引用的问题。</p>
 <figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line">__<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</span><br><span class="line">pageView.tapHandler = ^(<span class="built_in">NSUInteger</span> idx, <span class="built_in">UIImage</span> *img, <span class="built_in">NSURL</span> *url) &#123;</span><br><span class="line">   __<span class="keyword">strong</span> <span class="keyword">typeof</span>(weakSelf) <span class="keyword">self</span> = weakSelf;</span><br><span class="line">   <span class="built_in">NSLog</span>(<span class="string">@"self = %@, index = %lu, url = %@"</span>, <span class="keyword">self</span>, (<span class="keyword">unsigned</span> <span class="keyword">long</span>)idx, url);</span><br><span class="line">   [<span class="keyword">self</span>.navigationController popViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整体而言，没有冗余逻辑，能优化的也优化了（比如索引计算对取模的优化、定时器懒加载、刷新时机次数等等），应该算是比较轻量了吧哈哈哈哈。</p>
-<p>具体应用方面，比如腾讯视频App中的首页Tab、会员Tab都有这种custom width的轮播图。<br><img src="https://image.chenyalun.com/2019/08/07/001.gif"></p>
-<p>QQ音乐中的发现Tab也是这种轮播图，不过不能无限循环（不能无限循环岂不是更简单。。）。<br><img src="https://image.chenyalun.com/2019/08/07/002.gif"></p>
+<p>具体应用方面，比如腾讯视频App中的首页Tab、会员Tab都有这种custom width的轮播图。<br><img src="https://image.chenyalun.com/2019/08/07/002.gif" style="zoom:80%"></p>
+<p>QQ音乐中的发现Tab也是这种轮播图，不过不能无限循环（不能无限循环岂不是更简单。。）。<br><img src="https://image.chenyalun.com/2019/08/07/001.gif" style="zoom:80%"></p>
 <p>好了，把两年前的坑填上了。</p>
 
       
