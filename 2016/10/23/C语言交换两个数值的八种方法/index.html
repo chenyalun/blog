@@ -34,18 +34,18 @@
 <link rel="canonical" href="http://blog.chenyalun.com/2016/10/23/C语言交换两个数值的八种方法/">
 
 
-<meta name="description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月。">
+<meta name="description" content="简单总结，以鞭笞岁月。">
 <meta name="keywords" content="C语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言交换两个数值的八种方法">
 <meta property="og:url" content="http://blog.chenyalun.com/2016/10/23/C语言交换两个数值的八种方法/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月。">
+<meta property="og:description" content="简单总结，以鞭笞岁月。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-03-29T03:03:10.157Z">
+<meta property="og:updated_time" content="2019-08-15T09:41:20.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言交换两个数值的八种方法">
-<meta name="twitter:description" content="在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月。">
+<meta name="twitter:description" content="简单总结，以鞭笞岁月。">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
@@ -189,101 +189,53 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#异或"><span class="toc-text">异或</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#位运算"><span class="toc-text">位运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#宏定义"><span class="toc-text">宏定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#两数之和"><span class="toc-text">两数之和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#两数之积"><span class="toc-text">两数之积</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#经典的交换函数"><span class="toc-text">经典的交换函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#直接添加变量"><span class="toc-text">直接添加变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#知识"><span class="toc-text">知识</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#异或"><span class="toc-text">异或</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#位运算"><span class="toc-text">位运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#宏定义"><span class="toc-text">宏定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#两数之和"><span class="toc-text">两数之和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#两数之积"><span class="toc-text">两数之积</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#经典的交换函数"><span class="toc-text">经典的交换函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#临时变量"><span class="toc-text">临时变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#知识"><span class="toc-text">知识</span></a></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <p></p><p align="center"> 在回顾C语言的时候,偶遇此题,因曾被其深虐,特意搜寻多种解决办法,以鞭笞岁月。 </p><br><a id="more"></a><p></p>
+        <p></p><p align="center"> 简单总结，以鞭笞岁月。 </p><br><a id="more"></a><p></p>
 <blockquote>
 <p>编译器:XCode8.0</p>
 </blockquote>
-<h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc, const <span class="built_in">char</span> * argv[]) &#123;</span><br><span class="line">   <span class="built_in">int</span> m = <span class="number">5</span>, <span class="built_in">n</span> = <span class="number">3</span>;</span><br><span class="line">   m = m ^ <span class="built_in">n</span>;</span><br><span class="line">   <span class="built_in">n</span> = m ^ <span class="built_in">n</span>;</span><br><span class="line">   m = m ^ <span class="built_in">n</span>;</span><br><span class="line">   </span><br><span class="line">   printf(<span class="string">"m:%d---n:%d"</span>,m,<span class="built_in">n</span>);</span><br><span class="line">   return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc， const <span class="built_in">char</span> * argv[]) &#123;</span><br><span class="line">   <span class="built_in">int</span> m = <span class="number">5</span>， <span class="built_in">n</span> = <span class="number">3</span>;</span><br><span class="line">   m = m ^ <span class="built_in">n</span>;</span><br><span class="line">   <span class="built_in">n</span> = m ^ <span class="built_in">n</span>;</span><br><span class="line">   m = m ^ <span class="built_in">n</span>;</span><br><span class="line">   </span><br><span class="line">   printf(<span class="string">"m:%d---n:%d"</span>，m，<span class="built_in">n</span>);</span><br><span class="line">   return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>异或一般是针对二进制数.</p>
 <ol>
-<li>两数异或,相同则得0,不同则得1</li>
-<li>x ^ x = 0,x ^ 0 = x<br>第二行:  m:0101 n:0011<br>第三行:  m:0110 n:0011<br>第四行:  n:0101 m:0110<br>第五行:  m:0011 n:0101<br>此时,已完成交换.</li>
+<li>两数异或，相同则得0，不同则得1。</li>
+<li>x ^ x = 0，x ^ 0 = x<br>第二行:  m:0101 n:0011<br>第三行:  m:0110 n:0011<br>第四行:  n:0101 m:0110<br>第五行:  m:0011 n:0101<br>此时，已完成交换.</li>
 </ol>
-<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><pre><code>int main(int argc, const char * argv[]) {
-    int m = 2147483648, n = 2147483647;
-    m = m + n - (n = m);
-    printf(&quot;m:%d---n:%d&quot;,m,n);
-    return 0;
-}
-</code></pre><ol>
-<li>从左向右依次进行,首先获取m与n的和,接着利用()运算符直接将m的值赋予n,此时n完成交换</li>
-<li>同时()内的值是m的值,两数之和减去m值便是n的值,再将n的值赋予m,到这里m完成交换</li>
-</ol>
-<h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><pre><code>int main(int argc, const char * argv[]) {
-int m = 5, n = 3;
-n = (long)((long)m &lt;&lt; 32 | (m = n)) &gt;&gt; 32;
-printf(&quot;m:%d---n:%d&quot;,m,n);
-return 0;
-}
-</code></pre><p>注:<code>__int64表示64位整型变量,Xcode中用long代替,VC6.0可直接使用__int64,即: b = (__int64)((__int64)a &lt;&lt; 32 | (a = b)) &gt;&gt; 32；</code></p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc， <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> m = <span class="number">2147483648</span>， n = <span class="number">2147483647</span>;</span><br><span class="line">   m = m + n - (n = m);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"m:%d---n:%d"</span>，m，n);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
-<li>(m = n):完成m的交换,()的值是n</li>
-<li>(long)((long)m &lt;&lt; 32 | n):得到的结果是 <code>00...0  0101   00...0  11</code>第一部分28个0,第三部分30个0 </li>
-<li>((long)((long)m &lt;&lt; 32 ) &gt;&gt; 32:得到的结果:把第三第四部分去掉,即<code>00...0  0101</code> 正好32位,且此值为m的值,再将其赋予n,完成n的交换.</li>
+<li>从左向右依次进行，首先获取m与n的和，接着利用()运算符直接将m的值赋予n，此时n完成交换。</li>
+<li>同时()内的值是m的值，两数之和减去m值便是n的值，再将n的值赋予m，到这里m完成交换。</li>
 </ol>
-<h1 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h1><pre><code>#define swap(x, y, z) ((z) = (x), (x) = (y), (y) = (z))
-
-int main(int argc, const char * argv[]) {
-    int m = 5, n = 3,t = 0;
-    swap(m, n, t);
-    printf(&quot;m:%d---n:%d&quot;,m,n);
-    return 0;
-}
-</code></pre><p>比较巧妙,把中间变量放在宏中.</p>
-<h1 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h1><pre><code>int main(int argc, char *argv[]) {
-int m = 5, n = 3;
-m = m + n;
-n = m - n;
-m = m - n;
-
-printf(&quot;m:%d---n:%d&quot;,m,n);
-return 0;
-}
-</code></pre><p>算是一种数学方法吧,但可能溢出.</p>
-<h1 id="两数之积"><a href="#两数之积" class="headerlink" title="两数之积"></a>两数之积</h1><pre><code>int main(int argc, const char * argv[]) {
-    int m = 5, n = 3;
-    m = m * n;
-    n = m / n;
-    m = m / n;
-
-    printf(&quot;m:%d---n:%d&quot;,m,n);
-    return 0;
-}
-</code></pre><p>两数之和方法的变形,n不能为0,m更可能溢出.</p>
-<h1 id="经典的交换函数"><a href="#经典的交换函数" class="headerlink" title="经典的交换函数"></a>经典的交换函数</h1><pre><code>void swap(int *a, int *b) {
-    int temp = 0;
-    temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int main(int argc, const char * argv[]) {
-    int m = 2147483648, n = 2147483647;
-    swap(&amp;m,&amp;n);
-    printf(&quot;m:%d---n:%d&quot;,m,n);
-    return 0;
-}
-</code></pre><h1 id="直接添加变量"><a href="#直接添加变量" class="headerlink" title="直接添加变量"></a>直接添加变量</h1><pre><code>int main(int argc, const char * argv[]) {
-    int m = 2147483648, n = 2147483647,temp = 0;
-    temp = m;
-    m = n;
-    n = temp;
-    printf(&quot;m:%d---n:%d&quot;,m,n);
-    return 0;
-}
-</code></pre><h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><p>int最大值，根据编译器类型不同而变化。<br>1 对于16位编译器，int占16位(2字节)。<br>int的最大值为32767.<br>2 对于32位和64位编译器，int占32位(4字节)。<br>int的最大值为2147483647</p>
-<p>3 可以通过打印sizeof(int)查看平台对应的int占用字节数。乘8后即为位数。<br>最高位为符号位，如位数为n，则最大值为<br>2^(n-1)<br>即2的n-1次幂。</p>
-<pre><code>printf(&quot;%lu&quot;,sizeof(int));
-int a = 2147483648;
-</code></pre><blockquote>
-<p>参考并致谢:<br><a href="http://blog.csdn.net/ljx_5489464/article/details/50042571" target="_blank" rel="noopener">http://blog.csdn.net/ljx_5489464/article/details/50042571</a><br><a href="http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/" target="_blank" rel="noopener">http://kiya.space/2013/07/26/c%E8%AF%AD%E8%A8%80swap(a,b)%E5%80%BC%E4%BA%A4%E6%8D%A2%E7%9A%844%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E2%80%A6/</a><br><a href="http://www.itdadao.com/articles/c15a428576p0.html" target="_blank" rel="noopener">http://www.itdadao.com/articles/c15a428576p0.html</a><br><a href="http://www.cnblogs.com/kubixuesheng/p/4104800.html" target="_blank" rel="noopener">http://www.cnblogs.com/kubixuesheng/p/4104800.html</a><br><a href="https://www.byvoid.com/blog/c-int64" target="_blank" rel="noopener">https://www.byvoid.com/blog/c-int64</a></p>
+<h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc， <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m = <span class="number">5</span>， n = <span class="number">3</span>;</span><br><span class="line">    n = (<span class="keyword">long</span>)((<span class="keyword">long</span>)m &lt;&lt; <span class="number">32</span> | (m = n)) &gt;&gt; <span class="number">32</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"m:%d---n:%d"</span>，m，n);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注:<code>__int64表示64位整型变量，Xcode中用long代替，VC6.0可直接使用__int64，即: b = (__int64)((__int64)a &lt;&lt; 32 | (a = b)) &gt;&gt; 32；</code></p>
+<ol>
+<li>(m = n):完成m的交换，()内的值是n。</li>
+<li>(long)((long)m &lt;&lt; 32 | n):得到的结果是 <code>00...0  0101   00...0  11</code>第一部分28个0，第三部分30个0 。</li>
+<li>((long)((long)m &lt;&lt; 32 ) &gt;&gt; 32:得到的结果:把第三第四部分去掉，即<code>00...0  0101</code> 正好32位，且此值为m的值，再将其赋予n，完成n的交换。</li>
+</ol>
+<h1 id="宏定义"><a href="#宏定义" class="headerlink" title="宏定义"></a>宏定义</h1><figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line">#define swap(<span class="name">x</span>， y， z) ((<span class="name">z</span>) = (<span class="name">x</span>)， (<span class="name">x</span>) = (<span class="name">y</span>)， (<span class="name">y</span>) = (<span class="name">z</span>))</span><br><span class="line">    </span><br><span class="line">int main(<span class="name">int</span> argc， const char * argv[]) &#123;</span><br><span class="line">   int m = 5， n = 3，t = 0;</span><br><span class="line">   swap(m， n， t);</span><br><span class="line">   printf("m:%d---n:%d"，m，n);</span><br><span class="line">   return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比较巧妙，把中间变量放在宏中。</p>
+<h1 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h1><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc， <span class="built_in">char</span> *argv[]) &#123;</span><br><span class="line">    <span class="built_in">int</span> m = <span class="number">5</span>， <span class="built_in">n</span> = <span class="number">3</span>;</span><br><span class="line">    m = m + <span class="built_in">n</span>;</span><br><span class="line">    <span class="built_in">n</span> = m - <span class="built_in">n</span>;</span><br><span class="line">    m = m - <span class="built_in">n</span>;</span><br><span class="line">        </span><br><span class="line">    printf(<span class="string">"m:%d---n:%d"</span>，m，<span class="built_in">n</span>);</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算是一种数学方法吧，但可能溢出。</p>
+<h1 id="两数之积"><a href="#两数之积" class="headerlink" title="两数之积"></a>两数之积</h1><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line"><span class="built_in">int</span> main(<span class="built_in">int</span> argc， const <span class="built_in">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="built_in">int</span> m = <span class="number">5</span>， <span class="built_in">n</span> = <span class="number">3</span>;</span><br><span class="line">    m = m * <span class="built_in">n</span>;</span><br><span class="line">    <span class="built_in">n</span> = m / <span class="built_in">n</span>;</span><br><span class="line">    m = m / <span class="built_in">n</span>;</span><br><span class="line">       </span><br><span class="line">    printf(<span class="string">"m:%d---n:%d"</span>，m，<span class="built_in">n</span>);</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两数之和方法的变形，n不能为0，m更可能溢出。</p>
+<h1 id="经典的交换函数"><a href="#经典的交换函数" class="headerlink" title="经典的交换函数"></a>经典的交换函数</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *a， <span class="keyword">int</span> *b)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> temp = <span class="number">0</span>;</span><br><span class="line">   temp = *a;</span><br><span class="line">   *a = *b;</span><br><span class="line">   *b = temp;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc， <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> m = <span class="number">2147483648</span>， n = <span class="number">2147483647</span>;</span><br><span class="line">   swap(&amp;m，&amp;n);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"m:%d---n:%d"</span>，m，n);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="临时变量"><a href="#临时变量" class="headerlink" title="临时变量"></a>临时变量</h1><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc， <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line">   <span class="keyword">int</span> m = <span class="number">2147483648</span>， n = <span class="number">2147483647</span>，temp = <span class="number">0</span>;</span><br><span class="line">   temp = m;</span><br><span class="line">   m = n;</span><br><span class="line">   n = temp;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"m:%d---n:%d"</span>，m，n);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h1><p><code>int</code>最大值，根据编译器类型不同而变化。</p>
+<ol>
+<li>对于16位编译器，int占16位(2字节)。int的最大值为32767。</li>
+<li>对于32位和64位编译器，int占32位(4字节)。int的最大值为2147483647。</li>
+<li>可以通过打印<code>sizeof(int)</code>查看平台对应的int占用字节数。乘8后即为位数。最高位为符号位，如位数为n，则最大值为<code>2^(n-1)</code> 即2的n-1次幂。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%lu"</span>，<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">2147483648</span>;</span><br></pre></td></tr></table></figure>
+<p>做了一次标题党。。。</p>
+<blockquote>
+<p>参考并致谢:<br><a href="http://blog.csdn.net/ljx_5489464/article/details/50042571" target="_blank" rel="noopener">C语言交换两个变量数值的几种方法</a><br><a href="http://www.cnblogs.com/kubixuesheng/p/4104800.html" target="_blank" rel="noopener">一道面试题：用多种方法实现两个数的交换</a></p>
 </blockquote>
 
       
