@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://image.chenyalun.com/2017/10/01/005.gif">
 <meta property="og:image" content="https://image.chenyalun.com/2017/10/01/001.gif">
 <meta property="og:image" content="https://image.chenyalun.com/2017/10/01/002.gif">
-<meta property="og:updated_time" content="2019-08-07T01:45:45.372Z">
+<meta property="og:updated_time" content="2019-08-21T07:57:47.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源项目：YAScrollPlaceView">
 <meta name="twitter:description" content="2019.8.4 补充内容   可以给UIScrollView、UITableView添加头尾视图。">
@@ -244,9 +244,9 @@
 <h3 id="给tableView设置空白占位"><a href="#给tableView设置空白占位" class="headerlink" title="给tableView设置空白占位"></a>给tableView设置空白占位</h3><figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">YAScrollFooterView *footerView = [YAScrollFooterView new]<span class="comment">;</span></span><br><span class="line">footerView.height = <span class="number">100</span><span class="comment">;</span></span><br><span class="line">footerView.isFixed = YES<span class="comment">;</span></span><br><span class="line">self.tableView.<span class="keyword">scrollFooterView </span>= footerView<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 <h3 id="动态地显示或者隐藏"><a href="#动态地显示或者隐藏" class="headerlink" title="动态地显示或者隐藏"></a>动态地显示或者隐藏</h3><figure class="highlight lasso"><table><tr><td class="code"><pre><span class="line"><span class="built_in">self</span>.tableView.scrollHeaderView = <span class="built_in">self</span>.<span class="keyword">header</span>;</span><br><span class="line"><span class="built_in">self</span>.<span class="keyword">header</span>.showAnimationDuration = <span class="number">0.8</span>f;</span><br><span class="line"><span class="built_in">self</span>.<span class="keyword">header</span>.dismissAnimationDuration = <span class="number">0.8</span>f;</span><br><span class="line"><span class="meta">[</span><span class="built_in">self</span>.<span class="keyword">header</span> show<span class="meta">]</span>;</span><br><span class="line">// <span class="meta">[</span><span class="built_in">self</span>.<span class="keyword">header</span> dismissWithCompletion:nil<span class="meta">]</span>;</span><br></pre></td></tr></table></figure>
 <p><img src="https://image.chenyalun.com/2017/10/01/001.gif" style="zoom:40%"><img src="https://image.chenyalun.com/2017/10/01/002.gif" style="zoom:40%"></p>
-<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整体而言，比较简单，没有啥复杂的逻辑。不过作为我的第一个开源框架，还挺有纪念意义的。有一方有二，二生三，三生万物。</p>
+<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整体而言，实现起来还是比较轻松的，没有啥极其复杂的逻辑。不过作为我的第一个开源Framework，还挺有纪念意义的。有一方有二，二生三，三生万物。</p>
 <blockquote>
-<p>后记<br>2017年10月，离开北京，去渡劫。<br>2018年秋，存在两年的百度畅听正式下线。喜马拉雅、懒人听书，还活着。<br>2019年8月，整理博客时，完善文章内容并修复框架的bug。</p>
+<p>后记<br>2018年秋，存在两年的百度畅听正式下线。喜马拉雅、懒人听书，还活着。<br>2019年8月，整理博客时，完善文章内容并修复框架的bug。</p>
 </blockquote>
 
       

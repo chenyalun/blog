@@ -34,22 +34,22 @@
 <link rel="canonical" href="http://blog.chenyalun.com/2017/03/05/排序算法实现/">
 
 
-<meta name="description" content="2017.4.24 修改部分代码2017.4.21 完善2017.3.25 修改   排序算法。">
+<meta name="description" content="2017.03.25 修改2017.04.24 修改部分代码   排序算法。">
 <meta name="keywords" content="Python,算法,排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序算法实现">
 <meta property="og:url" content="http://blog.chenyalun.com/2017/03/05/排序算法实现/index.html">
 <meta property="og:site_name" content="Ya">
-<meta property="og:description" content="2017.4.24 修改部分代码2017.4.21 完善2017.3.25 修改   排序算法。">
+<meta property="og:description" content="2017.03.25 修改2017.04.24 修改部分代码   排序算法。">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="http://static.chenyalun.com/2017/03/15/2017031501.gif">
 <meta property="og:image" content="http://static.chenyalun.com/2017/03/15/2017031503.gif">
 <meta property="og:image" content="http://static.chenyalun.com/2017/03/15/2017031502.gif">
 <meta property="og:image" content="http://static.chenyalun.com/2017/03/15/2017031504.jpg">
-<meta property="og:updated_time" content="2019-03-29T03:02:32.637Z">
+<meta property="og:updated_time" content="2019-08-17T23:37:36.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法实现">
-<meta name="twitter:description" content="2017.4.24 修改部分代码2017.4.21 完善2017.3.25 修改   排序算法。">
+<meta name="twitter:description" content="2017.03.25 修改2017.04.24 修改部分代码   排序算法。">
 <meta name="twitter:image" content="http://static.chenyalun.com/2017/03/15/2017031501.gif">
 
 
@@ -202,16 +202,16 @@
     <div class="post-content">
       
         <blockquote>
-<p>2017.4.24 修改部分代码<br>2017.4.21 完善<br>2017.3.25 修改</p>
+<p>2017.03.25 修改<br>2017.04.24 修改部分代码</p>
 </blockquote>
 <p align="center"> 排序算法。 </p>
 
 <a id="more"></a>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>因为笔试使用的编译器语言为Python2.7，所以以下代码使用Python2实现并规定从小到大为目标顺序。</p>
 <p>八大排序：<br>直接插入排序，希尔排序，简单选择排序，堆排序，冒泡排序，快速排序，归并排序，基数排序。</p>
-<h2 id="排序的稳定性"><a href="#排序的稳定性" class="headerlink" title="排序的稳定性"></a>排序的稳定性</h2><p>假定n1 = n2,排序前n1位于n2前面,如果排序后n1扔领先于n2,则称排序算法稳定.</p>
-<h2 id="内排序与外排序"><a href="#内排序与外排序" class="headerlink" title="内排序与外排序"></a>内排序与外排序</h2><p>内排序:排序的整个过程中,待排序的所有记录全部被放置在内存中.<br>外排序:由于排序的记录太多,排序的过程中,需要内外存之间多次交换才能进行.</p>
-<h1 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h1><p>原理:通过相邻元素的比较和交换，把较大的数交换到后面，类似水泡向上面(数组的后面，所以总是靠后的数字有序)升，故称为冒泡排序。如果两数相等，不交换，所以稳定。</p>
+<h2 id="排序的稳定性"><a href="#排序的稳定性" class="headerlink" title="排序的稳定性"></a>排序的稳定性</h2><p>假定n1 = n2，排序前n1位于n2前面，如果排序后n1扔领先于n2，则称排序算法稳定。</p>
+<h2 id="内排序与外排序"><a href="#内排序与外排序" class="headerlink" title="内排序与外排序"></a>内排序与外排序</h2><p>内排序：排序的整个过程中，待排序的所有记录全部被放置在内存中。<br>外排序：由于排序的记录太多，排序的过程中，需要内外存之间多次交换才能进行。</p>
+<h1 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h1><p>原理：通过相邻元素的比较和交换，把较大的数交换到后面，类似水泡向上面(数组的后面，所以总是靠后的数字有序)升，故称为冒泡排序。如果两数相等，不交换，所以稳定。</p>
 <p>普通方式</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span><span class="params">(tempList)</span>:</span></span><br><span class="line">	n = len(tempList)</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> xrange(n):</span><br><span class="line">		<span class="keyword">for</span> y <span class="keyword">in</span> xrange(<span class="number">1</span>, n - x):<span class="comment"># 索引n-x之后的数已经排序好了</span></span><br><span class="line">			<span class="keyword">if</span> tempList[y - <span class="number">1</span>] &gt; tempList[y]:</span><br><span class="line">				tempList[y], tempList[y - <span class="number">1</span>] = tempList[y - <span class="number">1</span>], tempList[y]</span><br><span class="line">	<span class="keyword">return</span> tempList</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> bubbleSort([<span class="number">5</span>,<span class="number">10</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">0</span>,<span class="number">30</span>])</span><br></pre></td></tr></table></figure>
 <p>优化1：某一趟遍历如果没有数据交换，则说明已经排好序了，无需继续迭代。</p>
@@ -374,9 +374,8 @@ k(i) &lt;= k(2i+1)
 <h1 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h1><p>算法分析：</p>
 <p><img src="http://static.chenyalun.com/2017/03/15/2017031504.jpg" alt></p>
 <p>代码保存在<a href="https://github.com/ChenYalun/YACode/tree/master/Blog" target="_blank" rel="noopener">GitHub</a>上。</p>
-<p>参考资料：</p>
 <blockquote>
-<p>《大话数据结构》<br><a href="https://zh.wikipedia.org/zh-hans/" target="_blank" rel="noopener">维基百科</a><br><a href="https://segmentfault.com/a/1190000006546190#articleHeader17" target="_blank" rel="noopener">segmentfault</a><br><a href="http://wuchong.me/blog/2014/02/09/algorithm-sort-summary/" target="_blank" rel="noopener">WuChong</a><br><a href="http://bubkoo.com/2014/01/13/sort-algorithm/selection-sort/" target="_blank" rel="noopener">bubkoo</a></p>
+<p>参考资料：<br>《大话数据结构》<br><a href="https://zh.wikipedia.org/zh-hans/" target="_blank" rel="noopener">维基百科</a><br><a href="https://segmentfault.com/a/1190000006546190#articleHeader17" target="_blank" rel="noopener">segmentfault</a><br><a href="http://wuchong.me/blog/2014/02/09/algorithm-sort-summary/" target="_blank" rel="noopener">WuChong</a><br><a href="http://bubkoo.com/2014/01/13/sort-algorithm/selection-sort/" target="_blank" rel="noopener">bubkoo</a></p>
 </blockquote>
 
       
@@ -409,9 +408,9 @@ k(i) &lt;= k(2i+1)
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/04/02/C++提要/">
+      <a class="prev" href="/2017/04/02/从C++到汇编/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">C++提要</span>
+        <span class="prev-text nav-default">从C++到汇编</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
