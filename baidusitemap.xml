@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://blog.chenyalun.com/2018/09/30/%E8%AF%A6%E8%A7%A3PerformSelector/</loc>
+    <loc>http://blog.chenyalun.com/2019/05/31/Key-Value%20Observing%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/</loc>
+    <lastmod>2019-08-22</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2019/05/05/%E8%AF%A6%E8%A7%A3Key-Value%20Coding%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2019-08-22</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2018/09/30/PerformSelector%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2019-08-22</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2017/10/01/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAScrollPlaceView/</loc>
@@ -20,12 +26,6 @@
     <lastmod>2019-08-19</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2016/10/23/C%E8%AF%AD%E8%A8%80%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%80%BC%E7%9A%84%E5%85%AB%E7%A7%8D%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2019-08-18</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/05/05/%E8%AF%A6%E8%A7%A3KVC%E6%BA%90%E7%A0%81/</loc>
-    <lastmod>2019-08-18</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/05/31/%E8%AF%BBKVO%E6%BA%90%E7%A0%81/</loc>
     <lastmod>2019-08-18</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2017/03/05/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/</loc>
