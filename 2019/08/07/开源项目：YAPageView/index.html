@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://image.chenyalun.com/2019/08/07/003.gif">
 <meta property="og:image" content="https://image.chenyalun.com/2019/08/07/002.gif">
 <meta property="og:image" content="https://image.chenyalun.com/2019/08/07/001.gif">
-<meta property="og:updated_time" content="2019-08-15T04:56:05.398Z">
+<meta property="og:updated_time" content="2019-08-27T02:27:13.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源项目：YAPageView">
 <meta name="twitter:description" content="轻量级、新样式轮播视图。">
@@ -272,7 +272,7 @@
 <figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line">pageView.tapHandler = ^(<span class="built_in">NSUInteger</span> idx, <span class="built_in">UIImage</span> *img, <span class="built_in">NSURL</span> *url, <span class="built_in">UIViewController</span> *<span class="keyword">self</span>) &#123;</span><br><span class="line">   [<span class="keyword">self</span>.navigationController popViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>确实能解决循环引用，而且不是很费事。但是，实际使用的时候是这样的：</p>
 <figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line">pageView.tapHandler = ^(<span class="built_in">NSUInteger</span> idx, <span class="built_in">UIImage</span> *img, <span class="built_in">NSURL</span> *url, <span class="keyword">id</span> controller) &#123;</span><br><span class="line">   <span class="comment">// 需要手动把id类型改成实际的类型，如UIViewController、UIView等等</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>并不知道外界的<code>self</code>是啥类型，只能用<code>id</code>。我感觉也不是很巧妙。我还没有想到更好的办法，所以，暂时还是使用主流的方式吧：</p>
+<p>并不知道外界的<code>self</code>是啥类型，只能用<code>id</code>。我感觉也不是很巧妙。我还没有想到更好的办法，所以，暂时还是使用苹果推荐的主流的方式吧：</p>
 <figure class="highlight objectivec"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span> (^tapHandler)(<span class="built_in">NSUInteger</span> idx, <span class="built_in">UIImage</span> *img, <span class="built_in">NSURL</span> *url);</span><br></pre></td></tr></table></figure>
 <p>就让外界使用weak-strong来解决循环引用问题。</p>
 <h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1><h4 id="本地图片"><a href="#本地图片" class="headerlink" title="本地图片"></a>本地图片</h4><p>本地图片直接传入UIImage数组即可。</p>

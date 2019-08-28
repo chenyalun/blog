@@ -42,7 +42,7 @@
 <meta property="og:site_name" content="Ya">
 <meta property="og:description" content="2017.4.3 补充Clang指令   Git/SVN/Linux/Vim/LLDB等常用、快忘记的命令总结。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-08-17T23:34:50.421Z">
+<meta property="og:updated_time" content="2019-08-26T09:39:09.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git&#x2F;LLDB&#x2F;Linux等常用命令">
 <meta name="twitter:description" content="2017.4.3 补充Clang指令   Git/SVN/Linux/Vim/LLDB等常用、快忘记的命令总结。">
@@ -626,7 +626,8 @@ N：上一个
 </code></pre><h1 id="LLDB"><a href="#LLDB" class="headerlink" title="LLDB"></a>LLDB</h1><h2 id="初步-4"><a href="#初步-4" class="headerlink" title="初步"></a>初步</h2><pre><code>help
 </code></pre><p>输出</p>
 <pre><code>p (int)self.view.subviews.count 基本类型 
-po self.view 对象
+po self.view 对象类型
+print self.view 更详细的打印
 </code></pre><p>修改</p>
 <pre><code>expr a = 3
 expr int $c = 10 声明一个新变量
@@ -638,7 +639,11 @@ expr int $c = 10 声明一个新变量
 </code></pre><p>寻址</p>
 <pre><code>image lookup --address 0x0000000103aca1e1
 寻找栈地址对应的代码位置
-</code></pre><h1 id="Clang"><a href="#Clang" class="headerlink" title="Clang"></a>Clang</h1><h2 id="初步-5"><a href="#初步-5" class="headerlink" title="初步"></a>初步</h2><p> 编译单个c源文件，并产生一个目标文件  </p>
+</code></pre><p>查看具体类型</p>
+<pre><code>image lookup --type NSURL
+</code></pre><p>断点</p>
+<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line">breakpoint <span class="keyword">set</span></span><br><span class="line">   -M &lt;<span class="function"><span class="keyword">method</span>&gt; <span class="params">( --<span class="keyword">method</span> &lt;<span class="keyword">method</span>&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">S</span> &lt;<span class="title">selector</span>&gt; <span class="params">( --<span class="keyword">selector</span> &lt;<span class="keyword">selector</span>&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">b</span> &lt;<span class="title">function</span>-<span class="title">name</span>&gt; <span class="params">( --basename &lt;<span class="keyword">function</span>-name&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">f</span> &lt;<span class="title">filename</span>&gt; <span class="params">( --file &lt;filename&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">l</span> &lt;<span class="title">linenum</span>&gt; <span class="params">( --line &lt;linenum&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">n</span> &lt;<span class="title">function</span>-<span class="title">name</span>&gt; <span class="params">( --name &lt;<span class="keyword">function</span>-name&gt; )</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="Clang"><a href="#Clang" class="headerlink" title="Clang"></a>Clang</h1><h2 id="初步-5"><a href="#初步-5" class="headerlink" title="初步"></a>初步</h2><p> 编译单个c源文件，并产生一个目标文件  </p>
 <pre><code>cc -c one.c
 </code></pre><p> 编译多个c源文件，并为每个文件产生一个目标文件  </p>
 <pre><code>cc -c one.c two.c three.c
