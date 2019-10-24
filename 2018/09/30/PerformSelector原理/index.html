@@ -44,7 +44,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://image.chenyalun.com/2018/09/30/002.png">
 <meta property="og:image" content="https://image.chenyalun.com/2018/09/30/001.png">
-<meta property="og:updated_time" content="2019-09-07T01:50:10.143Z">
+<meta property="og:updated_time" content="2019-09-22T07:22:44.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PerformSelector原理">
 <meta name="twitter:description" content="PerformSelector相关知识。">
@@ -363,7 +363,7 @@
 <pre><code>if ([obj respondsToSelector:@selector(evaluateJavaScript:completionHandler:)]) {
     [obj performSelector:@selector(evaluateJavaScript:completionHandler:) withObject:js withObject:nil];
 } 
-</code></pre><p>上面的只是冰山一角，其合理性需要结合具体的业务场景具体分析，只是想阐明，performSelector在一些情况下是有作用的，请不要嫌弃它。</p>
+</code></pre><p>上面的只是冰山一角，其合理性需要结合具体的业务场景具体分析，只是想阐明，performSelector在一些情况下是很有用的。</p>
 <hr>
 <blockquote>
 <p>参考资料<br><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmRules.html" target="_blank" rel="noopener">Advanced Memory Management Programming Guide</a><br><a href="https://zhongwuzw.github.io/2017/01/19/Objective-C之performSelector编译器内存泄露警告/" target="_blank" rel="noopener">Objective-C之performSelector编译器内存泄露警告</a><br><a href="https://blog.csdn.net/dean19900504/article/details/8067679" target="_blank" rel="noopener">用performSelector的时候要注意别内存泄露了</a><br><a href="https://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown" target="_blank" rel="noopener">PerformSelector May Cause a Leak</a><br><a href="https://blog.csdn.net/wei371522/article/details/81216853" target="_blank" rel="noopener">performSelector 注意问题及原理</a><br><a href="https://blog.csdn.net/king16304/article/details/52192259" target="_blank" rel="noopener">c/c++ read 函数和 write 函数</a></p>

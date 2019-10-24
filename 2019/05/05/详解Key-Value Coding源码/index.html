@@ -44,7 +44,7 @@
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://image.chenyalun.com/2019/05/05/001.png">
 <meta property="og:image" content="https://image.chenyalun.com/2019/05/05/002.png">
-<meta property="og:updated_time" content="2019-09-16T08:13:42.006Z">
+<meta property="og:updated_time" content="2019-09-17T03:32:29.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解Key-Value Coding源码">
 <meta name="twitter:description" content="KVC源码阅读。">
@@ -392,14 +392,7 @@
 <p><strong>1.访问私有成员变量</strong><br>对于只给出存取方法的对象，可以使用KVC直接访问私有成员变量。不过可能会破坏封装性，毕竟人家没暴露私有成员变量说明不想让人访问。更多的其实是体现在对系统库上访问上，“一不留神”就用到私有API了，我是乖孩子，不敢这么用，万一被苹果发现整个手百App就要被打回了。。。不过非私有API倒也可以尝试下，<a href="https://blog.chenyalun.com/2019/04/25/读「FDFullscreenPopGesture」/">FDFullscreenPopGesture</a>就用到了私有成员变量，极其巧妙地解决了全屏侧滑的问题。</p>
 <p><strong>2.集合操作</strong><br>在文章的第四部分【集合对象的KVC】，就已经描述过，求和、求平均值、去重巴拉巴拉，聊胜于无。</p>
 <p><strong>3.JSON解析</strong><br>前些日子，图搜进行框架改版，下发接口需要完全重构。这可是个危险的工作，今年后端已经出现两次问题了，主要是字段的类型出现错误，造成端启动的Crash。端上做了大量的防护工作，防不胜防，而且代码越来越难看。于是我想到了使用KVC解析字段，重新整理现有逻辑，脱敏后大致是这样：<br><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)<span class="string">handleResponse:</span>(NSDictionary *)response &#123;</span><br><span class="line">    <span class="keyword">if</span> (![response <span class="string">isKindOfClass:</span>NSDictionary.<span class="keyword">class</span>]) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 处理苹果业务</span></span><br><span class="line">    [self <span class="string">handleAppleConfigWithResponse:</span>[response <span class="string">valueForKeyPath:</span>@<span class="string">"dataset.config1.apple"</span>]];</span><br><span class="line">    <span class="comment">// 处理香蕉业务</span></span><br><span class="line">    [self <span class="string">handleBananaConfigWithResponse:</span>[response <span class="string">valueForKeyPath:</span>@<span class="string">"dataset.config2.banana"</span>]];</span><br><span class="line">    <span class="comment">// 处理橘子业务</span></span><br><span class="line">    [self <span class="string">handleOrangeConfigWithResponse:</span>[response <span class="string">valueForKeyPath:</span>@<span class="string">"dataset.config3.orange"</span>]];</span><br><span class="line">    <span class="comment">/// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用keyPath对应到具体的处理逻辑，我想到的好处有：</p>
-<ol>
-<li>不同字段之间逻辑隔离，一个字段出错，并不影响其他字段；</li>
-<li>字段、方法、逻辑一一对应，后期增加或者删减很方便，新同学熟悉业务逻辑也清晰明了；</li>
-<li>response是字典，大可放心，不会出现<code>valueForUndefinedKey</code>的异常；</li>
-<li>在每条处理逻辑中做类型保护工作，方便review，不会遗漏；</li>
-</ol>
-<p>一点点想法而已，如果你有更好的点子，请指教。</p>
+<p>使用keyPath对应到具体的处理逻辑，不同字段之间逻辑隔离，一个字段出错，并不影响其他字段；字段、方法、逻辑一一对应，后期增加或者删减很方便，新同学熟悉业务逻辑也清晰明了；response是字典，不会出现<code>valueForUndefinedKey</code>的异常。在每条处理逻辑中做类型保护工作，方便review，不会遗漏。</p>
 <hr>
 <p>强烈建议阅读：</p>
 <blockquote>

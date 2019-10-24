@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://blog.chenyalun.com/2019/03/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9APageMenu/</loc>
-    <lastmod>2019-09-16</lastmod>
+    <loc>http://blog.chenyalun.com/2019/08/07/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAPageView/</loc>
+    <lastmod>2019-10-16</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2019/01/28/NSNotificationCenter%E6%8E%A2%E7%B4%A2/</loc>
+    <lastmod>2019-10-15</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/04/25/%E8%AF%BB%E3%80%8CFDFullscreenPopGesture%E3%80%8D/</loc>
-    <lastmod>2019-09-16</lastmod>
+    <lastmod>2019-09-23</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2017/04/13/%E8%AF%BB%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/</loc>
+    <lastmod>2019-09-23</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2018/09/30/PerformSelector%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2019-09-22</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2019/01/02/%E8%AF%BB%E3%80%8CYYCache%E3%80%8D/</loc>
+    <lastmod>2019-09-17</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2019/05/31/Key-Value%20Observing%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/</loc>
+    <lastmod>2019-09-17</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/05/05/%E8%AF%A6%E8%A7%A3Key-Value%20Coding%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2019-09-17</lastmod>
+  </url>  <url>
+    <loc>http://blog.chenyalun.com/2019/03/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9APageMenu/</loc>
     <lastmod>2019-09-16</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2017/04/02/%E4%BB%8EC++%E5%88%B0%E6%B1%87%E7%BC%96/</loc>
     <lastmod>2019-09-12</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2018/09/30/PerformSelector%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2019-09-07</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/08/07/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAPageView/</loc>
-    <lastmod>2019-08-28</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/01/20/Weak%20Associated%20Object/</loc>
     <lastmod>2019-08-28</lastmod>
@@ -31,13 +43,7 @@
     <loc>http://blog.chenyalun.com/2017/02/20/Git:LLDB:Linux%E7%AD%89%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2019-08-26</lastmod>
   </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/05/31/Key-Value%20Observing%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/</loc>
-    <lastmod>2019-08-22</lastmod>
-  </url>  <url>
     <loc>http://blog.chenyalun.com/2017/10/01/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAScrollPlaceView/</loc>
-    <lastmod>2019-08-21</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2017/04/13/%E8%AF%BB%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/</loc>
     <lastmod>2019-08-21</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2017/04/09/%E8%AF%BB%E3%80%8ASQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E3%80%8B/</loc>
@@ -69,12 +75,6 @@
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/07/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84Swift%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2019-08-15</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/01/02/%E8%AF%BB%E3%80%8CYYCache%E3%80%8D/</loc>
-    <lastmod>2019-07-30</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/01/28/%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%9F%A5%E4%B8%AD%E5%BF%83/</loc>
-    <lastmod>2019-05-20</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2017/04/21/%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2019-03-29</lastmod>

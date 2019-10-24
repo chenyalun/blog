@@ -2,6 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.chenyalun.com/2019/08/07/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAPageView/</loc>
+    
+    <lastmod>2019-10-16T07:59:39.048Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/01/28/NSNotificationCenter%E6%8E%A2%E7%B4%A2/</loc>
+    
+    <lastmod>2019-10-15T02:20:11.886Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/04/25/%E8%AF%BB%E3%80%8CFDFullscreenPopGesture%E3%80%8D/</loc>
+    
+    <lastmod>2019-09-23T09:13:10.739Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2017/04/13/%E8%AF%BB%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/</loc>
+    
+    <lastmod>2019-09-23T03:22:15.289Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2018/09/30/PerformSelector%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2019-09-22T07:22:44.642Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/01/02/%E8%AF%BB%E3%80%8CYYCache%E3%80%8D/</loc>
+    
+    <lastmod>2019-09-17T07:12:50.754Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/05/31/Key-Value%20Observing%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/</loc>
+    
+    <lastmod>2019-09-17T03:33:08.930Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/05/05/%E8%AF%A6%E8%A7%A3Key-Value%20Coding%E6%BA%90%E7%A0%81/</loc>
+    
+    <lastmod>2019-09-17T03:32:29.747Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.chenyalun.com/2019/03/21/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9APageMenu/</loc>
     
     <lastmod>2019-09-16T09:10:17.293Z</lastmod>
@@ -9,37 +65,9 @@
   </url>
   
   <url>
-    <loc>http://blog.chenyalun.com/2019/04/25/%E8%AF%BB%E3%80%8CFDFullscreenPopGesture%E3%80%8D/</loc>
-    
-    <lastmod>2019-09-16T08:55:27.196Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/05/05/%E8%AF%A6%E8%A7%A3Key-Value%20Coding%E6%BA%90%E7%A0%81/</loc>
-    
-    <lastmod>2019-09-16T08:13:42.006Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.chenyalun.com/2017/04/02/%E4%BB%8EC++%E5%88%B0%E6%B1%87%E7%BC%96/</loc>
     
     <lastmod>2019-09-12T06:49:27.336Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2018/09/30/PerformSelector%E5%8E%9F%E7%90%86/</loc>
-    
-    <lastmod>2019-09-07T01:50:10.143Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/08/07/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAPageView/</loc>
-    
-    <lastmod>2019-08-28T12:12:51.409Z</lastmod>
     
   </url>
   
@@ -72,23 +100,9 @@
   </url>
   
   <url>
-    <loc>http://blog.chenyalun.com/2019/05/31/Key-Value%20Observing%E6%BA%90%E7%A0%81%E5%88%9D%E6%8E%A2/</loc>
-    
-    <lastmod>2019-08-22T09:52:48.519Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.chenyalun.com/2017/10/01/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAScrollPlaceView/</loc>
     
     <lastmod>2019-08-21T07:57:47.135Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2017/04/13/%E8%AF%BB%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/</loc>
-    
-    <lastmod>2019-08-21T07:52:08.584Z</lastmod>
     
   </url>
   
@@ -159,20 +173,6 @@
     <loc>http://blog.chenyalun.com/2019/07/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84Swift%E5%AE%9E%E7%8E%B0/</loc>
     
     <lastmod>2019-08-15T06:28:17.052Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/01/02/%E8%AF%BB%E3%80%8CYYCache%E3%80%8D/</loc>
-    
-    <lastmod>2019-07-30T04:04:48.574Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/01/28/%E5%AE%9E%E7%8E%B0%E9%80%9A%E7%9F%A5%E4%B8%AD%E5%BF%83/</loc>
-    
-    <lastmod>2019-05-20T07:00:23.582Z</lastmod>
     
   </url>
   
