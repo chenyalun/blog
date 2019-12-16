@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.chenyalun.com/2019/08/07/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAPageView/</loc>
+    <lastmod>2019-12-16</lastmod>
+  </url>  <url>
     <loc>http://blog.chenyalun.com/2019/09/30/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8ERunloop%E6%8B%BE%E9%81%97/</loc>
     <lastmod>2019-12-09</lastmod>
   </url>  <url>
@@ -11,9 +14,6 @@
     <lastmod>2019-10-28</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/09/11/iOS%E4%B8%AD%E7%9A%84Crash%E9%98%B2%E6%8A%A4/</loc>
-    <lastmod>2019-10-27</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/08/07/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%EF%BC%9AYAPageView/</loc>
     <lastmod>2019-10-27</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/01/28/NSNotificationCenter%E6%8E%A2%E7%B4%A2/</loc>
