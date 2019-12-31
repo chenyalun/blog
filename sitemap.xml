@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.chenyalun.com/2019/01/12/%E3%80%8CKVOController%E3%80%8D%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
+    
+    <lastmod>2019-12-31T11:22:18.738Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.chenyalun.com/2019/01/28/NSNotificationCenter%E6%8E%A2%E7%B4%A2/</loc>
     
     <lastmod>2019-12-26T07:28:22.438Z</lastmod>
@@ -110,13 +117,6 @@
     <loc>http://blog.chenyalun.com/2019/01/20/Weak%20Associated%20Object/</loc>
     
     <lastmod>2019-08-28T12:04:08.062Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/01/12/%E3%80%8CKVOController%E3%80%8D%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
-    
-    <lastmod>2019-08-28T11:42:20.827Z</lastmod>
     
   </url>
   

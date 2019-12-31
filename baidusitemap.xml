@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.chenyalun.com/2019/01/12/%E3%80%8CKVOController%E3%80%8D%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
+    <lastmod>2019-12-31</lastmod>
+  </url>  <url>
     <loc>http://blog.chenyalun.com/2019/01/28/NSNotificationCenter%E6%8E%A2%E7%B4%A2/</loc>
     <lastmod>2019-12-26</lastmod>
   </url>  <url>
@@ -47,9 +50,6 @@
     <lastmod>2019-09-12</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/01/20/Weak%20Associated%20Object/</loc>
-    <lastmod>2019-08-28</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/01/12/%E3%80%8CKVOController%E3%80%8D%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
     <lastmod>2019-08-28</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2018/07/10/Runtime%E5%9F%BA%E7%A1%80/</loc>
