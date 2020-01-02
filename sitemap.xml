@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.chenyalun.com/2019/12/06/App%E4%BD%9C%E5%93%81%EF%BC%9ASplash/</loc>
+    
+    <lastmod>2020-01-02T03:49:30.241Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.chenyalun.com/2019/04/25/%E8%AF%BB%E3%80%8CFDFullscreenPopGesture%E3%80%8D/</loc>
+    
+    <lastmod>2020-01-01T06:17:55.283Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.chenyalun.com/2019/01/12/%E3%80%8CKVOController%E3%80%8D%E7%9A%84%E5%B0%81%E8%A3%85/</loc>
     
     <lastmod>2019-12-31T11:22:18.738Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>http://blog.chenyalun.com/2019/01/28/NSNotificationCenter%E6%8E%A2%E7%B4%A2/</loc>
     
     <lastmod>2019-12-26T07:28:22.438Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/12/06/App%E4%BD%9C%E5%93%81%EF%BC%9ASplash/</loc>
-    
-    <lastmod>2019-12-26T04:42:40.698Z</lastmod>
     
   </url>
   
@@ -54,13 +61,6 @@
     <loc>http://blog.chenyalun.com/2019/09/11/iOS%E4%B8%AD%E7%9A%84Crash%E9%98%B2%E6%8A%A4/</loc>
     
     <lastmod>2019-10-27T08:13:47.446Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.chenyalun.com/2019/04/25/%E8%AF%BB%E3%80%8CFDFullscreenPopGesture%E3%80%8D/</loc>
-    
-    <lastmod>2019-09-23T09:13:10.739Z</lastmod>
     
   </url>
   
