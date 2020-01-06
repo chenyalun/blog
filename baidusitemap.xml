@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://blog.chenyalun.com/2019/09/11/iOS%E4%B8%AD%E7%9A%84Crash%E9%98%B2%E6%8A%A4/</loc>
+    <lastmod>2020-01-06</lastmod>
+  </url>  <url>
     <loc>http://blog.chenyalun.com/2019/12/06/App%E4%BD%9C%E5%93%81%EF%BC%9ASplash/</loc>
     <lastmod>2020-01-02</lastmod>
   </url>  <url>
@@ -24,9 +27,6 @@
   </url>  <url>
     <loc>http://blog.chenyalun.com/2019/08/22/Objective-C%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8C%97/</loc>
     <lastmod>2019-10-28</lastmod>
-  </url>  <url>
-    <loc>http://blog.chenyalun.com/2019/09/11/iOS%E4%B8%AD%E7%9A%84Crash%E9%98%B2%E6%8A%A4/</loc>
-    <lastmod>2019-10-27</lastmod>
   </url>  <url>
     <loc>http://blog.chenyalun.com/2017/04/13/%E8%AF%BB%E3%80%8AObjective-C%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E3%80%8B/</loc>
     <lastmod>2019-09-23</lastmod>
