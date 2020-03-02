@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta charset="UTF-8">
+  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -10,71 +8,36 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
+<meta name="description" content="Runtime基础"><meta name="keywords" content="iOS开发, Ya"><link rel="alternate" href="/atom.xml" title="Ya"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://blog.chenyalun.com/2018/07/10/Runtime基础/">
 
-  <meta name="description" content="Runtime基础">
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
 
-
-
-
-  <meta name="keywords" content="iOS开发,">
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Ya">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
-
-
-
-<link rel="canonical" href="http://blog.chenyalun.com/2018/07/10/Runtime基础/">
-
-
-<meta name="description" content="2018.8.26 更新Class定义2019.3.25 更新设置weak关联属性   关于Runtime的简单总结。">
-<meta name="keywords" content="iOS开发">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Runtime基础">
-<meta property="og:url" content="http://blog.chenyalun.com/2018/07/10/Runtime基础/index.html">
-<meta property="og:site_name" content="Ya">
-<meta property="og:description" content="2018.8.26 更新Class定义2019.3.25 更新设置weak关联属性   关于Runtime的简单总结。">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-08-28T11:30:10.722Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Runtime基础">
-<meta name="twitter:description" content="2018.8.26 更新Class定义2019.3.25 更新设置weak关联属性   关于Runtime的简单总结。">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
-
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 <script>
-  var CONFIG = {
-    search: false,
-    searchPath: "/search.xml",
-    fancybox: true,
-    toc: true,
-  }
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-
-
-
-  
-
-
-
-    <title> Runtime基础 · Ya </title>
+    <title>Runtime基础 - Ya</title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -89,96 +52,51 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    
-      <a href="/archives/">
-        <li class="mobile-menu-item">
-          
-          
-            Archives
-          
-        </li>
-      </a>
-    
-      <a href="/tags/阅读/">
-        <li class="mobile-menu-item">
-          
-          
-            Tags
-          
-        </li>
-      </a>
-    
-  </ul>
+  <ul class="mobile-menu-list"><a href="/archives/">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/tags/阅读/">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a></ul>
 </nav>
-
-    <div class="container" id="mobile-panel">
+<div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
   <a href="/." class="logo">Ya</a>
 </div>
 
-<nav class="site-navbar">
-  
-    <ul id="menu" class="menu">
-      
-        <li class="menu-item">
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            
-            
-              时间线
-            
-          </a>
+            归档
+            </a>
         </li>
-      
-        <li class="menu-item">
+      <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            
-            
-              阅读
-            
-          </a>
+            标签
+            </a>
         </li>
-      
-      
-    </ul>
-  
-</nav>
-
-      </header>
+      </ul></nav>
+</header>
 
       <main id="main" class="main">
         <div class="content-wrapper">
-          <div id="content" class="content">
-            
-  
-  <article class="post">
+          <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">
-        
-          Runtime基础
-        
-      </h1>
+      <h1 class="post-title">Runtime基础
+        </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2018年7月10日
-        </span>
-      </div>
+          2018-07-10
+        </span></div>
     </header>
 
-    
-    
-  <div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Runtime"><span class="toc-text">一、Runtime</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Class"><span class="toc-text">Class</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Block"><span class="toc-text">Block</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SEL"><span class="toc-text">SEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ivar"><span class="toc-text">Ivar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Property"><span class="toc-text">Property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Protocol"><span class="toc-text">Protocol</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、技能"><span class="toc-text">二、技能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#消息转发"><span class="toc-text">消息转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多重继承"><span class="toc-text">多重继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关联引用"><span class="toc-text">关联引用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#给分类添加weak属性"><span class="toc-text">给分类添加weak属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方法一"><span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法二"><span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法三"><span class="toc-text">方法三</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法四"><span class="toc-text">方法四</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、要点"><span class="toc-text">三、要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#free"><span class="toc-text">free()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NONNULL"><span class="toc-text">NONNULL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#covariant"><span class="toc-text">__covariant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内联"><span class="toc-text">内联</span></a></li></ol></li></ol>
     </div>
-  </div>
-
-
-    <div class="post-content">
-      
-        <blockquote>
+  </div><div class="post-content"><blockquote>
 <p>2018.8.26 更新Class定义<br>2019.3.25 更新设置weak关联属性</p>
 </blockquote>
 <p></p><p align="center"> 关于Runtime的简单总结。 </p><br><a id="more"></a><p></p>
@@ -299,179 +217,55 @@
 <p>参考并感谢<br><a href="http://www.cnblogs.com/ludashi/p/6294112.html" target="_blank" rel="noopener">青玉伏案</a><br><a href="http://southpeak.github.io/2014/11/06/objective-c-runtime-4/" target="_blank" rel="noopener">南峰子</a></p>
 </blockquote>
 
+      </div>
       
-    </div>
-
-    
-      
-      
-
-
-
-      
-      
-    
-
-    
       <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/iOS开发/">iOS开发</a>
+            </div>
         
-          <div class="post-tags">
-            
-              <a href="/tags/iOS开发/">iOS开发</a>
-            
-          </div>
-        
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2018/09/30/PerformSelector原理/">
+        <nav class="post-nav"><a class="prev" href="/2018/09/30/PerformSelector原理/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">PerformSelector原理</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    
-    
-      <a class="next" href="/2017/10/01/开源项目：YAScrollPlaceView/">
+    <a class="next" href="/2017/10/01/开源项目：YAScrollPlaceView/">
         <span class="next-text nav-default">开源项目：YAScrollPlaceView</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
-    
-  </nav>
-
-      </footer>
-    
-
-  </article>
-
-
-          </div>
-          
-  <div class="comments" id="comments">
-    
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
-  </div>
-
-
-        </div>  
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
       </main>
 
-      <footer id="footer" class="footer">
-
-  <div class="social-links">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
-        
-      
-    
-      
-        
-          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        
-      
-    
-    
-    
-  </div>
-
-
-<div class="copyright">
+      <footer id="footer" class="footer"><div class="social-links"><a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
   <span class="power-by">
-    May Be 
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
   </span>
-  
+  <span class="division">|</span>
   <span class="theme-info">
-    Better  
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">
-    
-    &copy; 
-     
-      2014 - 
-    
-    2020
-
-    <span class="heart">
+  <span class="copyright-year">&copy;2014 - 2020<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>
   </span>
 </div>
-      </footer>
+</footer>
 
       <div class="back-to-top" id="back-to-top">
         <i class="iconfont icon-up"></i>
       </div>
-    </div>
-
-    
-  
-
-  
-  
-  <script>
-    var cloudTieConfig = {
-      url: document.location.href, 
-      sourceId: "",
-      productKey: "f132359147224247aa1c3ad32d20490b",
-      target: "cloud-tie-wrapper"
-    };
-  </script>
-  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-
-
-
-
-
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
-
-    
-  </body>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
 </html>

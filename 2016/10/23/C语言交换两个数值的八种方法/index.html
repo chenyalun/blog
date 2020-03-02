@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta charset="UTF-8">
+  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -10,71 +8,36 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
+<meta name="description" content="C语言交换两个数值的八种方法"><meta name="keywords" content="C语言, Ya"><link rel="alternate" href="/atom.xml" title="Ya"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://blog.chenyalun.com/2016/10/23/C语言交换两个数值的八种方法/">
 
-  <meta name="description" content="C语言交换两个数值的八种方法">
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
 
-
-
-
-  <meta name="keywords" content="C语言,">
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Ya">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
-
-
-
-<link rel="canonical" href="http://blog.chenyalun.com/2016/10/23/C语言交换两个数值的八种方法/">
-
-
-<meta name="description" content="简单总结，以鞭笞岁月。">
-<meta name="keywords" content="C语言">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C语言交换两个数值的八种方法">
-<meta property="og:url" content="http://blog.chenyalun.com/2016/10/23/C语言交换两个数值的八种方法/index.html">
-<meta property="og:site_name" content="Ya">
-<meta property="og:description" content="简单总结，以鞭笞岁月。">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-08-18T10:00:25.218Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言交换两个数值的八种方法">
-<meta name="twitter:description" content="简单总结，以鞭笞岁月。">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
-
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 <script>
-  var CONFIG = {
-    search: false,
-    searchPath: "/search.xml",
-    fancybox: true,
-    toc: true,
-  }
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-
-
-
-  
-
-
-
-    <title> C语言交换两个数值的八种方法 · Ya </title>
+    <title>C语言交换两个数值的八种方法 - Ya</title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -89,96 +52,51 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    
-      <a href="/archives/">
-        <li class="mobile-menu-item">
-          
-          
-            Archives
-          
-        </li>
-      </a>
-    
-      <a href="/tags/阅读/">
-        <li class="mobile-menu-item">
-          
-          
-            Tags
-          
-        </li>
-      </a>
-    
-  </ul>
+  <ul class="mobile-menu-list"><a href="/archives/">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/tags/阅读/">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a></ul>
 </nav>
-
-    <div class="container" id="mobile-panel">
+<div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
   <a href="/." class="logo">Ya</a>
 </div>
 
-<nav class="site-navbar">
-  
-    <ul id="menu" class="menu">
-      
-        <li class="menu-item">
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            
-            
-              时间线
-            
-          </a>
+            归档
+            </a>
         </li>
-      
-        <li class="menu-item">
+      <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            
-            
-              阅读
-            
-          </a>
+            标签
+            </a>
         </li>
-      
-      
-    </ul>
-  
-</nav>
-
-      </header>
+      </ul></nav>
+</header>
 
       <main id="main" class="main">
         <div class="content-wrapper">
-          <div id="content" class="content">
-            
-  
-  <article class="post">
+          <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">
-        
-          C语言交换两个数值的八种方法
-        
-      </h1>
+      <h1 class="post-title">C语言交换两个数值的八种方法
+        </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2016年10月23日
-        </span>
-      </div>
+          2016-10-23
+        </span></div>
     </header>
 
-    
-    
-  <div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#异或"><span class="toc-text">异或</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运算符"><span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#位运算"><span class="toc-text">位运算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#宏定义"><span class="toc-text">宏定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#两数之和"><span class="toc-text">两数之和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#两数之积"><span class="toc-text">两数之积</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#取址"><span class="toc-text">取址</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#知识"><span class="toc-text">知识</span></a></li></ol>
     </div>
-  </div>
-
-
-    <div class="post-content">
-      
-        <p></p><p align="center"> 简单总结，以鞭笞岁月。 </p><br><a id="more"></a><p></p>
+  </div><div class="post-content"><p></p><p align="center"> 简单总结，以鞭笞岁月。 </p><br><a id="more"></a><p></p>
 <blockquote>
 <p>编译器:XCode8.0</p>
 </blockquote>
@@ -220,179 +138,55 @@
 <p>参考并致谢:<br><a href="http://blog.csdn.net/ljx_5489464/article/details/50042571" target="_blank" rel="noopener">C语言交换两个变量数值的几种方法</a><br><a href="http://www.cnblogs.com/kubixuesheng/p/4104800.html" target="_blank" rel="noopener">一道面试题：用多种方法实现两个数的交换</a></p>
 </blockquote>
 
+      </div>
       
-    </div>
-
-    
-      
-      
-
-
-
-      
-      
-    
-
-    
       <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/C语言/">C语言</a>
+            </div>
         
-          <div class="post-tags">
-            
-              <a href="/tags/C语言/">C语言</a>
-            
-          </div>
-        
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2016/10/28/泛读博客笔记/">
+        <nav class="post-nav"><a class="prev" href="/2016/10/28/泛读博客笔记/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">泛读博客笔记</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    
-    
-      <a class="next" href="/2016/10/10/CocoaPods的安装与使用/">
+    <a class="next" href="/2016/10/10/CocoaPods的安装与使用/">
         <span class="next-text nav-default">CocoaPods的安装与使用</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
-    
-  </nav>
-
-      </footer>
-    
-
-  </article>
-
-
-          </div>
-          
-  <div class="comments" id="comments">
-    
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
-  </div>
-
-
-        </div>  
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
       </main>
 
-      <footer id="footer" class="footer">
-
-  <div class="social-links">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
-        
-      
-    
-      
-        
-          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        
-      
-    
-    
-    
-  </div>
-
-
-<div class="copyright">
+      <footer id="footer" class="footer"><div class="social-links"><a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
   <span class="power-by">
-    May Be 
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
   </span>
-  
+  <span class="division">|</span>
   <span class="theme-info">
-    Better  
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">
-    
-    &copy; 
-     
-      2014 - 
-    
-    2020
-
-    <span class="heart">
+  <span class="copyright-year">&copy;2014 - 2020<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>
   </span>
 </div>
-      </footer>
+</footer>
 
       <div class="back-to-top" id="back-to-top">
         <i class="iconfont icon-up"></i>
       </div>
-    </div>
-
-    
-  
-
-  
-  
-  <script>
-    var cloudTieConfig = {
-      url: document.location.href, 
-      sourceId: "",
-      productKey: "f132359147224247aa1c3ad32d20490b",
-      target: "cloud-tie-wrapper"
-    };
-  </script>
-  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-
-
-
-
-
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
-
-    
-  </body>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
 </html>

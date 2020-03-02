@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head><meta name="generator" content="Hexo 3.8.0">
-    
-<meta charset="UTF-8">
+  <head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -10,73 +8,36 @@
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
 
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
+<meta name="description" content="从C++到汇编"><meta name="keywords" content="C++, Ya"><link rel="alternate" href="/atom.xml" title="Ya"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.11.0">
+<link rel="canonical" href="https://blog.chenyalun.com/2017/04/02/从C++到汇编/">
 
-  <meta name="description" content="从C++到汇编">
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.11.0">
 
-
-
-
-  <meta name="keywords" content="C++,">
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Ya">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.4.x">
-
-
-
-<link rel="canonical" href="http://blog.chenyalun.com/2017/04/02/从C++到汇编/">
-
-
-<meta name="description" content="2019.08.18 补充汇编内容   C++和汇编。">
-<meta name="keywords" content="C++">
-<meta property="og:type" content="article">
-<meta property="og:title" content="从C++到汇编">
-<meta property="og:url" content="http://blog.chenyalun.com/2017/04/02/从C++到汇编/index.html">
-<meta property="og:site_name" content="Ya">
-<meta property="og:description" content="2019.08.18 补充汇编内容   C++和汇编。">
-<meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://static.chenyalun.com/2017/04/03/20170403002.jpg">
-<meta property="og:updated_time" content="2019-09-12T06:49:27.336Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从C++到汇编">
-<meta name="twitter:description" content="2019.08.18 补充汇编内容   C++和汇编。">
-<meta name="twitter:image" content="http://static.chenyalun.com/2017/04/03/20170403002.jpg">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x">
-
-
-
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
-
-
-
-
-
+<script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 <script>
-  var CONFIG = {
-    search: false,
-    searchPath: "/search.xml",
-    fancybox: true,
-    toc: true,
-  }
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":"","latex":false};
 </script>
 
-
-
-
-  
-
-
-
-    <title> 从C++到汇编 · Ya </title>
+    <title>从C++到汇编 - Ya</title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -91,96 +52,51 @@
 </div>
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    
-      <a href="/archives/">
-        <li class="mobile-menu-item">
-          
-          
-            Archives
-          
-        </li>
-      </a>
-    
-      <a href="/tags/阅读/">
-        <li class="mobile-menu-item">
-          
-          
-            Tags
-          
-        </li>
-      </a>
-    
-  </ul>
+  <ul class="mobile-menu-list"><a href="/archives/">
+        <li class="mobile-menu-item">归档
+          </li>
+      </a><a href="/tags/阅读/">
+        <li class="mobile-menu-item">标签
+          </li>
+      </a></ul>
 </nav>
-
-    <div class="container" id="mobile-panel">
+<div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
   <a href="/." class="logo">Ya</a>
 </div>
 
-<nav class="site-navbar">
-  
-    <ul id="menu" class="menu">
-      
-        <li class="menu-item">
+<nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            
-            
-              时间线
-            
-          </a>
+            归档
+            </a>
         </li>
-      
-        <li class="menu-item">
+      <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            
-            
-              阅读
-            
-          </a>
+            标签
+            </a>
         </li>
-      
-      
-    </ul>
-  
-</nav>
-
-      </header>
+      </ul></nav>
+</header>
 
       <main id="main" class="main">
         <div class="content-wrapper">
-          <div id="content" class="content">
-            
-  
-  <article class="post">
+          <div id="content" class="content"><article class="post">
     <header class="post-header">
-      <h1 class="post-title">
-        
-          从C++到汇编
-        
-      </h1>
+      <h1 class="post-title">从C++到汇编
+        </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2017年4月2日
-        </span>
-      </div>
+          2017-04-02
+        </span></div>
     </header>
 
-    
-    
-  <div class="post-toc" id="post-toc">
+    <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、基本语法"><span class="toc-text">一、基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#命名空间"><span class="toc-text">命名空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义及使用"><span class="toc-text">定义及使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统的命名空间"><span class="toc-text">系统的命名空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全局命名空间"><span class="toc-text">全局命名空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#extern-“C”"><span class="toc-text">extern “C”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cin与cout"><span class="toc-text">cin与cout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const"><span class="toc-text">const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针、引用、数组"><span class="toc-text">指针、引用、数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指针、引用、const"><span class="toc-text">指针、引用、const</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内存布局"><span class="toc-text">内存布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的内存"><span class="toc-text">对象的内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象的创建"><span class="toc-text">对象的创建</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态分配内存"><span class="toc-text">动态分配内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内联函数"><span class="toc-text">内联函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#成员函数"><span class="toc-text">成员函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的默认参数"><span class="toc-text">函数的默认参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数的重载"><span class="toc-text">函数的重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#struct与class"><span class="toc-text">struct与class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this"><span class="toc-text">this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数"><span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#析构函数"><span class="toc-text">析构函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化列表"><span class="toc-text">初始化列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构造函数调用构造函数"><span class="toc-text">构造函数调用构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拷贝构造函数"><span class="toc-text">拷贝构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深复制与浅复制"><span class="toc-text">深复制与浅复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态成员变量"><span class="toc-text">静态成员变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态成员函数"><span class="toc-text">静态成员函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常成员函数"><span class="toc-text">常成员函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#友元函数与友元类"><span class="toc-text">友元函数与友元类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多继承"><span class="toc-text">多继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚继承"><span class="toc-text">虚继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#菱形继承"><span class="toc-text">菱形继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多态"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#虚函数"><span class="toc-text">虚函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#纯虚函数"><span class="toc-text">纯虚函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符重载"><span class="toc-text">运算符重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内部类局部类"><span class="toc-text">内部类局部类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象型参数和返回值"><span class="toc-text">对象型参数和返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#仿函数"><span class="toc-text">仿函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板"><span class="toc-text">模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型转换"><span class="toc-text">类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-11新特性"><span class="toc-text">C++11新特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#智能指针"><span class="toc-text">智能指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#auto-ptr-已经废弃"><span class="toc-text">auto_ptr(已经废弃)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shared-ptr"><span class="toc-text">shared_ptr</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#weak-ptr"><span class="toc-text">weak_ptr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unique-ptr"><span class="toc-text">unique_ptr</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、其他"><span class="toc-text">二、其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数调用的流程"><span class="toc-text">函数调用的流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量地址"><span class="toc-text">变量地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寄存器"><span class="toc-text">寄存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-嵌入汇编"><span class="toc-text">c++嵌入汇编</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C语言中模拟面向对象"><span class="toc-text">C语言中模拟面向对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#声明与实现分离"><span class="toc-text">声明与实现分离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#string的使用"><span class="toc-text">string的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-中的单例"><span class="toc-text">C++中的单例</span></a></li></ol></li></ol>
     </div>
-  </div>
-
-
-    <div class="post-content">
-      
-        <blockquote>
+  </div><div class="post-content"><blockquote>
 <p>2019.08.18 补充汇编内容</p>
 </blockquote>
 <p align="center"> C++和汇编。 </p>
@@ -524,179 +440,55 @@
 <p>参考博客：<br><a href="http://c.biancheng.net/cpp/biancheng/cpp/rumen/" target="_blank" rel="noopener">C语言中文网</a></p>
 </blockquote>
 
+      </div>
       
-    </div>
-
-    
-      
-      
-
-
-
-      
-      
-    
-
-    
       <footer class="post-footer">
+        <div class="post-tags">
+            <a href="/tags/C/">C++</a>
+            </div>
         
-          <div class="post-tags">
-            
-              <a href="/tags/C/">C++</a>
-            
-          </div>
-        
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2017/04/05/读《Effective Objective-C 2.0》/">
+        <nav class="post-nav"><a class="prev" href="/2017/04/05/读《Effective Objective-C 2.0》/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">读《Effective Objective-C 2.0》</span>
         <span class="prev-text nav-mobile">上一篇</span>
       </a>
-    
-    
-      <a class="next" href="/2017/03/05/排序算法实现/">
+    <a class="next" href="/2017/03/05/排序算法实现/">
         <span class="next-text nav-default">排序算法实现</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
-    
-  </nav>
-
-      </footer>
-    
-
-  </article>
-
-
-          </div>
-          
-  <div class="comments" id="comments">
-    
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-    
-  </div>
-
-
-        </div>  
+    </nav></footer>
+    </article></div><div class="comments" id="comments"></div></div>
       </main>
 
-      <footer id="footer" class="footer">
-
-  <div class="social-links">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
-        
-      
-    
-      
-        
-          <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        
-      
-    
-      
-    
-      
-    
-      
-        
-          <a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        
-      
-    
-    
-    
-  </div>
-
-
-<div class="copyright">
+      <footer id="footer" class="footer"><div class="social-links"><a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+        <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
+        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    </div><div class="copyright">
   <span class="power-by">
-    May Be 
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
   </span>
-  
+  <span class="division">|</span>
   <span class="theme-info">
-    Better  
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even"> </a>
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
-  <span class="copyright-year">
-    
-    &copy; 
-     
-      2014 - 
-    
-    2020
-
-    <span class="heart">
+  <span class="copyright-year">&copy;2014 - 2020<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>
   </span>
 </div>
-      </footer>
+</footer>
 
       <div class="back-to-top" id="back-to-top">
         <i class="iconfont icon-up"></i>
       </div>
-    </div>
-
-    
-  
-
-  
-  
-  <script>
-    var cloudTieConfig = {
-      url: document.location.href, 
-      sourceId: "",
-      productKey: "f132359147224247aa1c3ad32d20490b",
-      target: "cloud-tie-wrapper"
-    };
-  </script>
-  <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-
-
-
-
-
-    
-  
-
-
-
-
-
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
-  
-
-  
-    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
-  
-
-
-    <script type="text/javascript" src="/js/src/even.js?v=2.4.x"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=2.4.x"></script>
-
-    
-  </body>
+    </div><script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/src/even.js?v=2.11.0"></script>
+</body>
 </html>
