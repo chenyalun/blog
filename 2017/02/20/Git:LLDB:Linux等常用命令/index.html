@@ -53,10 +53,10 @@
 
 <nav id="mobile-menu" class="mobile-menu slideout-menu">
   <ul class="mobile-menu-list"><a href="/archives/">
-        <li class="mobile-menu-item">归档
+        <li class="mobile-menu-item">时间线
           </li>
       </a><a href="/tags/阅读/">
-        <li class="mobile-menu-item">标签
+        <li class="mobile-menu-item">阅读
           </li>
       </a></ul>
 </nav>
@@ -67,12 +67,12 @@
 
 <nav class="site-navbar"><ul id="menu" class="menu"><li class="menu-item">
           <a class="menu-item-link" href="/archives/">
-            归档
+            时间线
             </a>
         </li>
       <li class="menu-item">
           <a class="menu-item-link" href="/tags/阅读/">
-            标签
+            阅读
             </a>
         </li>
       </ul></nav>
@@ -542,7 +542,7 @@ expr int $c = 10 声明一个新变量
 </code></pre><p>查看具体类型</p>
 <pre><code>image lookup --type NSURL
 </code></pre><p>断点</p>
-<figure class="highlight oxygene"><table><tr><td class="code"><pre><span class="line">breakpoint <span class="keyword">set</span></span><br><span class="line">   -M &lt;<span class="function"><span class="keyword">method</span>&gt; <span class="params">( --<span class="keyword">method</span> &lt;<span class="keyword">method</span>&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">S</span> &lt;<span class="title">selector</span>&gt; <span class="params">( --<span class="keyword">selector</span> &lt;<span class="keyword">selector</span>&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">b</span> &lt;<span class="title">function</span>-<span class="title">name</span>&gt; <span class="params">( --basename &lt;<span class="keyword">function</span>-name&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">f</span> &lt;<span class="title">filename</span>&gt; <span class="params">( --file &lt;filename&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">l</span> &lt;<span class="title">linenum</span>&gt; <span class="params">( --line &lt;linenum&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">n</span> &lt;<span class="title">function</span>-<span class="title">name</span>&gt; <span class="params">( --name &lt;<span class="keyword">function</span>-name&gt; )</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">breakpoint <span class="keyword">set</span></span><br><span class="line">   -M &lt;<span class="function"><span class="keyword">method</span>&gt; <span class="params">( --<span class="keyword">method</span> &lt;<span class="keyword">method</span>&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">S</span> &lt;<span class="title">selector</span>&gt; <span class="params">( --<span class="keyword">selector</span> &lt;<span class="keyword">selector</span>&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">b</span> &lt;<span class="title">function</span>-<span class="title">name</span>&gt; <span class="params">( --basename &lt;<span class="keyword">function</span>-name&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">f</span> &lt;<span class="title">filename</span>&gt; <span class="params">( --file &lt;filename&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">l</span> &lt;<span class="title">linenum</span>&gt; <span class="params">( --line &lt;linenum&gt; )</span></span></span><br><span class="line"><span class="function">   -<span class="title">n</span> &lt;<span class="title">function</span>-<span class="title">name</span>&gt; <span class="params">( --name &lt;<span class="keyword">function</span>-name&gt; )</span></span></span><br></pre></td></tr></table></figure>
 <h1 id="Clang"><a href="#Clang" class="headerlink" title="Clang"></a>Clang</h1><h2 id="初步-5"><a href="#初步-5" class="headerlink" title="初步"></a>初步</h2><p> 编译单个c源文件，并产生一个目标文件  </p>
 <pre><code>cc -c one.c
 </code></pre><p> 编译多个c源文件，并为每个文件产生一个目标文件  </p>
@@ -587,21 +587,19 @@ expr int $c = 10 声明一个新变量
     </article></div><div class="comments" id="comments"></div></div>
       </main>
 
-      <footer id="footer" class="footer"><div class="social-links"><a href="https://stackoverflow.com/users/7026915/allen" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-        <a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
+      <footer id="footer" class="footer"><div class="social-links"><a href="https://github.com/ChenYalun" class="iconfont icon-github" title="github"></a>
         <a href="https://weibo.com/icqk" class="iconfont icon-weibo" title="weibo"></a>
-        <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
-    </div><div class="copyright">
+        </div><div class="copyright">
   <span class="power-by">
-    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+    May Be 
   </span>
-  <span class="division">|</span>
+  <span class="division"> </span>
   <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+    Better
+    <a class="theme-link" href> </a>
   </span>
 
-  <span class="copyright-year">&copy;2014 - 2020<span class="heart">
+  <span class="copyright-year">&copy;2016 - 2020<span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
     <span class="author">Ya</span>

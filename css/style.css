@@ -461,8 +461,8 @@ h6 {
   .header .logo-wrapper {
     float: left; }
     .header .logo-wrapper .logo {
-      font-size: 48px;
-      font-family: "Chancery", cursive, LiSu, sans-serif; }
+      font-size: 28px;
+      font-family: Cursive; }
   @media screen and (max-width: 800px) {
     .header .logo-wrapper {
       display: none; } }
@@ -578,7 +578,7 @@ h6 {
     padding: 10px;
     font-family: Athelas, STHeiti, Microsoft Yahei, serif;
     border-radius: 5px;
-    background: rgba(248, 245, 236, 0.6);
+    background: rgba(240, 242, 245, 0.6);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125);
     word-wrap: break-word;
     box-sizing: border-box; }
@@ -626,7 +626,7 @@ h6 {
     color: #008cff;
     word-break: break-all; }
     .post .post-content a:hover {
-      border-bottom: 1px solid #c05b4d; }
+      border-bottom: 1px solid #0047AB; }
     .post .post-content a.fancybox {
       border: 0; }
   .post .post-content ul {
@@ -639,8 +639,8 @@ h6 {
     padding: 10px 20px;
     position: relative;
     color: rgba(52, 73, 94, 0.8);
-    background-color: rgba(192, 91, 77, 0.05);
-    border-left: 3px solid rgba(192, 91, 77, 0.3);
+    background-color: rgba(0, 71, 171, 0.05);
+    border-left: 3px solid rgba(0, 71, 171, 0.3);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.125); }
     .post .post-content blockquote p {
       margin: 0; }
@@ -651,22 +651,22 @@ h6 {
     width: 100%;
     margin-bottom: 20px;
     overflow: auto;
-    border: 3px double #f4efe1; }
+    border: 3px double #e7eaef; }
   .post .post-content table {
     width: 100%;
     max-width: 100%;
     border-spacing: 0;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.125); }
     .post .post-content table thead {
-      background: #f8f5ec; }
+      background: #f0f2f5; }
     .post .post-content table th, .post .post-content table td {
       padding: 5px 15px;
-      border: 1px double #f4efe1; }
+      border: 1px double #e7eaef; }
   .post .post-content code, .post .post-content pre {
     padding: 7px;
     font-size: 13px;
     font-family: Consolas, Monaco, Menlo, Consolas, monospace;
-    background: #f8f5ec; }
+    background: #f0f2f5; }
   .post .post-content code {
     padding: 3px 5px;
     border-radius: 4px;
@@ -689,7 +689,7 @@ h6 {
         font-size: 13px;
         font-weight: bold;
         color: #b1b1b1;
-        background: #f4efe1;
+        background: #e7eaef;
         content: 'Code'; }
     .post .post-content .highlight.html > table::after {
       content: "HTML"; }
@@ -831,7 +831,7 @@ h6 {
       font-size: 13px;
       font-weight: bold;
       color: #b1b1b1;
-      background: #f4efe1;
+      background: #e7eaef;
       z-index: 20;
       overflow-x: hidden;
       box-sizing: border-box; }
@@ -904,7 +904,7 @@ h6 {
     font-size: 1.1em;
     font-family: Athelas, STHeiti, Microsoft Yahei, serif; }
     .post .post-content .read-more .read-more-link:hover {
-      border-bottom: 1px solid #c05b4d; }
+      border-bottom: 1px solid #0047AB; }
   .post .post-copyright {
     margin-top: 20px;
     padding-top: 10px;
@@ -1072,7 +1072,7 @@ h6 {
     .archive .archive-post::first-child {
       margin-top: 10px; }
     .archive .archive-post:hover {
-      border-left: 3px solid #c05b4d;
+      border-left: 3px solid #0047AB;
       transition: 0.2s ease-out;
       transform: translateX(4px); }
       .archive .archive-post:hover .archive-post-time {
@@ -1103,7 +1103,7 @@ h6 {
     display: inline-block;
     font-size: 18px;
     color: #008cff;
-    border-bottom: 2px solid #c05b4d; }
+    border-bottom: 2px solid #0047AB; }
   .tag-cloud .tag-cloud-tags {
     margin: 10px 0; }
     .tag-cloud .tag-cloud-tags a {
@@ -1126,7 +1126,7 @@ h6 {
     display: inline-block;
     font-size: 18px;
     color: #008cff;
-    border-bottom: 2px solid #c05b4d; }
+    border-bottom: 2px solid #0047AB; }
   .categories .categories-tags {
     margin: 10px 0; }
     .categories .categories-tags .category-link {
@@ -1287,7 +1287,7 @@ h6 {
     .mobile-navbar .mobile-header-logo .logo {
       font-size: 22px;
       line-height: 50px;
-      font-family: "Chancery", cursive, LiSu, sans-serif; }
+      font-family: Cursive; }
   .mobile-navbar .mobile-navbar-icon {
     color: #008cff;
     height: 50px;
@@ -1370,16 +1370,16 @@ h6 {
       animation-name: outlast; }
 
 .mobile-menu {
-  background-color: rgba(248, 245, 236, 0.5); }
+  background-color: rgba(240, 242, 245, 0.5); }
   .mobile-menu .mobile-menu-list {
     position: relative;
     list-style: none;
     margin-top: 50px;
     padding: 0;
-    border-top: 1px solid #f8f5ec; }
+    border-top: 1px solid #f0f2f5; }
     .mobile-menu .mobile-menu-list .mobile-menu-item {
       padding: 10px 30px;
-      border-bottom: 1px solid #f8f5ec; }
+      border-bottom: 1px solid #f0f2f5; }
     .mobile-menu .mobile-menu-list a {
       font-size: 18px;
       font-family: Athelas, STHeiti, Microsoft Yahei, serif; }
